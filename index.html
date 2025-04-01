@@ -23,6 +23,53 @@ img{
 .tab {display: inline-block;
     margin-left: 40px;}
 
+    * {
+  box-sizing: border-box;
+}
+
+.items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.items li {
+  position: relative;
+  padding: 0 10px 10px 40px;
+}
+
+.items li:after {
+  content: "";
+  position: absolute;
+  background: rgb(120, 210, 120);
+  width: 16px;
+  height: 16px;
+  left: 6px;
+  top: 2px;
+  border-radius: 50%;
+}
+
+.items li:before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 20px;
+  left: 8px;
+  top: 0;
+  background-image: radial-gradient(circle at 2.5px, #ccc 1.25px, rgba(255, 255, 255, 0) 2.5px);
+  background-position: top, right, bottom, left;
+  background-size: 15px 15px;
+  background-repeat: repeat-y;
+}
+
+.items .end:before {
+  display: none;
+}
+
+.items .end:after {
+  background: rgb(120, 210, 120);
+}
+
 </style>
 <body class="w3-light-grey">
 
@@ -51,41 +98,55 @@ img{
             <a href=mailto:"dwiwat97@gmail.com" target="_blank">
             <i class="fa fa-envelope fa-fw w3-xxlarge w3-text-theme w3-hover-opacity"></i></a>
             </p>
-          <p class="w3-margin-right w3-margin-bottom w3-medium w3-justify">A PhD student in mathematics and statistics at Curtin University, Western Australia. Currently working on how to automate and optimise blockchain applications in energy sector. Highly organised and detail-oriented data scientist with an experience in research. Skilled in using Python and R for data management, visualisation, analysis and prediction using ML/AI. Keen on cloud-based web development and applications.
-        </p></p>
+          <p class="w3-margin-right w3-margin-bottom w3-medium w3-justify">PhD student in the Mathematics and Statistics discipline at Curtin University, Western Australia, researching optimisation of energy storage systems and trading mechanisms using blockchain platforms.
+          Experienced in teaching and research, with two years of delivering tutorials, workshops, and computer labs across seven finance, mathematics, and statistics units at Curtin University. Also taught two units in industrial optimisation at Yanshan University, China, as part of the Curtin–Yanshan joint program.
+          Highly organised and detail-oriented data scientist skilled in Python, R, and MATLAB for data management, visualisation, analysis, and AI/ML forecasting. Keen interest in cloud-based web development and data-driven applications.
+          </p>
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-theme"></i>
-            PhD Student in Maths & Stats<br>
+          PhD Student in Maths & Stats<br>
             <span class="tab"></span>Data Science Graduate<br>
             <span class="tab"></span>Actuarial Science Graduate</p>
           <p><i class="fa fa-home fa-fw w3-margin-right w3-large w3-text-theme"></i>
-            Perth, Western Australia<br>
+          Perth, Western Australia<br>
             <span class="tab"></span>Bangkok, Thailand</p>
           <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-theme"></i>
             Languages: Thai (Native), English</p>
           <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-theme"></i>
             <a href=mailto:"dwiwat97@gmail.com" target="_blank">dwiwat97@gmail.com</a><br>
-            <span class="tab"></span><a href=mailto:"18688915@student.curtin.edu.au" target="_blank">18688915@student.curtin.edu.au</a></p>
+            <span class="tab"></span><a href=mailto:"275287a@curtin.edu.au" target="_blank"> 275287a@curtin.edu.au</a></p>
           <hr>
+          <!--Education-->
+          <p class="w3-xlarge" style="margin-bottom: 0;"><b><i class="fa fa-university fa-fw w3-margin-right w3-xlarge w3-text-theme"></i>Education</b></p>
 
+          <ul class="items">
+            <li style="padding-bottom: 0;">
+              <p class="w3-text-theme w3-large">Jan 2022 - May 2025<br><b> PhD in Mathematics and Statistics</b><br>Curtin University</p>
+              <p class="w3-text-grey"><b>Thesis title:</b> Blockchain-based Renewable Energy Trading and Storage Optimisation</p>
+            </li>
+            <li style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Jul 2019 - Jun 2021<br><b>Master of Data Science with Distinction</b><br>The University of Western Australia</p>
+            
+            </li>
+            <li style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Feb 2016 - Dec 2018<br><b>Bachelor of Science (Actuarial Science)</b><br>Curtin University</p> 
+            </li>
+            <li class="end" style="padding-bottom: 0;"><p class="w3-text-theme w3-large"><b>2015 Year 12 WACE Program</b><br>Canning College</p>      
+            </li>
+          </ul>
+          <hr>
           <!--Skills-->
-          <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-theme"></i>Skills</b></p>
-          <p>Data Mining & Visualisation</p>
+          <p class="w3-xlarge"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-theme"></i>Skills</b></p>
+          <p>Statistical Data Analysis & Machine Learning</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">95%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:100%">100%</div>
           </div>
-          <p>Machine Learning</p>
+          <p>Mathematical Optimisation</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
             <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">
               <div class="w3-center w3-text-white">95%</div>
             </div>
           </div>
-          <p>Statistical Analysis</p>
+          <p>Financial Modelling, Risk analysis & Management</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">95%</div>
-          </div>
-          <p>Risk Analysis and Management</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:90%">90%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">90%</div>
           </div>
           <p>Web Development</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
@@ -96,32 +157,28 @@ img{
           <p class="w3-large"><b><i class="fa fa-cogs fa-fw w3-margin-right w3-text-theme"></i>Technical</b></p>
           <p>Python, R, MATLAB, LaTeX</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">95%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:100%">100%</div>
           </div>
           <p>HTML, CSS, JavaScript</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:85%">
-              <div class="w3-center w3-text-white">85%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:90%">
+              <div class="w3-center w3-text-white">90%</div>
             </div>
           </div>
           <p>Unix, Shell, Linux, C/C++</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
             <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:80%">
-              <div class="w3-center w3-text-white">80%</div>
+              <div class="w3-center w3-text-white">85%</div>
             </div>
           </div>
-          <p>Solidity, SQL</p>
+          <p>Tableau, SQL</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:75%">75%</div>
-          </div>
-          <p>Tableau</p>
-          <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:70%">70%</div>
-          </div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:75%">80%</div>
+          </div> 
+
           <br>
         </div>
       </div><br>
-
     <!-- End Left Column -->
     </div>
 
@@ -129,77 +186,164 @@ img{
     <div class="w3-twothird">
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Work Experience</h2>
-
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Sessional Academic / Curtin University</b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>July 2023 - <span class="w3-tag w3-theme w3-round">Current</span></h6>
-          <h6 class="w3-text-theme"><i class="fa fa-map-marker fa-fw w3-margin-right"></i>Perth, Western Australia</h6>
-          <ul>
-            <li>YSU Economics (Lecturer)</li>
-            <li>Financial Engineering (TA - tutorial)</li>
-            <li>Foundations of Calculus (TA - workshop)</li>
-            <li>Calculus for Engineers (TA - MATLAB)</li>
-            <li>Accelerated Mathematics for Engineers (TA - workshop)</li>
-            <li>Linear Algebra and Statistics for Engineers (TA - R & MATLAB)</li>
-            <li>Introduction to Scientific Data Analysis (TA - Excel & R)</li>
-            <li>Introduction to Probability and Data Analysis (TA - R)</li>
-          </ul>
+        <h2 class="w3-text-grey w3-padding-8"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Work Experience</h2>
+        <div class="w3-container w3-responsive">
+          <table class="w3-table">
+            <tr>
+              <th class="w3-large w3-text-grey"><i class="fa fa-university fa-fw w3-margin-right"></i>Curtin University</th>
+              <th class="w3-large w3-text-grey w3-right-align"><i
+                class="fa fa-map-marker fa-fw w3-margin-right"></i>Perth, Western Australia</th>
+            </tr>
+            <tr>
+              <td class="w3-text-theme w3-large">Sessional Academic and Invigilator</td>
+              <td class="w3-text-theme w3-right-align"><i class="fa fa-calendar fa-fw w3-margin-right"></i>July 2023 - <span
+                class="w3-tag w3-theme w3-round">Present</span></td>
+            </tr>
+          </table>
+        
+          <div class="w3-table w3-striped w3-hoverable">
+          <table>
+            <thead>
+              <tr class="w3-light-gray">
+                <th></th>
+                <th>Subject</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024 - present</td>
+                <td><b>Economics at YSU</b><br>Fundamental concepts in micro and macroeconomics, including policy modeling and business strategy</td>
+                <td>Lecturer</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>2025 - present</td>
+                <td><b>Supply Chain Modelling and Optimisation at YSU</b><br>Optimisation and forcasting techniques in logistics, operations, and network design</td>
+                <td>Lecturer</td>
+              </tr>
+              <tr>
+                <td>Semester 1, 2025</td>
+                <td><b>Introduction to Scientific Data Analysis</b><br>Fundamental concepts in data analysis using Excel and R</td>
+                <td>TA (Computer lab)</td>
+              </tr>
+              <tr>
+                <td>Semester 1, 2025</td>
+                <td><b>Introduction to Probability and Data Analysis</b><br>Core probability and statistical data analysis using R</td>
+                <td>TA (Computer lab)</td>
+              </tr>
+              <tr>
+                <td>Semester 2, 2024</td>
+                <td><b>Financial Engineering</b><br>Principles of financial economics for application in finance and investment portfolios</td>
+                <td>TA (Tutorial)</td>
+              </tr>
+              <tr>
+                <td>Semester 2, 2024</td>
+                <td><b>Calculus for Engineers</b><br>MATLAB-based problem-solving related to calculus and its applications in engineering</td>
+                <td>TA (Computer lab)</td>
+              </tr>
+              <tr>
+                <td>Semester 2, 2024</td>
+                <td><b>Linear Algebra and Statistics for Engineers</b><br>Linear algebra, data analysis and statistical inference through R and MATLAB-based exercises</td>
+                <td>TA (Computer lab)</td>
+              </tr>
+              <tr>
+                <td>Semester 2, 2024</td>
+                <td><b>Accelerated Mathematics for Engineers</b><br>Calculus, linear algebra, statistics, and techniques used in solving problems arising in engineering and related fields</td>
+                <td>TA (Workshop)</td>
+              </tr>
+              <tr>
+                <td>Semester 2, 2023</td>
+                <td><b>Foundations of Calculus</b><br>Differential and integral calculus for several types of problems, as well as trigonometric equations</td>
+                <td>TA (Workshop)</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Intern Researcher / Thanachart Insurance PCL </b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Dec 2018 - Feb 2019</h6>
-          <h6 class="w3-text-theme"><i class="fa fa-map-marker fa-fw w3-margin-right"></i>Bangkok, Thailand</h6>
+       
+          <table class="w3-table">
+
+            <tr>
+              <td class="w3-text-theme w3-large">Research assistant</td>
+              <td class="w3-text-theme w3-right-align"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb - Nov 2018</td>
+            </tr>
+          </table>
+          <ul>
+            <li>Carried out research on bridge structural analysis, involved solving differential equation using Finite Element method. The research output was published in 2019.</li>
+          </ul>
+
+        </div>
+        <hr>
+        <div class="w3-container w3-responsive">
+          <table class="w3-table">
+            <tr>
+              <th class="w3-large w3-text-grey"><i class="fa fa-car fa-fw w3-margin-right"></i>Thanachart Insurance PCL</th>
+              <th class="w3-large w3-text-grey w3-right-align"><i
+                class="fa fa-map-marker fa-fw w3-margin-right"></i>Bangkok, Thailand</th>
+            </tr>
+            <tr>
+              <td class="w3-text-theme w3-large">Intern Researcher</td>
+              <td class="w3-text-theme w3-right-align"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Dec 2018 - Feb 2019</td>
+            </tr>
+          </table>
           <ul>
             <li>Conducted research on risk analysis and  management, customer retention, and renewal rates for motor insurance using advanced statistical methods</li>
-            <li>Developed insurance dashboards using Tableau that outline a company's key performance indicators(KPIs), which makes it easier to access, monitor, and get actionable insights</li>
-          </ul>
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Research Assistant / Curtin University</b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb  - Nov 2018</h6>
-          <h6 class="w3-text-theme"><i class="fa fa-map-marker fa-fw w3-margin-right"></i>Perth, Western Australia</h6>
-          <ul>
-            <li>Carried out research on bridge structural analysis, involved solving differential equation using Finite Element method</li>
+            <li>Developed insurance dashboards using Tableau that outline a company's key performance indicators (KPIs), which makes it easier to access, monitor, and get actionable insights</li>
           </ul>
         </div>
       <br>
       </div>
 
+
       <div class="w3-container w3-card w3-white w3-margin-bottom">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Education</h2>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Curtin University</b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Jan 2022 - <span class="w3-tag w3-theme w3-round">Current</span></h6>
-          <p>Doctor of Philosophy - Mathematics and Statistics</p>
-        
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>The University of Western Australia</b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>July 2019 - June 2021</h6>
-          <p>Master of Data Science with Distinction</p>
-          
-        </div>
-        <div class="w3-container">
-          <h5 class="w3-opacity"><b>Curtin University</b></h5>
-          <h6 class="w3-text-theme"><i class="fa fa-calendar fa-fw w3-margin-right"></i>Feb 2016 - Dec 2018</h6>
-          <p>Bachelor of Science (Actuarial Science)</p><br>
+        <h2 class="w3-text-grey w3-padding-8"><i class="fa fa-flask fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Research</h2>
+        <div class="w3-table w3-hoverable w3-margin-bottom">
+          <table>
+            <thead>
+              <tr class="w3-light-gray">
+                <th>Publication</th>
+                <th>Year</th>
+              </tr>
+              <tr>
+                <td>Wiwatanapataphee, D., Khajohnsaksumeth, N. & Wu, Y.H. Effect of beam joinery on bridge structural stability. Adv Differ Equ 2019, 225 (2019). <a href="https://doi.org/10.1186/s13662-019-2158-5" target="_blank"> https://doi.org/10.1186/s13662-019-2158-5</a></td>
+                <td>2019</td>
+              </tr>
+              <tr class="w3-light-gray">
+                <td>
+                  Wiwatanapataphee, D. & Wu, Y.H. Fractional Optimal Control for Community-Shared Battery Energy Storage Systems Under Stochastic Dynamics. AIMS Mathematics.
+                </td>
+                <td>(2025, Under Review)</td>
+              </tr>
+              <tr>
+                <td>
+                  Wiwatanapataphee, D., Wu, Y., Sawangtong, W. & Sawangtong, P. Modeling Anomalous Diffusion and Volatility in the Australian National Electricity Market Using a Space-Fractional Black-Scholes Framework. AIMS Mathematics.
+                </td>
+                <td>(2025, Under Review)</td>
+              </tr>
+              <tr class="w3-light-gray">
+                <td>
+                  Sawangtong, W., Wiwatanataphee, D. & Sawangtong, P. Analytical Solution of Space-Fractional Black-Scholes Equation for European Put Option via Extended Caputo Derivative. AIMS Mathematics.
+                </td>
+                <td>(2025, Under Review)</td>
+              </tr>
+          </table>
         </div>
       </div>
       
 
       <div class="w3-container w3-card w3-white">
-        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Awards & Achievements</h2>
-        <ul class="w3-ul">
-            <li>Research Training Program (RTP) Scholarship 2022 - Current, Curtin University</li>
-            <li>SAE Summer Scholarship 2018, Curtin University</li> 
+        <h2 class="w3-text-grey w3-padding-8"><i class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i>Awards & Achievements</h2>
+        <ul class="w3-ul w3-margin" style="list-style-type:disc">
+            <li>Actuaries Institute foundation program exemption of CT1 Financial Mathematics; CB1 Business Finance; CS1 Actuarial Statistics; CB2 Business Economics; CM2 Financial Engineering and Loss Reserving in 2021</li>
+            <li>Research Training Program (RTP) Scholarship January 2022 - June 2025, Curtin University</li>            
+            <li>Curtin Science and Engineering (SAE) Summer Scholarship 2018, Curtin University</li>
+            <li>Course Completion Certificate "MATLAB Onramp" 2025, MathWorks Training Services</li>
+            <li>Certificate of Completion "2024 Summer School - AI Intensive Bootcamp", VP Akkodis Academy Australia</li>
+            <li>Certificate of Completion “Python Essential Training” 2020, LinkedIn</li>
+            <li>Certificate of Completion “Learning Python” 2019, LinkedIn</li>
             <li>Certificate of Completion “Statistical Tools for Risk Modelling” 2018, Actuarial Science, Thammasat University</li>
-            <li>Certificate of Excellence for Science & Mathematics 2015, Engineers Australia, WA</li>
-            <!-- <li>Certificate of Distinction 2013, Royal Australian Chemical Institute -->
-            <!-- <li>Certificate of Completion “Learning Python” 2019, LinkedIn</li>
-            <li>Certificate of Completion “Python Essential Training” 2020, LinkedIn</li> -->
-            <li>Actuaries Institute foundation program exemption of CT1 Financial Mathematics; CB1 Business Finance; CS1 Actuarial Statistics; CB2 Business Economics; CM2 Financial Engineering and Loss Reserving</li>
-
+            <!-- <li>Certificate of Excellence for Science & Mathematics 2015, Engineers Australia, WA</li> -->
+            <!-- <li>Certificate of Distinction 2013, Royal Australian Chemical Institute -->            
         </ul>
       </div>
 
@@ -215,7 +359,7 @@ img{
 </div>
 
 <footer class="w3-container w3-theme w3-center w3-margin-top">
-  <p>Get the print version here <a href="media/dwiwat-CV.pdf"><i class="fa fa-download fa-fw w3-large w3-text-white w3-hover-opacity"></i></a></p>
+  <p>Get the print version here <a href="media/D_Wiwatanapataphee_CV.pdf"><i class="fa fa-download fa-fw w3-large w3-text-white w3-hover-opacity"></i></a></p>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
 
