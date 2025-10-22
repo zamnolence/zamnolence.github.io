@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+<title>Benchawan Wiwatanapataphee | Compendia Index</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-indigo.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  html,
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  table {
+    counter-reset: tableCount;
+  }
+
+  .counterCell:before {
+    content: counter(tableCount);
+    counter-increment: tableCount;
+  }
+
+  /* Profile image style */
+  img.profile {
+    width: 240px;
+    height: 240px;
+    border-radius: 20%;
+    box-shadow: 10px 10px 10px #8d8c8a;
+    margin-top: 24px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  .tab {
+    display: inline-block;
+    margin-left: 40px;
+  }
+
+  #myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #myImg:hover {
+    opacity: 0.7;
+  }
+
+  .modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+  }
+
+  .modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+
+  .modal-content,
+  #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+
+  @keyframes zoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  .close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  @media only screen and (max-width: 700px) {
+    .modal-content {
+      width: 100%;
+    }
+  }
+
+  /* unvisited link */
+  .ca:link {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  /* visited link */
+  .ca:visited {
+    color: indigo;
+    text-decoration: underline;
+  }
+
+  /* mouse over link */
+  .ca:hover {
+    color: blue;
+    text-decoration: none;
+  }
+
+  /* selected link */
+  .ca:active {
+    color: blue;
+    text-decoration: underline;
+  }
+</style>
+
+<script>
+  // Accordion
+  function myFunction(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+      x.previousElementSibling.className += " w3-theme-d1";
+    } else {
+      x.className = x.className.replace("w3-show", "");
+      x.previousElementSibling.className =
+        x.previousElementSibling.className.replace(" w3-theme-d1", "");
+    }
+  }
+
+  // Used to toggle the menu on smaller screens when clicking on the menu button
+  function openNav() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+      x.className += " w3-show";
+    } else {
+      x.className = x.className.replace(" w3-show", "");
+    }
+  }
+
+</script>
+
+<script src="https://kit.fontawesome.com/a600c1fd88.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+
+<body class="w3-theme-l5">
+
+  <!-- Navbar -->
+  <div class="w3-top">
+    <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+      <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+        href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+
+      <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
+          class="fa fa-home w3-margin-right"></i>Home</a>
+
+      <a href="materials.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Materials">Materials</i></a>
+    </div>
+  </div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Home</a>
+    <a href="materials.html" class="w3-bar-item w3-button w3-padding-large">Materials</a>
+  </div>
+
+  <!-- Page Container -->
+  <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
+
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container w3-margin-left">
+          <h2><i class="fa fa-book fa-fw w3-margin-right w3-xxlarge w3-text-theme w3-padding-top-24"></i>Course Materials
+          </h2>
+
+          <p class="w3-margin-left w3-margin-right">All materials, including text, images, and downloadable content, are the intellectual property of the site owner unless otherwise stated. You may use these materials for personal and educational purposes only. Commercial use or redistribution is prohibited without prior written consent.</p>
+
+
+          <h3><i class="fa fa-caret-right fa-fw w3-xlarge w3-text-theme"></i>Economics (YSU 2025 class) <i
+              class="fa fa-star fa-beat-fade w3-text-theme"></i></h3>
+          <p class="w3-margin-left w3-margin-right">The course materials and announcements for this unit will be uploaded to the <a
+              href="https://github.com/zamnolence/Economics-at-YSU" class="ca">course repository</a> and the WeChat
+            group: <b>YSU Economics & Supply Chain</b>. Students are required to attend classes regularly to obtain the full version of the course materials.</p> 
+          <p class="w3-margin-left w3-large"><b>Assessment</b></p>
+          <ol>
+            <li>20% Assignment (Due: 13 June at 11:59 PM)</li>
+            <li>80% Final Exam (Date: TBA, Duration: 2 hours)</li>
+          </ol>
+          <p class="w3-margin-left w3-large"><b>Core Reading</b></p>
+          <ol>
+            <li>CB2 Business Economics Course Notes. The Actuarial Education Company, 2019 or newer.</li>
+            <li>Economics for business, 7th edition. Sloman, J. Pearson, 2016.</li>
+          </ol>
+          <p class="w3-margin-left w3-large"><b>Course Calendar</b></p>
+
+          <table class="w3-table-all">
+            <tr>
+              <th>Date</th>
+              <th>#</th>
+              <th>Topic</th>
+            </tr>
+            <tr>
+              <td>Wed 4 June</td>
+              <td>1</td>
+              <td>Introduction to Economic Concepts</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>2</td>
+              <td>Supply and Demand</td>
+            </tr>
+            <tr>
+              <td>Thu 5</td>
+              <td>3</td>
+              <td>Elasticity</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>4</td>
+              <td>Consumer demand and uncertainty</td>
+            </tr>
+            <tr>
+              <td>Fri 6</td>
+              <td>5</td>
+              <td>Production and costs</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>6</td>
+              <td>Revenue and profit</td>
+            </tr>
+            <tr>
+              <td>Sat 7</td>
+              <td></td>
+              <td>Break</td>
+            </tr>
+            <tr>
+              <td>Sun 8</td>
+              <td>7</td>
+              <td>Perfect competition and monopoly</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>8</td>
+              <td>Imperfect competition</td>
+            </tr>
+            <tr>
+              <td>Mon 9</td>
+              <td>9</td>
+              <td>Pricing strategies</td>
+            </tr>
+            <tr>
+              <td>Tue 10</td>
+              <td>10</td>
+              <td>Macroeconomic environment and objectives</td>
+            </tr>
+            <tr>
+              <td>Wed 11</td>
+              <td>11</td>
+              <td>Supply-side policy</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>12</td>
+              <td>Demand-side policy</td>
+            </tr>
+            <tr>
+              <td>Thu 12</td>
+              <td></td>
+              <td>Revision</td>
+            </tr>
+            <tr>
+              <td>Fri 13</td>
+              <td></td>
+              <td>Practice test &amp; assignment due at 11:59 PM</td>
+            </tr>
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="w3-row-padding">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container w3-margin-left">
+          <h3 class="w3-padding-top-24"><i class="fa fa-caret-right fa-fw w3-xlarge w3-text-theme"></i>Supply Chain Modelling & Optimisation
+            (YSU 2025 class) <i class="fa fa-star fa-beat-fade w3-text-theme"></i></h3>
+          <p class="w3-margin-left w3-margin-right">The course materials and announcements for this unit will be uploaded to the WeChat
+            group: <b>YSU Economics & Supply Chain</b>. Students are required to attend classes regularly to obtain the full version of the course materials.</p>
+          <p class="w3-margin-left w3-large"><b>Assessment</b></p>
+          <ol>
+            <li>20% Assignment (Due: 23 June at 11:59 PM)</li>
+            <li>80% Final Exam (Date: TBA, Duration: 2 hours)</li>
+          </ol>
+          <p class="w3-margin-left w3-large"><b>Core Reading</b></p>
+          <ol>
+            <li> Ghiani, Gianpaolo, Gilbert Laporte, and Roberto Musmanno, 2003. "Introduction to logistics systems planning and control". https://doi.org/10.1002/0470014040.</li>
+          </ol>
+          <p class="w3-margin-left w3-large"><b>Course Calendar</b></p>
+
+          <table class="w3-table-all">
+            <tr>
+              <th>Date</th>
+              <th>#</th>
+              <th>Topic</th>
+            </tr>
+            <tr>
+              <td>Sun 15 June</td>
+              <td>1</td>
+              <td>Introduction to Supply Chain and Review of Optimisation Problems</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>2</td>
+              <td>Network Design - SESC</td>
+            </tr>
+            <tr>
+              <td>Mon 16</td>
+              <td>3</td>
+              <td>Network Design - TEMC</td>
+            </tr>
+            <tr>
+              <td>Tue 17</td>
+              <td>4</td>
+              <td>Network Design under Uncertainty (CF analysis & Decision tree)</td>
+            </tr>
+            <tr>
+              <td>Wed 18</td>
+              <td>5</td>
+              <td>Forecasting Techniques (LR, MA, ES, Holt-Winter Model)</td>
+            </tr>
+            <tr>
+              <td>Thu 19</td>
+              <td>6</td>
+              <td>Inventory Model: Single-Commodity</td>
+            </tr>
+            <tr>
+              <td>Fri 20</td>
+              <td>7</td>
+              <td>Inventory Model: Discount and Multi-Commodity</td>
+            </tr>
+            <tr>
+              <td>Sat 21</td>
+              <td>8</td>
+              <td>Stochastic Inventory Model: Single-Period Model</td>
+            </tr>
+            <tr>
+              <td>Sun 22</td>
+              <td>9</td>
+              <td>Stochastic Inventory Model: Multi-Period Model</td>
+            </tr>
+
+            <tr>
+              <td>Mon 23</td>
+              <td></td>
+              <td>Revision & assignment due at 11:59 PM</td>
+            </tr>
+
+          </table>
+          <br>
+        </div>
+      </div>
+    </div>
+    <br>  
+    <div class="w3-row-padding">
+      <div class="w3-white w3-text-grey w3-card-4">
+        <div class="w3-container w3-margin-left">
+          <h2 class="w3-padding-top-24">Summary and Reference Sheets</h2>
+          <h3><i class="fa fa-caret-right fa-fw w3-xlarge w3-text-theme"></i>Python and R</h3>
+          <ul>
+            <li><a href="media/Python_Installation_Guide_WSL2_on_VS_Code_2025.pdf" class="ca"> Installation Guide (WSL2 on Windows VS Code)</a></li>
+            <li><a href="media/Getting Started with R and RStudio.pdf" class="ca">Getting Started with R and RStudio</a></li>
+            <!-- <li>Sample Data Analysis Guidline</li> -->
+          </ul>
+          <h3><i class="fa fa-caret-right fa-fw w3-xlarge w3-text-theme"></i>Statistical Probabiliy and Data Analysis</h3>
+          <ul>
+            <li><a href="media/Statistics_Summary_of_Theory.pdf" class="ca">Summary of Theory</a></li>
+            <li><a href="media/Probability_Ref_Sheet.pdf" class="ca">Probability Distributions Reference Sheet</a></li>
+            <li><a href="media/Hypothesis_Ref_Sheet.pdf" class="ca">Hypothesis Testing Reference Sheet</a></li>
+          </ul>
+          <h3><i class="fa fa-caret-right fa-fw w3-xlarge w3-text-theme"></i>Foundation Mathematics and Calculus</h3>
+          <ul>
+            <li><a href="media/Calculus_Ref_Sheet.pdf" class="ca">Calculus Reference Sheet</a></li>
+          </ul>
+          <br>
+        </div>
+
+      </div>
+
+
+      <!-- End Grid -->
+    </div>
+
+    <!-- End Page Container -->
+  </div>
+
+  <footer class="w3-container w3-theme w3-center w3-margin-top">
+    <p>Get the print version here <a href="media/D_Wiwatanapataphee_CV.pdf"><i
+          class="fa fa-download fa-fw w3-large w3-text-white w3-hover-opacity"></i></a></p>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  </footer>
+
+</body>
+
+</html>

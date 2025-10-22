@@ -14,7 +14,7 @@ html,body,h1,h2,h3,h4,h5,h6 {
 /* Profile image style */
 img{
   width: 250px;
-  height: 250px;
+  height: 275px;
   border-radius: 20%;
   box-shadow: 10px 10px 10px #8d8c8a;
   margin-top: 24px;
@@ -70,11 +70,56 @@ img{
   background: rgb(63, 81, 181);
 }
 
+/* compact “chips” */
+  .chip{
+    display:inline-block; padding:.25rem .6rem; margin:.15rem .2rem;
+    border-radius:999px; background:#f1f1f1; font-size:.85rem
+  }
+
+  /* two-column key/value layout like your screenshot */
+  .kv{ display:grid; gap:.5rem }
+  .kv-row{
+    display:grid; gap:.75rem;
+    grid-template-columns: minmax(150px, 25%) 1fr;  /* left label / right details */
+    align-items:start; padding:.35rem 0; border-bottom:1px dashed #eee
+  }
+  .kv-row:last-child{ border-bottom:none }
+  .kv-key{ font-weight:600 }
+  .kv-val{ color:#444 }
+
+  /* spacing for bars */
+  .bar-label{ margin:.9rem 0 .35rem; font-weight:600 }
+
+  /* responsive: stack labels on narrow screens */
+  @media (max-width:700px){
+    .kv-row{ grid-template-columns: 1fr; }
+  }
+
 </style>
 <body class="w3-light-grey">
 
+ <!-- Navbar -->
+ <div class="w3-top">
+  <div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2"
+      href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+
+    <a href="index.html" class="w3-bar-item w3-button w3-padding-large w3-theme-d4"><i
+        class="fa fa-home w3-margin-right"></i>Home</a>
+
+    <a href="materials.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+      title="Materials">Materials</i></a>
+  </div>
+</div>
+
+  <!-- Navbar on small screens -->
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+      <a href="index.html" class="w3-bar-item w3-button w3-padding-large">Home</a>
+      <a href="materials.html" class="w3-bar-item w3-button w3-padding-large">Materials</a>
+  </div>
+
 <!-- Page Container -->
-<div class="w3-content w3-margin-top" style="max-width:1400px;">
+ <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
 
   <!-- The Grid -->
   <div class="w3-row-padding">
@@ -84,13 +129,14 @@ img{
     
       <div class="w3-white w3-text-grey w3-card-4">
         <div class="w3-display-container w3-center">
-          <img src="media/self.png" alt="Avatar">
+          <img src="media/me-0-crop.jpg" alt="Avatar">
 
         </div>
         <div class="w3-container">
-          <p class="w3-margin-right w3-xlarge w3-center">Doungporn "Sam" Wiwatanapataphee </p>
-          <p class="w3-margin-right w3-margin-bottom w3-medium w3-justify">Sessional academic and PhD candidate in Mathematics and Statistics at Curtin University, researching energy storage optimisation and blockchain-based trading systems. My work combines fractional calculus, optimisation, and stochastic modelling to address challenges in finance and sustainable energy. I have two years of teaching experience across seven units in finance, mathematics, and statistics, using tools such as Python, R, MATLAB, and Excel. I have also taught internationally as a lecturer-in-charge for the unit Economics and Supply Chain Modelling and Optimisation for the Curtin–Yanshan joint program in China. Skilled in data analysis, AI/ML forecasting, and interactive web-based applications, with a strong interest in applying data science to real-world financial and energy systems.
-          </p>
+          <!-- <p class="w3-margin-right w3-xlarge w3-center">Doungporn "Sam" Wiwatanapataphee </p> -->
+          <!-- <p class="w3-margin-right w3-margin-bottom w3-medium w3-justify">Sessional academic in Mathematics and Statistics with a strong foundation in Data Science, Actuarial Science, and Applied Mathematics. Completed a PhD in Financial Modelling and Energy Optimisation, with research spanning fractional differential equations, space–time modelling, and blockchain-based smart grid systems. Skilled in data-driven optimisation using R, Python, and MATLAB. Research interests include Big Data Analytics for Smart Grids, Multifractal Models in Finance, and AI-based Risk Management under market uncertainty. Committed to interdisciplinary innovation at the intersection of mathematical modelling, simulation, and intelligent systems.
+          </p> -->
+          <br>
           <p><i class="fa fa-briefcase fa-fw w3-margin-right w3-large w3-text-theme"></i>
           PhD (Maths & Stats), 2025<br>
             <span class="tab"></span>MSc Data Science, 2021<br>
@@ -116,7 +162,8 @@ img{
 
           <ul class="items">
             <li style="padding-bottom: 0;">
-              <p class="w3-text-theme w3-large">September 2025<br><b> PhD in Mathematics and Statistics</b><br><span class="w3-text-grey" style="font-size: 16px;">Curtin University</span></p>
+              <p class="w3-text-theme w3-large">October 2025<br><b> PhD in Mathematics and Statistics</b><br><span class="w3-text-grey" style="font-size: 16px;">Curtin University</span></p>
+              <p>Research Training Program (RTP) Scholarship Recipient</p>
               <p class="w3-text-grey"><b>Thesis title:</b> Blockchain-based Renewable Energy Trading and Storage Optimisation</p>
             </li>
             <li style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Jun 2021<br><b>Master of Data Science with Distinction</b><br><span class="w3-text-grey" style="font-size: 16px;">The University of Western Australia</span></p>
@@ -124,43 +171,135 @@ img{
             </li>
             <li style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Dec 2018<br><b>Bachelor of Science (Actuarial Science)</b><br><span class="w3-text-grey" style="font-size: 16px;">Curtin University</span></p> 
             </li>
-            <li style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Oct 2015<br><b>WACE Program</b><br><span class="w3-text-grey" style="font-size: 16px;">Canning College</span></p> 
+            <li class="end" style="padding-bottom: 0;"><p class="w3-text-theme w3-large">Oct 2015<br><b>WACE Program</b><br><span class="w3-text-grey" style="font-size: 16px;">Canning College</span></p> 
             </li>
-            <li class="end" style="padding-bottom: 0;"><p class="w3-text-theme w3-large">December 2014<br><b>Senior Secondary Course</b><br><span class="w3-text-grey" style="font-size: 16px;">Kasetsart University Laboratory School</span></p>      
-            </li>
+            <!-- <li class="end" style="padding-bottom: 0;"><p class="w3-text-theme w3-large">December 2014<br><b>Year 11</b><br><span class="w3-text-grey" style="font-size: 16px;">Kasetsart University Laboratory School</span></p>      
+            </li> -->
           </ul>
 
           <!--Research Interest-->
           <p class="w3-xlarge"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-theme"></i>Research Interest</b></p>
           <ul>
+            <li>Multifractal Models for Financial Time Series</li>
             <li>Optimisation of Battery Storage Systems using Big Data from Smart Grids</li>
             <li>ML for Predictive Maintenance in Sustainable Wind and Solar Systems</li>
             <li>AI-Based Financial Risk Management under Market Volatility</li>
-            <li>ESG-based Credit Risk Modelling using ML</li>
+
           </ul>
 
           <!--Computation Skills-->
-          <p class="w3-xlarge"><b><i class="fa fa-cogs fa-fw w3-margin-right w3-text-theme"></i>Computation skills</b></p>
-          <p>Python, R, MATLAB, LaTeX</p>
+          <p class="w3-xlarge"><b><i class="fa fa-cogs fa-fw w3-margin-right w3-text-theme"></i>Skills</b></p>
+            <!-- quick summary chips -->
+  <div class="w3-margin-bottom">
+    <span class="chip">Python</span>
+    <span class="chip">R</span>
+    <span class="chip">MATLAB</span>
+    <span class="chip">Excel (VBA)</span>
+    <span class="chip">SQL</span>
+    <span class="chip">LaTeX</span>
+    <span class="chip">Git</span>
+    <span class="chip">HTML</span>
+    <span class="chip">CSS</span>
+    <span class="chip">JavaScript</span>
+    <span class="chip">Linux/Unix</span>
+  </div>
+
+  <!-- Analytical Tools -->
+  <div class="w3-card w3-round-large w3-white w3-padding">
+    <h4 class="w3-text-theme w3-margin-top w3-margin-bottom">Analytical Tools</h4>
+    <div class="kv">
+      <div class="kv-row">
+        <div class="kv-key">Mathematical & Statistical Modelling</div>
+        <div class="kv-val">ANSYS, MATLAB, Python, R</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Actuarial Modelling</div>
+        <div class="kv-val">Time series forecasting, stochastic processes, risk modelling</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Data Analytics</div>
+        <div class="kv-val">Tableau, Excel (VBA), SQL</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Insurance Analytics</div>
+        <div class="kv-val">Loss modelling, customer retention analysis, KPI dashboards</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Simulation & Optimisation</div>
+        <div class="kv-val">Monte Carlo simulation, supply chain modelling</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Teaching & Educational Skills -->
+  <div class="w3-card w3-round-large w3-white w3-padding w3-margin-top">
+    <h4 class="w3-text-theme w3-margin-top w3-margin-bottom">Teaching & Educational Skills</h4>
+    <div class="kv">
+      <div class="kv-row">
+        <div class="kv-key">Curriculum Design</div>
+        <div class="kv-val">Developed and coordinated units in economics and optimisation</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Assessment & Engagement</div>
+        <div class="kv-val">Delivered tutorials/workshops; mentored students in applied projects</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Learning Platforms</div>
+        <div class="kv-val">Blackboard, Moodle</div>
+      </div>
+      <div class="kv-row">
+        <div class="kv-key">Education Theory</div>
+        <div class="kv-val">Contemporary pedagogy in quantitative & actuarial education</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Web & Technical Development -->
+  <div class="w3-card w3-round-large w3-white w3-padding w3-margin-top">
+    <h4 class="w3-text-theme w3-margin-top w3-margin-bottom">Web & Technical Development</h4>
+
+    <!-- proficiency bars (keep your style) -->
+    <p class="bar-label">Python, R, MATLAB, Excel (VBA), LaTeX, Git</p>
+    <div class="w3-light-grey w3-round-xlarge w3-small">
+      <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:100%">Expert</div>
+    </div>
+
+    <p class="bar-label">HTML, CSS, JavaScript</p>
+    <div class="w3-light-grey w3-round-xlarge w3-small">
+      <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">Advanced</div>
+    </div>
+
+    <p class="bar-label">Unix, Shell, Linux, C/C++</p>
+    <div class="w3-light-grey w3-round-xlarge w3-small">
+      <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:90%">Advanced</div>
+    </div>
+
+    <p class="bar-label">Tableau, SQL</p>
+    <div class="w3-light-grey w3-round-xlarge w3-small">
+      <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:85%">Proficient</div>
+    </div>
+  </div>
+</section>
+          <!-- <p>Python, R, MATLAB, Excel (VBA), LaTeX, Git</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
             <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:100%">100%</div>
           </div>
           <p>HTML, CSS, JavaScript</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:90%">
-              <div class="w3-center w3-text-white">90%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:95%">
+              <div class="w3-center w3-text-white">95%</div>
             </div>
           </div>
           <p>Unix, Shell, Linux, C/C++</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:80%">
-              <div class="w3-center w3-text-white">85%</div>
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:90%">
+              <div class="w3-center w3-text-white">90%</div>
             </div>
           </div>
           <p>Tableau, SQL</p>
           <div class="w3-light-grey w3-round-xlarge w3-small">
-            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:75%">80%</div>
-          </div> 
+            <div class="w3-container w3-center w3-round-xlarge w3-theme" style="width:85%">85%</div>
+          </div>  -->
 
           <br>
         </div>
@@ -170,6 +309,12 @@ img{
 
     <!-- Right Column -->
     <div class="w3-twothird">
+
+        <div class="w3-container w3-card w3-white">
+        <p class="w3-text-grey w3-xxlarge w3-padding-bottom-0" style="margin-bottom: 8px;"><b>Doungporn "Sam" Wiwatanapataphee</b></p>
+          <p class="w3-margin-right w3-margin-bottom w3-medium w3-justify w3-padding-top-0" style="margin-top: 8px;">Sessional academic in Mathematics and Statistics with a strong foundation in Data Science, Actuarial Science, and Applied Mathematics. Completed a PhD in Financial Modelling and Energy Optimisation, with research spanning fractional differential equations, space–time modelling, and blockchain-based smart grid systems. Skilled in data-driven optimisation using R, Python, and MATLAB. Research interests include Big Data Analytics for Smart Grids, Multifractal Models in Finance, and AI-based Risk Management under market uncertainty. Committed to interdisciplinary innovation at the intersection of mathematical modelling, simulation, and intelligent systems.
+          </p>
+      </div>
     
       <div class="w3-container w3-card w3-white w3-margin-bottom">
         <p class="w3-text-grey w3-xlarge w3-padding-8"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i><b>Work Experience</b></p>
@@ -186,7 +331,9 @@ img{
                 class="w3-tag w3-theme w3-round">Present</span></td>
             </tr>
           </table>
-        
+          <ul>
+          <li>I have taught nine undergraduate courses in mathematics, statistics, finance, and data science. My teaching integrates mathematical and statistical methods with computational and AI techniques to address real-world problems.</li>
+          </ul>
           <div class="w3-table w3-striped w3-hoverable">
           <table>
             <thead>
@@ -200,13 +347,13 @@ img{
               <tr>
                 <td>2024 - present</td>
                 <td><b>Economics</b><br>Core concepts in micro and macroeconomics, including policy modeling and business strategy</td>
-                <td>Lecturer (joint program)</td>
+                <td>Lecturer</td>
                 <td></td>
               </tr>
               <tr>
                 <td>2025 - present</td>
                 <td><b>Supply Chain Modelling and Optimisation</b><br>Optimisation and forcasting techniques in logistics, operations, and network design</td>
-                <td>Lecturer (joint program)</td>
+                <td>Lecturer</td>
               </tr>
               <tr>
                 <td>Semester 1, 2025</td>
@@ -214,7 +361,7 @@ img{
                 <td>TA (Computer lab)</td>
               </tr>
               <tr>
-                <td>Semester 1, 2025</td>
+                <td></td>
                 <td><b>Introduction to Probability and Data Analysis</b><br>Core probability and statistical data analysis using R</td>
                 <td>TA (Computer lab)</td>
               </tr>
@@ -224,17 +371,17 @@ img{
                 <td>TA (Tutorial)</td>
               </tr>
               <tr>
-                <td>Semester 2, 2024</td>
+                <td></td>
                 <td><b>Calculus for Engineers</b><br>MATLAB-based problem-solving related to calculus and its applications in engineering</td>
                 <td>TA (Computer lab)</td>
               </tr>
               <tr>
-                <td>Semester 2, 2024</td>
+                <td></td>
                 <td><b>Linear Algebra and Statistics for Engineers</b><br>Linear algebra, data analysis and statistical inference through R and MATLAB</td>
                 <td>TA (Computer lab)</td>
               </tr>
               <tr>
-                <td>Semester 2, 2024</td>
+                <td></td>
                 <td><b>Accelerated Mathematics for Engineers</b><br>Calculus, linear algebra, statistics, and techniques for solving problems in engineering</td>
                 <td>TA (Workshop)</td>
               </tr>
@@ -287,13 +434,17 @@ img{
                 <th>Year</th>
               </tr>
               <tr>
-                <td>Wiwatanapataphee, D., Khajohnsaksumeth, N. & Wu, Y.H. Effect of beam joinery on bridge structural stability. Adv Differ Equ 2019, 225 (2019). <a href="https://doi.org/10.1186/s13662-019-2158-5" target="_blank"> https://doi.org/10.1186/s13662-019-2158-5</a></td>
+                <td>Wiwatanapataphee, D., Khajohnsaksumeth, N. & Wu, Y.H. <b>Effect of beam joinery on bridge structural stability.</b> Adv Differ Equ 2019, 225 (2019). <a href="https://doi.org/10.1186/s13662-019-2158-5" target="_blank"> https://doi.org/10.1186/s13662-019-2158-5</a></td>
                 <td>2019</td>
               </tr>
               <tr class="w3-light-gray">
                 <td>
-                  Wiwatanapataphee, D., Wu, Y., Sawangtong, W. & Sawangtong, P. Modeling Anomalous Diffusion and Volatility in the Australian National Electricity Market Using a Space-Fractional Black-Scholes Framework[J]. AIMS Mathematics, 2025, 10(5): 12388-12420. <a href="https://doi.org/10.3934/math.2025560" target="_blank" rel="noopener noreferrer">https://doi.org/10.3934/math.2025560</a>   
+                  Wiwatanapataphee, D., Wu, Y., Sawangtong, W. & Sawangtong, P. <b>Modeling Anomalous Diffusion and Volatility in the Australian National Electricity Market Using a Space-Fractional Black-Scholes Framework[J].</b> AIMS Mathematics, 2025, 10(5): 12388-12420. <a href="https://doi.org/10.3934/math.2025560" target="_blank" rel="noopener noreferrer">https://doi.org/10.3934/math.2025560</a>   
                 </td>
+                <td>2025</td>
+              </tr>
+              <tr>
+                <td>Sawangtong, W., Wiwatanataphee, D. & Sawangtong, P. <b>Analytical Solution of Space-Fractional Black-Scholes Equation for European Put Option via Extended Caputo Derivative.</b> Contemporary Mathmatics, 2025 (In Press).</td>
                 <td>2025</td>
               </tr>
               <!-- <tr>
@@ -334,7 +485,14 @@ img{
       <div class="w3-container w3-card w3-white">
         <p class="w3-text-grey w3-xlarge w3-padding-8"><i class="fa fa-university fa-fw w3-margin-right w3-xxlarge w3-text-theme"></i><b>Awards & Achievements</b></p>
         <ul class="w3-ul">
-            <li>Actuaries Institute foundation program exemption of CT1 Financial Mathematics; CB1 Business Finance; CS1 Actuarial Statistics; CB2 Business Economics; CM2 Financial Engineering and Loss Reserving in 2021</li>
+            <li>Actuaries Institute Australia <b>Foundation Program</b> since 2021
+              <ul>
+                <li>CT1 Financial Mathematics;</li>
+                <li>CB1 Business Finance;</li>
+                <li>CS1 Actuarial Statistics;</li>
+                <li>CB2 Business Economics;</li>
+                <li>M2 Financial Engineering and Loss Reserving.</li>
+              </ul>
             <li>Research Training Program (RTP) Scholarship from 2022-2025, Curtin University</li>            
             <li>Curtin Science and Engineering Summer Scholarship 2018, Curtin University</li>
             <li>Course Completion Certificate "MATLAB Onramp" 2025, MathWorks</li>
