@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Introduction to Simulation – Computer Simulation in R (v1.0.2)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./01_2_probability_revision.html" rel="next">
+<link href="./01_introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5c151f11a0e44064f75a5cfd43434b0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_1_simulation_intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Distributions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-simulation" id="toc-what-is-simulation" class="nav-link active" data-scroll-target="#what-is-simulation"><span class="header-section-number">1.1</span> What is Simulation?</a></li>
+  <li><a href="#simulation-workflow" id="toc-simulation-workflow" class="nav-link" data-scroll-target="#simulation-workflow"><span class="header-section-number">1.2</span> Simulation Workflow</a></li>
+  <li><a href="#simulation-vs-analytical-solutions" id="toc-simulation-vs-analytical-solutions" class="nav-link" data-scroll-target="#simulation-vs-analytical-solutions"><span class="header-section-number">1.3</span> Simulation vs Analytical Solutions</a></li>
+  <li><a href="#random-number-generation" id="toc-random-number-generation" class="nav-link" data-scroll-target="#random-number-generation"><span class="header-section-number">1.4</span> Random Number Generation</a>
+  <ul>
+  <li><a href="#linear-congruential-generators-lcgs" id="toc-linear-congruential-generators-lcgs" class="nav-link" data-scroll-target="#linear-congruential-generators-lcgs"><span class="header-section-number">1.4.1</span> Linear Congruential Generators (LCGs)</a></li>
+  <li><a href="#uniform01-random-number-mersenne-twister" id="toc-uniform01-random-number-mersenne-twister" class="nav-link" data-scroll-target="#uniform01-random-number-mersenne-twister"><span class="header-section-number">1.4.2</span> Uniform(0,1) Random Number (Mersenne Twister)</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_1_simulation_intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="what-is-simulation" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-simulation"><span class="header-section-number">1.1</span> What is Simulation?</h2>
+<p>Simulation is the systematic use of a computational model to study the behaviour of a system that evolves under uncertainty. More precisely, a simulation replaces analytical derivation or physical experimentation with a carefully constructed algorithm that generates artificial data according to specified probabilistic rules. By observing the behaviour of this artificial system repeatedly, we approximate characteristics of the real system.</p>
+<p>The defining feature of simulation is that randomness is built into the mechanism of the model. Unlike <strong>deterministic</strong> computation, where the same inputs always produce the same outputs, a <strong>stochastic</strong> simulation produces different outcomes on each run (<strong>nondeterministic</strong>). This variability is not a flaw but a deliberate feature. It mirrors the variability present in real-world systems and allows us to quantify uncertainty in outcomes.</p>
+<p>To understand what simulation achieves, consider the distinction between a single realisation and a distribution of outcomes. Running a queueing system for one simulated day yields one possible history of arrivals and waiting times. Running the simulation thousands of times produces a distribution of possible waiting times. It is this distribution—not any single run—that provides meaningful statistical insight. Simulation therefore shifts our focus from deterministic prediction to probabilistic understanding.</p>
+<div class="note">
+<p>It is important to recognise that a simulation does not replicate reality directly; it replicates a model of reality.</p>
+</div>
+<p>The validity of the conclusions depends entirely on the appropriateness of the modelling assumptions. If the model is unrealistic, the simulation will faithfully reproduce unrealistic behaviour. For this reason, simulation should always be viewed as a structured experiment conducted under explicitly stated assumptions.</p>
+<p>A useful way to conceptualise simulation is as a <em>virtual laboratory</em>. In a physical laboratory, we manipulate inputs and observe outputs. In a simulation, we encode the system’s rules into a computer program, manipulate parameters, and observe the resulting behaviour. This makes simulation especially powerful for “what-if” analysis. We can change arrival rates, service mechanisms, volatility parameters, or structural assumptions and immediately study the consequences, often at negligible cost compared to real-world experimentation.</p>
+<p>Finally, simulation is inherently <strong>approximate</strong>. Because we rely on finite repetition, our estimates contain sampling variability. However, probability theory provides the theoretical foundation that guarantees improvement with increased replication. As the number of runs grows, simulated averages stabilise and converge toward their true theoretical values. This convergence justifies the use of simulation as a legitimate inferential tool rather than a heuristic shortcut.</p>
+</section>
+<section id="simulation-workflow" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="simulation-workflow"><span class="header-section-number">1.2</span> Simulation Workflow</h2>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="flowchart" aria-label="Problem to Conclusion flowchart">
+<div class="node" style="background: rgba(0,90,180,0.08);">
+Problem
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(0, 120, 60, 0.08);">
+Model
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 90, 0, 0.10);">
+Simulation
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 0, 0, 0.10);">
+Analysis
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 160, 0, 0.10);">
+Conclusion
+</div>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>Although simulation problems arise in many different domains, the structure of a well-designed simulation study follows a common logical progression. The process begins with <strong>problem formulation</strong>. The question of interest must be stated clearly and quantitatively. Vague objectives lead to unfocused models and ambiguous conclusions. For example, asking whether “queues are too long” is imprecise; asking for the expected waiting time and the probability that waiting exceeds ten minutes is specific and measurable.</p>
+<p>Once the problem is defined, the next step is <strong>model construction</strong>. This involves identifying the essential components of the system and deciding how to represent them mathematically. In a queueing model, we must specify how customers arrive, how long service takes, how many servers operate, and how customers are prioritised. These assumptions may be based on empirical data, theoretical reasoning, or simplifying approximations. The art of modelling lies in balancing realism with tractability.</p>
+<p>After specifying the model, it must be translated into an <strong>algorithm</strong>. This step converts conceptual assumptions into computational procedures. Random variables must be generated from appropriate distributions, system states must be updated according to explicit rules, and outputs must be recorded systematically. At this stage, verification becomes crucial: we must ensure that the code implements the intended logic correctly.</p>
+<p>The <strong>simulation</strong> is then executed repeatedly. Each run generates one realisation of the system’s behaviour. By aggregating results across many independent replications, we estimate performance measures such as means, variances, quantiles, and probabilities of rare events. Statistical analysis of the output is essential; without it, simulation reduces to uncontrolled numerical experimentation.</p>
+<p>Finally, <strong>conclusions</strong> are drawn and interpreted in the context of the original problem. If results are unsatisfactory or unrealistic, the process returns to earlier stages. Simulation is inherently iterative. Assumptions are revised, parameters are recalibrated, and models are refined. This feedback loop is not a sign of failure but a central feature of responsible modelling.</p>
+</section>
+<section id="simulation-vs-analytical-solutions" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="simulation-vs-analytical-solutions"><span class="header-section-number">1.3</span> Simulation vs Analytical Solutions</h2>
+<p>Simulation and analytical methods represent two fundamentally different approaches to solving quantitative problems.</p>
+<div class="note">
+<p>Analytical solutions rely on <em>mathematical derivations</em> that express relationships in closed form.</p>
+</div>
+<p>When available, such solutions provide exact expressions that reveal structural properties of the system. They are often elegant, computationally efficient, and theoretically satisfying.</p>
+<p>However, analytical solutions typically require strong assumptions. Many real-world systems violate the simplifying conditions necessary for closed-form derivations. Introducing heterogeneous agents, time-varying dynamics, nonlinear interactions, or complex dependence structures often renders analytical treatment infeasible.</p>
+<div class="note">
+<p>Simulation, by contrast, replaces algebraic derivation with <em>computational experimentation</em>.</p>
+</div>
+<p>Rather than solving equations, we approximate quantities of interest by averaging outcomes from repeated random experiments. The result is approximate rather than exact, but the method accommodates far greater structural complexity. Simulation therefore trades exactness for flexibility.</p>
+<p>The choice between analytical and simulation approaches is not a matter of superiority but of suitability. When exact formulas exist and assumptions are reasonable, analytical solutions are often preferable. When systems are too complex for tractable mathematics, simulation becomes indispensable. In practice, the two approaches complement one another: analytical results guide modelling intuition, while simulation explores behaviour beyond analytical reach.</p>
+<table class="table-striped caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Analytical Solutions</strong></th>
+<th style="text-align: center;"><strong>Simulation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Nature</strong></td>
+<td style="text-align: center;"><strong>Nature</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Formulas/exact, showing how variables relate</td>
+<td style="text-align: center;">Produces approximate answers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Strong assumptions</td>
+<td style="text-align: center;">Handles complex, realistic systems</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Often elegant and fast to compute</td>
+<td style="text-align: center;">Requires computational power</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">Flexible: you can model almost anything</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>When to Use</strong></td>
+<td style="text-align: center;"><strong>When to Use</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">The system is simple enough to model with equations</td>
+<td style="text-align: center;">The system is too complicated for closed-form math</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">The mathematics is tractable</td>
+<td style="text-align: center;">You want to include realistic randomness</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">You need exact results</td>
+<td style="text-align: center;">You want to test “what-if” scenarios</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">You want to understand the structure of the problem</td>
+<td style="text-align: center;">You need distributions, not just averages</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Example</strong></td>
+<td style="text-align: center;"><strong>Example</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">For a simple queue with arrival rate <span class="math inline">\(\lambda\)</span> and service rate <span class="math inline">\(\mu\)</span>, the average number of customers in the system is: <span class="math display">\[L = \frac{\lambda}{\mu - \lambda}\]</span></td>
+<td style="text-align: center;">If the café has:<br> • two baristas with different speeds <br> • customers who sometimes abandon the queue</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="random-number-generation" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="random-number-generation"><span class="header-section-number">1.4</span> Random Number Generation</h2>
+<p>All stochastic simulation depends on our ability to generate random numbers. Without randomness, simulation reduces to deterministic computation and cannot represent uncertainty. Yet computers are <strong>deterministic</strong> machines: given the same inputs, they always produce the same outputs. This raises an important question: how can a deterministic machine generate randomness?</p>
+<p>The answer lies in the concept of <em>pseudorandomness</em>. Computers do not generate truly random numbers in the physical sense. Instead, they generate sequences of numbers using deterministic algorithms designed to mimic the statistical properties of randomness. These algorithms are known as <strong>pseudorandom number generators</strong> (PRNGs).</p>
+<p>A PRNG begins with an initial value called a seed. It then applies a recursive formula to produce a sequence of numbers that appear random. If the same seed is used, the same sequence will be generated. This reproducibility is not a weakness; it is one of the greatest strengths of computational simulation. It allows experiments to be replicated exactly, facilitating debugging, validation, and scientific transparency.</p>
+<p><strong>True randomness</strong>, by contrast, arises from inherently unpredictable <em>physical processes</em> such as radioactive decay, atmospheric noise, or quantum phenomena. Such randomness is <strong>nondeterministic</strong>. While it is possible to use hardware devices to capture physical randomness, simulation typically relies on algorithmic generators because they are fast, reproducible, and sufficiently random for statistical purposes.</p>
+<p>For a pseudorandom sequence to be useful in simulation, it must satisfy several important properties. The sequence should have a very long period before repeating. Its values should be uniformly distributed over the intended range. There should be no detectable patterns or correlations that could bias simulation results. Poor-quality generators can produce subtle dependencies that distort high-dimensional simulations, particularly in Monte Carlo integration or Bayesian computation.</p>
+<p>Modern statistical software such as R and Python uses high-quality PRNGs by default. Nevertheless, understanding their structure is essential because every simulated random variable ultimately depends on these underlying generators.</p>
+<section id="linear-congruential-generators-lcgs" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="linear-congruential-generators-lcgs"><span class="header-section-number">1.4.1</span> Linear Congruential Generators (LCGs)</h3>
+<p>One of the earliest and simplest pseudorandom number generators is the Linear Congruential Generator (LCG). Historically important in the development of Monte Carlo methods, the LCG illustrates the basic mechanism of algorithmic randomness.</p>
+<div class="note">
+<p>An LCG generates a sequence of integers according to the <em>recurrence relation</em>:</p>
+<p><span class="math display">\[X_{n+1} = (aX_n + c) \ \text{mod} \ m,\]</span></p>
+<p>where <span class="math inline">\(X\)</span> is the sequence of pseudo-random numbers, <span class="math inline">\(m\)</span> is the modulus, <span class="math inline">\(a\)</span> is the multiplier, <span class="math inline">\(c\)</span> is the increment, and <span class="math inline">\(X_0\)</span> is the seed. Also,</p>
+<ul>
+<li>the modulus <span class="math inline">\(m, 0 &lt; m\)</span></li>
+<li>the multiplier <span class="math inline">\(a, 0 &lt; a &lt; m\)</span></li>
+<li>the increment <span class="math inline">\(c, 0 \leq c &lt; m\)</span></li>
+<li>the seed or start values <span class="math inline">\(X_0, 0 \leq X_0 &lt; m\)</span></li>
+</ul>
+<p>The modulo operation ensures that the sequence remains within the range <span class="math inline">\(0 \leq X_n &lt; m\)</span>.</p>
+</div>
+<div class="tip">
+<p><strong>Modulo arithmetic</strong></p>
+<p>In arithmetic, the modulus refers to the operation that returns the <em>remainder</em> after division.</p>
+<p><span class="math display">\[a \bmod m = \text{remainder when } a \text{ is divided by } m\]</span></p>
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(7 \bmod 5 = 2\)</span></li>
+<li><span class="math inline">\(5 \bmod 5 = 0\)</span></li>
+<li><span class="math inline">\(17 \bmod 5 = 2\)</span></li>
+</ul>
+</div>
+<p>To use the sequence for simulation, the generated integers are typically scaled to the interval (0,1) by dividing by <span class="math inline">\(m\)</span>. This produces numbers that approximate draws from a Uniform(0,1) distribution.</p>
+<p>Although the formula is simple, the choice of parameters <span class="math inline">\(a\)</span>, <span class="math inline">\(c\)</span>, and <span class="math inline">\(m\)</span> critically determines the quality of the generator. Poor parameter choices can produce short cycles and visible lattice structures when successive pairs <span class="math inline">\((X_n, X_{n+1})\)</span> are plotted. These patterns indicate correlation and undermine the reliability of simulations.</p>
+<p><strong>Example:</strong> Bad LCG with poor parameter choices</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>lcg <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">seed =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">5</span>, <span class="at">c =</span> <span class="dv">1</span>, <span class="at">m =</span> <span class="dv">16</span>) {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> seed</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    x[i] <span class="ot">&lt;-</span> (a <span class="sc">*</span> x[i<span class="dv">-1</span>] <span class="sc">+</span> c) <span class="sc">%%</span> m</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> x <span class="sc">/</span> m   <span class="co"># convert to Uniform(0,1)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(u)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">lcg</span>(<span class="dv">5000</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Value"</span>, <span class="at">main =</span> <span class="st">""</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u[<span class="sc">-</span><span class="fu">length</span>(u)], u[<span class="sc">-</span><span class="dv">1</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="dv">2</span>, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">"u_n"</span>, <span class="at">ylab =</span> <span class="st">"u_{n+1}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_1_simulation_intro_files/figure-html/Bad LCG-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While LCGs are computationally efficient and easy to implement, they suffer from <em>structural weaknesses</em>. In high-dimensional simulations, they may exhibit <em>undesirable correlations</em>. For this reason, LCGs are primarily of pedagogical and historical interest rather than practical use in modern statistical computing.</p>
+</section>
+<section id="uniform01-random-number-mersenne-twister" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="uniform01-random-number-mersenne-twister"><span class="header-section-number">1.4.2</span> Uniform(0,1) Random Number (Mersenne Twister)</h3>
+<p>Modern simulation relies on far more sophisticated generators. The most widely used PRNG in contemporary statistical software is the <strong>Mersenne Twister</strong>, which serves as the default generator in R, Python (NumPy), MATLAB, and many other systems.</p>
+<p>The Mersenne Twister was designed to have an extremely long period (specifically <span class="math inline">\(2^{19937} - 1\)</span>), excellent equidistribution properties, and strong performance in high-dimensional settings. For most practical simulation tasks, it provides randomness of sufficient quality.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(u, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">cex=</span>.<span class="dv">8</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Uniform(0,1) Random Draws"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Index"</span>, <span class="at">ylab =</span> <span class="st">"Value"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(u,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">breaks =</span> <span class="dv">20</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Histogram of Uniform(0,1) Samples"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Value"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Frequency"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="cn">FALSE</span>,)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(u), <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_1_simulation_intro_files/figure-html/Uniform(0,1) Scatter-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The fundamental output of nearly all PRNGs is a sequence of values that approximate independent draws from the Uniform(0,1) distribution. This distribution plays a central role in simulation because it serves as the building block for generating all other random variables.</p>
+<p>If we can generate <span class="math inline">\(U \sim \text{Uniform}(0,1)\)</span>, we can transform it to simulate other distributions. For example,</p>
+<ul>
+<li>A Bernoulli(<span class="math inline">\(p\)</span>): returning 1 if <span class="math inline">\(U &lt; p\)</span> and 0 otherwise.</li>
+<li>An Exponential(<span class="math inline">\(\lambda\)</span>): using the inverse transform <span class="math inline">\(X = -\frac{1}{\lambda} \ln(1 - U)\)</span>.</li>
+<li>A Normal(0, 1): using transformations such as the <em>Box–Muller</em> method.</li>
+</ul>
+<p>This principle — generating complex distributions from uniform random numbers — underlies nearly all simulation techniques studied in this unit. Whether we simulate queueing systems, perform Monte Carlo (MC) integration, or implement Markov Chain Monte Carlo (MCMC) algorithms, the process always begins with high-quality Uniform(0,1) draws.</p>
+<p>In this sense, the uniform random number generator is the engine of stochastic simulation. If that engine is flawed, every subsequent simulation result is compromised. If it is reliable, we can build complex probabilistic models with confidence.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01_introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./01_2_probability_revision.html" class="pagination-link" aria-label="Revision: Probability Tools for Simulation">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Computer Simulation in R(v1.0.2) <br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

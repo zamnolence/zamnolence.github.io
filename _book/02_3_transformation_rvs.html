@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Transformation of Random Variables – Computer Simulation in R (v1.0.2)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_4_workshop.html" rel="next">
+<link href="./02_2_joint_dependence.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5c151f11a0e44064f75a5cfd43434b0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Distributions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#transformation-of-a-single-random-variable" id="toc-transformation-of-a-single-random-variable" class="nav-link active" data-scroll-target="#transformation-of-a-single-random-variable"><span class="header-section-number">7.1</span> Transformation of a Single Random Variable</a>
+  <ul>
+  <li><a href="#discrete-case" id="toc-discrete-case" class="nav-link" data-scroll-target="#discrete-case"><span class="header-section-number">7.1.1</span> Discrete Case</a></li>
+  <li><a href="#continuous-case" id="toc-continuous-case" class="nav-link" data-scroll-target="#continuous-case"><span class="header-section-number">7.1.2</span> Continuous Case</a>
+  <ul class="collapse">
+  <li><a href="#monotone-transformations" id="toc-monotone-transformations" class="nav-link" data-scroll-target="#monotone-transformations"><span class="header-section-number">7.1.2.1</span> Monotone Transformations</a></li>
+  <li><a href="#nonmonotone-transformations" id="toc-nonmonotone-transformations" class="nav-link" data-scroll-target="#nonmonotone-transformations"><span class="header-section-number">7.1.2.2</span> Non‑Monotone Transformations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#inverse-transform-sampling" id="toc-inverse-transform-sampling" class="nav-link" data-scroll-target="#inverse-transform-sampling"><span class="header-section-number">7.2</span> Inverse Transform Sampling</a>
+  <ul>
+  <li><a href="#probability-integral-transform" id="toc-probability-integral-transform" class="nav-link" data-scroll-target="#probability-integral-transform"><span class="header-section-number">7.2.1</span> Probability Integral Transform</a></li>
+  <li><a href="#inverse-transform-sampling-algorithm" id="toc-inverse-transform-sampling-algorithm" class="nav-link" data-scroll-target="#inverse-transform-sampling-algorithm"><span class="header-section-number">7.2.2</span> Inverse Transform Sampling Algorithm</a></li>
+  <li><a href="#examples-and-limitations" id="toc-examples-and-limitations" class="nav-link" data-scroll-target="#examples-and-limitations"><span class="header-section-number">7.2.3</span> Examples and Limitations</a></li>
+  </ul></li>
+  <li><a href="#transformation-of-multiple-random-variables" id="toc-transformation-of-multiple-random-variables" class="nav-link" data-scroll-target="#transformation-of-multiple-random-variables"><span class="header-section-number">7.3</span> Transformation of Multiple Random Variables</a>
+  <ul>
+  <li><a href="#transformations-of-two-random-variables" id="toc-transformations-of-two-random-variables" class="nav-link" data-scroll-target="#transformations-of-two-random-variables"><span class="header-section-number">7.3.1</span> Transformations of Two Random Variables</a></li>
+  <li><a href="#the-jacobian-formula-continuous-case" id="toc-the-jacobian-formula-continuous-case" class="nav-link" data-scroll-target="#the-jacobian-formula-continuous-case"><span class="header-section-number">7.3.2</span> The Jacobian Formula (Continuous Case)</a></li>
+  </ul></li>
+  <li><a href="#linear-transformations-and-the-multivariate-normal" id="toc-linear-transformations-and-the-multivariate-normal" class="nav-link" data-scroll-target="#linear-transformations-and-the-multivariate-normal"><span class="header-section-number">7.4</span> Linear Transformations and the Multivariate Normal</a>
+  <ul>
+  <li><a href="#linear-transformations-of-random-vectors" id="toc-linear-transformations-of-random-vectors" class="nav-link" data-scroll-target="#linear-transformations-of-random-vectors"><span class="header-section-number">7.4.1</span> Linear Transformations of Random Vectors</a></li>
+  <li><a href="#the-multivariate-normal-distribution" id="toc-the-multivariate-normal-distribution" class="nav-link" data-scroll-target="#the-multivariate-normal-distribution"><span class="header-section-number">7.4.2</span> The Multivariate Normal Distribution</a></li>
+  <li><a href="#constructing-a-multivariate-normal-via-cholesky" id="toc-constructing-a-multivariate-normal-via-cholesky" class="nav-link" data-scroll-target="#constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">7.4.3</span> Constructing a Multivariate Normal via Cholesky</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Up to this point, we have focused on how random variables behave together—their joint distributions, dependence structures, and how correlation shapes the geometry of the bivariate normal. In the final example, we saw that we can <em>construct</em> correlated normals by applying a <strong>linear transformation</strong> to independent ones. This idea is much more general than it first appears.</p>
+<p>In this section, we shift our attention to <strong>how random variables change when we transform them</strong>. Whether we apply a simple function to a single variable or a linear transformation to a vector of variables, the distribution changes in systematic, mathematically predictable ways. Understanding these transformation rules is essential for simulation, modelling, and deriving new distributions from known ones.</p>
+<section id="transformation-of-a-single-random-variable" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="transformation-of-a-single-random-variable"><span class="header-section-number">7.1</span> Transformation of a Single Random Variable</h2>
+<p>When we apply a function to a random variable, the result is itself a new random variable. If <span class="math inline">\(X\)</span> has a known distribution and we define<br>
+<span class="math display">\[
+Y = g(X),
+\]</span></p>
+<p>then the key question is:</p>
+<blockquote class="blockquote">
+<p>What is the distribution of <span class="math inline">\(Y\)</span>?</p>
+</blockquote>
+<p>This section develops the tools needed to answer that question for both discrete and continuous cases.</p>
+<section id="discrete-case" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">7.1.1</span> Discrete Case</h3>
+<div class="note">
+<p>If <span class="math inline">\(X\)</span> is discrete with PMF <span class="math inline">\(p_X(x)\)</span>, and <span class="math inline">\(Y = g(X)\)</span>, then the PMF of <span class="math inline">\(Y\)</span> is obtained by collecting all values of <span class="math inline">\(X\)</span> that map to the same value of <span class="math inline">\(Y\)</span>:</p>
+<p><span class="math display">\[
+p_Y(y) = \sum_{x : g(x) = y} p_X(x).
+\]</span></p>
+<p>This is simply a “probability bookkeeping” rule: every value of <span class="math inline">\(Y\)</span> inherits probability from the <span class="math inline">\(X\)</span>-values that produce it.</p>
+</div>
+<p><strong>Example:</strong> Let <span class="math inline">\(X\)</span> take values <span class="math inline">\(\{ 1,2,3,4\}\)</span> with <span class="math display">\[
+P(X=1)=0.1,\quad P(X=2)=0.2,
+\]</span></p>
+<p><span class="math display">\[
+P(X=3)=0.3,\quad P(X=4)=0.4.
+\]</span></p>
+<p>Define</p>
+<p><span class="math display">\[
+Y=g(X)=\left\{ \, \begin{array}{ll}\textstyle 0,&amp;\textstyle X\mathrm{\  is\  odd}\\ \textstyle 1,&amp;\textstyle X\mathrm{\  is\  even}\end{array}\right.
+\]</span></p>
+<p>so <span class="math inline">\(Y\)</span> indicates whether <span class="math inline">\(X\)</span> is even.</p>
+<p>Determine the PMF of <span class="math inline">\(Y\)</span> with possible values of 0 and 1.</p>
+<ul>
+<li>For <span class="math inline">\(Y=0\)</span>: this happens when <span class="math inline">\(X\)</span> is odd, i.e.&nbsp;<span class="math inline">\(X\in \{ 1,3\}\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+P(Y=0)=P(X=1)+P(X=3)=0.1+0.3=0.4.
+\]</span></p>
+<ul>
+<li>For <span class="math inline">\(Y=1\)</span>: this happens when <span class="math inline">\(X\)</span> is even, i.e.&nbsp;<span class="math inline">\(X\in \{ 2,4\}\)</span>.</li>
+</ul>
+<p><span class="math display">\[
+P(Y=1)=P(X=2)+P(X=4)=0.2+0.4=0.6.
+\]</span></p>
+<p>So the PMF of <span class="math inline">\(Y\)</span> is</p>
+<p><span class="math display">\[
+P(Y=0)=0.4,\qquad P(Y=1)=0.6.
+\]</span></p>
+<p>We can try simulating the example:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Original discrete variable</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">size =</span> <span class="dv">5000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.4</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(X <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot empirical pmf of Y</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">prop.table</span>(<span class="fu">table</span>(Y)),</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"skyblue"</span>, <span class="st">"tomato"</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Empirical PMF of Y = g(X)"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Probability"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The heights close to the theoretical values of 0.4 and 0.6.</p>
+</section>
+<section id="continuous-case" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">7.1.2</span> Continuous Case</h3>
+<p>The method used for transforming discrete random variables cannot be applied directly to the continuous case because probabilities at individual points no longer make sense: for a continuous random variable, <span class="math inline">\(P(X=x)=0\)</span> for all <span class="math inline">\(x\)</span>. As a result, we cannot “collect probabilities” like the previous section; instead, we must work with how <strong>probability density</strong> is redistributed under a transformation.</p>
+<p>For continuous random variables, there are in principle two approaches: a <strong>CDF‑based method</strong>, which derives the distribution of <span class="math inline">\(Y\)</span> by working with cumulative probabilities, and a <strong>PDF‑based method</strong>, which determines how density changes under the transformation. In this subsection, we focus on the PDF‑based method, as it provides a unified and transparent way to handle both monotone and non‑monotone transformations.</p>
+<p>When the transformation is <strong>monotone</strong>, each value of <span class="math inline">\(Y\)</span> corresponds to exactly one value of <span class="math inline">\(X\)</span>, so the density of <span class="math inline">\(Y\)</span> is obtained from a single contribution. In contrast, for <strong>non‑monotone</strong> transformations, multiple values of <span class="math inline">\(X\)</span> may map to the same value of <span class="math inline">\(Y\)</span>, and the density of <span class="math inline">\(Y\)</span> must account for all such contributions. This perspective emphasises conservation of probability and naturally extends to more complex transformations, including multivariate cases.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  %% Monotone transformation
+  subgraph M["Monotone Y = g(X)"]
+    direction TB
+    x1["x₁"] --&gt;|"g"| y1["y₁"]
+    x2["x₂"] --&gt;|"g"| y2["y₂"]
+    x3["x₃"] --&gt;|"g"| y3["y₃"]
+  end
+
+  %% Non-monotone transformation
+  subgraph N["Non‑monotone Y = g(X)"]
+    direction TB
+    a1["x₁"] --&gt;|"g"| b1["y₁"]
+    a2["x₂"] --&gt;|"g"| b2["y₂"]
+    a3["x₃"] --&gt;|"g"| b2
+    a4["x₄"] --&gt;|"g"| b3["y₃"]
+  end
+
+  %% Notes
+  note1["Each y has exactly one preimage"]:::note
+  note2["A y may have multiple preimages"]:::note
+
+  M --- note1
+  N --- note2
+
+  %% Styling
+  classDef note fill:#f5f5f5,stroke:#999,stroke-dasharray: 4 4,color:#111;
+
+  style M fill:#f5f5f5,stroke:#999,stroke-dasharray: 4 4,color:#111;
+  style N fill:#f5f5f5,stroke:#999,stroke-dasharray: 4 4,color:#111;
+
+  %% Make all arrows black
+  linkStyle default stroke:#000,stroke-width:1.5px;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<section id="monotone-transformations" class="level4" data-number="7.1.2.1">
+<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="monotone-transformations"><span class="header-section-number">7.1.2.1</span> Monotone Transformations</h4>
+<div class="note">
+<p>If <span class="math inline">\(X\)</span> is continuous with PDF <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(Y = g(X)\)</span> where <span class="math inline">\(g\)</span> is <strong>strictly increasing or decreasing</strong>, then the PDF of <span class="math inline">\(Y\)</span> is given by the change‑of‑variables formula:</p>
+<p><span class="math display">\[
+f_Y(y) = f_X(g^{-1}(y)) \left| \frac{d}{dy} g^{-1}(y) \right|.
+\]</span></p>
+<p>This formula ensures that probability is preserved under the transformation.</p>
+</div>
+<p><strong>Example:</strong> Let <span class="math inline">\(X\sim \mathcal{N}(0,1)\)</span> and define <span class="math inline">\(Y=3X+2\)</span>. Determine the PDF of <span class="math inline">\(Y\)</span>.</p>
+<p>We know <span class="math inline">\(Y=g(X)=3X+2\)</span>, which is strictly increasing. The inverse is</p>
+<p><span class="math display">\[x=g^{-1}(y)=\frac{y-2}{3},\]</span></p>
+<p>and</p>
+<p><span class="math display">\[\frac{d}{dy}g^{-1}(y)=\frac{1}{3}.\]</span></p>
+<p>The PDF of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[f_X(x)=\frac{1}{\sqrt{2\pi }}e^{-x^2/2}.\]</span></p>
+<p>By the change‑of‑variables formula,</p>
+<p><span class="math display">\[f_Y(y)=f_X\! \left( g^{-1}(y)\right) \left| \frac{d}{dy}g^{-1}(y)\right| =f_X\! \left( \frac{y-2}{3}\right) \cdot \frac{1}{3}.\]</span></p>
+<p>So</p>
+<p><span class="math display">\[f_Y(y)=\frac{1}{3}\cdot \frac{1}{\sqrt{2\pi }}\exp \! \left( -\frac{1}{2}\left( \frac{y-2}{3}\right) ^2\right).\]</span></p>
+<p>We recognise this as the PDF of a normal distribution with mean <span class="math inline">\(2\)</span> and variance <span class="math inline">\(3^2=9\)</span>, i.e.</p>
+<p><span class="math display">\[Y\sim \mathcal{N}(2,9).\]</span></p>
+<p>This matches the general rule: if <span class="math inline">\(X\sim \mathcal{N}(\mu ,\sigma ^2)\)</span> and <span class="math inline">\(Y=aX+b\)</span>, then <span class="math inline">\(Y\sim \mathcal{N}(a\mu +b,a^2\sigma ^2)\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Original variable</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span>X <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">density</span>(Y),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"darkred"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Density of Y = 3X + 2"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"y"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add theoretical curve</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dnorm</span>(x, <span class="at">mean =</span> <span class="dv">2</span>, <span class="at">sd =</span> <span class="dv">3</span>),</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Simulated"</span>, <span class="st">"Theoretical N(2, 9)"</span>),</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"darkred"</span>, <span class="st">"blue"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The simulated density (red) matches the theoretical <span class="math inline">\(\mathcal{N}(2,9)\)</span> curve (blue).</p>
+</section>
+<section id="nonmonotone-transformations" class="level4" data-number="7.1.2.2">
+<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="nonmonotone-transformations"><span class="header-section-number">7.1.2.2</span> Non‑Monotone Transformations</h4>
+<div class="note">
+<p>If <span class="math inline">\(g\)</span> is not one‑to‑one (e.g., <span class="math inline">\(Y = X^2\)</span>), then multiple <span class="math inline">\(X\)</span>-values may map to the same <span class="math inline">\(Y\)</span>. In that case:</p>
+<p><span class="math display">\[
+f_Y(y) = \sum_{x : g(x) = y}
+f_X(x)\left|\frac{dx}{dy}\right|.
+\]</span></p>
+</div>
+<p><strong>Example:</strong> Let <span class="math inline">\(X\sim \mathcal{N}(0,1)\)</span> and define <span class="math inline">\(Y=X^2\)</span>. Find the PDF of <span class="math inline">\(Y\)</span>.</p>
+<p><strong>Step 1: Support of <span class="math inline">\(Y\)</span></strong></p>
+<p>Since <span class="math inline">\(Y=X^2\)</span>, we must have Y.</p>
+<p><strong>Step 2: Solve <span class="math inline">\(y=x^2\)</span> for <span class="math inline">\(x\)</span></strong></p>
+<p>For a given <span class="math inline">\(y&gt;0\)</span>, the equation <span class="math inline">\(y=x^2\)</span> has two solutions:</p>
+<p><span class="math display">\[x=\sqrt{y},\quad x=-\sqrt{y}.\]</span></p>
+<p>So both contribute to the density at <span class="math inline">\(y\)</span>.</p>
+<p><strong>Step 3: Apply the non‑monotone transformation rule</strong></p>
+<p>For each branch, we use</p>
+<p><span class="math display">\[f_Y(y)=\sum _{x:x^2=y}f_X(x)\left| \frac{dx}{dy}\right|.\]</span></p>
+<p>The PDF of <span class="math inline">\(X\)</span> is</p>
+<p><span class="math display">\[f_X(x)=\frac{1}{\sqrt{2\pi }}e^{-x^2/2}.\]</span></p>
+<p>Thus, for <span class="math inline">\(y&gt;0\)</span>,</p>
+<p><span class="math display">\[\begin{aligned}f_Y(y)&amp;=f_X(\sqrt{y})\left| \frac{d}{dy}\sqrt{y}\right| +f_X(-\sqrt{y})\left| \frac{d}{dy}(-\sqrt{y})\right| \\ &amp;=\frac{1}{\sqrt{2\pi }}e^{-(\sqrt{y})^2/2}\cdot \frac{1}{2\sqrt{y}}+\frac{1}{\sqrt{2\pi }}e^{-(-\sqrt{y})^2/2}\cdot \frac{1}{2\sqrt{y}}\\ &amp;=\frac{1}{\sqrt{2\pi }}e^{-y/2}\cdot \frac{1}{2\sqrt{y}}+\frac{1}{\sqrt{2\pi }}e^{-y/2}\cdot \frac{1}{2\sqrt{y}}\\ &amp;=\frac{1}{\sqrt{2\pi }}e^{-y/2}\cdot \frac{1}{\sqrt{y}}.\end{aligned}\]</span></p>
+<p>This is the PDF of a <strong><span class="math inline">\(\chi^2\)</span> distribution with 1 degree of freedom</strong>, i.e.&nbsp;<span class="math inline">\(Y\sim \chi_1^2\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Original variable</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Transformation</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> X<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot histogram</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Y, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgray"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of Y = X^2"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"y"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add theoretical chi-square(1) density</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dchisq</span>(x, <span class="at">df =</span> <span class="dv">1</span>),</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Simulated"</span>, <span class="st">"Chi-square(1)"</span>),</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"darkgreen"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The simulated <span class="math inline">\(Y\)</span> shows a right‑skewed histogram that overlays beautifully with the theoretical <span class="math inline">\(\chi_1^2\)</span> curve.</p>
+</section>
+</section>
+</section>
+<section id="inverse-transform-sampling" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="inverse-transform-sampling"><span class="header-section-number">7.2</span> Inverse Transform Sampling</h2>
+<p>In the previous section, we studied how the distribution of a random variable changes when we apply a transformation, focusing on how probability density is redistributed under monotone and non‑monotone mappings. In simulation, however, we often face the <strong>inverse problem</strong>: rather than starting with a random variable and determining the distribution of its transformation, we want to <em>construct</em> a random variable with a specified distribution in the first place. <strong>Inverse transform sampling</strong> provides a direct solution to this problem by reversing the logic of transformation.</p>
+<p>Starting from a Uniform(0,1) random variable—the fundamental output of most random number generators—we apply an appropriate inverse transformation to obtain samples from a desired distribution. This method makes explicit the connection between transformation theory and simulation practice, and it highlights why understanding how probability behaves under transformations is essential for building simulation algorithms.</p>
+<p>We have already seen examples of this idea in practice, such as generating Bernoulli and Exponential random variables from Uniform(0,1) values; inverse transform sampling now formalises this approach and explains why it works in general.</p>
+<section id="probability-integral-transform" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="probability-integral-transform"><span class="header-section-number">7.2.1</span> Probability Integral Transform</h3>
+<p>A key theoretical result underlying inverse transform sampling is the <strong>Probability Integral Transform</strong>. The probability integral transform explains why uniform random variables play a fundamental role in simulation and provides the theoretical justification for constructing new random variables by transforming Uniform(0,1) draws.</p>
+<p>For inverse transform sampling, we work directly with the <strong>cumulative distribution function</strong>. If <span class="math inline">\(X\)</span> is a continuous random variable with cumulative distribution function <span class="math inline">\(F_X\)</span>, then the transformed variable: <span class="math display">\[
+U = F_X(X) \sim \text{Uniform}(0,1).
+\]</span></p>
+<p>Turning it around gives the <strong>sampling rule</strong>:</p>
+<p><span class="math display">\[X = F_X^{-1}(U), \qquad U \sim \text{Uniform}(0,1).\]</span></p>
+<p>This result allows us to turn the theoretical relationship between a random variable and its CDF into a practical simulation algorithm.</p>
+</section>
+<section id="inverse-transform-sampling-algorithm" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="inverse-transform-sampling-algorithm"><span class="header-section-number">7.2.2</span> Inverse Transform Sampling Algorithm</h3>
+<p>The probability integral transform provides the theoretical justification for inverse transform sampling. We now turn this result into a <strong>practical simulation algorithm</strong>. The goal is to generate random variables with a specified distribution using only Uniform(0,1) random numbers.</p>
+<p>Suppose we want to simulate a continuous random variable with cumulative distribution function <span class="math inline">\(F_X\)</span>, and assume that the inverse CDF <span class="math inline">\(F_X^{-1}\)</span> is available in closed form. The inverse transform sampling algorithm proceeds as follows:</p>
+<ol type="1">
+<li><p>Generate a random number <span class="math display">\[
+U \sim \text{Uniform}(0,1).
+\]</span></p></li>
+<li><p>Transform this value using the inverse CDF: <span class="math display">\[
+X = F_X^{-1}(U).
+\]</span></p></li>
+<li><p>The resulting value <span class="math inline">\(X\)</span> is a random draw from the target distribution with CDF <span class="math inline">\(F_X\)</span>.</p></li>
+</ol>
+<p>This algorithm works because the inverse transformation exactly reverses the probability integral transform. Since <span class="math inline">\(F_X(X)\)</span> is uniformly distributed on <span class="math inline">\([0,1]\)</span>, applying the inverse CDF to a Uniform(0,1) random variable reconstructs the original distribution. In this sense, inverse transform sampling is a direct application of transformation theory: it constructs a desired distribution by transforming a simpler one.</p>
+<p>Inverse transform sampling is conceptually simple and widely used in simulation, particularly when the inverse CDF has a closed‑form expression. However, not all distributions admit an explicit inverse CDF, which motivates alternative simulation methods introduced later in the course.</p>
+<p>We now illustrate this algorithm with a simple example where the inverse CDF can be derived explicitly.</p>
+</section>
+<section id="examples-and-limitations" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="examples-and-limitations"><span class="header-section-number">7.2.3</span> Examples and Limitations</h3>
+<p><strong>Example (Exponential distribution).</strong></p>
+<p><em>We briefly previewed this idea earlier; here we are using it as a worked example of the general inverse transform algorithm.</em></p>
+<p>Inverse transform sampling is easiest to see when the inverse CDF has a simple closed form. For the Exponential distribution with rate <span class="math inline">\(\lambda\)</span>, the CDF is</p>
+<p><span class="math display">\[
+F(x)=1-e^{-\lambda x},\qquad x\ge 0.
+\]</span></p>
+<p>Setting <span class="math inline">\(U=F(X)\)</span> and solving for <span class="math inline">\(X\)</span> gives the inverse transform</p>
+<p><span class="math display">\[
+X = F^{-1}(U)= -\frac{1}{\lambda}\log(1-U),\qquad U\sim \text{Uniform}(0,1).
+\]</span></p>
+<p>The following R code implements the algorithm in three steps—generate uniforms, apply the inverse CDF, then validate the result by comparing the simulated histogram to <code>rexp()</code>. This mirrors the core simulation workflow:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: generate Uniform(0,1) values</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: transform them into Exponential(lambda)</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span>   <span class="co"># rate parameter</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> u) <span class="sc">/</span> lambda</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot and compare with R's built-in rexp()</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>x_builtin <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1000</span>, <span class="at">rate =</span> lambda)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.4</span>), <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Comparison of PDF of exponential distribution: Transform vs rexp()"</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x_builtin, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Transform"</span>, <span class="st">"rexp()"</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.4</span>), <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Limitations (why we need other methods).</strong><br>
+Inverse transform sampling is conceptually simple, but it has practical limitations:</p>
+<ol type="1">
+<li><p><strong>You need an invertible CDF (or a tractable numerical inverse).</strong><br>
+Many common distributions do not have a neat closed-form inverse CDF, so applying <span class="math inline">\(F^{-1}\)</span> directly may be difficult or computationally expensive.</p></li>
+<li><p><strong>Not all transformations are “one-line” like the exponential.</strong><br>
+Even when the CDF exists and is monotone, solving <span class="math inline">\(u = F(x)\)</span> for <span class="math inline">\(x\)</span> may not be algebraically possible.</p></li>
+<li><p><strong>This motivates alternative sampling techniques.</strong><br>
+When <span class="math inline">\(F^{-1}\)</span> is unavailable or inefficient, we use other approaches (e.g., acceptance–rejection or specialised transformations such as Box–Muller for Normal simulation), which you cover later in the unit.</p></li>
+</ol>
+</section>
+</section>
+<section id="transformation-of-multiple-random-variables" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="transformation-of-multiple-random-variables"><span class="header-section-number">7.3</span> Transformation of Multiple Random Variables</h2>
+<p>In many applications, we work not with a single random variable but with a <em>pair</em> (or vector) of variables whose joint distribution is known. When we apply a transformation to such a pair, the result is a new pair of random variables whose joint distribution we often need to determine. This section develops the tools for understanding how probability densities change under transformations of two (or more) variables.</p>
+<p>Transformations of multiple random variables arise naturally in statistics, simulation, and modelling. Examples include converting Cartesian coordinates to polar coordinates, forming sums and differences of random variables, and applying linear transformations to generate correlated normals. The key idea is that probability must be preserved under the transformation, and the mathematical tool that ensures this is the <strong>Jacobian</strong>.</p>
+<section id="transformations-of-two-random-variables" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="transformations-of-two-random-variables"><span class="header-section-number">7.3.1</span> Transformations of Two Random Variables</h3>
+<p><strong>Why This Matters</strong></p>
+<p>Transformations of multiple random variables allow us to:</p>
+<ul>
+<li>derive distributions of sums, ratios, and other combinations,<br>
+</li>
+<li>change coordinate systems to simplify integrals,<br>
+</li>
+<li>understand how linear maps create covariance,<br>
+</li>
+<li>simulate multivariate distributions efficiently,<br>
+</li>
+<li>and prepare for higher‑dimensional transformations in later topics.</li>
+</ul>
+<p>This section builds the foundation for the next major topic: <strong>linear transformations and the multivariate normal</strong>, where the Jacobian plays a central role in understanding how densities behave under matrix transformations.</p>
+<p>Suppose <span class="math inline">\((X, Y)\)</span> has a known joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>, and we define a new pair:</p>
+<p><span class="math display">\[
+U = g_1(X, Y), \qquad V = g_2(X, Y).
+\]</span></p>
+<p>Our goal is to find the joint density <span class="math inline">\(f_{U,V}(u,v)\)</span>.<br>
+If the transformation is one‑to‑one and differentiable, we can invert it:</p>
+<p><span class="math display">\[
+x = h_1(u,v), \qquad y = h_2(u,v),
+\]</span></p>
+<p>and use the <strong>Jacobian determinant</strong> to adjust for how the transformation stretches or compresses area.</p>
+</section>
+<section id="the-jacobian-formula-continuous-case" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="the-jacobian-formula-continuous-case"><span class="header-section-number">7.3.2</span> The Jacobian Formula (Continuous Case)</h3>
+<p>If the transformation is smooth and invertible, then</p>
+<p><span class="math display">\[
+f_{U,V}(u,v)
+= f_{X,Y}(h_1(u,v),\, h_2(u,v))
+\left| \det J \right|,
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+J =
+\begin{pmatrix}
+\dfrac{\partial x}{\partial u} &amp; \dfrac{\partial x}{\partial v} \\
+\dfrac{\partial y}{\partial u} &amp; \dfrac{\partial y}{\partial v}
+\end{pmatrix}
+\]</span></p>
+<p>is the <strong>Jacobian matrix</strong> of the inverse transformation.</p>
+<p>The determinant <span class="math inline">\(|\det J|\)</span> measures how the transformation changes area, ensuring that total probability remains 1.</p>
+<div class="note">
+<p><strong>Example 1: Sums and Differences</strong></p>
+</div>
+<p>Let <span class="math inline">\((X,Y)\)</span> have joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>. Defin</p>
+<p><span class="math display">\[
+U = X + Y, \qquad V = X - Y.
+\]</span></p>
+<p>This transformation is linear and invertible, and the Jacobian is constant.<br>
+It is widely used in deriving distributions of sums of independent normals.</p>
+<p><strong>Step 1: Invert the transformation</strong></p>
+<p>Solve for <span class="math inline">\(X, Y\)</span> in terms of <span class="math inline">\(U, V\)</span>:</p>
+<p><span class="math display">\[
+X = \dfrac{U + V}{2}, \qquad Y = \dfrac{U - V}{2}.
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+x = h_1(u,v) = \dfrac{u+v}{2}, \quad
+y = h_2(u,v) = \dfrac{u-v}{2}.
+\]</span></p>
+<p><strong>Step 2: Compute the Jacobian</strong></p>
+<p><span class="math display">\[
+J =
+\begin{pmatrix}
+\dfrac{\partial x}{\partial u} &amp; \dfrac{\partial x}{\partial v} \\
+\dfrac{\partial y}{\partial u} &amp; \dfrac{\partial y}{\partial v}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\dfrac{1}{2} &amp; \dfrac{1}{2} \\
+\dfrac{1}{2} &amp; -\dfrac{1}{2}
+\end{pmatrix}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\det J
+= \dfrac{1}{2}\cdot\left(-\dfrac{1}{2}\right)
+- \dfrac{1}{2}\cdot\dfrac{1}{2}
+= -\dfrac{1}{4} - \dfrac{1}{4}
+= -\dfrac{1}{2},
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+|\det J| = \dfrac{1}{2}.
+\]</span></p>
+<p><strong>Step 3: Write the joint density of <span class="math inline">\((U, V)\)</span></strong></p>
+<p><span class="math display">\[
+f_{U,V}(u,v)
+= f_{X,Y}\!\left(\dfrac{u+v}{2}, \dfrac{u-v}{2}\right)\cdot \dfrac{1}{2}.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> X <span class="sc">+</span> Y</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>V <span class="ot">&lt;-</span> X <span class="sc">-</span> Y</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Original (X, Y)"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X"</span>, <span class="at">ylab =</span> <span class="st">"Y"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(U, V, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Transformed (U = X+Y, V = X-Y)"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"U"</span>, <span class="at">ylab =</span> <span class="st">"V"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\((X,Y)\)</span> is a round cloud (independent normals).</li>
+<li><span class="math inline">\((U,V)\)</span> becomes an axis‑aligned ellipse — the transformation <strong>stretches and rotates</strong> the cloud.</li>
+<li>This visually confirms the Jacobian‑based derivation.</li>
+</ul>
+<div class="note">
+<p><strong>Example 2: Polar Coordinates</strong></p>
+</div>
+<p>Let <span class="math inline">\((X, Y)\)</span> have joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>. Define</p>
+<p><span class="math display">\[
+U = R = \sqrt{X^2 + Y^2}, \qquad V = \Theta = \arctan(Y/X).
+\]</span></p>
+<p>The Jacobian determinant is <span class="math inline">\(r\)</span>, which explains why polar integrals include the factor <span class="math inline">\(r\)</span>.</p>
+<p>We want <span class="math inline">\(f_{R,\Theta}(r,\theta)\)</span>.</p>
+<p><strong>Step 1: Invert the transformation</strong></p>
+<p>The inverse map is the usual polar–Cartesian relation:</p>
+<p><span class="math display">\[
+X = r\cos\theta, \qquad Y = r\sin\theta.
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+x = h_1(r,\theta) = r\cos\theta, \quad
+y = h_2(r,\theta) = r\sin\theta.
+\]</span></p>
+<p><strong>Step 2: Compute the Jacobian</strong></p>
+<p><span class="math display">\[
+J =
+\begin{pmatrix}
+\dfrac{\partial x}{\partial r} &amp; \dfrac{\partial x}{\partial \theta} \\
+\dfrac{\partial y}{\partial r} &amp; \dfrac{\partial y}{\partial \theta}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos\theta &amp; -r\sin\theta \\
+\sin\theta &amp; r\cos\theta
+\end{pmatrix}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\det J
+= \cos\theta \cdot r\cos\theta
+- (-r\sin\theta)\cdot\sin\theta
+= r(\cos^2\theta + \sin^2\theta)
+= r.
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+|\det J| = r.
+\]</span></p>
+<p><strong>Step 3: Joint density of <span class="math inline">\((R,\Theta)\)</span></strong></p>
+<p><span class="math display">\[
+f_{R,\Theta}(r,\theta)
+= f_{X,Y}(r\cos\theta, r\sin\theta)\cdot r.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(X<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> Y<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>Theta <span class="ot">&lt;-</span> <span class="fu">atan2</span>(Y, X)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(R, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">"lightgray"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of R"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"R"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dchisq</span>(x<span class="sc">^</span><span class="dv">2</span>, <span class="at">df =</span> <span class="dv">2</span>) <span class="sc">*</span> <span class="dv">2</span><span class="sc">*</span>x, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(Theta, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">col =</span> <span class="st">"lightblue"</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Distribution of Theta"</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(theta))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>R follows the <strong>Rayleigh distribution</strong> (equivalently, <span class="math inline">\(R^2\sim \chi_2^2\)</span>).</li>
+<li><span class="math inline">\(\Theta\)</span> is uniform on <span class="math inline">\([-\pi ,\pi ]\)</span>.</li>
+</ul>
+<div class="note">
+<p><strong>Example 3: Linear Transformations</strong></p>
+</div>
+<p>Let <span class="math inline">\((X, Y)\)</span> have joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>, and let <span class="math display">\[
+\begin{pmatrix} U \\ V \end{pmatrix}
+=
+A \begin{pmatrix} X \\ Y \end{pmatrix},
+\quad
+A =
+\begin{pmatrix}
+a &amp; b \\
+c &amp; d
+\end{pmatrix},
+\]</span></p>
+<p>with <span class="math inline">\(\det A \neq 0\)</span>. Then the Jacobian determinant is simply <span class="math inline">\(|\det A|\)</span>.</p>
+<p>This case is especially important for the <strong>multivariate normal distribution</strong>, where linear transformations <strong>create covariance structures</strong>. The correlated‑normal simulation you used earlier is a special case of this idea.</p>
+<p><strong>Step 1: Invert the transformation</strong></p>
+<p>Because <span class="math inline">\(\det A \neq 0\)</span>, <span class="math inline">\(A\)</span> is invertible:</p>
+<p><span class="math display">\[
+\begin{pmatrix} X \\ Y \end{pmatrix}
+= A^{-1} \begin{pmatrix} U \\ V \end{pmatrix}.
+\]</span></p>
+<p>Write</p>
+<p><span class="math display">\[
+A^{-1} =
+\frac{1}{ad - bc}
+\begin{pmatrix}
+d &amp; -b \\
+-c &amp; a
+\end{pmatrix}.
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+x = h_1(u,v), \quad y = h_2(u,v)
+\]</span></p>
+<p>are linear functions of <span class="math inline">\((u,v)\)</span>.</p>
+<p><strong>Step 2: Jacobian of the inverse</strong></p>
+<p>For a linear map, the Jacobian matrix of the inverse is just <span class="math inline">\(A^{-1}\)</span>, so</p>
+<p><span class="math display">\[
+|\det J| = |\det A^{-1}| = \frac{1}{|\det A|}.
+\]</span></p>
+<p><strong>Step 3: Joint density of <span class="math inline">\((U,V)\)</span></strong></p>
+<p><span class="math display">\[
+f_{U,V}(u,v)
+= f_{X,Y}\big(h_1(u,v), h_2(u,v)\big)\cdot \frac{1}{|\det A|}.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.8</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>              <span class="fl">0.2</span>, <span class="dv">1</span>), <span class="at">nrow =</span> <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>UV <span class="ot">&lt;-</span> A <span class="sc">%*%</span> <span class="fu">rbind</span>(X, Y)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> UV[<span class="dv">1</span>, ]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>V <span class="ot">&lt;-</span> UV[<span class="dv">2</span>, ]</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"gray40"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Original (X, Y)"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X"</span>, <span class="at">ylab =</span> <span class="st">"Y"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(U, V, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Transformed (U, V) = A(X, Y)"</span>,</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"U"</span>, <span class="at">ylab =</span> <span class="st">"V"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The original cloud is round (independent normals).</li>
+<li>The transformed cloud becomes tilted and stretched, showing induced correlation.</li>
+</ul>
+</section>
+</section>
+<section id="linear-transformations-and-the-multivariate-normal" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="linear-transformations-and-the-multivariate-normal"><span class="header-section-number">7.4</span> Linear Transformations and the Multivariate Normal</h2>
+<p>Linear transformations play a central role in probability and statistics, especially when working with <strong>multivariate normal distributions</strong>. In earlier sections, we saw how a linear transformation of two independent standard normals can create correlation. Here, we generalise that idea and show how <em>any</em> multivariate normal distribution can be constructed from a standard one using a matrix transformation.</p>
+<p><strong>Why This Matters</strong></p>
+<p>Linear transformations of multivariate normals underpin:</p>
+<ul>
+<li>simulation of correlated variables,<br>
+</li>
+<li>regression and linear models,<br>
+</li>
+<li>principal component analysis (PCA),<br>
+</li>
+<li>Bayesian multivariate priors,<br>
+</li>
+<li>and nearly all multivariate statistical methods.</li>
+</ul>
+<p>This section forms the conceptual bridge between probability theory and practical statistical modelling.</p>
+<section id="linear-transformations-of-random-vectors" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="linear-transformations-of-random-vectors"><span class="header-section-number">7.4.1</span> Linear Transformations of Random Vectors</h3>
+<p>Let<br>
+<span class="math display">\[
+\mathbf{X} = (X_1, X_2, \dots, X_k)^\top
+\]</span> be a random vector, and let <span class="math inline">\(A\)</span> be a fixed <span class="math inline">\(m \times k\)</span> matrix. A <strong>linear transformation</strong> of <span class="math inline">\(\mathbf{X}\)</span> is</p>
+<p><span class="math display">\[
+\mathbf{Y} = A\mathbf{X} + \mathbf{b},
+\]</span> where <span class="math inline">\(\mathbf{b}\)</span> is a constant vector.</p>
+<p>This transformation:</p>
+<ul>
+<li>rotates, stretches, or compresses the space,<br>
+</li>
+<li>shifts the mean by <span class="math inline">\(\mathbf{b}\)</span>,<br>
+</li>
+<li>and reshapes the covariance structure through the matrix <span class="math inline">\(A\)</span>.</li>
+</ul>
+</section>
+<section id="the-multivariate-normal-distribution" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="the-multivariate-normal-distribution"><span class="header-section-number">7.4.2</span> The Multivariate Normal Distribution</h3>
+<p>A random vector <span class="math inline">\(\mathbf{X}\)</span> is <strong>multivariate normal</strong> if every linear combination of its components is normally distributed.</p>
+<p>If<br>
+<span class="math display">\[
+\mathbf{X} \sim N(\boldsymbol{\mu}, \Sigma),
+\]</span> then:</p>
+<ul>
+<li><span class="math inline">\(\boldsymbol{\mu}\)</span> is the mean vector,<br>
+</li>
+<li><span class="math inline">\(\Sigma\)</span> is the covariance matrix (symmetric and positive‑definite).</li>
+</ul>
+<p>The density is</p>
+<p><span class="math display">\[
+f_{\mathbf{X}}(\mathbf{x})
+= \frac{1}{(2\pi)^{k/2} |\Sigma|^{1/2}}
+\exp\!\left(
+-\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^\top
+\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})
+\right).
+\]</span></p>
+<p>A key property makes the multivariate normal uniquely convenient:</p>
+<p><span class="math display">\[
+\mathbf{X} \sim N(\boldsymbol{\mu}, \Sigma)
+\quad \Longrightarrow \quad
+A\mathbf{X} + \mathbf{b} \sim N(A\boldsymbol{\mu} + \mathbf{b},\; A\Sigma A^\top).
+\]</span></p>
+<p>This means:</p>
+<ul>
+<li>linear transformations of normals are still normal (preserve normality),<br>
+</li>
+<li>the mean transforms linearly,<br>
+</li>
+<li>the covariance transforms quadratically.</li>
+</ul>
+<p>This is why the multivariate normal is so widely used: it behaves perfectly under linear operations.</p>
+<p><strong>Example: Linear Transformation of a Bivariate Normal</strong></p>
+<p>We simulate <span class="math inline">\(\mathbf{X}\sim N(\mu ,\Sigma )\)</span> with mean vector and covariance matrix:</p>
+<p><span class="math display">\[
+\mu = (1,2)^{\top}, \qquad
+\Sigma =\left( \begin{matrix}4&amp;1\\ 1&amp;1\end{matrix}\right).
+\]</span></p>
+<p>The entries encode <span class="math inline">\(\text{Var}(X_1) = 4\)</span>, <span class="math inline">\(\text{Var}(X_2) = 1\)</span> and <span class="math inline">\(\text{Cov}(X_1,X_2) = 1\)</span>.</p>
+<p>Then, apply <span class="math inline">\(\mathbf{Y}=A\mathbf{X}+b\)</span> with</p>
+<p><span class="math display">\[
+A =\left( \begin{matrix}1&amp;0\\ -1&amp;2\end{matrix}\right), \qquad
+b = (0, 1)^{\top}
+\]</span></p>
+<p>Compare the scatterplots.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Original distribution</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                  <span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear transformation</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>             <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix algebra</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">t</span>(A <span class="sc">%*%</span> <span class="fu">t</span>(X)) <span class="sc">+</span> <span class="fu">matrix</span>(b, n, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Original X ~ N(mu, Sigma)"</span>,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y[,<span class="dv">1</span>], Y[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Transformed Y = A X + b"</span>,</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Y1"</span>, <span class="at">ylab =</span> <span class="st">"Y2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The original cloud has a certain tilt and spread.</li>
+<li>The transformed cloud is rotated and stretched exactly as predicted by <span class="math inline">\(A\Sigma A^{\top }\)</span>.</li>
+</ul>
+</section>
+<section id="constructing-a-multivariate-normal-via-cholesky" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">7.4.3</span> Constructing a Multivariate Normal via Cholesky</h3>
+<p>If <span class="math inline">\(\Sigma\)</span> is a covariance matrix, we can write:</p>
+<p><span class="math display">\[
+\Sigma = LL^\top,
+\]</span></p>
+<p>where <span class="math inline">\(L\)</span> is the <strong>Cholesky factor</strong> (lower triangular).<br>
+If <span class="math inline">\(\mathbf{Z} \sim N(\mathbf{0}, I)\)</span>, then</p>
+<p><span class="math display">\[
+\mathbf{X} = L\mathbf{Z} + \boldsymbol{\mu}
+\]</span></p>
+<p>has distribution <span class="math inline">\(N(\boldsymbol{\mu}, \Sigma)\)</span>.</p>
+<p>This generalises earlier 2D construction:</p>
+<p><span class="math display">\[
+Y = \rho Z_1 + \sqrt{1-\rho^2}\, Z_2,
+\]</span></p>
+<p>which is exactly the Cholesky factor of <span class="math inline">\(\begin{pmatrix}1 &amp; \rho \\ \rho &amp; 1\end{pmatrix}\)</span>.</p>
+<p><strong>Example: Constructing Correlated Normals via Cholesky</strong></p>
+<p>Define the covariance matrix</p>
+<p><span class="math display">\[\Sigma =\left( \begin{matrix}1&amp;\rho \\ \rho &amp;1\end{matrix}\right) =\left( \begin{matrix}1&amp;0.8\\ 0.8&amp;1\end{matrix}\right).\]</span></p>
+<p>Both variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have variance 1, and covariance <span class="math inline">\(\rho\)</span>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariance matrix</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>                  rho, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor: L^T L (upper triangular)</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 2n independent N(0,1) values</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">2</span><span class="sc">*</span>n), n, <span class="dv">2</span>)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T (linear transformation)</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Z[,<span class="dv">1</span>], Z[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"gray60"</span>,</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Z ~ N(0, I)"</span>,</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z2"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"X = Z L^T (Correlated Normals)"</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><span class="math inline">\(Z\)</span> is a round cloud (independent normals).</li>
+<li><span class="math inline">\(X\)</span> becomes a tilted ellipse with correlation <span class="math inline">\(\rho =0.8\)</span>.</li>
+<li>This is how Cholesky induces covariance.</li>
+</ul>
+<p><strong>Example: General k‑Dimensional Construction</strong></p>
+<p>Simulate <span class="math inline">\(\mathbf{X}\sim N(\mu ,\Sigma )\)</span> using Cholesky.</p>
+<p>Define a mean vector and a covariance matrix:</p>
+<p><span class="math display">\[
+\mu =(0,\; 1,\; 2)^{\top }, \qquad
+\Sigma =\left( \begin{matrix}1&amp;0.5&amp;0.2\\ 0.5&amp;2&amp;0.3\\ 0.2&amp;0.3&amp;1\end{matrix}\right).
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D mean and covariance</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="fl">0.3</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard normals</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span><span class="sc">*</span>n), n, <span class="dv">3</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T + mu</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L) <span class="sc">+</span> <span class="fu">matrix</span>(mu, n, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick diagnostic: sample covariance</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cov</span>(X), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3]
+[1,] 1.35 0.69 0.21
+[2,] 0.69 1.77 0.15
+[3,] 0.21 0.15 0.90</code></pre>
+</div>
+</div>
+<ul>
+<li>The sample covariance of <span class="math inline">\(X\)</span> matches <span class="math inline">\(\Sigma\)</span>.</li>
+<li>The construction works in any dimension.</li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D mean and covariance</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="fl">0.3</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard normals</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span><span class="sc">*</span>n), n, <span class="dv">3</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T + mu</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L) <span class="sc">+</span> <span class="fu">matrix</span>(mu, n, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatterplot</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], X[,<span class="dv">3</span>],</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex.symbols =</span> <span class="fl">0.4</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">"3D Scatterplot of Multivariate Normal Sample"</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>, <span class="at">zlab =</span> <span class="st">"X3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_3_transformation_rvs_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>A 3D elliptical cloud whose shape reflects the covariance matrix.</li>
+<li>The cloud is tilted and stretched in directions determined by <span class="math inline">\(\Sigma\)</span>.</li>
+<li>This visually reinforces the idea that <span class="math inline">\(X=LZ+\mu\)</span>.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_2_joint_dependence.html" class="pagination-link" aria-label="Joint Distributions and Dependence">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02_4_workshop.html" class="pagination-link" aria-label="Workshop Activities">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Computer Simulation in R(v1.0.2) <br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
