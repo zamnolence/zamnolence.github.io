@@ -1,0 +1,1854 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Python Workshop Solutions – R and Python for Computer Simulation (v1.0.3)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_distributions.html" rel="next">
+<link href="./01_4_workshop_sol.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5c151f11a0e44064f75a5cfd43434b0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_5_workshop_sol.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Distributions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#part-1-introduction-review-to-python" id="toc-part-1-introduction-review-to-python" class="nav-link active" data-scroll-target="#part-1-introduction-review-to-python"><span class="header-section-number">5.1</span> <strong>Part 1: Introduction &amp; review to Python</strong></a>
+  <ul>
+  <li><a href="#numeric-operations" id="toc-numeric-operations" class="nav-link" data-scroll-target="#numeric-operations"><span class="header-section-number">5.1.1</span> Numeric operations</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.1" id="toc-exercise-1.1" class="nav-link" data-scroll-target="#exercise-1.1">Exercise 1.1</a></li>
+  </ul></li>
+  <li><a href="#basic-data-types" id="toc-basic-data-types" class="nav-link" data-scroll-target="#basic-data-types"><span class="header-section-number">5.1.2</span> Basic data types</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.2" id="toc-exercise-1.2" class="nav-link" data-scroll-target="#exercise-1.2">Exercise 1.2</a></li>
+  </ul></li>
+  <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables"><span class="header-section-number">5.1.3</span> Variables</a></li>
+  <li><a href="#defining-function-and-assigning-input" id="toc-defining-function-and-assigning-input" class="nav-link" data-scroll-target="#defining-function-and-assigning-input"><span class="header-section-number">5.1.4</span> Defining function and assigning input</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.3" id="toc-exercise-1.3" class="nav-link" data-scroll-target="#exercise-1.3">Exercise 1.3</a></li>
+  </ul></li>
+  <li><a href="#return-values-and-return-statements" id="toc-return-values-and-return-statements" class="nav-link" data-scroll-target="#return-values-and-return-statements"><span class="header-section-number">5.1.5</span> Return values and return statements</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.4" id="toc-exercise-1.4" class="nav-link" data-scroll-target="#exercise-1.4">Exercise 1.4</a></li>
+  </ul></li>
+  <li><a href="#definite-loops" id="toc-definite-loops" class="nav-link" data-scroll-target="#definite-loops"><span class="header-section-number">5.1.6</span> Definite loops</a>
+  <ul class="collapse">
+  <li><a href="#exercise-1.5" id="toc-exercise-1.5" class="nav-link" data-scroll-target="#exercise-1.5">Exercise 1.5</a></li>
+  </ul></li>
+  <li><a href="#indefinite-loops" id="toc-indefinite-loops" class="nav-link" data-scroll-target="#indefinite-loops"><span class="header-section-number">5.1.7</span> Indefinite loops</a></li>
+  <li><a href="#decisions-and-control-flow-statements" id="toc-decisions-and-control-flow-statements" class="nav-link" data-scroll-target="#decisions-and-control-flow-statements"><span class="header-section-number">5.1.8</span> Decisions and control flow statements</a>
+  <ul class="collapse">
+  <li><a href="#if-statement-one-way-decision" id="toc-if-statement-one-way-decision" class="nav-link" data-scroll-target="#if-statement-one-way-decision"><span class="header-section-number">5.1.8.1</span> <code>if</code> statement: one-way decision</a></li>
+  <li><a href="#if-else-statement-two-way-decisions" id="toc-if-else-statement-two-way-decisions" class="nav-link" data-scroll-target="#if-else-statement-two-way-decisions"><span class="header-section-number">5.1.8.2</span> <code>if-else</code> statement: two-way decisions</a></li>
+  <li><a href="#elif-statement-multi-way-decisions" id="toc-elif-statement-multi-way-decisions" class="nav-link" data-scroll-target="#elif-statement-multi-way-decisions"><span class="header-section-number">5.1.8.3</span> <code>elif</code> statement: multi-way decisions</a></li>
+  </ul></li>
+  <li><a href="#exception-handling" id="toc-exception-handling" class="nav-link" data-scroll-target="#exception-handling"><span class="header-section-number">5.1.9</span> Exception handling</a></li>
+  </ul></li>
+  <li><a href="#part-2-probability-foundations-for-simulation" id="toc-part-2-probability-foundations-for-simulation" class="nav-link" data-scroll-target="#part-2-probability-foundations-for-simulation"><span class="header-section-number">5.2</span> <strong>Part 2: Probability Foundations for Simulation</strong></a>
+  <ul>
+  <li><a href="#random-number-generators" id="toc-random-number-generators" class="nav-link" data-scroll-target="#random-number-generators"><span class="header-section-number">5.2.1</span> Random Number Generators</a>
+  <ul class="collapse">
+  <li><a href="#lcgs" id="toc-lcgs" class="nav-link" data-scroll-target="#lcgs"><span class="header-section-number">5.2.1.1</span> LCGs</a></li>
+  </ul></li>
+  <li><a href="#probability-distributions-pdfpmfcdf" id="toc-probability-distributions-pdfpmfcdf" class="nav-link" data-scroll-target="#probability-distributions-pdfpmfcdf"><span class="header-section-number">5.2.2</span> Probability Distributions (PDF/PMF/CDF)</a>
+  <ul class="collapse">
+  <li><a href="#example-exponentialλ" id="toc-example-exponentialλ" class="nav-link" data-scroll-target="#example-exponentialλ">Example: Exponential(λ)</a></li>
+  <li><a href="#example-normal01" id="toc-example-normal01" class="nav-link" data-scroll-target="#example-normal01">Example: Normal(0,1)</a></li>
+  <li><a href="#example-bernoullip" id="toc-example-bernoullip" class="nav-link" data-scroll-target="#example-bernoullip">Example: Bernoulli(p)</a></li>
+  </ul></li>
+  <li><a href="#law-of-large-numbers-llns" id="toc-law-of-large-numbers-llns" class="nav-link" data-scroll-target="#law-of-large-numbers-llns"><span class="header-section-number">5.2.3</span> Law of Large Numbers (LLNs)</a>
+  <ul class="collapse">
+  <li><a href="#lln-for-uniform01" id="toc-lln-for-uniform01" class="nav-link" data-scroll-target="#lln-for-uniform01">LLN for Uniform(0,1)</a></li>
+  <li><a href="#lln-for-exponentialλ" id="toc-lln-for-exponentialλ" class="nav-link" data-scroll-target="#lln-for-exponentialλ">LLN for Exponential(λ)</a></li>
+  <li><a href="#lln-for-bernoullip" id="toc-lln-for-bernoullip" class="nav-link" data-scroll-target="#lln-for-bernoullip">LLN for Bernoulli(p)</a></li>
+  </ul></li>
+  <li><a href="#some-other-useful-functions" id="toc-some-other-useful-functions" class="nav-link" data-scroll-target="#some-other-useful-functions"><span class="header-section-number">5.2.4</span> Some Other Useful Functions</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_5_workshop_sol.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Objectives</strong></p>
+<p>This workshop consists of two parts:</p>
+<ul>
+<li><strong>Part 1:</strong> Introduction to Python and development environments</li>
+<li><strong>Part 2:</strong> Probability Foundations for Simulation</li>
+</ul>
+<p>By the end of this workshop, you should be able to:</p>
+<ol type="1">
+<li><p>Navigate and use Python effectively within Jupyter Notebook and Visual Studio Code;</p></li>
+<li><p>Implement basic Python commands relevant to simulation tasks (e.g., variables, functions, loops, and random number generation);</p></li>
+<li><p>Recall and apply key probability concepts that underpin simulation methods.</p></li>
+</ol>
+<section id="part-1-introduction-review-to-python" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="part-1-introduction-review-to-python"><span class="header-section-number">5.1</span> <strong>Part 1: Introduction &amp; review to Python</strong></h2>
+<p><strong>Mini tasks</strong></p>
+<ol type="1">
+<li>Add your name + student ID to this Markdown cell.</li>
+<li>To verify that you have a running notebook, run a code cell:</li>
+</ol>
+<div id="22bba5ac" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys, numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Python:"</span>, sys.version.split()[<span class="dv">0</span>])</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"NumPy:"</span>, np.__version__)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Python: 3.12.3
+NumPy: 2.4.2</code></pre>
+</div>
+</div>
+<p>To run code cells in VS Code, you can</p>
+<ul>
+<li><p><strong>Using the Play Icon</strong>: Click the “Run Cell” (▶) button that appears to the left of the code cell when you hover over it or select it. The output will be displayed directly below the cell.</p></li>
+<li><p><strong>Using Keyboard Shortcuts</strong>:</p>
+<ul>
+<li><code>Ctrl+Enter</code> (Windows/Linux) or <code>Cmd+Enter</code> (macOS): Runs the currently selected cell and the focus remains on the current cell.</li>
+<li><code>Shift+Enter</code>: Runs the currently selected cell and automatically moves the focus to the next cell, or inserts a new cell if you are at the end.</li>
+<li><code>Alt+Enter</code> (Windows/Linux) or <code>Option+Enter</code> (macOS): Runs the currently selected cell and inserts a new cell immediately below it, but the focus remains on the current cell.</li>
+</ul></li>
+<li><p><strong>Run All Cells</strong>: Click the double arrow icon (⏭) in the main notebook toolbar to run all cells in the notebook sequentially.</p></li>
+<li><p><strong>Run Cells Above/Below</strong>: Right-click a specific cell and select Run All Above or Run All Below from the context menu.</p></li>
+</ul>
+<section id="numeric-operations" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="numeric-operations"><span class="header-section-number">5.1.1</span> Numeric operations</h3>
+<p>Python supports the usual mathematical operations on numbers</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Operation</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>Addition</td>
+<td>2 + 2 = 4</td>
+</tr>
+<tr class="even">
+<td>-</td>
+<td>Subtraction</td>
+<td>7 - 2 = 5</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>Multiplication</td>
+<td>2 * 3 = 6</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>Float division</td>
+<td>22 / 7 = 3.142857</td>
+</tr>
+<tr class="odd">
+<td>**</td>
+<td>Exponentiation</td>
+<td>3 ** 2 = 9</td>
+</tr>
+<tr class="even">
+<td>abs()</td>
+<td>Absolute value</td>
+<td>abs(-20) = 20</td>
+</tr>
+<tr class="odd">
+<td>//</td>
+<td>Integer division</td>
+<td>22 // 7 = 3</td>
+</tr>
+<tr class="even">
+<td>%</td>
+<td>Modulus/Remainder</td>
+<td>22 % 7 = 1</td>
+</tr>
+</tbody>
+</table>
+<section id="exercise-1.1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1.1">Exercise 1.1</h4>
+<p>Try writing the mathematical operations given in the above example and see whether you get the same answer. To insert a new code cell, click on the ‘+’ button on the toolbar above or hovering at the bottom of the cell and click ‘+ Code’.</p>
+</section>
+</section>
+<section id="basic-data-types" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="basic-data-types"><span class="header-section-number">5.1.2</span> Basic data types</h3>
+<p>The data type of an object determines what values it can have and what operations can be performed on it. Whole numbers are represented using the integer data type (or <code>int</code>), which can be either positive or negative. Numbers that can have fractional parts are represented as floating-point (or <code>float</code>) values. Complex numbers (or <code>complex</code>), which consist of a real (<span class="math inline">\(x\)</span>) and an imaginary part (<span class="math inline">\(y\)</span>) is represented by <span class="math inline">\(x + yj\)</span>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 41%">
+<col style="width: 58%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Data Type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Integers (<code>int</code>)</td>
+<td>-2, -1, 0, 1, 2, 3, 4, 5</td>
+</tr>
+<tr class="even">
+<td>Floating-point numbers (<code>float</code>)</td>
+<td>-1.25, -1.0, -0.5, 0.0, 0.5, 1.0, 1.25</td>
+</tr>
+<tr class="odd">
+<td>Complex numbers (<code>complex</code>)</td>
+<td>2 + 3j</td>
+</tr>
+<tr class="even">
+<td>Strings (<code>str</code>)</td>
+<td>‘a’, ‘aa’, ‘aaa’, ‘Hello!’, ‘11 cats’</td>
+</tr>
+</tbody>
+</table>
+<p>Python provides a special function called <code>type()</code> that tells us the data type (or <code>class</code>) of any value. For example,</p>
+<div id="8541ec0f" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="op">-</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="477">
+<pre><code>int</code></pre>
+</div>
+</div>
+<p>Moreover, type conversion also available using the following functions:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Conversion function</th>
+<th>Example</th>
+<th>Value returned</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>int(&lt;float&gt;)</code></td>
+<td><code>int(3.14)</code></td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td><code>int(&lt;str&gt;)</code></td>
+<td><code>int("100")</code></td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<td><code>float(&lt;int or str&gt;)</code></td>
+<td><code>float(15)</code></td>
+<td>15.0</td>
+</tr>
+<tr class="even">
+<td><code>str(&lt;any value&gt;)</code></td>
+<td><code>str(100)</code></td>
+<td>“100”</td>
+</tr>
+</tbody>
+</table>
+<section id="exercise-1.2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1.2">Exercise 1.2</h4>
+<ol type="1">
+<li>Try using the <code>type()</code> function for the following and answer the following questions:</li>
+</ol>
+<p><code>22/7</code>, <code>3e-04</code>, <code>Hello</code>, <code>"Hello!"</code>, <code>'Hello!'</code>, <code>True</code>, <code>["cat", 3.14]</code>, <code>{'name': 'Sam', 'id': 1}</code>.</p>
+<ul>
+<li>Do both single quotes and double quotes work interchangeable for string type data?</li>
+<li>What are <code>bool</code>, <code>list</code>, and <code>dict</code>?</li>
+<li>If you encounter an error, what do you think is the cause?</li>
+</ul>
+<ol start="2" type="1">
+<li>Try converting “3.14” to <code>int</code>. If you encounter an error, what do you think is the cause?</li>
+</ol>
+</section>
+</section>
+<section id="variables" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="variables"><span class="header-section-number">5.1.3</span> Variables</h3>
+<p>A variable is an identifier that stores a value. We can name a variable anything as long as it obeys the following rules:</p>
+<ul>
+<li>It can be only one word.</li>
+<li>It can use only letters, numbers, and the underscore (<code>_</code>) character.</li>
+<li>It cannot begin with a number</li>
+<li>Variable name starting with an underscore (<code>_</code>) are deemed as unuseful.</li>
+<li>The basic assignment statement has this form:</li>
+</ul>
+<p><code>&lt;variable&gt; = &lt;expr&gt;</code></p>
+<p>A variable can be assigned many times, and it will always retain the value of the most recent assignment. For example,</p>
+<div id="941196be" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="478">
+<pre><code>2</code></pre>
+</div>
+</div>
+<div id="1707f081" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="479">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>Also, simultaneous assignment where Python evaluate all expressions on the right-hand side and then assign these results to the corresponding variables named on the left-hand side is possible with the following form:</p>
+<p><code>&lt;var1&gt;, &lt;var2&gt;, ... , &lt;varn&gt; = &lt;expr1&gt;, &lt;expr2&gt;, ... , &lt;exprn&gt;</code></p>
+<p>For example,</p>
+<div id="66e63e72" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>, diff <span class="op">=</span> x<span class="op">+</span>y, x<span class="op">-</span>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="70093aa9" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span>, diff</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="481">
+<pre><code>(7, 3)</code></pre>
+</div>
+</div>
+<p><strong>Note</strong></p>
+<ul>
+<li>We can click on ‘Jupyter Variables’ from the notebook menu bar to see all the variables we assigned in this notebook.</li>
+<li>We can also use <code>del()</code> function to delete objects including variables, lists, or parts of a list, etc. Or, we can use a <code>%reset</code> command.</li>
+<li>Try <code>del(x, y, sum, diff)</code> and <code>%reset</code>.</li>
+</ul>
+</section>
+<section id="defining-function-and-assigning-input" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="defining-function-and-assigning-input"><span class="header-section-number">5.1.4</span> Defining function and assigning input</h3>
+<p>By using <code>input()</code> function, we can assign <strong>textual</strong> input or get an information from user and then store it into a variable. The statement will look like this:</p>
+<p><code>&lt;variable&gt; = input(&lt;prompt&gt;)</code>,</p>
+<p>where <code>&lt;prompt&gt;</code> is a string expression that is used to prompt the user for input. Upon executing the statement, Python will print out the prompt and then the interpreter will be paused waiting for user input.</p>
+<p>When the user input is a number, we need to use <code>eval()</code> function to wrap around <code>input()</code> function:</p>
+<p><code>&lt;variable&gt; = eval(input(&lt;prompt&gt;))</code></p>
+<p>For example,</p>
+<div id="aa92e6af" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> info():</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="bu">input</span>(<span class="st">"What's your name?"</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    num <span class="op">=</span> <span class="bu">eval</span>(<span class="bu">input</span>(<span class="st">"What's your favourite number?"</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Nice to meet you, </span><span class="sc">{}</span><span class="st">! You are blessed with </span><span class="sc">{}</span><span class="st"> cookies!"</span>.<span class="bu">format</span>(name, <span class="bu">str</span>(num)))</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># info()</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><strong>Note:</strong> In a VS Code Jupyter notebook, the input box for an <code>input()</code> call appears in a dedicated input field at the <strong>top of the window</strong> or near the cell’s output area.</p>
+<p>From the above example:</p>
+<ul>
+<li>We defined a function called <code>info()</code> using the <code>def</code> keyword where Python print out the prompts “What’s your name?” and “What’s your favourite number?” and then store the user input in the variable ‘<code>name</code>’ and ‘<code>num</code>’, respectively.</li>
+<li>The <code>print()</code> function is used to display the sentences. The <code>format()</code> function allows us to format the specified value(s) and insert them inside the string’s placeholder, <code>{}</code>.</li>
+<li><strong>Important:</strong> the indentation must be <strong>uniform</strong> to show that they are part of the function. The blank line lets Python knows that the definition is finished.</li>
+<li>The function is executed or invoked by typing its name followed by blackets <code>()</code>, e.g., <code>info()</code>.</li>
+</ul>
+<p>Functions can also take parameters. For example,</p>
+<div id="c29cffc3" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> info2(name, num):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Nice to meet you, </span><span class="sc">{}</span><span class="st">! You are blessed with </span><span class="sc">{}</span><span class="st"> cookies!"</span>.<span class="bu">format</span>(name, <span class="bu">str</span>(num)))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>info2(<span class="st">"Sam"</span>, <span class="dv">10000000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Nice to meet you, Sam! You are blessed with 10000000 cookies!</code></pre>
+</div>
+</div>
+<p><strong>Why do we need to use functions?</strong></p>
+<ul>
+<li>Once the function is defined, it can be used many times.</li>
+<li>Aids problem decomposition where difficult problem can be broken down into smaller, manageable pieces.</li>
+<li>Allows independent testing/validation of code</li>
+<li>However, all functions that we defined will cease to exist once we exit Python interpreter. So, if we want to use the function elsewhere, we have to create a module file. For example, <code>hello_world.py</code>.</li>
+</ul>
+<section id="exercise-1.3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1.3">Exercise 1.3</h4>
+<ul>
+<li>Create a file <code>hello_world.py</code> with the content: <code>print("Hello, World!")</code>.</li>
+<li>To import module, run:</li>
+</ul>
+<pre><code>import hello_world</code></pre>
+</section>
+</section>
+<section id="return-values-and-return-statements" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="return-values-and-return-statements"><span class="header-section-number">5.1.5</span> Return values and return statements</h3>
+<p>So far, we have been using <code>print()</code> function to show the human user a string representing what is going on inside computer. However, the computer cannot make use of that printing in further function. Considering when we would like to break down a difficult problem into many smaller problems, how can the results in one function be passed to another function? That is where the <code>return</code> statement comes in.</p>
+<p>When creating a function using the def statement, you can specify what the return value should be with a return statement. A return statement consists of the following:</p>
+<ul>
+<li>The <code>return</code> keyword.</li>
+<li>The value or expression that the function should return.</li>
+</ul>
+<p>For example,</p>
+<div id="14669d69" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fiveNumSummary(data):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">min</span> <span class="op">=</span> numpy.<span class="bu">min</span>(data)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    q1 <span class="op">=</span> numpy.percentile(data, <span class="dv">25</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    q2 <span class="op">=</span> numpy.percentile(data, <span class="dv">50</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    q3 <span class="op">=</span> numpy.percentile(data, <span class="dv">75</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">max</span> <span class="op">=</span> numpy.<span class="bu">max</span>(data)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">min</span>, q1, q2, q3, <span class="bu">max</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">15</span>,<span class="dv">3</span>,<span class="dv">6</span>,<span class="dv">17</span>,<span class="dv">8</span>,<span class="dv">16</span>,<span class="dv">8</span>,<span class="dv">3</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">16</span>,<span class="dv">12</span>,<span class="dv">9</span>]</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>fiveNumSummary(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="484">
+<pre><code>(np.int64(1), np.float64(4.5), np.float64(9.0), np.float64(13.5), np.int64(17))</code></pre>
+</div>
+</div>
+<section id="exercise-1.4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1.4">Exercise 1.4</h4>
+<p>Write a function to calculate an average value between the two numbers.</p>
+</section>
+</section>
+<section id="definite-loops" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="definite-loops"><span class="header-section-number">5.1.6</span> Definite loops</h3>
+<p>A definite loop executes a pre-specified number of times, iterations, which is known when program loaded. The statement will look like this:</p>
+<pre><code>for &lt;var&gt; in &lt;sequence&gt;:
+    &lt;body&gt;</code></pre>
+<p>It is noted that the beginning and end of the body are indicated by indentation, and iterations are over sequences. For example,</p>
+<div id="7d179b71" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"num"</span>, <span class="st">"square"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="kw">in</span> <span class="bu">list</span>(<span class="bu">range</span>(<span class="dv">5</span>)):</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(num, num<span class="op">*</span>num, sep<span class="op">=</span><span class="st">' '</span><span class="op">*</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>num square
+0     0
+1     1
+2     4
+3     9
+4     16</code></pre>
+</div>
+</div>
+<p>The above example shows the numbers returned from <code>list(range(5))</code> and its square value. Notice that Python uses <strong>zero-based indexing</strong>, which means that the first element has an index 0.</p>
+<section id="exercise-1.5" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1.5">Exercise 1.5</h4>
+<p>4.1 Write a function to calculate factorial of a given number.</p>
+<p>4.2 Write a function to calculate a future value of given principal in 10-year time</p>
+<p><strong>Hints:</strong> You may find some of these built-in functions useful.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 69%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>range(stop)</code></td>
+<td>Returns list of ints from 0 to stop - 1</td>
+</tr>
+<tr class="even">
+<td><code>range(start, stop)</code></td>
+<td>Returns list of ints from start to stop - 1</td>
+</tr>
+<tr class="odd">
+<td><code>range(start, stop, step)</code></td>
+<td>Returns list of ints from start to stop counting by step</td>
+</tr>
+<tr class="even">
+<td><code>round(x)</code></td>
+<td>Returns nearest whole value of x (as a float)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="indefinite-loops" class="level3" data-number="5.1.7">
+<h3 data-number="5.1.7" class="anchored" data-anchor-id="indefinite-loops"><span class="header-section-number">5.1.7</span> Indefinite loops</h3>
+<p>For definite loop, we have to identify how many iterations there are. This is working just fine as long as the number of iterations is not large, or worse, the number of iterations is unknown or predefined by some conditions.</p>
+<p>It would be much more advantageous if the computer could take care of counting the numbers of iterations for us. However, the for loop is no longer feasible as it is a definite loop in which the number of iterations is determined when the loop starts. The solution to this lies in another kind of loop, the indefinite or conditional loop. An indefinite loop keeps iterating until certain conditions are met. But do keep in mind that there is no guarantee ahead of time regarding how many times the loop will go around.</p>
+<p>In Python, an indefinite loop is implemented using a while statement</p>
+<pre><code>while &lt;condition&gt;:
+    &lt;body&gt;</code></pre>
+<p>where <code>&lt;condition&gt;</code> is a Boolean expression, and the body is a sequence of one or more statements. Also, we can also use break and continue statements to immediately exits the while loop’s clause or to return the control to the beginning of the while loop. For example,</p>
+<div id="e73f8a1b" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> spam <span class="op">&lt;</span> <span class="dv">5</span>:</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Hello, world.'</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    spam <span class="op">=</span> spam <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.
+Hello, world.</code></pre>
+</div>
+</div>
+<pre><code>while True:
+    print('Who are you?')
+    name = input()
+    if name != 'Sam':
+        continue
+    print('Hello, Sam. What is the password? (It is a fish.)')
+    password = input()
+    if password == 'swordfish':
+        break
+print('Access granted.')</code></pre>
+</section>
+<section id="decisions-and-control-flow-statements" class="level3" data-number="5.1.8">
+<h3 data-number="5.1.8" class="anchored" data-anchor-id="decisions-and-control-flow-statements"><span class="header-section-number">5.1.8</span> Decisions and control flow statements</h3>
+<p>In the previous sections, we have viewed computer programs as sequences of instructions that are followed one after the other. However, sequencing is not sufficiently enough to solve every problem, and we need to alter the sequential flow of a program to suit the needs of a particular situation.</p>
+<p>In this section, we will take a look at decision structures, which are statements that allow a program to execute different sequences of instructions for different cases.</p>
+<section id="if-statement-one-way-decision" class="level4" data-number="5.1.8.1">
+<h4 data-number="5.1.8.1" class="anchored" data-anchor-id="if-statement-one-way-decision"><span class="header-section-number">5.1.8.1</span> <code>if</code> statement: one-way decision</h4>
+<pre><code>if &lt;condition&gt;:
+    &lt;body (statements to execute if condition is True)&gt;</code></pre>
+<p>where <code>&lt;condition&gt;</code> is a Boolean expression evaluates to values True or False, and <code>&lt;body&gt;</code> is a sequence of one or more statements indented under the <code>if</code> heading.</p>
+<p>In order to write down a condition, we will need a relational operator or a logical operator to compare the values of two expression. The tables below show the list of available comparison operators and logical operators.</p>
+<p><strong>Comparison operators</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operator</th>
+<th>Mathematics</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td>≤</td>
+<td>Less than or equal to</td>
+</tr>
+<tr class="odd">
+<td><code>==</code></td>
+<td>=</td>
+<td>Equal to</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td>≥</td>
+<td>Greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td>≠</td>
+<td>Not equal to</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Logical/boolean operators</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Operation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>not</td>
+<td>Inverse the comparison result</td>
+</tr>
+<tr class="even">
+<td>and</td>
+<td>Returns True only if both inputs are True</td>
+</tr>
+<tr class="odd">
+<td>or</td>
+<td>Returns False only if both inputs are False</td>
+</tr>
+</tbody>
+</table>
+<section id="exercise-1.6" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="exercise-1.6">Exercise 1.6</h5>
+<p>Try executing the following line of code:</p>
+<ul>
+<li><code>2021 == 2021.0</code></li>
+<li><code>2021 == '2021'</code></li>
+<li><code>'Hello' == 'hello'</code></li>
+<li><code>'dog' != 'cat'</code></li>
+<li><code>True != False</code></li>
+<li><code>True is not False</code></li>
+<li><code>(1 &lt; 3) and (3 &lt; 5)</code></li>
+<li><code>(1 &gt; 3) and (3 &gt; 5)</code></li>
+<li><code>(1 &lt; 3) or (3 == 5) or (4 + 1 == 7)</code></li>
+</ul>
+<pre><code>if 2 + 2 == 4 and not 2 + 2 == 5 and 2 * 2 == 2 + 2:
+    print("These are true!")</code></pre>
+<div id="62a3b4da" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2021</span> <span class="op">==</span> <span class="fl">2021.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="487">
+<pre><code>True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="if-else-statement-two-way-decisions" class="level4" data-number="5.1.8.2">
+<h4 data-number="5.1.8.2" class="anchored" data-anchor-id="if-else-statement-two-way-decisions"><span class="header-section-number">5.1.8.2</span> <code>if-else</code> statement: two-way decisions</h4>
+<p>In Python, a two-way decision can be implemented by attaching an else clause onto an if-clause. The statement will look like this:</p>
+<pre><code>if &lt;condition&gt;:
+    &lt;statements if True&gt;
+else:
+    &lt;statements if False&gt;</code></pre>
+<p>For example, we can write a function to determine roots of a quadratic equation <span class="math inline">\(ax^2+bx+c=0\)</span> and use <code>if-else</code> statements to handle the case of no roots, two repeated roots, and two distinct roots.</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>The formula for computing the roots of quadratic equation is <span class="math inline">\(\dfrac{-b\pm \sqrt{b^2-4ac}}{2a}\)</span>.</li>
+<li>Try checking whether <span class="math inline">\(b^2-4ac\)</span> is less than, equal, or greater than zero.</li>
+</ul>
+<div id="4500294d" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Quadratic solver</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roots(a, b, c):</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    check <span class="op">=</span> b<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> (<span class="dv">4</span><span class="op">*</span>a<span class="op">*</span>c)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> check <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"The roots are complex."</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> check <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>            r <span class="op">=</span> <span class="op">-</span>b <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"There are two repeated roots at"</span>, r)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>            discRoot <span class="op">=</span> math.sqrt(check)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>            r1 <span class="op">=</span> (<span class="op">-</span>b <span class="op">+</span> discRoot) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>            r2 <span class="op">=</span> (<span class="op">-</span>b <span class="op">-</span> discRoot) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">"The solution are </span><span class="sc">{0}</span><span class="st"> and </span><span class="sc">{1}</span><span class="st">"</span>.<span class="bu">format</span>(r1, r2))</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>roots(<span class="dv">1</span>, <span class="dv">7</span>, <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>The solution are -3.0 and -4.0</code></pre>
+</div>
+</div>
+</section>
+<section id="elif-statement-multi-way-decisions" class="level4" data-number="5.1.8.3">
+<h4 data-number="5.1.8.3" class="anchored" data-anchor-id="elif-statement-multi-way-decisions"><span class="header-section-number">5.1.8.3</span> <code>elif</code> statement: multi-way decisions</h4>
+<p>It is a good idea to write a <strong>pseudocode</strong> of an algorithm before we start writing the program itself, as it allows us to focus on main logic without being distracted by programming languages syntax.</p>
+<p>So far, our quadratic solver is technically working as expected. However, if we try writing down a pseudocode, we will see that there are exactly three possible paths.</p>
+<p>Check the value of <span class="math inline">\(b^2-4ac\)</span>: - when &lt; 0: handle the case of no roots - when = 0: handle the case of two repeated roots - when &gt; 0: handle the case</p>
+<p>Instead of using nest if-else statements, there is another way to write multi-way decisions in Python that preserves the semantics of the nested structures but gives it a more appealing look. The idea is to combine an else followed immediately by an if into a single clause called an <code>elif</code> (pronounced “ell-if”). The statement will look like this:</p>
+<pre><code>if &lt;condition1&gt;:
+    &lt;case 1 statements&gt;
+elif &lt;condition2&gt;:
+    &lt;case 2 statements&gt;
+elif &lt;condition3&gt;:      
+    &lt;case 3 statements&gt;
+...
+else:
+    &lt;default statements&gt;</code></pre>
+<p>This form is used to set off any number of mutually exclusive code blocks. Python will evaluate each condition in turn looking for the first one that is true. If a true condition is found, the statements indented under that condition are executed, and control passes to the next statement after the entire <code>if-elif-else</code>.</p>
+<p>For example, we can implement the <code>roots(a, b, c)</code> function using the <code>if-elif-else</code> statements to handle the case of no roots, two repeated roots, and two distinct roots.</p>
+<div id="ec5c26aa" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roots2(a, b, c):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    check <span class="op">=</span> b<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> (<span class="dv">4</span><span class="op">*</span>a<span class="op">*</span>c)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> check <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"The roots are complex."</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> check <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        root <span class="op">=</span> <span class="op">-</span>b<span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"There are repeated two roots at:"</span>, root)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>        root1 <span class="op">=</span> (<span class="op">-</span>b <span class="op">+</span> math.sqrt(check)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>        root2 <span class="op">=</span> (<span class="op">-</span>b <span class="op">-</span> math.sqrt(check)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>a)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"The roots are:"</span>, root1, <span class="st">"and"</span>, root2)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>roots2(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>There are repeated two roots at: -2.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="exception-handling" class="level3" data-number="5.1.9">
+<h3 data-number="5.1.9" class="anchored" data-anchor-id="exception-handling"><span class="header-section-number">5.1.9</span> Exception handling</h3>
+<p>Our quadratic program uses decision structures to avoid taking the square root of a negative number and generating an error at runtime. This is a common pattern in many programs: using decisions to protect against rare but possible errors.</p>
+<p>In the case of the quadratic solver, we checked the data before the call to the <code>sqrt()</code> function. Sometimes programs become so peppered with decisions to check for special cases that the main algorithm for handling the run-of-the-mill cases seems completely lost. Programming language designers have come up with mechanisms for exception handling that help to solve this design problem. The idea of an exception-handling mechanism is that the programmer can write code that catches and deals with errors that arise when the program is running. Rather than explicitly checking that each step in the algorithm was successful, a program with exception handling can in essence say, <strong>“Do these steps, and if any problem crops up, handle it this way.”</strong></p>
+<pre><code>try:
+    &lt;body&gt;
+except &lt;ErrorType&gt;:
+    &lt;handler&gt;</code></pre>
+<p>For example,</p>
+<div id="6c7485aa" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> roots3(a, b, c):</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>        discRoot <span class="op">=</span> math.sqrt(b<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> (<span class="dv">4</span> <span class="op">*</span> a <span class="op">*</span> c))</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>        r1 <span class="op">=</span> (<span class="op">-</span>b <span class="op">+</span> discRoot) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> a)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        r2 <span class="op">=</span> (<span class="op">-</span>b <span class="op">-</span> discRoot) <span class="op">/</span> (<span class="dv">2</span> <span class="op">*</span> a)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"The solutions are:"</span>, r1, r2)</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">ValueError</span>:</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"No real roots"</span>)</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>roots3(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>No real roots</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="part-2-probability-foundations-for-simulation" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="part-2-probability-foundations-for-simulation"><span class="header-section-number">5.2</span> <strong>Part 2: Probability Foundations for Simulation</strong></h2>
+<p>Here is a collection of summary and reference sheets I prepared for the first-year statistics and probabilities unit:</p>
+<ul>
+<li><a href="https://zamnolence.github.io/media/Statistics_Summary_of_Theory.pdf">Summary of Theory</a> (Example codes in R)</li>
+<li><a href="https://zamnolence.github.io/media/Probability_Ref_Sheet.pdf">Probability Distributions Reference Sheet</a></li>
+<li><a href="https://zamnolence.github.io/media/Hypothesis_Ref_Sheet.pdf">Hypothesis Testing Reference Sheet</a></li>
+</ul>
+<p>There might not be a lot of exercises for this part, the objective is that you get familiar with Python code structure. It is highly recommended that you make your own notes (or comments using <code>#</code>) to describe what is being done for every line of code.</p>
+<p>The following are some basic Python libraries for statistics, data analysis, simulation, and visualisation.</p>
+<p><strong>Key Libraries</strong></p>
+<ul>
+<li><strong>Pandas:</strong> <code>import pandas as pd</code> (DataFrames)</li>
+<li><strong>Numpy:</strong> <code>import numpy as np</code> (Numerical ops)</li>
+<li><strong>Scipy:</strong> <code>from scipy import stats</code> (Tests &amp; Distributions)</li>
+<li><strong>Statsmodels:</strong> <code>import statsmodels.api as sm</code> (Modelling &amp; Regression)</li>
+<li><strong>Matplotlib:</strong> <code>import matplotlib.pyplot as plt</code> (Plotting)</li>
+</ul>
+<p>To install package, run <code>pip install &lt;package name&gt;</code>.</p>
+<section id="random-number-generators" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="random-number-generators"><span class="header-section-number">5.2.1</span> Random Number Generators</h3>
+<p>Simulation begins with the ability to generate random‑looking numbers. Computers, however, are deterministic machines—they cannot produce true randomness on their own. Instead, they use <strong>pseudorandom number generators (PRNGs)</strong>: algorithms that produce sequences of numbers that behave like random samples.</p>
+<p>In this section, we will:</p>
+<ul>
+<li>implement a simple Linear Congruential Generator (LCG)</li>
+<li>generate Uniform(0,1) samples</li>
+<li>compare our LCG to Python’s built‑in generator</li>
+</ul>
+<p>This gives us the computational foundation for all later simulation work.</p>
+<section id="lcgs" class="level4" data-number="5.2.1.1">
+<h4 data-number="5.2.1.1" class="anchored" data-anchor-id="lcgs"><span class="header-section-number">5.2.1.1</span> LCGs</h4>
+<p>From the lecture, we learned that an LCG produces a sequence of integers using a recurrence relation: <span class="math display">\[
+X_{n+1} = (aX_n + c) \mod m,
+\]</span> where <span class="math inline">\(X\)</span> is the sequence of pseudo-random values and</p>
+<ul>
+<li>the modulus <span class="math inline">\(m, 0 &lt; m\)</span></li>
+<li>the multiplier <span class="math inline">\(a, 0 &lt; a &lt; m\)</span></li>
+<li>the increment <span class="math inline">\(c, 0 \leq c &lt; m\)</span></li>
+<li>the seed or start values <span class="math inline">\(X_0, 0 \leq X_0 &lt; m\)</span></li>
+</ul>
+<p>Good choices of <span class="math inline">\((a,c,m)\)</span> give long, well‑distributed sequences. Poor choices give visible patterns—great for teaching, not great for real simulation.</p>
+<p>For example,</p>
+<div id="d72f9d1b" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lcg(n, seed<span class="op">=</span><span class="dv">12345</span>, a<span class="op">=</span><span class="dv">1103515245</span>, c<span class="op">=</span><span class="dv">12345</span>, m<span class="op">=</span><span class="dv">2</span><span class="op">**</span><span class="dv">31</span>):</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Generate n pseudorandom integers using a simple LCG."""</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> seed</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> []</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(n):</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> (a <span class="op">*</span> x <span class="op">+</span> c) <span class="op">%</span> m</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>        out.append(x)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> out</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>lcg(<span class="dv">10</span>) <span class="co"># generate 10 pseudorandom integers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="491">
+<pre><code>[1406932606,
+ 654583775,
+ 1449466924,
+ 229283573,
+ 1109335178,
+ 1051550459,
+ 1293799192,
+ 794471793,
+ 551188310,
+ 803550167]</code></pre>
+</div>
+</div>
+<p>Then, we can write a function <code>lcg_uniform()</code> that returns the LCG integer output as Uniform(0,1).</p>
+<div id="d16636ec" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> lcg_uniform(n, seed<span class="op">=</span><span class="dv">12345</span>):</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">31</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    ints <span class="op">=</span> lcg(n, seed<span class="op">=</span>seed, m<span class="op">=</span>m)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> [x <span class="op">/</span> m <span class="cf">for</span> x <span class="kw">in</span> ints]</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>lcg_uniform(<span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="492">
+<pre><code>[0.6551540484651923,
+ 0.30481432331725955,
+ 0.6749606337398291,
+ 0.10676848376169801,
+ 0.5165744470432401]</code></pre>
+</div>
+</div>
+<p><strong>Quick visual check:</strong> Does it look uniform?</p>
+<div id="6f8340e0" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> lcg_uniform(<span class="dv">10000</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>plt.hist(u, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Histogram of LCG Uniform(0,1) Samples"</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-19-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Comparing to NumPy’s Generator</strong></p>
+<p>NumPy uses a high‑quality PRNG. Let’s compare histograms side‑by‑side.</p>
+<div id="520e34c2" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>u_np <span class="op">=</span> np.random.default_rng(<span class="dv">123</span>).uniform(size<span class="op">=</span><span class="dv">10_000</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].hist(u, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">"LCG Uniform(0,1)"</span>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].hist(u_np, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">"NumPy Uniform(0,1)"</span>)</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-20-output-1.png" width="950" height="374" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="probability-distributions-pdfpmfcdf" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="probability-distributions-pdfpmfcdf"><span class="header-section-number">5.2.2</span> Probability Distributions (PDF/PMF/CDF)</h3>
+<p><strong>Discrete RVs (e.g., Bernoulli, Binomial)</strong> PMF gives the probability of each possible value <span class="math display">\[
+P(X=x)
+\]</span> <strong>Continuous RVs (e.g., Exponential, Normal)</strong> - PDF describes the shape of the distribution <span class="math display">\[
+f(x)
+\]</span> - CDF gives cumulative probability <span class="math display">\[
+F(x)=P(X\leq x)
+\]</span> Simulation gives us <em>samples</em>. Theory gives us <em>functions</em>.</p>
+<section id="example-exponentialλ" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="example-exponentialλ">Example: Exponential(λ)</h4>
+<p>We already simulated Exponential(λ) using inverse transform. Now we compare the simulated histogram to the theoretical PDF: <span class="math display">\[
+f(x)=\lambda e^{-\lambda x},\quad x\geq 0
+\]</span></p>
+<div id="4e52cef4" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> <span class="op">-</span>np.log(np.random.default_rng().uniform(size<span class="op">=</span><span class="dv">5000</span>)) <span class="op">/</span> lam</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical PDF</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">300</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> lam <span class="op">*</span> np.exp(<span class="op">-</span>lam <span class="op">*</span> x)</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>plt.hist(samples, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>, label<span class="op">=</span><span class="st">'Simulated'</span>)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, pdf, <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Theoretical PDF'</span>)</span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Exponential(λ=2): Simulation vs PDF"</span>)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-21-output-1.png" width="582" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-normal01" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="example-normal01">Example: Normal(0,1)</h4>
+<p>The Normal distribution has PDF: <span class="math display">\[
+f(x)=\frac{1}{\sqrt{2\pi }}e^{-x^2/2}
+\]</span></p>
+<div id="8aa1d277" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> norm</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate Normal(0,1)</span></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>samples_norm <span class="op">=</span> np.random.default_rng().normal(size<span class="op">=</span><span class="dv">5000</span>)</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical PDF</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">300</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> norm.pdf(x)</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>plt.hist(samples_norm, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>, label<span class="op">=</span><span class="st">'Simulated'</span>)</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x, pdf, <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Theoretical PDF'</span>)</span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Normal(0,1): Simulation vs PDF"</span>)</span>
+<span id="cb45-13"><a href="#cb45-13" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb45-14"><a href="#cb45-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-22-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-bernoullip" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="example-bernoullip">Example: Bernoulli(p)</h4>
+<p>For Bernoulli(p), the theoretical PMF: <span class="math display">\[
+P(X=1)=p,\quad P(X=0)=1-p
+\]</span></p>
+<div id="2bfdb938" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>samples_bern <span class="op">=</span> (np.random.default_rng().uniform(size<span class="op">=</span><span class="dv">5000</span>) <span class="op">&lt;</span> p).astype(<span class="bu">int</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Empirical PMF</span></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>vals, counts <span class="op">=</span> np.unique(samples_bern, return_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>empirical <span class="op">=</span> counts <span class="op">/</span> counts.<span class="bu">sum</span>()</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical PMF</span></span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>theoretical <span class="op">=</span> np.array([<span class="dv">1</span><span class="op">-</span>p, p])</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a>plt.bar([<span class="dv">0</span>,<span class="dv">1</span>], empirical, width<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Empirical'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>plt.bar([<span class="fl">0.4</span>,<span class="fl">1.4</span>], theoretical, width<span class="op">=</span><span class="fl">0.4</span>, label<span class="op">=</span><span class="st">'Theoretical'</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb46-13"><a href="#cb46-13" aria-hidden="true" tabindex="-1"></a>plt.xticks([<span class="fl">0.2</span>,<span class="fl">1.2</span>], [<span class="st">'0'</span>,<span class="st">'1'</span>])</span>
+<span id="cb46-14"><a href="#cb46-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Bernoulli(p=0.3): Empirical vs Theoretical PMF"</span>)</span>
+<span id="cb46-15"><a href="#cb46-15" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb46-16"><a href="#cb46-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-23-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="law-of-large-numbers-llns" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="law-of-large-numbers-llns"><span class="header-section-number">5.2.3</span> Law of Large Numbers (LLNs)</h3>
+<p>The Law of Large Numbers (LLN) is one of the most important ideas in probability and simulation. It explains why simulation works and why empirical averages converge to theoretical expectations. In simple terms:</p>
+<blockquote class="blockquote">
+<p>As we take more and more samples, the sample mean gets closer to the true mean.</p>
+</blockquote>
+<p>This is why Monte Carlo methods are powerful: averages stabilise. We’ll demonstrate LLN using simulation.</p>
+<section id="lln-for-uniform01" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="lln-for-uniform01">LLN for Uniform(0,1)</h4>
+<p>For a Uniform(0,1) random variable: <span class="math inline">\(\mathbb{E}[X]=0.5\)</span></p>
+<p>We will: - Generate many Uniform(0,1) samples - Compute the running average - Watch it converge to 0.5</p>
+<div id="d1707438" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>rng <span class="op">=</span> np.random.default_rng(<span class="dv">123</span>)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">50_000</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> rng.uniform(size<span class="op">=</span>n)</span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>running_mean <span class="op">=</span> np.cumsum(samples) <span class="op">/</span> np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>plt.plot(running_mean, label<span class="op">=</span><span class="st">'Running Mean'</span>)</span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="fl">0.5</span>, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean = 0.5'</span>)</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"LLN for Uniform(0,1)"</span>)</span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Samples"</span>)</span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Running Mean"</span>)</span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-24-output-1.png" width="812" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lln-for-exponentialλ" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="lln-for-exponentialλ">LLN for Exponential(λ)</h4>
+<p>For an Exponential(λ) distribution: <span class="math inline">\(\mathbb{E}[X]=\frac{1}{\lambda }\)</span></p>
+<p>Let’s use <span class="math inline">\(\lambda = 2\)</span>, so the true mean is 0.5 again.</p>
+<div id="782e7310" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>lam <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>samples_exp <span class="op">=</span> <span class="op">-</span>np.log(rng.uniform(size<span class="op">=</span>n)) <span class="op">/</span> lam</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>running_mean_exp <span class="op">=</span> np.cumsum(samples_exp) <span class="op">/</span> np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>plt.plot(running_mean_exp, label<span class="op">=</span><span class="st">'Running Mean'</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">1</span><span class="op">/</span>lam, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean = 0.5'</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"LLN for Exponential(λ=2)"</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Samples"</span>)</span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Running Mean"</span>)</span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-25-output-1.png" width="812" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="lln-for-bernoullip" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="lln-for-bernoullip">LLN for Bernoulli(p)</h4>
+<p>For Bernoulli(p): <span class="math inline">\(\mathbb{E}[X]=p\)</span></p>
+<p>Let’s use p = 0.3.</p>
+<div id="078a644f" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>samples_bern <span class="op">=</span> (rng.uniform(size<span class="op">=</span>n) <span class="op">&lt;</span> p).astype(<span class="bu">int</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>running_mean_bern <span class="op">=</span> np.cumsum(samples_bern) <span class="op">/</span> np.arange(<span class="dv">1</span>, n<span class="op">+</span><span class="dv">1</span>)</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>,<span class="dv">4</span>))</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>plt.plot(running_mean_bern, label<span class="op">=</span><span class="st">'Running Mean'</span>)</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>plt.axhline(p, color<span class="op">=</span><span class="st">'red'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'True Mean = 0.3'</span>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"LLN for Bernoulli(p=0.3)"</span>)</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Number of Samples"</span>)</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Running Mean"</span>)</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_5_workshop_sol_files/figure-html/cell-26-output-1.png" width="812" height="376" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="some-other-useful-functions" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="some-other-useful-functions"><span class="header-section-number">5.2.4</span> Some Other Useful Functions</h3>
+<p><strong>Basic Summaries</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Mean</td>
+<td><code>np.mean(x)</code></td>
+</tr>
+<tr class="even">
+<td>Variance</td>
+<td><code>np.var(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Std dev</td>
+<td><code>np.std(x)</code></td>
+</tr>
+<tr class="even">
+<td>Quantiles</td>
+<td><code>np.quantile(x, 0.95)</code></td>
+</tr>
+<tr class="odd">
+<td>Min / Max</td>
+<td><code>np.min(x)</code>, <code>np.max(x)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Random Number Generation</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 31%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Set (global) seed</td>
+<td><code>np.random.seed()</code></td>
+<td><code>np.random.seed(123)</code></td>
+</tr>
+<tr class="even">
+<td>Set (local) seed</td>
+<td><code>np.random.default_rng()</code></td>
+<td><code>rng = np.random.default_rng(123)</code></td>
+</tr>
+<tr class="odd">
+<td>Uniform(0,1)</td>
+<td><code>np.random.uniform()</code></td>
+<td><code>np.random.uniform(0,1,1000)</code></td>
+</tr>
+<tr class="even">
+<td>Bernoulli / Binomial</td>
+<td><code>np.random.binomial()</code></td>
+<td><code>np.random.binomial(1, 0.3, 1000)</code></td>
+</tr>
+<tr class="odd">
+<td>Normal</td>
+<td><code>np.random.normal()</code></td>
+<td><code>np.random.normal(0,1,1000)</code></td>
+</tr>
+<tr class="even">
+<td>Exponential</td>
+<td><code>np.random.exponential()</code></td>
+<td><code>np.random.exponential(1,1000)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Working with Replication</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cumulative sum</td>
+<td><code>np.cumsum(x)</code></td>
+</tr>
+<tr class="even">
+<td>Sequence 1…n</td>
+<td><code>np.arange(1, n+1)</code></td>
+</tr>
+<tr class="odd">
+<td>Running mean</td>
+<td><code>np.cumsum(x) / np.arange(1,n+1)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Probability Distributions (<code>scipy.stats</code>)</strong></p>
+<ul>
+<li><strong>Normal:</strong> <code>stats.norm.rvs()</code> (random var), <code>stats.norm.pdf()</code> (density)</li>
+<li><strong>Binomial:</strong> <code>stats.binom.rvs()</code></li>
+<li><strong>Uniform:</strong> <code>stats.uniform.rvs()</code></li>
+</ul>
+<p><strong>Plotting (Matplotlib)</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Histogram</td>
+<td><code>plt.hist(x, bins=30)</code></td>
+</tr>
+<tr class="even">
+<td>Line plot</td>
+<td><code>plt.plot(x)</code></td>
+</tr>
+<tr class="odd">
+<td>Add horizontal line</td>
+<td><code>plt.axhline(value)</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>Sweigart, A. (2021). <em>Python cheatsheet</em>. <a href="https://www.pythoncheatsheet.org/">https://www.pythoncheatsheet.org/</a></p>
+<p>Zelle, J. (2016). <em>Python programming: An introduction to computer science</em> (3rd ed.). Franklin, Beedle &amp; Associates.</p>
+<p>Vasiliev, Y. (2022). Python for data science: A hands-on introduction. No Starch Press.</p>
+<p>Haslwanter, T. (2016). <em>An introduction to statistics with Python: With applications in the life sciences</em>. Springer.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01_4_workshop_sol.html" class="pagination-link" aria-label="R Workshop Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02_distributions.html" class="pagination-link" aria-label="Statistical Distributions">
+        <span class="nav-page-text">Statistical Distributions</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Computer Simulation in R(v1.0.2) <br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

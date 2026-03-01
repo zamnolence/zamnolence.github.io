@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Univariate Distributions – Computer Simulation in R (v1.0.2)</title>
+<title>6&nbsp; Univariate Distributions – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -156,7 +156,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_1_univariate.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_1_univariate.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -171,7 +171,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -217,7 +217,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -234,31 +240,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -273,34 +285,34 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link active" data-scroll-target="#discrete-distributions"><span class="header-section-number">5.1</span> Discrete Distributions</a>
+  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link active" data-scroll-target="#discrete-distributions"><span class="header-section-number">6.1</span> Discrete Distributions</a>
   <ul>
-  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">5.1.1</span> Bernoulli Distribution</a></li>
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">5.1.2</span> Binomial Distribution</a></li>
-  <li><a href="#geometric-distribution" id="toc-geometric-distribution" class="nav-link" data-scroll-target="#geometric-distribution"><span class="header-section-number">5.1.3</span> Geometric Distribution</a></li>
-  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution"><span class="header-section-number">5.1.4</span> Negative Binomial Distribution</a></li>
-  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">5.1.5</span> Poisson Distribution</a></li>
-  <li><a href="#multinomial-distribution" id="toc-multinomial-distribution" class="nav-link" data-scroll-target="#multinomial-distribution"><span class="header-section-number">5.1.6</span> Multinomial Distribution</a></li>
+  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution"><span class="header-section-number">6.1.1</span> Bernoulli Distribution</a></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution"><span class="header-section-number">6.1.2</span> Binomial Distribution</a></li>
+  <li><a href="#geometric-distribution" id="toc-geometric-distribution" class="nav-link" data-scroll-target="#geometric-distribution"><span class="header-section-number">6.1.3</span> Geometric Distribution</a></li>
+  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution"><span class="header-section-number">6.1.4</span> Negative Binomial Distribution</a></li>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution"><span class="header-section-number">6.1.5</span> Poisson Distribution</a></li>
+  <li><a href="#multinomial-distribution" id="toc-multinomial-distribution" class="nav-link" data-scroll-target="#multinomial-distribution"><span class="header-section-number">6.1.6</span> Multinomial Distribution</a></li>
   </ul></li>
-  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions"><span class="header-section-number">5.2</span> Continuous Distributions</a>
+  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions"><span class="header-section-number">6.2</span> Continuous Distributions</a>
   <ul>
-  <li><a href="#uniform-distribution" id="toc-uniform-distribution" class="nav-link" data-scroll-target="#uniform-distribution"><span class="header-section-number">5.2.1</span> Uniform Distribution</a></li>
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">5.2.2</span> Exponential Distribution</a></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">5.2.3</span> Gamma Distribution</a></li>
-  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">5.2.4</span> Normal Distribution</a></li>
-  <li><a href="#log-normal-distribution" id="toc-log-normal-distribution" class="nav-link" data-scroll-target="#log-normal-distribution"><span class="header-section-number">5.2.5</span> Log-Normal Distribution</a></li>
-  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution"><span class="header-section-number">5.2.6</span> Beta Distribution</a></li>
+  <li><a href="#uniform-distribution" id="toc-uniform-distribution" class="nav-link" data-scroll-target="#uniform-distribution"><span class="header-section-number">6.2.1</span> Uniform Distribution</a></li>
+  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">6.2.2</span> Exponential Distribution</a></li>
+  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">6.2.3</span> Gamma Distribution</a></li>
+  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution"><span class="header-section-number">6.2.4</span> Normal Distribution</a></li>
+  <li><a href="#log-normal-distribution" id="toc-log-normal-distribution" class="nav-link" data-scroll-target="#log-normal-distribution"><span class="header-section-number">6.2.5</span> Log-Normal Distribution</a></li>
+  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution"><span class="header-section-number">6.2.6</span> Beta Distribution</a></li>
   </ul></li>
-  <li><a href="#r-functions-for-probability-distributions" id="toc-r-functions-for-probability-distributions" class="nav-link" data-scroll-target="#r-functions-for-probability-distributions"><span class="header-section-number">5.3</span> R Functions for Probability Distributions</a></li>
+  <li><a href="#r-functions-for-probability-distributions" id="toc-r-functions-for-probability-distributions" class="nav-link" data-scroll-target="#r-functions-for-probability-distributions"><span class="header-section-number">6.3</span> R Functions for Probability Distributions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_1_univariate.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_1_univariate.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></h1>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></h1>
 </div>
 
 
@@ -322,8 +334,8 @@ window.Quarto = {
 <p><span class="math display">\[X : \Omega \to \mathbb{R},\]</span></p>
 <p>which assigns a real number to each outcome of a random experiment. In simulation, random variables are the primary objects we generate. Their distributions determine the behaviour of the systems we model.</p>
 <p>Random variables may be discrete or continuous, and while the computational treatment differs slightly between these two cases, the underlying principles are unified.</p>
-<section id="discrete-distributions" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">5.1</span> Discrete Distributions</h2>
+<section id="discrete-distributions" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="discrete-distributions"><span class="header-section-number">6.1</span> Discrete Distributions</h2>
 <p>Discrete distributions arise naturally whenever we simulate events, counts, or categorical outcomes. Each of the following plays a distinct structural role in modelling stochastic systems.</p>
 <p>We can categorise discrete distributions into four groups:</p>
 <ol type="1">
@@ -353,8 +365,8 @@ window.Quarto = {
 <p>The <strong>cumulative distribution function (CDF)</strong> is defined by</p>
 <p><span class="math display">\[F(x) = P(X \le x) = \sum_{t \le x} p(t).\]</span></p>
 <p>The CDF plays a central role in simulation theory, as it links probability with transformation methods that we will study later.</p>
-<section id="bernoulli-distribution" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">5.1.1</span> Bernoulli Distribution</h3>
+<section id="bernoulli-distribution" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="bernoulli-distribution"><span class="header-section-number">6.1.1</span> Bernoulli Distribution</h3>
 <p>The simplest discrete distribution is the Bernoulli distribution. A Bernoulli random variable represents a <strong>single trial</strong> with two possible outcomes, often labelled 1 (success) and 0 (failure).</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -508,8 +520,8 @@ F(x) = \begin{cases}
 </div>
 </div>
 </section>
-<section id="binomial-distribution" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">5.1.2</span> Binomial Distribution</h3>
+<section id="binomial-distribution" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="binomial-distribution"><span class="header-section-number">6.1.2</span> Binomial Distribution</h3>
 <p>The Binomial distribution counts the number of successes in <span class="math inline">\(n\)</span> independent Bernoulli trials.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -647,8 +659,8 @@ F(x) = \begin{cases}
 </div>
 </div>
 </section>
-<section id="geometric-distribution" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="geometric-distribution"><span class="header-section-number">5.1.3</span> Geometric Distribution</h3>
+<section id="geometric-distribution" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="geometric-distribution"><span class="header-section-number">6.1.3</span> Geometric Distribution</h3>
 <p>The Geometric distribution models the number of trials required until the first success. in a sequence of independent Bernoulli trials, where each trial has a constant probability of success.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -731,8 +743,8 @@ F(x) = \begin{cases}
 </div>
 <p><strong>Note:</strong> The plots above are generated using <code>x = x-1</code> to model the number of trialsl.</p>
 </section>
-<section id="negative-binomial-distribution" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="negative-binomial-distribution"><span class="header-section-number">5.1.4</span> Negative Binomial Distribution</h3>
+<section id="negative-binomial-distribution" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="negative-binomial-distribution"><span class="header-section-number">6.1.4</span> Negative Binomial Distribution</h3>
 <p>The Negative Binomial <em>generalises</em> the geometric distribution to the number of trials before <span class="math inline">\(r\)</span> successes.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -814,8 +826,8 @@ F(x) = \begin{cases}
 </div>
 </div>
 </section>
-<section id="poisson-distribution" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">5.1.5</span> Poisson Distribution</h3>
+<section id="poisson-distribution" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="poisson-distribution"><span class="header-section-number">6.1.5</span> Poisson Distribution</h3>
 <p>The Poisson distribution arises naturally in modelling the number of events occurring, <span class="math inline">\(X\)</span>, in a fixed interval of time or space.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -972,8 +984,8 @@ P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}, \qquad
 </div>
 </div>
 </section>
-<section id="multinomial-distribution" class="level3" data-number="5.1.6">
-<h3 data-number="5.1.6" class="anchored" data-anchor-id="multinomial-distribution"><span class="header-section-number">5.1.6</span> Multinomial Distribution</h3>
+<section id="multinomial-distribution" class="level3" data-number="6.1.6">
+<h3 data-number="6.1.6" class="anchored" data-anchor-id="multinomial-distribution"><span class="header-section-number">6.1.6</span> Multinomial Distribution</h3>
 <p>The Multinomial distribution generalises the binomial to more than two outcome categories.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -1126,8 +1138,8 @@ P =
 </ul>
 </section>
 </section>
-<section id="continuous-distributions" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">5.2</span> Continuous Distributions</h2>
+<section id="continuous-distributions" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="continuous-distributions"><span class="header-section-number">6.2</span> Continuous Distributions</h2>
 <p>Continuous distributions play two fundamental roles in simulation:</p>
 <ol type="1">
 <li>Modelling real-world variability (waiting times, measurement noise, lifetimes).</li>
@@ -1165,8 +1177,8 @@ P =
 <p>The <strong>cumulative distribution function</strong> (CDF) is</p>
 <p><span class="math display">\[F(x) = \int_{-\infty}^x f(t)\,dt.\]</span></p>
 <p>The CDF is always non-decreasing and continuous from the right. Importantly, it provides the bridge between probability theory and simulation algorithms.</p>
-<section id="uniform-distribution" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="uniform-distribution"><span class="header-section-number">5.2.1</span> Uniform Distribution</h3>
+<section id="uniform-distribution" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="uniform-distribution"><span class="header-section-number">6.2.1</span> Uniform Distribution</h3>
 <p>Uniform is a distribution where all outcomes in the range <span class="math inline">\([a,b]\)</span> are equally likely.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation:</strong></p>
@@ -1268,8 +1280,8 @@ F(x)=
 </div>
 </div>
 </section>
-<section id="exponential-distribution" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="exponential-distribution"><span class="header-section-number">5.2.2</span> Exponential Distribution</h3>
+<section id="exponential-distribution" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="exponential-distribution"><span class="header-section-number">6.2.2</span> Exponential Distribution</h3>
 <p>The exponential distribution models waiting times between events in a Poisson process. If the number of events in any interval of length <span class="math inline">\(t\)</span> follows</p>
 <p><span class="math display">\[
 N(t)\sim \mathrm{Poisson}(\lambda t).
@@ -1378,8 +1390,8 @@ T\sim \mathrm{Exponential}(\lambda ).
 </div>
 </div>
 </section>
-<section id="gamma-distribution" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="gamma-distribution"><span class="header-section-number">5.2.3</span> Gamma Distribution</h3>
+<section id="gamma-distribution" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="gamma-distribution"><span class="header-section-number">6.2.3</span> Gamma Distribution</h3>
 <p>The gamma distribution <em>generalises the exponential distribution</em>. It represents the sum of independent exponential random variables, and also waiting time until the <span class="math inline">\(\alpha\)</span>-th event in a Poisson process.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation</strong></p>
@@ -1484,8 +1496,8 @@ T_3\sim \mathrm{Gamma}(3,2).
 </div>
 </div>
 </section>
-<section id="normal-distribution" class="level3" data-number="5.2.4">
-<h3 data-number="5.2.4" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">5.2.4</span> Normal Distribution</h3>
+<section id="normal-distribution" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="normal-distribution"><span class="header-section-number">6.2.4</span> Normal Distribution</h3>
 <p>The normal distribution or Gaussian distribution describes uncertainty as a symmetric bell-shaped curve. Arising through the Central Limit Theorem, it is considered the most important continuous distribution in applied probability.</p>
 <div class="tip">
 <p><strong>What it matters in simulation</strong></p>
@@ -1567,8 +1579,8 @@ F(x)=\Phi\left(\frac{x-\mu}{\sigma}\right)
 </div>
 </div>
 </section>
-<section id="log-normal-distribution" class="level3" data-number="5.2.5">
-<h3 data-number="5.2.5" class="anchored" data-anchor-id="log-normal-distribution"><span class="header-section-number">5.2.5</span> Log-Normal Distribution</h3>
+<section id="log-normal-distribution" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="log-normal-distribution"><span class="header-section-number">6.2.5</span> Log-Normal Distribution</h3>
 <p>The normal distribution is symmetric and defined over all real numbers, so it may not suit variables that are strictly positive or strongly skewed, such as body weight or stock prices. In such cases, distributions like the log‑normal are often more appropriate.</p>
 <div class="tip">
 <p><strong>Why it matters in simulation</strong></p>
@@ -1651,8 +1663,8 @@ F(x)=P(X\leq x)=\Phi \! \left( \frac{\ln x-\mu }{\sigma }\right) ,\qquad x&gt;0,
 </div>
 </div>
 </section>
-<section id="beta-distribution" class="level3" data-number="5.2.6">
-<h3 data-number="5.2.6" class="anchored" data-anchor-id="beta-distribution"><span class="header-section-number">5.2.6</span> Beta Distribution</h3>
+<section id="beta-distribution" class="level3" data-number="6.2.6">
+<h3 data-number="6.2.6" class="anchored" data-anchor-id="beta-distribution"><span class="header-section-number">6.2.6</span> Beta Distribution</h3>
 <p>The beta distribution is defined on (0,1), making it ideal for modelling probabilities and proportions. In Bayesian inference, the beta distribution is the conjugate prior probability distribution for the Bernoulli, binomial, negative binomial, and geometric distributions. It has flexible shapes (U-shaped, symmetric, skewed).</p>
 <div class="tip">
 <p><strong>Why it matters in simulation</strong></p>
@@ -1765,8 +1777,8 @@ p\sim \mathrm{Beta}(\alpha =4,\; \beta =16).
 </div>
 </section>
 </section>
-<section id="r-functions-for-probability-distributions" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="r-functions-for-probability-distributions"><span class="header-section-number">5.3</span> R Functions for Probability Distributions</h2>
+<section id="r-functions-for-probability-distributions" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="r-functions-for-probability-distributions"><span class="header-section-number">6.3</span> R Functions for Probability Distributions</h2>
 <p>R provides a consistent and elegant naming convention for working with probability distributions. For nearly every standard distribution, four core functions are available. These functions allow us to compute probabilities, evaluate densities, calculate quantiles, and generate random samples.</p>
 <p>The naming structure follows the pattern:</p>
 <p><code>prefix + distribution</code></p>
@@ -2318,7 +2330,7 @@ p\sim \mathrm{Beta}(\alpha =4,\; \beta =16).
   </div>
   <div class="nav-page nav-page-next">
       <a href="./02_2_joint_dependence.html" class="pagination-link" aria-label="Joint Distributions and Dependence">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Joint Distributions and Dependence – Computer Simulation in R (v1.0.2)</title>
+<title>7&nbsp; Joint Distributions and Dependence – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,7 +162,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -208,7 +208,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -225,31 +231,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -264,28 +276,28 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#why-dependence-matters-in-simulation" id="toc-why-dependence-matters-in-simulation" class="nav-link active" data-scroll-target="#why-dependence-matters-in-simulation"><span class="header-section-number">6.1</span> Why Dependence Matters in Simulation</a></li>
-  <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link" data-scroll-target="#joint-distributions"><span class="header-section-number">6.2</span> Joint Distributions</a>
+  <li><a href="#why-dependence-matters-in-simulation" id="toc-why-dependence-matters-in-simulation" class="nav-link active" data-scroll-target="#why-dependence-matters-in-simulation"><span class="header-section-number">7.1</span> Why Dependence Matters in Simulation</a></li>
+  <li><a href="#joint-distributions" id="toc-joint-distributions" class="nav-link" data-scroll-target="#joint-distributions"><span class="header-section-number">7.2</span> Joint Distributions</a>
   <ul>
-  <li><a href="#discrete-case" id="toc-discrete-case" class="nav-link" data-scroll-target="#discrete-case"><span class="header-section-number">6.2.1</span> Discrete Case</a></li>
-  <li><a href="#continuous-case" id="toc-continuous-case" class="nav-link" data-scroll-target="#continuous-case"><span class="header-section-number">6.2.2</span> Continuous Case</a></li>
-  <li><a href="#mixed-case" id="toc-mixed-case" class="nav-link" data-scroll-target="#mixed-case"><span class="header-section-number">6.2.3</span> Mixed Case</a></li>
+  <li><a href="#discrete-case" id="toc-discrete-case" class="nav-link" data-scroll-target="#discrete-case"><span class="header-section-number">7.2.1</span> Discrete Case</a></li>
+  <li><a href="#continuous-case" id="toc-continuous-case" class="nav-link" data-scroll-target="#continuous-case"><span class="header-section-number">7.2.2</span> Continuous Case</a></li>
+  <li><a href="#mixed-case" id="toc-mixed-case" class="nav-link" data-scroll-target="#mixed-case"><span class="header-section-number">7.2.3</span> Mixed Case</a></li>
   </ul></li>
-  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">6.3</span> Independence</a></li>
-  <li><a href="#conditional-distributions" id="toc-conditional-distributions" class="nav-link" data-scroll-target="#conditional-distributions"><span class="header-section-number">6.4</span> Conditional Distributions</a></li>
-  <li><a href="#joint-vs-conditional-distribution" id="toc-joint-vs-conditional-distribution" class="nav-link" data-scroll-target="#joint-vs-conditional-distribution"><span class="header-section-number">6.5</span> Joint vs Conditional Distribution</a></li>
-  <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule"><span class="header-section-number">6.6</span> Bayes’ Rule</a></li>
-  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">6.7</span> Covariance and Correlation</a></li>
-  <li><a href="#bivariate-normal-distribution" id="toc-bivariate-normal-distribution" class="nav-link" data-scroll-target="#bivariate-normal-distribution"><span class="header-section-number">6.8</span> Bivariate Normal Distribution</a></li>
+  <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">7.3</span> Independence</a></li>
+  <li><a href="#conditional-distributions" id="toc-conditional-distributions" class="nav-link" data-scroll-target="#conditional-distributions"><span class="header-section-number">7.4</span> Conditional Distributions</a></li>
+  <li><a href="#joint-vs-conditional-distribution" id="toc-joint-vs-conditional-distribution" class="nav-link" data-scroll-target="#joint-vs-conditional-distribution"><span class="header-section-number">7.5</span> Joint vs Conditional Distribution</a></li>
+  <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule"><span class="header-section-number">7.6</span> Bayes’ Rule</a></li>
+  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">7.7</span> Covariance and Correlation</a></li>
+  <li><a href="#bivariate-normal-distribution" id="toc-bivariate-normal-distribution" class="nav-link" data-scroll-target="#bivariate-normal-distribution"><span class="header-section-number">7.8</span> Bivariate Normal Distribution</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></h1>
 </div>
 
 
@@ -320,8 +332,8 @@ window.Quarto = {
 <p>For instance, suppose during busy periods customers tend to order simpler drinks, resulting in shorter service times. Then small interarrival times might be associated with smaller service times. This is a form of dependence.</p>
 </div>
 <p>To model such behaviour rigorously, we require the concept of a joint distribution.</p>
-<section id="why-dependence-matters-in-simulation" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="why-dependence-matters-in-simulation"><span class="header-section-number">6.1</span> Why Dependence Matters in Simulation</h2>
+<section id="why-dependence-matters-in-simulation" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="why-dependence-matters-in-simulation"><span class="header-section-number">7.1</span> Why Dependence Matters in Simulation</h2>
 <p>Incorrectly assuming independence can lead to:</p>
 <ul>
 <li>Underestimated variance</li>
@@ -336,20 +348,20 @@ window.Quarto = {
 </ul>
 <p>Simulation provides flexibility to incorporate complex dependence structures — but only if we understand the joint distribution.</p>
 </section>
-<section id="joint-distributions" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="joint-distributions"><span class="header-section-number">6.2</span> Joint Distributions</h2>
+<section id="joint-distributions" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="joint-distributions"><span class="header-section-number">7.2</span> Joint Distributions</h2>
 <div id="fig-joint" class="center quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-joint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="figs/joint.png" class="img-fluid figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-joint-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: <a href="https://en.wikipedia.org/wiki/File:Multivariate_normal_sample.svg">Joint probability distribution samples (black) and marginal densities (blue and red)</a>
+Figure&nbsp;7.1: <a href="https://en.wikipedia.org/wiki/File:Multivariate_normal_sample.svg">Joint probability distribution samples (black) and marginal densities (blue and red)</a>
 </figcaption>
 </figure>
 </div>
 <p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two random variables defined on the same probability space. Their behaviour is described by the joint distribution, which specifies probabilities for events involving both variables simultaneously.</p>
-<p>From <a href="#fig-joint" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>, the surface is the joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>. The curves along the axes are the <strong>marginals</strong> <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(f_Y(y)\)</span>. The scatter cloud shows sample points from the joint distribution.</p>
+<p>From <a href="#fig-joint" class="quarto-xref">Figure&nbsp;<span>7.1</span></a>, the surface is the joint density <span class="math inline">\(f_{X,Y}(x,y)\)</span>. The curves along the axes are the <strong>marginals</strong> <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(f_Y(y)\)</span>. The scatter cloud shows sample points from the joint distribution.</p>
 <p>A <strong>marginal distribution</strong> tells you how one variable behaves on its own, regardless of the other.</p>
 <p>Also, a joint distribution is a <strong>multivariate distribution</strong>. It is the probability structure that describes how several random variables behave together.</p>
 <ul>
@@ -357,8 +369,8 @@ Figure&nbsp;6.1: <a href="https://en.wikipedia.org/wiki/File:Multivariate_normal
 <li><p>For <span class="math inline">\(k\)</span> variables, <span class="math inline">\(X_1, \dots, X_k\)</span>, the joint distribution is <span class="math inline">\(f_{X_1,\dots ,X_k}(x_1,\dots ,x_k)\)</span>, which is a multivariate distribution.</p></li>
 </ul>
 <p>For this chapter, we will focus on bivariate distribution.</p>
-<section id="discrete-case" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">6.2.1</span> Discrete Case</h3>
+<section id="discrete-case" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">7.2.1</span> Discrete Case</h3>
 <div class="note">
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are discrete, their joint distribution is given by the <strong>joint probability mass function</strong></p>
 <p><span class="math display">\[p_{X,Y}(x,y) = P(X=x, Y=y),\]</span></p>
@@ -591,8 +603,8 @@ $$
 0.178 + 0.311 + 0.511 = 1.
 $$ -->
 </section>
-<section id="continuous-case" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">6.2.2</span> Continuous Case</h3>
+<section id="continuous-case" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">7.2.2</span> Continuous Case</h3>
 <div class="note">
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are continuous, their joint distribution is described by a <strong>joint density function</strong></p>
 <p><span class="math display">\[f_{X,Y}(x,y)\]</span></p>
@@ -802,8 +814,8 @@ $$
 
 (The exact algebra depends on the relative sizes of $x$ and $y$.) -->
 </section>
-<section id="mixed-case" class="level3" data-number="6.2.3">
-<h3 data-number="6.2.3" class="anchored" data-anchor-id="mixed-case"><span class="header-section-number">6.2.3</span> Mixed Case</h3>
+<section id="mixed-case" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="mixed-case"><span class="header-section-number">7.2.3</span> Mixed Case</h3>
 <div class="note">
 <p>In practice, random variables need not both be discrete or both continuous. A common situation in simulation is that one variable is discrete while another is continuous.</p>
 <p>Suppose:</p>
@@ -972,8 +984,8 @@ P(X=2 \mid Y=y)
 $$ -->
 </section>
 </section>
-<section id="independence" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="independence"><span class="header-section-number">6.3</span> Independence</h2>
+<section id="independence" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="independence"><span class="header-section-number">7.3</span> Independence</h2>
 <p>Up to this point, we have described the most general form of joint behaviour. The joint distribution <span class="math inline">\(p_{X,Y}(x,y)\)</span> or <span class="math inline">\(f_{X,Y}(x,y)\)</span> allows arbitrary dependence between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. In principle, the variables may influence one another in any possible way.</p>
 <p>However, among all possible joint distributions, one case is particularly important: the case in which the <strong>variables do not influence each other at all</strong>. This leads to the concept of <strong>independence</strong>.</p>
 <div class="example">
@@ -1047,8 +1059,8 @@ $$ -->
 </div>
 <p>The scatterplot looks like a round cloud, with no directional trend.</p>
 </section>
-<section id="conditional-distributions" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="conditional-distributions"><span class="header-section-number">6.4</span> Conditional Distributions</h2>
+<section id="conditional-distributions" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="conditional-distributions"><span class="header-section-number">7.4</span> Conditional Distributions</h2>
 <p>Independence describes the simplest possible joint structure: learning the value of one variable does not change the distribution of the other.</p>
 <p>But most real systems are not independent.</p>
 <p>In practice, we often observe one variable first and then ask:</p>
@@ -1247,8 +1259,8 @@ X \sim \text{Exp}(1),
 <p>The scatterplot reveals a clear linear trend, and the correlation is positive.</p>
 <p>Even if we know the distribution of <span class="math inline">\(X\)</span> and the distribution of <span class="math inline">\(Y\)</span>, without their joint structure we cannot simulate the system correctly.</p>
 </section>
-<section id="joint-vs-conditional-distribution" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="joint-vs-conditional-distribution"><span class="header-section-number">6.5</span> Joint vs Conditional Distribution</h2>
+<section id="joint-vs-conditional-distribution" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="joint-vs-conditional-distribution"><span class="header-section-number">7.5</span> Joint vs Conditional Distribution</h2>
 <p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables.</p>
 <table class="caption-top table">
 <colgroup>
@@ -1292,11 +1304,11 @@ X \sim \text{Exp}(1),
 </tbody>
 </table>
 </section>
-<section id="bayes-rule" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">6.6</span> Bayes’ Rule</h2>
+<section id="bayes-rule" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">7.6</span> Bayes’ Rule</h2>
 </section>
-<section id="covariance-and-correlation" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">6.7</span> Covariance and Correlation</h2>
+<section id="covariance-and-correlation" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">7.7</span> Covariance and Correlation</h2>
 <div class="note">
 <p>To quantify <strong>linear dependence</strong>, we define the covariance:</p>
 <p><span class="math display">\[\mathrm{Cov}(X,Y)
@@ -1411,8 +1423,8 @@ X \sim \text{Exp}(1),
 </blockquote>
 <p>Because it’s standardised, you can compare height vs weight, income vs education, temperature vs electricity use, etc, even though all are in different units.</p>
 </section>
-<section id="bivariate-normal-distribution" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="bivariate-normal-distribution"><span class="header-section-number">6.8</span> Bivariate Normal Distribution</h2>
+<section id="bivariate-normal-distribution" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="bivariate-normal-distribution"><span class="header-section-number">7.8</span> Bivariate Normal Distribution</h2>
 <p>A central example in simulation is the bivariate normal distribution. A bivariate normal distribution is a two‑dimensional version of the normal distribution. It describes the joint behaviour of two continuous random variables, usually written as:</p>
 <p><span class="math display">\[(X,Y)\sim \mathrm{BVN}(\mu _X,\mu _Y,\sigma _X^2,\sigma _Y^2,\rho )\]</span></p>
 <p>or</p>
@@ -1975,12 +1987,12 @@ Y
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02_1_univariate.html" class="pagination-link" aria-label="Univariate Distributions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./02_3_transformation_rvs.html" class="pagination-link" aria-label="Transformation of Random Variables">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

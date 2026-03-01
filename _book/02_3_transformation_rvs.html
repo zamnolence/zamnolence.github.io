@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Transformation of Random Variables – Computer Simulation in R (v1.0.2)</title>
+<title>8&nbsp; Transformation of Random Variables – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -165,7 +165,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -211,7 +211,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -228,31 +234,37 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -267,31 +279,31 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#transformation-of-a-single-random-variable" id="toc-transformation-of-a-single-random-variable" class="nav-link active" data-scroll-target="#transformation-of-a-single-random-variable"><span class="header-section-number">7.1</span> Transformation of a Single Random Variable</a>
+  <li><a href="#transformation-of-a-single-random-variable" id="toc-transformation-of-a-single-random-variable" class="nav-link active" data-scroll-target="#transformation-of-a-single-random-variable"><span class="header-section-number">8.1</span> Transformation of a Single Random Variable</a>
   <ul>
-  <li><a href="#discrete-case" id="toc-discrete-case" class="nav-link" data-scroll-target="#discrete-case"><span class="header-section-number">7.1.1</span> Discrete Case</a></li>
-  <li><a href="#continuous-case" id="toc-continuous-case" class="nav-link" data-scroll-target="#continuous-case"><span class="header-section-number">7.1.2</span> Continuous Case</a>
+  <li><a href="#discrete-case" id="toc-discrete-case" class="nav-link" data-scroll-target="#discrete-case"><span class="header-section-number">8.1.1</span> Discrete Case</a></li>
+  <li><a href="#continuous-case" id="toc-continuous-case" class="nav-link" data-scroll-target="#continuous-case"><span class="header-section-number">8.1.2</span> Continuous Case</a>
   <ul class="collapse">
-  <li><a href="#monotone-transformations" id="toc-monotone-transformations" class="nav-link" data-scroll-target="#monotone-transformations"><span class="header-section-number">7.1.2.1</span> Monotone Transformations</a></li>
-  <li><a href="#nonmonotone-transformations" id="toc-nonmonotone-transformations" class="nav-link" data-scroll-target="#nonmonotone-transformations"><span class="header-section-number">7.1.2.2</span> Non‑Monotone Transformations</a></li>
+  <li><a href="#monotone-transformations" id="toc-monotone-transformations" class="nav-link" data-scroll-target="#monotone-transformations"><span class="header-section-number">8.1.2.1</span> Monotone Transformations</a></li>
+  <li><a href="#nonmonotone-transformations" id="toc-nonmonotone-transformations" class="nav-link" data-scroll-target="#nonmonotone-transformations"><span class="header-section-number">8.1.2.2</span> Non‑Monotone Transformations</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#inverse-transform-sampling" id="toc-inverse-transform-sampling" class="nav-link" data-scroll-target="#inverse-transform-sampling"><span class="header-section-number">7.2</span> Inverse Transform Sampling</a>
+  <li><a href="#inverse-transform-sampling" id="toc-inverse-transform-sampling" class="nav-link" data-scroll-target="#inverse-transform-sampling"><span class="header-section-number">8.2</span> Inverse Transform Sampling</a>
   <ul>
-  <li><a href="#probability-integral-transform" id="toc-probability-integral-transform" class="nav-link" data-scroll-target="#probability-integral-transform"><span class="header-section-number">7.2.1</span> Probability Integral Transform</a></li>
-  <li><a href="#inverse-transform-sampling-algorithm" id="toc-inverse-transform-sampling-algorithm" class="nav-link" data-scroll-target="#inverse-transform-sampling-algorithm"><span class="header-section-number">7.2.2</span> Inverse Transform Sampling Algorithm</a></li>
-  <li><a href="#examples-and-limitations" id="toc-examples-and-limitations" class="nav-link" data-scroll-target="#examples-and-limitations"><span class="header-section-number">7.2.3</span> Examples and Limitations</a></li>
+  <li><a href="#probability-integral-transform" id="toc-probability-integral-transform" class="nav-link" data-scroll-target="#probability-integral-transform"><span class="header-section-number">8.2.1</span> Probability Integral Transform</a></li>
+  <li><a href="#inverse-transform-sampling-algorithm" id="toc-inverse-transform-sampling-algorithm" class="nav-link" data-scroll-target="#inverse-transform-sampling-algorithm"><span class="header-section-number">8.2.2</span> Inverse Transform Sampling Algorithm</a></li>
+  <li><a href="#examples-and-limitations" id="toc-examples-and-limitations" class="nav-link" data-scroll-target="#examples-and-limitations"><span class="header-section-number">8.2.3</span> Examples and Limitations</a></li>
   </ul></li>
-  <li><a href="#transformation-of-multiple-random-variables" id="toc-transformation-of-multiple-random-variables" class="nav-link" data-scroll-target="#transformation-of-multiple-random-variables"><span class="header-section-number">7.3</span> Transformation of Multiple Random Variables</a>
+  <li><a href="#transformation-of-multiple-random-variables" id="toc-transformation-of-multiple-random-variables" class="nav-link" data-scroll-target="#transformation-of-multiple-random-variables"><span class="header-section-number">8.3</span> Transformation of Multiple Random Variables</a>
   <ul>
-  <li><a href="#transformations-of-two-random-variables" id="toc-transformations-of-two-random-variables" class="nav-link" data-scroll-target="#transformations-of-two-random-variables"><span class="header-section-number">7.3.1</span> Transformations of Two Random Variables</a></li>
-  <li><a href="#the-jacobian-formula-continuous-case" id="toc-the-jacobian-formula-continuous-case" class="nav-link" data-scroll-target="#the-jacobian-formula-continuous-case"><span class="header-section-number">7.3.2</span> The Jacobian Formula (Continuous Case)</a></li>
+  <li><a href="#transformations-of-two-random-variables" id="toc-transformations-of-two-random-variables" class="nav-link" data-scroll-target="#transformations-of-two-random-variables"><span class="header-section-number">8.3.1</span> Transformations of Two Random Variables</a></li>
+  <li><a href="#the-jacobian-formula-continuous-case" id="toc-the-jacobian-formula-continuous-case" class="nav-link" data-scroll-target="#the-jacobian-formula-continuous-case"><span class="header-section-number">8.3.2</span> The Jacobian Formula (Continuous Case)</a></li>
   </ul></li>
-  <li><a href="#linear-transformations-and-the-multivariate-normal" id="toc-linear-transformations-and-the-multivariate-normal" class="nav-link" data-scroll-target="#linear-transformations-and-the-multivariate-normal"><span class="header-section-number">7.4</span> Linear Transformations and the Multivariate Normal</a>
+  <li><a href="#linear-transformations-and-the-multivariate-normal" id="toc-linear-transformations-and-the-multivariate-normal" class="nav-link" data-scroll-target="#linear-transformations-and-the-multivariate-normal"><span class="header-section-number">8.4</span> Linear Transformations and the Multivariate Normal</a>
   <ul>
-  <li><a href="#linear-transformations-of-random-vectors" id="toc-linear-transformations-of-random-vectors" class="nav-link" data-scroll-target="#linear-transformations-of-random-vectors"><span class="header-section-number">7.4.1</span> Linear Transformations of Random Vectors</a></li>
-  <li><a href="#the-multivariate-normal-distribution" id="toc-the-multivariate-normal-distribution" class="nav-link" data-scroll-target="#the-multivariate-normal-distribution"><span class="header-section-number">7.4.2</span> The Multivariate Normal Distribution</a></li>
-  <li><a href="#constructing-a-multivariate-normal-via-cholesky" id="toc-constructing-a-multivariate-normal-via-cholesky" class="nav-link" data-scroll-target="#constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">7.4.3</span> Constructing a Multivariate Normal via Cholesky</a></li>
+  <li><a href="#linear-transformations-of-random-vectors" id="toc-linear-transformations-of-random-vectors" class="nav-link" data-scroll-target="#linear-transformations-of-random-vectors"><span class="header-section-number">8.4.1</span> Linear Transformations of Random Vectors</a></li>
+  <li><a href="#the-multivariate-normal-distribution" id="toc-the-multivariate-normal-distribution" class="nav-link" data-scroll-target="#the-multivariate-normal-distribution"><span class="header-section-number">8.4.2</span> The Multivariate Normal Distribution</a></li>
+  <li><a href="#constructing-a-multivariate-normal-via-cholesky" id="toc-constructing-a-multivariate-normal-via-cholesky" class="nav-link" data-scroll-target="#constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">8.4.3</span> Constructing a Multivariate Normal via Cholesky</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -299,9 +311,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_3_transformation_rvs.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></h1>
 </div>
 
 
@@ -320,8 +332,8 @@ window.Quarto = {
 
 <p>Up to this point, we have focused on how random variables behave together—their joint distributions, dependence structures, and how correlation shapes the geometry of the bivariate normal. In the final example, we saw that we can <em>construct</em> correlated normals by applying a <strong>linear transformation</strong> to independent ones. This idea is much more general than it first appears.</p>
 <p>In this section, we shift our attention to <strong>how random variables change when we transform them</strong>. Whether we apply a simple function to a single variable or a linear transformation to a vector of variables, the distribution changes in systematic, mathematically predictable ways. Understanding these transformation rules is essential for simulation, modelling, and deriving new distributions from known ones.</p>
-<section id="transformation-of-a-single-random-variable" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="transformation-of-a-single-random-variable"><span class="header-section-number">7.1</span> Transformation of a Single Random Variable</h2>
+<section id="transformation-of-a-single-random-variable" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="transformation-of-a-single-random-variable"><span class="header-section-number">8.1</span> Transformation of a Single Random Variable</h2>
 <p>When we apply a function to a random variable, the result is itself a new random variable. If <span class="math inline">\(X\)</span> has a known distribution and we define<br>
 <span class="math display">\[
 Y = g(X),
@@ -331,8 +343,8 @@ Y = g(X),
 <p>What is the distribution of <span class="math inline">\(Y\)</span>?</p>
 </blockquote>
 <p>This section develops the tools needed to answer that question for both discrete and continuous cases.</p>
-<section id="discrete-case" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">7.1.1</span> Discrete Case</h3>
+<section id="discrete-case" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">8.1.1</span> Discrete Case</h3>
 <div class="note">
 <p>If <span class="math inline">\(X\)</span> is discrete with PMF <span class="math inline">\(p_X(x)\)</span>, and <span class="math inline">\(Y = g(X)\)</span>, then the PMF of <span class="math inline">\(Y\)</span> is obtained by collecting all values of <span class="math inline">\(X\)</span> that map to the same value of <span class="math inline">\(Y\)</span>:</p>
 <p><span class="math display">\[
@@ -394,8 +406,8 @@ P(Y=0)=0.4,\qquad P(Y=1)=0.6.
 </div>
 <p>The heights close to the theoretical values of 0.4 and 0.6.</p>
 </section>
-<section id="continuous-case" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">7.1.2</span> Continuous Case</h3>
+<section id="continuous-case" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">8.1.2</span> Continuous Case</h3>
 <p>The method used for transforming discrete random variables cannot be applied directly to the continuous case because probabilities at individual points no longer make sense: for a continuous random variable, <span class="math inline">\(P(X=x)=0\)</span> for all <span class="math inline">\(x\)</span>. As a result, we cannot “collect probabilities” like the previous section; instead, we must work with how <strong>probability density</strong> is redistributed under a transformation.</p>
 <p>For continuous random variables, there are in principle two approaches: a <strong>CDF‑based method</strong>, which derives the distribution of <span class="math inline">\(Y\)</span> by working with cumulative probabilities, and a <strong>PDF‑based method</strong>, which determines how density changes under the transformation. In this subsection, we focus on the PDF‑based method, as it provides a unified and transparent way to handle both monotone and non‑monotone transformations.</p>
 <p>When the transformation is <strong>monotone</strong>, each value of <span class="math inline">\(Y\)</span> corresponds to exactly one value of <span class="math inline">\(X\)</span>, so the density of <span class="math inline">\(Y\)</span> is obtained from a single contribution. In contrast, for <strong>non‑monotone</strong> transformations, multiple values of <span class="math inline">\(X\)</span> may map to the same value of <span class="math inline">\(Y\)</span>, and the density of <span class="math inline">\(Y\)</span> must account for all such contributions. This perspective emphasises conservation of probability and naturally extends to more complex transformations, including multivariate cases.</p>
@@ -443,8 +455,8 @@ P(Y=0)=0.4,\qquad P(Y=1)=0.6.
 </div>
 </div>
 </div>
-<section id="monotone-transformations" class="level4" data-number="7.1.2.1">
-<h4 data-number="7.1.2.1" class="anchored" data-anchor-id="monotone-transformations"><span class="header-section-number">7.1.2.1</span> Monotone Transformations</h4>
+<section id="monotone-transformations" class="level4" data-number="8.1.2.1">
+<h4 data-number="8.1.2.1" class="anchored" data-anchor-id="monotone-transformations"><span class="header-section-number">8.1.2.1</span> Monotone Transformations</h4>
 <div class="note">
 <p>If <span class="math inline">\(X\)</span> is continuous with PDF <span class="math inline">\(f_X(x)\)</span> and <span class="math inline">\(Y = g(X)\)</span> where <span class="math inline">\(g\)</span> is <strong>strictly increasing or decreasing</strong>, then the PDF of <span class="math inline">\(Y\)</span> is given by the change‑of‑variables formula:</p>
 <p><span class="math display">\[
@@ -498,8 +510,8 @@ f_Y(y) = f_X(g^{-1}(y)) \left| \frac{d}{dy} g^{-1}(y) \right|.
 </div>
 <p>The simulated density (red) matches the theoretical <span class="math inline">\(\mathcal{N}(2,9)\)</span> curve (blue).</p>
 </section>
-<section id="nonmonotone-transformations" class="level4" data-number="7.1.2.2">
-<h4 data-number="7.1.2.2" class="anchored" data-anchor-id="nonmonotone-transformations"><span class="header-section-number">7.1.2.2</span> Non‑Monotone Transformations</h4>
+<section id="nonmonotone-transformations" class="level4" data-number="8.1.2.2">
+<h4 data-number="8.1.2.2" class="anchored" data-anchor-id="nonmonotone-transformations"><span class="header-section-number">8.1.2.2</span> Non‑Monotone Transformations</h4>
 <div class="note">
 <p>If <span class="math inline">\(g\)</span> is not one‑to‑one (e.g., <span class="math inline">\(Y = X^2\)</span>), then multiple <span class="math inline">\(X\)</span>-values may map to the same <span class="math inline">\(Y\)</span>. In that case:</p>
 <p><span class="math display">\[
@@ -556,13 +568,13 @@ f_X(x)\left|\frac{dx}{dy}\right|.
 </section>
 </section>
 </section>
-<section id="inverse-transform-sampling" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="inverse-transform-sampling"><span class="header-section-number">7.2</span> Inverse Transform Sampling</h2>
+<section id="inverse-transform-sampling" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="inverse-transform-sampling"><span class="header-section-number">8.2</span> Inverse Transform Sampling</h2>
 <p>In the previous section, we studied how the distribution of a random variable changes when we apply a transformation, focusing on how probability density is redistributed under monotone and non‑monotone mappings. In simulation, however, we often face the <strong>inverse problem</strong>: rather than starting with a random variable and determining the distribution of its transformation, we want to <em>construct</em> a random variable with a specified distribution in the first place. <strong>Inverse transform sampling</strong> provides a direct solution to this problem by reversing the logic of transformation.</p>
 <p>Starting from a Uniform(0,1) random variable—the fundamental output of most random number generators—we apply an appropriate inverse transformation to obtain samples from a desired distribution. This method makes explicit the connection between transformation theory and simulation practice, and it highlights why understanding how probability behaves under transformations is essential for building simulation algorithms.</p>
 <p>We have already seen examples of this idea in practice, such as generating Bernoulli and Exponential random variables from Uniform(0,1) values; inverse transform sampling now formalises this approach and explains why it works in general.</p>
-<section id="probability-integral-transform" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="probability-integral-transform"><span class="header-section-number">7.2.1</span> Probability Integral Transform</h3>
+<section id="probability-integral-transform" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="probability-integral-transform"><span class="header-section-number">8.2.1</span> Probability Integral Transform</h3>
 <p>A key theoretical result underlying inverse transform sampling is the <strong>Probability Integral Transform</strong>. The probability integral transform explains why uniform random variables play a fundamental role in simulation and provides the theoretical justification for constructing new random variables by transforming Uniform(0,1) draws.</p>
 <p>For inverse transform sampling, we work directly with the <strong>cumulative distribution function</strong>. If <span class="math inline">\(X\)</span> is a continuous random variable with cumulative distribution function <span class="math inline">\(F_X\)</span>, then the transformed variable: <span class="math display">\[
 U = F_X(X) \sim \text{Uniform}(0,1).
@@ -571,8 +583,8 @@ U = F_X(X) \sim \text{Uniform}(0,1).
 <p><span class="math display">\[X = F_X^{-1}(U), \qquad U \sim \text{Uniform}(0,1).\]</span></p>
 <p>This result allows us to turn the theoretical relationship between a random variable and its CDF into a practical simulation algorithm.</p>
 </section>
-<section id="inverse-transform-sampling-algorithm" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="inverse-transform-sampling-algorithm"><span class="header-section-number">7.2.2</span> Inverse Transform Sampling Algorithm</h3>
+<section id="inverse-transform-sampling-algorithm" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="inverse-transform-sampling-algorithm"><span class="header-section-number">8.2.2</span> Inverse Transform Sampling Algorithm</h3>
 <p>The probability integral transform provides the theoretical justification for inverse transform sampling. We now turn this result into a <strong>practical simulation algorithm</strong>. The goal is to generate random variables with a specified distribution using only Uniform(0,1) random numbers.</p>
 <p>Suppose we want to simulate a continuous random variable with cumulative distribution function <span class="math inline">\(F_X\)</span>, and assume that the inverse CDF <span class="math inline">\(F_X^{-1}\)</span> is available in closed form. The inverse transform sampling algorithm proceeds as follows:</p>
 <ol type="1">
@@ -588,8 +600,8 @@ X = F_X^{-1}(U).
 <p>Inverse transform sampling is conceptually simple and widely used in simulation, particularly when the inverse CDF has a closed‑form expression. However, not all distributions admit an explicit inverse CDF, which motivates alternative simulation methods introduced later in the course.</p>
 <p>We now illustrate this algorithm with a simple example where the inverse CDF can be derived explicitly.</p>
 </section>
-<section id="examples-and-limitations" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="examples-and-limitations"><span class="header-section-number">7.2.3</span> Examples and Limitations</h3>
+<section id="examples-and-limitations" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="examples-and-limitations"><span class="header-section-number">8.2.3</span> Examples and Limitations</h3>
 <p><strong>Example (Exponential distribution).</strong></p>
 <p><em>We briefly previewed this idea earlier; here we are using it as a worked example of the general inverse transform algorithm.</em></p>
 <p>Inverse transform sampling is easiest to see when the inverse CDF has a simple closed form. For the Exponential distribution with rate <span class="math inline">\(\lambda\)</span>, the CDF is</p>
@@ -638,12 +650,12 @@ When <span class="math inline">\(F^{-1}\)</span> is unavailable or inefficient, 
 </ol>
 </section>
 </section>
-<section id="transformation-of-multiple-random-variables" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="transformation-of-multiple-random-variables"><span class="header-section-number">7.3</span> Transformation of Multiple Random Variables</h2>
+<section id="transformation-of-multiple-random-variables" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="transformation-of-multiple-random-variables"><span class="header-section-number">8.3</span> Transformation of Multiple Random Variables</h2>
 <p>In many applications, we work not with a single random variable but with a <em>pair</em> (or vector) of variables whose joint distribution is known. When we apply a transformation to such a pair, the result is a new pair of random variables whose joint distribution we often need to determine. This section develops the tools for understanding how probability densities change under transformations of two (or more) variables.</p>
 <p>Transformations of multiple random variables arise naturally in statistics, simulation, and modelling. Examples include converting Cartesian coordinates to polar coordinates, forming sums and differences of random variables, and applying linear transformations to generate correlated normals. The key idea is that probability must be preserved under the transformation, and the mathematical tool that ensures this is the <strong>Jacobian</strong>.</p>
-<section id="transformations-of-two-random-variables" class="level3" data-number="7.3.1">
-<h3 data-number="7.3.1" class="anchored" data-anchor-id="transformations-of-two-random-variables"><span class="header-section-number">7.3.1</span> Transformations of Two Random Variables</h3>
+<section id="transformations-of-two-random-variables" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="transformations-of-two-random-variables"><span class="header-section-number">8.3.1</span> Transformations of Two Random Variables</h3>
 <p><strong>Why This Matters</strong></p>
 <p>Transformations of multiple random variables allow us to:</p>
 <ul>
@@ -669,8 +681,8 @@ x = h_1(u,v), \qquad y = h_2(u,v),
 \]</span></p>
 <p>and use the <strong>Jacobian determinant</strong> to adjust for how the transformation stretches or compresses area.</p>
 </section>
-<section id="the-jacobian-formula-continuous-case" class="level3" data-number="7.3.2">
-<h3 data-number="7.3.2" class="anchored" data-anchor-id="the-jacobian-formula-continuous-case"><span class="header-section-number">7.3.2</span> The Jacobian Formula (Continuous Case)</h3>
+<section id="the-jacobian-formula-continuous-case" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="the-jacobian-formula-continuous-case"><span class="header-section-number">8.3.2</span> The Jacobian Formula (Continuous Case)</h3>
 <p>If the transformation is smooth and invertible, then</p>
 <p><span class="math display">\[
 f_{U,V}(u,v)
@@ -932,8 +944,8 @@ f_{U,V}(u,v)
 </ul>
 </section>
 </section>
-<section id="linear-transformations-and-the-multivariate-normal" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="linear-transformations-and-the-multivariate-normal"><span class="header-section-number">7.4</span> Linear Transformations and the Multivariate Normal</h2>
+<section id="linear-transformations-and-the-multivariate-normal" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="linear-transformations-and-the-multivariate-normal"><span class="header-section-number">8.4</span> Linear Transformations and the Multivariate Normal</h2>
 <p>Linear transformations play a central role in probability and statistics, especially when working with <strong>multivariate normal distributions</strong>. In earlier sections, we saw how a linear transformation of two independent standard normals can create correlation. Here, we generalise that idea and show how <em>any</em> multivariate normal distribution can be constructed from a standard one using a matrix transformation.</p>
 <p><strong>Why This Matters</strong></p>
 <p>Linear transformations of multivariate normals underpin:</p>
@@ -949,8 +961,8 @@ f_{U,V}(u,v)
 <li>and nearly all multivariate statistical methods.</li>
 </ul>
 <p>This section forms the conceptual bridge between probability theory and practical statistical modelling.</p>
-<section id="linear-transformations-of-random-vectors" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="linear-transformations-of-random-vectors"><span class="header-section-number">7.4.1</span> Linear Transformations of Random Vectors</h3>
+<section id="linear-transformations-of-random-vectors" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="linear-transformations-of-random-vectors"><span class="header-section-number">8.4.1</span> Linear Transformations of Random Vectors</h3>
 <p>Let<br>
 <span class="math display">\[
 \mathbf{X} = (X_1, X_2, \dots, X_k)^\top
@@ -967,8 +979,8 @@ f_{U,V}(u,v)
 <li>and reshapes the covariance structure through the matrix <span class="math inline">\(A\)</span>.</li>
 </ul>
 </section>
-<section id="the-multivariate-normal-distribution" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="the-multivariate-normal-distribution"><span class="header-section-number">7.4.2</span> The Multivariate Normal Distribution</h3>
+<section id="the-multivariate-normal-distribution" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="the-multivariate-normal-distribution"><span class="header-section-number">8.4.2</span> The Multivariate Normal Distribution</h3>
 <p>A random vector <span class="math inline">\(\mathbf{X}\)</span> is <strong>multivariate normal</strong> if every linear combination of its components is normally distributed.</p>
 <p>If<br>
 <span class="math display">\[
@@ -1059,8 +1071,8 @@ b = (0, 1)^{\top}
 <li>The transformed cloud is rotated and stretched exactly as predicted by <span class="math inline">\(A\Sigma A^{\top }\)</span>.</li>
 </ul>
 </section>
-<section id="constructing-a-multivariate-normal-via-cholesky" class="level3" data-number="7.4.3">
-<h3 data-number="7.4.3" class="anchored" data-anchor-id="constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">7.4.3</span> Constructing a Multivariate Normal via Cholesky</h3>
+<section id="constructing-a-multivariate-normal-via-cholesky" class="level3" data-number="8.4.3">
+<h3 data-number="8.4.3" class="anchored" data-anchor-id="constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">8.4.3</span> Constructing a Multivariate Normal via Cholesky</h3>
 <p>If <span class="math inline">\(\Sigma\)</span> is a covariance matrix, we can write:</p>
 <p><span class="math display">\[
 \Sigma = LL^\top,
@@ -1611,12 +1623,12 @@ Y = \rho Z_1 + \sqrt{1-\rho^2}\, Z_2,
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02_2_joint_dependence.html" class="pagination-link" aria-label="Joint Distributions and Dependence">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./02_4_workshop.html" class="pagination-link" aria-label="Workshop Activities">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

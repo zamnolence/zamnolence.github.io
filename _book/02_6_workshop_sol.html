@@ -1,0 +1,1558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>11&nbsp; Python Workshop Solutions – R and Python for Computer Simulation (v1.0.3)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_5_workshop_sol.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5c151f11a0e44064f75a5cfd43434b0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_6_workshop_sol.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistical Distributions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#key-scipy.stats-functions-for-univariate-distributions" id="toc-key-scipy.stats-functions-for-univariate-distributions" class="nav-link active" data-scroll-target="#key-scipy.stats-functions-for-univariate-distributions"><strong>Key <code>scipy.stats</code> Functions for Univariate Distributions</strong></a></li>
+  <li><a href="#part-1-univariate-distributions-in-simulation" id="toc-part-1-univariate-distributions-in-simulation" class="nav-link" data-scroll-target="#part-1-univariate-distributions-in-simulation"><strong>Part 1: Univariate distributions in simulation</strong></a>
+  <ul>
+  <li><a href="#exercise-1-geometric-distribution" id="toc-exercise-1-geometric-distribution" class="nav-link" data-scroll-target="#exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</a></li>
+  <li><a href="#exercise-2-gamma-distribution" id="toc-exercise-2-gamma-distribution" class="nav-link" data-scroll-target="#exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</a></li>
+  <li><a href="#exercise-3-beta-distribution" id="toc-exercise-3-beta-distribution" class="nav-link" data-scroll-target="#exercise-3-beta-distribution">Exercise 3: Beta Distribution</a></li>
+  <li><a href="#exercise-4-multinomial-distribution" id="toc-exercise-4-multinomial-distribution" class="nav-link" data-scroll-target="#exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_6_workshop_sol.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This workshop consists of three parts:</p>
+<ul>
+<li><strong>Part 1:</strong> Univariate distributions in simulation</li>
+<li><strong>Part 2:</strong> Joint distributions and dependence</li>
+<li><strong>Part 3:</strong> Transformation of a single random variable</li>
+</ul>
+<section id="key-scipy.stats-functions-for-univariate-distributions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-scipy.stats-functions-for-univariate-distributions"><strong>Key <code>scipy.stats</code> Functions for Univariate Distributions</strong></h2>
+<p>In Python, a package <strong><code>scipy.stats</code> provides the probability‑distribution machinery, and <code>matplotlib</code> provides the plotting layer</strong>, so together they let you both <em>generate</em> random variables from any univariate distribution and <em>visualise</em> their empirical behaviour against theoretical curves.</p>
+<p>With <code>scipy.stats</code>, each distribution comes with methods for simulation (<code>.rvs()</code>), probability mass/density evaluation (<code>.pmf()</code>, <code>.pdf()</code>), and cumulative or survival functions (<code>.cdf()</code>, <code>.sf()</code>), which makes it easy to reproduce the same workflows you would do in R.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>PMF/PDF Function</th>
+<th>CDF Function</th>
+<th>Random Generation (<code>rvs</code>)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Bernoulli</strong></td>
+<td><code>bernoulli.pmf(x, p)</code></td>
+<td><code>bernoulli.cdf(x, p)</code></td>
+<td><code>bernoulli.rvs(p, size=n)</code></td>
+<td>Support {0,1}</td>
+</tr>
+<tr class="even">
+<td><strong>Binomial</strong></td>
+<td><code>binom.pmf(x, n, p)</code></td>
+<td><code>binom.cdf(x, n, p)</code></td>
+<td><code>binom.rvs(n, p, size=n)</code></td>
+<td>Number of successes in <em>n</em> trials</td>
+</tr>
+<tr class="odd">
+<td><strong>Geometric</strong></td>
+<td><code>geom.pmf(x, p)</code></td>
+<td><code>geom.cdf(x, p)</code></td>
+<td><code>geom.rvs(p, size=n)</code></td>
+<td>SciPy uses support {1,2,…}; subtract 1 for “failures before success”</td>
+</tr>
+<tr class="even">
+<td><strong>Negative Binomial</strong></td>
+<td><code>nbinom.pmf(x, r, p)</code></td>
+<td><code>nbinom.cdf(x, r, p)</code></td>
+<td><code>nbinom.rvs(r, p, size=n)</code></td>
+<td>Counts failures before <em>r</em> successes</td>
+</tr>
+<tr class="odd">
+<td><strong>Poisson</strong></td>
+<td><code>poisson.pmf(x, λ)</code></td>
+<td><code>poisson.cdf(x, λ)</code></td>
+<td><code>poisson.rvs(λ, size=n)</code></td>
+<td>Mean = variance = λ</td>
+</tr>
+<tr class="even">
+<td><strong>Multinomial</strong></td>
+<td><code>multinomial.pmf(x, n, p)</code></td>
+<td><em>No closed-form CDF</em></td>
+<td><code>multinomial.rvs(n, p, size=k)</code></td>
+<td>Vector-valued counts</td>
+</tr>
+<tr class="odd">
+<td><strong>Uniform</strong></td>
+<td><code>uniform.pdf(x, loc, scale)</code></td>
+<td><code>uniform.cdf(x, loc, scale)</code></td>
+<td><code>uniform.rvs(loc, scale, size=n)</code></td>
+<td>On interval ([loc, loc+scale])</td>
+</tr>
+<tr class="even">
+<td><strong>Exponential</strong></td>
+<td><code>expon.pdf(x, scale=1/λ)</code></td>
+<td><code>expon.cdf(x, scale=1/λ)</code></td>
+<td><code>expon.rvs(scale=1/λ, size=n)</code></td>
+<td>Memoryless continuous distribution</td>
+</tr>
+<tr class="odd">
+<td><strong>Gamma</strong></td>
+<td><code>gamma.pdf(x, a, scale)</code></td>
+<td><code>gamma.cdf(x, a, scale)</code></td>
+<td><code>gamma.rvs(a, scale, size=n)</code></td>
+<td>Shape <code>a</code>, scale <code>θ</code></td>
+</tr>
+<tr class="even">
+<td><strong>Normal</strong></td>
+<td><code>norm.pdf(x, μ, σ)</code></td>
+<td><code>norm.cdf(x, μ, σ)</code></td>
+<td><code>norm.rvs(μ, σ, size=n)</code></td>
+<td>Gaussian distribution</td>
+</tr>
+<tr class="odd">
+<td><strong>Log-normal</strong></td>
+<td><code>lognorm.pdf(x, s, scale)</code></td>
+<td><code>lognorm.cdf(x, s, scale)</code></td>
+<td><code>lognorm.rvs(s, scale, size=n)</code></td>
+<td><code>s</code> = σ of underlying normal</td>
+</tr>
+<tr class="even">
+<td><strong>Beta</strong></td>
+<td><code>beta.pdf(x, a, b)</code></td>
+<td><code>beta.cdf(x, a, b)</code></td>
+<td><code>beta.rvs(a, b, size=n)</code></td>
+<td>Support on (0,1)</td>
+</tr>
+</tbody>
+</table>
+<p>Once you generate samples, <code>matplotlib</code> handles the visualisation: bar plots for discrete PMFs, histograms for continuous densities, and line plots for overlaying theoretical curves. This combination mirrors the R workflow closely—<code>scipy.stats</code> plays the role of <code>rgeom</code>, <code>dgeom</code>, etc., while <code>matplotlib</code> plays the role of <code>barplot</code>, <code>plot</code>, and <code>hist</code>—and gives you a consistent, reproducible way to teach simulation, empirical vs theoretical comparison, and distributional intuition across all univariate distributions.</p>
+</section>
+<section id="part-1-univariate-distributions-in-simulation" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-1-univariate-distributions-in-simulation"><strong>Part 1: Univariate distributions in simulation</strong></h2>
+<section id="exercise-1-geometric-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Geometric}(p),\]</span> where <span class="math inline">\(p = 0.3\)</span>.</p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot the empirical PMF (barplot of relative frequencies).</li>
+<li>Overlay the theoretical PMF.</li>
+<li>Compute:
+<ul>
+<li>empirical mean and variance</li>
+<li>theoretical mean and variance</li>
+</ul></li>
+<li>Explain:
+<ul>
+<li>Why is the geometric distribution memoryless? Verify: <span class="math inline">\(P(X&gt;s+t | X&gt;s)=P(X&gt;t)\)</span></li>
+<li>How does changing <span class="math inline">\(p\)</span> affect skewness?</li>
+</ul></li>
+<li>Estimate <span class="math inline">\(P(X &gt; 5)\)</span> analytically and via simulation. Compare results.</li>
+</ol>
+<section id="solution" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div id="526c4f0a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> geom</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="fl">0.3</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># scipy.stats.geom uses support {1,2,3,...} for "trial of first success"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># So subtract 1 to match R's convention (number of failures).</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> geom.rvs(p, size<span class="op">=</span>n) <span class="op">-</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot the empirical PMF (barplot of relative frequencies).</li>
+<li>Overlay the theoretical PMF.</li>
+</ol>
+<div id="bb0fa8a8" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># empirical PMF</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>vals, counts <span class="op">=</span> np.unique(x, return_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>emp_pmf <span class="op">=</span> counts <span class="op">/</span> n</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical PMF for same x-range</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>theo_pmf <span class="op">=</span> geom.pmf(vals <span class="op">+</span> <span class="dv">1</span>, p)  <span class="co"># +1 because scipy's geom starts at 1</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>plt.bar(vals, emp_pmf, color<span class="op">=</span><span class="st">"skyblue"</span>, label<span class="op">=</span><span class="st">"Empirical PMF"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plt.plot(vals, theo_pmf, <span class="st">"ro-"</span>, label<span class="op">=</span><span class="st">"Theoretical PMF"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x (failures before first success)"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Probability"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Geometric(p=0.3): Empirical vs Theoretical PMF"</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-3-output-1.png" width="672" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Empirical PMF closely matches theoretical PMF.</p>
+<ol start="4" type="1">
+<li>Compute:
+<ul>
+<li>empirical mean and variance</li>
+<li>theoretical mean and variance</li>
+</ul></li>
+</ol>
+<div id="87d1a4f1" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># empirical</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="op">=</span> np.mean(x)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="op">=</span> np.var(x, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical (R-style parameterization)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> p</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> p) <span class="op">/</span> (p<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical mean:"</span>, emp_mean)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical variance:"</span>, emp_var)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical mean:"</span>, theo_mean)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical variance:"</span>, theo_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empirical mean: 2.2958
+Empirical variance: 7.378440204020402
+Theoretical mean: 2.3333333333333335
+Theoretical variance: 7.777777777777778</code></pre>
+</div>
+</div>
+<ul>
+<li>The reason empirical mean (and variance) are close to the theoretical values is due to the <strong>Law of Large Numbers (LLN)</strong>.</li>
+<li>Variance closeness is also due to consistency (LLN applied to functions of X).</li>
+</ul>
+<ol start="5" type="1">
+<li>Explain:
+<ul>
+<li>Why is the geometric distribution memoryless? Verify: <span class="math inline">\(P(X&gt;s+t | X&gt;s)=P(X&gt;t)\)</span></li>
+<li>How does changing <span class="math inline">\(p\)</span> affect skewness?</li>
+</ul></li>
+</ol>
+<p>Using conditional probability:</p>
+<p><span class="math display">\[
+P(X&gt;s+t \mid X&gt;s) = \frac{P(X&gt;s+t)}{P(X&gt;s)},
+\]</span></p>
+<p>and <code>mean(x &gt;= k)</code> to estimate <code>P(X&gt;k)</code></p>
+<div id="c0620424" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>lhs <span class="op">=</span> np.mean(x <span class="op">&gt;=</span> (s <span class="op">+</span> t)) <span class="op">/</span> np.mean(x <span class="op">&gt;=</span> s)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>rhs <span class="op">=</span> np.mean(x <span class="op">&gt;=</span> t)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"LHS (simulated):"</span>, lhs)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"RHS (simulated):"</span>, rhs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>LHS (simulated): 0.23436586791350086
+RHS (simulated): 0.234</code></pre>
+</div>
+</div>
+<p>Mathematically, for a geometric distribution:</p>
+<p><span class="math display">\[
+P(X&gt;k) = (1-p)^{k+1},
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
+\frac{P(X&gt;s+t)}{P(X&gt;s)} = \frac{(1-p)^{s+t+1}}{(1-p)^{s+1}} = (1-p)^t = P(X&gt;t)
+\]</span></p>
+<p>The cancellation is why memorylessness holds.</p>
+<div id="931beab5" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect of changing p</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ps <span class="op">=</span> [<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>, <span class="st">"green"</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, p_i <span class="kw">in</span> <span class="bu">enumerate</span>(ps):</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    x_i <span class="op">=</span> geom.rvs(p_i, size<span class="op">=</span>n) <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    vals_i, counts_i <span class="op">=</span> np.unique(x_i, return_counts<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    pmf_i <span class="op">=</span> counts_i <span class="op">/</span> n</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> i <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        plt.plot(vals_i, pmf_i, <span class="st">"o-"</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span><span class="ss">f"p=</span><span class="sc">{</span>p_i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        plt.plot(vals_i, pmf_i, <span class="st">"o-"</span>, color<span class="op">=</span>colors[i], label<span class="op">=</span><span class="ss">f"p=</span><span class="sc">{</span>p_i<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Relative frequency"</span>)</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Effect of p on Geometric Distribution Shape"</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-6-output-1.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Increasing <span class="math inline">\(p\)</span> makes the curve shift left and decay faster, concentrating more probability at small values (especially at 0).</p>
+<ol start="6" type="1">
+<li>Estimate <span class="math inline">\(P(X &gt; 5)\)</span> analytically and via simulation. Compare results.</li>
+</ol>
+<div id="5770edb3" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>analytic_prob <span class="op">=</span> (<span class="dv">1</span> <span class="op">-</span> p)<span class="op">**</span>(k <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sim_prob <span class="op">=</span> np.mean(x <span class="op">&gt;</span> k)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Analytic P(X&gt;5):"</span>, analytic_prob)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Simulated P(X&gt;5):"</span>, sim_prob)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analytic P(X&gt;5): 0.11764899999999996
+Simulated P(X&gt;5): 0.1115</code></pre>
+</div>
+</div>
+<p>We are verifying that the simulated tail probability matches the theoretical geometric survival probability <span class="math inline">\(P(X&gt;5) = (1-p)^{5+1} = 0.117649\)</span>.</p>
+<hr>
+</section>
+</section>
+<section id="exercise-2-gamma-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Gamma}(\alpha = 3, \beta = 2)\]</span> (Use shape–rate parameterisation.)</p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot histogram with theoretical density overlay.</li>
+<li>Compute empirical vs theoretical mean and variance.</li>
+<li>Investigate how changing <span class="math inline">\(\alpha\)</span> affects:
+<ul>
+<li>skewness</li>
+<li>tail behaviour</li>
+</ul></li>
+</ol>
+<section id="solution-1" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-1">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div id="5ba6d613" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> gamma</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span>   <span class="co"># rate</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> beta   <span class="co"># SciPy uses scale = 1/rate</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> gamma.rvs(a<span class="op">=</span>alpha, scale<span class="op">=</span>scale, size<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot histogram with theoretical density overlay.</li>
+</ol>
+<div id="569bc737" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram as density</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical density on same range</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, x.<span class="bu">max</span>(), <span class="dv">500</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>pdf_vals <span class="op">=</span> gamma.pdf(xs, a<span class="op">=</span>alpha, scale<span class="op">=</span>scale)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, pdf_vals, <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Theoretical PDF'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Gamma(α=3, β=2): Empirical Histogram + Theoretical PDF"</span>)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-9-output-1.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Compute empirical vs theoretical mean and variance.</li>
+</ol>
+<div id="fce4dfe0" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="op">=</span> np.mean(x)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="op">=</span> np.var(x, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="op">=</span> alpha <span class="op">/</span> beta</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="op">=</span> alpha <span class="op">/</span> (beta<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical mean:"</span>, emp_mean)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical mean:"</span>, theo_mean)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical variance:"</span>, emp_var)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical variance:"</span>, theo_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empirical mean: 1.5100165009253022
+Theoretical mean: 1.5
+Empirical variance: 0.7485340154615578
+Theoretical variance: 0.75</code></pre>
+</div>
+</div>
+<p>With large <span class="math inline">\(n\)</span>, the empirical values should be very close.</p>
+<ol start="4" type="1">
+<li>Investigate how changing <span class="math inline">\(\alpha\)</span> affects:
+<ul>
+<li>skewness</li>
+<li>tail behaviour</li>
+</ul></li>
+</ol>
+<div id="598f45ee" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>alphas <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>beta <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>scale <span class="op">=</span> <span class="dv">1</span> <span class="op">/</span> beta</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate samples for each alpha</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> [gamma.rvs(a<span class="op">=</span>a, scale<span class="op">=</span>scale, size<span class="op">=</span>n) <span class="cf">for</span> a <span class="kw">in</span> alphas]</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co"># common x-grid for plotting</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>xmax <span class="op">=</span> <span class="bu">max</span>(s.<span class="bu">max</span>() <span class="cf">for</span> s <span class="kw">in</span> samples)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, xmax, <span class="dv">1000</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, a <span class="kw">in</span> <span class="bu">enumerate</span>(alphas):</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    pdf_vals <span class="op">=</span> gamma.pdf(xs, a<span class="op">=</span>a, scale<span class="op">=</span>scale)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, pdf_vals, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="ss">f"alpha = </span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Gamma PDFs for Different α (β fixed at 2)"</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-11-output-1.png" width="672" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With <span class="math inline">\(\beta\)</span> fixed, increasing <span class="math inline">\(\alpha\)</span> has the following effects:</p>
+<ul>
+<li>Skewness decreases (more “bell-shaped”).</li>
+<li>Tail becomes less extreme relative to the center.</li>
+<li>The distribution concentrates more around its mean (and looks more normal-like), so very large values become less common relative to the bulk.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exercise-3-beta-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-3-beta-distribution">Exercise 3: Beta Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Beta}(2,5).\]</span></p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot histogram and density.</li>
+<li>Compute mean and variance.</li>
+<li>Repeat for:
+<ul>
+<li>Beta(0.5, 0.5)</li>
+<li>Beta(5, 5)</li>
+</ul></li>
+<li>How do the shape parameters affect:
+<ul>
+<li>symmetry?</li>
+<li>concentration?</li>
+<li>boundary behaviour?</li>
+</ul></li>
+</ol>
+<section id="solution-2" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-2">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div id="57773e45" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> <span class="dv">2</span>, <span class="dv">5</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> beta.rvs(a, b, size<span class="op">=</span>n)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot histogram and density.</li>
+</ol>
+<div id="bee57b31" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram as density</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">30</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical density</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>pdf_vals <span class="op">=</span> beta.pdf(xs, a, b)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, pdf_vals, <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Theoretical density'</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># empirical density estimate</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> gaussian_kde</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>kde <span class="op">=</span> gaussian_kde(x)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>plt.plot(xs, kde(xs), <span class="st">'b--'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Empirical density'</span>)</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Beta(2,5): Histogram + Density"</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-13-output-1.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Compute mean and variance.</li>
+</ol>
+<div id="f8fdeeda" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="op">=</span> np.mean(x)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="op">=</span> np.var(x, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="op">=</span> a <span class="op">/</span> (a <span class="op">+</span> b)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="op">=</span> (a <span class="op">*</span> b) <span class="op">/</span> ((a <span class="op">+</span> b)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> (a <span class="op">+</span> b <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical mean:"</span>, emp_mean)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical mean:"</span>, theo_mean)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical variance:"</span>, emp_var)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical variance:"</span>, theo_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empirical mean: 0.28388702893411
+Theoretical mean: 0.2857142857142857
+Empirical variance: 0.025079505260659093
+Theoretical variance: 0.025510204081632654</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Repeat for:
+<ul>
+<li>Beta(0.5, 0.5)</li>
+<li>Beta(5, 5)</li>
+</ul></li>
+</ol>
+<div id="127dc834" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_beta(a, b, n<span class="op">=</span><span class="dv">10000</span>, seed<span class="op">=</span><span class="dv">123</span>):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    np.random.seed(seed)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> beta.rvs(a, b, size<span class="op">=</span>n)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, edgecolor<span class="op">=</span><span class="st">'black'</span>,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>             <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    xs <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    plt.plot(xs, beta.pdf(xs, a, b), <span class="st">'r-'</span>, lw<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"Beta(</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Density"</span>)</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    emp_mean <span class="op">=</span> np.mean(x)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    emp_var  <span class="op">=</span> np.var(x, ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    theo_mean <span class="op">=</span> a <span class="op">/</span> (a <span class="op">+</span> b)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    theo_var  <span class="op">=</span> (a <span class="op">*</span> b) <span class="op">/</span> ((a <span class="op">+</span> b)<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> (a <span class="op">+</span> b <span class="op">+</span> <span class="dv">1</span>))</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Beta(</span><span class="sc">{</span>a<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>b<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Empirical mean:"</span>, emp_mean, <span class="st">"  Theoretical mean:"</span>, theo_mean)</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Empirical var :"</span>, emp_var,  <span class="st">"  Theoretical var :"</span>, theo_var)</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>run_beta(<span class="dv">2</span>, <span class="dv">5</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>run_beta(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>run_beta(<span class="dv">5</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-15-output-1.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(2, 5)
+Empirical mean: 0.28388702893411   Theoretical mean: 0.2857142857142857
+Empirical var : 0.025079505260659093   Theoretical var : 0.025510204081632654</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-15-output-3.png" width="651" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(0.5, 0.5)
+Empirical mean: 0.5023044733845982   Theoretical mean: 0.5
+Empirical var : 0.1243420507711425   Theoretical var : 0.125</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-15-output-5.png" width="663" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(5, 5)
+Empirical mean: 0.5018933069915179   Theoretical mean: 0.5
+Empirical var : 0.022669247459073824   Theoretical var : 0.022727272727272728</code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>How do the shape parameters affect:
+<ul>
+<li>symmetry?</li>
+<li>concentration?</li>
+<li>boundary behaviour?</li>
+</ul></li>
+</ol>
+<p><strong>Symmetry</strong></p>
+<p>The Beta distribution is symmetric <strong>if and only if</strong> <span class="math inline">\(\alpha = \beta.\)</span></p>
+<ul>
+<li>If <span class="math inline">\(\alpha = \beta\)</span> → symmetric around <span class="math inline">\(0.5\)</span>.</li>
+<li>If <span class="math inline">\(\alpha &lt; \beta\)</span> → distribution is skewed toward 0.</li>
+<li>If <span class="math inline">\(\alpha &gt; \beta\)</span> → distribution is skewed toward 1.</li>
+</ul>
+<p>From 4):</p>
+<ul>
+<li><span class="math inline">\(\text{Beta}(5,5)\)</span> → symmetric and bell-shaped.</li>
+<li><span class="math inline">\(\text{Beta}(2,5)\)</span> → skewed toward 0.</li>
+<li><span class="math inline">\(\text{Beta}(0.5,0.5)\)</span> → symmetric but U-shaped.</li>
+</ul>
+<p><strong>Concentration (Spread Around the Mean)</strong></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) =
+\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}.
+\]</span></p>
+<p>As <span class="math inline">\(\alpha + \beta\)</span> increases:</p>
+<ul>
+<li>The variance decreases.</li>
+<li>The distribution becomes more concentrated around the mean.</li>
+</ul>
+<p>Thus:</p>
+<ul>
+<li>Large <span class="math inline">\(\alpha + \beta\)</span> → tightly concentrated.</li>
+<li>Small <span class="math inline">\(\alpha + \beta\)</span> → more spread out.</li>
+</ul>
+<p><strong>Boundary Behaviour (Near 0 and 1)</strong></p>
+<p>The density near the boundaries depends on whether parameters are less than 1.</p>
+<p>Near 0:</p>
+<ul>
+<li>If <span class="math inline">\(\alpha &lt; 1\)</span> → density <span class="math inline">\(\to \infty\)</span> at 0.</li>
+<li>If <span class="math inline">\(\alpha = 1\)</span> → finite nonzero value at 0.</li>
+<li>If <span class="math inline">\(\alpha &gt; 1\)</span> → density <span class="math inline">\(\to 0\)</span> at 0.</li>
+</ul>
+<p>Near 1:</p>
+<ul>
+<li>If <span class="math inline">\(\beta &lt; 1\)</span> → density <span class="math inline">\(\to \infty\)</span> at 1.</li>
+<li>If <span class="math inline">\(\beta = 1\)</span> → finite nonzero value at 1.</li>
+<li>If <span class="math inline">\(\beta &gt; 1\)</span> → density <span class="math inline">\(\to 0\)</span> at 1.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(\text{Beta}(0.5,0.5)\)</span> → spikes at both 0 and 1 (U-shaped).</li>
+<li><span class="math inline">\(\text{Beta}(5,5)\)</span> → zero at both boundaries, peak at 0.5.</li>
+<li><span class="math inline">\(\text{Beta}(2,5)\)</span> → zero at boundaries, skewed toward 0.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exercise-4-multinomial-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</h4>
+<p>Let</p>
+<p><span class="math display">\[(X_1, X_2, X_3) \sim \text{Multinomial}(n=20, p=(0.2,0.5,0.3))\]</span></p>
+<ol type="1">
+<li>Simulate 5,000 independent multinomial experiments.</li>
+<li>Compute:
+<ul>
+<li>sample means of each component</li>
+<li>covariance matrix</li>
+</ul></li>
+<li>Verify: <span class="math inline">\(E[X_i] = np_i\)</span></li>
+<li>Verify that components are negatively correlated.</li>
+<li>Visualisation
+<ul>
+<li>Scatterplot of <span class="math inline">\(X_1\)</span> vs <span class="math inline">\(X_2\)</span></li>
+<li>Comment on dependence structure.</li>
+</ul></li>
+<li>Conceptual Question: Why must multinomial components be dependent?</li>
+</ol>
+<section id="solution-3" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-3">Solution</h5>
+<ol type="1">
+<li>Simulate 5,000 independent multinomial experiments.</li>
+</ol>
+<div id="52631ded" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> multinomial</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>B <span class="op">=</span> <span class="dv">5000</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">20</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.array([<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>])</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="co"># each row = one experiment, each column = X1, X2, X3</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> multinomial.rvs(n<span class="op">=</span>n, p<span class="op">=</span>p, size<span class="op">=</span>B)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Compute:
+<ul>
+<li>sample means of each component</li>
+<li>covariance matrix</li>
+</ul></li>
+</ol>
+<div id="ccf98399" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sample means of each component</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>sample_means <span class="op">=</span> X.mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sample means:"</span>, sample_means)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sample covariance matrix</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>sample_cov <span class="op">=</span> np.cov(X, rowvar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sample covariance matrix:</span><span class="ch">\n</span><span class="st">"</span>, sample_cov)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sample means: [ 3.9878 10.03    5.9822]
+Sample covariance matrix:
+ [[ 3.1266765  -1.94962392 -1.17705257]
+ [-1.94962392  4.93968794 -2.99006401]
+ [-1.17705257 -2.99006401  4.16711658]]</code></pre>
+</div>
+</div>
+<p>By LLN, sample means (empirical averages) are close to:</p>
+<p><span class="math display">\[
+E[X_i] = np_i
+\]</span></p>
+<ul>
+<li><span class="math inline">\(20 \times 0.2 = 4,\)</span></li>
+<li><span class="math inline">\(20 \times 0.5 = 10,\)</span></li>
+<li><span class="math inline">\(20 \times 0.3 = 6,\)</span></li>
+</ul>
+<p>and the covariance matrix is in the form of:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\mathrm{Var}(X_1) &amp; \mathrm{Cov}(X_1,X_2) &amp; \mathrm{Cov}(X_1,X_3) \\
+\mathrm{Cov}(X_2,X_1) &amp; \mathrm{Var}(X_2) &amp; \mathrm{Cov}(X_2,X_3) \\
+\mathrm{Cov}(X_3,X_1) &amp; \mathrm{Cov}(X_3,X_2) &amp; \mathrm{Var}(X_3)
+\end{pmatrix}
+\]</span></p>
+<ul>
+<li>In theory, <span class="math inline">\(Var(X_i)=np_i(1-p_i) &gt; 0\)</span>.</li>
+<li>For covariance, <span class="math inline">\(Cov(X_i, X_j) = -np_ip_j \quad(i\neq j)\)</span>.</li>
+<li>Covariances are negative because an increase in <span class="math inline">\(X_i\)</span> must result in a decrease in <span class="math inline">\(X_j, (i\neq j)\)</span>.</li>
+<li>Since the variables move in opposite directions, we have negative covariance.</li>
+</ul>
+<ol start="3" type="1">
+<li>Verify: <span class="math inline">\(E[X_i] = np_i\)</span></li>
+</ol>
+<div id="abe9dbed" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>theo_means <span class="op">=</span> n <span class="op">*</span> p</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>np.column_stack((sample_means, theo_means))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="93">
+<pre><code>array([[ 3.9878,  4.    ],
+       [10.03  , 10.    ],
+       [ 5.9822,  6.    ]])</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Verify that components are negatively correlated.</li>
+</ol>
+<div id="2d1e41da" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>sample_cor <span class="op">=</span> np.corrcoef(X, rowvar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sample correlation matrix:</span><span class="ch">\n</span><span class="st">"</span>, sample_cor)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sample correlation matrix:
+ [[ 1.         -0.49608902 -0.32608931]
+ [-0.49608902  1.         -0.65904171]
+ [-0.32608931 -0.65904171  1.        ]]</code></pre>
+</div>
+</div>
+<p>Note that:</p>
+<p><span class="math display">\[
+\mathrm{Corr}(X_i, X_i)=\frac{\mathrm{Cov}(X_i, X_i)}
+{\sqrt{\mathrm{Var}(X_i)\mathrm{Var}(X_i)}}
+\]</span></p>
+<ul>
+<li>The covariance matrix measures joint variability in original units, while the correlation matrix standardises this to measure pure strength of linear dependence on a -1 to 1 scale.</li>
+<li>In a correlation matrix, the diagonal entries are always 1, because a variable is perfectly positively linearly related to itself.</li>
+</ul>
+<ol start="5" type="1">
+<li>Visualisation
+<ul>
+<li>Scatterplot of <span class="math inline">\(X_1\)</span> vs <span class="math inline">\(X_2\)</span></li>
+<li>Comment on dependence structure.</li>
+</ul></li>
+</ol>
+<div id="45c08241" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">5</span>))</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>plt.scatter(X[:,<span class="dv">0</span>], X[:,<span class="dv">1</span>], alpha<span class="op">=</span><span class="fl">0.5</span>, s<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"X1"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"X2"</span>)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Scatterplot of X1 vs X2 (Multinomial, n=20)"</span>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_6_workshop_sol_files/figure-html/cell-20-output-1.png" width="510" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You should see a downward trend. When <span class="math inline">\(X_1\)</span> is large, <span class="math inline">\(X_2\)</span> tends to be smaller (and vice versa).</p>
+<p>Also, the points lie within feasible integer bounds, especially because:</p>
+<p><span class="math display">\[
+X_1+X_2+X_3=20.
+\]</span></p>
+<p>So not every pair <span class="math inline">\((X_1,X_2)\)</span> is possible; they’re constrained by the remaining count for <span class="math inline">\(X_3\)</span>.</p>
+<ol start="6" type="1">
+<li>Conceptual Question: Why must multinomial components be dependent?</li>
+</ol>
+<p>Because the components must sum to a fixed total:</p>
+<p><span class="math display">\[
+X_1+X_2+X_3=n.
+\]</span></p>
+<p>So if one component increases, at least one of the others must decrease to keep the sum equal to <span class="math inline">\(n\)</span>. This fixed-sum constraint forces dependence and typically creates negative correlations between different categories.</p>
+<hr>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_5_workshop_sol.html" class="pagination-link" aria-label="R Workshop Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Computer Simulation in R(v1.0.2) <br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sam Wiwatanapataphee">
-<meta name="dcterms.date" content="2026-02-17">
+<meta name="dcterms.date" content="2026-03-01">
 
-<title>Computer Simulation in R (v1.0.2)</title>
+<title>R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Computer Simulation in R (v1.0.2)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.3)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -145,7 +145,13 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -162,31 +168,37 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Solutions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
   </div>
 </li>
       </ul>
@@ -213,7 +225,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Computer Simulation in R (v1.0.2)</h1>
+<h1 class="title">R and Python for Computer Simulation (v1.0.3)</h1>
 </div>
 
 
@@ -230,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 17, 2026</p>
+      <p class="date">March 1, 2026</p>
     </div>
   </div>
   
@@ -251,11 +263,15 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <section id="updates" class="level2">
 <h2 class="anchored" data-anchor-id="updates">Updates</h2>
-<p>As of <span style="color: crimson;"><strong>27/02/2026</strong></span>, the ebook includes the following content:</p>
+<p><span style="color: crimson;"><strong>01/03/2026</strong></span>: Workshop solutions in <strong>Python</strong> are now live 🎉</p>
+<p><strong>27/02/2026</strong>: Added univariate distribution workshop solutions.</p>
+<p><strong>23/02/2026</strong>: Added <strong>Statistical Distributions</strong> section.</p>
+<p><strong>16/02/2026</strong>: Added <strong>Introduction</strong> section.</p>
+<p>As of <span style="color: crimson;"><strong>01/03/2026</strong></span>, the ebook includes:</p>
 <ul>
-<li><strong>Week 1:</strong> Introduction to Computer Simulation (Lecture and Workshop solutions)</li>
-<li><strong>Week 2:</strong> Statistical Distribution (Lecture and Workshop (Part 1) solutions)</li>
-<li><strong>Week 3:</strong> Joint Distributions and Transformation of Random Variables (Lecture and Workshop Activities)</li>
+<li><strong>Week 1:</strong> Introduction (Lecture + Workshop Solutions)</li>
+<li><strong>Week 2:</strong> Statistical Distribution (Lecture + Workshop Part 1 Solutions)</li>
+<li><strong>Week 3:</strong> Joint Distributions and Transformation of Random Variables (Lecture + Workshop Activities)</li>
 </ul>
 
 
