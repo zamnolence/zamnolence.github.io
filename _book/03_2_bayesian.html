@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>9&nbsp; Workshop Activities – R and Python for Computer Simulation (v1.0.3)</title>
+<title>13&nbsp; Bayesian Inference – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02_5_workshop_sol.html" rel="next">
-<link href="./02_3_transformation_rvs.html" rel="prev">
+<link href="./03_3_workshop.html" rel="next">
+<link href="./03_1_frequentist.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -70,6 +105,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -112,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_4_workshop.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_inference.html"><strong>Statistical Inference</strong></a></li><li class="breadcrumb-item"><a href="./03_2_bayesian.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -213,7 +251,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link active">
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
@@ -248,7 +286,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
   </div>
 </li>
@@ -288,40 +326,23 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#part-1-univariate-distributions-in-simulation" id="toc-part-1-univariate-distributions-in-simulation" class="nav-link active" data-scroll-target="#part-1-univariate-distributions-in-simulation"><span class="header-section-number">9.1</span> <strong>Part 1: Univariate distributions in simulation</strong></a>
+  <li><a href="#bayes-theorem" id="toc-bayes-theorem" class="nav-link active" data-scroll-target="#bayes-theorem"><span class="header-section-number">13.1</span> Bayes’ Theorem</a></li>
+  <li><a href="#bayesian-updating" id="toc-bayesian-updating" class="nav-link" data-scroll-target="#bayesian-updating"><span class="header-section-number">13.2</span> Bayesian Updating</a></li>
+  <li><a href="#conjugate-priors" id="toc-conjugate-priors" class="nav-link" data-scroll-target="#conjugate-priors"><span class="header-section-number">13.3</span> Conjugate Priors</a>
   <ul>
-  <li><a href="#exercise-1-geometric-distribution" id="toc-exercise-1-geometric-distribution" class="nav-link" data-scroll-target="#exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</a></li>
-  <li><a href="#exercise-2-gamma-distribution" id="toc-exercise-2-gamma-distribution" class="nav-link" data-scroll-target="#exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</a></li>
-  <li><a href="#exercise-3-beta-distribution" id="toc-exercise-3-beta-distribution" class="nav-link" data-scroll-target="#exercise-3-beta-distribution">Exercise 3: Beta Distribution</a></li>
-  <li><a href="#exercise-4-multinomial-distribution" id="toc-exercise-4-multinomial-distribution" class="nav-link" data-scroll-target="#exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</a></li>
+  <li><a href="#beta-binomial-conjugate" id="toc-beta-binomial-conjugate" class="nav-link" data-scroll-target="#beta-binomial-conjugate">Beta-Binomial Conjugate</a></li>
   </ul></li>
-  <li><a href="#part-2-joint-distributions-and-dependence" id="toc-part-2-joint-distributions-and-dependence" class="nav-link" data-scroll-target="#part-2-joint-distributions-and-dependence"><span class="header-section-number">9.2</span> <strong>Part 2: Joint distributions and dependence</strong></a>
-  <ul>
-  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
-  <li><a href="#exercise-6-visualising-dependence" id="toc-exercise-6-visualising-dependence" class="nav-link" data-scroll-target="#exercise-6-visualising-dependence">Exercise 6: Visualising Dependence</a></li>
-  <li><a href="#exercise-7-constructing-a-joint-distribution-discrete" id="toc-exercise-7-constructing-a-joint-distribution-discrete" class="nav-link" data-scroll-target="#exercise-7-constructing-a-joint-distribution-discrete">Exercise 7: Constructing a Joint Distribution (Discrete)</a></li>
-  <li><a href="#exercise-8-zero-correlation-independence" id="toc-exercise-8-zero-correlation-independence" class="nav-link" data-scroll-target="#exercise-8-zero-correlation-independence">Exercise 8: Zero Correlation ≠ Independence</a></li>
-  <li><a href="#exercise-10-simulating-bivariate-normal" id="toc-exercise-10-simulating-bivariate-normal" class="nav-link" data-scroll-target="#exercise-10-simulating-bivariate-normal">Exercise 10: Simulating Bivariate Normal</a></li>
-  <li><a href="#exercise-11" id="toc-exercise-11" class="nav-link" data-scroll-target="#exercise-11">Exercise 11</a></li>
-  <li><a href="#exercise-12" id="toc-exercise-12" class="nav-link" data-scroll-target="#exercise-12">Exercise 12</a></li>
-  <li><a href="#exercise-13" id="toc-exercise-13" class="nav-link" data-scroll-target="#exercise-13">Exercise 13</a></li>
-  </ul></li>
-  <li><a href="#extra-exercises" id="toc-extra-exercises" class="nav-link" data-scroll-target="#extra-exercises"><strong>Extra Exercises</strong></a>
-  <ul>
-  <li><a href="#distribution-identification" id="toc-distribution-identification" class="nav-link" data-scroll-target="#distribution-identification">Distribution Identification</a></li>
-  <li><a href="#scenario-analysis" id="toc-scenario-analysis" class="nav-link" data-scroll-target="#scenario-analysis">Scenario Analysis</a></li>
-  <li><a href="#joint-distributions-and-dependence" id="toc-joint-distributions-and-dependence" class="nav-link" data-scroll-target="#joint-distributions-and-dependence">Joint Distributions and Dependence</a></li>
-  </ul></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#posterior-mean-vs-mle" id="toc-posterior-mean-vs-mle" class="nav-link" data-scroll-target="#posterior-mean-vs-mle"><span class="header-section-number">13.4</span> Posterior mean vs MLE</a></li>
+  <li><a href="#credible-intervals" id="toc-credible-intervals" class="nav-link" data-scroll-target="#credible-intervals"><span class="header-section-number">13.5</span> Credible intervals</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_4_workshop.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_inference.html"><strong>Statistical Inference</strong></a></li><li class="breadcrumb-item"><a href="./03_2_bayesian.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Workshop Activities</span></h1>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></h1>
 </div>
 
 
@@ -338,347 +359,345 @@ window.Quarto = {
 </header>
 
 
-<p>This workshop consists of two parts:</p>
+<p><strong>Bayesian inference</strong> is a way of drawing conclusions from data by treating probability as a measure of uncertainty or belief. In this framework, the parameter itself is treated as a random variable. We begin with a prior distribution that represents our initial belief about the parameter. After observing data, we update this belief using Bayes’ theorem to obtain the posterior distribution. The posterior distribution describes what we believe about the parameter after seeing the data, and it allows us to make direct probability statements about the parameter.</p>
+<section id="bayes-theorem" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="bayes-theorem"><span class="header-section-number">13.1</span> Bayes’ Theorem</h2>
+<p>Bayes’ rule is a way to <em>update beliefs</em> when new information arrives, letting you reverse the direction of conditional probabilities so you can reason from effects back to possible causes. It links four quantities: <strong>the prior probability</strong> of a hypothesis, <strong>the likelihood</strong> of observing certain evidence if that hypothesis were true, <strong>the overall probability of the evidence</strong>, and <strong>the updated (posterior) probability</strong> once the evidence is seen.</p>
+<div class="note">
+<p>If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are events and <span class="math inline">\(P(B) \neq 0,\)</span> Bayes’ theorem is stated as:</p>
+<p><span class="math display">\[
+P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)},
+\]</span></p>
+<p>where</p>
 <ul>
-<li><strong>Part 1:</strong> Univariate distributions in simulation</li>
-<li><strong>Part 2:</strong> Joint distributions and dependence</li>
+<li><span class="math inline">\(P(A \mid B)\)</span> is the <strong>posterior</strong> probability of <span class="math inline">\(A\)</span> given <span class="math inline">\(B\)</span>,</li>
+<li><span class="math inline">\(P(B \mid A)\)</span> is the <strong>likelihood</strong> of <span class="math inline">\(A\)</span> given a fixed <span class="math inline">\(B\)</span>,</li>
+<li><span class="math inline">\(P(A)\)</span> is the <strong>prior</strong> probability without any given conditions,</li>
+<li><span class="math inline">\(P(B)\)</span> a normalising constant ensuring probabilities sum to one.</li>
 </ul>
-<p>By the end of this workshop, you should be able to:</p>
-<ol type="1">
-<li>Use built‑in distribution functions in R (e.g., <code>r*</code>, <code>d*</code>, <code>p*</code>, <code>q*</code>) or <code>scipy.stats</code> package for Python to simulate and evaluate common distributions.</li>
-<li>Visualise and interpret univariate and joint distributions, using histograms/density overlays and scatterplots/contours.</li>
-</ol>
-<p>From this workshop onward, no R Notebook or Jupyter Notebook templates will be provided.</p>
-<p>You are expected to practice creating and rendering HTML documents independently, as this is an essential component of all the assessments in this unit.</p>
-<p>If you find that R Notebook or Jupyter Notebook is somewhat limited in producing polished reports, you may consider using <a href="https://quarto.org/">Quarto</a>.</p>
-<p>Quarto is a modern and more powerful publishing system (and successor to R Markdown) that supports dynamic content using R and Python. It can be used to create reproducible, production-quality articles, presentations, dashboards, websites, blogs, and books in formats such as HTML, PDF, MS Word, ePub, and more. For instance, this book and all the lecture slides are developed using Quarto.</p>
-<p>You can install Quarto and use it directly within RStudio or VS Code.</p>
-<section id="part-1-univariate-distributions-in-simulation" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="part-1-univariate-distributions-in-simulation"><span class="header-section-number">9.1</span> <strong>Part 1: Univariate distributions in simulation</strong></h2>
-<section id="exercise-1-geometric-distribution" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</h4>
-<p>Let <span class="math display">\[X \sim \text{Geometric}(p),\]</span> where <span class="math inline">\(p = 0.3\)</span>.</p>
-<ol type="1">
-<li>Simulate 10,000 observations.</li>
-<li>Plot the empirical PMF (barplot of relative frequencies).</li>
-<li>Overlay the theoretical PMF.</li>
-<li>Compute:
-<ul>
-<li>empirical mean and variance</li>
-<li>theoretical mean and variance</li>
-</ul></li>
-<li>Explain:
-<ul>
-<li>Why is the geometric distribution memoryless? Verify: <span class="math inline">\(P(X&gt;s+t | X&gt;s)=P(X&gt;t)\)</span></li>
-<li>How does changing <span class="math inline">\(p\)</span> affect skewness?</li>
-</ul></li>
-<li>Estimate <span class="math inline">\(P(X &gt; 5)\)</span> analytically and via simulation. Compare results.</li>
-</ol>
-</section>
-<section id="exercise-2-gamma-distribution" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</h4>
-<p>Let <span class="math display">\[X \sim \text{Gamma}(\alpha = 3, \beta = 2)\]</span> (Use shape–rate parameterisation.)</p>
-<ol type="1">
-<li>Simulate 10,000 observations.</li>
-<li>Plot histogram with theoretical density overlay.</li>
-<li>Compute empirical vs theoretical mean and variance.</li>
-<li>Investigate how changing <span class="math inline">\(\alpha\)</span> affects:
-<ul>
-<li>skewness</li>
-<li>tail behaviour</li>
-</ul></li>
-</ol>
-</section>
-<section id="exercise-3-beta-distribution" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-3-beta-distribution">Exercise 3: Beta Distribution</h4>
-<p>Let <span class="math display">\[X \sim \text{Beta}(2,5).\]</span></p>
-<ol type="1">
-<li>Simulate 10,000 observations.</li>
-<li>Plot histogram and density.</li>
-<li>Compute mean and variance.</li>
-<li>Repeat for:
-<ul>
-<li>Beta(0.5, 0.5)</li>
-<li>Beta(5, 5)</li>
-</ul></li>
-<li>How do the shape parameters affect:
-<ul>
-<li>symmetry?</li>
-<li>concentration?</li>
-<li>boundary behaviour?</li>
-</ul></li>
-</ol>
-</section>
-<section id="exercise-4-multinomial-distribution" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</h4>
-<p>Let</p>
-<p><span class="math display">\[(X_1, X_2, X_3) \sim \text{Multinomial}(n=20, p=(0.2,0.5,0.3))\]</span></p>
-<ol type="1">
-<li>Simulate 5,000 independent multinomial experiments.</li>
-<li>Compute:
-<ul>
-<li>sample means of each component</li>
-<li>covariance matrix</li>
-</ul></li>
-<li>Verify: <span class="math inline">\(E[X_i] = np_i\)</span></li>
-<li>Verify that components are negatively correlated.</li>
-<li>Visualisation
-<ul>
-<li>Scatterplot of <span class="math inline">\(X_1\)</span> vs <span class="math inline">\(X_2\)</span></li>
-<li>Comment on dependence structure.</li>
-</ul></li>
-<li>Conceptual Question: Why must multinomial components be dependent?</li>
-</ol>
-</section>
-</section>
-<section id="part-2-joint-distributions-and-dependence" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="part-2-joint-distributions-and-dependence"><span class="header-section-number">9.2</span> <strong>Part 2: Joint distributions and dependence</strong></h2>
-<section id="exercise-5" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-5">Exercise 5</h4>
-<p>Explain why dependence matters in simulation. Give 3 examples.</p>
-</section>
-<section id="exercise-6-visualising-dependence" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-6-visualising-dependence">Exercise 6: Visualising Dependence</h4>
-<p>Simulate two scenarios:</p>
-<p><strong>Case A: Independent variables</strong></p>
-<p>Let: <span class="math display">\[
-X \sim \mathcal{N}(0,1), \quad Y \sim \mathcal{N}(0,1)
-\]</span></p>
-<p>Generate independently.</p>
-<p><strong>Case B: Dependent variables</strong></p>
-<p>Define:</p>
+<p>In Bayesian inference, <span class="math inline">\(P(B)\)</span> is fixed and Bayes’ theorem shows that the posterior probabilities are proportional to the numerator, thus</p>
 <p><span class="math display">\[
-Y = 0.8X + \sqrt{1-0.8^2} Z
+P(A \mid B) \propto P(B \mid A) \cdot P(A).
 \]</span></p>
-<p>where <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span> independent of <span class="math inline">\(X\)</span>.</p>
-<ol type="1">
-<li>Generate 5,000 observations for each case.</li>
-<li>Produce scatterplots.</li>
-<li>Compute correlation.</li>
-<li>Compare visually and numerically.</li>
-</ol>
-</section>
-<section id="exercise-7-constructing-a-joint-distribution-discrete" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-7-constructing-a-joint-distribution-discrete">Exercise 7: Constructing a Joint Distribution (Discrete)</h4>
-<p>Let:</p>
+<p>In words,</p>
 <p><span class="math display">\[
-P(X=0,Y=0)=0.2, \quad
-P(X=0,Y=1)=0.3,
-\]</span> <span class="math display">\[
-P(X=1,Y=0)=0.1, \quad
-P(X=1,Y=1)=0.4
+\text{Posterior} \propto \text{Likelihood} \times \text{Prior}.
 \]</span></p>
-<ol type="1">
-<li>Verify probabilities sum to 1.</li>
-<li>Compute marginal distributions.</li>
-<li>Check if independent.</li>
-<li>Compute covariance manually.</li>
-<li>Simulate 10,000 draws from this joint distribution.</li>
-<li>Compare empirical and theoretical covariance.</li>
-</ol>
-</section>
-<section id="exercise-8-zero-correlation-independence" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-8-zero-correlation-independence">Exercise 8: Zero Correlation ≠ Independence</h4>
-<p>Let:</p>
+<p>If events <span class="math inline">\(A1, A2, \dots,\)</span> are mutually exclusive and exhaustive, i.e., one of them is certain to occur but no two can occur together, then the <strong>Law of Total Probability</strong> states that <span class="math display">\[
+P(B)=\sum_{i=1}^k P(B \mid A_i)\,P(A_i).
+\]</span></p>
+<p>Substituting this expression for <span class="math inline">\(P(B)\)</span> into the denominator of Bayes’ theorem gives:</p>
 <p><span class="math display">\[
-X \sim \mathcal{N}(0,1)
+P(A_i \mid B) = \frac{P(A_i)P(B \mid A_i)}{\sum_j P(A_i)P(B \mid A_i)}.
 \]</span></p>
-<p>Define:</p>
-<p><span class="math display">\[
-Y = X^2
-\]</span></p>
-<ol type="1">
-<li>Simulate 10,000 observations.</li>
-<li>Compute correlation.</li>
-<li>Plot scatterplot.</li>
-<li>Explain why they are dependent despite near-zero correlation.</li>
-</ol>
-<section id="exercise-9-conditional-simulation" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="exercise-9-conditional-simulation">Exercise 9: Conditional Simulation</h5>
-<p>Let:</p>
-<p><span class="math display">\[
-X \sim \text{Gamma}(2,1)
-\]</span></p>
-<p>Given <span class="math inline">\(X=x,\)</span></p>
-<p><span class="math display">\[
-Y|X=x \sim \text{Poisson}(x)
-\]</span></p>
-<ol type="1">
-<li>Simulate 5,000 pairs.</li>
-<li>Plot scatterplot.</li>
-<li>Estimate:
+</div>
+<div class="example">
+<p><strong>Example:</strong> Suppose a mail server knows the following from past data:</p>
 <ul>
-<li>(E[Y])</li>
-<li>Compare with theoretical value using law of total expectation.</li>
-</ul></li>
-</ol>
-<p>Hint:</p>
-<p><span class="math display">\[
-E[Y] = E[E(Y|X)]
-\]</span></p>
-</section>
-</section>
-<section id="exercise-10-simulating-bivariate-normal" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-10-simulating-bivariate-normal">Exercise 10: Simulating Bivariate Normal</h4>
-<p>Construct a portfolio simulation:</p>
-<p>Let:</p>
-<ul>
-<li><span class="math inline">\(X_1, X_2\)</span> be correlated returns (bivariate normal).</li>
-<li>Portfolio return:</li>
+<li>10% of all incoming emails are spam.</li>
+<li>40% of spam emails contain the word “WIN”.</li>
+<li>5% of non‑spam emails also contain the word “WIN”.</li>
 </ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Email] --&gt; B{Spam?}
+    B --&gt;|Yes 10%| C[Spam]
+    B --&gt;|No 90%| D[Not Spam]
+
+    C --&gt;|WIN 40%| E[Spam + WIN]
+    C --&gt;|No WIN 60%| F[Spam + No WIN]
+
+    D --&gt;|WIN 5%| G[Not Spam + WIN]
+    D --&gt;|No WIN 95%| H[Not Spam + No WIN]
+
+    linkStyle default stroke:#000,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Let <span class="math inline">\(W\)</span> be the event that the email contains the word “WIN” and <span class="math inline">\(S\)</span> be the event that the email is spam.</p>
+<p>Suppose that you receive a new email and notice it contains “WIN”. Bayes’ rule lets you compute the probability that it is actually spam:</p>
 <p><span class="math display">\[
-R = 0.6X_1 + 0.4X_2
+P(S \mid W)
+= \frac{P(W \mid S) \, P(S)}
+       {P(W \mid S)P(S) + P(W \mid \neg S)P(\neg S)}.
 \]</span></p>
-<p>Tasks:</p>
-<ol type="1">
-<li>Simulate 10,000 returns.</li>
-<li>Estimate variance.</li>
-<li>Plot scatterplot and explain.</li>
-<li>Explain how ignoring dependence affects risk estimation.</li>
-</ol>
-</section>
-<section id="exercise-11" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-11">Exercise 11</h4>
-<p>(Jones et al., 2014, Chapter 14, Exercise 23, p.&nbsp;282)</p>
-<p>A diagnostic test is used to determine whether or not a person has a certain disease. If the test is positive, then it is assumed the person has the disease; if negative, that they do not have it. However, the test is not 100% accurate.</p>
-<ul>
-<li>If a diseased person is tested, it gives a negative result 5% of the time (a false negative).</li>
-<li>When testing a person free of the disease, it gives a false positive 10% of the time.</li>
-<li>Suppose we choose someone at random from a population in which only 1 person in 50 has the disease.</li>
-</ul>
-<ol type="a">
-<li>Find the probability that their test result is positive.<br>
-</li>
-<li>Find the probability that their test result is misleading.<br>
-</li>
-<li>Find the probability that they actually have the disease if they test positive.</li>
-</ol>
-</section>
-<section id="exercise-12" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-12">Exercise 12</h4>
-<p>(Jones et al., 2014, Chapter 14, Exercise 24, p.&nbsp;282)</p>
-<p>There are two bus lines which travel between towns <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.<br>
-Bus line <span class="math inline">\(A\)</span> runs late 20% of the time, while bus line <span class="math inline">\(B\)</span> runs late 50% of the time. You travel three times as often by line <span class="math inline">\(A\)</span> as you do by line <span class="math inline">\(B\)</span>. On a certain day you arrive late. What is the probability that you used bus line <span class="math inline">\(B\)</span> that day?</p>
-</section>
-<section id="exercise-13" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="exercise-13">Exercise 13</h4>
-<p>(Jones et al., 2014, Chapter 14, Exercise 26, p.&nbsp;283)</p>
-<p>The dice game craps is played as follows. The player throws two dice, and if the sum is seven or eleven, then he wins. If the sum is two, three, or twelve, then he loses. If the sum is anything else, then he continues throwing until he either throws that number again (in which case he wins) or he throws a seven (in which case he loses). Calculate the probability that the player wins.</p>
-</section>
-</section>
-<section id="extra-exercises" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="extra-exercises"><strong>Extra Exercises</strong></h2>
-<section id="distribution-identification" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="distribution-identification">Distribution Identification</h3>
-<p>For each of the functions below check if it is a valid cumulative distribution function (cdf), probability density function (pdf) or a probability mass function (pmf). For valid cdf’s, compute the corresponding pdf or pmf. Also for each valid pdf or pmf compute the corresponding cdf.</p>
-<p><span class="math display">\[
-f_X(x) =
-\begin{cases}
-6x - 6x^2 &amp; 0 \le x \le 1 \\
-0 &amp; \text{Otherwise}
-\end{cases}
+<p>Even though “WIN” appears often in spam, the fact that most emails are not spam pulls the probability down. This illustrates the core idea: Bayes’ rule balances how common a cause is (the prior) with how strongly the evidence points to it (the likelihood), giving an updated probability that reflects both.</p>
+<p><strong>Note:</strong> Logical negation (NOT) symbol is typically written in the form of <span class="math inline">\(\neg\)</span> or <span class="math inline">\(\sim\)</span>.</p>
+<p>First, we identify the probabilities: <span class="math display">\[
+P(S) = 0.10, \qquad P(\neg S) = 0.90
 \]</span></p>
 <p><span class="math display">\[
-F_X(x) =
-\begin{cases}
-0 &amp; x &lt; 0 \\
-0.2 &amp; 0 &lt; x \le 1 \\
-0.3 &amp; 1 &lt; x \le 2 \\
-1 &amp; x &gt; 2
-\end{cases}
+P(W \mid S) = 0.40, \qquad P(W \mid \neg S) = 0.05
 \]</span></p>
+<p>Compute the numerator:</p>
+<p><span class="math display">\[
+P(W \mid S)P(S) = 0.40 \times 0.10 = 0.04
+\]</span></p>
+<p>Compute the denominator:</p>
+<p><span class="math display">\[
+P(W \mid S)P(S) + P(W \mid \neg S)P(\neg S) = 0.40(0.10) + 0.05(0.90) = 0.085
+\]</span></p>
+<p>Compute the posterior probability:</p>
+<p><span class="math display">\[
+P(S \mid W) =
+\frac{0.04}{0.085}
+\approx 0.4706
+\]</span></p>
+<p>Therefore, if an email contains the word <strong>“WIN”</strong>, the probability that it is spam is about <strong>47.1%</strong>.</p>
+</div>
 </section>
-<section id="scenario-analysis" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="scenario-analysis">Scenario Analysis</h3>
-<p>For each of the scenarios below identify</p>
-<ul>
-<li>Random Variable</li>
-<li>Distribution and paramenters</li>
-<li>Probability (mass) density function</li>
-<li>Probability of interest</li>
-</ul>
-<p>You may use direct calculations, use <strong>R</strong> or any other computing system.</p>
-<ol type="a">
-<li><p>A husband has 6 tasks on his to-do list and a wife has 10 tasks on her to-do list. Four tasks are randomly picked up. We are interested in the number of tasks the wife will have to do. What is the probability that wife would have to do all four tasks.</p></li>
-<li><p>A couple likes to play chess together. Male is not good at the game and has only 10% chance of winning. The stubborn couple decides to play until male wins two games. We are interested in number of games couple would have to play. What is the probability that couple would play at least 15 games?</p></li>
-<li><p>A student is taking a true/false test that consists of 10 questions. The student has approximately 80% change of getting any individual question correct. We are interested in the number of questions a student answers correctly. What is the probability that student gets all ten questions right?</p></li>
-<li><p>A police officer has found that approximately 0.1% of the vehicles he pulls over fail the alcohol test. He is interested in the number of vehicles that will fail the alcohol test from next 100 vehicles he pulls over. What this the probability that 5 vehicles will fail the alcohol test from next 100 vehicles he pulls over?</p></li>
-<li><p>At a certain manufacturing company, approximately 2% of the products are defective. We are interested in the number of products that need to be checked before we hit rst defective item. What is the probability that third product checked will be rst defective item?</p></li>
-<li><p>The amount of time one spends in a bank is exponentially distributed with mean 10 minutes. What is the probability that the customer will spend more than 15 minutes in the bank?</p></li>
-<li><p>The smiling times of babies, in seconds, follow a uniform distribution between 0 and 23 seconds, inclusive. What is the probability that a randomly selected eight week old baby smiles between 2 and 18 seconds?</p></li>
-<li><p>A utility industry consultant predicts a cutback in the utility industry by a percentage speci ed by a Beta distribution with parameters <span class="math inline">\(\alpha = 1\)</span> and <span class="math inline">\(\beta = 0.25\)</span>, in ve year period. What is the probability that Department of Hydrology will down size by 10% to 30%?</p></li>
-</ol>
+<section id="bayesian-updating" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="bayesian-updating"><span class="header-section-number">13.2</span> Bayesian Updating</h2>
+<p>Bayesian inference is based on the idea of updating our beliefs about an unknown parameter after observing data. Before collecting data, we describe our uncertainty about the parameter using a prior distribution. After observing the data, we combine the prior information with the likelihood of the data using Bayes’ theorem to obtain the posterior distribution.</p>
+<p>The posterior distribution represents our updated knowledge about the parameter. In general,</p>
+<p><span class="math display">\[
+\text{Posterior} \propto \text{Likelihood} \times \text{Prior}.
+\]</span></p>
+<p>This updating process can be interpreted as a learning process: the prior represents what we believe before seeing the data, while the likelihood reflects the information provided by the observed data. The posterior distribution combines both sources of information.</p>
 </section>
-<section id="joint-distributions-and-dependence" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="joint-distributions-and-dependence">Joint Distributions and Dependence</h3>
-<ol type="a">
-<li>Let <span class="math inline">\((X_1, X_2)\)</span> and <span class="math inline">\((Y_1, Y_2)\)</span> be two discrete random vectors with the following probability functions:</li>
-</ol>
-<p>Joint pmf of <span class="math inline">\((X_1, X_2)\)</span>:</p>
-<table class="table-bordered table-hover caption-top table">
+<section id="conjugate-priors" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="conjugate-priors"><span class="header-section-number">13.3</span> Conjugate Priors</h2>
+<p>Some combinations of prior distributions and likelihood functions lead to particularly convenient forms for the posterior distribution. These are called <strong>conjugate priors</strong>.</p>
+<p>Conjugate priors simplify Bayesian inference because the posterior distribution has a closed-form expression. This means we can compute posterior summaries, such as the mean and credible intervals, without complex numerical methods.</p>
+<p>In more complicated models, conjugacy may not hold, and simulation-based methods such as Markov Chain Monte Carlo (MCMC) are required to approximate the posterior distribution.</p>
+<p>The followings are common conjugate prior pairs:</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;"><span class="math inline">\(x_1 \backslash x_2\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(-1\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(1\)</span></th>
+<th><strong>Likelihood </strong></th>
+<th><strong>Conjugate Prior</strong></th>
+<th><strong>Posterior</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/6\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/6\)</span></td>
+<td>Binomial</td>
+<td>Beta</td>
+<td>Beta</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><span class="math inline">\(1/2\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/3\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/3\)</span></td>
+<td>Poisson</td>
+<td>Gamma</td>
+<td>Gamma</td>
+</tr>
+<tr class="odd">
+<td>Exponential</td>
+<td>Gamma</td>
+<td>Gamma</td>
+</tr>
+<tr class="even">
+<td>Normal</td>
+<td>Normal</td>
+<td>Normal</td>
 </tr>
 </tbody>
 </table>
-<p>Joint pmf of <span class="math inline">\((Y_1, Y_2)\)</span>:</p>
-<table class="table-bordered table-hover caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: right;"><span class="math inline">\(y_1 \backslash y_2\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(-1\)</span></th>
-<th style="text-align: right;"><span class="math inline">\(1\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/3\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><span class="math inline">\(1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/6\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/4\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1/4\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Show that <span class="math inline">\(X_2\)</span> and <span class="math inline">\(Y_2\)</span> are identically distributed.</p>
-<ol start="2" type="a">
-<li>Let <span class="math inline">\(X \sim N(7, 3^2)\)</span>, <span class="math inline">\(Y \sim N(5, 2^2)\)</span> and <span class="math inline">\(\mathrm{Cor}(X,Y) = -0.2\)</span>.</li>
-</ol>
+<section id="beta-binomial-conjugate" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="beta-binomial-conjugate">Beta-Binomial Conjugate</h3>
+<p>A common example arises when modelling binary outcomes such as coin flips. Suppose</p>
+<p><span class="math display">\[
+X_i \sim \text{Bernoulli}(p),
+\]</span></p>
+<p>where <span class="math inline">\(p\)</span> is the probability of success.</p>
+<p>If we observe <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> trials, the likelihood follows a <strong>Binomial distribution</strong>.</p>
+<p>In Bayesian inference, a convenient prior for <span class="math inline">\(p\)</span> is the <strong>Beta distribution</strong>: <span class="math display">\[
+p \sim \text{Beta}(\alpha, \beta).
+\]</span></p>
+<p>The Beta distribution is defined on the interval <span class="math inline">\([0,1]\)</span>, making it suitable for modelling probabilities.</p>
+<p>When a Beta prior is combined with a Binomial likelihood, the posterior distribution is also a Beta distribution:</p>
+<p><span class="math display">\[
+p \mid \text{data} \sim \text{Beta}(\alpha + k, \beta + n - k).
+\]</span></p>
+<p>This result is known as the <strong>Beta–Binomial conjugate model</strong>.</p>
+<p>The parameters of the posterior distribution can be interpreted intuitively:</p>
 <ul>
-<li>Specify the joint probability density function for <span class="math inline">\((X,Y)\)</span>.</li>
-<li>Find the distribution for <span class="math inline">\(Z = 3X + 4Y\)</span>, hence find <span class="math inline">\(P[Z &gt; 50]\)</span>.</li>
-<li>Find the distribution for <span class="math inline">\(Z = X - Y\)</span>, hence find <span class="math inline">\(P[Z &lt; 0]\)</span>.</li>
-<li>Specify the distribution of <span class="math inline">\(Z = 3 + 4X + 2Y\)</span>.</li>
-<li>Specify <span class="math inline">\(E(X \mid Y)\)</span>.</li>
+<li><span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> represent prior information,</li>
+<li><span class="math inline">\(k\)</span> and <span class="math inline">\(n-k\)</span> represent the observed data.</li>
 </ul>
+<p>Thus, the posterior parameters combine prior knowledge with information from the data.</p>
+<div class="example">
+<p><strong>Conjugate example (Beta–Binomial):</strong> Suppose that during the morning rush, a barista records 20 customers. Among these, 9 customers chose oat milk and the rest chose dairy. Let <span class="math inline">\(X\)</span> be the number of oat-milk orders out of 20 and <span class="math inline">\(p\)</span> be the true (but unknown) probability a customer chooses oat milk. This can be modelled as: <span class="math display">\[
+X \,|\, p \sim \text{Binomial}(n=20, p),
+\]</span></p>
+<p>which is considered as the <strong>likelihood</strong>.</p>
+<p>First, we give <span class="math inline">\(p\)</span> a <strong>prior distribution (prior belief)</strong>. We now have</p>
+<p><span class="math display">\[
+p \sim \text{Beta}(\alpha=3, \beta=7)
+\]</span></p>
+<p>The parameters can be interpreted as:</p>
+<ul>
+<li>the barista expect ~30% of customers to choose oat milk (prior mean = 0.3)</li>
+<li>but not very certain (small <span class="math inline">\(\alpha + \beta = 10\)</span>)</li>
+</ul>
+<p>With the data, we can update <em>your belief</em>.</p>
+<ul>
+<li><strong>Likelihood</strong> from Binomial: <span class="math inline">\(\displaystyle f(X|p)= {20 \choose X} p^X(1-p)^{20-X}.\)</span></li>
+<li><strong>Prior</strong> from Beta: <span class="math inline">\(f(p) \propto p^{\alpha-1}(1-p)^{\beta-1}.\)</span></li>
+</ul>
+<p><span class="math display">\[
+\text{Likelihood}\times\text{Prior} \propto p^{X+\alpha-1}(1-p)^{(20-X)+\beta-1}
+\]</span></p>
+<p>This expression is exactly the <em>kernel</em> of a Beta distribution. So the posterior must be</p>
+<p><span class="math display">\[
+p \,|\, X \sim \text{Beta}(\alpha+X, \beta+(20-X))
+\]</span></p>
+<p>We observe <span class="math inline">\(x=9\)</span>. Then,</p>
+<p><span class="math display">\[
+p \,|\, X \sim \text{Beta}(12, 18).
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13</span>); b <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(<span class="dv">2000</span>, <span class="at">shape1 =</span> <span class="dv">12</span>, <span class="at">shape2 =</span> <span class="dv">18</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(b)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3982516</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>)); <span class="fu">hist</span>(b, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">"p"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_2_bayesian_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The posterior mean is 0.4, so our belief shifts from 30% to 40%.</p>
+</div>
 </section>
 </section>
-<section id="references" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
-<p>Jones, O., Maillardet, R., &amp; Robinson, A. (2014). Introduction to scientific programming and simulation using R (2nd ed.). Chapman &amp; Hall/CRC. https://doi.org/10.1201/b17079</p>
+<section id="posterior-mean-vs-mle" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="posterior-mean-vs-mle"><span class="header-section-number">13.4</span> Posterior mean vs MLE</h2>
+<p>In frequentist inference, the parameter <span class="math inline">\(p\)</span> is often estimated using the <strong>maximum likelihood estimator (MLE)</strong>. For the Binomial model, the MLE is</p>
+<p><span class="math display">\[
+\hat{p}_{\text{MLE}} = \frac{k}{n},
+\]</span></p>
+<p>which is simply the sample proportion.</p>
+<p>In the Bayesian framework, the estimate of <span class="math inline">\(p\)</span> is often taken as the <strong>posterior mean</strong>. For the Beta–Binomial model, the posterior mean is</p>
+<p><span class="math display">\[
+E[p \mid \text{data}] =
+\frac{\alpha + k}{\alpha + \beta + n}.
+\]</span></p>
+<p>The difference between the two estimators highlights the role of the prior distribution.</p>
+<ul>
+<li>The <strong>MLE</strong> depends only on the observed data.</li>
+<li>The <strong>posterior mean</strong> incorporates both prior information and the data.</li>
+</ul>
+<p>When the sample size <span class="math inline">\(n\)</span> is large, the influence of the prior becomes small and the posterior mean becomes close to the MLE. When the sample size is small, the prior can have a stronger influence on the estimate.</p>
+<div class="example">
+<p><strong>Example:</strong> Beta–Binomial Posterior Mean</p>
+<p>Recall the model:</p>
+<p><span class="math display">\[
+X \mid p \sim \text{Binomial}(n=20, p), \qquad p \sim \text{Beta}(\alpha=3,\beta=7),
+\]</span></p>
+<p>and we observed <span class="math inline">\(x=9\)</span> oat-milk orders out of <span class="math inline">\(n=20\)</span>.</p>
+<p>By Beta–Binomial conjugacy,</p>
+<p><span class="math display">\[
+p \mid X=x \sim \text{Beta}(\alpha + x,\; \beta + n - x).
+\]</span></p>
+<p>Substituting <span class="math inline">\(\alpha=3, \beta=7, n=20, x=9\)</span> gives</p>
+<p><span class="math display">\[
+p \mid X=9 \sim \text{Beta}(12,18).
+\]</span></p>
+<p>If <span class="math inline">\(p \sim \text{Beta}(a,b)\)</span>, then</p>
+<p><span class="math display">\[
+\mathbb{E}[p] = \frac{a}{a+b}.
+\]</span></p>
+<p>Therefore, for the posterior <span class="math inline">\(\text{Beta}(12,18)\)</span>,</p>
+<p><span class="math display">\[
+\mathbb{E}[p \mid X=9] = \frac{12}{12+18} = \frac{12}{30} = 0.4.
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior parameters</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">18</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior mean (exact)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>post_mean <span class="ot">&lt;-</span> a <span class="sc">/</span> (a <span class="sc">+</span> b)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>post_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4</code></pre>
+</div>
+</div>
+</section>
+<section id="credible-intervals" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="credible-intervals"><span class="header-section-number">13.5</span> Credible intervals</h2>
+<p>In Bayesian inference, uncertainty about a parameter is summarised using the posterior distribution. From this distribution, we can construct <strong>credible intervals</strong>.</p>
+<p>A credible interval is an interval that contains a specified proportion of the posterior probability.</p>
+<p>For example, a 95% credible interval for parameter <span class="math inline">\(\theta\)</span> satisfies</p>
+<p><span class="math display">\[
+P(a \leq \theta \leq b \mid y) = 0.95
+\]</span></p>
+<p>Unlike frequentist confidence intervals, credible intervals have a direct probabilistic interpretation: given the observed data and the prior distribution, there is a 95% probability that the parameter lies within the interval.</p>
+<div class="example">
+<p><strong>Example:</strong> Beta–Binomial Credible Interval</p>
+<p>A central 95% Bayesian credible interval is typically defined using posterior quantiles:</p>
+<p><span class="math display">\[
+\left[q_{0.025},\; q_{0.975}\right],
+\]</span></p>
+<p>where <span class="math inline">\(q_\gamma\)</span> is the <span class="math inline">\(\gamma\)</span>-quantile of the posterior distribution. That is,</p>
+<p><span class="math display">\[
+P(p \le q_\gamma \mid X=9) = \gamma.
+\]</span></p>
+<p>So the 95% credible interval is</p>
+<p><span class="math display">\[
+\left[
+F^{-1}(0.025;\, a=12,b=18),\;
+F^{-1}(0.975;\, a=12,b=18)
+\right],
+\]</span></p>
+<p>where <span class="math inline">\(F^{-1}(\cdot; a,b)\)</span> is the inverse CDF (quantile function) of a Beta(a,b) distribution.</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% central credible interval (exact, via Beta quantiles)</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">qbeta</span>(<span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="at">shape1 =</span> a, <span class="at">shape2 =</span> b)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>ci</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2352402 0.5773954</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Monte Carlo check (simulation)</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">13</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">20000</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>p_draw <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(B, <span class="at">shape1 =</span> a, <span class="at">shape2 =</span> b)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_draw)                    <span class="co"># should be close to post_mean</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4002564</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(p_draw, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="co"># should be close to ci</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     2.5%     97.5% 
+0.2352525 0.5797690 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot posterior with credible interval markers</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(p_draw, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">main =</span> <span class="st">""</span>, <span class="at">xlab =</span> <span class="st">"p"</span>, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> ci, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v =</span> post_mean, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_2_bayesian_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The posterior mean 0.4 is our updated estimate of the oat-milk probability after observing 9 out of 20 orders. The 95% credible interval gives a range <span class="math inline">\([L,U]\)</span> such that</p>
+<p><span class="math display">\[
+P(L \leq p \leq U \mid X= 9) = 0.95
+\]</span></p>
+<p>Unlike a confidence interval, this statement is a direct probability statement about the parameter <span class="math inline">\(p\)</span> (given the prior and the observed data).</p>
 
 
 </section>
@@ -1086,13 +1105,13 @@ F_X(x) =
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02_3_transformation_rvs.html" class="pagination-link" aria-label="Transformation of Random Variables">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span>
+      <a href="./03_1_frequentist.html" class="pagination-link" aria-label="Frequentist Inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02_5_workshop_sol.html" class="pagination-link" aria-label="R Workshop Solutions">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03_3_workshop.html" class="pagination-link" aria-label="Workshop Activities">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

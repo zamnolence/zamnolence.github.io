@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sam Wiwatanapataphee">
-<meta name="dcterms.date" content="2026-03-01">
 
-<title>R and Python for Computer Simulation (v1.0.3)</title>
+<title>Statistical Inference – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_introduction.html" rel="next">
+<link href="./03_1_frequentist.html" rel="next">
+<link href="./02_6_workshop_sol.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -72,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -84,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><strong>Preface</strong></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_inference.html"><strong>Statistical Inference</strong></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -111,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Preface</strong></span></a>
   </div>
 </li>
@@ -205,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
+            <a href="./03_inference.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><strong>Statistical Inference</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -260,10 +288,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface"><strong>Preface</strong></a>
-  <ul>
-  <li><a href="#updates" id="toc-updates" class="nav-link" data-scroll-target="#updates">Updates</a></li>
-  </ul></li>
+  <li><a href="#two-frameworks-for-inference" id="toc-two-frameworks-for-inference" class="nav-link active" data-scroll-target="#two-frameworks-for-inference">Two Frameworks for Inference</a></li>
   </ul>
 </nav>
     </div>
@@ -272,26 +297,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">R and Python for Computer Simulation (v1.0.3)</h1>
+<h1 class="title"><strong>Statistical Inference</strong></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sam Wiwatanapataphee </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2026</p>
-    </div>
-  </div>
   
     
   </div>
@@ -301,66 +314,132 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered"><strong>Preface</strong></h1><p><img src="cover.png" title="R and Python for Computer Simulation (v1.0.3)" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>This book introduces computer simulation as a core methodological tool in modern statistics for analysing complex systems and modelling uncertainty when analytical solutions are unavailable or impractical. Students will develop an understanding of the capabilities and limitations of simulation, and how simulation complements theoretical and data-driven statistical approaches.</p>
-<p>The book adopts a computational and algorithmic approach to simulation. Students will learn to design, implement, and verify simulation procedures in an appropriate computing environment, with emphasis on <strong>Monte Carlo methods, simulation of univariate and multivariate random variables, dependence structures, and simulation-based statistical inference.</strong> Simulation is treated as a structured experimental process, from problem formulation and model design to implementation and evaluation.</p>
-<p>Students will develop skills in the <strong>analysis, visualisation, and interpretation of simulation output</strong>, including assessing variability, uncertainty, and convergence.</p>
-<p>The book is <strong>hands-on</strong>, with computational activities using <strong>R and/or Python</strong>. Students will complete a substantial project in which they apply simulation techniques to a <strong>discipline-specific problem</strong>, demonstrating the ability to develop, analyse, and report a simulation study in a clear, rigorous, and professional manner.</p>
-<hr>
-<section id="updates" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="updates">Updates</h2>
-<p><span style="color: crimson;"><strong>01/03/2026</strong></span>: Workshop solutions in <strong>Python</strong> are now live 🎉</p>
-<p><strong>27/02/2026</strong>: Added univariate distribution workshop solutions.</p>
-<p><strong>23/02/2026</strong>: Added <strong>Statistical Distributions</strong> section.</p>
-<p><strong>16/02/2026</strong>: Added <strong>Introduction</strong> section.</p>
-<p>As of <span style="color: crimson;"><strong>01/03/2026</strong></span>, the ebook includes:</p>
+<p>Up to this point, we have studied probability distributions and how to simulate random variables from them. We have generated data from known models and explored their behaviour through repeated sampling.</p>
+<p>Statistical inference reverses this perspective.</p>
+<p>Instead of starting with a known distribution and generating data, we now <strong>start with observed data and attempt to learn about the unknown mechanism that produced it</strong>.</p>
+<p>In other words:</p>
 <ul>
-<li><strong>Week 1: Introduction to Computer Simulation</strong>
-<ul>
-<li>✅ Course Notes</li>
-<li>✅ Workshop Activities</li>
-<li>✅ Workshop Solutions</li>
-</ul></li>
-<li><strong>Week 2: Statistical Distribution</strong>
-<ul>
-<li>✅ Course Notes</li>
-<li>✅ Workshop Activities (Part 1)</li>
-<li>✅ Workshop Solutions (Part 1)</li>
-</ul></li>
-<li><strong>Week 3: Joint Distributions and Transformation of Random Variables</strong>
-<ul>
-<li>✅ Course Notes</li>
-</ul></li>
+<li><strong>Probability</strong> asks: If the model is known, what kind of data will we see?</li>
+<li><strong>Inference</strong> asks: Given the data we observed, what can we say about the unknown model?</li>
 </ul>
+<div class="example">
+<p><strong>Example:</strong> Suppose we flip a coin 100 times and observe 63 heads.</p>
+<p>Questions immediately arise:</p>
+<ul>
+<li>Is the coin fair?</li>
+<li>What is the probability of heads?</li>
+<li>How certain are we about our estimate?</li>
+<li>Would we obtain a similar result if we repeated the experiment?</li>
+</ul>
+<p>These questions cannot be answered by a single probability calculation. They require reasoning about uncertainty, because:</p>
+<ul>
+<li>The data are random.</li>
+<li>The parameter (e.g., the probability of heads) is unknown.</li>
+<li>Different samples would produce different results.</li>
+</ul>
+<p><strong>This variability is the heart of inference.</strong></p>
+<p>Simulation plays a crucial role here. It allows us to:</p>
+<ul>
+<li>Approximate <strong>sampling distributions</strong>,</li>
+<li>Evaluate <strong>estimator</strong> performance,</li>
+<li>Construct <strong>confidence intervals</strong>,</li>
+<li>Explore how uncertainty behaves as sample size increases,</li>
+<li>Compare different inferential approaches.</li>
+</ul>
+<p>Inference and simulation are therefore deeply connected.</p>
+</div>
+<p>To formalise inference, we distinguish between:</p>
+<div class="columns">
+<div class="column center">
+<p><span style="color:blue;"><strong>Parameter</strong></span></p>
+<p>A fixed but unknown quantity describing the population, e.g., the true probability of heads, <span class="math inline">\(p\)</span>.</p>
+</div><div class="column center">
+<p><span style="color:darkgreen;"><strong>Statistic</strong></span></p>
+<p>A quantity computed from data, e.g., the sample proportion, <span class="math inline">\(\hat{p}\)</span>.</p>
+</div>
+</div>
+<p>The statistic is random because it depends on random data. The parameter is unknown but fixed (under the frequentist view).</p>
+<p>Because statistics vary from sample to sample, we must understand their sampling distribution — the distribution of the estimator across repeated samples.</p>
+<p>This is where simulation becomes powerful. Instead of deriving complicated formulas, we can simulate many repeated datasets and observe how the estimator behaves.</p>
+<section id="two-frameworks-for-inference" class="level2">
+<h2 class="anchored" data-anchor-id="two-frameworks-for-inference">Two Frameworks for Inference</h2>
+<p>There are two major approaches to statistical inference, frequentist inference and bayesian inference.</p>
+<div class="table-responsive">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span style="color: blue;"><strong>Frequentist Inference</strong></span></th>
+<th><span style="color: blue;"><strong>Bayesian Inference</strong></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Treats probability as long-run frequency</td>
+<td>Treats probability as a measure of uncertainty or belief</td>
+</tr>
+<tr class="even">
+<td>• Parameters are fixed but unknown.<br>• Data are random.<br>• Uncertainty is described using sampling distributions.<br>• Inference is based on long-run repeated sampling behaviour.</td>
+<td>• Parameters are treated as random variables.<br>• Prior beliefs are updated using observed data.<br>• Uncertainty is described using the posterior distribution.</td>
+</tr>
+<tr class="odd">
+<td><strong>Example:</strong> <br>• p-value<br>• Maximum Likelihood Estimation (MLE)<br>• Confidence Intervals<br>• Hypothesis testing</td>
+<td><strong>Example:</strong> <br> • Bayes’ theorem provides the updating mechanism: <span class="math inline">\(\text{Posterior} \propto \text{Likelihood} \times \text{Prior}\)</span><br>• Credible interval for interval estimation</td>
+</tr>
+<tr class="even">
+<td><strong>Interpretation:</strong> <br>A 95% <strong>confidence interval</strong> means that, over many repeated samples, 95% of such intervals would contain the true parameter.</td>
+<td><strong>Interpretation:</strong> <br>A 95% <strong>credible interval</strong> means that, given the data and prior, there is a 95% probability that the parameter lies within the interval.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="example">
+<p><strong>Example:</strong> Suppose we flip a coin 20 times and observe 14 heads. We want to estimate the true probability of heads, <span class="math inline">\(p\)</span>.</p>
+<p>In the <span style="color: blue;"><strong>frequentist framework:</strong></span></p>
+<ul>
+<li>The true probability <span class="math inline">\(p\)</span> is fixed but unknown.</li>
+<li>The data (14 heads out of 20) are random.</li>
+</ul>
+<p>The natural estimator is the sample proportion:</p>
+<p><span class="math display">\[
+\hat{p} = \frac{14}{20} = 0.7.
+\]</span></p>
+<p>We compute a 95% confidence interval:</p>
+<p><span class="math display">\[
+\hat{p} \pm 1.96 \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \approx (0.5, 0.9)
+\]</span></p>
+<p>A <strong>95% confidence interval</strong> means:</p>
+<blockquote class="blockquote">
+<p>If we repeated this experiment many times and constructed intervals in the same way, about 95% of those intervals would contain the true value of p.</p>
+</blockquote>
+<p>In the <span style="color: blue;"><strong>Bayesian framework:</strong></span></p>
+<ul>
+<li>The parameter <span class="math inline">\(p\)</span> is treated as a random variable.</li>
+<li>We start with a simple <em>prior belief</em> about <span class="math inline">\(p\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+p \sim \text{Beta}(1,1),
+\]</span></p>
+<p>which represents no strong prior preference (mean = 0.5).</p>
+<p>After observing 14 heads and 6 tails, the posterior becomes:</p>
+<p><span class="math display">\[
+p \mid \text{data} \sim \text{Beta}(15,7).
+\]</span></p>
+<p>Then, we can compute <strong>posterior mean</strong> and <strong>95% credible interval</strong>.</p>
+<p>Suppose the 95% credible interval is approximately <span class="math inline">\((0.48, 0.88)\)</span>.</p>
+<p>A <strong>95% credible interval</strong> means:</p>
+<blockquote class="blockquote">
+<p>Given the data and prior, there is a 95% probability that <span class="math inline">\(p\)</span> lies in this interval.</p>
+</blockquote>
+<p>Here, <span class="math inline">\(p\)</span> is treated as random.</p>
+</div>
 <hr>
-<!-- ## Program Calendar {.unnumbered}
-
-| Week | Lecture Content | Workshop |
-|--|-----------------|----------|
-| 1 | **Introduction to Simulation**<br>• Monte Carlo history & motivation<br>• Simulation workflow<br>• Simulation vs analytical solutions<br>• PRNGs (LCG, Mersenne Twister)<br>• Probability revision & LLN intuition | Implement LCG; compare with built-in RNG; empirical LLN |
-| 2 | **Statistical Distributions (Univariate & Joint)**<br>• Univariate distributions<br>• Conditional probabilities<br>• Bayesian inference (Intro) | Univariate distributions simulation and visualisations |
-| 3 | **Statistical Inference (Frequentist & Bayesian)**<br>• Joint distributions & dependence<br>• Transformation of random variables<br>• Bayesian inference<br>• Frequentist interpretations | Joint distributions simulation |
-| 4 | **Simulation of Discrete RVs**<br>• Discrete inverse CDF method<br>• Multinomial simulation<br>• Alias method (conceptual)<br>• Rare-event simulation issues<br>• Monte Carlo standard error (MCSE) | Simulate Poisson process; multinomial sampling; rare-event estimation; compute MCSE & CI |
-| 5 | **Test 1** |
-| 6 | **Simulation of Continuous RVs**<br>• Acceptance–rejection (efficiency analysis)<br>• Box–Muller & Polar methods<br>• Numerical stability<br>• Bias–variance tradeoff in MC<br>• Diagnostics for continuous simulation | Implement A–R; compare Normal generators; tail estimation; runtime benchmarking |
-| 7 | **Multivariate Simulation (Part 1)**<br>• Multivariate Normal simulation<br>• Cholesky decomposition<br>• Numerical conditioning issues | Simulate correlated normals; verify covariance empirically; portfolio risk simulation |
-| 8 | Tuition Free Week |
-| 9 | Tuition Free Week |
-| 10 | **Multivariate Simulation (Part 2)**<br>• Conditional distributions<br>• Gaussian copula (intro)<br>• Finite-state Markov chains<br>• Transition matrices<br>• Stationary distribution & convergence | Simulate Markov chain; empirical stationary distribution; trace plots & diagnostics |
-| 11 | **Data Visualisation**<br>• Visualising stochastic processes<br>• Visualising uncertainty (bands, ribbons)<br>• Monte Carlo error bars<br>• Autocorrelation plots<br>• Reproducible simulation reporting | Visualise trace plots & ACF; density overlays; reproducible simulation report |
-| 12 | **Test 2** |
-| 13 | **Monte Carlo Integration & Gibbs Sampling**<br>• Monte Carlo integration (theory)<br>• CLT for Monte Carlo<br>• Variance reduction: antithetic & control variates<br>• Importance sampling (intro)<br>• Gibbs sampling derivation<br>• Effective sample size | Estimate integrals via MC; implement control variates; Gibbs sampler; compute ESS |
-| 14 | **Simulation in Practice**<br>• Importance sampling (deep dive)<br>• Rare-event simulation<br>• Stratified sampling<br>• Latin Hypercube Sampling<br>• Variance comparison of methods<br>• Metropolis–Hastings algorithm<br>• Discrete-event simulation (event scheduling, queues) | Compare crude MC vs importance sampling; tail probability estimation; stratified sampling |
-| 14 | **Revision & Project Consultations**<br>• Designing a simulation study<br>• Replication vs run length<br>• Sensitivity analysis<br>• Validation & verification<br>• Common simulation pitfalls | Peer review projects; diagnose flawed designs; MC error analysis |
-| 15 | Study Week |
-| 16–17 | Centrally Scheduled Examination |
-
-: {.striped .hover} -->
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -766,10 +845,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./02_6_workshop_sol.html" class="pagination-link" aria-label="Python Workshop Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_introduction.html" class="pagination-link" aria-label="<strong>Introduction</strong>">
-        <span class="nav-page-text"><strong>Introduction</strong></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./03_1_frequentist.html" class="pagination-link" aria-label="Frequentist Inference">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
