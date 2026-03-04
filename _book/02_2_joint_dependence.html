@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -175,13 +175,13 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
+ <span class="menu-text"><strong>Preface</strong></span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction</span></a>
+ <span class="menu-text"><strong>Introduction</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -222,7 +222,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Statistical Distributions</span></a>
+ <span class="menu-text"><strong>Statistical Distributions</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -266,6 +266,53 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Inference</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_1_frequentist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -286,16 +333,17 @@ window.Quarto = {
   <li><a href="#independence" id="toc-independence" class="nav-link" data-scroll-target="#independence"><span class="header-section-number">7.3</span> Independence</a></li>
   <li><a href="#conditional-distributions" id="toc-conditional-distributions" class="nav-link" data-scroll-target="#conditional-distributions"><span class="header-section-number">7.4</span> Conditional Distributions</a></li>
   <li><a href="#joint-vs-conditional-distribution" id="toc-joint-vs-conditional-distribution" class="nav-link" data-scroll-target="#joint-vs-conditional-distribution"><span class="header-section-number">7.5</span> Joint vs Conditional Distribution</a></li>
-  <li><a href="#bayes-rule" id="toc-bayes-rule" class="nav-link" data-scroll-target="#bayes-rule"><span class="header-section-number">7.6</span> Bayes’ Rule</a></li>
-  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">7.7</span> Covariance and Correlation</a></li>
-  <li><a href="#bivariate-normal-distribution" id="toc-bivariate-normal-distribution" class="nav-link" data-scroll-target="#bivariate-normal-distribution"><span class="header-section-number">7.8</span> Bivariate Normal Distribution</a></li>
+  <li><a href="#conditional-expectation" id="toc-conditional-expectation" class="nav-link" data-scroll-target="#conditional-expectation"><span class="header-section-number">7.6</span> Conditional Expectation</a></li>
+  <li><a href="#law-of-total-expectation" id="toc-law-of-total-expectation" class="nav-link" data-scroll-target="#law-of-total-expectation"><span class="header-section-number">7.7</span> Law of Total Expectation</a></li>
+  <li><a href="#covariance-and-correlation" id="toc-covariance-and-correlation" class="nav-link" data-scroll-target="#covariance-and-correlation"><span class="header-section-number">7.8</span> Covariance and Correlation</a></li>
+  <li><a href="#bivariate-normal-distribution" id="toc-bivariate-normal-distribution" class="nav-link" data-scroll-target="#bivariate-normal-distribution"><span class="header-section-number">7.9</span> Bivariate Normal Distribution</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html">Statistical Distributions</a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_2_joint_dependence.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></h1>
 </div>
@@ -373,9 +421,13 @@ Figure&nbsp;7.1: <a href="https://en.wikipedia.org/wiki/File:Multivariate_normal
 <h3 data-number="7.2.1" class="anchored" data-anchor-id="discrete-case"><span class="header-section-number">7.2.1</span> Discrete Case</h3>
 <div class="note">
 <p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are discrete, their joint distribution is given by the <strong>joint probability mass function</strong></p>
-<p><span class="math display">\[p_{X,Y}(x,y) = P(X=x, Y=y),\]</span></p>
+<p><span class="math display">\[
+p_{X,Y}(x,y) = P(X=x, Y=y),
+\]</span></p>
 <p>which satisfies:</p>
-<p><span class="math display">\[p_{X,Y}(x,y) \ge 0, \qquad \sum_x \sum_y p_{X,Y}(x,y) = 1.\]</span></p>
+<p><span class="math display">\[
+p_{X,Y}(x,y) \ge 0, \qquad \sum_x \sum_y p_{X,Y}(x,y) = 1.
+\]</span></p>
 <p>From the joint distribution, we can recover the individual (marginal) distributions:</p>
 <p><span class="math display">\[
 p_X(x) = \sum_y p_{X,Y}(x,y), \qquad
@@ -400,7 +452,8 @@ X=3 &amp; 0.08 &amp; 0.14 &amp; 0.23
 <ol type="a">
 <li>Verify that this is a valid joint PMF</li>
 <li>Find the marginal PMF of <span class="math inline">\(X\)</span></li>
-<li>Find the marginal PMF of <span class="math inline">\(Y\)</span> <!-- d. Find $P_{X|Y=0}(x)$ and $P_{Y|X=3}(y)$ --></li>
+<li>Find the marginal PMF of <span class="math inline">\(Y\)</span></li>
+<li>Find <span class="math inline">\(P_{X|Y=0}(x)\)</span> and <span class="math inline">\(P_{Y|X=3}(y)\)</span></li>
 </ol>
 </div>
 <p><strong>a. Verify this is a valid joint PMF</strong></p>
@@ -483,125 +536,98 @@ X=3 &amp; 0.08 &amp; 0.14 &amp; 0.23 &amp; 0.45 \\
 p_Y(y) &amp; 0.30 &amp; 0.35 &amp; 0.35 &amp; 1
 \end{array}
 \]</span></p>
-<!-- **d. Find $P_{X|Y=0}(x)$ and $P_{Y|X=3}(y)$**
-
-We now compute two conditional pmfs from the same joint distribution.
-
-Recall:
-
-$$
+<p><strong>d.&nbsp;Find <span class="math inline">\(P_{X|Y=0}(x)\)</span> and <span class="math inline">\(P_{Y|X=3}(y)\)</span></strong></p>
+<p>We now compute two conditional pmfs from the same joint distribution.</p>
+<p>Recall:</p>
+<p><span class="math display">\[
 p_{X \mid Y=y}(x) = \frac{p(x,y)}{p_Y(y)},
 \qquad
 p_{Y \mid X=x}(y) = \frac{p(x,y)}{p_X(x)}.
-$$
-
-From earlier results:
-
-$$
+\]</span></p>
+<p>From earlier results:</p>
+<p><span class="math display">\[
 p_Y(0) = 0.30,
 \qquad
 p_X(3) = 0.45.
-$$
-
-
-**For $P_{X|Y=0}(x)$, the conditional pmf of $X$ given $Y=0$, we use**
-
-$$
+\]</span></p>
+<p><strong>For <span class="math inline">\(P_{X|Y=0}(x)\)</span>, the conditional pmf of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=0\)</span>, we use</strong></p>
+<p><span class="math display">\[
 p_{X \mid Y=0}(x)
 =
 \frac{p(x,0)}{p_Y(0)}.
-$$
-
-From the first column of the joint table:
-
-$$
+\]</span></p>
+<p>From the first column of the joint table:</p>
+<p><span class="math display">\[
 \begin{array}{c|c}
-x & p(x,0) \\
+x &amp; p(x,0) \\
 \hline
-0 & 0.12 \\
-1 & 0.10 \\
-3 & 0.08
+0 &amp; 0.12 \\
+1 &amp; 0.10 \\
+3 &amp; 0.08
 \end{array}
-$$
-
-Since $p_Y(0)=0.30$, divide each entry by $0.30$:
-
-$$
+\]</span></p>
+<p>Since <span class="math inline">\(p_Y(0)=0.30\)</span>, divide each entry by <span class="math inline">\(0.30\)</span>:</p>
+<p><span class="math display">\[
 \begin{aligned}
-p_{X \mid Y=0}(0) &= \frac{0.12}{0.30} = 0.40 \\
-p_{X \mid Y=0}(1) &= \frac{0.10}{0.30} = \frac{1}{3} \approx 0.333 \\
-p_{X \mid Y=0}(3) &= \frac{0.08}{0.30} \approx 0.267
+p_{X \mid Y=0}(0) &amp;= \frac{0.12}{0.30} = 0.40 \\
+p_{X \mid Y=0}(1) &amp;= \frac{0.10}{0.30} = \frac{1}{3} \approx 0.333 \\
+p_{X \mid Y=0}(3) &amp;= \frac{0.08}{0.30} \approx 0.267
 \end{aligned}
-$$
-
-Therefore,
-
-$$
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
 p_{X \mid Y=0}(x)
 =
 \begin{cases}
-0.40, & x=0 \\
-0.333, & x=1 \\
-0.267, & x=3 \\
-0, & \text{otherwise}.
+0.40, &amp; x=0 \\
+0.333, &amp; x=1 \\
+0.267, &amp; x=3 \\
+0, &amp; \text{otherwise}.
 \end{cases}
-$$
-
-Check:
-
-$$
+\]</span></p>
+<p>Check:</p>
+<p><span class="math display">\[
 0.40 + 0.333 + 0.267 = 1.
-$$
-
-
-**For $P_{Y|X=3}(y)$, the coonditional pmf of $Y$ given $X=3$, we use**
-
-$$
+\]</span></p>
+<p><strong>For <span class="math inline">\(P_{Y|X=3}(y)\)</span>, the coonditional pmf of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=3\)</span>, we use</strong></p>
+<p><span class="math display">\[
 p_{Y \mid X=3}(y)
 =
 \frac{p(3,y)}{p_X(3)}.
-$$
-
-From the row corresponding to $X=3$:
-
-$$
+\]</span></p>
+<p>From the row corresponding to <span class="math inline">\(X=3\)</span>:</p>
+<p><span class="math display">\[
 \begin{array}{c|c}
-y & p(3,y) \\
+y &amp; p(3,y) \\
 \hline
-0 & 0.08 \\
-1 & 0.14 \\
-2 & 0.23
+0 &amp; 0.08 \\
+1 &amp; 0.14 \\
+2 &amp; 0.23
 \end{array}
-$$
-
-Since $p_X(3)=0.45$, divide each entry by $0.45$:
-
-$$
+\]</span></p>
+<p>Since <span class="math inline">\(p_X(3)=0.45\)</span>, divide each entry by <span class="math inline">\(0.45\)</span>:</p>
+<p><span class="math display">\[
 \begin{aligned}
-p_{Y \mid X=3}(0) &= \frac{0.08}{0.45} \approx 0.178 \\
-p_{Y \mid X=3}(1) &= \frac{0.14}{0.45} \approx 0.311 \\
-p_{Y \mid X=3}(2) &= \frac{0.23}{0.45} \approx 0.511
+p_{Y \mid X=3}(0) &amp;= \frac{0.08}{0.45} \approx 0.178 \\
+p_{Y \mid X=3}(1) &amp;= \frac{0.14}{0.45} \approx 0.311 \\
+p_{Y \mid X=3}(2) &amp;= \frac{0.23}{0.45} \approx 0.511
 \end{aligned}
-$$
-
-Therefore,
-
-$$
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
 p_{Y \mid X=3}(y)
 =
 \begin{cases}
-0.178, & y=0 \\
-0.311, & y=1 \\
-0.511, & y=2 \\
-0, & \text{otherwise}.
+0.178, &amp; y=0 \\
+0.311, &amp; y=1 \\
+0.511, &amp; y=2 \\
+0, &amp; \text{otherwise}.
 \end{cases}
-$$
-
-Check:
-
-$$
+\]</span></p>
+<p>Check:</p>
+<p><span class="math display">\[
 0.178 + 0.311 + 0.511 = 1.
-$$ -->
+\]</span></p>
 </section>
 <section id="continuous-case" class="level3" data-number="7.2.2">
 <h3 data-number="7.2.2" class="anchored" data-anchor-id="continuous-case"><span class="header-section-number">7.2.2</span> Continuous Case</h3>
@@ -639,9 +665,10 @@ f_{X,Y}(x,y) =
 <ol type="a">
 <li>Verify that this is a valid joint density</li>
 <li>Find the marginal desity of <span class="math inline">\(X\)</span></li>
-<li>Find the marginal density of <span class="math inline">\(Y\)</span> <!-- d. Find the conditional desity of $X$ given $Y=y$
-e. Find the conditional density of $Y$ given $X=x$
-f. Find the joint CDF --></li>
+<li>Find the marginal density of <span class="math inline">\(Y\)</span></li>
+<li>Find the conditional desity of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=y\)</span></li>
+<li>Find the conditional density of <span class="math inline">\(Y\)</span> given <span class="math inline">\(X=x\)</span></li>
+<li>Find the joint CDF</li>
 </ol>
 </div>
 <p><strong>a. Verify this is a valid joint density</strong></p>
@@ -718,101 +745,77 @@ f_Y(y)
 0, &amp; \text{otherwise}.
 \end{cases}
 \]</span></p>
-<!-- **d. Conditional Density of $X$ Given $Y=y$**
-
-By definition,
-
-$$
+<p><strong>d.&nbsp;Conditional Density of <span class="math inline">\(X\)</span> Given <span class="math inline">\(Y=y\)</span></strong></p>
+<p>By definition,</p>
+<p><span class="math display">\[
 f_{X \mid Y=y}(x)
 =
 \frac{f(x,y)}{f_Y(y)}.
-$$
-
-For $0<y<x<1$,
-
-$$
+\]</span></p>
+<p>For <span class="math inline">\(0&lt;y&lt;x&lt;1\)</span>,</p>
+<p><span class="math display">\[
 f_{X \mid Y=y}(x)
 =
 \frac{2}{2(1-y)}
 =
 \frac{1}{1-y}.
-$$
-
-Thus,
-
-$$
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
 f_{X \mid Y=y}(x)
 =
 \begin{cases}
-\dfrac{1}{1-y}, & y<x<1, \\
-0, & \text{otherwise}.
+\dfrac{1}{1-y}, &amp; y&lt;x&lt;1, \\
+0, &amp; \text{otherwise}.
 \end{cases}
-$$
-
-Notice this is a **uniform density** over the interval $(y,1)$.
-
-
-**e. Conditional Density of $Y$ Given $X=x$**
-
-Similarly,
-
-$$
+\]</span></p>
+<p>Notice this is a <strong>uniform density</strong> over the interval <span class="math inline">\((y,1)\)</span>.</p>
+<p><strong>e. Conditional Density of <span class="math inline">\(Y\)</span> Given <span class="math inline">\(X=x\)</span></strong></p>
+<p>Similarly,</p>
+<p><span class="math display">\[
 f_{Y \mid X=x}(y)
 =
 \frac{f(x,y)}{f_X(x)}.
-$$
-
-For $0<y<x<1$,
-
-$$
+\]</span></p>
+<p>For <span class="math inline">\(0&lt;y&lt;x&lt;1\)</span>,</p>
+<p><span class="math display">\[
 f_{Y \mid X=x}(y)
 =
 \frac{2}{2x}
 =
 \frac{1}{x}.
-$$
-
-Thus,
-
-$$
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
 f_{Y \mid X=x}(y)
 =
 \begin{cases}
-\dfrac{1}{x}, & 0<y<x, \\
-0, & \text{otherwise}.
+\dfrac{1}{x}, &amp; 0&lt;y&lt;x, \\
+0, &amp; \text{otherwise}.
 \end{cases}
-$$
-
-This is uniform on $(0,x)$.
-
-**f. Joint CDF**
-
-The joint CDF is
-
-$$
+\]</span></p>
+<p>This is uniform on <span class="math inline">\((0,x)\)</span>.</p>
+<p><strong>f.&nbsp;Joint CDF</strong></p>
+<p>The joint CDF is</p>
+<p><span class="math display">\[
 F(x,y)
 =
 P(X \le x, Y \le y).
-$$
-
-For $0<y<x<1$, this corresponds to integrating over the region
-
-$$
-0 < v < u < x,
+\]</span></p>
+<p>For <span class="math inline">\(0&lt;y&lt;x&lt;1\)</span>, this corresponds to integrating over the region</p>
+<p><span class="math display">\[
+0 &lt; v &lt; u &lt; x,
 \quad
 v \le y.
-$$
-
-So
-
-$$
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
 F(x,y)
 =
 \int_0^{\min(x,1)}
 \int_0^{\min(u,y)} 2\, dv\, du.
-$$
-
-(The exact algebra depends on the relative sizes of $x$ and $y$.) -->
+\]</span></p>
+<p>(The exact algebra depends on the relative sizes of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.)</p>
 </section>
 <section id="mixed-case" class="level3" data-number="7.2.3">
 <h3 data-number="7.2.3" class="anchored" data-anchor-id="mixed-case"><span class="header-section-number">7.2.3</span> Mixed Case</h3>
@@ -867,7 +870,8 @@ x e^{-x y}, &amp; y&gt;0, \\
 <li>Determine the joint distribution structure</li>
 <li>Verify that this is a valid joint distribution</li>
 <li>Find the marginal density of <span class="math inline">\(Y\)</span></li>
-<li>Find the marginal probability of <span class="math inline">\(X\)</span> <!-- e. Find the conditional distribution of $X$ given $Y=y$ --></li>
+<li>Find the marginal probability of <span class="math inline">\(X\)</span></li>
+<li>Find the conditional distribution of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y=y\)</span></li>
 </ol>
 </div>
 <p><strong>a. Joint Distribution</strong></p>
@@ -957,31 +961,26 @@ P(X=1)=0.4,
 \qquad
 P(X=2)=0.6.
 \]</span></p>
-<!-- **e. Conditional Distribution of $X$ Given $Y=y$**
-
-Using Bayes’ rule for mixed cases:
-
-$$
+<p><strong>e. Conditional Distribution of <span class="math inline">\(X\)</span> Given <span class="math inline">\(Y=y\)</span></strong></p>
+<p>Using Bayes’ rule for mixed cases:</p>
+<p><span class="math display">\[
 P(X=x \mid Y=y)
 =
 \frac{f_{X,Y}(x,y)}{f_Y(y)}.
-$$
-
-So,
-
-$$
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
 P(X=1 \mid Y=y)
 =
 \frac{0.4 e^{-y}}
 {0.4 e^{-y} + 1.2 e^{-2y}},
-$$
-
-$$
+\]</span></p>
+<p><span class="math display">\[
 P(X=2 \mid Y=y)
 =
 \frac{1.2 e^{-2y}}
 {0.4 e^{-y} + 1.2 e^{-2y}}.
-$$ -->
+\]</span></p>
 </section>
 </section>
 <section id="independence" class="level2" data-number="7.3">
@@ -1001,12 +1000,23 @@ $$ -->
 <p>Two random variables are independent if knowledge of one provides no information about the other.</p>
 </blockquote>
 <div class="note">
-<p>Formally, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent if</p>
-<p><strong>Discrete Case</strong></p>
-<p><span class="math display">\[p_{X,Y}(x,y) = p_X(x)p_Y(y)\]</span></p>
-<p><strong>Continuous Case</strong></p>
-<p><span class="math display">\[f_{X,Y}(x,y) = f_X(x)f_Y(y)\]</span></p>
-<p>for all <span class="math inline">\(x,y\)</span>.</p>
+<p>If the probability of <span class="math inline">\(A\)</span> is not affected by whether or not <span class="math inline">\(B\)</span> occurs, then <span class="math inline">\(A\)</span> is said to be <strong>independent</strong> of <span class="math inline">\(B\)</span>, thus</p>
+<p><span class="math display">\[
+P(A \cap B) = P(A)\,P(B)
+\]</span></p>
+<p>Formally, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are independent for all <span class="math inline">\(x,y\)</span> if</p>
+<table class="table-borderless caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Discrete Case</strong></td>
+<td style="text-align: center;"><span class="math inline">\(p_{X,Y}(x,y) = p_X(x)p_Y(y)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Continuous Case</strong></td>
+<td style="text-align: center;"><span class="math inline">\(f_{X,Y}(x,y) = f_X(x)f_Y(y)\)</span></td>
+</tr>
+</tbody>
+</table>
 </div>
 <p>Independence simplifies simulation dramatically. If variables are independent, we may generate them separately. However, many real-world systems exhibit dependence, and modelling this dependence correctly is crucial.</p>
 <div class="example">
@@ -1083,9 +1093,9 @@ $$ -->
 <p><span class="math display">\[
 P(A \mid B) = \frac{P(A \cap B)}{P(B)}.
 \]</span></p>
-<p>As an axiom of probability, we have</p>
+<p>Rearranging the conditional probability formula gives the <strong>Multiplication Rule</strong> for probabilities:</p>
 <p><span class="math display">\[
-P(A \cap B) = P(A \mid B) P(B).
+P(A \cap B) = P(A \mid B) P(B) = P(B \mid A) P(A).
 \]</span></p>
 <p><strong>Discrete Case</strong></p>
 <p>Let <span class="math inline">\(A = \{X=x\}\)</span> and <span class="math inline">\(B = \{Y=y\}\)</span>,</p>
@@ -1097,25 +1107,31 @@ P(X=x \mid Y=y) &amp;= \frac{P(X=x,Y=y)}{P(Y=y)} \\
 \]</span></p>
 <p><strong>Continuous Case</strong></p>
 <p>In continuous distributions, we replace probabilities with densities, so</p>
-<p><span class="math display">\[f_{X|Y}(x \mid y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}, \quad f_Y(y)&gt;0\]</span></p>
+<p><span class="math display">\[
+f_{X|Y}(x \mid y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}, \quad f_Y(y)&gt;0
+\]</span></p>
 <p>A conditional distribution is obtained by taking the joint distribution and dividing by the corresponding marginal distribution.</p>
 </div>
 <p>Recall that independence was defined by</p>
 <p><span class="math display">\[
-f_{X,Y}(x,y) = f_X(x) f_Y(y).
-\]</span></p>
-<p>Rewriting this gives</p>
-<p><span class="math display">\[
-f_{Y|X}(y \mid x)
-=
-\frac{f_{X,Y}(x,y)}{f_X(x)}.
+P(A \cap B) = P(A)\,P(B).
 \]</span></p>
 <p>If independence holds, then</p>
 <p><span class="math display">\[
-f_{Y|X}(y \mid x)
-=
-f_Y(y).
+P(A \mid B) = P(A), \qquad P(B \mid A) = P(B).
 \]</span></p>
+<table class="table-borderless caption-top table">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>Discrete Case</strong></td>
+<td style="text-align: center;"><span class="math inline">\(p_{X|Y}(x \mid y) = p_X(x)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>Continuous Case</strong></td>
+<td style="text-align: center;"><span class="math inline">\(f_{X|Y}(x \mid y) = f_X(x)\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>Thus:</p>
 <blockquote class="blockquote">
 <p>Independence is exactly the situation in which conditioning has no effect.</p>
@@ -1134,9 +1150,8 @@ f_Y(y).
 <li>Generate <span class="math inline">\(Y\)</span> from <span class="math inline">\(f_{Y|X}(\cdot \mid X)\)</span>.</li>
 </ol></li>
 </ul>
-<div class="note">
+<div class="example">
 <p><strong>Discrete Case Example</strong></p>
-</div>
 <p>Suppose a small call center with two types of customers:</p>
 <ul>
 <li><strong>Type A</strong> customers are quick to serve.</li>
@@ -1155,6 +1170,7 @@ Y\mid X=0\sim \mathrm{Binomial}(n=10,p=0.7)
 Y\mid X=1\sim \mathrm{Binomial}(n=10,p=0.4)
 \]</span></p>
 <p>This creates dependence between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. Even if we know the marginal distribution of <span class="math inline">\(X\)</span> and the marginal distribution of <span class="math inline">\(Y\)</span>, we cannot simulate the system correctly without the conditional structure.</p>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1216,10 +1232,14 @@ Y\mid X=1\sim \mathrm{Binomial}(n=10,p=0.4)
 </div>
 </div>
 </div>
-<p>The histograms show the conditional distributions of <span class="math inline">\(Y\)</span> for the two customer types. When <span class="math inline">\(X=0\)</span> (Type A), the bars are concentrated at higher values of Y, meaning agents resolve more tickets on average. When <span class="math inline">\(X=1\)</span> (Type B), the distribution shifts downward, with higher probability on smaller values of <span class="math inline">\(Y\)</span>. The contrast between the two panels makes the dependence obvious: the value of <span class="math inline">\(X\)</span> changes the entire shape of the distribution of <span class="math inline">\(Y\)</span>, not just its mean.</p>
-<div class="note">
+<p>The histograms show the conditional distributions of <span class="math inline">\(Y\)</span> for the two customer types.</p>
+<ul>
+<li>When <span class="math inline">\(X=0\)</span> (Type A), the bars are concentrated at higher values of Y, meaning agents resolve more tickets on average.</li>
+<li>When <span class="math inline">\(X=1\)</span> (Type B), the distribution shifts downward, with higher probability on smaller values of <span class="math inline">\(Y\)</span>.</li>
+<li>The contrast between the two panels makes the dependence obvious: the value of <span class="math inline">\(X\)</span> changes the entire shape of the distribution of <span class="math inline">\(Y\)</span>, not just its mean.</li>
+</ul>
+<div class="example">
 <p><strong>Continuous Case Example</strong></p>
-</div>
 <p>Suppose interarrival time <span class="math inline">\(X\)</span> of a coffee shop influences service time <span class="math inline">\(Y\)</span>, such that</p>
 <p><span class="math display">\[Y = 2 + 0.5X + \varepsilon,\]</span></p>
 <p>where</p>
@@ -1235,6 +1255,7 @@ X \sim \text{Exp}(1),
 <li>When arrivals are rapid (small <span class="math inline">\(X\)</span>), service is faster.</li>
 </ul>
 <p>This creates dependence between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -1262,7 +1283,8 @@ X \sim \text{Exp}(1),
 <section id="joint-vs-conditional-distribution" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="joint-vs-conditional-distribution"><span class="header-section-number">7.5</span> Joint vs Conditional Distribution</h2>
 <p>Let <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be random variables.</p>
-<table class="caption-top table">
+<div class="table-responsive">
+<table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 41%">
@@ -1303,12 +1325,138 @@ X \sim \text{Exp}(1),
 </tr>
 </tbody>
 </table>
+</div>
 </section>
-<section id="bayes-rule" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="bayes-rule"><span class="header-section-number">7.6</span> Bayes’ Rule</h2>
+<section id="conditional-expectation" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="conditional-expectation"><span class="header-section-number">7.6</span> Conditional Expectation</h2>
+<p>The conditional expectation of a random variable is the expected (average) value given that we know some information.</p>
+<p>Think of it as:</p>
+<blockquote class="blockquote">
+<p>“What is the expected value of <span class="math inline">\(X\)</span> <strong>if we already know <span class="math inline">\(Y\)</span></strong>?”</p>
+</blockquote>
+<p>Instead of averaging over all outcomes, we only average over outcomes consistent with the condition.</p>
+<div class="note">
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>discrete</strong> random variables:</p>
+<p><span class="math display">\[
+E[X \mid Y=y] = \sum_x x \, P(X=x \mid Y=y),
+\]</span></p>
+<p>which means take every possible value of <span class="math inline">\(X\)</span>, multiply by the conditional probability and sum them.</p>
+<hr>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>continuous</strong> random variables:</p>
+<p><span class="math display">\[
+E[X \mid Y=y] =
+\int_{-\infty}^{\infty} x \, f_{X|Y}(x|y) dx
+\]</span></p>
+<p>where <span class="math inline">\(f_{X|Y}\)</span> is the conditional density.</p>
+</div>
+<div class="example">
+<p><strong>Example:</strong> Suppose <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> be two discrete random variables with the following probability function. Compute <span class="math inline">\(E[X|Y=0]\)</span>.</p>
+<table class="table-bordered table-hover caption-top table">
+<thead>
+<tr class="header">
+<th>Y</th>
+<th>X</th>
+<th>Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>3</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table>
+<p>First find the probability that <span class="math inline">\(P(Y=0)\)</span>:</p>
+<p><span class="math display">\[
+P(Y=0)=0.2 + 0.3 = 0.5
+\]</span></p>
+<p>Then, find conditional probabilities: <span class="math display">\[
+P(X=1|Y=0)=\frac{P(X=1 \cap Y=0)}{P(Y=0)} = \frac{0.2}{0.5}=0.4
+\]</span></p>
+<p><span class="math display">\[
+P(X=3|Y=0)=\frac{P(X=3 \cap Y=0)}{P(Y=0)} = \frac{0.3}{0.5}=0.6
+\]</span></p>
+<p>Lastly, calculate the conditional expectation: <span class="math display">\[
+E[X|Y=0] = 1(0.4) + 3(0.6) = 2.2
+\]</span></p>
+</div>
+<hr>
 </section>
-<section id="covariance-and-correlation" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">7.7</span> Covariance and Correlation</h2>
+<section id="law-of-total-expectation" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="law-of-total-expectation"><span class="header-section-number">7.7</span> Law of Total Expectation</h2>
+<p>If <span class="math inline">\(X\)</span> is a random variable whose expected value <span class="math inline">\(E(X)\)</span> is defined, and <span class="math inline">\(Y\)</span> is any random variable on the same probability space, then <span class="math display">\[
+E[X] = E[E[X|Y]],
+\]</span></p>
+<p>i.e., the expected value of the conditional expected value of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is the same as the expected value of <span class="math inline">\(X\)</span>.</p>
+<div class="note">
+<p><strong>Discrete Formula</strong></p>
+<p><span class="math display">\[
+E[X] =
+\sum_y E[X|Y=y] P(Y=y)
+\]</span></p>
+<p><strong>Continuous Formula</strong></p>
+<p><span class="math display">\[
+E[X] =
+\int E[X|Y=y] f_Y(y) dy
+\]</span></p>
+</div>
+<p>Think of it as <strong>two-stage averaging</strong>.</p>
+<ul>
+<li><strong>Stage 1:</strong> Average inside each group, e.g.&nbsp;average income within each city.</li>
+<li><strong>Stage 2:</strong> Average across groups, e.g.&nbsp;combine city averages weighted by population.</li>
+</ul>
+<p>This gives the overall average.</p>
+<p><strong>Why It Is Useful</strong></p>
+<p>It simplifies many problems. Instead of computing <span class="math inline">\(E[X]\)</span> directly, we often compute <span class="math inline">\(E[E[X|Y]]\)</span>, which is easier. This is used heavily in Bayesian statistics, regression, stochastic processes, machine learning, and econometrics.</p>
+<div class="example">
+<p><strong>Example:</strong> Suppose</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(E[X|Y]\)</span></th>
+<th><span class="math inline">\(P(Y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+<td>0.6</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>5</td>
+<td>0.4</td>
+</tr>
+</tbody>
+</table>
+<p>Then</p>
+<p><span class="math display">\[
+E[X] =
+2(0.6) + 5(0.4) = 3.2
+\]</span></p>
+</div>
+<p><strong>Important Properties</strong></p>
+<ul>
+<li><p><strong>Linearity:</strong> <span class="math inline">\(E[aX+bY|Z] = aE[X|Z] + bE[Y|Z]\)</span></p></li>
+<li><p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>independent</strong>, then <span class="math inline">\(E[X|Y] = E[X]\)</span></p></li>
+<li><p><strong>Tower property:</strong> <span class="math inline">\(E[E[X|Y,Z]|Y] = E[X|Y]\)</span></p></li>
+</ul>
+</section>
+<section id="covariance-and-correlation" class="level2" data-number="7.8">
+<h2 data-number="7.8" class="anchored" data-anchor-id="covariance-and-correlation"><span class="header-section-number">7.8</span> Covariance and Correlation</h2>
 <div class="note">
 <p>To quantify <strong>linear dependence</strong>, we define the covariance:</p>
 <p><span class="math display">\[\mathrm{Cov}(X,Y)
@@ -1423,8 +1571,8 @@ X \sim \text{Exp}(1),
 </blockquote>
 <p>Because it’s standardised, you can compare height vs weight, income vs education, temperature vs electricity use, etc, even though all are in different units.</p>
 </section>
-<section id="bivariate-normal-distribution" class="level2" data-number="7.8">
-<h2 data-number="7.8" class="anchored" data-anchor-id="bivariate-normal-distribution"><span class="header-section-number">7.8</span> Bivariate Normal Distribution</h2>
+<section id="bivariate-normal-distribution" class="level2" data-number="7.9">
+<h2 data-number="7.9" class="anchored" data-anchor-id="bivariate-normal-distribution"><span class="header-section-number">7.9</span> Bivariate Normal Distribution</h2>
 <p>A central example in simulation is the bivariate normal distribution. A bivariate normal distribution is a two‑dimensional version of the normal distribution. It describes the joint behaviour of two continuous random variables, usually written as:</p>
 <p><span class="math display">\[(X,Y)\sim \mathrm{BVN}(\mu _X,\mu _Y,\sigma _X^2,\sigma _Y^2,\rho )\]</span></p>
 <p>or</p>
@@ -2000,7 +2148,7 @@ Y
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>Computer Simulation in R(v1.0.2) <br> by Sam Wiwatanapataphee</p>
+<p>R and Python for Computer Simulation (v1.0.3) <br> by Sam Wiwatanapataphee</p>
 </div>   
     <div class="nav-footer-center">
       &nbsp;

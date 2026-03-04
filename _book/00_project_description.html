@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – R and Python for Computer Simulation (v1.0.3)</title>
+<title>17&nbsp; Project Information – R and Python for Computer Simulation (v1.0.3)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_1_simulation_intro.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./03_5_workshop_sol.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +111,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html"><strong>Introduction</strong></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00_project_description.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +144,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link active">
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Introduction</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -245,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
+  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span></a>
   </div>
 </li>
@@ -254,15 +282,34 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#project-proposal-5" id="toc-project-proposal-5" class="nav-link" data-scroll-target="#project-proposal-5">Project Proposal (5%)</a></li>
+  <li><a href="#final-report-23" id="toc-final-report-23" class="nav-link" data-scroll-target="#final-report-23">Final Report (23%)</a></li>
+  <li><a href="#peer-evaluation-2" id="toc-peer-evaluation-2" class="nav-link" data-scroll-target="#peer-evaluation-2">Peer evaluation (2%)</a></li>
+  <li><a href="#project-ideas" id="toc-project-ideas" class="nav-link" data-scroll-target="#project-ideas">Project Ideas</a>
+  <ul>
+  <li><a href="#queueing-systems-and-service-operations" id="toc-queueing-systems-and-service-operations" class="nav-link" data-scroll-target="#queueing-systems-and-service-operations">Queueing Systems and Service Operations</a></li>
+  <li><a href="#financial-simulation-and-risk-modelling" id="toc-financial-simulation-and-risk-modelling" class="nav-link" data-scroll-target="#financial-simulation-and-risk-modelling">Financial Simulation and Risk Modelling</a></li>
+  <li><a href="#epidemic-modelling-sir-seir" id="toc-epidemic-modelling-sir-seir" class="nav-link" data-scroll-target="#epidemic-modelling-sir-seir">Epidemic Modelling (SIR / SEIR)</a></li>
+  <li><a href="#time-series-simulation" id="toc-time-series-simulation" class="nav-link" data-scroll-target="#time-series-simulation">Time Series Simulation</a></li>
+  <li><a href="#environmental-and-climate-simulation" id="toc-environmental-and-climate-simulation" class="nav-link" data-scroll-target="#environmental-and-climate-simulation">Environmental and Climate Simulation</a></li>
+  <li><a href="#bayesian-simulation-and-mcmc" id="toc-bayesian-simulation-and-mcmc" class="nav-link" data-scroll-target="#bayesian-simulation-and-mcmc">Bayesian Simulation and MCMC</a></li>
+  <li><a href="#synthetic-data-from-published-models" id="toc-synthetic-data-from-published-models" class="nav-link" data-scroll-target="#synthetic-data-from-published-models">Synthetic Data from Published Models</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><strong>Introduction</strong></h1>
+<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></h1>
 </div>
 
 
@@ -279,48 +326,317 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Computer simulation has become one of the central methodologies of modern scientific inquiry. Alongside theoretical analysis and physical experimentation, simulation provides a third way of understanding complex systems. Where mathematical analysis seeks exact solutions and experimentation observes real-world behaviour, simulation constructs a computational model of reality and explores its behaviour through repeated virtual experiments.</p>
-<div class="columns">
-<div class="column center" style="width:33%;">
-<p><strong>Stanisław Ulam</strong> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Stanislaw_Ulam.tif/lossy-page1-826px-Stanislaw_Ulam.tif.jpg" class="img-fluid" style="width:64.0%"></p>
-</div><div class="column center" style="width:33%;">
-<p><strong>John Von Neumann</strong> <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif" class="img-fluid" style="width:70.0%"></p>
-</div><div class="column center" style="width:33%;">
-<p><strong>ENIAC</strong> (Electronic Numerical Integrator and Computer)</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg/1280px-Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg" class="img-fluid" style="width:96.0%"></p>
-</div>
-</div>
-<p>The idea of solving problems through simulated repetition dates back to the 1940s, when Stanisław Ulam considered the probability of winning a solitaire game. Rather than attempting to derive a complicated analytical formula, he proposed repeatedly playing the game and estimating the probability empirically. Together with John von Neumann, this reasoning developed into what is now known as the Monte Carlo method: using randomness and repetition to approximate solutions to problems that are otherwise analytically intractable. With the emergence of electronic computing, this approach transformed from a clever thought experiment into a powerful scientific tool.</p>
-<div class="note">
-<p>At its core, simulation is the use of a computer to imitate the operation of a real-world stochastic system in order to study its behaviour.</p>
-</div>
-<p>The system of interest may be physical, biological, economic, or entirely abstract. We may simulate the lifetime of a machine component, the arrival of customers in a queue, rainfall patterns over time, the spread of an infectious disease, or the evolution of a financial portfolio. In each case, the goal is not merely to generate numbers, but to gain insight into variability, uncertainty, and long-run behaviour.</p>
-<div class="note">
-<p>A simulation study always rests on three conceptual pillars: a model, randomness, and repetition.</p>
-</div>
-<p>The model provides a mathematical or logical representation of the system. Randomness is introduced to reflect uncertainty in inputs or mechanisms. Repetition allows patterns to emerge from noise, enabling us to estimate quantities such as probabilities, expectations, and distributions. Without repetition, randomness obscures structure; with repetition, structure becomes visible.</p>
-<p>Unlike analytical methods, simulation rarely produces exact answers. Instead, it produces approximations whose accuracy improves as the number of replications increases. This fundamental idea underlies much of computational statistics and is formalised by results such as the Law of Large Numbers and the Central Limit Theorem, which justify the convergence of simulated averages to theoretical quantities.</p>
-<div class="note">
-<p>Simulation is especially valuable when systems are too complex for closed-form mathematical analysis.</p>
-</div>
-<p>Real-world processes often involve nonlinear interactions, high-dimensional dependence, heterogeneous agents, time-varying parameters, and complicated feedback mechanisms. In such settings, deriving exact formulas may be impossible or impractical. Simulation trades algebraic elegance for flexibility: we sacrifice exactness in exchange for the ability to model reality more faithfully.</p>
-<p>Modern computing environments such as R and Python make it possible to design, implement, and analyse simulation studies efficiently. However, effective simulation requires more than programming skill. It requires careful problem formulation, thoughtful modelling assumptions, validation of computational implementations, and rigorous statistical analysis of output. A poorly designed simulation can be as misleading as a flawed mathematical proof.</p>
-<div class="flowchart" aria-label="intro">
-<div class="node" style="background: rgba(170, 0, 0, 0.10);">
-Garbage in
-</div>
-<div class="arrow" aria-hidden="true">
-→
-</div>
-<div class="node" style="background: rgba(170, 160, 0, 0.10);">
-Garbage out
-</div>
-</div>
-<p><span style="display: block; margin: 24px 0;"></span></p>
-<p>This chapter introduces the foundational ideas that underpin all simulation methods studied in this unit. We begin by formalising what is meant by simulation and how simulation studies are structured. We then examine the essential role of random number generation, since all stochastic simulation ultimately depends on our ability to generate high-quality random variables. Finally, we review the probability concepts that provide the theoretical justification for simulation-based inference.</p>
-<p>Simulation is not merely a computational trick. It is a way of thinking about uncertainty, experimentation, and modelling in the presence of randomness. Understanding its scope and its limitations is the first step toward using it responsibly and effectively.</p>
+<p>This assessment task is designed to provide an authentic and applied learning experience in computer simulation. Students will work <em>collaboratively</em> to design, implement, and analyse a simulation study in a relevant problem domain.</p>
+<p>Simulation studies in industry and research are rarely conducted in isolation; they involve discussion of modelling assumptions, validation of computational procedures, interpretation of results, and clear communication of findings. The group-based structure of this project reflects this professional practice and encourages the development of technical, analytical, and collaborative skills.</p>
+<p>Through this project, students will integrate theoretical concepts, computational implementation, and statistical reasoning to produce a reproducible and well-justified simulation analysis.</p>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<ul>
+<li>The project must be undertaken in <strong>groups of 2-3 students</strong>.</li>
+<li>Groups of 3 are encouraged only for more complex projects.</li>
+<li>Each group must submit:
+<ul>
+<li><strong>One proposal (5%)</strong></li>
+<li><strong>One final report (23%)</strong></li>
+</ul></li>
+<li>Each student must individually submit:
+<ul>
+<li><strong>A confidential peer evaluation (2%)</strong>, rating the contribution of each team member (including themselves) on a scale of 0-10.</li>
+</ul></li>
+<li>You may use <strong>R or Python</strong> for this project.</li>
+<li>The project must comply fully with all aspects of <strong>Academic Integrity</strong>.</li>
+<li>The project should be sufficiently substantial to warrant <strong>30% assessment weighting</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="project-proposal-5" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="project-proposal-5">Project Proposal (5%)</h2>
+<p><strong>Due:</strong> Friday 27th Mar, 8:00pm (Week 6)</p>
+<p><strong>Submission:</strong> Turnitin (PDF or HTML)</p>
+<p><strong>Length:</strong> Maximum 2 pages (<span class="math inline">\(\approx\)</span> 1000 words)</p>
+<p><strong>Proposal Structure (10 marks)</strong></p>
+<ol type="1">
+<li>Problem statement and background (4 marks)</li>
+<li>Proposed methodology (6 marks)</li>
+</ol>
+<ul>
+<li>You will not be penalised for “wrong” ideas.</li>
+<li>Marks will be deducted if the proposal is too brief or lacks sufficient detail.</li>
+</ul>
+<hr>
+</section>
+<section id="final-report-23" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="final-report-23">Final Report (23%)</h2>
+<p><strong>Due:</strong> Friday 22nd May, 8:00pm (Week 14 / Teaching Week 12)</p>
+<p><strong>Submission:</strong> Turnitin (PDF or HTML)</p>
+<p><strong>Length:</strong> Maximum 10 pages (<span class="math inline">\(\approx\)</span> 2500-3500 words) excluding appendix.</p>
+<p><strong>Report Structure (95 marks)</strong></p>
+<ol type="1">
+<li><p><strong>Introduction and Background (10 marks)</strong></p>
+<ul>
+<li>Problem context</li>
+<li>Objectives</li>
+<li>Significance</li>
+<li>Brief literature review (3-5 relevant sources)</li>
+</ul></li>
+<li><p><strong>Methodology (25 marks)</strong></p>
+<ul>
+<li>Assumptions and model formulation</li>
+<li>Description of data (if applicable)</li>
+<li>Justification of modelling choices</li>
+</ul></li>
+<li><p><strong>Model Implementation and Results (45 marks)</strong></p>
+<ul>
+<li>Implementation (code integrated within explanation)</li>
+<li>Statistical summaries and visualisations</li>
+<li>Interpretation in context</li>
+</ul></li>
+<li><p><strong>Conclusion (15 marks)</strong></p>
+<ul>
+<li>Discussion of results</li>
+<li>Strengths and limitations</li>
+<li>Possible extensions (future work)</li>
+<li>Practical implications</li>
+</ul></li>
+<li><p><strong>Contribution statements</strong></p></li>
+<li><p><strong>Appendix (optional)</strong></p>
+<ul>
+<li>Additional plots</li>
+<li>Extended code</li>
+<li>Supplementary results</li>
+</ul></li>
+</ol>
+<p><strong>Overall Presentation (5 marks)</strong></p>
+<ul>
+<li>Clear coherent structure, appropriate formatting of text, tables and graphs, easily readable language, spelling, grammar.</li>
+<li>Use APA 7th Ed referencing style.</li>
+</ul>
+<hr>
+</section>
+<section id="peer-evaluation-2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="peer-evaluation-2">Peer evaluation (2%)</h2>
+<p>Each student must submit a confidential peer evaluation form on Blackboard.</p>
+<p>You are required to:</p>
+<ul>
+<li>Rate the contribution of each group member (including yourself) on a scale from 0 to 10</li>
+<li>Provide a brief justification (2–3 sentences per member) describing their contribution</li>
+</ul>
+<p>Your individual peer evaluation mark will be calculated based on:</p>
+<ul>
+<li><p>The average rating you receive from your teammates</p></li>
+<li><p>The consistency and fairness of ratings across the group</p></li>
+</ul>
+<p>Example: If your average rating from peers is 8/10, your peer mark will be:</p>
+<p><span class="math display">\[
+\frac{8}{10} \times 2\% = 1.6\%
+\]</span></p>
+<p>You are expected to evaluate your peers honestly, respectfully, and professionally.</p>
+<hr>
+</section>
+<section id="project-ideas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="project-ideas">Project Ideas</h2>
+<p>From the unit reading list, <strong>Jones (2014, Chapter 24)</strong> provides a few examples that can be used, such as roulette, insurance risk, stock prices, and conserving water.</p>
+<p>There are also many public <strong>datasets</strong> available at:</p>
+<ul>
+<li><a href="http://kaggle.com/datasets">http://kaggle.com/datasets</a></li>
+<li><a href="https://www.data.gov.au/">https://www.data.gov.au/</a></li>
+<li><a href="https://archive.ics.uci.edu/">https://archive.ics.uci.edu/</a></li>
+</ul>
+<p>The following list provides suggested directions for the simulation project.<br>
+Each topic is intentionally broad and can be developed into a unique and substantial study by:</p>
+<ul>
+<li>Modifying modelling assumptions,</li>
+<li>Adopting alternative methodological approaches (e.g., Bayesian vs frequentist),</li>
+<li>Extending to multivariate settings,</li>
+<li>Comparing simulation algorithms,</li>
+<li>Conducting sensitivity or robustness analysis.</li>
+</ul>
+<p>Projects should demonstrate thoughtful model design, careful implementation, validation of results, and clear interpretation.</p>
+<p>Students may also propose their own topic, provided it:</p>
+<ul>
+<li>Is supported by relevant literature,</li>
+<li>Is feasible within the scope of the unit,</li>
+<li>Can be investigated using a reproducible simulation framework.</li>
+</ul>
+<section id="queueing-systems-and-service-operations" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="queueing-systems-and-service-operations">Queueing Systems and Service Operations</h3>
+<p>Queueing models are fundamental in operations research, logistics, healthcare, telecommunications, and service industries. They provide a natural setting for simulation, especially when analytical solutions are unavailable or unrealistic assumptions must be relaxed.</p>
+<p>Students may investigate classical queueing systems and extend them through simulation.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Simulating M/M/1 and M/M/2 queues</li>
+<li>Priority queue systems</li>
+<li>Customer abandonment models</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Extend to multiple servers (M/M/c) and compare</li>
+<li>Non-Exponential Service Times (M/G/1)</li>
+<li>Compare simulation results with analytical formulas (where available)</li>
+<li>Investigate waiting time distributions</li>
+<li>Time-varying arrivals (peak vs off-peak) using piecewise arrival rates</li>
+<li>Conduct sensitivity analysis on arrival and service rates</li>
+</ul>
+</section>
+<section id="financial-simulation-and-risk-modelling" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="financial-simulation-and-risk-modelling">Financial Simulation and Risk Modelling</h3>
+<p>Financial systems are inherently stochastic and often analytically intractable under realistic assumptions. Simulation plays a central role in modern risk management, derivative pricing, and portfolio optimisation.</p>
+<p>Projects in this area should focus on modelling uncertainty, estimating risk measures, validating results, and interpreting implications for decision-making.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Portfolio risk simulation under correlated returns, assuming daily log-returns follow a multivariate normal distribution:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{R} \sim \mathcal{N}(\boldsymbol{\mu}, \Sigma)
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\mu}\)</span> is the mean return vector and <span class="math inline">\(\Sigma\)</span> is the covariance matrix.</p>
+<ul>
+<li>Monte Carlo option pricing under Geometric Brownian Motion (GBM) model:</li>
+</ul>
+<p><span class="math display">\[
+S_{t+1} = S_t \exp\left(\mu - \frac{1}{2}\sigma^2 + \sigma Z_{t+1}\right),
+\]</span></p>
+<p>where <span class="math inline">\(Z_t \sim \mathcal{N}(0,1)\)</span>. Where applicable, compare your Monte Carlo estimate to the known Black–Scholes analytical formula.</p>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Heavy-tailed return distributions</li>
+<li>Stress testing scenarios</li>
+<li>Comparing parametric vs simulation-based risk measures</li>
+</ul>
+</section>
+<section id="epidemic-modelling-sir-seir" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="epidemic-modelling-sir-seir">Epidemic Modelling (SIR / SEIR)</h3>
+<p>Compartmental epidemic models describe how infectious diseases spread through a population. They are widely used in public health, policy planning, and epidemiology.</p>
+<p>Simulation is particularly valuable because real outbreaks are stochastic, and analytical solutions are often unavailable or unrealistic under complex assumptions.</p>
+<p>Projects in this area should focus on modelling assumptions, stochastic simulation, parameter sensitivity, and interpretation of public health implications.</p>
+<p>The basic SIR model divides a fixed population of size <span class="math inline">\(N\)</span> into three compartments:</p>
+<ul>
+<li><strong>S(t)</strong>: Susceptible individuals<br>
+</li>
+<li><strong>I(t)</strong>: Infectious individuals<br>
+</li>
+<li><strong>R(t)</strong>: Recovered (or removed) individuals</li>
+</ul>
+<p>At each time step:</p>
+<ul>
+<li>New infections occur at rate proportional to <span class="math inline">\(\beta S(t) I(t) / N\)</span>, where <span class="math inline">\(\beta\)</span> is the average number of contacts per person per time.</li>
+<li>Recoveries occur at rate <span class="math inline">\(\gamma I(t)\)</span>, where <span class="math inline">\(\gamma\)</span> is the recovery rate constant in the unit fraction of a person recovered per day per infected person, when time is in unit day.</li>
+<li>Dynamics of the infectious class depends on the basic reproduction ratio <span class="math inline">\(R_0 = \frac{\beta}{\gamma}\)</span>.</li>
+</ul>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Stochastic SIR model simulation</li>
+<li>Impact of vaccination strategies</li>
+<li>Estimation of outbreak probabilities</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Comparison of deterministic and stochastic models</li>
+<li>Sensitivity analysis on transmission rates</li>
+<li>Policy intervention scenarios</li>
+</ul>
+</section>
+<section id="time-series-simulation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="time-series-simulation">Time Series Simulation</h3>
+<p>Time Series Analysis comprises of statistical methods to analyse data depends on time (in seconds, daily, weekly, monthly, etc). The applications in many fields, as examples:</p>
+<ul>
+<li><strong>Business and Economics:</strong> weekly interest rates, daily closing stock prices,monthly price indices, yearly sales figures</li>
+<li><strong>Meteorology:</strong> daily highs and lows temperature, hourly wind speeds</li>
+<li><strong>Agriculture:</strong> annual figures for crop and livestock production, soil erosion, and export sales</li>
+<li><strong>Biological sciences:</strong> electrical activity of heart at millisecond intervals</li>
+<li><strong>Social Sciences:</strong> population series such as birth rates or school enrolment</li>
+<li><strong>Epidemiology:</strong> number of influenza cases observed over time</li>
+<li><strong>Medicine:</strong> Blood pressure measurements traced over time for evaluating drugs used in treating hypertension.</li>
+</ul>
+<p>In this project, find resources that fitted time series model in the field of your interest. Based on the fitted model, generate synthetic data through simulation as one of the objectives.</p>
+<p>In your proposal, you must be being specific for fitted model(s) and resources that you referred to, so that I can justify it to be unique.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Simulating ARIMA models from fitted parameters</li>
+<li>GARCH models for financial volatility, e.g.&nbsp;GARCH(1,1) model:</li>
+</ul>
+<p><span class="math display">\[
+r_t = \sigma_t Z_t, \quad
+\sigma_t^2 = \alpha_0 + \alpha_1 r_{t-1}^2 + \beta_1 \sigma_{t-1}^2
+\]</span></p>
+<ul>
+<li>Synthetic data generation from published time series models</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Parameter recovery analysis</li>
+<li>Model diagnostics and residual analysis</li>
+<li>Nonlinear extensions</li>
+</ul>
+</section>
+<section id="environmental-and-climate-simulation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="environmental-and-climate-simulation">Environmental and Climate Simulation</h3>
+<p>Environmental systems are inherently stochastic and often exhibit temporal dependence, seasonality, and heavy-tailed behaviour. Simulation plays an important role in climate modelling, water resource planning, agriculture, and risk management.</p>
+<p>Projects in this area should focus on constructing stochastic models for environmental variables, validating them against observed data, and evaluating their long-term behaviour.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Rainfall generation using Markov chain models</li>
+<li>Modelling rainfall amounts with parametric distributions</li>
+<li>Comparing simulated weather sequences to observed data</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Multi-state Markov models</li>
+<li>Long-term variability analysis</li>
+<li>Visualisation of simulated vs real sequences</li>
+</ul>
+</section>
+<section id="bayesian-simulation-and-mcmc" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bayesian-simulation-and-mcmc">Bayesian Simulation and MCMC</h3>
+<p>Bayesian inference treats model parameters as random variables and updates beliefs using data through Bayes’ theorem:</p>
+<p><span class="math display">\[
+p(\theta \mid y) \propto p(y \mid \theta)\, p(\theta)
+\]</span></p>
+<p>In many realistic models, the posterior distribution does not have a closed-form solution. Simulation-based methods such as Markov Chain Monte Carlo (MCMC) allow us to approximate posterior distributions through repeated sampling.</p>
+<p>Projects in this area should focus on posterior simulation, convergence diagnostics, uncertainty quantification, and interpretation.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Implementing Gibbs sampling for a bivariate model</li>
+<li>Bayesian linear regression via simulation</li>
+<li>Comparing analytical posterior solutions with MCMC output</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Convergence diagnostics</li>
+<li>Autocorrelation analysis</li>
+<li>Mixing behaviour comparison</li>
+</ul>
+</section>
+<section id="synthetic-data-from-published-models" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="synthetic-data-from-published-models">Synthetic Data from Published Models</h3>
+<p>Simulation is widely used in research to evaluate models, test assumptions, and study system behaviour under controlled conditions. One powerful project direction is to identify a fitted model from the literature and use simulation to generate synthetic data based on that model.</p>
+<p>This approach connects simulation practice with real-world research and encourages critical evaluation of modelling assumptions.</p>
+<p>Students identify a published paper, textbook example, or applied modelling study that:</p>
+<ul>
+<li>Specifies a fitted statistical model,</li>
+<li>Reports parameter estimates,</li>
+<li>Describes assumptions clearly,</li>
+<li>Provides sufficient information to reconstruct the model.</li>
+</ul>
+<p>Using the reported structure and parameter values, and then</p>
+<ol type="1">
+<li>Reconstruct the model.</li>
+<li>Simulate synthetic datasets.</li>
+<li>Analyse the behaviour of the simulated system.</li>
+<li>Evaluate robustness under modified assumptions.</li>
+</ol>
+<p>A typical project may involve:</p>
+<ul>
+<li>Implementing the model from scratch (not solely using built-in simulation commands).</li>
+<li>Generating synthetic datasets of varying sizes.</li>
+<li>Studying sampling variability.</li>
+<li>Investigating parameter recovery through re-estimation.</li>
+<li>Comparing simulated data with properties described in the original paper.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -725,14 +1041,11 @@ Garbage out
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="**Preface**">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><strong>Preface</strong></span>
+      <a href="./03_5_workshop_sol.html" class="pagination-link" aria-label="Python Workshop Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_1_simulation_intro.html" class="pagination-link" aria-label="Introduction to Simulation">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
