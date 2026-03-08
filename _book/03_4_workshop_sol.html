@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>14&nbsp; R Workshop Solutions – R and Python for Computer Simulation (v1.0.4)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./03_5_workshop_sol.html" rel="next">
+<link href="./03_3_workshop.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-5c151f11a0e44064f75a5cfd43434b0d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_inference.html"><strong>Statistical Inference</strong></a></li><li class="breadcrumb-item"><a href="./03_4_workshop_sol.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Python for Computer Simulation (v1.0.4)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Preface</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Distributions</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Inference</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_1_frequentist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_4_workshop_sol.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04_discrete.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Simulation of Discrete Random Variables</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_1_precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Precision Method</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_3_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#part-1-frequentist-inference" id="toc-part-1-frequentist-inference" class="nav-link active" data-scroll-target="#part-1-frequentist-inference"><strong>Part 1: Frequentist inference</strong></a>
+  <ul>
+  <li><a href="#exercise-1-sampling-distribution" id="toc-exercise-1-sampling-distribution" class="nav-link" data-scroll-target="#exercise-1-sampling-distribution">Exercise 1: Sampling Distribution</a></li>
+  <li><a href="#exercise-2-bias-of-an-estimator" id="toc-exercise-2-bias-of-an-estimator" class="nav-link" data-scroll-target="#exercise-2-bias-of-an-estimator">Exercise 2: Bias of an Estimator</a></li>
+  <li><a href="#exercise-3-mle-for-the-bernoulli" id="toc-exercise-3-mle-for-the-bernoulli" class="nav-link" data-scroll-target="#exercise-3-mle-for-the-bernoulli">Exercise 3: MLE for the Bernoulli</a></li>
+  <li><a href="#exercise-4-mle-for-normal-distribution-exam-style" id="toc-exercise-4-mle-for-normal-distribution-exam-style" class="nav-link" data-scroll-target="#exercise-4-mle-for-normal-distribution-exam-style">Exercise 4: MLE for Normal Distribution (Exam-style)</a></li>
+  <li><a href="#exercise-5-confidence-interval-for-a-mean" id="toc-exercise-5-confidence-interval-for-a-mean" class="nav-link" data-scroll-target="#exercise-5-confidence-interval-for-a-mean">Exercise 5: Confidence Interval for a Mean</a></li>
+  </ul></li>
+  <li><a href="#part-2-bayesian-inference" id="toc-part-2-bayesian-inference" class="nav-link" data-scroll-target="#part-2-bayesian-inference"><strong>Part 2: Bayesian inference</strong></a>
+  <ul>
+  <li><a href="#exercise-6-bayes-theorem" id="toc-exercise-6-bayes-theorem" class="nav-link" data-scroll-target="#exercise-6-bayes-theorem">Exercise 6: Bayes Theorem</a></li>
+  <li><a href="#exercise-7-bayesian-estimate" id="toc-exercise-7-bayesian-estimate" class="nav-link" data-scroll-target="#exercise-7-bayesian-estimate">Exercise 7: Bayesian Estimate</a></li>
+  <li><a href="#exercise-8-conjugate-prior" id="toc-exercise-8-conjugate-prior" class="nav-link" data-scroll-target="#exercise-8-conjugate-prior">Exercise 8: Conjugate Prior</a></li>
+  </ul></li>
+  <li><a href="#extra-exercises" id="toc-extra-exercises" class="nav-link" data-scroll-target="#extra-exercises"><strong>Extra Exercises</strong></a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03_inference.html"><strong>Statistical Inference</strong></a></li><li class="breadcrumb-item"><a href="./03_4_workshop_sol.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="part-1-frequentist-inference" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-1-frequentist-inference"><strong>Part 1: Frequentist inference</strong></h2>
+<section id="exercise-1-sampling-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1-sampling-distribution">Exercise 1: Sampling Distribution</h4>
+<p>Suppose <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> are independent observations from an exponential distribution with rate <span class="math inline">\(\lambda = 1\)</span>.</p>
+<ol type="1">
+<li>Simulate <strong>1000 samples</strong> of size <span class="math inline">\(n = 20\)</span>.</li>
+<li>For each sample, compute the sample mean <span class="math inline">\(\bar{X}\)</span>.</li>
+<li>Plot a histogram of the 1000 sample means.</li>
+<li>Compute the mean and standard deviation of the simulated sample means.</li>
+</ol>
+<p><strong>Questions:</strong></p>
+<ol type="a">
+<li>What is the theoretical mean of <span class="math inline">\(X\)</span>?</li>
+<li>How does the average of the simulated sample means compare with the theoretical mean?</li>
+<li>What does this illustrate about the sampling distribution of <span class="math inline">\(\bar{X}\)</span>?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">rexp</span>(n, <span class="at">rate =</span> lambda)))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(xbar, <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of x̄ (Exp(1), n=20)"</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x̄"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<p>The histogram looks approximately normal (CLT at work).</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mean_xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(xbar)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sd_xbar   <span class="ot">&lt;-</span> <span class="fu">sd</span>(xbar)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mean_theory <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> lambda</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sd_theory   <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> (lambda<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> n))  </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># SD of x̄ for Exp(1): sqrt(Var)/sqrt(n), Var=1/lambda^2</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mean_xbar; sd_xbar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.003465</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2220453</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mean_theory; sd_theory</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2236068</code></pre>
+</div>
+</div>
+<div class="example">
+<p>a,b,c.&nbsp;The simulated mean should be close to 1 (theoretical mean). The simulated SD should be close to theoretical SD calculated by</p>
+<p><span class="math display">\[
+\sqrt{\frac{1}{n}} = \frac{1}{\sqrt{20}} \approx 0.2236.
+\]</span></p>
+</div>
+<hr>
+</section>
+<section id="exercise-2-bias-of-an-estimator" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-2-bias-of-an-estimator">Exercise 2: Bias of an Estimator</h4>
+<p>Let <span class="math inline">\(X_1, X_2, \dots, X_n \sim \text{Uniform}(0,1)\)</span>.</p>
+<p>Two estimators of the mean <span class="math inline">\(\mu = 0.5\)</span> are:</p>
+<p><span class="math display">\[
+\hat{\mu}_1 = \bar{X}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\hat{\mu}_2 = \frac{n+1}{n}\bar{X}.
+\]</span></p>
+<ol type="1">
+<li>Simulate <strong>1000 samples</strong> with <span class="math inline">\(n = 10\)</span>.</li>
+<li>Compute both estimators for each sample.</li>
+<li>Calculate the average value of each estimator.</li>
+</ol>
+<p><strong>Questions:</strong></p>
+<ol type="a">
+<li>Which estimator appears to be unbiased?</li>
+<li>Which estimator tends to overestimate the true mean?</li>
+<li>How could simulation help compare estimators?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">runif</span>(n, <span class="dv">0</span>, <span class="dv">1</span>)))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>mu_hat1 <span class="ot">&lt;-</span> xbar</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>mu_hat2 <span class="ot">&lt;-</span> ((n <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span> n) <span class="sc">*</span> xbar</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="fu">mean</span>(mu_hat1), <span class="fu">mean</span>(mu_hat2))     <span class="co"># compare average estimates to 0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4960166 0.5456182</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="at">bias1 =</span> <span class="fu">mean</span>(mu_hat1) <span class="sc">-</span> <span class="fl">0.5</span>,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">bias2 =</span> <span class="fu">mean</span>(mu_hat2) <span class="sc">-</span> <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      bias1       bias2 
+-0.00398343  0.04561823 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional visual:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mu_hat1, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="st">"mu_hat1 = x̄"</span>, <span class="at">xlab =</span> <span class="st">"Estimate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mu_hat2, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">main =</span> <span class="st">"mu_hat2 = ((n+1)/n) x̄"</span>, <span class="at">xlab =</span> <span class="st">"Estimate"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<ol type="a">
+<li>Estimator <span class="math inline">\(\hat{mu}_1 = \bar{X}\)</span> appears to be unbiased as its average across simulations is very close to 0.5.</li>
+<li>Estimator <span class="math inline">\(\hat{\mu}_2 = \frac{n+1}{n}\bar{X}\)</span> tends to overestimate the true mean as its expected value is 0.55, so it consistently overshoots.</li>
+<li>Simulation allows us to:
+<ul>
+<li>Empirically estimate the bias of each estimator.</li>
+<li>Compare variability (MSE, variance).</li>
+<li>Visualise sampling distributions.</li>
+<li>Understand estimator behaviour without relying solely on algebra.</li>
+</ul></li>
+</ol>
+</div>
+<hr>
+</section>
+<section id="exercise-3-mle-for-the-bernoulli" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-3-mle-for-the-bernoulli">Exercise 3: MLE for the Bernoulli</h4>
+<p>Suppose <span class="math inline">\(X_i \sim \text{Bernoulli}(p)\)</span>.</p>
+<ol type="1">
+<li>Simulate <span class="math inline">\(n = 50\)</span> Bernoulli observations with <span class="math inline">\(p = 0.3\)</span>.</li>
+<li>Compute the maximum likelihood estimator.</li>
+<li>Repeat this simulation <strong>1000 times</strong> and record the estimates.</li>
+</ol>
+<p><strong>Questions:</strong></p>
+<ol type="a">
+<li>Plot a histogram of the 1000 estimates.</li>
+<li>What is the mean of the simulated estimates?</li>
+<li>Does the estimator appear to be unbiased?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p)))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(p_hat, <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of p̂ (Bernoulli MLE)"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"p̂"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(p_hat)          <span class="co"># should be close to 0.3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.30222</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(p_hat)            <span class="co"># variability</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.06168368</code></pre>
+</div>
+</div>
+<div class="example">
+<ol type="a">
+<li>The histogram looks approximately normal and centred near 0.3.</li>
+<li>Mean of the estimates is very close to 0.3.</li>
+<li>The estimator appears unbiased as simulation confirms <span class="math inline">\(E[\hat{p}]=p\)</span>.</li>
+</ol>
+</div>
+<hr>
+</section>
+<section id="exercise-4-mle-for-normal-distribution-exam-style" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-4-mle-for-normal-distribution-exam-style">Exercise 4: MLE for Normal Distribution (Exam-style)</h4>
+<p>Suppose</p>
+<p><span class="math display">\[
+X_i \sim N(\mu, \sigma^2),
+\]</span></p>
+<p>where <span class="math inline">\(\sigma^2\)</span> is known.</p>
+<ol type="1">
+<li>Write down the likelihood function <span class="math inline">\(L(\mu)\)</span>.</li>
+<li>Derive the log-likelihood function.</li>
+<li>Show that the maximum likelihood estimator of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\bar{X}.\)</span></li>
+<li>Simulate <span class="math inline">\(n=40\)</span> observations from <span class="math inline">\(N(5,1)\)</span></li>
+<li>Compute the MLE of <span class="math inline">\(\mu\)</span>.</li>
+<li>Repeat the simulation 1000 times and plot the distribution of the estimates.</li>
+</ol>
+<p><strong>Questions:</strong></p>
+<ol type="a">
+<li>What is the mean of the simulated estimates?</li>
+<li>What does this suggest about the estimator?</li>
+<li>How does the variability change if the sample size increases?</li>
+</ol>
+<div class="example">
+<ol type="1">
+<li>Likelihood function:</li>
+</ol>
+<p><span class="math display">\[
+L(\mu)
+= \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}
+\exp\!\left\{-\frac{(x_i - \mu)^2}{2\sigma^2}\right\}.
+\]</span></p>
+<ol start="2" type="1">
+<li>The log-likelihood function:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\ell(\mu) &amp;= \log L(\mu) \\
+&amp;= \sum_{i=1}^n \left[-\frac{1}{2}\log(2\pi\sigma^2)-\frac{(x_i - \mu)^2}{2\sigma^2}\right] \\
+&amp;= -\frac{n}{2}\log(2\pi\sigma^2)-\frac{1}{2\sigma^2}\sum_{i=1}^n (x_i - \mu)^2.
+\end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li>MLE:</li>
+</ol>
+<p><span class="math display">\[
+\frac{\partial \ell(\mu)}{\partial \mu}
+= -\frac{1}{2\sigma^2} \cdot 2 \sum_{i=1}^n (x_i - \mu)(-1)
+= \frac{1}{\sigma^2} \sum_{i=1}^n (x_i - \mu) = 0.
+\]</span></p>
+<p><span class="math display">\[
+\Longrightarrow \sum_{i=1}^n x_i = n\mu
+\quad \Longrightarrow \quad
+\hat{\mu}_{\text{MLE}} = \bar{X}
+= \frac{1}{n}\sum_{i=1}^n X_i.
+\]</span></p>
+<ol start="4" type="1">
+<li>Simulate <span class="math inline">\(n=40\)</span> observations from <span class="math inline">\(N(5,1)\)</span></li>
+<li>Compute the MLE of <span class="math inline">\(\mu\)</span>.</li>
+<li>Repeat the simulation 1000 times and plot the distribution of the estimates.</li>
+</ol>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>mu_true <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">1</span>  <span class="co"># sd = 1, so variance = 1</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_true, <span class="at">sd =</span> sigma)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># MLE for mu when sigma^2 known</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>mu_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)  </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>mu_hat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.045183</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Repeat 1000 times and plot distribution of estimates</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mu_hats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_true, <span class="at">sd =</span> sigma)))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(mu_hats, <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Sampling distribution of MLE μ̂ (Normal mean), n=40"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(<span class="fu">hat</span>(mu)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Questions a–b</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mean_est <span class="ot">&lt;-</span> <span class="fu">mean</span>(mu_hats)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>sd_est   <span class="ot">&lt;-</span> <span class="fu">sd</span>(mu_hats)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>mean_est</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.9942</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sd_est</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1489613</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># c. Variability vs sample size</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>ns <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">80</span>, <span class="dv">200</span>)   <span class="co"># you can change / add sizes</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>summary_tbl <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> ns,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_hat =</span> <span class="cn">NA_real_</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd_hat =</span> <span class="cn">NA_real_</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(ns)) {</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  n_i <span class="ot">&lt;-</span> ns[i]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  hats <span class="ot">&lt;-</span> <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n_i, <span class="at">mean =</span> mu_true, <span class="at">sd =</span> sigma)))</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  summary_tbl<span class="sc">$</span>mean_hat[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(hats)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  summary_tbl<span class="sc">$</span>sd_hat[i] <span class="ot">&lt;-</span> <span class="fu">sd</span>(hats)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>summary_tbl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    n mean_hat    sd_hat
+1  40 5.008467 0.1552998
+2  80 5.004284 0.1105658
+3 200 5.000384 0.0698447</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: show how sd decreases ~ 1/sqrt(n)</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(summary_tbl<span class="sc">$</span>n, summary_tbl<span class="sc">$</span>sd_hat,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Sample size n"</span>, <span class="at">ylab =</span> <span class="st">"SD of μ̂"</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Variability of μ̂ decreases with n"</span>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(summary_tbl<span class="sc">$</span>n, sigma <span class="sc">/</span> <span class="fu">sqrt</span>(summary_tbl<span class="sc">$</span>n))  <span class="co"># theoretical SD of x̄ when sigma known</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Simulated SD"</span>, <span class="st">"Theoretical SD = σ/√n"</span>),</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">1</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<ol type="a">
+<li>Mean of the simulated estimates.</li>
+</ol>
+<p>The empirical mean of the <span class="math inline">\(1000\)</span> estimates is <span class="math display">\[
+\overline{\hat{\mu}}
+= \frac{1}{1000}\sum_{b=1}^{1000} \hat{\mu}^{(b)}.
+\]</span> In large simulations, this will be very close to the true value <span class="math inline">\(5\)</span>.</p>
+<ol start="2" type="a">
+<li>What does this suggest about the estimator?</li>
+</ol>
+<p>Since the average of the simulated MLEs is close to <span class="math inline">\(5\)</span>, this suggests that <span class="math display">\[
+E[\hat{\mu}] = \mu,
+\]</span></p>
+<p>i.e.&nbsp;<span class="math inline">\(\hat{\mu} = \bar{X}\)</span> is an <strong>unbiased</strong> estimator of <span class="math inline">\(\mu\)</span>.</p>
+<ol start="3" type="a">
+<li>Effect of increasing the sample size on variability.</li>
+</ol>
+<p>The variance of <span class="math inline">\(\bar{X}\)</span> is <span class="math display">\[
+\operatorname{Var}(\bar{X}) = \frac{\sigma^2}{n}.
+\]</span></p>
+<p>As <span class="math inline">\(n\)</span> increases, <span class="math inline">\(\operatorname{Var}(\bar{X})\)</span> decreases, so the sampling distribution of <span class="math inline">\(\hat{\mu}\)</span> becomes more concentrated around <span class="math inline">\(\mu\)</span>. In simulation, this appears as a histogram that is more tightly clustered around <span class="math inline">\(5\)</span> when <span class="math inline">\(n\)</span> is larger (e.g.&nbsp;<span class="math inline">\(n=100\)</span> vs.&nbsp;<span class="math inline">\(n=40\)</span>).</p>
+</div>
+<hr>
+</section>
+<section id="exercise-5-confidence-interval-for-a-mean" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-5-confidence-interval-for-a-mean">Exercise 5: Confidence Interval for a Mean</h4>
+<p>Suppose the true distribution is Normal with</p>
+<p><span class="math display">\[
+\mu = 10, \quad \sigma = 2.
+\]</span></p>
+<ol type="1">
+<li>Simulate a sample of size <span class="math inline">\(n = 40\)</span>.</li>
+<li>Compute the sample mean <span class="math inline">\(\bar{X}\)</span>.</li>
+<li>Construct a 95% confidence interval.</li>
+</ol>
+<p><strong>Questions:</strong></p>
+<ol type="a">
+<li>Does the interval contain the true mean <span class="math inline">\(\mu = 10\)</span>?</li>
+<li>Repeat the experiment <strong>1000 times</strong> and record whether the interval contains the true mean.</li>
+</ol>
+<p>Compute the <strong>proportion of intervals that contain the true mean</strong>.</p>
+<ol start="3" type="a">
+<li>Is this proportion close to 0.95?</li>
+<li>What does this illustrate about confidence intervals?</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Known parameters</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>mu_true <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>sigma   <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>n       <span class="ot">&lt;-</span> <span class="dv">40</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="do">### 1. Simulate one sample</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_true, <span class="at">sd =</span> sigma)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="do">### 2. Sample mean</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="do">### 3. 95% confidence interval (sigma known)</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>CI_lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> z <span class="sc">*</span> se</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>CI_upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> z <span class="sc">*</span> se</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(CI_lower, CI_upper)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9.470572 10.710162</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">### a. Does the interval contain the true mean?</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>contains_mu <span class="ot">&lt;-</span> (mu_true <span class="sc">&gt;=</span> CI_lower) <span class="sc">&amp;</span> (mu_true <span class="sc">&lt;=</span> CI_upper)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>contains_mu</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="do">### b. Repetition for 1000 simulations</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>contains <span class="ot">&lt;-</span> <span class="fu">logical</span>(B)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  x  <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_true, <span class="at">sd =</span> sigma)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  CI_lower <span class="ot">&lt;-</span> xbar <span class="sc">-</span> z <span class="sc">*</span> se</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  CI_upper <span class="ot">&lt;-</span> xbar <span class="sc">+</span> z <span class="sc">*</span> se</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  contains[b] <span class="ot">&lt;-</span> (mu_true <span class="sc">&gt;=</span> CI_lower) <span class="sc">&amp;</span> (mu_true <span class="sc">&lt;=</span> CI_upper)</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a><span class="do">### (b)–(c) Proportion of intervals containing the true mean</span></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>prop_contains <span class="ot">&lt;-</span> <span class="fu">mean</span>(contains)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>prop_contains   <span class="co"># should be close to 0.95</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.962</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Optional: visualise sampling variability of xbar</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replicate</span>(B, <span class="fu">mean</span>(<span class="fu">rnorm</span>(n, mu_true, sigma))),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">breaks =</span> <span class="dv">30</span>,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Sampling Distribution of x̄ (n = 40)"</span>,</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"x̄"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<ol start="4" type="a">
+<li>This simulation illustrates the frequentist coverage interpretation of confidence intervals:</li>
+</ol>
+<ul>
+<li>A single 95% confidence interval does not guarantee that it contains the true mean.</li>
+<li>However, if we repeatedly sample from the population and construct a 95% confidence interval each time, then approximately 95% of those intervals will contain the true parameter <span class="math inline">\(\mu\)</span>.</li>
+<li>Thus, the 95% refers to the long-run proportion of intervals that cover the true parameter, not to a probability statement about any one specific interval.</li>
+</ul>
+</div>
+<hr>
+</section>
+</section>
+<section id="part-2-bayesian-inference" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-2-bayesian-inference"><strong>Part 2: Bayesian inference</strong></h2>
+<section id="exercise-6-bayes-theorem" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-6-bayes-theorem">Exercise 6: Bayes Theorem</h4>
+<p>Suppose a test is 95% accurate when a disease is present and 97% accurate when the disease is absent. Suppose that 1% of the population has the disease. Let <span class="math inline">\(H\)</span> be the event that a disease is present, <span class="math inline">\(T^+\)</span> be the event of positive test result, and <span class="math inline">\(T^-\)</span> be the event of negative test result.</p>
+<div class="example">
+<ol type="a">
+<li>Draw a tree diagram or probability table to visualise the conditional probabilities</li>
+</ol>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+    A[Start] --&gt; B{H: Disease?}
+    B --&gt;|Yes 1%| C[H]
+    B --&gt;|No 99%| D[&amp;sim;H]
+
+    C --&gt;|Test Positive 95%| E[T+ &amp;mid; H]
+    C --&gt;|Test Negative 5%| F[T- &amp;mid; H]
+
+    D --&gt;|Test Positive 3%| G[T+ &amp;mid; &amp;sim;H]
+    D --&gt;|Test Negative 97%| K[T- &amp;mid; &amp;sim;H]
+
+    linkStyle default stroke:#000,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[
+\begin{array}{c|cc}
+P(T? \mid ?H) &amp; H &amp; \neg H \\
+\hline
+T+ &amp;  95\% &amp; 3\% \\
+T- &amp; 5\% &amp; 97\% \\
+\hline
+&amp; 1\% &amp; 99\%
+\end{array}
+\]</span></p>
+<ol start="2" type="a">
+<li>True positive probability <span class="math inline">\(P(H \mid T^+)\)</span>.</li>
+</ol>
+<p>Bayes’ rule:</p>
+<p><span class="math display">\[
+P(H \mid T^+) =
+\frac{P(T^+ \mid H)P(H)}
+     {P(T^+ \mid H)P(H) + P(T^+ \mid \neg H)P(\neg H)}
+\]</span></p>
+<p>Plug in values:</p>
+<p><span class="math display">\[
+P(H \mid T^+) =
+\frac{0.95 \cdot 0.01}
+     {0.95 \cdot 0.01 + 0.03 \cdot 0.99}
+\]</span></p>
+<p>Compute numerator and denominator:</p>
+<ul>
+<li>Numerator: <span class="math inline">\(0.0095\)</span></li>
+<li>Denominator: <span class="math inline">\(0.0095 + 0.0297 = 0.0392\)</span></li>
+</ul>
+<p><span class="math display">\[
+P(H \mid T^+) = \frac{0.0095}{0.0392} \approx 0.242
+\]</span></p>
+<p><strong>True positive probability ≈ 24.2%</strong></p>
+<p>Even with a “good” test, the disease is rare, so most positives are false positives.</p>
+<ol start="3" type="a">
+<li>False positive probability <span class="math inline">\(P(\neg H \mid T^+)\)</span></li>
+</ol>
+<p><span class="math display">\[
+P(\neg H \mid T^+) = 1 - P(H \mid T^+)
+\]</span></p>
+<p><span class="math display">\[
+= 1 - 0.242 = 0.758
+\]</span></p>
+<p><strong>False positive probability ≈ 75.8%</strong></p>
+<ol start="4" type="a">
+<li>True negative probability <span class="math inline">\(P(\neg H \mid T^-)\)</span></li>
+</ol>
+<p>Bayes’ rule again:</p>
+<p><span class="math display">\[
+P(\neg H \mid T^-) =
+\frac{P(T^- \mid \neg H)P(\neg H)}
+     {P(T^- \mid \neg H)P(\neg H) + P(T^- \mid H)P(H)}
+\]</span></p>
+<p><span class="math display">\[
+= \frac{0.97 \cdot 0.99}
+        {0.97 \cdot 0.99 + 0.05 \cdot 0.01}
+\]</span></p>
+<p>Compute:</p>
+<ul>
+<li>Numerator: <span class="math inline">\(0.9603\)</span></li>
+<li>Denominator: <span class="math inline">\(0.9603 + 0.0005 = 0.9608\)</span></li>
+</ul>
+<p><span class="math display">\[
+P(\neg H \mid T^-) \approx \frac{0.9603}{0.9608} \approx 0.9995
+\]</span></p>
+<p><strong>True negative probability ≈ 99.95%</strong></p>
+<ol start="5" type="a">
+<li>False negative probability <span class="math inline">\(P(H \mid T^-)\)</span></li>
+</ol>
+<p><span class="math display">\[
+P(H \mid T^-) = 1 - P(\neg H \mid T^-)
+\]</span></p>
+<p><span class="math display">\[
+= 1 - 0.9995 = 0.0005
+\]</span></p>
+<p><strong>False negative probability ≈ 0.05%</strong></p>
+</div>
+<hr>
+</section>
+<section id="exercise-7-bayesian-estimate" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-7-bayesian-estimate">Exercise 7: Bayesian Estimate</h4>
+<p>(Albert et al., 2009, Chapter 4, Exercise 4.4)</p>
+<p>A woman tells you she can predict the sex of a baby by how high it ‘rides’ in the mothers uterus. ‘High’ means a boy and ‘low’ means a girl. You suspect she is only guessing, but you are not completely sure;</p>
+<ol type="a">
+<li>Place a prior distribution on the values of her success rate (<span class="math inline">\(p\)</span>) in the table below that reflects this belief that she is probably just guessing.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow=</span><span class="dv">2</span>, <span class="at">ncol=</span><span class="dv">7</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Success rate p'</span>,<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Pr(p) prior'</span>,<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.75</span>,<span class="fl">0.1</span>,<span class="fl">0.04</span>,<span class="fl">0.01</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Success rate p</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pr(p) prior</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">0.01</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>This is a <strong>discrete prior</strong> with the following pmf <span class="math inline">\(Pr(p)\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x[<span class="dv">1</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], x[<span class="dv">2</span>,<span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>], <span class="at">xlab=</span><span class="st">"p"</span>, <span class="at">ylab=</span><span class="st">"prior"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>You conduct an experiment with 10 pregnant women, and the woman is correct 7 times out of 10 in predicting the sex of the unborn baby. Update your probabilities in the table.</li>
+</ol>
+<div class="example">
+<p>This is Binomial data (likelihood):</p>
+<p><span class="math display">\[
+X \mid p \sim \text{Binomial}(n=10, p)
+\]</span></p>
+<p><span class="math display">\[
+f(X \mid p) = {10\choose X} p^X (1-p)^{10-X}
+\]</span></p>
+<p>The woman is correct 7 times out of 10 <span class="math inline">\(\rightarrow X = 7\)</span>.</p>
+<p><span class="math display">\[
+f(X \mid p) = {10\choose 7} p^7 (1-p)^{3}
+\]</span></p>
+<p>Product:</p>
+<p><span class="math display">\[
+f(p \mid X) = Pr(p) \times f(X \mid p)
+\]</span></p>
+<p>Normalising above gives the posterior:</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>prior <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.75</span>,<span class="fl">0.1</span>,<span class="fl">0.04</span>,<span class="fl">0.01</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">7</span>,<span class="dv">10</span>,p)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>product <span class="ot">&lt;-</span> prior <span class="sc">*</span> likelihood</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> product <span class="sc">/</span> <span class="fu">sum</span>(product) <span class="co"># normalise</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>)</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Success rate p'</span>,<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Pr(p) prior'</span>,<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.75</span>,<span class="fl">0.1</span>,<span class="fl">0.04</span>,<span class="fl">0.01</span>)</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">3</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Product'</span>, <span class="fu">round</span>(product,<span class="dv">5</span>))</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">4</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Posterior'</span>, <span class="fu">round</span>(posterior,<span class="dv">5</span>))</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Success rate p</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pr(p) prior</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.1</td>
+<td style="text-align: left;">0.04</td>
+<td style="text-align: left;">0.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Product</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.00031</td>
+<td style="text-align: left;">0.08789</td>
+<td style="text-align: left;">0.02503</td>
+<td style="text-align: left;">0.0023</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Posterior</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.00267</td>
+<td style="text-align: left;">0.7608</td>
+<td style="text-align: left;">0.21665</td>
+<td style="text-align: left;">0.01987</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p,prior,<span class="at">type=</span><span class="st">'l'</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p,likelihood,<span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(p,posterior,<span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="03_4_workshop_sol_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Based on the data obtained in part (b) compute the maximum likelihood estimate of <span class="math inline">\(p\)</span> and place a bound on its estimate.</li>
+</ol>
+<div class="example">
+<p>For a Binomial mode, the MLE is <span class="math display">\[
+\hat{p}_{\text{MLE}} = \frac{X}{n} = \frac{7}{10} = 0.7.
+\]</span></p>
+<p>A 95% confidence interval is</p>
+<p><span class="math display">\[
+\hat{p} \pm 1.96 \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \approx 0.7 \pm 0.28,
+\]</span></p>
+<p>so roughly <strong>(0.42, 0.98)</strong>.</p>
+</div>
+<ol start="4" type="a">
+<li>How likely is she to have some skill in gender prediction? How likely is she to be just guessing?</li>
+</ol>
+<div class="example">
+<p>Let’s define</p>
+<ul>
+<li>Just guessing: <span class="math inline">\(p = 0.5\)</span>.</li>
+<li>Some skill: <span class="math inline">\(p &gt; 0.5, \quad p \in \{0.75, 0.9, 1\}\)</span>.</li>
+</ul>
+<p>From the posterior:</p>
+<p><span class="math display">\[
+Pr(p=0.5 \mid X) \approx 0.7608
+\]</span></p>
+<p><span class="math display">\[
+Pr(p&gt;0.5 \mid X) \approx 0.2167 + 0.0199 \approx 0.2366
+\]</span></p>
+<ul>
+<li>About 76% chance she’s just guessing.</li>
+<li>About 24% chance she has some real skill.</li>
+</ul>
+<p>The data nudges you toward “maybe some skill,” but your prior belief that she’s guessing still dominates.</p>
+</div>
+<ol start="5" type="a">
+<li>Repeat (b) and (d) with a flat prior on p.&nbsp;</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.25</span>,<span class="fl">0.5</span>,<span class="fl">0.75</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>prior1 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="co"># 1/6 for each</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>likelihood <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(<span class="dv">7</span>,<span class="dv">10</span>,p)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>posterior <span class="ot">&lt;-</span> (prior1 <span class="sc">*</span> likelihood) <span class="sc">/</span> <span class="fu">sum</span>(prior1 <span class="sc">*</span> likelihood)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>,<span class="at">nrow=</span><span class="dv">4</span>, <span class="at">ncol=</span><span class="dv">7</span>)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">1</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Success rate p'</span>, p)</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Pr(p) prior'</span>, <span class="fu">round</span>(prior1, <span class="dv">4</span>))</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">3</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Likelihood'</span>, <span class="fu">round</span>(likelihood, <span class="dv">4</span>))</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>x1[<span class="dv">4</span>, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Posterior'</span>, <span class="fu">round</span>(posterior, <span class="dv">4</span>))</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(x1)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Success rate p</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.5</td>
+<td style="text-align: left;">0.75</td>
+<td style="text-align: left;">0.9</td>
+<td style="text-align: left;">1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Pr(p) prior</td>
+<td style="text-align: left;">0.1667</td>
+<td style="text-align: left;">0.1667</td>
+<td style="text-align: left;">0.1667</td>
+<td style="text-align: left;">0.1667</td>
+<td style="text-align: left;">0.1667</td>
+<td style="text-align: left;">0.1667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Likelihood</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.0031</td>
+<td style="text-align: left;">0.1172</td>
+<td style="text-align: left;">0.2503</td>
+<td style="text-align: left;">0.0574</td>
+<td style="text-align: left;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Posterior</td>
+<td style="text-align: left;">0</td>
+<td style="text-align: left;">0.0072</td>
+<td style="text-align: left;">0.2738</td>
+<td style="text-align: left;">0.5848</td>
+<td style="text-align: left;">0.1341</td>
+<td style="text-align: left;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="example">
+<p><span class="math display">\[
+Pr(p=0.5 \mid X) \approx 0.2738
+\]</span></p>
+<p><span class="math display">\[
+Pr(p&gt;0.5 \mid X) \approx 0.5848 + 0.1341 \approx 0.7189
+\]</span></p>
+<ul>
+<li>About 27% chance she’s just guessing.</li>
+<li>About 72% chance she has some real skill.</li>
+</ul>
+<p>With a <strong>flat prior</strong>, the same data makes “some skill” the more plausible story.</p>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Same likelihood, different priors → different posterior stories.</p>
+</div>
+</div>
+</section>
+<section id="exercise-8-conjugate-prior" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-8-conjugate-prior">Exercise 8: Conjugate Prior</h4>
+<p>Suppose the number of customers arriving at a service desk in one hour follows a Poisson distribution with unknown rate <span class="math inline">\(\lambda\)</span>:</p>
+<p><span class="math display">\[
+X_i \sim \text{Poisson}(\lambda), \quad i = 1, \dots, n.
+\]</span></p>
+<p>A prior distribution is placed on <span class="math inline">\(\lambda\)</span>:</p>
+<p><span class="math display">\[
+\lambda \sim \text{Gamma}(\alpha, \beta),
+\]</span></p>
+<p>where <span class="math inline">\(\alpha &gt; 0\)</span> and <span class="math inline">\(\beta &gt; 0\)</span>.</p>
+<p>Assume the prior parameters are</p>
+<p><span class="math display">\[
+\alpha = 3, \qquad \beta = 1.
+\]</span></p>
+<p>During five observed hours, the number of arriving customers is recorded as</p>
+<p><span class="math display">\[
+8,\; 6,\; 7,\; 9,\; 10.
+\]</span></p>
+<p><strong>Questions:</strong></p>
+<ol type="1">
+<li>Write down the likelihood function for <span class="math inline">\(\lambda\)</span> based on the observed data.</li>
+<li>Using the conjugacy of the Gamma prior with the Poisson likelihood, determine the posterior distribution of <span class="math inline">\(\lambda\)</span>. Specify the updated parameters of the Gamma distribution.</li>
+<li>Compute the posterior mean of <span class="math inline">\(\lambda\)</span>.</li>
+<li>Find the maximum likelihood estimator (MLE) of <span class="math inline">\(\lambda\)</span> based on the observed data. Compare the MLE with the posterior mean and briefly comment on the difference.</li>
+<li>Using statistical software (R or Python), compute a <strong>95% credible interval</strong> for <span class="math inline">\(\lambda\)</span> from the posterior distribution.</li>
+</ol>
+<p><strong>Hint:</strong></p>
+<p>For the Gamma distribution parameterised as <span class="math inline">\(\text{Gamma}(\alpha, \beta)\)</span> with shape <span class="math inline">\(\alpha\)</span> and rate <span class="math inline">\(\beta\)</span>: <span class="math display">\[
+E[\lambda] = \frac{\alpha}{\beta}.
+\]</span></p>
+<p>For the Gamma–Poisson conjugate model, the posterior parameters are</p>
+<p><span class="math display">\[
+\alpha_{\text{post}} = \alpha + \sum x_i,
+\]</span></p>
+<p><span class="math display">\[
+\beta_{\text{post}} = \beta + n.
+\]</span></p>
+<div class="example">
+<ol type="1">
+<li>Likelihood function</li>
+</ol>
+<p>Given data <span class="math inline">\(x_1, \dots, x_n\)</span> with <span class="math inline">\(x_i \sim \text{Poisson}(\lambda)\)</span> independently, the likelihood is<br>
+<span class="math display">\[
+L(\lambda \mid x_1,\dots,x_n)
+= \prod_{i=1}^n \frac{e^{-\lambda}\lambda^{x_i}}{x_i!}
+= e^{-n\lambda}\lambda^{\sum_{i=1}^n x_i} \prod_{i=1}^n \frac{1}{x_i!}.
+\]</span></p>
+<p>For the specific data <span class="math inline">\(8,6,7,9,10\)</span> with <span class="math inline">\(n=5\)</span> and <span class="math inline">\(\sum x_i = 40\)</span>, <span class="math display">\[
+L(\lambda \mid \mathbf{x}) \propto e^{-5\lambda}\lambda^{40}.
+\]</span></p>
+<ol start="2" type="1">
+<li>Posterior distribution</li>
+</ol>
+<p>Prior: <span class="math inline">\(\lambda \sim \text{Gamma}(\alpha,\beta)\)</span> with <span class="math inline">\(\alpha=3\)</span>, <span class="math inline">\(\beta=1\)</span>.</p>
+<p>Using conjugacy: <span class="math display">\[
+\alpha_{\text{post}} = \alpha + \sum x_i = 3 + 40 = 43,
+\]</span> <span class="math display">\[
+\beta_{\text{post}} = \beta + n = 1 + 5 = 6.
+\]</span></p>
+<p>So the posterior is <span class="math display">\[
+\lambda \mid \mathbf{x} \sim \text{Gamma}(43, 6).
+\]</span></p>
+<ol start="3" type="1">
+<li>Posterior mean</li>
+</ol>
+<p>For <span class="math inline">\(\lambda \sim \text{Gamma}(\alpha_{\text{post}}, \beta_{\text{post}})\)</span>, <span class="math display">\[
+E[\lambda \mid \mathbf{x}] = \frac{\alpha_{\text{post}}}{\beta_{\text{post}}}
+= \frac{43}{6} \approx 7.1667.
+\]</span></p>
+<ol start="4" type="1">
+<li>MLE of <span class="math inline">\(\lambda\)</span> and comparison</li>
+</ol>
+<p>For Poisson data, the MLE is the sample mean: <span class="math display">\[
+\hat{\lambda}_{\text{MLE}} = \bar{x}
+= \frac{8+6+7+9+10}{5}
+= \frac{40}{5} = 8.
+\]</span></p>
+<p>Comparison:</p>
+<ul>
+<li>MLE: <span class="math inline">\(\hat{\lambda}_{\text{MLE}} = 8\)</span><br>
+</li>
+<li>Posterior mean: <span class="math inline">\(E[\lambda \mid \mathbf{x}] = 43/6 \approx 7.17\)</span></li>
+</ul>
+<p>The posterior mean is <strong>shrunk</strong> toward the prior mean<br>
+<span class="math display">\[
+E[\lambda] = \frac{\alpha}{\beta} = \frac{3}{1} = 3,
+\]</span> reflecting prior information plus data, whereas the MLE uses only the data.</p>
+<ol start="5" type="1">
+<li>95% credible interval in R</li>
+</ol>
+<p>Posterior: <span class="math inline">\(\lambda \mid \mathbf{x} \sim \text{Gamma}(43, 6)\)</span>.</p>
+<p>A 95% credible interval is given by the 2.5% and 97.5% quantiles:</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>alpha_post <span class="ot">&lt;-</span> <span class="dv">43</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>beta_post  <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior mean</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>post_mean <span class="ot">&lt;-</span> alpha_post <span class="sc">/</span> beta_post</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>post_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.166667</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% credible interval</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>ci_lower <span class="ot">&lt;-</span> <span class="fu">qgamma</span>(<span class="fl">0.025</span>, <span class="at">shape =</span> alpha_post, <span class="at">rate =</span> beta_post)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>ci_upper <span class="ot">&lt;-</span> <span class="fu">qgamma</span>(<span class="fl">0.975</span>, <span class="at">shape =</span> alpha_post, <span class="at">rate =</span> beta_post)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(ci_lower, ci_upper)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5.186552 9.461966</code></pre>
+</div>
+</div>
+<div class="example">
+<p>This returns a 95% credible interval of the form<br>
+<span class="math display">\[
+[\lambda_{0.025},\; \lambda_{0.975}] = [5.1866, 9.4620].
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="extra-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="extra-exercises"><strong>Extra Exercises</strong></h2>
+<ol type="1">
+<li>Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> have a joint density function <span class="math inline">\(f(X_1, X_2, \dots, X_n \mid \theta)\)</span>. Given <span class="math inline">\(X_1 = x_1, X_2 = x_2, \dots, X_n = x_n\)</span> is observed, the function of <span class="math inline">\(\theta\)</span> defined by</li>
+</ol>
+<p><span class="math display">\[
+L(\theta) = L(\theta \mid x_1, x_2, \dots, x_n) = f(x_1, x_2, \dots, x_n \mid \theta)
+\]</span></p>
+<p>  is the <strong>likelihood function</strong>.</p>
+<p>  In the following questions you are asked to specify the likelihood functions for given scenarios.</p>
+<ol type="a">
+<li>A coin is flipped <strong>100 times</strong>. Given that there were <strong>55 heads</strong>, specify the likelihood function for <span class="math inline">\(\theta\)</span>, the probability of heads on a single toss.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(\theta) = {100 \choose 55}\theta^55 (1-\theta)^{100-55}
+\]</span></p>
+</div>
+<ol start="2" type="a">
+<li>Consider the distribution <span class="math inline">\(\text{Multinomial}(n = 6, \theta, \theta, 1 - 2\theta)\)</span>. The following two samples are drawn from this distribution: <span class="math inline">\(X = (1,3,2)\)</span> and <span class="math inline">\(X = (2,2,2)\)</span>. Specify the likelihood function for each sample and compare them.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\begin{aligned}
+L(\theta \mid 1,3,2)
+&amp;= \frac{6!}{1!\,3!\,2!}\,\theta^{1}\theta^{3}(1-2\theta)^{2} \\
+&amp;= \frac{6!}{1!\,3!\,2!}\,\theta^{4}(1-2\theta)^{2} \\
+&amp;\propto \theta^{4}(1-2\theta)^{2}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+L(\theta \mid 2,2,2)
+&amp;= \frac{6!}{2!\,2!\,2!}\,\theta^{2}\theta^{2}(1-2\theta)^{2} \\
+&amp;= \frac{6!}{2!\,2!\,2!}\,\theta^{4}(1-2\theta)^{2} \\
+&amp;\propto \theta^{4}(1-2\theta)^{2}
+\end{aligned}
+\]</span></p>
+<p>Both have the same mathematical form.</p>
+</div>
+<ol start="3" type="a">
+<li>An actuary has been advised to use the following claim size distribution as a model for a particular type of claim, with claim sizes measured in units of A$100,</li>
+</ol>
+<p><span class="math display">\[
+f_X(x) = \frac{x^2}{2\theta^3} e^{-x/\theta}, \qquad 0 &lt; x &lt; \infty, \quad \theta &gt; 0
+\]</span></p>
+<p>  Let <span class="math inline">\(x_1, x_2, \dots, x_n\)</span> be a random sample of <span class="math inline">\(n\)</span> claim sizes for such claims. Specify the likelihood function and the log-likelihood function.</p>
+<div class="example">
+<p><span class="math display">\[
+\begin{aligned}
+L(\theta) &amp;= \prod_{i=1}^{n} f_X(x_i) \\
+&amp;= \prod_{i=1}^{n} \frac{x_i^2}{2\theta^3} \exp\!\left(-\frac{x_i}{\theta}\right) \\
+&amp;= \left( \frac{x_1^2}{2\theta^3} e^{-x_1/\theta} \right)
+   \left( \frac{x_2^2}{2\theta^3} e^{-x_2/\theta} \right)
+   \cdots
+   \left( \frac{x_n^2}{2\theta^3} e^{-x_n/\theta} \right) \\
+&amp;= \frac{\displaystyle \prod_{i=1}^{n} x_i^2 \;
+      \exp\!\left( -\sum_{i=1}^{n} \frac{x_i}{\theta} \right)}
+      {2^n \theta^{3n}}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\ln(L(\theta))
+&amp;= \ln\!\left(
+\frac{\prod_{i=1}^{n} x_i^{2}\, e^{-\sum_{i=1}^{n} x_i/\theta}}
+     {2^{n}\theta^{3n}}
+\right) \\[6pt]
+&amp;= \ln\!\left(\prod_{i=1}^{n} x_i^{2} e^{-\sum_{i=1}^{n} x_i/\theta}\right)
+  - \ln(2^{n}\theta^{3n}) \\[6pt]
+&amp;= \sum_{i=1}^{n} \ln(x_i^{2})
+  - \sum_{i=1}^{n} \frac{x_i}{\theta}
+  - n\ln(2)
+  - 3n\ln(\theta) \\[6pt]
+&amp;\propto
+-\sum_{i=1}^{n} \frac{x_i}{\theta}
+- 3n\ln(\theta)
+\end{aligned}
+\]</span></p>
+</div>
+<ol start="2" type="1">
+<li>Consider a sample of 1000 motor insurance policies. We assume that the annual total claim amounts per policy are independent and identically distributed. We denote by <span class="math inline">\(X\)</span> the number of policies with a total amount of over A$5000 claimed in a calendar year, and assume that <span class="math inline">\(X\)</span> has a Binomial distribution with parameters <span class="math inline">\(n = 1000\)</span> and <span class="math inline">\(p\)</span>. An analyst wishes to estimate the unknown proportion <span class="math inline">\(p\)</span> of claims with amount greater than A$5000 per year.</li>
+</ol>
+<ol type="a">
+<li>Derive the maximum likelihood estimator for <span class="math inline">\(p\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\begin{aligned}
+l(p) &amp;= k\, p^{x}(1-p)^{\,n-x} \\[6pt]
+\frac{\partial l(p)}{\partial p}
+&amp;= \frac{x}{p} - \frac{n-x}{1-p} \\[6pt]
+\frac{\partial^{2} l(p)}{\partial p^{2}}
+&amp;= \frac{x}{p^{2}} - \frac{n-x}{(1-p)^{2}} &lt; 0 \\[6pt]
+\hat{p} &amp;= \frac{x}{n}
+\end{aligned}
+\]</span></p>
+</div>
+<ol start="2" type="a">
+<li>Derive the Bayesian estimator of <span class="math inline">\(p\)</span> under quadratic loss assuming that the prior distribution of <span class="math inline">\(p\)</span> is beta with parameters <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> respectively.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\begin{aligned}
+\pi(p)
+&amp;\propto p^{x}(1-p)^{\,n-x}\, p^{\alpha-1}(1-p)^{\beta-1} \\[6pt]
+&amp;\propto p^{\,x+\alpha-1}(1-p)^{\,n-x+\beta-1} \\[6pt]
+&amp;\sim \mathrm{Beta}(x+\alpha,\; n-x+\beta) \\[6pt]
+&amp;\sim \mathrm{Beta}(x+\alpha,\; 1000-x+\beta)
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{p}
+&amp;= \mathbb{E}[p \mid x]
+= \frac{x+\alpha}{n+\alpha+\beta}
+= \frac{x+\alpha}{1000+\alpha+\beta}
+\end{aligned}
+\]</span></p>
+</div>
+<ol start="3" type="a">
+<li>Comment on the relationship between the prior distribution and the posterior distribution of <span class="math inline">\(p\)</span> obtained in (b).</li>
+</ol>
+<div class="example">
+<p>Conjugate prior, same form of prior and posterior distribution.</p>
+</div>
+<ol start="4" type="a">
+<li>Assume that 50 out of 1000 policies in an actual sample have a total claim amount of over A$5000.</li>
+</ol>
+<div class="example">
+<ul>
+<li>Estimate <span class="math inline">\(p\)</span> using the MLE. <span class="math display">\[
+\hat{p} = 50/1000 = 0.05
+\]</span></li>
+<li>Estimate <span class="math inline">\(p\)</span> using the Bayesian estimator under quadratic loss, given that the parameters of the beta prior distribution are <span class="math inline">\(\alpha = 2\)</span> and <span class="math inline">\(\beta = 2\)</span> respectively. <span class="math display">\[
+\hat{p} = (50+2)/(1000+4) = 0.0518
+\]</span></li>
+<li>Comment on the difference between the values estimated in MLE and Bayesian Estimate.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>The two estimators are the same.</strong></p>
+</blockquote>
+</div>
+<ol start="3" type="1">
+<li><p>While travelling through the Mushroom Kingdom, Mario and Luigi find some rather unusual coins. They agree on a prior of <span class="math inline">\(f(\theta) \sim \text{Beta}(5,5)\)</span> for the probability of heads, though they disagree on what experiment to run to investigate <span class="math inline">\(\theta\)</span> further.</p>
+<ul>
+<li>Mario decides to flip a coin 5 times. He gets four heads in five flips.</li>
+<li>Luigi decides to flip a coin until the first tails. He gets four heads before the first tail.</li>
+</ul></li>
+</ol>
+<p>  Show that Mario and Luigi will arrive at the same posterior on <span class="math inline">\(\theta\)</span>, and calculate this posterior.</p>
+<div class="example">
+<p><strong>Mario</strong></p>
+<p>Prior is Beta(5,5):</p>
+<p><span class="math display">\[
+f(\theta) = \frac{\theta^4(1-\theta)^4}{B(5,5)}
+\]</span></p>
+<p>Likelihood is Binomial(5, <span class="math inline">\(\theta\)</span>):</p>
+<p><span class="math display">\[
+f(X \mid \theta) = {5 \choose 4}\theta^4(1-\theta)^1
+\]</span></p>
+<p>Posterior:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\theta \mid X) &amp;\propto \theta^8 (1-\theta)^5 \\
+&amp;\propto \theta^{9-1} (1-\theta)^{6-1} \\
+&amp;\sim \text{Beta}(9,6).
+\end{aligned}
+\]</span></p>
+<p><strong>Luigi</strong></p>
+<p>Prior is Beta(5,5):</p>
+<p><span class="math display">\[
+f(\theta) = \frac{\theta^4(1-\theta)^4}{B(5,5)}
+\]</span></p>
+<p>Likelihood is Geometric(<span class="math inline">\(\theta\)</span>):</p>
+<p><span class="math display">\[
+f(X \mid \theta) = \theta^4(1-\theta)^1
+\]</span></p>
+<p>Posterior:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f(\theta \mid X) &amp;\propto \theta^8 (1-\theta)^5 \\
+&amp;\propto \theta^{9-1} (1-\theta)^{6-1} \\
+&amp;\sim \text{Beta}(9,6).
+\end{aligned}
+\]</span></p>
+<p>Both arrive at the same pposterior Beta(9, 5).</p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03_3_workshop.html" class="pagination-link" aria-label="Workshop Activities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./03_5_workshop_sol.html" class="pagination-link" aria-label="Python Workshop Solutions">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R and Python for Computer Simulation (v1.0.4) <br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
