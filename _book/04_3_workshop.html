@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – R and Python for Computer Simulation (v1.0.4)</title>
+<title>18&nbsp; Workshop Activities – R and Python for Computer Simulation (v1.0.4)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_1_simulation_intro.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./04_4_workshop_sol.html" rel="next">
+<link href="./02_3_transformation_rvs.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -71,6 +71,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -83,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01_introduction.html"><strong>Introduction</strong></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_discrete.html"><strong>Simulation of Discrete Random Variables</strong></a></li><li class="breadcrumb-item"><a href="./04_3_workshop.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Workshop Activities</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link active">
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Introduction</strong></span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -260,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_3_workshop.html" class="sidebar-item-text sidebar-link">
+  <a href="./04_3_workshop.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
   </div>
 </li>
@@ -289,15 +318,21 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#exercise-precision-method" id="toc-exercise-precision-method" class="nav-link active" data-scroll-target="#exercise-precision-method">Exercise : Precision Method</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04_discrete.html"><strong>Simulation of Discrete Random Variables</strong></a></li><li class="breadcrumb-item"><a href="./04_3_workshop.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Workshop Activities</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><strong>Introduction</strong></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Workshop Activities</span></h1>
 </div>
 
 
@@ -314,48 +349,58 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Computer simulation has become one of the central methodologies of modern scientific inquiry. Alongside theoretical analysis and physical experimentation, simulation provides a third way of understanding complex systems. Where mathematical analysis seeks exact solutions and experimentation observes real-world behaviour, simulation constructs a computational model of reality and explores its behaviour through repeated virtual experiments.</p>
-<div class="columns">
-<div class="column center" style="width:33%;">
-<p><strong>Stanisław Ulam</strong> <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Stanislaw_Ulam.tif/lossy-page1-826px-Stanislaw_Ulam.tif.jpg" class="img-fluid" style="width:64.0%"></p>
-</div><div class="column center" style="width:33%;">
-<p><strong>John Von Neumann</strong> <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif" class="img-fluid" style="width:70.0%"></p>
-</div><div class="column center" style="width:33%;">
-<p><strong>ENIAC</strong> (Electronic Numerical Integrator and Computer)</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg/1280px-Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg" class="img-fluid" style="width:96.0%"></p>
-</div>
-</div>
-<p>The idea of solving problems through simulated repetition dates back to the 1940s, when Stanisław Ulam considered the probability of winning a solitaire game. Rather than attempting to derive a complicated analytical formula, he proposed repeatedly playing the game and estimating the probability empirically. Together with John von Neumann, this reasoning developed into what is now known as the Monte Carlo method: using randomness and repetition to approximate solutions to problems that are otherwise analytically intractable. With the emergence of electronic computing, this approach transformed from a clever thought experiment into a powerful scientific tool.</p>
-<div class="note">
-<p>At its core, simulation is the use of a computer to imitate the operation of a real-world stochastic system in order to study its behaviour.</p>
-</div>
-<p>The system of interest may be physical, biological, economic, or entirely abstract. We may simulate the lifetime of a machine component, the arrival of customers in a queue, rainfall patterns over time, the spread of an infectious disease, or the evolution of a financial portfolio. In each case, the goal is not merely to generate numbers, but to gain insight into variability, uncertainty, and long-run behaviour.</p>
-<div class="note">
-<p>A simulation study always rests on three conceptual pillars: a model, randomness, and repetition.</p>
-</div>
-<p>The model provides a mathematical or logical representation of the system. Randomness is introduced to reflect uncertainty in inputs or mechanisms. Repetition allows patterns to emerge from noise, enabling us to estimate quantities such as probabilities, expectations, and distributions. Without repetition, randomness obscures structure; with repetition, structure becomes visible.</p>
-<p>Unlike analytical methods, simulation rarely produces exact answers. Instead, it produces approximations whose accuracy improves as the number of replications increases. This fundamental idea underlies much of computational statistics and is formalised by results such as the Law of Large Numbers and the Central Limit Theorem, which justify the convergence of simulated averages to theoretical quantities.</p>
-<div class="note">
-<p>Simulation is especially valuable when systems are too complex for closed-form mathematical analysis.</p>
-</div>
-<p>Real-world processes often involve nonlinear interactions, high-dimensional dependence, heterogeneous agents, time-varying parameters, and complicated feedback mechanisms. In such settings, deriving exact formulas may be impossible or impractical. Simulation trades algebraic elegance for flexibility: we sacrifice exactness in exchange for the ability to model reality more faithfully.</p>
-<p>Modern computing environments such as R and Python make it possible to design, implement, and analyse simulation studies efficiently. However, effective simulation requires more than programming skill. It requires careful problem formulation, thoughtful modelling assumptions, validation of computational implementations, and rigorous statistical analysis of output. A poorly designed simulation can be as misleading as a flawed mathematical proof.</p>
-<div class="flowchart" aria-label="intro">
-<div class="node" style="background: rgba(170, 0, 0, 0.10);">
-Garbage in
-</div>
-<div class="arrow" aria-hidden="true">
-→
-</div>
-<div class="node" style="background: rgba(170, 160, 0, 0.10);">
-Garbage out
-</div>
-</div>
-<p><span style="display: block; margin: 24px 0;"></span></p>
-<p>This chapter introduces the foundational ideas that underpin all simulation methods studied in this unit. We begin by formalising what is meant by simulation and how simulation studies are structured. We then examine the essential role of random number generation, since all stochastic simulation ultimately depends on our ability to generate high-quality random variables. Finally, we review the probability concepts that provide the theoretical justification for simulation-based inference.</p>
-<p>Simulation is not merely a computational trick. It is a way of thinking about uncertainty, experimentation, and modelling in the presence of randomness. Understanding its scope and its limitations is the first step toward using it responsibly and effectively.</p>
+<section id="exercise-precision-method" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="exercise-precision-method">Exercise : Precision Method</h2>
+<p>A mobile game awards players with different types of rewards when a treasure chest is opened. The reward type follows the probability distribution below.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Reward Type <span class="math inline">\(x\)</span></th>
+<th>Coins</th>
+<th>Gems</th>
+<th>Energy</th>
+<th>Rare Item</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(P(X=x)\)</span></td>
+<td>0.50</td>
+<td>0.25</td>
+<td>0.15</td>
+<td>0.10</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tasks</strong></p>
+<ol type="a">
+<li><p>Construct the cumulative distribution function (CDF) for this random variable and present it in a table.</p></li>
+<li><p>Using the precision method, write down the interval of the unit interval <span class="math inline">\((0,1)\)</span> corresponding to each outcome. That is, determine the intervals for <span class="math inline">\(U \sim \text{Uniform}(0,1)\)</span> such that</p></li>
+</ol>
+<p><span class="math display">\[
+X =
+\begin{cases}
+\text{Coins} &amp; \text{if } \dots \\
+\text{Gems} &amp; \text{if } \dots \\
+\text{Energy} &amp; \text{if } \dots \\
+\text{Rare Item} &amp; \text{if } \dots
+\end{cases}
+\]</span></p>
+<ol start="3" type="a">
+<li>Suppose the following random numbers are generated:</li>
+</ol>
+<p><span class="math display">\[
+0.12, 0.63, 0.44, 0.91, 0.27
+\]</span></p>
+<p>   Using the intervals from part (b), determine the reward obtained in each case.</p>
+<ol start="4" type="a">
+<li><p>Write an R function that simulates one reward using the precision method.</p></li>
+<li><p>Simulate 10,000 rewards and compute the empirical probabilities of each outcome. Compare the simulated probabilities with the theoretical probabilities. Briefly comment on the result.</p></li>
+<li><p>Explain why the precision method may become inefficient when the number of possible outcomes <span class="math inline">\(k\)</span> is very large.</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -760,13 +805,13 @@ Garbage out
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="**Preface**">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><strong>Preface</strong></span>
+      <a href="./02_3_transformation_rvs.html" class="pagination-link" aria-label="Transformation of Random Variables">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Transformation of Random Variables</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_1_simulation_intro.html" class="pagination-link" aria-label="Introduction to Simulation">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_4_workshop_sol.html" class="pagination-link" aria-label="R Workshop Solutions">
+        <span class="nav-page-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
