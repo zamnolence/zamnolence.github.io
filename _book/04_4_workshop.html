@@ -451,35 +451,48 @@ X =
 <p><span class="math display">\[ f(x)= \left(\frac{1}{8} + \frac{3}{8} x \right), \quad 0 \le x \le 2 \]</span></p>
 <p><span class="math display">\[ f(x)=0, \quad \text{otherwise.}\]</span></p>
 <ol type="a">
-<li><p>Calculate the exact mean and variance (4 decimal points).</p></li>
-<li><p>Write a program to simulate values from this distribution using <em>the inverse cdf</em> method. Calculate the mean and variance (4dp) and compare with the exact results.</p></li>
+<li><p>Calculate the exact mean and variance.</p></li>
+<li><p>Write a program to simulate values from this distribution using <em>the inverse cdf</em> method. Calculate the mean and variance and compare with the exact results.</p></li>
 </ol>
 <ul>
-<li>Hints</li>
+<li>Hints
+<ul>
+<li>Step 1. Firstly, we need to find the cdf <span class="math inline">\(F(x).\)</span></li>
+<li>Step 2. Set <span class="math inline">\(u = F(x)\)</span> and solve for <span class="math inline">\(x\)</span></li>
+<li>The final answer is <span class="math display">\[
+  x=\frac{-1 + \sqrt{1+48u} }{3}
+  \]</span></li>
+</ul></li>
 </ul>
-<p>Step 1. Firstly, we need to find the cdf <span class="math inline">\(F(x).\)</span></p>
-<p>Step 2. Set <span class="math inline">\(u = F(x)\)</span> and solve for <span class="math inline">\(x\)</span></p>
-<p>The final answer is</p>
-<p><span class="math display">\[x=\frac{-1 + \sqrt{1+48u} }{3}\]</span></p>
-<p>Then write the program in the following chunk.</p>
 </section>
 <section id="exercise-3-simulating-the-distribution-of-waiting-time---transportation" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="exercise-3-simulating-the-distribution-of-waiting-time---transportation">Exercise 3: Simulating the distribution of waiting time - Transportation</h3>
-<p>The article “A Model of Pedestrians’ Waiting Times for Street Crossings at Signalised Intersections” (Transportation Research, 2013: 17–28) suggested that under some circumstances the distribution of waiting time X could be modeled with the following pdf:</p>
-<p><span class="math display">\[ f(x)= \frac{\theta}{\tau}\left( 1- \frac{x}{\tau}\right)^{\theta - 1}, \quad 0 \le x &lt; \tau \]</span></p>
-<p><span class="math display">\[ f(x)=0, \quad \text{otherwise.}\]</span></p>
-<ol type="a">
-<li>Write a function to simulate values from this distribution, implementing the inverse cdf method. Your function should have three inputs: the desired number of simulated values <span class="math inline">\(n\)</span> and values for the two parameters for $ $ and <span class="math inline">\(\tau.\)</span></li>
-</ol>
-<p>Hints: The final answer is <span class="math display">\[F(x)=  1 - (1-x/\tau)^{\theta}.\]</span></p>
-<ol start="2" type="a">
-<li>Use your function in part (a) to simulate 10,000 values from this wait time distribution with <span class="math inline">\(\theta=4\)</span> and <span class="math inline">\(\tau=80.\)</span> Estimate E(X) under these parameter settings.</li>
-</ol>
-<p>Hints: The final answer is <span class="math display">\[
-x= \tau(1 - (1- u)^{1/\theta})
+<p>The article “A Model of Pedestrians’ Waiting Times for Street Crossings at Signalised Intersections” (Transportation Research, 2013: 17–28) suggested that under some circumstances the distribution of waiting time <span class="math inline">\(X\)</span> could be modeled with the following pdf:</p>
+<p><span class="math display">\[
+f(x)= \frac{\theta}{\tau}\left( 1- \frac{x}{\tau}\right)^{\theta - 1}, \quad 0 \le x &lt; \tau
 \]</span></p>
-<p>Then write the program below.</p>
-<p>How close is your estimate to the correct value of the exact <span class="math inline">\(E(X)=16\)</span>?</p>
+<p><span class="math display">\[
+f(x)=0, \quad \text{otherwise.}
+\]</span></p>
+<ol type="a">
+<li>Write a function to simulate values from this distribution, implementing the inverse cdf method. Your function should have three inputs: the desired number of simulated values <span class="math inline">\(n\)</span> and values for the two parameters for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\tau.\)</span></li>
+</ol>
+<ul>
+<li>Hints: The final answer is <span class="math display">\[
+  F(x)=  1 - (1-x/\tau)^{\theta}.
+  \]</span></li>
+</ul>
+<ol start="2" type="a">
+<li>Use your function in part (a) to simulate 10,000 values from this wait time distribution with <span class="math inline">\(\theta=4\)</span> and <span class="math inline">\(\tau=80.\)</span> Estimate <span class="math inline">\(E(X)\)</span> under these parameter settings.</li>
+</ol>
+<ul>
+<li>Hints: The final answer is <span class="math display">\[
+  x= \tau(1 - (1- u)^{1/\theta})
+  \]</span></li>
+</ul>
+<ol start="3" type="a">
+<li>How close is your estimate to the correct value of the exact <span class="math inline">\(E(X)=16\)</span>?</li>
+</ol>
 <hr>
 </section>
 </section>

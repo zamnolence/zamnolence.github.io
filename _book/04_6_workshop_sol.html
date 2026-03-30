@@ -390,7 +390,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#solution-precision-method-in-python" id="toc-solution-precision-method-in-python" class="nav-link active" data-scroll-target="#solution-precision-method-in-python">Solution: Precision Method in Python</a></li>
+  <li><a href="#part-1-inverse-transform-sampling" id="toc-part-1-inverse-transform-sampling" class="nav-link active" data-scroll-target="#part-1-inverse-transform-sampling">Part 1: Inverse Transform Sampling</a>
+  <ul>
+  <li><a href="#exercise-1-precision-method" id="toc-exercise-1-precision-method" class="nav-link" data-scroll-target="#exercise-1-precision-method">Exercise 1: Precision Method</a></li>
+  <li><a href="#exercise-2-load-on-a-bridge-cd-2014" id="toc-exercise-2-load-on-a-bridge-cd-2014" class="nav-link" data-scroll-target="#exercise-2-load-on-a-bridge-cd-2014">Exercise 2: Load on a bridge (CD 2014)</a></li>
+  <li><a href="#exercise-3-simulating-the-distribution-of-waiting-time---transportation" id="toc-exercise-3-simulating-the-distribution-of-waiting-time---transportation" class="nav-link" data-scroll-target="#exercise-3-simulating-the-distribution-of-waiting-time---transportation">Exercise 3: Simulating the distribution of waiting time - Transportation</a></li>
+  </ul></li>
+  <li><a href="#part-2-acceptance-rejection-sampling" id="toc-part-2-acceptance-rejection-sampling" class="nav-link" data-scroll-target="#part-2-acceptance-rejection-sampling">Part 2: Acceptance-Rejection Sampling</a>
+  <ul>
+  <li><a href="#exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" id="toc-exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" class="nav-link" data-scroll-target="#exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016">Exercise 4: Simulating Beta(2,2) distribution using Uniform distribution (Templ 2016)</a></li>
+  <li><a href="#exercise-5-simulating-the-half-normal-distribution-using-exponential" id="toc-exercise-5-simulating-the-half-normal-distribution-using-exponential" class="nav-link" data-scroll-target="#exercise-5-simulating-the-half-normal-distribution-using-exponential">Exercise 5: Simulating the half-normal distribution using Exponential</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -416,8 +426,15 @@ window.Quarto = {
 </header>
 
 
-<section id="solution-precision-method-in-python" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="solution-precision-method-in-python">Solution: Precision Method in Python</h2>
+<p>This workshop consists of two parts:</p>
+<ul>
+<li><strong>Part 1:</strong> Inverse Transform Sampling</li>
+<li><strong>Part 2:</strong> Acceptance-Rejection Sampling</li>
+</ul>
+<section id="part-1-inverse-transform-sampling" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-1-inverse-transform-sampling">Part 1: Inverse Transform Sampling</h2>
+<section id="exercise-1-precision-method" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-1-precision-method">Exercise 1: Precision Method</h3>
 <p>A mobile game awards players with different types of rewards when a treasure chest is opened. The reward type follows the probability distribution below.</p>
 <table class="caption-top table">
 <thead>
@@ -442,7 +459,7 @@ window.Quarto = {
 <ol type="a">
 <li>Construct the cumulative distribution function (CDF) for this random variable and present it in a table.</li>
 </ol>
-<div id="2e8cfa25" class="cell" data-execution_count="1">
+<div id="48486d1c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -462,7 +479,7 @@ window.Quarto = {
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"p"</span>: p,</span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"F"</span>: F</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="85">
 <div>
 
 
@@ -526,7 +543,7 @@ X =
 \text{Rare Item} &amp; \text{if } 0.90 &lt; U \le 1.00
 \end{cases}
 \]</span></p>
-<div id="4cb9408e" class="cell" data-execution_count="2">
+<div id="16544ee7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show intervals in a table</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lower <span class="op">=</span> np.concatenate(([<span class="dv">0</span>], F[:<span class="op">-</span><span class="dv">1</span>]))   <span class="co"># F[:-1] excludes the last item in F</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>upper <span class="op">=</span> F</span>
@@ -536,7 +553,7 @@ X =
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lower"</span>: lower,</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"upper"</span>: upper</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="86">
 <div>
 
 
@@ -583,7 +600,7 @@ X =
 <ol start="3" type="a">
 <li>Classify the given random numbers</li>
 </ol>
-<div id="82f51ac3" class="cell" data-execution_count="3">
+<div id="6600fbd6" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>u_given <span class="op">=</span> np.array([<span class="fl">0.12</span>, <span class="fl">0.63</span>, <span class="fl">0.44</span>, <span class="fl">0.91</span>, <span class="fl">0.27</span>])</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the first cumulative probability &gt;= u</span></span>
@@ -593,7 +610,7 @@ X =
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"u"</span>: u_given,</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reward"</span>: result_given</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="cell-output cell-output-display" data-execution_count="87">
 <div>
 
 
@@ -644,7 +661,7 @@ X =
 <li><code>[0]</code> takes the first such index</li>
 </ul>
 <p>Equivalently:</p>
-<div id="1c48eae4" class="cell" data-execution_count="4">
+<div id="c65a0e08" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> find_outcome(u):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> np.where(u <span class="op">&lt;=</span> F)[<span class="dv">0</span>][<span class="dv">0</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[i]</span>
@@ -655,7 +672,7 @@ X =
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"u"</span>: u_given,</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"reward"</span>: result_given</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div class="cell-output cell-output-display" data-execution_count="88">
 <div>
 
 
@@ -702,7 +719,7 @@ X =
 <ol start="4" type="a">
 <li>R function to simulate one reward</li>
 </ol>
-<div id="e25e1851" class="cell" data-execution_count="5">
+<div id="b3bb0977" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_reward():</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x[np.where(u <span class="op">&lt;=</span> F)[<span class="dv">0</span>][<span class="dv">0</span>]]</span>
@@ -710,7 +727,7 @@ X =
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: simulate 20 rewards</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>np.array([simulate_reward() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20</span>)])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="89">
 <pre><code>array(['Gems', 'Coins', 'Coins', 'Gems', 'Gems', 'Coins', 'Rare Item',
        'Gems', 'Coins', 'Coins', 'Coins', 'Gems', 'Coins', 'Coins',
        'Coins', 'Gems', 'Coins', 'Coins', 'Gems', 'Gems'], dtype='&lt;U9')</code></pre>
@@ -719,7 +736,7 @@ X =
 <ol start="5" type="a">
 <li>Simulate 10,000 rewards and compare empirical probabilities</li>
 </ol>
-<div id="70577f1d" class="cell" data-execution_count="6">
+<div id="8db7e92b" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">123</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>samples <span class="op">=</span> np.array([simulate_reward() <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10000</span>)])</span>
@@ -736,7 +753,7 @@ X =
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="90">
 <div>
 
 
@@ -781,10 +798,10 @@ X =
 </div>
 </div>
 <p>You can also look at the differences:</p>
-<div id="f59321fd" class="cell" data-execution_count="7">
+<div id="1ecf41f9" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>comparison[<span class="st">"difference"</span>] <span class="op">=</span> comparison[<span class="st">"empirical"</span>] <span class="op">-</span> comparison[<span class="st">"theoretical"</span>]</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>comparison</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="91">
 <div>
 
 
@@ -839,7 +856,7 @@ X =
 </ol>
 <p>A simple implementation checks the cumulative probabilities one by one until it finds the correct interval. When the number of outcomes k is large, this search can become slow, especially if repeated many times. More efficient methods or built-in algorithms are often preferred for large discrete distributions.</p>
 <p><strong>Optional:</strong> more compact R version using <code>np.searchsorted()</code></p>
-<div id="85d9633e" class="cell" data-execution_count="8">
+<div id="67dd34e6" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_reward2(n<span class="op">=</span><span class="dv">1</span>):</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.random.uniform(<span class="dv">0</span>, <span class="dv">1</span>, size<span class="op">=</span>n)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> np.searchsorted(F, u, side<span class="op">=</span><span class="st">"left"</span>)</span>
@@ -851,7 +868,7 @@ X =
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 10,000 simulated rewards</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>samples2 <span class="op">=</span> simulate_reward2(<span class="dv">10000</span>)</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>pd.Series(samples2).value_counts(normalize<span class="op">=</span><span class="va">True</span>).reindex(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="92">
 <pre><code>Coins        0.4964
 Gems         0.2586
 Energy       0.1495
@@ -873,8 +890,421 @@ Note
 <p>The precision method is essentially the discrete version of the inverse CDF method.</p>
 </div>
 </div>
+</section>
+<section id="exercise-2-load-on-a-bridge-cd-2014" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-2-load-on-a-bridge-cd-2014">Exercise 2: Load on a bridge (CD 2014)</h3>
+<p>Consider the pdf for the random variable <span class="math inline">\(X\)</span> which is the magnitude (in newtons) of a dynamic load on a bridge, given as</p>
+<p><span class="math display">\[
+f(x)= \left(\frac{1}{8} + \frac{3}{8} x \right), \quad 0 \le x \le 2
+\]</span></p>
+<p><span class="math display">\[
+f(x)=0, \quad \text{otherwise.}
+\]</span></p>
+<ol type="a">
+<li>Calculate the exact mean and variance.</li>
+</ol>
+<p><span class="math display">\[
+\boxed{E(X) = \int_x x f(x)\,dx, \quad \mathrm{Var}(X)= E(X^2) - [E(X)]^2}
+\]</span></p>
+<p>First, check the pdf:</p>
+<p><span class="math display">\[
+\int_0^2 f(x)\, dx = \int_0^2 \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx = 1 \rightarrow \text{ valid PDF.}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+E(X) &amp;= \int_0^2 x f(x)\,dx \\
+     &amp;= \int_0^2 x \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx \\
+     &amp;= \left[\frac{1}{16} x^2 + \frac{1}{8} x^3\right]_0^2 \\
+\therefore E(X) &amp;= \frac{5}{4} = 1.25 \\
+E(X^2) &amp;= \int_0^2 x^2 f(x)\,dx \\
+       &amp;= \int_0^2 x^2 \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx \\
+       &amp;= \left[\frac{1}{24} x^3 + \frac{3}{32} x^4\right]_0^2 \\
+E(X^2) &amp; = \frac{11}{6} \approx 1.8333 \\
+Var(X) &amp;= E(X^2) - [E(X)]^2 \\
+       &amp;= \frac{11}{6} - \left(\frac{5}{4}\right)^2 \\
+\therefore Var(X) &amp;= \frac{13}{48} \approx 0.2708
+\end{aligned}
+\]</span></p>
+<p>Alternatively,</p>
+<div id="2a427928" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">'x'</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>sp.Integer(<span class="dv">8</span>) <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">/</span><span class="dv">8</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># E(X)</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>EX <span class="op">=</span> sp.integrate(x <span class="op">*</span> f, (x, <span class="dv">0</span>, <span class="dv">2</span>))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># E(X^2)</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>EX2 <span class="op">=</span> sp.integrate(x<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> f, (x, <span class="dv">0</span>, <span class="dv">2</span>))</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>VarX <span class="op">=</span> EX2 <span class="op">-</span> EX<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E(X) ="</span>, EX)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"E(X^2) ="</span>, EX2)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Var(X) ="</span>, sp.simplify(VarX))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>E(X) = 5/4
+E(X^2) = 11/6
+Var(X) = 13/48</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Write a program to simulate values from this distribution using <em>the inverse cdf</em> method. Calculate the mean and variance and compare with the exact results.</li>
+</ol>
+<ul>
+<li>Step 1. Firstly, we need to find the cdf <span class="math inline">\(F(x).\)</span> <span class="math display">\[
+\begin{aligned}
+F(x) &amp;= \int_0^x f(t)\, dt \\
+     &amp;= \int_0^x \left(\frac{1}{8} + \frac{3}{8} t \right)\,dt \\
+F(x) &amp;= \frac{x}{8} + \frac{3x^2}{16}
+\end{aligned}
+\]</span></li>
+</ul>
+<div id="8172320a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">'x'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> <span class="dv">1</span><span class="op">/</span>sp.Integer(<span class="dv">8</span>) <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">/</span><span class="dv">8</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co"># cdf</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> sp.integrate(f, (x, <span class="dv">0</span>, x))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"F(X) ="</span>, F)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>F(X) = 3*x**2/16 + x/8</code></pre>
+</div>
+</div>
+<ul>
+<li>Step 2. Set <span class="math inline">\(u = F(x)\)</span> and solve for <span class="math inline">\(x\)</span> <span class="math display">\[
+\begin{aligned}
+u &amp;= \frac{x}{8} + \frac{3x^2}{16} \\
+16u &amp;= 3x^2 + 2x \\
+0 &amp;= 3x^2 + 2x - 16u \\
+x &amp;= \frac{-2 \pm \sqrt{2^2 - 4(3)(-16u)}}{2(3)} \\
+  &amp;= \frac{-1 \pm \sqrt{1+48u} }{3} \\
+\therefore x &amp;= \frac{-1 + \sqrt{1+48u} }{3}, \quad 0 \leq x \leq 2.
+\end{aligned}
+\]</span></li>
+</ul>
+<div id="1d302fc8" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define variables</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> sp.symbols(<span class="st">'x'</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> sp.symbols(<span class="st">'u'</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define equation: F = u</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>equation <span class="op">=</span> sp.Eq(F, u)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve for x</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> sp.solve(equation, x)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(solution)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[-sqrt(48*u + 1)/3 - 1/3, sqrt(48*u + 1)/3 - 1/3]</code></pre>
+</div>
+</div>
+<ul>
+<li>Step 3. Simulate <span class="math inline">\(f(x)\)</span> from <span class="math inline">\(U \sim \text{Uniform}(0,1)\)</span></li>
+</ul>
+<div id="a8e39f66" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1234</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>u <span class="op">=</span> np.random.rand(<span class="dv">10000</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Inverse CDF</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> (<span class="op">-</span><span class="dv">1</span> <span class="op">+</span> np.sqrt(<span class="dv">1</span> <span class="op">+</span> <span class="dv">48</span><span class="op">*</span>u)) <span class="op">/</span> <span class="dv">3</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Histogram</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Overlay true pdf</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">200</span>)</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>pdf <span class="op">=</span> <span class="dv">1</span><span class="op">/</span><span class="dv">8</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>t<span class="op">/</span><span class="dv">8</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>plt.plot(t, pdf, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Simulated Distribution"</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare mean and variance</span></span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical mean ="</span>, EX, <span class="st">", Empirical mean ="</span>, np.mean(x))</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical variance ="</span>, VarX, <span class="st">", Empirical variance ="</span>, np.var(x, ddof<span class="op">=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_6_workshop_sol_files/figure-html/cell-13-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theoretical mean = 5/4 , Empirical mean = 1.2491798412911999
+Theoretical variance = 13/48 , Empirical variance = 0.27390211327069786</code></pre>
+</div>
+</div>
+<p>The simulated distribution closely matches the theoretical probability density function, as shown by the histogram and overlaid curve Additionally, the empirical mean and variance from the simulated data are very close to the exact values <span class="math inline">\(E(X)=\frac{5}{4}\)</span> and <span class="math inline">\(\mathrm{Var}(X)=\frac{13}{48}\)</span>, confirming that the simulation is accurate.</p>
+</section>
+<section id="exercise-3-simulating-the-distribution-of-waiting-time---transportation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-3-simulating-the-distribution-of-waiting-time---transportation">Exercise 3: Simulating the distribution of waiting time - Transportation</h3>
+<p>The article “A Model of Pedestrians’ Waiting Times for Street Crossings at Signalised Intersections” (Transportation Research, 2013: 17–28) suggested that under some circumstances the distribution of waiting time <span class="math inline">\(X\)</span> could be modeled with the following pdf:</p>
+<p><span class="math display">\[
+f(x)= \frac{\theta}{\tau}\left( 1- \frac{x}{\tau}\right)^{\theta - 1}, \quad 0 \le x &lt; \tau
+\]</span></p>
+<p><span class="math display">\[
+f(x)=0, \quad \text{otherwise.}
+\]</span></p>
+<ol type="a">
+<li>Write a function to simulate values from this distribution, implementing the inverse cdf method. Your function should have three inputs: the desired number of simulated values <span class="math inline">\(n\)</span> and values for the two parameters for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\tau.\)</span></li>
+</ol>
+<ul>
+<li><p>Step 1. Determine the cdf:</p>
+<p><span class="math display">\[
+F(x) = \int_0^x f(t) dt
+     = \int_0^x \frac{\theta}{\tau}\left( 1- \frac{t}{\tau}\right)^{\theta - 1} dt
+\]</span></p>
+<p>Using <strong>integration by substitution</strong> method, let <span class="math display">\[
+w=\left( 1- \frac{t}{\tau}\right), \quad dw=-\frac{1}{\tau}\,dt
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+F(x) &amp;= \int_0^x \left( 1- \frac{t}{\tau}\right)^{\theta - 1}\left(\frac{\theta}{\tau}\right) dt \\
+     &amp;= \int_1^{(1-x/\tau)} w^{\theta-1}(-\theta)\,dw \\
+     &amp;= \left[-w^\theta\right]_1^{(1-x/\tau)} \\
+\therefore F(x) &amp;=  1 - (1-x/\tau)^{\theta}     
+\end{aligned}
+\]</span></p></li>
+<li><p>Step 2. Set <span class="math inline">\(u=F(x)\)</span> and solve for x</p>
+<p><span class="math display">\[
+u=  1 - (1-x/\tau)^{\theta}  \quad \rightarrow \quad  x= \tau(1 - (1- u)^{1/\theta})
+\]</span></p></li>
+<li><p>Step 3. Write a function that accepts 3 inputs: <span class="math inline">\(n,\theta,\tau\)</span></p></li>
+</ul>
+<div id="b8aa6b0b" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> waittime(n, theta, tau):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.random.rand(n)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> tau <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> (<span class="dv">1</span> <span class="op">-</span> u)<span class="op">**</span>(<span class="dv">1</span><span class="op">/</span>theta))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="a">
+<li>Use your function in part (a) to simulate 10,000 values from this wait time distribution with <span class="math inline">\(\theta=4\)</span> and <span class="math inline">\(\tau=80.\)</span> Estimate <span class="math inline">\(E(X)\)</span> under these parameter settings.</li>
+</ol>
+<div id="c763b97f" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1234</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> waittime(<span class="dv">10000</span>, <span class="dv">4</span>, <span class="dv">80</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated E(X):"</span>, np.mean(x))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Estimated Var(X):"</span>, np.var(x, ddof<span class="op">=</span><span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated E(X): 16.000890300264242
+Estimated Var(X): 169.98408083749962</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>How close is your estimate to the correct value of the exact <span class="math inline">\(E(X)=16\)</span> and <span class="math inline">\(\mathrm{Var}(X)=170.67\)</span>?</li>
+</ol>
+<p>The empirical mean and variance from the simulated data are very close to the exact mean and variance, confirming that the simulation is accurate.</p>
+<hr>
+</section>
+</section>
+<section id="part-2-acceptance-rejection-sampling" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-2-acceptance-rejection-sampling">Part 2: Acceptance-Rejection Sampling</h2>
+<section id="exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016">Exercise 4: Simulating Beta(2,2) distribution using Uniform distribution (Templ 2016)</h3>
+<ol type="a">
+<li><p>Describe the steps. Hints: The pdf of <span class="math inline">\(Beta(\alpha,\beta)\)</span> is <span class="math display">\[
+f(x)= \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1}(1-x)^{\beta-1}, \quad 0 \le x \le 1
+\]</span></p>
+<p>The aim is to simulate <span class="math inline">\(n\)</span> values from a Beta(2,2) distribution with pdf such that by substituting <span class="math inline">\(\alpha=2, \beta=2\)</span> in the above, we have <span class="math display">\[
+f(x)= 6x(1-x), \quad 0 \le x \le 1.
+\]</span></p>
+<p>Let <span class="math inline">\(g(x)\)</span> be Uniform(0,1) such that <span class="math display">\[
+g(x)= 1, \quad 0 \le x \le 1.
+\]</span></p>
+<p>and the ratio <span class="math inline">\(f/g\)</span> is bounded, i.e., there exists a constant <span class="math inline">\(M\)</span> such that <span class="math display">\[
+\frac{f(x)}{g(x)} = 6x(1-x)  \le M, \quad \forall x.
+\]</span></p>
+<p><span class="math display">\[
+\frac{d}{dx}6x(1-x) = 6 - 12x = 0
+\]</span></p>
+<p>In this case, the function is maximised at <span class="math inline">\(x=0.5, f(x)=1.5\)</span> so that we choose <span class="math inline">\(M = 1.5.\)</span></p>
+<p>Therefore, the general rule is</p>
+<p><span class="math display">\[
+U \leq \frac{f(Y)}{Mg(Y)} = \frac{6y(1-y)}{1.5(1)} = 4y(1-y)
+\]</span></p>
+<p>Proceed as follows:</p></li>
+</ol>
+<div class="example">
+<ol type="1">
+<li><p>Generate <span class="math inline">\(Y \sim g \sim \text{Uniform}(0,1).\)</span></p></li>
+<li><p>Generate a standard uniform variate, <span class="math inline">\(U \sim \text{Uniform}(0,1).\)</span></p></li>
+<li><p>If <span class="math inline">\(u\le 4y(1-y),\)</span> then assign <span class="math inline">\(x=y\)</span> (i.e., “accept” the candidate). Otherwise, discard or reject <span class="math inline">\(y\)</span> and return to step 1.</p></li>
+</ol>
+<ul>
+<li>These steps are repeated until <span class="math inline">\(n\)</span> candidate values have been accepted.</li>
+<li>The resulting accepted values <span class="math inline">\(x_1, . . ., x_n\)</span> form a simulation of a random variable with the original pdf, <span class="math inline">\(f(x).\)</span></li>
+</ul>
+</div>
+<ol start="2" type="a">
+<li>Check visually the plots of <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(Mg(x).\)</span></li>
+</ol>
+<div id="cd008a8c" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> beta</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># f(x): Beta(2,2)</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> beta.pdf(x, a<span class="op">=</span><span class="dv">2</span>, b<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Mg(x) = 1.5</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>Mg <span class="op">=</span> <span class="fl">1.5</span> <span class="op">*</span> np.ones_like(x)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>plt.plot(x, f, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"f(x) = Beta(2,2)"</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>plt.plot(x, Mg, linestyle<span class="op">=</span><span class="st">"--"</span>, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Mg(x) = 1.5"</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"f(x) vs Mg(x)"</span>)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_6_workshop_sol_files/figure-html/cell-16-output-1.png" width="571" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Perform Accept-Reject method to simulate Beta(2,2) distribution from Uniform distribution. Calculate the acceptance rate. Plot the simulating values of a Beta(2,2) using the accep rejection approach.</li>
+</ol>
+<div id="0c750a4a" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1234</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> []</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(x) <span class="op">&lt;</span> n:</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> n <span class="op">-</span> <span class="bu">len</span>(x)</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.rand(m)</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.random.rand(m)</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> u <span class="op">&lt;=</span> <span class="dv">4</span> <span class="op">*</span> y <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> y)</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>    x.extend(y[accept])</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(x[:n])</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Simulated"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">500</span>)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>plt.plot(t, <span class="dv">6</span><span class="op">*</span>t<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>t), linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"True Beta(2,2)"</span>)</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Acceptance-Rejection Sampling"</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_6_workshop_sol_files/figure-html/cell-17-output-1.png" width="571" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-simulating-the-half-normal-distribution-using-exponential" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-5-simulating-the-half-normal-distribution-using-exponential">Exercise 5: Simulating the half-normal distribution using Exponential</h3>
+<p>The half-normal distribution is defined as:</p>
+<p><span class="math display">\[f(x) = \sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2}), \quad x \ge 0.\]</span></p>
+<p>Consider simulating values from this distribution using the accept–reject method with a candidate distribution of an Exponential random variable with parameter <span class="math inline">\(\lambda = 1\)</span></p>
+<p><span class="math display">\[g(x)= e^{-x}, \quad  x \ge 0.\]</span></p>
+<ol type="a">
+<li><p>Find the inverse cdf corresponding to <span class="math inline">\(g(x).\)</span></p>
+<p>If <span class="math inline">\(X \sim Exp(\lambda=1)\)</span> then the pdf and cdf are <span class="math display">\[
+g(x)= e^{-x}, \quad  G(x)= 1- e^{-x}.
+\]</span></p>
+<p>Then set <span class="math inline">\(u=G(x)\)</span> and then solve for <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+u = G(x) &amp;= 1- e^{-x} \\
+e^{-x} &amp;= 1-u \\
+-x &amp;= \ln(1-u) \\
+x &amp;= G^{-1}(u) = -\ln(1-u).
+\end{aligned}
+\]</span></p></li>
+<li><p>Find the smallest majorisation constant <span class="math inline">\(M\)</span> so that <span class="math inline">\(f(x)/g(x)\le M\)</span> for all <span class="math inline">\(x \ge 0.\)</span></p>
+<p>The ratio <span class="math inline">\(f(x)/g(x)\)</span> is equivalent to</p>
+<p><span class="math display">\[
+\frac{f(x)}{g(x)}= \frac{\sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2})}{\exp(-x)}=\sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2}+x).
+\]</span></p>
+<p>Use the first derivative test,</p>
+<p><span class="math display">\[
+\frac{d}{dx} \left(\exp (-\frac{x^2}{2}+x) \right)=\exp (-\frac{x^2}{2}+x)(1-x)=0.
+\]</span></p>
+<p>The absolute maximum on the interval <span class="math inline">\([0, \infty)\)</span> occurs at <span class="math inline">\(x = 1\)</span>.</p>
+<p><span class="math display">\[
+\frac{f(x)}{g(x)} \le \sqrt{\frac{2}{\pi}} \exp (-\frac{1^2}{2}+1)=\sqrt{\frac{2}{\pi}} \exp(1/2)=\sqrt{\frac{2e}{\pi}}=M
+\]</span></p></li>
+<li><p>On the average, how many candidate values will be required to generate 10,000 “accepted” values?</p></li>
+</ol>
+<p>The expected number of candidate values required to generate a single accepted value is <span class="math inline">\(M,\)</span> so the expected number required to generate 10,000 x-values is <span class="math inline">\(10,000M \approx 13,155.\)</span></p>
+<ol start="4" type="a">
+<li>Write a program to construct 10,000 values from a half-normal distribution.</li>
+</ol>
+<div id="dff5aa4a" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1234</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>M <span class="op">=</span> np.sqrt(<span class="dv">2</span> <span class="op">*</span> np.exp(<span class="dv">1</span>) <span class="op">/</span> np.pi)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> []</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">len</span>(x) <span class="op">&lt;</span> n:</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> n <span class="op">-</span> <span class="bu">len</span>(x)                      <span class="co"># how many more needed</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.random.exponential(scale<span class="op">=</span><span class="dv">1</span>, size<span class="op">=</span>m)  <span class="co"># Exp(1)</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> np.random.rand(m)                      <span class="co"># Uniform(0,1)</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>    fg_ratio <span class="op">=</span> np.sqrt(<span class="dv">2</span> <span class="op">/</span> np.pi) <span class="op">*</span> np.exp(<span class="op">-</span>y<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">+</span> y)</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>    accept <span class="op">=</span> u <span class="op">&lt;=</span> fg_ratio <span class="op">/</span> M</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    x.extend(y[accept])</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Trim to exactly n samples</span></span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array(x[:n])</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>plt.hist(x, bins<span class="op">=</span><span class="dv">40</span>, density<span class="op">=</span><span class="va">True</span>, alpha<span class="op">=</span><span class="fl">0.6</span>, label<span class="op">=</span><span class="st">"Simulated"</span>)</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">500</span>)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>true_pdf <span class="op">=</span> np.sqrt(<span class="dv">2</span> <span class="op">/</span> np.pi) <span class="op">*</span> np.exp(<span class="op">-</span>t<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> <span class="dv">2</span>)</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>plt.plot(t, true_pdf, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"Half-Normal PDF"</span>)</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Acceptance-Rejection Sampling"</span>)</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_6_workshop_sol_files/figure-html/cell-18-output-1.png" width="571" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

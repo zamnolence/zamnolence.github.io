@@ -387,7 +387,17 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#solution-precision-method-in-r" id="toc-solution-precision-method-in-r" class="nav-link active" data-scroll-target="#solution-precision-method-in-r">Solution: Precision Method in R</a></li>
+  <li><a href="#part-1-inverse-transform-sampling" id="toc-part-1-inverse-transform-sampling" class="nav-link active" data-scroll-target="#part-1-inverse-transform-sampling">Part 1: Inverse Transform Sampling</a>
+  <ul>
+  <li><a href="#exercise-1-precision-method" id="toc-exercise-1-precision-method" class="nav-link" data-scroll-target="#exercise-1-precision-method">Exercise 1: Precision Method</a></li>
+  <li><a href="#exercise-2-load-on-a-bridge-cd-2014" id="toc-exercise-2-load-on-a-bridge-cd-2014" class="nav-link" data-scroll-target="#exercise-2-load-on-a-bridge-cd-2014">Exercise 2: Load on a bridge (CD 2014)</a></li>
+  <li><a href="#exercise-3-simulating-the-distribution-of-waiting-time---transportation" id="toc-exercise-3-simulating-the-distribution-of-waiting-time---transportation" class="nav-link" data-scroll-target="#exercise-3-simulating-the-distribution-of-waiting-time---transportation">Exercise 3: Simulating the distribution of waiting time - Transportation</a></li>
+  </ul></li>
+  <li><a href="#part-2-acceptance-rejection-sampling" id="toc-part-2-acceptance-rejection-sampling" class="nav-link" data-scroll-target="#part-2-acceptance-rejection-sampling">Part 2: Acceptance-Rejection Sampling</a>
+  <ul>
+  <li><a href="#exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" id="toc-exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" class="nav-link" data-scroll-target="#exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016">Exercise 4: Simulating Beta(2,2) distribution using Uniform distribution (Templ 2016)</a></li>
+  <li><a href="#exercise-5-simulating-the-half-normal-distribution-using-exponential" id="toc-exercise-5-simulating-the-half-normal-distribution-using-exponential" class="nav-link" data-scroll-target="#exercise-5-simulating-the-half-normal-distribution-using-exponential">Exercise 5: Simulating the half-normal distribution using Exponential</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -413,8 +423,15 @@ window.Quarto = {
 </header>
 
 
-<section id="solution-precision-method-in-r" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="solution-precision-method-in-r">Solution: Precision Method in R</h2>
+<p>This workshop consists of two parts:</p>
+<ul>
+<li><strong>Part 1:</strong> Inverse Transform Sampling</li>
+<li><strong>Part 2:</strong> Acceptance-Rejection Sampling</li>
+</ul>
+<section id="part-1-inverse-transform-sampling" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-1-inverse-transform-sampling">Part 1: Inverse Transform Sampling</h2>
+<section id="exercise-1-precision-method" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-1-precision-method">Exercise 1: Precision Method</h3>
 <p>A mobile game awards players with different types of rewards when a treasure chest is opened. The reward type follows the probability distribution below.</p>
 <table class="caption-top table">
 <thead>
@@ -655,8 +672,379 @@ Note
 <p>The precision method is essentially the discrete version of the inverse CDF method.</p>
 </div>
 </div>
+</section>
+<section id="exercise-2-load-on-a-bridge-cd-2014" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-2-load-on-a-bridge-cd-2014">Exercise 2: Load on a bridge (CD 2014)</h3>
+<p>Consider the pdf for the random variable <span class="math inline">\(X\)</span> which is the magnitude (in newtons) of a dynamic load on a bridge, given as</p>
+<p><span class="math display">\[
+f(x)= \left(\frac{1}{8} + \frac{3}{8} x \right), \quad 0 \le x \le 2
+\]</span></p>
+<p><span class="math display">\[
+f(x)=0, \quad \text{otherwise.}
+\]</span></p>
+<ol type="a">
+<li>Calculate the exact mean and variance.</li>
+</ol>
+<p><span class="math display">\[
+\boxed{E(X) = \int_x x f(x)\,dx, \quad \mathrm{Var}(X)= E(X^2) - [E(X)]^2}
+\]</span></p>
+<p>First, check the pdf:</p>
+<p><span class="math display">\[
+\int_0^2 f(x)\, dx = \int_0^2 \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx = 1 \rightarrow \text{ valid PDF.}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+E(X) &amp;= \int_0^2 x f(x)\,dx \\
+     &amp;= \int_0^2 x \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx \\
+     &amp;= \left[\frac{1}{16} x^2 + \frac{1}{8} x^3\right]_0^2 \\
+\therefore E(X) &amp;= \frac{5}{4} = 1.25 \\
+E(X^2) &amp;= \int_0^2 x^2 f(x)\,dx \\
+       &amp;= \int_0^2 x^2 \left(\frac{1}{8} + \frac{3}{8} x \right)\,dx \\
+       &amp;= \left[\frac{1}{24} x^3 + \frac{3}{32} x^4\right]_0^2 \\
+E(X^2) &amp; = \frac{11}{6} \approx 1.8333 \\
+\mathrm{Var}(X) &amp;= E(X^2) - [E(X)]^2 \\
+       &amp;= \frac{11}{6} - \left(\frac{5}{4}\right)^2 \\
+\therefore \mathrm{Var}(X) &amp;= \frac{13}{48} \approx 0.2708
+\end{aligned}
+\]</span></p>
+<p>Alternatively,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pdf</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> x <span class="sc">&lt;=</span> <span class="dv">2</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">8</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">/</span><span class="dv">8</span>, <span class="dv">0</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># E(X)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>EX <span class="ot">&lt;-</span> <span class="fu">integrate</span>(<span class="cf">function</span>(x) x <span class="sc">*</span> <span class="fu">f</span>(x), <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="dv">2</span>)<span class="sc">$</span>value</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="co"># E(X^2)</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>EX2 <span class="ot">&lt;-</span> <span class="fu">integrate</span>(<span class="cf">function</span>(x) x<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="fu">f</span>(x), <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> <span class="dv">2</span>)<span class="sc">$</span>value</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Var(X)</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>VarX <span class="ot">&lt;-</span> EX2 <span class="sc">-</span> EX<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>EX</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.25</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>EX2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.833333</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>VarX</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2708333</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Write a program to simulate values from this distribution using <em>the inverse cdf</em> method. Calculate the mean and variance and compare with the exact results.</li>
+</ol>
+<ul>
+<li>Step 1. Firstly, we need to find the cdf <span class="math inline">\(F(x).\)</span> <span class="math display">\[
+\begin{aligned}
+F(x) &amp;= \int_0^x f(t)\, dt \\
+     &amp;= \int_0^x \left(\frac{1}{8} + \frac{3}{8} t \right)\,dt \\
+F(x) &amp;= \frac{x}{8} + \frac{3x^2}{16}
+\end{aligned}
+\]</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Ryacas)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Define variable</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">ysym</span>(<span class="st">"x"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define pdf</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">8</span> <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span>x<span class="sc">/</span><span class="dv">8</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Integrate</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>F <span class="ot">&lt;-</span> <span class="fu">integrate</span>(f, x)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>F</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>y: (3*x^2)/16+0.125*x</code></pre>
+</div>
+</div>
+<ul>
+<li>Step 2. Set <span class="math inline">\(u = F(x)\)</span> and solve for <span class="math inline">\(x\)</span> <span class="math display">\[
+\begin{aligned}
+u &amp;= \frac{x}{8} + \frac{3x^2}{16} \\
+16u &amp;= 3x^2 + 2x \\
+0 &amp;= 3x^2 + 2x - 16u \\
+x &amp;= \frac{-2 \pm \sqrt{2^2 - 4(3)(-16u)}}{2(3)} \\
+  &amp;= \frac{-1 \pm \sqrt{1+48u} }{3} \\
+\therefore x &amp;= \frac{-1 + \sqrt{1+48u} }{3}, \quad 0 \leq x \leq 2.
+\end{aligned}
+\]</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">ysym</span>(<span class="st">"u"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">solve</span>(<span class="dv">3</span><span class="sc">*</span>x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">-</span> <span class="dv">16</span><span class="sc">*</span>u, <span class="st">"x"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{x==(Sqrt(4-(-192)*u)-2)/6, x==(-(Sqrt(4-(-192)*u)+2))/6} </code></pre>
+</div>
+</div>
+<ul>
+<li>Step 3. Simulate <span class="math inline">\(f(x)\)</span> from <span class="math inline">\(U \sim \text{Uniform}(0,1)\)</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10000</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> ( <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">48</span> <span class="sc">*</span> u) ) <span class="sc">/</span> <span class="dv">3</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">prob =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"skyblue"</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Simulated Distribution"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">8</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> x <span class="sc">/</span> <span class="dv">8</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_5_workshop_sol_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Theoretical mean ="</span>, EX, <span class="st">", Empirical mean ="</span>, <span class="fu">mean</span>(x))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theoretical mean = 1.25 , Empirical mean = 1.251618</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Theoretical variance ="</span>, VarX, <span class="st">", Empirical variance ="</span>, <span class="fu">var</span>(x))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theoretical variance = 0.2708333 , Empirical variance = 0.2673982</code></pre>
+</div>
+</div>
+<p>The simulated distribution closely matches the theoretical probability density function, as shown by the histogram and overlaid curve Additionally, the empirical mean and variance from the simulated data are very close to the exact values <span class="math inline">\(E(X)=\frac{5}{4}\)</span> and <span class="math inline">\(\mathrm{Var}(X)=\frac{13}{48}\)</span>, confirming that the simulation is accurate.</p>
+</section>
+<section id="exercise-3-simulating-the-distribution-of-waiting-time---transportation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-3-simulating-the-distribution-of-waiting-time---transportation">Exercise 3: Simulating the distribution of waiting time - Transportation</h3>
+<p>The article “A Model of Pedestrians’ Waiting Times for Street Crossings at Signalised Intersections” (Transportation Research, 2013: 17–28) suggested that under some circumstances the distribution of waiting time <span class="math inline">\(X\)</span> could be modeled with the following pdf:</p>
+<p><span class="math display">\[
+f(x)= \frac{\theta}{\tau}\left( 1- \frac{x}{\tau}\right)^{\theta - 1}, \quad 0 \le x &lt; \tau
+\]</span></p>
+<p><span class="math display">\[
+f(x)=0, \quad \text{otherwise.}
+\]</span></p>
+<ol type="a">
+<li>Write a function to simulate values from this distribution, implementing the inverse cdf method. Your function should have three inputs: the desired number of simulated values <span class="math inline">\(n\)</span> and values for the two parameters for <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\tau.\)</span></li>
+</ol>
+<ul>
+<li><p>Step 1. Determine the cdf:</p>
+<p><span class="math display">\[
+F(x) = \int_0^x f(t) dt
+     = \int_0^x \frac{\theta}{\tau}\left( 1- \frac{t}{\tau}\right)^{\theta - 1} dt
+\]</span></p>
+<p>Using <strong>integration by substitution</strong> method, let <span class="math display">\[
+w=\left( 1- \frac{t}{\tau}\right), \quad dw=-\frac{1}{\tau}\,dt
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+F(x) &amp;= \int_0^x \left( 1- \frac{t}{\tau}\right)^{\theta - 1}\left(\frac{\theta}{\tau}\right) dt \\
+     &amp;= \int_1^{(1-x/\tau)} w^{\theta-1}(-\theta)\,dw \\
+     &amp;= \left[-w^\theta\right]_1^{(1-x/\tau)} \\
+\therefore F(x) &amp;=  1 - (1-x/\tau)^{\theta}     
+\end{aligned}
+\]</span></p></li>
+<li><p>Step 2. Set <span class="math inline">\(u=F(x)\)</span> and solve for x</p>
+<p><span class="math display">\[
+u=  1 - (1-x/\tau)^{\theta}  \quad \rightarrow \quad  x= \tau(1 - (1- u)^{1/\theta})
+\]</span></p></li>
+<li><p>Step 3. Write a function that accepts 3 inputs: <span class="math inline">\(n,\theta,\tau\)</span></p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>waittime <span class="ot">&lt;-</span> <span class="cf">function</span>(n, theta, tau){</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> tau<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>(<span class="dv">1</span><span class="sc">-</span>u)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span>theta))</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="a">
+<li>Use your function in part (a) to simulate 10,000 values from this wait time distribution with <span class="math inline">\(\theta=4\)</span> and <span class="math inline">\(\tau=80.\)</span> Estimate <span class="math inline">\(E(X)\)</span> under these parameter settings.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">waittime</span>(<span class="dv">10000</span>,<span class="dv">4</span>,<span class="dv">80</span>)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15.95958</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 167.5203</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>How close is your estimate to the correct value of the exact <span class="math inline">\(E(X)=16\)</span> and <span class="math inline">\(\mathrm{Var}(X)=170.67\)</span>?</li>
+</ol>
+<p>The empirical mean and variance from the simulated data are very close to the exact mean and variance, confirming that the simulation is accurate.</p>
+<hr>
+</section>
+</section>
+<section id="part-2-acceptance-rejection-sampling" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-2-acceptance-rejection-sampling">Part 2: Acceptance-Rejection Sampling</h2>
+<section id="exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-4-simulating-beta22-distribution-using-uniform-distribution-templ-2016">Exercise 4: Simulating Beta(2,2) distribution using Uniform distribution (Templ 2016)</h3>
+<ol type="a">
+<li><p>Describe the steps. Hints: The pdf of <span class="math inline">\(Beta(\alpha,\beta)\)</span> is <span class="math display">\[
+f(x)= \frac{\Gamma(\alpha+\beta)}{\Gamma(\alpha)\Gamma(\beta)} x^{\alpha-1}(1-x)^{\beta-1}, \quad 0 \le x \le 1
+\]</span></p>
+<p>The aim is to simulate <span class="math inline">\(n\)</span> values from a Beta(2,2) distribution with pdf such that by substituting <span class="math inline">\(\alpha=2, \beta=2\)</span> in the above, we have <span class="math display">\[
+f(x)= 6x(1-x), \quad 0 \le x \le 1.
+\]</span></p>
+<p>Let <span class="math inline">\(g(x)\)</span> be Uniform(0,1) such that <span class="math display">\[
+g(x)= 1, \quad 0 \le x \le 1.
+\]</span></p>
+<p>and the ratio <span class="math inline">\(f/g\)</span> is bounded, i.e., there exists a constant <span class="math inline">\(M\)</span> such that <span class="math display">\[
+\frac{f(x)}{g(x)} = 6x(1-x)  \le M, \quad \forall x.
+\]</span></p>
+<p><span class="math display">\[
+\frac{d}{dx}6x(1-x) = 6 - 12x = 0
+\]</span></p>
+<p>In this case, the function is maximised at <span class="math inline">\(x=0.5, f(x)=1.5\)</span> so that we choose <span class="math inline">\(M = 1.5.\)</span></p>
+<p>Therefore, the general rule is</p>
+<p><span class="math display">\[
+U \leq \frac{f(Y)}{Mg(Y)} = \frac{6y(1-y)}{1.5(1)} = 4y(1-y)
+\]</span></p>
+<p>Proceed as follows:</p></li>
+</ol>
+<div class="example">
+<ol type="1">
+<li><p>Generate <span class="math inline">\(Y \sim g \sim \text{Uniform}(0,1).\)</span></p></li>
+<li><p>Generate a standard uniform variate, <span class="math inline">\(U \sim \text{Uniform}(0,1).\)</span></p></li>
+<li><p>If <span class="math inline">\(u\le 4y(1-y),\)</span> then assign <span class="math inline">\(x=y\)</span> (i.e., “accept” the candidate). Otherwise, discard or reject <span class="math inline">\(y\)</span> and return to step 1.</p></li>
+</ol>
+<ul>
+<li>These steps are repeated until <span class="math inline">\(n\)</span> candidate values have been accepted.</li>
+<li>The resulting accepted values <span class="math inline">\(x_1, . . ., x_n\)</span> form a simulation of a random variable with the original pdf, <span class="math inline">\(f(x).\)</span></li>
+</ul>
+</div>
+<ol start="2" type="a">
+<li>Check visually the plots of <span class="math inline">\(f(x)\)</span> and <span class="math inline">\(Mg(x).\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dbeta</span>(x, <span class="at">shape1 =</span> <span class="dv">2</span>, <span class="at">shape2 =</span> <span class="dv">2</span>), </span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">""</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">1.5</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"f(x)"</span>, <span class="st">"Mg(x) = 1.5"</span>),</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_5_workshop_sol_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="a">
+<li>Perform Accept-Reject method to simulate Beta(2,2) distribution from Uniform distribution. Calculate the acceptance rate. Plot the simulating values of a Beta(2,2) using the accep rejection approach.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">0</span>) <span class="co"># store accepted samples</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(<span class="fu">length</span>(x) <span class="sc">&lt;</span> n){ <span class="co"># keep sampling until we have n accepted values</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="fu">length</span>(x)   <span class="co"># only generate what you still need</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">runif</span>(m)                      <span class="co"># proposal sample Y ~ g(x) ~ Uniform(0, 1)</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(m)                      <span class="co"># U ~ Uniform(0,1) for acceptance test</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>  accept <span class="ot">&lt;-</span> u <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">*</span> y <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> y)     <span class="co"># acceptance rule (returns TRUE/FALSE)</span></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y[accept])               <span class="co"># keep accepted y</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span>n] <span class="co"># trim to exactly n samples</span></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">prob =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">40</span>,</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgray"</span>, <span class="at">border =</span> <span class="st">"white"</span>,</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Acceptance-Rejection Sampling"</span>,</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="dv">6</span><span class="sc">*</span>x<span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span>x), <span class="at">from =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">to =</span> <span class="dv">2</span>,</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_5_workshop_sol_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-5-simulating-the-half-normal-distribution-using-exponential" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="exercise-5-simulating-the-half-normal-distribution-using-exponential">Exercise 5: Simulating the half-normal distribution using Exponential</h3>
+<p>The half-normal distribution is defined as:</p>
+<p><span class="math display">\[f(x) = \sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2}), \quad x \ge 0.\]</span></p>
+<p>Consider simulating values from this distribution using the accept–reject method with a candidate distribution of an Exponential random variable with parameter <span class="math inline">\(\lambda = 1\)</span></p>
+<p><span class="math display">\[g(x)= e^{-x}, \quad  x \ge 0.\]</span></p>
+<ol type="a">
+<li><p>Find the inverse cdf corresponding to <span class="math inline">\(g(x).\)</span></p>
+<p>If <span class="math inline">\(X \sim Exp(\lambda=1)\)</span> then the pdf and cdf are <span class="math display">\[
+g(x)= e^{-x}, \quad  G(x)= 1- e^{-x}.
+\]</span></p>
+<p>Then set <span class="math inline">\(u=G(x)\)</span> and then solve for <span class="math inline">\(x\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+u = G(x) &amp;= 1- e^{-x} \\
+e^{-x} &amp;= 1-u \\
+-x &amp;= \ln(1-u) \\
+x &amp;= G^{-1}(u) = -\ln(1-u).
+\end{aligned}
+\]</span></p></li>
+<li><p>Find the smallest majorisation constant <span class="math inline">\(M\)</span> so that <span class="math inline">\(f(x)/g(x)\le M\)</span> for all <span class="math inline">\(x \ge 0.\)</span></p>
+<p>The ratio <span class="math inline">\(f(x)/g(x)\)</span> is equivalent to</p>
+<p><span class="math display">\[
+\frac{f(x)}{g(x)}= \frac{\sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2})}{\exp(-x)}=\sqrt{\frac{2}{\pi}} \exp (-\frac{x^2}{2}+x).
+\]</span></p>
+<p>Use the first derivative test,</p>
+<p><span class="math display">\[
+\frac{d}{dx} \left(\exp (-\frac{x^2}{2}+x) \right)=\exp (-\frac{x^2}{2}+x)(1-x)=0.
+\]</span></p>
+<p>The absolute maximum on the interval <span class="math inline">\([0, \infty)\)</span> occurs at <span class="math inline">\(x = 1\)</span>.</p>
+<p><span class="math display">\[
+\frac{f(x)}{g(x)} \le \sqrt{\frac{2}{\pi}} \exp (-\frac{1^2}{2}+1)=\sqrt{\frac{2}{\pi}} \exp(1/2)=\sqrt{\frac{2e}{\pi}}=M
+\]</span></p></li>
+<li><p>On the average, how many candidate values will be required to generate 10,000 “accepted” values?</p></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>M <span class="ot">=</span> <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="dv">1</span>)<span class="sc">/</span>pi); M</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.315489</code></pre>
+</div>
+</div>
+<p>The expected number of candidate values required to generate a single accepted value is <span class="math inline">\(M,\)</span> so the expected number required to generate 10,000 x-values is <span class="math inline">\(10,000M \approx 13,155.\)</span></p>
+<ol start="4" type="a">
+<li>Write a program to construct 10,000 values from a half-normal distribution.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span><span class="sc">*</span><span class="fu">exp</span>(<span class="dv">1</span>)<span class="sc">/</span>pi)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">0</span>) <span class="co"># store accepted samples</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span>(<span class="fu">length</span>(x) <span class="sc">&lt;</span> n){ <span class="co"># keep sampling until we have n accepted values</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="fu">length</span>(x)   <span class="co"># only generate what you still need</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">rexp</span>(m, <span class="at">rate=</span><span class="dv">1</span>)          <span class="co"># proposal sample Y ~ g(x)</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">runif</span>(m)                 <span class="co"># U ~ Uniform(0,1) for acceptance test</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a>  fg_ratio <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">/</span> pi) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>y<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span> <span class="sc">+</span> y)                    </span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a>  accept <span class="ot">&lt;-</span> u <span class="sc">&lt;=</span> fg_ratio <span class="sc">/</span> M   <span class="co"># acceptance rule (returns TRUE/FALSE)</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">c</span>(x, y[accept])          <span class="co"># keep accepted y</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> x[<span class="dv">1</span><span class="sc">:</span>n] <span class="co"># trim to exactly n samples</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">prob =</span> <span class="cn">TRUE</span>, <span class="at">breaks =</span> <span class="dv">40</span>,</span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"lightgray"</span>, <span class="at">border =</span> <span class="st">"white"</span>,</span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Acceptance-Rejection Sampling"</span>,</span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>)</span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">sqrt</span>(<span class="dv">2</span> <span class="sc">/</span> pi) <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span>x<span class="sc">**</span><span class="dv">2</span><span class="sc">/</span><span class="dv">2</span>), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">4</span>,</span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="04_5_workshop_sol_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
