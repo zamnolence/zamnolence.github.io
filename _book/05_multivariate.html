@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Multivariate Simulation – R and Python for Computer Simulation (v1.0.5)</title>
+<title>Multivariate Simulation – R and Python for Computer Simulation (v1.0.6)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8c8652d294c146b4dfaf290a06e67645.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0d2636a0403db34f7c2fbe53eca008ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R and Python for Computer Simulation (v1.0.5)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.6)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -301,8 +301,55 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_3_linear_transform.html" class="sidebar-item-text sidebar-link">
+  <a href="./05_2_linear_transform.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_1_epidemic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_3_portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,7 +357,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span></a>
+ <span class="menu-text"><strong>Project Information</strong></span></a>
   </div>
 </li>
     </ul>
@@ -326,7 +373,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><strong>Multivariate Simulation</strong></h1>
+<h1 class="title"><span id="multivariate-sim" class="quarto-section-identifier"><strong>Multivariate Simulation</strong></span></h1>
 </div>
 
 
@@ -343,6 +390,19 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>In many simulation problems, we need to generate not just one random variable, but a collection of variables that interact with one another. For example, a financial model may involve several asset returns observed together, a reliability study may involve lifetimes of related components, and a service system may require the joint simulation of arrivals, service durations, and customer behaviour. In such settings, simulating each variable separately is not enough: we must also account for the dependence structure between them.</p>
+<p>This section extends the ideas of univariate simulation to the multivariate setting. We begin with transformations of multiple random variables and show how the <strong>Jacobian</strong> generalises to higher dimensions. We then study <strong>linear transformations</strong>, which provide the foundation for constructing and understanding the <strong>multivariate normal distribution</strong>. This leads naturally to <strong>Cholesky decomposition</strong>, one of the most important practical tools for simulating correlated random vectors.</p>
+<p>However, not all dependence can be described adequately by linear correlation or by the multivariate normal model. To address this, we introduce <strong>copulas</strong>, which allow us to model dependence separately from the marginal distributions. This provides a more flexible framework for simulating dependent variables with potentially very different individual behaviours.</p>
+<p>Overall, this topic forms an important bridge between probability theory and practical simulation.</p>
+<p>By the end of this section, you should be able to:</p>
+<ul>
+<li>understand how transformations extend to multiple random variables,</li>
+<li>apply linear transformations to construct correlated random vectors,</li>
+<li>explain and simulate from the multivariate normal distribution,</li>
+<li>use Cholesky decomposition to generate dependent variables efficiently,</li>
+<li>understand the role of copulas in modelling dependence,</li>
+<li>simulate multivariate data with specified marginals and dependence structures.</li>
+</ul>
 
 
 

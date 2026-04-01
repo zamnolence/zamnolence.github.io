@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>23&nbsp; Linear Transformations and the Multivariate Normal – R and Python for Computer Simulation (v1.0.5)</title>
+<title>24&nbsp; Copulas and Simulation of Dependent Variables – R and Python for Computer Simulation (v1.0.6)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./00_project_description.html" rel="next">
-<link href="./05_1_transformation_mvs.html" rel="prev">
+<link href="./05_4_workshop.html" rel="next">
+<link href="./05_2_linear_transform.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8c8652d294c146b4dfaf290a06e67645.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0d2636a0403db34f7c2fbe53eca008ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_linear_transform.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_copulas.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -162,7 +162,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R and Python for Computer Simulation (v1.0.5)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.0.6)</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -365,8 +365,55 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_3_linear_transform.html" class="sidebar-item-text sidebar-link active">
+  <a href="./05_2_linear_transform.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_1_epidemic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_3_portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
   </div>
 </li>
       </ul>
@@ -374,7 +421,7 @@ window.Quarto = {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span></a>
+ <span class="menu-text"><strong>Project Information</strong></span></a>
   </div>
 </li>
     </ul>
@@ -387,18 +434,25 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#linear-transformations-of-random-vectors" id="toc-linear-transformations-of-random-vectors" class="nav-link active" data-scroll-target="#linear-transformations-of-random-vectors"><span class="header-section-number">23.1</span> Linear Transformations of Random Vectors</a></li>
-  <li><a href="#the-multivariate-normal-distribution" id="toc-the-multivariate-normal-distribution" class="nav-link" data-scroll-target="#the-multivariate-normal-distribution"><span class="header-section-number">23.2</span> The Multivariate Normal Distribution</a></li>
-  <li><a href="#constructing-a-multivariate-normal-via-cholesky" id="toc-constructing-a-multivariate-normal-via-cholesky" class="nav-link" data-scroll-target="#constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">23.3</span> Constructing a Multivariate Normal via Cholesky</a></li>
+  <li><a href="#copula" id="toc-copula" class="nav-link active" data-scroll-target="#copula"><span class="header-section-number">24.1</span> Copula</a>
+  <ul>
+  <li><a href="#gaussian-copula" id="toc-gaussian-copula" class="nav-link" data-scroll-target="#gaussian-copula">Gaussian Copula</a>
+  <ul class="collapse">
+  <li><a href="#simulation-algorithm-gaussian-copula" id="toc-simulation-algorithm-gaussian-copula" class="nav-link" data-scroll-target="#simulation-algorithm-gaussian-copula">Simulation Algorithm (Gaussian Copula)</a></li>
+  <li><a href="#example-normalexponential-dependence" id="toc-example-normalexponential-dependence" class="nav-link" data-scroll-target="#example-normalexponential-dependence">Example: Normal–Exponential Dependence</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#simulation-of-dependent-variables" id="toc-simulation-of-dependent-variables" class="nav-link" data-scroll-target="#simulation-of-dependent-variables"><span class="header-section-number">24.2</span> Simulation of Dependent Variables</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_linear_transform.html"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_copulas.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></h1>
+<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></h1>
 </div>
 
 
@@ -415,274 +469,236 @@ window.Quarto = {
 </header>
 
 
-<p>Linear transformations play a central role in probability and statistics, especially when working with <strong>multivariate normal distributions</strong>. In earlier sections, we saw how a linear transformation of two independent standard normals can create correlation. Here, we generalise that idea and show how <em>any</em> multivariate normal distribution can be constructed from a standard one using a matrix transformation.</p>
-<p><strong>Why This Matters</strong></p>
-<p>Linear transformations of multivariate normals underpin:</p>
+<p>So far, we have constructed dependence using linear transformations of normal variables. This approach is powerful, but it has an important limitation:</p>
+<blockquote class="blockquote">
+<p>It ties dependence to normality.</p>
+</blockquote>
+<p>In many real-world applications (finance, insurance, environmental modelling), dependence can be:</p>
 <ul>
-<li>simulation of correlated variables,<br>
-</li>
-<li>regression and linear models,<br>
-</li>
-<li>principal component analysis (PCA),<br>
-</li>
-<li>Bayesian multivariate priors,<br>
-</li>
-<li>and nearly all multivariate statistical methods.</li>
+<li>non-linear,</li>
+<li>asymmetric,</li>
+<li>or stronger in extremes (tail dependence).</li>
 </ul>
-<p>This section forms the conceptual bridge between probability theory and practical statistical modelling.</p>
-<section id="linear-transformations-of-random-vectors" class="level2" data-number="23.1">
-<h2 data-number="23.1" class="anchored" data-anchor-id="linear-transformations-of-random-vectors"><span class="header-section-number">23.1</span> Linear Transformations of Random Vectors</h2>
-<p>Let<br>
-<span class="math display">\[
-\mathbf{X} = (X_1, X_2, \dots, X_k)^\top
-\]</span> be a random vector, and let <span class="math inline">\(A\)</span> be a fixed <span class="math inline">\(m \times k\)</span> matrix. A <strong>linear transformation</strong> of <span class="math inline">\(\mathbf{X}\)</span> is</p>
+<p>To model such behaviour, we need a more flexible framework.</p>
+<p>This leads to the idea of copulas.</p>
+<section id="copula" class="level2" data-number="24.1">
+<h2 data-number="24.1" class="anchored" data-anchor-id="copula"><span class="header-section-number">24.1</span> Copula</h2>
+<p>A copula is a function that allows us to construct a joint distribution by combining:</p>
+<ul>
+<li>marginal distributions, and</li>
+<li>a dependence structure.</li>
+</ul>
+<div class="note">
+<p><strong>Key Idea</strong></p>
+<p>Any joint distribution can be decomposed as:</p>
 <p><span class="math display">\[
-\mathbf{Y} = A\mathbf{X} + \mathbf{b},
-\]</span> where <span class="math inline">\(\mathbf{b}\)</span> is a constant vector.</p>
-<p>This transformation:</p>
+F_{X,Y}(x,y) = C\big(F_X(x), F_Y(y)\big),
+\]</span></p>
+<p>where:</p>
 <ul>
-<li>rotates, stretches, or compresses the space,<br>
-</li>
-<li>shifts the mean by <span class="math inline">\(\mathbf{b}\)</span>,<br>
-</li>
-<li>and reshapes the covariance structure through the matrix <span class="math inline">\(A\)</span>.</li>
+<li><span class="math inline">\(F_X, F_Y\)</span> are marginal CDFs,</li>
+<li><span class="math inline">\(C(u,v)\)</span> is a copula.</li>
 </ul>
+<p>This result is known as <strong>Sklar’s Theorem</strong>.</p>
+<p><strong>Interpretation</strong></p>
+<ul>
+<li>Marginals describe individual behaviour.</li>
+<li>The copula describes dependence.</li>
+</ul>
+<p>In copula models, dependence is often measured using:</p>
+<ul>
+<li>Pearson correlation (linear)</li>
+<li>Spearman’s rho (rank-based)</li>
+<li>Kendall’s tau</li>
+</ul>
+<p>Copulas naturally capture <em>rank dependence</em>, not just linear relationships.</p>
+</div>
+<div class="tip">
+<p><strong>Why Copulas Matter in Simulation</strong></p>
+<p>Copulas allow us to:</p>
+<ul>
+<li>simulate dependence without assuming normality,</li>
+<li>combine any marginal distributions (e.g., Normal + Exponential),</li>
+<li>model tail dependence (important in risk modelling),</li>
+<li>separate modelling into marginals (easy) or dependence (flexible).</li>
+</ul>
+</div>
+<section id="gaussian-copula" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="gaussian-copula">Gaussian Copula</h3>
+<p>The most commonly used copula in simulation is the Gaussian copula.</p>
+<p><strong>Construction</strong></p>
+<ol type="1">
+<li><p>Generate correlated normal variables: <span class="math display">\[
+(Z_1, Z_2) \sim N(0, \Sigma)
+\]</span></p></li>
+<li><p>Transform to uniforms: <span class="math display">\[
+U_1 = \Phi(Z_1), \quad U_2 = \Phi(Z_2)
+\]</span></p></li>
+<li><p>Apply inverse CDFs: <span class="math display">\[
+X = F_X^{-1}(U_1), \quad Y = F_Y^{-1}(U_2)
+\]</span></p>
+<p>This produces <span class="math inline">\((X,Y)\)</span> with:</p>
+<ul>
+<li>chosen marginals <span class="math inline">\(F_X, F_Y\)</span>,</li>
+<li>dependence induced by <span class="math inline">\(\Sigma\)</span>.</li>
+</ul></li>
+</ol>
+<section id="simulation-algorithm-gaussian-copula" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="simulation-algorithm-gaussian-copula">Simulation Algorithm (Gaussian Copula)</h4>
+<ol type="1">
+<li><p>Choose:</p>
+<ul>
+<li>marginal distributions <span class="math inline">\(F_X, F_Y\)</span>,</li>
+<li>correlation parameter <span class="math inline">\(\rho\)</span></li>
+</ul></li>
+<li><p>Construct covariance matrix: <span class="math display">\[
+\Sigma =
+\begin{pmatrix}
+1 &amp; \rho \\
+\rho &amp; 1
+\end{pmatrix}
+\]</span></p></li>
+<li><p>Generate: <span class="math display">\[
+(Z_1, Z_2) \sim N(0, \Sigma)
+\]</span></p></li>
+<li><p>Transform: <span class="math display">\[
+U_i = \Phi(Z_i)
+\]</span></p></li>
+<li><p>Apply inverse CDF: <span class="math display">\[
+X = F_X^{-1}(U_1), \quad Y = F_Y^{-1}(U_2)
+\]</span></p></li>
+</ol>
 </section>
-<section id="the-multivariate-normal-distribution" class="level2" data-number="23.2">
-<h2 data-number="23.2" class="anchored" data-anchor-id="the-multivariate-normal-distribution"><span class="header-section-number">23.2</span> The Multivariate Normal Distribution</h2>
-<p>A random vector <span class="math inline">\(\mathbf{X}\)</span> is <strong>multivariate normal</strong> if every linear combination of its components is normally distributed.</p>
-<p>If<br>
-<span class="math display">\[
-\mathbf{X} \sim N(\boldsymbol{\mu}, \Sigma),
-\]</span> then:</p>
+<section id="example-normalexponential-dependence" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="example-normalexponential-dependence">Example: Normal–Exponential Dependence</h4>
+<p>Simulate:</p>
 <ul>
-<li><span class="math inline">\(\boldsymbol{\mu}\)</span> is the mean vector,<br>
-</li>
-<li><span class="math inline">\(\Sigma\)</span> is the covariance matrix (symmetric and positive‑definite).</li>
+<li><span class="math inline">\(X \sim N(0,1)\)</span></li>
+<li><span class="math inline">\(Y \sim \text{Exp}(1)\)</span></li>
+<li>with dependence <span class="math inline">\(\rho = 0.7\)</span></li>
 </ul>
-<p>The density is</p>
-<p><span class="math display">\[
-f_{\mathbf{X}}(\mathbf{x})
-= \frac{1}{(2\pi)^{k/2} |\Sigma|^{1/2}}
-\exp\!\left(
--\frac{1}{2}(\mathbf{x}-\boldsymbol{\mu})^\top
-\Sigma^{-1}(\mathbf{x}-\boldsymbol{\mu})
-\right).
-\]</span></p>
-<p>A key property makes the multivariate normal uniquely convenient:</p>
-<p><span class="math display">\[
-\mathbf{X} \sim N(\boldsymbol{\mu}, \Sigma)
-\quad \Longrightarrow \quad
-A\mathbf{X} + \mathbf{b} \sim N(A\boldsymbol{\mu} + \mathbf{b},\; A\Sigma A^\top).
-\]</span></p>
-<p>This means:</p>
-<ul>
-<li>linear transformations of normals are still normal (preserve normality),<br>
-</li>
-<li>the mean transforms linearly,<br>
-</li>
-<li>the covariance transforms quadratically.</li>
-</ul>
-<p>This is why the multivariate normal is so widely used: it behaves perfectly under linear operations.</p>
-<p><strong>Example: Linear Transformation of a Bivariate Normal</strong></p>
-<p>We simulate <span class="math inline">\(\mathbf{X}\sim N(\mu ,\Sigma )\)</span> with mean vector and covariance matrix:</p>
-<p><span class="math display">\[
-\mu = (1,2)^{\top}, \qquad
-\Sigma =\left( \begin{matrix}4&amp;1\\ 1&amp;1\end{matrix}\right).
-\]</span></p>
-<p>The entries encode <span class="math inline">\(\text{Var}(X_1) = 4\)</span>, <span class="math inline">\(\text{Var}(X_2) = 1\)</span> and <span class="math inline">\(\text{Cov}(X_1,X_2) = 1\)</span>.</p>
-<p>Then, apply <span class="math inline">\(\mathbf{Y}=A\mathbf{X}+b\)</span> with</p>
-<p><span class="math display">\[
-A =\left( \begin{matrix}1&amp;0\\ -1&amp;2\end{matrix}\right), \qquad
-b = (0, 1)^{\top}
-\]</span></p>
-<p>Compare the scatterplots.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Original distribution</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>mu  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                  <span class="dv">1</span>, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="at">mu =</span> mu, <span class="at">Sigma =</span> Sigma)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear transformation</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>,</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix algebra</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">t</span>(A <span class="sc">%*%</span> <span class="fu">t</span>(X)) <span class="sc">+</span> <span class="fu">matrix</span>(b, n, <span class="dv">2</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: correlated normals</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                  rho, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: convert to uniforms</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(Z)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: apply inverse CDFs</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U[,<span class="dv">1</span>])      <span class="co"># Normal</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">qexp</span>(U[,<span class="dv">2</span>])       <span class="co"># Exponential</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Original X ~ N(mu, Sigma)"</span>,</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>)</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Y[,<span class="dv">1</span>], Y[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Transformed Y = A X + b"</span>,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Y1"</span>, <span class="at">ylab =</span> <span class="st">"Y2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gaussian Copula (Normal + Exponential)"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X ~ N(0,1)"</span>, <span class="at">ylab =</span> <span class="st">"Y ~ Exp(1)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="05_3_linear_transform_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="05_3_copulas_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p><strong>Observations:</strong></p>
 <ul>
-<li>The original cloud has a certain tilt and spread.</li>
-<li>The transformed cloud is rotated and stretched exactly as predicted by <span class="math inline">\(A\Sigma A^{\top }\)</span>.</li>
+<li>Marginals are preserved exactly,</li>
+<li>Dependence is induced via the copula,</li>
+<li>The shape is not elliptical (unlike MVN).</li>
 </ul>
 </section>
-<section id="constructing-a-multivariate-normal-via-cholesky" class="level2" data-number="23.3">
-<h2 data-number="23.3" class="anchored" data-anchor-id="constructing-a-multivariate-normal-via-cholesky"><span class="header-section-number">23.3</span> Constructing a Multivariate Normal via Cholesky</h2>
-<p>If <span class="math inline">\(\Sigma\)</span> is a covariance matrix, we can write:</p>
-<p><span class="math display">\[
-\Sigma = LL^\top,
-\]</span></p>
-<p>where <span class="math inline">\(L\)</span> is the <strong>Cholesky factor</strong> (lower triangular).<br>
-If <span class="math inline">\(\mathbf{Z} \sim N(\mathbf{0}, I)\)</span>, then</p>
-<p><span class="math display">\[
-\mathbf{X} = L\mathbf{Z} + \boldsymbol{\mu}
-\]</span></p>
-<p>has distribution <span class="math inline">\(N(\boldsymbol{\mu}, \Sigma)\)</span>.</p>
-<p>This generalises earlier 2D construction:</p>
-<p><span class="math display">\[
-Y = \rho Z_1 + \sqrt{1-\rho^2}\, Z_2,
-\]</span></p>
-<p>which is exactly the Cholesky factor of <span class="math inline">\(\begin{pmatrix}1 &amp; \rho \\ \rho &amp; 1\end{pmatrix}\)</span>.</p>
-<p><strong>Example: Constructing Correlated Normals via Cholesky</strong></p>
-<p>Define the covariance matrix</p>
-<p><span class="math display">\[\Sigma =\left( \begin{matrix}1&amp;\rho \\ \rho &amp;1\end{matrix}\right) =\left( \begin{matrix}1&amp;0.8\\ 0.8&amp;1\end{matrix}\right).\]</span></p>
-<p>Both variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> have variance 1, and covariance <span class="math inline">\(\rho\)</span>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.8</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariance matrix</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                  rho, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor: L^T L (upper triangular)</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 2n independent N(0,1) values</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">2</span><span class="sc">*</span>n), n, <span class="dv">2</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T (linear transformation)</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Z[,<span class="dv">1</span>], Z[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"gray60"</span>,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Z ~ N(0, I)"</span>,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Z1"</span>, <span class="at">ylab =</span> <span class="st">"Z2"</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"firebrick"</span>,</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"X = Z L^T (Correlated Normals)"</span>,</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="05_3_linear_transform_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<section id="limitations" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="limitations">Limitations</h4>
+<p>A key limitation of the Gaussian copula is that it’s <strong>weak in modelling extreme co-movements.</strong></p>
+<p>Alternative copulas:</p>
 <ul>
-<li><span class="math inline">\(Z\)</span> is a round cloud (independent normals).</li>
-<li><span class="math inline">\(X\)</span> becomes a tilted ellipse with correlation <span class="math inline">\(\rho =0.8\)</span>.</li>
-<li>This is how Cholesky induces covariance.</li>
+<li>t-copula → captures tail dependence</li>
+<li>Clayton copula → lower tail dependence</li>
+<li>Gumbel copula → upper tail dependence</li>
 </ul>
-<p><strong>Example: General k‑Dimensional Construction</strong></p>
-<p>Simulate <span class="math inline">\(\mathbf{X}\sim N(\mu ,\Sigma )\)</span> using Cholesky.</p>
-<p>Define a mean vector and a covariance matrix:</p>
-<p><span class="math display">\[
-\mu =(0,\; 1,\; 2)^{\top }, \qquad
-\Sigma =\left( \begin{matrix}1&amp;0.5&amp;0.2\\ 0.5&amp;2&amp;0.3\\ 0.2&amp;0.3&amp;1\end{matrix}\right).
-\]</span></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D mean and covariance</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="fl">0.3</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard normals</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span><span class="sc">*</span>n), n, <span class="dv">3</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T + mu</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L) <span class="sc">+</span> <span class="fu">matrix</span>(mu, n, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick diagnostic: sample covariance</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cov</span>(X), <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3]
-[1,] 1.35 0.69 0.21
-[2,] 0.69 1.77 0.15
-[3,] 0.21 0.15 0.90</code></pre>
-</div>
-</div>
+<hr>
+</section>
+</section>
+</section>
+<section id="simulation-of-dependent-variables" class="level2" data-number="24.2">
+<h2 data-number="24.2" class="anchored" data-anchor-id="simulation-of-dependent-variables"><span class="header-section-number">24.2</span> Simulation of Dependent Variables</h2>
+<p>We now unify everything into a general framework.</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 43%">
+<col style="width: 43%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Linear Transformation</th>
+<th>Copula-Based Simulation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Use</td>
+<td><span class="math inline">\(X=LZ+\mu\)</span></td>
+<td><span class="math inline">\(U_i = \Phi(Z_i), \quad X_i = F_i^{-1}(U_i)\)</span></td>
+</tr>
+<tr class="even">
+<td>Works for</td>
+<td>Normal only</td>
+<td>Any marginals</td>
+</tr>
+<tr class="odd">
+<td>Dependence</td>
+<td>Linear</td>
+<td>Flexible</td>
+</tr>
+<tr class="even">
+<td>Pros</td>
+<td>Simple and efficient</td>
+<td>Very flexible, realistic modelling</td>
+</tr>
+<tr class="odd">
+<td>Cons</td>
+<td>Limited flexibility</td>
+<td>Slightly more complex</td>
+</tr>
+<tr class="even">
+<td>Use case</td>
+<td>Statistics, regression</td>
+<td>Finance, risk, insurance</td>
+</tr>
+</tbody>
+</table>
+<div class="note">
+<p><strong>General Algorithm</strong></p>
+<ol type="1">
+<li>Specify marginals <span class="math inline">\(F_1, \dots, F_k\)</span></li>
+<li>Choose dependence structure:
 <ul>
-<li>The sample covariance of <span class="math inline">\(X\)</span> matches <span class="math inline">\(\Sigma\)</span>.</li>
-<li>The construction works in any dimension.</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D mean and covariance</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.2</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.5</span>, <span class="dv">2</span>, <span class="fl">0.3</span>,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="dv">1</span>), <span class="dv">3</span>, <span class="dv">3</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard normals</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span><span class="sc">*</span>n), n, <span class="dv">3</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct X = Z L^T + mu</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> <span class="fu">t</span>(L) <span class="sc">+</span> <span class="fu">matrix</span>(mu, n, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># 3D scatterplot</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scatterplot3d)</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">scatterplot3d</span>(X[,<span class="dv">1</span>], X[,<span class="dv">2</span>], X[,<span class="dv">3</span>],</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex.symbols =</span> <span class="fl">0.4</span>,</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>              <span class="at">color =</span> <span class="st">"steelblue"</span>,</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>              <span class="at">main =</span> <span class="st">"3D Scatterplot of Multivariate Normal Sample"</span>,</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>              <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>, <span class="at">zlab =</span> <span class="st">"X3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="05_3_linear_transform_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
+<li>covariance matrix (MVN), or</li>
+<li>copula</li>
+</ul></li>
+<li>Generate base variables:
 <ul>
-<li>A 3D elliptical cloud whose shape reflects the covariance matrix.</li>
-<li>The cloud is tilted and stretched in directions determined by <span class="math inline">\(\Sigma\)</span>.</li>
-<li>This visually reinforces the idea that <span class="math inline">\(X=LZ+\mu\)</span>.</li>
-</ul>
+<li><span class="math inline">\(Z \sim N(0,I)\)</span></li>
+</ul></li>
+<li>Induce dependence:
+<ul>
+<li>via <span class="math inline">\(LZ\)</span> (Cholesky), or copula</li>
+</ul></li>
+<li>Transform to desired marginals</li>
+</ol>
+</div>
+<p>The worked example of this section can be found in <a href="10_3_portfolio.html">📈 Portfolio Risk Simulation</a>.</p>
 
 
 </section>
@@ -1090,13 +1106,13 @@ Y = \rho Z_1 + \sqrt{1-\rho^2}\, Z_2,
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05_1_transformation_mvs.html" class="pagination-link" aria-label="Transformation of Multiple Random Variables">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Transformation of Multiple Random Variables</span></span>
+      <a href="./05_2_linear_transform.html" class="pagination-link" aria-label="Linear Transformations and the Multivariate Normal">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_project_description.html" class="pagination-link" aria-label="<strong>Project Information</strong>">
-        <span class="nav-page-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title"><strong>Project Information</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./05_4_workshop.html" class="pagination-link" aria-label="Workshop Activities">
+        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
