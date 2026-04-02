@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>24&nbsp; Copulas and Simulation of Dependent Variables – R and Python for Computer Simulation (v1.0.6)</title>
+<title>29&nbsp; 🌫️ Air Pollution Monitoring – R and Python for Computer Simulation (v1.0.6)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05_4_workshop.html" rel="next">
-<link href="./05_2_linear_transform.html" rel="prev">
+<link href="./10_3_portfolio.html" rel="next">
+<link href="./10_1_epidemic.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -147,7 +147,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_copulas.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10_case_studies.html"><strong>Case Studies</strong></a></li><li class="breadcrumb-item"><a href="./10_2_pollution.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -371,7 +371,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link active">
+  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></span></a>
   </div>
 </li>
@@ -412,7 +412,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10_2_pollution.html" class="sidebar-item-text sidebar-link">
+  <a href="./10_2_pollution.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></span></a>
   </div>
 </li>
@@ -440,25 +440,24 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#copula" id="toc-copula" class="nav-link active" data-scroll-target="#copula"><span class="header-section-number">24.1</span> Copula</a>
+  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
+  <li><a href="#frequentist-mvn" id="toc-frequentist-mvn" class="nav-link" data-scroll-target="#frequentist-mvn">Frequentist MVN</a></li>
+  <li><a href="#bayesian-mvn" id="toc-bayesian-mvn" class="nav-link" data-scroll-target="#bayesian-mvn">Bayesian MVN</a>
   <ul>
-  <li><a href="#gaussian-copula" id="toc-gaussian-copula" class="nav-link" data-scroll-target="#gaussian-copula">Gaussian Copula</a>
-  <ul class="collapse">
-  <li><a href="#simulation-algorithm-gaussian-copula" id="toc-simulation-algorithm-gaussian-copula" class="nav-link" data-scroll-target="#simulation-algorithm-gaussian-copula">Simulation Algorithm (Gaussian Copula)</a></li>
-  <li><a href="#example-normalexponential-dependence" id="toc-example-normalexponential-dependence" class="nav-link" data-scroll-target="#example-normalexponential-dependence">Example: Normal–Exponential Dependence</a></li>
-  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#prior-conjugate" id="toc-prior-conjugate" class="nav-link" data-scroll-target="#prior-conjugate">Prior (conjugate)</a></li>
+  <li><a href="#posterior" id="toc-posterior" class="nav-link" data-scroll-target="#posterior">Posterior</a></li>
+  <li><a href="#posterior-predictive-distribution-key-result" id="toc-posterior-predictive-distribution-key-result" class="nav-link" data-scroll-target="#posterior-predictive-distribution-key-result">Posterior Predictive Distribution (key result)</a></li>
+  <li><a href="#bayesian-simulation-algorithm" id="toc-bayesian-simulation-algorithm" class="nav-link" data-scroll-target="#bayesian-simulation-algorithm">Bayesian Simulation Algorithm</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#simulation-of-dependent-variables" id="toc-simulation-of-dependent-variables" class="nav-link" data-scroll-target="#simulation-of-dependent-variables"><span class="header-section-number">24.2</span> Simulation of Dependent Variables</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./05_multivariate.html"><strong>Multivariate Simulation</strong></a></li><li class="breadcrumb-item"><a href="./05_3_copulas.html"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10_case_studies.html"><strong>Case Studies</strong></a></li><li class="breadcrumb-item"><a href="./10_2_pollution.html"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></h1>
+<h1 class="title"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></h1>
 </div>
 
 
@@ -475,238 +474,337 @@ window.Quarto = {
 </header>
 
 
-<p>So far, we have constructed dependence using linear transformations of normal variables. This approach is powerful, but it has an important limitation:</p>
-<blockquote class="blockquote">
-<p>It ties dependence to normality.</p>
-</blockquote>
-<p>In many real-world applications (finance, insurance, environmental modelling), dependence can be:</p>
+<p>Air pollution is a major environmental and public health concern, particularly in urban areas where emissions from traffic, industry, and weather conditions interact in complex ways. Monitoring pollution levels across multiple locations is essential for understanding spatial patterns, assessing risk, and informing policy decisions.</p>
+<p>In practice, pollution measurements at nearby locations are <strong>not independent</strong>. For example, wind direction, temperature, and regional emission sources can cause pollution levels at different monitoring stations to rise and fall together. As a result, modelling each location separately fails to capture the true joint behaviour of the system.</p>
+<p>A natural way to model such data is through a <strong>multivariate normal distribution</strong>, where each component represents pollution levels at a different site, and the covariance matrix encodes the dependence between locations. This allows us to simulate realistic scenarios in which pollution levels co-vary across space.</p>
+<p>In this example, we compare the differences between:</p>
 <ul>
-<li>non-linear,</li>
-<li>asymmetric,</li>
-<li>or stronger in extremes (tail dependence).</li>
+<li><strong>Frequentist MVN:</strong> treat <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> as fixed and known</li>
+<li><strong>Bayesian MVN:</strong> treat <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> as unknown and assign priors</li>
 </ul>
-<p>To model such behaviour, we need a more flexible framework.</p>
-<p>This leads to the idea of copulas.</p>
-<section id="copula" class="level2" data-number="24.1">
-<h2 data-number="24.1" class="anchored" data-anchor-id="copula"><span class="header-section-number">24.1</span> Copula</h2>
-<p>A copula is a function that allows us to construct a joint distribution by combining:</p>
+<section id="background" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="background">Background</h2>
+<p>We consider pollution levels (e.g., PM2.5 concentration) measured at three <em>nearby</em> monitoring stations:</p>
 <ul>
-<li>marginal distributions, and</li>
-<li>a dependence structure.</li>
+<li><strong>Site A:</strong> <span class="math inline">\(X_1\)</span></li>
+<li><strong>Site B:</strong> <span class="math inline">\(X_2\)</span></li>
+<li><strong>Site C:</strong> <span class="math inline">\(X_3\)</span></li>
 </ul>
-<div class="note">
-<p><strong>Key Idea</strong></p>
-<p>Any joint distribution can be decomposed as:</p>
+<p>Because the sites are geographically close, pollution levels tend to move together due to shared weather conditions, traffic patterns, and regional emission sources. A multivariate normal model provides a natural way to describe this joint behaviour.</p>
+<p>We assume that the vector of pollution levels follows a multivariate normal distribution:</p>
 <p><span class="math display">\[
-F_{X,Y}(x,y) = C\big(F_X(x), F_Y(y)\big),
+\mathbf{X} = (X_1, X_2, X_3)^\top \sim N(\boldsymbol{\mu}, \Sigma),
 \]</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(F_X, F_Y\)</span> are marginal CDFs,</li>
-<li><span class="math inline">\(C(u,v)\)</span> is a copula.</li>
+<li><span class="math inline">\(\boldsymbol{\mu}\)</span> represents the average pollution levels at each site,</li>
+<li><span class="math inline">\(\Sigma\)</span> represents the covariance structure capturing spatial dependence (how sites move together).</li>
 </ul>
-<p>This result is known as <strong>Sklar’s Theorem</strong>.</p>
-<p><strong>Interpretation</strong></p>
+<p>In a <strong>Bayesian</strong> model:</p>
 <ul>
-<li>Marginals describe individual behaviour.</li>
-<li>The copula describes dependence.</li>
+<li><span class="math inline">\(\boldsymbol{\mu}\)</span> and <span class="math inline">\(\Sigma\)</span> are unknown</li>
+<li>we simulate from this distribution repeatedly</li>
 </ul>
-<p>In copula models, dependence is often measured using:</p>
+<p><strong>Our goal is to:</strong></p>
+<blockquote class="blockquote">
+<p>simulate realistic pollution levels across the three sites while preserving both the marginal behaviour and the dependence structure between locations.</p>
+</blockquote>
+<p>To achieve this, we will construct samples from the <strong>multivariate normal distribution using Cholesky decomposition</strong>, which allows us to transform independent standard normal variables into correlated variables with the desired covariance structure.</p>
+</section>
+<section id="frequentist-mvn" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="frequentist-mvn">Frequentist MVN</h2>
+<p>In the frequentist version, we assume that the mean vector and covariance matrix are known constants. Our goal is simply to simulate pollution levels that have the required averages and dependence structure.</p>
+<p>This is useful when:</p>
 <ul>
-<li>Pearson correlation (linear)</li>
-<li>Spearman’s rho (rank-based)</li>
-<li>Kendall’s tau</li>
+<li>parameters are given from historical estimates,</li>
+<li>we want to generate synthetic data,</li>
+<li>or we want to understand how covariance affects the joint behaviour.</li>
 </ul>
-<p>Copulas naturally capture <em>rank dependence</em>, not just linear relationships.</p>
-</div>
-<div class="tip">
-<p><strong>Why Copulas Matter in Simulation</strong></p>
-<p>Copulas allow us to:</p>
-<ul>
-<li>simulate dependence without assuming normality,</li>
-<li>combine any marginal distributions (e.g., Normal + Exponential),</li>
-<li>model tail dependence (important in risk modelling),</li>
-<li>separate modelling into marginals (easy) or dependence (flexible).</li>
-</ul>
-</div>
-<section id="gaussian-copula" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="gaussian-copula">Gaussian Copula</h3>
-<p>The most commonly used copula in simulation is the Gaussian copula.</p>
-<p><strong>Construction</strong></p>
-<ol type="1">
-<li><p>Generate correlated normal variables: <span class="math display">\[
-(Z_1, Z_2) \sim N(0, \Sigma)
-\]</span></p></li>
-<li><p>Transform to uniforms: <span class="math display">\[
-U_1 = \Phi(Z_1), \quad U_2 = \Phi(Z_2)
-\]</span></p></li>
-<li><p>Apply inverse CDFs: <span class="math display">\[
-X = F_X^{-1}(U_1), \quad Y = F_Y^{-1}(U_2)
+<p>We assume:</p>
+<p><span class="math display">\[
+\mathbf{X}=(X_1,X_2,X_3)^\top \sim N(\boldsymbol{\mu}, \Sigma),
 \]</span></p>
-<p>This produces <span class="math inline">\((X,Y)\)</span> with:</p>
-<ul>
-<li>chosen marginals <span class="math inline">\(F_X, F_Y\)</span>,</li>
-<li>dependence induced by <span class="math inline">\(\Sigma\)</span>.</li>
-</ul></li>
-</ol>
-<section id="simulation-algorithm-gaussian-copula" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="simulation-algorithm-gaussian-copula">Simulation Algorithm (Gaussian Copula)</h4>
-<ol type="1">
-<li><p>Choose:</p>
-<ul>
-<li>marginal distributions <span class="math inline">\(F_X, F_Y\)</span>,</li>
-<li>correlation parameter <span class="math inline">\(\rho\)</span></li>
-</ul></li>
-<li><p>Construct covariance matrix: <span class="math display">\[
+<p>with</p>
+<p><span class="math display">\[
+\boldsymbol{\mu} =
+\begin{pmatrix}
+20\\
+25\\
+22
+\end{pmatrix},
+\qquad
 \Sigma =
 \begin{pmatrix}
-1 &amp; \rho \\
-\rho &amp; 1
-\end{pmatrix}
-\]</span></p></li>
-<li><p>Generate: <span class="math display">\[
-(Z_1, Z_2) \sim N(0, \Sigma)
-\]</span></p></li>
-<li><p>Transform: <span class="math display">\[
-U_i = \Phi(Z_i)
-\]</span></p></li>
-<li><p>Apply inverse CDF: <span class="math display">\[
-X = F_X^{-1}(U_1), \quad Y = F_Y^{-1}(U_2)
-\]</span></p></li>
-</ol>
-</section>
-<section id="example-normalexponential-dependence" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="example-normalexponential-dependence">Example: Normal–Exponential Dependence</h4>
-<p>Simulate:</p>
+10 &amp; 6 &amp; 4\\
+6 &amp; 12 &amp; 5\\
+4 &amp; 5 &amp; 8
+\end{pmatrix},
+\]</span></p>
+<p>where</p>
 <ul>
-<li><span class="math inline">\(X \sim N(0,1)\)</span></li>
-<li><span class="math inline">\(Y \sim \text{Exp}(1)\)</span></li>
-<li>with dependence <span class="math inline">\(\rho = 0.7\)</span></li>
+<li><span class="math inline">\(\mu\)</span> gives the average pollution level at each site,</li>
+<li><span class="math inline">\(\Sigma\)</span> describes the variability and dependence.</li>
 </ul>
+<p>Then, we simulate realistic pollution measurements at the three sites assuming the mean vector and covariance matrix are known. Use Cholesky decomposition to generate correlated samples from the multivariate normal distribution.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1: correlated normals</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, rho,</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                  rho, <span class="dv">1</span>), <span class="dv">2</span>, <span class="dv">2</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="at">mu =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">Sigma =</span> Sigma)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean vector</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">22</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Covariance matrix</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Sigma <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">4</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                  <span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">5</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                  <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">8</span>), <span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Cholesky factor</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">chol</span>(Sigma)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2: convert to uniforms</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>U <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(Z)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: apply inverse CDFs</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(U[,<span class="dv">1</span>])      <span class="co"># Normal</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">qexp</span>(U[,<span class="dv">2</span>])       <span class="co"># Exponential</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate standard normals</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">3</span> <span class="sc">*</span> n), n, <span class="dv">3</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct correlated MVN sample</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> Z <span class="sc">%*%</span> L <span class="sc">+</span> <span class="fu">matrix</span>(mu, n, <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X, Y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gaussian Copula (Normal + Exponential)"</span>,</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X ~ N(0,1)"</span>, <span class="at">ylab =</span> <span class="st">"Y ~ Exp(1)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Check results</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.99820 24.98682 22.01486</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(X)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]      [,2]     [,3]
+[1,] 9.891714  5.880366 3.975450
+[2,] 5.880366 11.942226 4.997649
+[3,] 3.975450  4.997649 8.024612</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pairwise plots</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(X, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Frequentist MVN: Simulated Pollution Levels"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="05_3_copulas_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="10_2_pollution_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>Observations:</strong></p>
 <ul>
-<li>Marginals are preserved exactly,</li>
-<li>Dependence is induced via the copula,</li>
-<li>The shape is not elliptical (unlike MVN).</li>
+<li>Each column represents one monitoring site.</li>
+<li>The sample means should be close to <span class="math inline">\(\mu\)</span>.</li>
+<li>The sample covariance matrix should be close to <span class="math inline">\(\Sigma\)</span>.</li>
+<li>The scatterplots should show positive dependence between sites.</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>In the frequentist MVN model, the parameters are fixed, and we simulate pollution levels conditional on those values.</strong></p>
+</blockquote>
+</section>
+<section id="bayesian-mvn" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="bayesian-mvn">Bayesian MVN</h2>
+<p>In practice, the <strong>true mean pollution levels and covariance structure are usually unknown</strong>. A Bayesian approach treats these parameters as random variables and updates them using observed data.</p>
+<p>This means we account for two layers of uncertainty:</p>
+<ol type="1">
+<li>uncertainty in the pollution measurements themselves,</li>
+<li>uncertainty in the unknown parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span>.</li>
+</ol>
+<p>We observed pollution vectors</p>
+<p><span class="math display">\[
+\mathbf{X}_1,\dots,\mathbf{X}_n \mid \mu,\Sigma \sim N(\mu,\Sigma),
+\]</span></p>
+<p>with both <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> are unknown.</p>
+<section id="prior-conjugate" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="prior-conjugate">Prior (conjugate)</h3>
+<p>We use the Normal–Inverse‑Wishart prior:</p>
+<p><span class="math display">\[
+\mu \mid \Sigma \sim N\!\left(\mu_0,\frac{\Sigma}{\kappa_0}\right),
+\qquad
+\Sigma \sim \text{Inverse-Wishart}(\Psi_0,\nu_0),
+\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(\mu_0\)</span> is prior mean,</li>
+<li><span class="math inline">\(\kappa_0\)</span> is prior strength (pseudo sample size for the mean),</li>
+<li><span class="math inline">\(\Psi_0, \nu_0\)</span> are prior scale and degrees of freedom for <span class="math inline">\(\Sigma\)</span>.</li>
 </ul>
 </section>
-<section id="limitations" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="limitations">Limitations</h4>
-<p>A key limitation of the Gaussian copula is that it’s <strong>weak in modelling extreme co-movements.</strong></p>
-<p>Alternative copulas:</p>
+<section id="posterior" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="posterior">Posterior</h3>
+<p>Let:</p>
 <ul>
-<li>t-copula → captures tail dependence</li>
-<li>Clayton copula → lower tail dependence</li>
-<li>Gumbel copula → upper tail dependence</li>
+<li><span class="math inline">\(\bar{\mathbf X}\)</span> = sample mean</li>
+<li><span class="math inline">\(S = \sum_{i=1}^n (\mathbf X_i-\bar{\mathbf X})(\mathbf X_i-\bar{\mathbf X})^\top\)</span></li>
 </ul>
-<hr>
+<p>Then the posterior is:</p>
+<p><span class="math display">\[
+\Sigma \mid \mathbf X \sim \text{Inv-Wishart}(\Psi_n,\nu_n),
+\]</span></p>
+<p><span class="math display">\[
+\mu \mid \Sigma,\mathbf X \sim N_p\!\left(\mu_n,\frac{\Sigma}{\kappa_n}\right),
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+\kappa_n = \kappa_0 + n,
+\qquad
+\nu_n = \nu_0 + n,
+\]</span></p>
+<p><span class="math display">\[
+\mu_n = \frac{\kappa_0\mu_0 + n\bar{\mathbf X}}{\kappa_n},
+\]</span></p>
+<p><span class="math display">\[
+\Psi_n = \Psi_0 + S + \frac{\kappa_0 n}{\kappa_n}
+(\bar{\mathbf X}-\mu_0)(\bar{\mathbf X}-\mu_0)^\top.
+\]</span></p>
 </section>
+<section id="posterior-predictive-distribution-key-result" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="posterior-predictive-distribution-key-result">Posterior Predictive Distribution (key result)</h3>
+<p>After integrating out <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{X_{\text{new}}} \mid \mathbf{X}
+\;\sim\;
+\text{Multivariate-}t_{\nu_n-p+1}
+\left(
+\mu_n,\;
+\frac{\kappa_n+1}{\kappa_n(\nu_n-p+1)}\Psi_n
+\right).
+\]</span></p>
+<p><strong>This is the exact Bayesian predictive distribution.</strong><br>
+It has heavier tails than a Gaussian, reflecting parameter uncertainty.</p>
 </section>
-</section>
-<section id="simulation-of-dependent-variables" class="level2" data-number="24.2">
-<h2 data-number="24.2" class="anchored" data-anchor-id="simulation-of-dependent-variables"><span class="header-section-number">24.2</span> Simulation of Dependent Variables</h2>
-<p>We now unify everything into a general framework.</p>
+<section id="bayesian-simulation-algorithm" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bayesian-simulation-algorithm">Bayesian Simulation Algorithm</h3>
+<ol type="1">
+<li>Sample <span class="math inline">\(\Sigma^{(s)} \sim \text{Inv-Wishart}(\Psi_n,\nu_n)\)</span></li>
+<li>Sample <span class="math inline">\(\mu^{(s)} \mid \Sigma^{(s)} \sim N(\mu_n,\Sigma^{(s)}/\kappa_n)\)</span></li>
+<li>Sample <span class="math inline">\(\mathbf X_{\text{new}}^{(s)} \sim N(\mu^{(s)},\Sigma^{(s)})\)</span></li>
+<li>Repeat for <span class="math inline">\(s=1,\dots,S\)</span>.</li>
+</ol>
+<p>In practice, we do not know the true mean vector or covariance matrix. We only observe data and estimate these quantities using the sample mean and sample covariance. In this example, we simulate data using “true” parameters to illustrate the process, but in real applications these parameters must be inferred from data.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate synthetic pollution data</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>mu_true <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">22</span>) <span class="co"># unknown in reality</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>Sigma_true <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">4</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                       <span class="dv">6</span>, <span class="dv">12</span>, <span class="dv">5</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                       <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">8</span>), <span class="dv">3</span>, <span class="dv">3</span>) <span class="co"># unknown in reality</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>X_obs <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="dv">100</span>, <span class="at">mu =</span> mu_true, <span class="at">Sigma =</span> Sigma_true)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># In practice, we estimate parameters from the observed data</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colMeans</span>(X_obs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 20.50903 25.24295 22.54921</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(X_obs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          [,1]      [,2]     [,3]
+[1,] 10.507274  6.049016 3.842170
+[2,]  6.049016 12.709741 4.929106
+[3,]  3.842170  4.929106 6.930013</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimensions</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X_obs)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample statistics</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X_obs)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">t</span>(X_obs <span class="sc">-</span> xbar) <span class="sc">%*%</span> (X_obs <span class="sc">-</span> xbar)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior hyperparameters (weakly informative)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">22</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>kappa0 <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>nu0 <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="dv">2</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>Psi0 <span class="ot">&lt;-</span> <span class="fu">diag</span>(p)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior hyperparameters</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>kappa_n <span class="ot">&lt;-</span> kappa0 <span class="sc">+</span> n</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>nu_n <span class="ot">&lt;-</span> nu0 <span class="sc">+</span> n</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>mu_n <span class="ot">&lt;-</span> (kappa0 <span class="sc">*</span> mu0 <span class="sc">+</span> n <span class="sc">*</span> xbar) <span class="sc">/</span> kappa_n</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>Psi_n <span class="ot">&lt;-</span> Psi0 <span class="sc">+</span> S <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  (kappa0 <span class="sc">*</span> n <span class="sc">/</span> kappa_n) <span class="sc">*</span> <span class="fu">tcrossprod</span>(xbar <span class="sc">-</span> mu0)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of posterior predictive draws</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>n_post <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>X_pred <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, n_post, p)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_post) {</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample Sigma | data</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  Sigma_draw <span class="ot">&lt;-</span> <span class="fu">solve</span>(<span class="fu">rWishart</span>(<span class="dv">1</span>, nu_n, <span class="fu">solve</span>(Psi_n))[,,<span class="dv">1</span>])</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample mu | Sigma, data</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  mu_draw <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, mu_n, Sigma_draw <span class="sc">/</span> kappa_n)</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Sample new observation</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  X_pred[i, ] <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(<span class="dv">1</span>, mu_draw, Sigma_draw)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(X_pred, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.4</span>, <span class="at">col =</span> <span class="st">"tomato"</span>,</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>      <span class="at">main =</span> <span class="st">"Fully Bayesian MVN: Posterior Predictive"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="10_2_pollution_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column">
+<p><strong>Frequentist MVN</strong></p>
+<ul>
+<li><span class="math inline">\(\mu,\Sigma\)</span> fixed</li>
+<li>Variability only from data noise</li>
+<li>Gaussian elliptical clouds</li>
+</ul>
+</div><div class="column">
+<p><strong>Bayesian MVN</strong></p>
+<ul>
+<li><span class="math inline">\(\mu,\Sigma\)</span> both random</li>
+<li>Predictive distribution is multivariate <em>t</em></li>
+<li>Heavier tails</li>
+<li>More realistic uncertainty</li>
+<li>Correct propagation of parameter uncertainty</li>
+</ul>
+</div>
+</div>
 <table class="table-striped table-hover caption-top table">
-<colgroup>
-<col style="width: 13%">
-<col style="width: 43%">
-<col style="width: 43%">
-</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th>Linear Transformation</th>
-<th>Copula-Based Simulation</th>
+<th>Feature</th>
+<th>Frequentist MVN</th>
+<th>Bayesian MVN</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Use</td>
-<td><span class="math inline">\(X=LZ+\mu\)</span></td>
-<td><span class="math inline">\(U_i = \Phi(Z_i), \quad X_i = F_i^{-1}(U_i)\)</span></td>
+<td>Mean vector <span class="math inline">\(\mu\)</span></td>
+<td>fixed</td>
+<td>random</td>
 </tr>
 <tr class="even">
-<td>Works for</td>
-<td>Normal only</td>
-<td>Any marginals</td>
+<td>Covariance matrix <span class="math inline">\(\Sigma\)</span></td>
+<td>fixed</td>
+<td>random</td>
 </tr>
 <tr class="odd">
-<td>Dependence</td>
-<td>Linear</td>
-<td>Flexible</td>
+<td>Simulation target</td>
+<td>data only</td>
+<td>parameters and data</td>
 </tr>
 <tr class="even">
-<td>Pros</td>
-<td>Simple and efficient</td>
-<td>Very flexible, realistic modelling</td>
-</tr>
-<tr class="odd">
-<td>Cons</td>
-<td>Limited flexibility</td>
-<td>Slightly more complex</td>
-</tr>
-<tr class="even">
-<td>Use case</td>
-<td>Statistics, regression</td>
-<td>Finance, risk, insurance</td>
+<td>Uncertainty</td>
+<td>data variability</td>
+<td>data + parameter uncertainty</td>
 </tr>
 </tbody>
 </table>
-<div class="note">
-<p><strong>General Algorithm</strong></p>
-<ol type="1">
-<li>Specify marginals <span class="math inline">\(F_1, \dots, F_k\)</span></li>
-<li>Choose dependence structure:
-<ul>
-<li>covariance matrix (MVN), or</li>
-<li>copula</li>
-</ul></li>
-<li>Generate base variables:
-<ul>
-<li><span class="math inline">\(Z \sim N(0,I)\)</span></li>
-</ul></li>
-<li>Induce dependence:
-<ul>
-<li>via <span class="math inline">\(LZ\)</span> (Cholesky), or copula</li>
-</ul></li>
-<li>Transform to desired marginals</li>
-</ol>
-</div>
-<p>The worked example of this section can be found in <a href="10_3_portfolio.html">📈 Portfolio Risk Simulation</a>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1112,13 +1210,13 @@ X = F_X^{-1}(U_1), \quad Y = F_Y^{-1}(U_2)
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./05_2_linear_transform.html" class="pagination-link" aria-label="Linear Transformations and the Multivariate Normal">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span>
+      <a href="./10_1_epidemic.html" class="pagination-link" aria-label="🦠 Epidemic Modelling">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05_4_workshop.html" class="pagination-link" aria-label="Workshop Activities">
-        <span class="nav-page-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./10_3_portfolio.html" class="pagination-link" aria-label="📈 Portfolio Risk Simulation">
+        <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
