@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Project Information – R and Python for Computer Simulation (v1.0.6)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./10_3_portfolio.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0d2636a0403db34f7c2fbe53eca008ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./00_project_description.html"><strong>Project Information</strong></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Python for Computer Simulation (v1.0.6)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Preface</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Distributions</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Inference</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_1_frequentist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Univariate Simulation</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_1_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Transforming RVs (Density Approach)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_2_precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_3_accept_reject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Acceptance-Rejection Method</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05_multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Multivariate Simulation</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_1_transformation_mvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Transformation of Multiple Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_2_linear_transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_1_epidemic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_2_pollution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_3_portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><strong>Project Information</strong></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#project-proposal-5" id="toc-project-proposal-5" class="nav-link" data-scroll-target="#project-proposal-5">Project Proposal (5%)</a></li>
+  <li><a href="#final-report-23" id="toc-final-report-23" class="nav-link" data-scroll-target="#final-report-23">Final Report (23%)</a></li>
+  <li><a href="#peer-evaluation-2" id="toc-peer-evaluation-2" class="nav-link" data-scroll-target="#peer-evaluation-2">Peer evaluation (2%)</a></li>
+  <li><a href="#project-ideas" id="toc-project-ideas" class="nav-link" data-scroll-target="#project-ideas">Project Ideas</a>
+  <ul>
+  <li><a href="#queueing-systems-and-service-operations" id="toc-queueing-systems-and-service-operations" class="nav-link" data-scroll-target="#queueing-systems-and-service-operations">Queueing Systems and Service Operations</a></li>
+  <li><a href="#financial-simulation-and-risk-modelling" id="toc-financial-simulation-and-risk-modelling" class="nav-link" data-scroll-target="#financial-simulation-and-risk-modelling">Financial Simulation and Risk Modelling</a></li>
+  <li><a href="#epidemic-modelling-sir-seir" id="toc-epidemic-modelling-sir-seir" class="nav-link" data-scroll-target="#epidemic-modelling-sir-seir">Epidemic Modelling (SIR / SEIR)</a></li>
+  <li><a href="#time-series-simulation" id="toc-time-series-simulation" class="nav-link" data-scroll-target="#time-series-simulation">Time Series Simulation</a></li>
+  <li><a href="#environmental-and-climate-simulation" id="toc-environmental-and-climate-simulation" class="nav-link" data-scroll-target="#environmental-and-climate-simulation">Environmental and Climate Simulation</a></li>
+  <li><a href="#bayesian-simulation-and-mcmc" id="toc-bayesian-simulation-and-mcmc" class="nav-link" data-scroll-target="#bayesian-simulation-and-mcmc">Bayesian Simulation and MCMC</a></li>
+  <li><a href="#synthetic-data-from-published-models" id="toc-synthetic-data-from-published-models" class="nav-link" data-scroll-target="#synthetic-data-from-published-models">Synthetic Data from Published Models</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong>Project Information</strong></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This assessment task is designed to provide an authentic and applied learning experience in computer simulation. Students will work <em>collaboratively</em> to design, implement, and analyse a simulation study in a relevant problem domain.</p>
+<p>Simulation studies in industry and research are rarely conducted in isolation; they involve discussion of modelling assumptions, validation of computational procedures, interpretation of results, and clear communication of findings. The group-based structure of this project reflects this professional practice and encourages the development of technical, analytical, and collaborative skills.</p>
+<p>Through this project, students will integrate theoretical concepts, computational implementation, and statistical reasoning to produce a reproducible and well-justified simulation analysis.</p>
+<section id="overview" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
+<ul>
+<li>The project must be undertaken in <strong>groups of 2-3 students</strong>.</li>
+<li>Groups of 3 are encouraged only for more complex projects.</li>
+<li>Each group must submit:
+<ul>
+<li><strong>One proposal (5%)</strong></li>
+<li><strong>One final report (23%)</strong></li>
+</ul></li>
+<li>Each student must individually submit:
+<ul>
+<li><strong>A confidential peer evaluation (2%)</strong>, rating the contribution of each team member (including themselves) on a scale of 0-10.</li>
+</ul></li>
+<li>You may use <strong>R or Python</strong> for this project.</li>
+<li>The project must comply fully with all aspects of <strong>Academic Integrity</strong>.</li>
+<li>The project should be sufficiently substantial to warrant <strong>30% assessment weighting</strong>.</li>
+</ul>
+<hr>
+</section>
+<section id="project-proposal-5" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="project-proposal-5">Project Proposal (5%)</h2>
+<p><strong>Due:</strong> Friday 27th Mar, 8:00pm (Week 6)</p>
+<p><strong>Submission:</strong> Turnitin (PDF or HTML)</p>
+<p><strong>Length:</strong> Maximum 2 pages (<span class="math inline">\(\approx\)</span> 1000 words)</p>
+<p><strong>Proposal Structure (10 marks)</strong></p>
+<ol type="1">
+<li>Problem statement and background (4 marks)</li>
+<li>Proposed methodology (6 marks)</li>
+</ol>
+<ul>
+<li>You will not be penalised for “wrong” ideas.</li>
+<li>Marks will be deducted if the proposal is too brief or lacks sufficient detail.</li>
+</ul>
+<hr>
+</section>
+<section id="final-report-23" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="final-report-23">Final Report (23%)</h2>
+<p><strong>Due:</strong> Friday 22nd May, 8:00pm (Week 14 / Teaching Week 12)</p>
+<p><strong>Submission:</strong> Turnitin (PDF or HTML)</p>
+<p><strong>Length:</strong> Maximum 10 pages (<span class="math inline">\(\approx\)</span> 2500-3500 words) excluding appendix.</p>
+<p><strong>Report Structure (95 marks)</strong></p>
+<ol type="1">
+<li><p><strong>Introduction and Background (10 marks)</strong></p>
+<ul>
+<li>Problem context</li>
+<li>Objectives</li>
+<li>Significance</li>
+<li>Brief literature review (3-5 relevant sources)</li>
+</ul></li>
+<li><p><strong>Methodology (25 marks)</strong></p>
+<ul>
+<li>Assumptions and model formulation</li>
+<li>Description of data (if applicable)</li>
+<li>Justification of modelling choices</li>
+</ul></li>
+<li><p><strong>Model Implementation and Results (45 marks)</strong></p>
+<ul>
+<li>Implementation (code integrated within explanation)</li>
+<li>Statistical summaries and visualisations</li>
+<li>Interpretation in context</li>
+</ul></li>
+<li><p><strong>Conclusion (15 marks)</strong></p>
+<ul>
+<li>Discussion of results</li>
+<li>Strengths and limitations</li>
+<li>Possible extensions (future work)</li>
+<li>Practical implications</li>
+</ul></li>
+<li><p><strong>Contribution statements</strong></p></li>
+<li><p><strong>Appendix (optional)</strong></p>
+<ul>
+<li>Additional plots</li>
+<li>Extended code</li>
+<li>Supplementary results</li>
+</ul></li>
+</ol>
+<p><strong>Overall Presentation (5 marks)</strong></p>
+<ul>
+<li>Clear coherent structure, appropriate formatting of text, tables and graphs, easily readable language, spelling, grammar.</li>
+<li>Use APA 7th Ed referencing style.</li>
+</ul>
+<hr>
+</section>
+<section id="peer-evaluation-2" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="peer-evaluation-2">Peer evaluation (2%)</h2>
+<p>Each student must submit a confidential peer evaluation form on Blackboard.</p>
+<p>You are required to:</p>
+<ul>
+<li>Rate the contribution of each group member (including yourself) on a scale from 0 to 10</li>
+<li>Provide a brief justification (2–3 sentences per member) describing their contribution</li>
+</ul>
+<p>Your individual peer evaluation mark will be calculated based on:</p>
+<ul>
+<li><p>The average rating you receive from your teammates</p></li>
+<li><p>The consistency and fairness of ratings across the group</p></li>
+</ul>
+<p>Example: If your average rating from peers is 8/10, your peer mark will be:</p>
+<p><span class="math display">\[
+\frac{8}{10} \times 2\% = 1.6\%
+\]</span></p>
+<p>You are expected to evaluate your peers honestly, respectfully, and professionally.</p>
+<hr>
+</section>
+<section id="project-ideas" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="project-ideas">Project Ideas</h2>
+<p>From the unit reading list, <strong>Jones (2014, Chapter 24)</strong> provides a few examples that can be used, such as roulette, insurance risk, stock prices, and conserving water.</p>
+<p>There are also many public <strong>datasets</strong> available at:</p>
+<ul>
+<li><a href="http://kaggle.com/datasets">http://kaggle.com/datasets</a></li>
+<li><a href="https://www.data.gov.au/">https://www.data.gov.au/</a></li>
+<li><a href="https://archive.ics.uci.edu/">https://archive.ics.uci.edu/</a></li>
+</ul>
+<p>The following list provides suggested directions for the simulation project.<br>
+Each topic is intentionally broad and can be developed into a unique and substantial study by:</p>
+<ul>
+<li>Modifying modelling assumptions,</li>
+<li>Adopting alternative methodological approaches (e.g., Bayesian vs frequentist),</li>
+<li>Extending to multivariate settings,</li>
+<li>Comparing simulation algorithms,</li>
+<li>Conducting sensitivity or robustness analysis.</li>
+</ul>
+<p>Projects should demonstrate thoughtful model design, careful implementation, validation of results, and clear interpretation.</p>
+<p>Students may also propose their own topic, provided it:</p>
+<ul>
+<li>Is supported by relevant literature,</li>
+<li>Is feasible within the scope of the unit,</li>
+<li>Can be investigated using a reproducible simulation framework.</li>
+</ul>
+<section id="queueing-systems-and-service-operations" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="queueing-systems-and-service-operations">Queueing Systems and Service Operations</h3>
+<p>Queueing models are fundamental in operations research, logistics, healthcare, telecommunications, and service industries. They provide a natural setting for simulation, especially when analytical solutions are unavailable or unrealistic assumptions must be relaxed.</p>
+<p>Students may investigate classical queueing systems and extend them through simulation.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Simulating M/M/1 and M/M/2 queues</li>
+<li>Priority queue systems</li>
+<li>Customer abandonment models</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Extend to multiple servers (M/M/c) and compare</li>
+<li>Non-Exponential Service Times (M/G/1)</li>
+<li>Compare simulation results with analytical formulas (where available)</li>
+<li>Investigate waiting time distributions</li>
+<li>Time-varying arrivals (peak vs off-peak) using piecewise arrival rates</li>
+<li>Conduct sensitivity analysis on arrival and service rates</li>
+</ul>
+</section>
+<section id="financial-simulation-and-risk-modelling" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="financial-simulation-and-risk-modelling">Financial Simulation and Risk Modelling</h3>
+<p>Financial systems are inherently stochastic and often analytically intractable under realistic assumptions. Simulation plays a central role in modern risk management, derivative pricing, and portfolio optimisation.</p>
+<p>Projects in this area should focus on modelling uncertainty, estimating risk measures, validating results, and interpreting implications for decision-making.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Portfolio risk simulation under correlated returns, assuming daily log-returns follow a multivariate normal distribution:</li>
+</ul>
+<p><span class="math display">\[
+\mathbf{R} \sim \mathcal{N}(\boldsymbol{\mu}, \Sigma)
+\]</span></p>
+<p>where <span class="math inline">\(\boldsymbol{\mu}\)</span> is the mean return vector and <span class="math inline">\(\Sigma\)</span> is the covariance matrix.</p>
+<ul>
+<li>Monte Carlo option pricing under Geometric Brownian Motion (GBM) model:</li>
+</ul>
+<p><span class="math display">\[
+S_{t+1} = S_t \exp\left(\mu - \frac{1}{2}\sigma^2 + \sigma Z_{t+1}\right),
+\]</span></p>
+<p>where <span class="math inline">\(Z_t \sim \mathcal{N}(0,1)\)</span>. Where applicable, compare your Monte Carlo estimate to the known Black–Scholes analytical formula.</p>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Heavy-tailed return distributions</li>
+<li>Stress testing scenarios</li>
+<li>Comparing parametric vs simulation-based risk measures</li>
+</ul>
+</section>
+<section id="epidemic-modelling-sir-seir" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="epidemic-modelling-sir-seir">Epidemic Modelling (SIR / SEIR)</h3>
+<p>Compartmental epidemic models describe how infectious diseases spread through a population. They are widely used in public health, policy planning, and epidemiology.</p>
+<p>Simulation is particularly valuable because real outbreaks are stochastic, and analytical solutions are often unavailable or unrealistic under complex assumptions.</p>
+<p>Projects in this area should focus on modelling assumptions, stochastic simulation, parameter sensitivity, and interpretation of public health implications.</p>
+<p>The basic SIR model divides a fixed population of size <span class="math inline">\(N\)</span> into three compartments:</p>
+<ul>
+<li><strong>S(t)</strong>: Susceptible individuals<br>
+</li>
+<li><strong>I(t)</strong>: Infectious individuals<br>
+</li>
+<li><strong>R(t)</strong>: Recovered (or removed) individuals</li>
+</ul>
+<p>At each time step:</p>
+<ul>
+<li>New infections occur at rate proportional to <span class="math inline">\(\beta S(t) I(t) / N\)</span>, where <span class="math inline">\(\beta\)</span> is the average number of contacts per person per time.</li>
+<li>Recoveries occur at rate <span class="math inline">\(\gamma I(t)\)</span>, where <span class="math inline">\(\gamma\)</span> is the recovery rate constant in the unit fraction of a person recovered per day per infected person, when time is in unit day.</li>
+<li>Dynamics of the infectious class depends on the basic reproduction ratio <span class="math inline">\(R_0 = \frac{\beta}{\gamma}\)</span>.</li>
+</ul>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Stochastic SIR model simulation</li>
+<li>Impact of vaccination strategies</li>
+<li>Estimation of outbreak probabilities</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Comparison of deterministic and stochastic models</li>
+<li>Sensitivity analysis on transmission rates</li>
+<li>Policy intervention scenarios</li>
+</ul>
+</section>
+<section id="time-series-simulation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="time-series-simulation">Time Series Simulation</h3>
+<p>Time Series Analysis comprises of statistical methods to analyse data depends on time (in seconds, daily, weekly, monthly, etc). The applications in many fields, as examples:</p>
+<ul>
+<li><strong>Business and Economics:</strong> weekly interest rates, daily closing stock prices,monthly price indices, yearly sales figures</li>
+<li><strong>Meteorology:</strong> daily highs and lows temperature, hourly wind speeds</li>
+<li><strong>Agriculture:</strong> annual figures for crop and livestock production, soil erosion, and export sales</li>
+<li><strong>Biological sciences:</strong> electrical activity of heart at millisecond intervals</li>
+<li><strong>Social Sciences:</strong> population series such as birth rates or school enrolment</li>
+<li><strong>Epidemiology:</strong> number of influenza cases observed over time</li>
+<li><strong>Medicine:</strong> Blood pressure measurements traced over time for evaluating drugs used in treating hypertension.</li>
+</ul>
+<p>In this project, find resources that fitted time series model in the field of your interest. Based on the fitted model, generate synthetic data through simulation as one of the objectives.</p>
+<p>In your proposal, you must be being specific for fitted model(s) and resources that you referred to, so that I can justify it to be unique.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Simulating ARIMA models from fitted parameters</li>
+<li>GARCH models for financial volatility, e.g.&nbsp;GARCH(1,1) model:</li>
+</ul>
+<p><span class="math display">\[
+r_t = \sigma_t Z_t, \quad
+\sigma_t^2 = \alpha_0 + \alpha_1 r_{t-1}^2 + \beta_1 \sigma_{t-1}^2
+\]</span></p>
+<ul>
+<li>Synthetic data generation from published time series models</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Parameter recovery analysis</li>
+<li>Model diagnostics and residual analysis</li>
+<li>Nonlinear extensions</li>
+</ul>
+</section>
+<section id="environmental-and-climate-simulation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="environmental-and-climate-simulation">Environmental and Climate Simulation</h3>
+<p>Environmental systems are inherently stochastic and often exhibit temporal dependence, seasonality, and heavy-tailed behaviour. Simulation plays an important role in climate modelling, water resource planning, agriculture, and risk management.</p>
+<p>Projects in this area should focus on constructing stochastic models for environmental variables, validating them against observed data, and evaluating their long-term behaviour.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Rainfall generation using Markov chain models</li>
+<li>Modelling rainfall amounts with parametric distributions</li>
+<li>Comparing simulated weather sequences to observed data</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Multi-state Markov models</li>
+<li>Long-term variability analysis</li>
+<li>Visualisation of simulated vs real sequences</li>
+</ul>
+</section>
+<section id="bayesian-simulation-and-mcmc" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bayesian-simulation-and-mcmc">Bayesian Simulation and MCMC</h3>
+<p>Bayesian inference treats model parameters as random variables and updates beliefs using data through Bayes’ theorem:</p>
+<p><span class="math display">\[
+p(\theta \mid y) \propto p(y \mid \theta)\, p(\theta)
+\]</span></p>
+<p>In many realistic models, the posterior distribution does not have a closed-form solution. Simulation-based methods such as Markov Chain Monte Carlo (MCMC) allow us to approximate posterior distributions through repeated sampling.</p>
+<p>Projects in this area should focus on posterior simulation, convergence diagnostics, uncertainty quantification, and interpretation.</p>
+<p><strong>Example directions:</strong></p>
+<ul>
+<li>Implementing Gibbs sampling for a bivariate model</li>
+<li>Bayesian linear regression via simulation</li>
+<li>Comparing analytical posterior solutions with MCMC output</li>
+</ul>
+<p><strong>Possible extensions:</strong></p>
+<ul>
+<li>Convergence diagnostics</li>
+<li>Autocorrelation analysis</li>
+<li>Mixing behaviour comparison</li>
+</ul>
+</section>
+<section id="synthetic-data-from-published-models" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="synthetic-data-from-published-models">Synthetic Data from Published Models</h3>
+<p>Simulation is widely used in research to evaluate models, test assumptions, and study system behaviour under controlled conditions. One powerful project direction is to identify a fitted model from the literature and use simulation to generate synthetic data based on that model.</p>
+<p>This approach connects simulation practice with real-world research and encourages critical evaluation of modelling assumptions.</p>
+<p>Students identify a published paper, textbook example, or applied modelling study that:</p>
+<ul>
+<li>Specifies a fitted statistical model,</li>
+<li>Reports parameter estimates,</li>
+<li>Describes assumptions clearly,</li>
+<li>Provides sufficient information to reconstruct the model.</li>
+</ul>
+<p>Using the reported structure and parameter values, and then</p>
+<ol type="1">
+<li>Reconstruct the model.</li>
+<li>Simulate synthetic datasets.</li>
+<li>Analyse the behaviour of the simulated system.</li>
+<li>Evaluate robustness under modified assumptions.</li>
+</ol>
+<p>A typical project may involve:</p>
+<ul>
+<li>Implementing the model from scratch (not solely using built-in simulation commands).</li>
+<li>Generating synthetic datasets of varying sizes.</li>
+<li>Studying sampling variability.</li>
+<li>Investigating parameter recovery through re-estimation.</li>
+<li>Comparing simulated data with properties described in the original paper.</li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10_3_portfolio.html" class="pagination-link" aria-label="📈 Portfolio Risk Simulation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R and Python for Computer Simulation<br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

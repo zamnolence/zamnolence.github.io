@@ -1,0 +1,2934 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; R Workshop Solutions – R and Python for Computer Simulation (v1.0.6)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02_6_workshop_sol.html" rel="next">
+<link href="./02_4_workshop.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-0d2636a0403db34f7c2fbe53eca008ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_5_workshop_sol.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">R and Python for Computer Simulation (v1.0.6)</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Preface</strong></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_2_probability_revision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Revision: Probability Tools for Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Distributions</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Univariate Distributions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_2_joint_dependence.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Joint Distributions and Dependence</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_5_workshop_sol.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Statistical Inference</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_1_frequentist.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Frequentist Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_2_bayesian.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Bayesian Inference</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_3_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_4_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./04_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Univariate Simulation</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_1_transformation_rvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Transforming RVs (Density Approach)</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_2_precision.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Inverse Transform Sampling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_3_accept_reject.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Acceptance-Rejection Method</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./05_multivariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Multivariate Simulation</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_1_transformation_mvs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">Transformation of Multiple Random Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_2_linear_transform.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">23</span>&nbsp; <span class="chapter-title">Linear Transformations and the Multivariate Normal</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_3_copulas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">24</span>&nbsp; <span class="chapter-title">Copulas and Simulation of Dependent Variables</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_4_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">25</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_5_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">26</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_6_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">27</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_1_epidemic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">28</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_2_pollution.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">29</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_3_portfolio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">30</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_project_description.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Project Information</strong></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#part-1-univariate-distributions-in-simulation" id="toc-part-1-univariate-distributions-in-simulation" class="nav-link active" data-scroll-target="#part-1-univariate-distributions-in-simulation"><span class="header-section-number">9.1</span> Part 1: Univariate distributions in simulation</a>
+  <ul>
+  <li><a href="#exercise-1-geometric-distribution" id="toc-exercise-1-geometric-distribution" class="nav-link" data-scroll-target="#exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</a></li>
+  <li><a href="#exercise-2-gamma-distribution" id="toc-exercise-2-gamma-distribution" class="nav-link" data-scroll-target="#exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</a></li>
+  <li><a href="#exercise-3-beta-distribution" id="toc-exercise-3-beta-distribution" class="nav-link" data-scroll-target="#exercise-3-beta-distribution">Exercise 3: Beta Distribution</a></li>
+  <li><a href="#exercise-4-multinomial-distribution" id="toc-exercise-4-multinomial-distribution" class="nav-link" data-scroll-target="#exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</a></li>
+  </ul></li>
+  <li><a href="#part-2-joint-distributions-and-dependence" id="toc-part-2-joint-distributions-and-dependence" class="nav-link" data-scroll-target="#part-2-joint-distributions-and-dependence"><span class="header-section-number">9.2</span> <strong>Part 2: Joint distributions and dependence</strong></a>
+  <ul>
+  <li><a href="#exercise-5" id="toc-exercise-5" class="nav-link" data-scroll-target="#exercise-5">Exercise 5</a></li>
+  <li><a href="#exercise-6-visualising-dependence" id="toc-exercise-6-visualising-dependence" class="nav-link" data-scroll-target="#exercise-6-visualising-dependence">Exercise 6: Visualising Dependence</a></li>
+  <li><a href="#exercise-7-constructing-a-joint-distribution-discrete" id="toc-exercise-7-constructing-a-joint-distribution-discrete" class="nav-link" data-scroll-target="#exercise-7-constructing-a-joint-distribution-discrete">Exercise 7: Constructing a Joint Distribution (Discrete)</a></li>
+  <li><a href="#exercise-8-zero-correlation-independence" id="toc-exercise-8-zero-correlation-independence" class="nav-link" data-scroll-target="#exercise-8-zero-correlation-independence">Exercise 8: Zero Correlation ≠ Independence</a></li>
+  <li><a href="#exercise-10-simulating-bivariate-normal" id="toc-exercise-10-simulating-bivariate-normal" class="nav-link" data-scroll-target="#exercise-10-simulating-bivariate-normal">Exercise 10: Simulating Bivariate Normal</a></li>
+  <li><a href="#exercise-11" id="toc-exercise-11" class="nav-link" data-scroll-target="#exercise-11">Exercise 11</a></li>
+  <li><a href="#exercise-12" id="toc-exercise-12" class="nav-link" data-scroll-target="#exercise-12">Exercise 12</a></li>
+  <li><a href="#exercise-13" id="toc-exercise-13" class="nav-link" data-scroll-target="#exercise-13">Exercise 13</a></li>
+  </ul></li>
+  <li><a href="#extra-exercises" id="toc-extra-exercises" class="nav-link" data-scroll-target="#extra-exercises"><strong>Extra Exercises</strong></a>
+  <ul>
+  <li><a href="#distribution-identification" id="toc-distribution-identification" class="nav-link" data-scroll-target="#distribution-identification">Distribution Identification</a></li>
+  <li><a href="#scenario-analysis" id="toc-scenario-analysis" class="nav-link" data-scroll-target="#scenario-analysis">Scenario Analysis</a></li>
+  <li><a href="#joint-distributions-and-dependence" id="toc-joint-distributions-and-dependence" class="nav-link" data-scroll-target="#joint-distributions-and-dependence">Joint Distributions and Dependence</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_distributions.html"><strong>Statistical Distributions</strong></a></li><li class="breadcrumb-item"><a href="./02_5_workshop_sol.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This workshop consists of two parts:</p>
+<ul>
+<li><strong>Part 1:</strong> Univariate distributions in simulation</li>
+<li><strong>Part 2:</strong> Joint distributions and dependence</li>
+</ul>
+<section id="part-1-univariate-distributions-in-simulation" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="part-1-univariate-distributions-in-simulation"><span class="header-section-number">9.1</span> Part 1: Univariate distributions in simulation</h2>
+<section id="exercise-1-geometric-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-1-geometric-distribution">Exercise 1: Geometric Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Geometric}(p),\]</span> where <span class="math inline">\(p = 0.3\)</span>.</p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot the empirical PMF (barplot of relative frequencies).</li>
+<li>Overlay the theoretical PMF.</li>
+<li>Compute:
+<ul>
+<li>empirical mean and variance</li>
+<li>theoretical mean and variance</li>
+</ul></li>
+<li>Explain:
+<ul>
+<li>Why is the geometric distribution memoryless? Verify: <span class="math inline">\(P(X&gt;s+t | X&gt;s)=P(X&gt;t)\)</span></li>
+<li>How does changing <span class="math inline">\(p\)</span> affect skewness?</li>
+</ul></li>
+<li>Estimate <span class="math inline">\(P(X &gt; 5)\)</span> analytically and via simulation. Compare results.</li>
+</ol>
+<section id="solution" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgeom</span>(n, <span class="at">prob =</span> p)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot the empirical PMF (barplot of relative frequencies).</li>
+<li>Overlay the theoretical PMF.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create frequency table (count how many times each value appears)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(x) </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tab # printing the object to see what it is</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>emp_pmf <span class="ot">&lt;-</span> tab <span class="sc">/</span> n <span class="co"># devided by n to get relative frequencies</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the empirical PMF (barplot of relative frequencies).</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(emp_pmf,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Empirical PMF of Geometric(0.3)"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"x (number of failures before first success)"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Probability"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="st">"skyblue"</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical values (for observed range)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>x_vals <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">names</span>(emp_pmf))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># names(emp_pmf) returns the values of the rv (x) in "string" format</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># wrap as.numeric() convert "string" name to numbers</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical PMF using the same range of x values</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>theo_pmf <span class="ot">&lt;-</span> <span class="fu">dgeom</span>(x_vals, <span class="at">prob =</span> p)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># overlay theoretical probabilities</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># have to plot in the same code chunk</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="fu">seq_along</span>(x_vals),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>       theo_pmf,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># legend</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Empirical"</span>, <span class="st">"Theoretical"</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"skyblue"</span>, <span class="cn">NA</span>),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">border =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="cn">NA</span>),</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">19</span>),</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Empirical PMF closely matches theoretical PMF.</p>
+<ol start="4" type="1">
+<li>Compute:
+<ul>
+<li>empirical mean and variance</li>
+<li>theoretical mean and variance</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Empirical mean and variance</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Theoretical mean and variance</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> p</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> (p<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Empirical mean:"</span>, emp_mean,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">", Empirical variance:"</span>, emp_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Empirical mean: 2.3 , Empirical variance: 7.554555</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Theoretical mean:"</span>, theo_mean,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">", Theoretical variance:"</span>, theo_var)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Theoretical mean: 2.333333 , Theoretical variance: 7.777778</code></pre>
+</div>
+</div>
+<ul>
+<li>The reason empirical mean (and variance) are close to the theoretical values is due to the <strong>Law of Large Numbers (LLN)</strong>.</li>
+<li>Variance closeness is also due to consistency (LLN applied to functions of X).</li>
+</ul>
+<ol start="5" type="1">
+<li>Explain:
+<ul>
+<li>Why is the geometric distribution memoryless? Verify: <span class="math inline">\(P(X&gt;s+t | X&gt;s)=P(X&gt;t)\)</span></li>
+<li>How does changing <span class="math inline">\(p\)</span> affect skewness?</li>
+</ul></li>
+</ol>
+<p>Using conditional probability:</p>
+<p><span class="math display">\[
+P(X&gt;s+t \mid X&gt;s) = \frac{P(X&gt;s+t)}{P(X&gt;s)},
+\]</span></p>
+<p>and <code>mean(x &gt;= k)</code> to estimate <code>P(X&gt;k)</code></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using simulated data x and conditional probability</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>lhs <span class="ot">&lt;-</span> <span class="fu">mean</span>(x <span class="sc">&gt;=</span> (s <span class="sc">+</span> t)) <span class="sc">/</span> <span class="fu">mean</span>(x <span class="sc">&gt;=</span> s)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>rhs <span class="ot">&lt;-</span> <span class="fu">mean</span>(x <span class="sc">&gt;=</span> t)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># use &gt;= instead of &gt; to compensate `rgeom` for modelling X as number of "failures"</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>lhs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2382501</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rhs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2387</code></pre>
+</div>
+</div>
+<p>Mathematically, for a geometric distribution:</p>
+<p><span class="math display">\[
+P(X&gt;k) = (1-p)^{k+1},
+\]</span></p>
+<p>So,</p>
+<p><span class="math display">\[
+\frac{P(X&gt;s+t)}{P(X&gt;s)} = \frac{(1-p)^{s+t+1}}{(1-p)^{s+1}} = (1-p)^t = P(X&gt;t)
+\]</span></p>
+<p>The cancellation is why memorylessness holds.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect of changing p</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ps <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="fl">0.7</span>, <span class="fl">0.9</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>, <span class="st">"green"</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># use for loop to plot and overlay</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ps)) {</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) { <span class="co"># base plot</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">plot</span>(<span class="fu">table</span>(<span class="fu">rgeom</span>(n, ps[[i]])) <span class="sc">/</span> n, </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>        <span class="at">type=</span><span class="st">"b"</span>,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> cols[[i]],</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Relative frequency"</span>,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"x"</span>)</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> { <span class="co"># use lines() to overlay</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">lines</span>(<span class="fu">table</span>(<span class="fu">rgeom</span>(n, ps[[i]])) <span class="sc">/</span> n, </span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">type=</span><span class="st">"b"</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> cols[[i]])</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"p ="</span>, ps),</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>, <span class="st">"green"</span>),</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Increasing <span class="math inline">\(p\)</span> makes the curve shift left and decay faster, concentrating more probability at small values (especially at 0).</p>
+<ol start="6" type="1">
+<li>Estimate <span class="math inline">\(P(X &gt; 5)\)</span> analytically and via simulation. Compare results.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>analytic_prob <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> p)<span class="sc">^</span>(k <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>analytic_prob</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.117649</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sim_prob <span class="ot">&lt;-</span> <span class="fu">mean</span>(x <span class="sc">&gt;</span> k)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sim_prob <span class="co"># they should be extremely close</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.118</code></pre>
+</div>
+</div>
+<p>We are verifying that the simulated tail probability matches the theoretical geometric survival probability <span class="math inline">\(P(X&gt;5) = (1-p)^{5+1} = 0.117649\)</span>.</p>
+<hr>
+</section>
+</section>
+<section id="exercise-2-gamma-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-2-gamma-distribution">Exercise 2: Gamma Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Gamma}(\alpha = 3, \beta = 2)\]</span> (Use shape–rate parameterisation.)</p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot histogram with theoretical density overlay.</li>
+<li>Compute empirical vs theoretical mean and variance.</li>
+<li>Investigate how changing <span class="math inline">\(\alpha\)</span> affects:
+<ul>
+<li>skewness</li>
+<li>tail behaviour</li>
+</ul></li>
+</ol>
+<section id="solution-1" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-1">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span>   <span class="co"># rate</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> alpha, <span class="at">rate =</span> beta)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot histogram with theoretical density overlay.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hist(probability = TRUE) scales histogram to the total area = 1 (make it density)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># using the same value of x that has been generated</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dgamma</span>(x, <span class="at">shape =</span> alpha, <span class="at">rate =</span> beta),</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fu">max</span>(x),</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>) <span class="co"># use add = TRUE to overlay</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Compute empirical vs theoretical mean and variance.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="ot">&lt;-</span> alpha <span class="sc">/</span> beta</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="ot">&lt;-</span> alpha <span class="sc">/</span> (beta<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>emp_mean; theo_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.482623</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>emp_var;  theo_var</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7325013</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.75</code></pre>
+</div>
+</div>
+<p>With large <span class="math inline">\(n\)</span>, the empirical values should be very close.</p>
+<ol start="4" type="1">
+<li>Investigate how changing <span class="math inline">\(\alpha\)</span> affects:
+<ul>
+<li>skewness</li>
+<li>tail behaviour</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>, <span class="st">"green"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create empty list to store results</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>samples <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(alphas))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(alphas)) {</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  a <span class="ot">&lt;-</span> alphas[i]                 <span class="co"># current alpha</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  samples[[i]] <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n,      <span class="co"># simulate</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>                         <span class="at">shape =</span> a,</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>                         <span class="at">rate =</span> beta)</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Choose a common x-range so curves are comparable</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>xmax <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">unlist</span>(samples)) <span class="co"># find the largest observed value across all simulated datasets.</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>xs <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, xmax, <span class="at">length.out =</span> <span class="dv">1000</span>) <span class="co"># create a smooth grid for x-values to draw pdf</span></span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xs, <span class="fu">dgamma</span>(xs, <span class="at">shape =</span> alphas[<span class="dv">1</span>], <span class="at">rate =</span> beta), <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"Density"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Gamma densities for different alpha (rate fixed)"</span>)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(alphas)) {</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(xs, <span class="fu">dgamma</span>(xs, <span class="at">shape =</span> alphas[i], <span class="at">rate =</span> beta), <span class="at">col =</span> cols[[i<span class="dv">-1</span>]],</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>,</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">paste</span>(<span class="st">"alpha ="</span>, alphas),</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>, <span class="st">"green"</span>),</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>With <span class="math inline">\(\beta\)</span> fixed, increasing <span class="math inline">\(\alpha\)</span> has the following effects:</p>
+<ul>
+<li>Skewness decreases (more “bell-shaped”).</li>
+<li>Tail becomes less extreme relative to the center.</li>
+<li>The distribution concentrates more around its mean (and looks more normal-like), so very large values become less common relative to the bulk.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exercise-3-beta-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-3-beta-distribution">Exercise 3: Beta Distribution</h4>
+<p>Let <span class="math display">\[X \sim \text{Beta}(2,5).\]</span></p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Plot histogram and density.</li>
+<li>Compute mean and variance.</li>
+<li>Repeat for:
+<ul>
+<li>Beta(0.5, 0.5)</li>
+<li>Beta(5, 5)</li>
+</ul></li>
+<li>How do the shape parameters affect:
+<ul>
+<li>symmetry?</li>
+<li>concentration?</li>
+<li>boundary behaviour?</li>
+</ul></li>
+</ol>
+<section id="solution-2" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-2">Solution</h5>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Plot histogram and density.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">breaks=</span><span class="dv">30</span>, <span class="at">probability=</span><span class="cn">TRUE</span>, <span class="at">main=</span><span class="st">""</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># theoretical density</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(<span class="fu">dbeta</span>(x, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">from=</span><span class="dv">0</span>, <span class="at">to=</span><span class="dv">1</span>, <span class="at">add=</span><span class="cn">TRUE</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># empirical density</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">density</span>(x), <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Theoretical density"</span>, <span class="st">"Empirical density"</span>),</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Compute mean and variance.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>emp_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>emp_var  <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>theo_mean <span class="ot">&lt;-</span> a <span class="sc">/</span> (a <span class="sc">+</span> b)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>theo_var  <span class="ot">&lt;-</span> (a <span class="sc">*</span> b) <span class="sc">/</span> ((a <span class="sc">+</span> b)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (a <span class="sc">+</span> b <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>emp_mean; theo_mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2862241</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2857143</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>emp_var;  theo_var</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02578022</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.0255102</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Repeat for:
+<ul>
+<li>Beta(0.5, 0.5)</li>
+<li>Beta(5, 5)</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>run_beta <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, <span class="at">n =</span> <span class="dv">10000</span>, <span class="at">seed =</span> <span class="dv">123</span>) {</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n, a, b)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="dv">40</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="fu">paste0</span>(<span class="st">"Beta("</span>, a, <span class="st">", "</span>, b, <span class="st">")"</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">curve</span>(<span class="fu">dbeta</span>(x, a, b), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">add =</span> <span class="cn">TRUE</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  emp_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  emp_var  <span class="ot">&lt;-</span> <span class="fu">var</span>(x)</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  theo_mean <span class="ot">&lt;-</span> a <span class="sc">/</span> (a <span class="sc">+</span> b)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  theo_var  <span class="ot">&lt;-</span> (a <span class="sc">*</span> b) <span class="sc">/</span> ((a <span class="sc">+</span> b)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> (a <span class="sc">+</span> b <span class="sc">+</span> <span class="dv">1</span>))</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">Beta("</span>, a, <span class="st">","</span>, b, <span class="st">")</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Empirical mean:"</span>, emp_mean, <span class="st">" Theoretical mean:"</span>, theo_mean, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"Empirical var :"</span>, emp_var,  <span class="st">" Theoretical var :"</span>, theo_var,  <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a><span class="fu">run_beta</span>(<span class="dv">2</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(2,5)
+Empirical mean: 0.2862241  Theoretical mean: 0.2857143 
+Empirical var : 0.02578022  Theoretical var : 0.0255102 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">run_beta</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(0.5,0.5)
+Empirical mean: 0.4992115  Theoretical mean: 0.5 
+Empirical var : 0.1251524  Theoretical var : 0.125 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">run_beta</span>(<span class="dv">5</span>, <span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-14-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Beta(5,5)
+Empirical mean: 0.4999191  Theoretical mean: 0.5 
+Empirical var : 0.0229485  Theoretical var : 0.02272727 </code></pre>
+</div>
+</div>
+<ol start="5" type="1">
+<li>How do the shape parameters affect:
+<ul>
+<li>symmetry?</li>
+<li>concentration?</li>
+<li>boundary behaviour?</li>
+</ul></li>
+</ol>
+<p><strong>Symmetry</strong></p>
+<p>The Beta distribution is symmetric <strong>if and only if</strong> <span class="math inline">\(\alpha = \beta.\)</span></p>
+<ul>
+<li>If <span class="math inline">\(\alpha = \beta\)</span> → symmetric around <span class="math inline">\(0.5\)</span>.</li>
+<li>If <span class="math inline">\(\alpha &lt; \beta\)</span> → distribution is skewed toward 0.</li>
+<li>If <span class="math inline">\(\alpha &gt; \beta\)</span> → distribution is skewed toward 1.</li>
+</ul>
+<p>From 4):</p>
+<ul>
+<li><span class="math inline">\(\text{Beta}(5,5)\)</span> → symmetric and bell-shaped.</li>
+<li><span class="math inline">\(\text{Beta}(2,5)\)</span> → skewed toward 0.</li>
+<li><span class="math inline">\(\text{Beta}(0.5,0.5)\)</span> → symmetric but U-shaped.</li>
+</ul>
+<p><strong>Concentration (Spread Around the Mean)</strong></p>
+<p>The variance is:</p>
+<p><span class="math display">\[
+\mathrm{Var}(X) =
+\frac{\alpha \beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}.
+\]</span></p>
+<p>As <span class="math inline">\(\alpha + \beta\)</span> increases:</p>
+<ul>
+<li>The variance decreases.</li>
+<li>The distribution becomes more concentrated around the mean.</li>
+</ul>
+<p>Thus:</p>
+<ul>
+<li>Large <span class="math inline">\(\alpha + \beta\)</span> → tightly concentrated.</li>
+<li>Small <span class="math inline">\(\alpha + \beta\)</span> → more spread out.</li>
+</ul>
+<p><strong>Boundary Behaviour (Near 0 and 1)</strong></p>
+<p>The density near the boundaries depends on whether parameters are less than 1.</p>
+<p>Near 0:</p>
+<ul>
+<li>If <span class="math inline">\(\alpha &lt; 1\)</span> → density <span class="math inline">\(\to \infty\)</span> at 0.</li>
+<li>If <span class="math inline">\(\alpha = 1\)</span> → finite nonzero value at 0.</li>
+<li>If <span class="math inline">\(\alpha &gt; 1\)</span> → density <span class="math inline">\(\to 0\)</span> at 0.</li>
+</ul>
+<p>Near 1:</p>
+<ul>
+<li>If <span class="math inline">\(\beta &lt; 1\)</span> → density <span class="math inline">\(\to \infty\)</span> at 1.</li>
+<li>If <span class="math inline">\(\beta = 1\)</span> → finite nonzero value at 1.</li>
+<li>If <span class="math inline">\(\beta &gt; 1\)</span> → density <span class="math inline">\(\to 0\)</span> at 1.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li><span class="math inline">\(\text{Beta}(0.5,0.5)\)</span> → spikes at both 0 and 1 (U-shaped).</li>
+<li><span class="math inline">\(\text{Beta}(5,5)\)</span> → zero at both boundaries, peak at 0.5.</li>
+<li><span class="math inline">\(\text{Beta}(2,5)\)</span> → zero at boundaries, skewed toward 0.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="exercise-4-multinomial-distribution" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-4-multinomial-distribution">Exercise 4: Multinomial Distribution</h4>
+<p>Let</p>
+<p><span class="math display">\[(X_1, X_2, X_3) \sim \text{Multinomial}(n=20, p=(0.2,0.5,0.3))\]</span></p>
+<ol type="1">
+<li>Simulate 5,000 independent multinomial experiments.</li>
+<li>Compute:
+<ul>
+<li>sample means of each component</li>
+<li>covariance matrix</li>
+</ul></li>
+<li>Verify: <span class="math inline">\(E[X_i] = np_i\)</span></li>
+<li>Verify that components are negatively correlated.</li>
+<li>Visualisation
+<ul>
+<li>Scatterplot of <span class="math inline">\(X_1\)</span> vs <span class="math inline">\(X_2\)</span></li>
+<li>Comment on dependence structure.</li>
+</ul></li>
+<li>Conceptual Question: Why must multinomial components be dependent?</li>
+</ol>
+<section id="solution-3" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="solution-3">Solution</h5>
+<ol type="1">
+<li>Simulate 5,000 independent multinomial experiments.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>, <span class="fl">0.5</span>, <span class="fl">0.3</span>)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">rmultinom</span>(B, <span class="at">size =</span> n, <span class="at">prob =</span> p)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co"># now each row of object X represents X_i</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co"># use t() to transpose</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">rmultinom</span>(B, <span class="at">size =</span> n, <span class="at">prob =</span> p))</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co"># now each "column" of object X represents X_i</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># use colnames() to change columns name of object X</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(X) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"X1"</span>, <span class="st">"X2"</span>, <span class="st">"X3"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ol start="2" type="1">
+<li>Compute:
+<ul>
+<li>sample means of each component</li>
+<li>covariance matrix</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>sample_means <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(X) <span class="co"># return mean of each column</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sample_means</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     X1      X2      X3 
+ 3.9964 10.0404  5.9632 </code></pre>
+</div>
+</div>
+<p>By LLN, sample means (empirical averages) are close to:</p>
+<p><span class="math display">\[
+E[X_i] = np_i
+\]</span></p>
+<ul>
+<li><span class="math inline">\(20 \times 0.2 = 4\)</span></li>
+<li><span class="math inline">\(20 \times 0.5 = 10\)</span></li>
+<li><span class="math inline">\(20 \times 0.3 = 6\)</span></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>sample_cov   <span class="ot">&lt;-</span> <span class="fu">cov</span>(X) <span class="co"># return covariance matrix</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>sample_cov</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          X1        X2        X3
+X1  3.225832 -2.050065 -1.175768
+X2 -2.050065  4.936155 -2.886090
+X3 -1.175768 -2.886090  4.061858</code></pre>
+</div>
+</div>
+<p>This returns:</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\mathrm{Var}(X_1) &amp; \mathrm{Cov}(X_1,X_2) &amp; \mathrm{Cov}(X_1,X_3) \\
+\mathrm{Cov}(X_2,X_1) &amp; \mathrm{Var}(X_2) &amp; \mathrm{Cov}(X_2,X_3) \\
+\mathrm{Cov}(X_3,X_1) &amp; \mathrm{Cov}(X_3,X_2) &amp; \mathrm{Var}(X_3)
+\end{pmatrix}
+\]</span></p>
+<ul>
+<li>In theory, <span class="math inline">\(Var(X_i)=np_i(1-p_i) &gt; 0\)</span>.</li>
+<li>For covariance, <span class="math inline">\(Cov(X_i, X_j) = -np_ip_j \quad(i\neq j)\)</span>.</li>
+<li>Covariances are negative because an increase in <span class="math inline">\(X_i\)</span> must result in a decrease in <span class="math inline">\(X_j, (i\neq j)\)</span>.</li>
+<li>Since the variables move in opposite directions, we have negative covariance.</li>
+</ul>
+<ol start="3" type="1">
+<li>Verify: <span class="math inline">\(E[X_i] = np_i\)</span></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>theo_means <span class="ot">&lt;-</span> n <span class="sc">*</span> p</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co"># combine objects by columns</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">empirical =</span> sample_means, <span class="at">theoretical =</span> theo_means)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   empirical theoretical
+X1    3.9964           4
+X2   10.0404          10
+X3    5.9632           6</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Verify that components are negatively correlated.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>sample_cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(X)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>sample_cor <span class="co"># returns correlation between the columns of X</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           X1         X2         X3
+X1  1.0000000 -0.5137505 -0.3248166
+X2 -0.5137505  1.0000000 -0.6445449
+X3 -0.3248166 -0.6445449  1.0000000</code></pre>
+</div>
+</div>
+<p>Note that:</p>
+<p><span class="math display">\[
+\mathrm{Corr}(X_i, X_i)=\frac{\mathrm{Cov}(X_i, X_i)}
+{\sqrt{\mathrm{Var}(X_i)\mathrm{Var}(X_i)}}
+\]</span></p>
+<ul>
+<li>The covariance matrix measures joint variability in original units, while the correlation matrix standardises this to measure pure strength of linear dependence on a -1 to 1 scale.</li>
+<li>In a correlation matrix, the diagonal entries are always 1, because a variable is perfectly positively linearly related to itself.</li>
+</ul>
+<ol start="5" type="1">
+<li>Visualisation
+<ul>
+<li>Scatterplot of <span class="math inline">\(X_1\)</span> vs <span class="math inline">\(X_2\)</span></li>
+<li>Comment on dependence structure.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(X[, <span class="st">"X1"</span>], X[, <span class="st">"X2"</span>],</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X1"</span>, <span class="at">ylab =</span> <span class="st">"X2"</span>,</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of X1 vs X2 (Multinomial, n=20)"</span>,</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You should see a downward trend. When <span class="math inline">\(X_1\)</span> is large, <span class="math inline">\(X_2\)</span> tends to be smaller (and vice versa).</p>
+<p>Also, the points lie within feasible integer bounds, especially because:</p>
+<p><span class="math display">\[
+X_1+X_2+X_3=20.
+\]</span></p>
+<p>So not every pair <span class="math inline">\((X_1,X_2)\)</span> is possible; they’re constrained by the remaining count for <span class="math inline">\(X_3\)</span>.</p>
+<ol start="6" type="1">
+<li>Conceptual Question: Why must multinomial components be dependent?</li>
+</ol>
+<p>Because the components must sum to a fixed total:</p>
+<p><span class="math display">\[
+X_1+X_2+X_3=n.
+\]</span></p>
+<p>So if one component increases, at least one of the others must decrease to keep the sum equal to <span class="math inline">\(n\)</span>. This fixed-sum constraint forces dependence and typically creates negative correlations between different categories.</p>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-2-joint-distributions-and-dependence" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="part-2-joint-distributions-and-dependence"><span class="header-section-number">9.2</span> <strong>Part 2: Joint distributions and dependence</strong></h2>
+<section id="exercise-5" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-5">Exercise 5</h4>
+<p>Explain why dependence matters in simulation. Give 3 examples.</p>
+<div class="example">
+<p><strong>Dependence</strong> in simulation means that variables or events influence each other rather than occurring independently. If dependence is ignored, simulations can produce unrealistic results because many real-world processes are correlated.</p>
+<p><strong>Why it matters:</strong> Modeling dependence helps simulations reflect real system behavior, improving accuracy and decision-making.</p>
+<p><strong>Examples:</strong></p>
+<ol type="1">
+<li><strong>Finance:</strong> Stock returns often move together (correlation between assets). Ignoring this can underestimate portfolio risk.</li>
+<li><strong>Healthcare:</strong> A patient’s future health outcomes depend on their current condition and previous treatments.</li>
+<li><strong>Traffic simulation:</strong> Congestion on one road affects traffic flow on nearby roads.</li>
+</ol>
+</div>
+</section>
+<section id="exercise-6-visualising-dependence" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-6-visualising-dependence">Exercise 6: Visualising Dependence</h4>
+<p>Simulate two scenarios:</p>
+<p><strong>Case A: Independent variables</strong></p>
+<p>Let: <span class="math display">\[
+X \sim \mathcal{N}(0,1), \quad Y \sim \mathcal{N}(0,1)
+\]</span></p>
+<p>Generate independently.</p>
+<p><strong>Case B: Dependent variables</strong></p>
+<p>Define:</p>
+<p><span class="math display">\[
+Y = 0.8X + \sqrt{1-0.8^2} Z
+\]</span></p>
+<p>where <span class="math inline">\(Z \sim \mathcal{N}(0,1)\)</span> independent of <span class="math inline">\(X\)</span>.</p>
+<ol type="1">
+<li>Generate 5,000 observations for each case.</li>
+<li>Produce scatterplots.</li>
+<li>Compute correlation.</li>
+<li>Compare visually and numerically.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Exercise 6</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>); y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>) <span class="co"># case A</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fl">0.8</span><span class="sc">*</span>x <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="fl">-0.8</span><span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> z   <span class="co"># case B</span></span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>)) </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">main=</span><span class="st">"Case A: Independent"</span>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y2, <span class="at">main=</span><span class="st">"Case B: Dependent"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case A correlation:"</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x,y),<span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Case A correlation: -0.006 </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Case B correlation:"</span>, <span class="fu">round</span>(<span class="fu">cor</span>(x,y2),<span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Case B correlation: 0.799 </code></pre>
+</div>
+</div>
+<div class="example">
+<p><strong>Comments:</strong></p>
+<p>Case A’s scatterplot should look like random circular cloud with no directional trend (<span class="math inline">\(\rho \approx 0\)</span>).</p>
+<p>Case B’s scatterplot should show clear upward diagonal, elongate ellipse (<span class="math inline">\(\rho \approx 0.8\)</span>).</p>
+<p>This construction is important because it is exactly how multivariate normal simulation works. In fact, the general idea is <span class="math display">\[
+Y = \rho X + \sqrt{1-\rho^2}\,Z
+\]</span></p>
+<p>which produces correation <span class="math inline">\(\rho\)</span></p>
+</div>
+</section>
+<section id="exercise-7-constructing-a-joint-distribution-discrete" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-7-constructing-a-joint-distribution-discrete">Exercise 7: Constructing a Joint Distribution (Discrete)</h4>
+<p>Let:</p>
+<p><span class="math display">\[
+P(X=0,Y=0)=0.2, \quad
+P(X=0,Y=1)=0.3,
+\]</span> <span class="math display">\[
+P(X=1,Y=0)=0.1, \quad
+P(X=1,Y=1)=0.4
+\]</span></p>
+<ol type="1">
+<li>Verify probabilities sum to 1.</li>
+</ol>
+<p>Check that</p>
+<p><span class="math display">\[
+\sum_x \sum_y p_{X,Y}(x,y) = 1.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.2+0.3+0.1+0.4</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<ol type="1">
+<li>Compute marginal distributions.</li>
+</ol>
+<ul>
+<li>For <span class="math inline">\(x=0\)</span>, <span class="math inline">\(P(X=0) = 0.2 + 0.3 = 0.5.\)</span></li>
+<li>For <span class="math inline">\(x=1\)</span>, <span class="math inline">\(P(X=1) = 0.1 + 0.4 = 0.5.\)</span></li>
+</ul>
+<p><span class="math display">\[
+\therefore p_X(x) = \begin{cases} 0.5, &amp; x=0,1 \\ 0, &amp; \text{otherwise.} \end{cases}
+\]</span></p>
+<ul>
+<li>For <span class="math inline">\(y=0\)</span>, <span class="math inline">\(P(Y=0) = 0.2 + 0.1 = 0.3.\)</span></li>
+<li>For <span class="math inline">\(y=1\)</span>, <span class="math inline">\(P(Y=1) = 0.3 + 0.4 = 0.7.\)</span></li>
+</ul>
+<p><span class="math display">\[
+\therefore p_Y(y) = \begin{cases} 0.3, &amp; y=0 \\ 0.7, &amp; y=1 \\ 0, \text{otherwise.} \end{cases}
+\]</span></p>
+<ol start="3" type="1">
+<li>Check if independent.</li>
+</ol>
+<p><span class="math display">\[
+p(x,y) = p_X(x) \, p_Y(y)
+\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(X\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(P(X,Y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0.2</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>0.1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>0.4</td>
+</tr>
+</tbody>
+</table>
+<p>For the <span class="math inline">\((X=0, Y=0)\)</span> case,</p>
+<p><span class="math display">\[
+p_X(x) \, p_Y(y) = 0.5 \times 0.3 = 0.15.
+\]</span></p>
+<p>However, <span class="math inline">\(P(X=0, Y=0) = 0.2 \neq 0.15.\)</span> The independence condition fails.</p>
+<ol start="4" type="1">
+<li>Compute covariance manually.</li>
+</ol>
+<p><span class="math display">\[
+\text{Cov}(X,Y) = E(XY) - E(X)E(Y)
+\]</span></p>
+<p>Calculate <span class="math inline">\(E(X)\)</span>, <span class="math inline">\(E(Y)\)</span> and <span class="math inline">\(E(XY)\)</span></p>
+<p><span class="math display">\[
+E(X) = \sum x P(X=x) = 0(0.5) + 1(0.5) = 0.5
+\]</span></p>
+<p><span class="math display">\[
+E(Y) = \sum y P(Y=y) = 0(0.3) + 1(0.7) = 0.7
+\]</span></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(X\)</span></th>
+<th><span class="math inline">\(Y\)</span></th>
+<th><span class="math inline">\(P(X,Y)\)</span></th>
+<th><span class="math inline">\(XY\)</span></th>
+<th><span class="math inline">\(XY\times P\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>0.2</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1</td>
+<td>0.3</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>0.1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>1</td>
+<td>0.4</td>
+<td>1</td>
+<td>0.4</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[
+E(XY) = 0.4
+\]</span></p>
+<p><span class="math display">\[
+\text{Cov}(X,Y) = 0.4 - 0.5(0.7) = 0.4 - 0.35 = 0.05
+\]</span></p>
+<ol start="5" type="1">
+<li>Simulate 10,000 draws from this joint distribution.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>X <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.1</span>,<span class="fl">0.4</span>) <span class="co"># probabilities</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a><span class="co"># sample indices 1-4 for n times</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, n, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob=</span>p)</span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a><span class="co"># simulate values</span></span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>X_sim <span class="ot">&lt;-</span> X[s] <span class="co"># select from X based on the indices</span></span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>Y_sim <span class="ot">&lt;-</span> Y[s] <span class="co"># select from Y based on the indices</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(X_sim, Y_sim)<span class="sc">/</span>n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Y_sim
+X_sim      0      1
+    0 0.2007 0.3074
+    1 0.0945 0.3974</code></pre>
+</div>
+</div>
+<ol start="6" type="1">
+<li>Compare empirical and theoretical covariance.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Empirical (simulated)</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(X_sim, Y_sim)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05071395</code></pre>
+</div>
+</div>
+<div class="example">
+<p><strong>Comments:</strong></p>
+<p>From Question 4, the theoretical covariance is 0.05. The simulated covariance should be close to 0.05, with small differences due to random sampling variation. As the sample size increases, the empirical covariance tends to approach the theoretical covariance.</p>
+</div>
+</section>
+<section id="exercise-8-zero-correlation-independence" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-8-zero-correlation-independence">Exercise 8: Zero Correlation ≠ Independence</h4>
+<p>Let:</p>
+<p><span class="math display">\[
+X \sim \mathcal{N}(0,1)
+\]</span></p>
+<p>Define:</p>
+<p><span class="math display">\[
+Y = X^2
+\]</span></p>
+<ol type="1">
+<li>Simulate 10,000 observations.</li>
+<li>Compute correlation.</li>
+<li>Plot scatterplot.</li>
+<li>Explain why they are dependent despite near-zero correlation.</li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(x, y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.002432014</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of Y = X^2"</span>,</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X"</span>, <span class="at">ylab =</span> <span class="st">"Y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<p><strong>Comments:</strong></p>
+<ul>
+<li><p>The scatterplot should show a <strong>U-shaped parabola</strong>, because every point lies on <span class="math inline">\(Y=X^2\)</span>. So the relationship is clearly deterministic and nonlinear.</p></li>
+<li><p>The sample correlation should be <strong>close to 0</strong>, though not exactly 0 in finite samples.</p></li>
+<li><p>Although the correlation between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> is close to 0, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are not independent because <span class="math inline">\(Y\)</span> is completely determined by <span class="math inline">\(X\)</span> through the relationship <span class="math inline">\(Y=X^2\)</span>. Knowing the value of <span class="math inline">\(X\)</span> tells us the exact value of <span class="math inline">\(Y\)</span>, so there is clear dependence. The correlation is near zero only because correlation measures linear association, whereas the relationship here is nonlinear and symmetric around 0.</p></li>
+<li><p><strong>Zero correlation means no linear relationship, not no relationship at all.</strong></p></li>
+</ul>
+<p><strong>Why is the correlation near zero?</strong></p>
+<p>Correlation measures <strong>linear association</strong>. Here,</p>
+<p><span class="math display">\[
+\operatorname{Corr}(X,Y)=\operatorname{Corr}(X,X^2).
+\]</span></p>
+<p>Since <span class="math inline">\(X \sim \mathcal N(0,1)\)</span>,</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,X^2)=E(X^3)-E(X)E(X^2).
+\]</span></p>
+<p>Now:</p>
+<ul>
+<li><span class="math inline">\(E(X)=0\)</span></li>
+<li><span class="math inline">\(E(X^2)=1\)</span></li>
+<li><span class="math inline">\(E(X^3)=0\)</span> because the normal distribution is symmetric about 0</li>
+</ul>
+<p>So</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,X^2)=0-0\cdot 1=0.
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\operatorname{Corr}(X,X^2)=0.
+\]</span></p>
+<p>So the near-zero sample correlation is exactly what theory predicts.</p>
+</div>
+<section id="exercise-9-conditional-simulation" class="level5 unnumbered">
+<h5 class="unnumbered anchored" data-anchor-id="exercise-9-conditional-simulation">Exercise 9: Conditional Simulation</h5>
+<p>Let:</p>
+<p><span class="math display">\[
+X \sim \text{Gamma}(2,1)
+\]</span></p>
+<p>Given <span class="math inline">\(X=x,\)</span></p>
+<p><span class="math display">\[
+Y|X=x \sim \text{Poisson}(x)
+\]</span></p>
+<ol type="1">
+<li>Simulate 5,000 pairs.</li>
+<li>Plot scatterplot.</li>
+<li>Estimate:
+<ul>
+<li><span class="math inline">\(E[Y]\)</span></li>
+<li>Compare with theoretical value using law of total expectation.</li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(n, <span class="at">shape =</span> <span class="dv">2</span>, <span class="at">rate =</span> <span class="dv">1</span>)</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> x)</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y,</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"X"</span>,</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Y"</span>,</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Conditional simulation: Y | X ~ Poisson(X)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.9546</code></pre>
+</div>
+</div>
+<div class="example">
+<p><strong>Theoretical Value Using The Law of Total Expectation</strong></p>
+<p><span class="math display">\[
+E[Y] = E[E(Y|X)] = \int E[Y \mid X=x]\,f_X(x)\,dx
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+Y \mid X = x \sim \text{Poisson}(x),
+\]</span></p>
+<p>the conditional mean is</p>
+<p><span class="math display">\[
+E[Y \mid X=x] = x.
+\]</span></p>
+<p>So</p>
+<p><span class="math display">\[
+E[Y] = E[E(Y \mid X)] = E[X].
+\]</span></p>
+<p>Now if</p>
+<p><span class="math display">\[
+X \sim \text{Gamma}(2,1),
+\]</span></p>
+<p>with shape 2 and rate 1, then</p>
+<p><span class="math display">\[
+E[X] = 2/1 = 2.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+E[Y] = 2.
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="exercise-10-simulating-bivariate-normal" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-10-simulating-bivariate-normal">Exercise 10: Simulating Bivariate Normal</h4>
+<p>Construct a portfolio simulation:</p>
+<p>Let:</p>
+<ul>
+<li><span class="math inline">\(X_1, X_2\)</span> be correlated returns (bivariate normal).</li>
+<li>Portfolio return:</li>
+</ul>
+<p><span class="math display">\[
+R = 0.6X_1 + 0.4X_2
+\]</span></p>
+<p>Tasks:</p>
+<ol type="1">
+<li>Simulate 10,000 returns.</li>
+<li>Estimate variance.</li>
+<li>Plot scatterplot and explain.</li>
+<li>Explain how ignoring dependence affects risk estimation.</li>
+</ol>
+<p>We can simulate correlated normals using a <strong>linear transformation</strong>:</p>
+<p><span class="math display">\[
+X_1 = Z_1, \quad X_2 = \rho Z_1 + \sqrt{1-\rho^2} \, Z_2.
+\]</span></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>rho <span class="ot">&lt;-</span> <span class="fl">0.7</span> <span class="co"># assume</span></span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a><span class="co"># starting with two independent standard normals</span></span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>z1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>z2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n)</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a><span class="co"># linear transformation</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> z1</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> rho<span class="sc">*</span>z1 <span class="sc">+</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> rho<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>z2 <span class="co"># linear transformation</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="co"># portfolio return:</span></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fl">0.6</span> <span class="sc">*</span> x1 <span class="sc">+</span> <span class="fl">0.4</span> <span class="sc">*</span> x2</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># estimate the portfolio variance</span></span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(R)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.8571739</code></pre>
+</div>
+</div>
+<div class="example">
+<p><strong>Extra:</strong> We can also compare this with the theoretical variance.</p>
+<p>Since</p>
+<p><span class="math display">\[
+R = 0.6 X_1 + 0.4 X_2,
+\]</span></p>
+<p>the variance is</p>
+<p><span class="math display">\[
+\text{Var}(R) = 0.6^2 \text{Var}(X_1) + 0.4^2 \text{Var}(X_2) + 2(0.6)(0.4)\text{Cov}(X_1,X_2).
+\]</span></p>
+<p>Because <span class="math inline">\(\text{Var}(X_1) = \text{Var}(X_2) = 1\)</span> and <span class="math inline">\(\text{Cov}(X_1,X_2) = \rho = 0.7,\)</span></p>
+<p>we get</p>
+<p><span class="math display">\[
+\text{Var}(R) = 0.36 + 0.16 + 2(0.6)(0.4)(0.7) = 0.856
+\]</span></p>
+<p>So the simulated variance should be close to 0.856.</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x1, x2,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="fu">expression</span>(X[<span class="dv">1</span>]),</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="fu">expression</span>(X[<span class="dv">2</span>]),</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Scatterplot of correlated returns"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="02_5_workshop_sol_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="example">
+<p><strong>Comments:</strong></p>
+<p>The scatterplot should show an upward-sloping cloud of points. This indicates positive dependence: when <span class="math inline">\(X_1\)</span> is high, <span class="math inline">\(X_2\)</span> also tends to be high; when <span class="math inline">\(X_1\)</span> is low, <span class="math inline">\(X_2\)</span> tends to be low. Because the variables are jointly normal, the cloud has an elliptical shape. This matters for the portfolio because the two asset returns do not move independently. Their co-movement contributes directly to the total portfolio variance.</p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Variance if independence were incorrectly assumed</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fl">0.6</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="fl">0.4</span><span class="sc">^</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.52</code></pre>
+</div>
+</div>
+<div class="example">
+<p><strong>Comments:</strong></p>
+<p>If we incorrectly assume independence, then we set</p>
+<p><span class="math display">\[
+\text{Cov}(X_1, X_2) = 0.
+\]</span></p>
+<p>The portfolio variance would then be estimated as</p>
+<p><span class="math display">\[
+\text{Var}(R) = 0.6^2(1) + 0.4^2(1) = 0.52.
+\]</span></p>
+<p>But the correct variance is 0.856. So ignoring the positive dependence would <strong>underestimate risk</strong>.</p>
+<p>When returns are positively correlated, the two assets tend to rise and fall together. This reduces diversification benefits, so the portfolio is riskier than it would be under independence.</p>
+<p>More generally:</p>
+<ul>
+<li>positive dependence → higher portfolio risk than independence suggests</li>
+<li>negative dependence → lower portfolio risk and stronger diversification benefits</li>
+</ul>
+<p>So modelling dependence correctly is essential in portfolio simulation.</p>
+</div>
+</section>
+<section id="exercise-11" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-11">Exercise 11</h4>
+<p>(Jones et al., 2014, Chapter 14, Exercise 23, p.&nbsp;282)</p>
+<p>A diagnostic test is used to determine whether or not a person has a certain disease. If the test is positive, then it is assumed the person has the disease; if negative, that they do not have it. However, the test is not 100% accurate.</p>
+<ul>
+<li>If a diseased person is tested, it gives a negative result 5% of the time (a false negative).</li>
+<li>When testing a person free of the disease, it gives a false positive 10% of the time.</li>
+<li>Suppose we choose someone at random from a population in which only 1 person in 50 has the disease.</li>
+</ul>
+<ol type="a">
+<li>Find the probability that their test result is positive.<br>
+</li>
+<li>Find the probability that their test result is misleading.<br>
+</li>
+<li>Find the probability that they actually have the disease if they test positive.</li>
+</ol>
+<div class="example">
+<p>Define events:</p>
+<ul>
+<li><span class="math inline">\(D\)</span>: person <strong>has the disease</strong></li>
+<li><span class="math inline">\(D^c\)</span>: person <strong>does not have the disease</strong></li>
+<li><span class="math inline">\(+\)</span>: <strong>positive test</strong></li>
+<li><span class="math inline">\(-\)</span>: <strong>negative test</strong></li>
+</ul>
+<p>From the problem:</p>
+<p><span class="math display">\[
+P(D) = \frac{1}{50} = 0.02, \qquad P(D^c) = 0.98
+\]</span></p>
+<p>False negative rate:</p>
+<p><span class="math display">\[
+P(-|D) = 0.05
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+P(+|D) = 1 - 0.05 = 0.95
+\]</span></p>
+<p>False positive rate:</p>
+<p><span class="math display">\[
+P(+|D^c) = 0.10
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+P(-|D^c) = 0.90
+\]</span></p>
+<hr>
+<ol type="a">
+<li>Probability the test result is positive</li>
+</ol>
+<p>Using the <strong>law of total probability</strong>,</p>
+<p><span class="math display">\[
+P(+) = P(+|D)P(D) + P(+|D^c)P(D^c)
+\]</span></p>
+<p>Substituting the values:</p>
+<p><span class="math display">\[
+P(+) = 0.95(0.02) + 0.10(0.98)
+\]</span></p>
+<p><span class="math display">\[
+P(+) = 0.019 + 0.098 = 0.117
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{P(+) = 0.117}
+\]</span></p>
+<p>About <strong>11.7% of tests are positive</strong>.</p>
+<hr>
+<ol start="2" type="a">
+<li>Probability the test result is misleading</li>
+</ol>
+<p>A misleading result occurs if the test gives:</p>
+<ul>
+<li>a <strong>false positive</strong> (test positive but no disease), or</li>
+<li>a <strong>false negative</strong> (test negative but disease present).</li>
+</ul>
+<p>Thus</p>
+<p><span class="math display">\[
+P(\text{misleading})
+=
+P(+|D^c)P(D^c) + P(-|D)P(D)
+\]</span></p>
+<p>Compute each term:</p>
+<p>False positive probability:</p>
+<p><span class="math display">\[
+0.10 \times 0.98 = 0.098
+\]</span></p>
+<p>False negative probability:</p>
+<p><span class="math display">\[
+0.05 \times 0.02 = 0.001
+\]</span></p>
+<p>Total probability:</p>
+<p><span class="math display">\[
+P(\text{misleading}) = 0.098 + 0.001 = 0.099
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\boxed{P(\text{misleading}) = 0.099}
+\]</span></p>
+<p>So approximately <strong>9.9% of test results are incorrect</strong>.</p>
+<ol start="3" type="a">
+<li>Probability the person has the disease given a positive test</li>
+</ol>
+<p>Using <strong>Bayes’ theorem</strong>,</p>
+<p><span class="math display">\[
+P(D|+) = \frac{P(+|D)P(D)}{P(+)}
+\]</span></p>
+<p>Substitute values:</p>
+<p><span class="math display">\[
+P(D|+) =
+\frac{0.95(0.02)}{0.117}
+\]</span></p>
+<p><span class="math display">\[
+P(D|+) =
+\frac{0.019}{0.117}
+\]</span></p>
+<p><span class="math display">\[
+P(D|+) \approx 0.162
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{P(D|+) \approx 0.162}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even though the test has high accuracy (95% sensitivity and 90% specificity), the disease is <strong>rare</strong> (only 2% prevalence). As a result, many positive tests are false positives. Only about <strong>16% of people who test positive actually have the disease</strong>.</p>
+</div>
+</div>
+</section>
+<section id="exercise-12" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-12">Exercise 12</h4>
+<p>(Jones et al., 2014, Chapter 14, Exercise 24, p.&nbsp;282)</p>
+<p>There are two bus lines which travel between towns <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.<br>
+Bus line <span class="math inline">\(A\)</span> runs late 20% of the time, while bus line <span class="math inline">\(B\)</span> runs late 50% of the time. You travel three times as often by line <span class="math inline">\(A\)</span> as you do by line <span class="math inline">\(B\)</span>. On a certain day you arrive late. What is the probability that you used bus line <span class="math inline">\(B\)</span> that day?</p>
+<div class="example">
+<p>Let</p>
+<ul>
+<li><span class="math inline">\(A\)</span>: you took <strong>bus line A</strong></li>
+<li><span class="math inline">\(B\)</span>: you took <strong>bus line B</strong></li>
+<li><span class="math inline">\(L\)</span>: the bus <strong>arrives late</strong></li>
+</ul>
+<p>You travel three times as often on line <span class="math inline">\(A\)</span> as on line <span class="math inline">\(B\)</span>, so the ratio is</p>
+<p><span class="math display">\[
+P(A):P(B) = 3:1
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+P(A) = \frac{3}{4}, \qquad P(B) = \frac{1}{4}.
+\]</span></p>
+<p>From the problem:</p>
+<p><span class="math display">\[
+P(L|A) = 0.20, \quad
+P(L|B) = 0.50
+\]</span></p>
+<p>Using the <strong>law of total probability</strong></p>
+<p><span class="math display">\[
+P(L) = P(L|A)P(A) + P(L|B)P(B)
+\]</span></p>
+<p>Substitute the values:</p>
+<p><span class="math display">\[
+\begin{aligned}
+P(L) &amp;= 0.20\left(\frac{3}{4}\right) + 0.50\left(\frac{1}{4}\right) \\
+&amp;= 0.15 + 0.125 = 0.275
+\end{aligned}
+\]</span></p>
+<p>We want the probability that you took <strong>bus line <span class="math inline">\(B\)</span></strong> given that you arrived late. Using <strong>Bayes’ theorem</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+P(B|L) &amp;= \frac{P(L|B)P(B)}{P(L)} \\
+&amp;=\frac{0.50 \times 0.25}{0.275} \\
+&amp;=\frac{0.125}{0.275}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{P(B|L) \approx 0.455}
+\]</span></p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Even though bus line <span class="math inline">\(A\)</span> is used more often, bus line <span class="math inline">\(B\)</span> is <strong>much more likely to run late</strong>. Observing a late arrival increases the probability that bus <span class="math inline">\(B\)</span> was used.</p>
+</div>
+</div>
+</section>
+<section id="exercise-13" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="exercise-13">Exercise 13</h4>
+<p>(Jones et al., 2014, Chapter 14, Exercise 26, p.&nbsp;283)</p>
+<p>The dice game craps is played as follows. The player throws two dice, and if the sum is seven or eleven, then he wins. If the sum is two, three, or twelve, then he loses. If the sum is anything else, then he continues throwing until he either throws that number again (in which case he wins) or he throws a seven (in which case he loses). Calculate the probability that the player wins.</p>
+<div class="example">
+<p>In the dice game <em>craps</em>, a player throws two dice.</p>
+<ul>
+<li>If the sum is <strong>7 or 11</strong>, the player <strong>wins immediately</strong>.</li>
+<li>If the sum is <strong>2, 3, or 12</strong>, the player <strong>loses immediately</strong>.</li>
+<li>Otherwise, the sum becomes the <strong>point</strong>. The player keeps rolling until:
+<ul>
+<li>the point appears again (win), or</li>
+<li>a <strong>7</strong> appears (loss).</li>
+</ul></li>
+</ul>
+<p>Two dice have 36 equally likely outcomes. The following table shows the sum of die 1 and die 2, where rows are value of die 1 and columns are value of die 2.</p>
+<p><span class="math display">\[
+\begin{array}{c|cccccc}
+&amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; 6 \\
+\hline
+1 &amp; \textbf{\color{red}2} &amp; \textbf{\color{red}3} &amp; 4 &amp; 5 &amp; 6 &amp; \textbf{\color{green}7} \\
+2 &amp; \textbf{\color{red}3} &amp; 4 &amp; 5 &amp; 6 &amp; \textbf{\color{green}7} &amp; 8 \\
+3 &amp; 4 &amp; 5 &amp; 6 &amp; \textbf{\color{green}7} &amp; 8 &amp; 9 \\
+4 &amp; 5 &amp; 6 &amp; \textbf{\color{green}7} &amp; 8 &amp; 9 &amp; 10 \\
+5 &amp; 6 &amp; \textbf{\color{green}7} &amp; 8 &amp; 9 &amp; 10 &amp; \textbf{\color{green}11} \\
+6 &amp; \textbf{\color{green}7} &amp; 8 &amp; 9 &amp; 10 &amp; \textbf{\color{green}11} &amp; \textbf{\color{red}12}
+\end{array}
+\]</span></p>
+<p><strong>Immediate win:</strong></p>
+<p>The order matters when counting outcomes for two dice. When rolling two dice, the outcomes are ordered pairs <span class="math inline">\((d_1,d_2)\)</span>. Thus, the two immediate win events are</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Sum } &amp;= 7: \{(1,6),(2,5),(3,4),(4,3),(5,2),(6,1)\} \\
+\text{Sum } &amp;= 11: \{(5,6),(6,5)\}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+P(\text{win immediately})
+= \frac{6}{36} + \frac{2}{36}
+= \frac{8}{36}
+\]</span></p>
+<p>Immediate loss:</p>
+<p><span class="math display">\[
+P(\text{lose immediately})
+= \frac{1}{36} + \frac{2}{36} + \frac{1}{36}
+= \frac{4}{36}
+\]</span></p>
+<p>Possible points are</p>
+<p><span class="math display">\[
+4,5,6,8,9,10
+\]</span></p>
+<p>Probabilities of establising each point from the <strong>first roll of the dice</strong> are</p>
+<p><span class="math display">\[
+\begin{array}{ccc}
+\text{Sum } (k) &amp; \text{Ways} &amp; P(k)\\
+\hline
+4 &amp; 3 &amp; 3/36 \\
+5 &amp; 4 &amp; 4/36\\
+6 &amp; 5 &amp; 5/36\\
+8 &amp; 5 &amp; 5/36\\
+9 &amp; 4 &amp; 4/36\\
+10 &amp; 3 &amp; 3/36\\
+\end{array}
+\]</span></p>
+<p>If the point is <span class="math inline">\(k\)</span>, the player wins if <span class="math inline">\(k\)</span> appears before a 7. Thus</p>
+<p><span class="math display">\[
+P(\text{win} \mid k) = \frac{P(k)}{P(k)+P(7)}.
+\]</span></p>
+<p>Since <span class="math inline">\(P(7)=6/36\)</span>,</p>
+<p><span class="math display">\[
+P(\text{win} \mid k)=
+\begin{cases}
+\dfrac{3/36}{3/36 + 6/36}=\dfrac13, &amp; k = 4,10, \\[1em]
+\dfrac{4/36}{4/36 + 6/36}=\dfrac25, &amp; k = 5,9, \\[1em]
+\dfrac{5/36}{5/36 + 6/36}=\dfrac{5}{11}, &amp; k = 6,8.
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+P(\text{win})
+&amp;= P(\text{win immediately}) + \sum_k P(k)\,P(\text{win}\mid k) \\
+&amp;= \frac{8}{36}
++ 2\left(\frac{3}{36}\cdot\frac13\right)
++ 2\left(\frac{4}{36}\cdot\frac25\right)
++ 2\left(\frac{5}{36}\cdot\frac{5}{11}\right) \\
+&amp;= \frac{8}{36}+\frac{2}{36}+\frac{4}{45}+\frac{25}{198}.
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{P(\text{win}) \approx 0.493}
+\]</span></p>
+<p>The player wins about <strong>49.3% of the time</strong>, giving the casino a small advantage.</p>
+</div>
+</section>
+</section>
+<section id="extra-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="extra-exercises"><strong>Extra Exercises</strong></h2>
+<section id="distribution-identification" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="distribution-identification">Distribution Identification</h3>
+<p>For each of the functions below check if it is a valid cumulative distribution function (cdf), probability density function (pdf) or a probability mass function (pmf). For valid cdf’s, compute the corresponding pdf or pmf. Also for each valid pdf or pmf compute the corresponding cdf.</p>
+<p><span class="math display">\[
+f_X(x) =
+\begin{cases}
+6x - 6x^2 &amp; 0 \le x \le 1 \\
+0 &amp; \text{Otherwise}
+\end{cases}
+\]</span></p>
+<div class="example">
+<p>Check:</p>
+<p><span class="math display">\[
+f_X(x) \geq 0, \qquad 0\leq x \leq 1
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\int_0^1 f_X(x)\,dx = \int_0^1 6x-6x^2 =1,
+\]</span></p>
+<p>it is a <strong>valid pdf</strong>.</p>
+</div>
+<p><span class="math display">\[
+F_X(x) =
+\begin{cases}
+0 &amp; x &lt; 0 \\
+0.2 &amp; 0 &lt; x \le 1 \\
+0.3 &amp; 1 &lt; x \le 2 \\
+1 &amp; x &gt; 2
+\end{cases}
+\]</span></p>
+<div class="example">
+<p><strong>Properties of a CDF</strong></p>
+<p>A function <span class="math inline">\(F_X(x)\)</span> is a valid CDF if it satisfies:</p>
+<ol type="1">
+<li><strong>Non-decreasing</strong></li>
+</ol>
+<p><span class="math display">\[
+F(x_1) \le F(x_2) \quad \text{for } x_1 &lt; x_2
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Right-continuity</strong></li>
+</ol>
+<p><span class="math display">\[
+F(x) = \lim_{t \downarrow x} F(t)
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Limits</strong></li>
+</ol>
+<p><span class="math display">\[
+\lim_{x\to -\infty} F(x) = 0,
+\qquad
+\lim_{x\to \infty} F(x) = 1
+\]</span></p>
+<p>However, in the given function <span class="math inline">\(F(0)\)</span> is <strong>not defined</strong>.</p>
+<p>Also, at <span class="math inline">\(x=1\)</span>:</p>
+<p><span class="math display">\[
+F(1)=0.2
+\]</span></p>
+<p>but</p>
+<p><span class="math display">\[
+\lim_{x\downarrow1}F(x)=0.3
+\]</span></p>
+<p>Thus</p>
+<p><span class="math display">\[
+F(1) \neq \lim_{x\downarrow1}F(x)
+\]</span></p>
+<p>so the function is <strong>not right-continuous</strong>.</p>
+<p>The function <strong>is not a valid CDF</strong> because it is not defined at some points and it is not right-continuous.</p>
+</div>
+</section>
+<section id="scenario-analysis" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="scenario-analysis">Scenario Analysis</h3>
+<p>For each of the scenarios below identify</p>
+<ul>
+<li>Random Variable</li>
+<li>Distribution and paramenters</li>
+<li>Probability (mass) density function</li>
+<li>Probability of interest</li>
+</ul>
+<p>You may use direct calculations, use <strong>R</strong> or any other computing system.</p>
+<ol type="a">
+<li>A husband has 6 tasks on his to-do list and a wife has 10 tasks on her to-do list. Four tasks are randomly picked up. We are interested in the number of tasks the wife will have to do. What is the probability that wife would have to do all four tasks.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{number of tasks the wife will do}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Hypergeometric}(N=16,\; M=10,\; n=4)
+\]</span></p>
+<p><span class="math display">\[
+P(X=4)
+= \frac{\binom{10}{4}\binom{6}{0}}{\binom{16}{4}}
+= 0.11538
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dhyper</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">m =</span> <span class="dv">10</span>, <span class="at">n =</span> <span class="dv">6</span>, <span class="at">k =</span> <span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1153846</code></pre>
+</div>
+</div>
+<ol start="2" type="a">
+<li>A couple likes to play chess together. Male is not good at the game and has only 10% chance of winning. The stubborn couple decides to play until male wins two games. We are interested in number of games couple would have to play. What is the probability that couple would play at least 15 games?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{number of games until the second win by a male}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Negative Binomial}(r = 2,\; p = 0.1)
+\]</span></p>
+<p><span class="math display">\[
+P(X \ge 15) = 0.5846
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnbinom</span>(<span class="dv">12</span>, <span class="at">size =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5846291</code></pre>
+</div>
+</div>
+<ol start="3" type="a">
+<li>A student is taking a true/false test that consists of 10 questions. The student has approximately 80% change of getting any individual question correct. We are interested in the number of questions a student answers correctly. What is the probability that student gets all ten questions right?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{number of questions a student answers correctly out of 10}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Binomial}(n = 10,\; p = 0.8)
+\]</span></p>
+<p><span class="math display">\[
+P(X = 10) = 0.10737
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">10</span>, <span class="dv">10</span>, <span class="fl">0.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1073742</code></pre>
+</div>
+</div>
+<ol start="4" type="a">
+<li>A police officer has found that approximately 0.1% of the vehicles he pulls over fail the alcohol test. He is interested in the number of vehicles that will fail the alcohol test from next 100 vehicles he pulls over. What this the probability that 5 vehicles will fail the alcohol test from next 100 vehicles he pulls over?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{number of vehicles that will fail the alcohol test out of the next 100}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Poisson}(\lambda = 0.1)
+\]</span></p>
+<p><span class="math display">\[
+P(X = 5) = 0
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(<span class="dv">5</span>, <span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.540312e-08</code></pre>
+</div>
+</div>
+<ol start="5" type="a">
+<li>At a certain manufacturing company, approximately 2% of the products are defective. We are interested in the number of products that need to be checked before we hit rst defective item. What is the probability that third product checked will be rst defective item?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{number of products checked to get a defective}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Geometric}(p = 0.02)
+\]</span></p>
+<p><span class="math display">\[
+P(X = 3) = 0.01921
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dgeom</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">prob =</span> <span class="fl">0.02</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.019208</code></pre>
+</div>
+</div>
+<ol start="6" type="a">
+<li>The amount of time one spends in a bank is exponentially distributed with mean 10 minutes. What is the probability that the customer will spend more than 15 minutes in the bank?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{time spent in a bank}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Exponential}(\lambda = 0.1)
+\]</span></p>
+<p><span class="math display">\[
+P(X &gt; 15)
+= \int_{15}^{\infty} 0.1 e^{-0.1x}\, dx
+= e^{-0.1 \times 15}
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="dv">15</span>, <span class="fl">0.1</span>, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2231302</code></pre>
+</div>
+</div>
+<ol start="7" type="a">
+<li>The smiling times of babies, in seconds, follow a uniform distribution between 0 and 23 seconds, inclusive. What is the probability that a randomly selected eight week old baby smiles between 2 and 18 seconds?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{smiling times}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Uniform}(0, 23)
+\]</span></p>
+<p><span class="math display">\[
+P(2 &lt; X &lt; 18)
+= \int_{2}^{18} \frac{1}{23}\, dx
+= 0.6957
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">punif</span>(<span class="dv">18</span>, <span class="dv">0</span>, <span class="dv">23</span>) <span class="sc">-</span> <span class="fu">punif</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">23</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6956522</code></pre>
+</div>
+</div>
+<ol start="8" type="a">
+<li>A utility industry consultant predicts a cutback in the utility industry by a percentage speci ed by a Beta distribution with parameters <span class="math inline">\(\alpha = 1\)</span> and <span class="math inline">\(\beta = 0.25\)</span>, in ve year period. What is the probability that Department of Hydrology will down size by 10% to 30%?</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+X = \text{cutback in utility industry (\%)}
+\]</span></p>
+<p><span class="math display">\[
+X \sim \text{Beta}(1,\; 0.25)
+\]</span></p>
+<p><span class="math display">\[
+f_X(x)
+= \frac{x^{1-1}(1-x)^{0.25-1}}{B(1, 0.25)}
+\]</span></p>
+<p><span class="math display">\[
+B(1, 0.25)
+= \frac{\Gamma(1)\,\Gamma(0.25)}{\Gamma(1.25)}
+= \frac{1}{0.25}
+\]</span></p>
+<p><span class="math display">\[
+\int_{0.1}^{0.3} f_X(x)\, dx
+= \int_{0.1}^{0.3} \frac{x^{1-1}(1-x)^{0.25-1}}{B(1, 0.25)}\, dx
+= 0.0593
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbeta</span>(<span class="fl">0.3</span>, <span class="dv">1</span>, <span class="fl">0.25</span>) <span class="sc">-</span> <span class="fu">pbeta</span>(<span class="fl">0.1</span>, <span class="dv">1</span>, <span class="fl">0.25</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.05931253</code></pre>
+</div>
+</div>
+</section>
+<section id="joint-distributions-and-dependence" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="joint-distributions-and-dependence">Joint Distributions and Dependence</h3>
+<ol type="a">
+<li>Let <span class="math inline">\((X_1, X_2)\)</span> and <span class="math inline">\((Y_1, Y_2)\)</span> be two discrete random vectors with the following probability functions:</li>
+</ol>
+<p>Joint pmf of <span class="math inline">\((X_1, X_2)\)</span>:</p>
+<p><span class="math display">\[
+\begin{array}{c|cc}
+f_{(X_1, X_2)}(x_1,x_2) &amp; -1 &amp; 1 \\
+\hline
+0 &amp; 1/6 &amp; 1/6 \\
+1/2 &amp; 1/3 &amp; 1/3
+\end{array}
+\]</span></p>
+<p>Joint pmf of <span class="math inline">\((Y_1, Y_2)\)</span>:</p>
+<p><span class="math display">\[
+\begin{array}{c|cc}
+f_{(Y_1, Y_2)}(y_1,y_2) &amp; -1 &amp; 1 \\
+\hline
+0 &amp; 1/3 &amp; 0 \\
+1 &amp; 1/6 &amp; 1/4 \\
+2 &amp; 0 &amp; 1/4
+\end{array}
+\]</span></p>
+<p>Show that <span class="math inline">\(X_2\)</span> and <span class="math inline">\(Y_2\)</span> are identically distributed.</p>
+<div class="example">
+<p><span class="math display">\[
+P[X_2 = x_2] =
+\begin{cases}
+-1, &amp; 1/6 + 1/3 = 1/2, \\[6pt]
+1,  &amp; 1/6 + 1/3 = 1/2.
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+P[Y_2 = y_2] =
+\begin{cases}
+-1, &amp; 1/3 + 1/6 + 0 = 1/2, \\[6pt]
+1,  &amp; 0 + 1/4 + 1/4 = 1/2.
+\end{cases}
+\]</span></p>
+<p>As <span class="math inline">\(X_2\)</span> and <span class="math inline">\(Y_2\)</span> take identical values with equal probability, they are identically distributed.</p>
+</div>
+<hr>
+<ol start="2" type="a">
+<li>Let <span class="math inline">\(X \sim N(7, 3^2)\)</span>, <span class="math inline">\(Y \sim N(5, 2^2)\)</span> and <span class="math inline">\(\mathrm{Cor}(X,Y) = -0.2\)</span>.</li>
+</ol>
+<ul>
+<li>Specify the joint probability density function for <span class="math inline">\((X,Y)\)</span>.</li>
+</ul>
+<div class="example">
+<p><span class="math display">\[
+f_{X,Y}(x,y) = \frac{1}{2\pi \cdot 3 \cdot 2 \sqrt{1 - (-0.2)^2}}
+   \exp\!\left(\frac{-z}{2\left(1 - (-0.2)^2\right)}\right)
+\]</span></p>
+<p>where <span class="math inline">\(z\)</span> is</p>
+<p><span class="math display">\[
+z
+= \frac{(x - 7)^2}{3^2}
++ \frac{(y - 5)^2}{2^2}
+- \frac{2(-0.2)(x - 7)(y - 5)}{3 \cdot 2}.
+\]</span></p>
+</div>
+<ul>
+<li>Find the distribution for <span class="math inline">\(Z = 3X + 4Y\)</span>, hence find <span class="math inline">\(P[Z &gt; 50]\)</span>.</li>
+</ul>
+<div class="example">
+<p>Since <span class="math inline">\((X,Y)\)</span> is jointly normal, any linear combination is also normal.<br>
+Thus <span class="math inline">\(Z\)</span> is normally distributed with</p>
+<p><span class="math display">\[
+E[Z] = 3E[X] + 4E[Y]
+     = 3(7) + 4(5)
+     = 41.
+\]</span></p>
+<p>The variance is</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= 3^2 \operatorname{Var}(X)
++ 4^2 \operatorname{Var}(Y)
++ 2(3)(4)\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>Because</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+= \rho \sigma_X \sigma_Y
+= (-0.2)(3)(2)
+= -1.2,
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= 9(9) + 16(4) + 2(3)(4)(-1.2)
+= 81 + 64 - 28.8
+= 116.2.
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+Z \sim N(41,\; 116.2),
+\qquad
+\sigma_Z = \sqrt{116.2}.
+\]</span></p>
+<p>To compute the probability:</p>
+<p><span class="math display">\[
+P(Z &gt; 50)
+= 1 - \Phi\!\left(
+\frac{50 - 41}{\sqrt{116.2}}
+\right)
+= 1 - \Phi(0.835).
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>muZ  <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">7</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">*</span><span class="dv">5</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>varZ <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">4</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span><span class="dv">4</span><span class="sc">*</span>(<span class="sc">-</span><span class="fl">0.2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>sdZ  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varZ)</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> muZ, <span class="at">sd =</span> sdZ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2018843</code></pre>
+</div>
+</div>
+<ul>
+<li>Find the distribution for <span class="math inline">\(Z = X - Y\)</span>, hence find <span class="math inline">\(P[Z &lt; 0]\)</span>.</li>
+</ul>
+<div class="example">
+<p>Since <span class="math inline">\((X,Y)\)</span> is jointly normal, any linear combination is also normal.<br>
+Thus <span class="math inline">\(Z\)</span> is normally distributed with</p>
+<p><span class="math display">\[
+E[Z] = E[X] - E[Y]
+     = 7 - 5
+     = 2.
+\]</span></p>
+<p>The variance is</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= \operatorname{Var}(X)
++ \operatorname{Var}(Y)
+- 2\,\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>Because</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+= \rho \sigma_X \sigma_Y
+= (-0.2)(3)(2)
+= -1.2,
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= 9 + 4 - 2(-1.2)
+= 13 + 2.4
+= 15.4.
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+Z \sim N(2,\; 15.4),
+\qquad
+\sigma_Z = \sqrt{15.4}.
+\]</span></p>
+<p>To compute the probability:</p>
+<p><span class="math display">\[
+P(Z &lt; 0)
+= \Phi\!\left(
+\frac{0 - 2}{\sqrt{15.4}}
+\right)
+= \Phi(-0.509).
+\]</span></p>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>muZ  <span class="ot">&lt;-</span> <span class="dv">7</span> <span class="sc">-</span> <span class="dv">5</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a>varZ <span class="ot">&lt;-</span> <span class="dv">3</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="sc">-</span><span class="fl">0.2</span><span class="sc">*</span><span class="dv">3</span><span class="sc">*</span><span class="dv">2</span>)</span>
+<span id="cb89-3"><a href="#cb89-3" aria-hidden="true" tabindex="-1"></a>sdZ  <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(varZ)</span>
+<span id="cb89-4"><a href="#cb89-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb89-5"><a href="#cb89-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">0</span>, <span class="at">mean =</span> muZ, <span class="at">sd =</span> sdZ)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3051493</code></pre>
+</div>
+</div>
+<ul>
+<li>Specify the distribution of <span class="math inline">\(Z = 3 + 4X + 2Y\)</span>.</li>
+</ul>
+<div class="example">
+<p>Since <span class="math inline">\((X,Y)\)</span> is jointly normal, any linear combination is also normal.<br>
+Thus <span class="math inline">\(Z\)</span> is normally distributed with</p>
+<p><span class="math display">\[
+E[Z] = 3 + 4E[X] + 2E[Y]
+     = 3 + 4(7) + 2(5)
+     = 3 + 28 + 10
+     = 41.
+\]</span></p>
+<p>The variance is</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= 4^2 \operatorname{Var}(X)
++ 2^2 \operatorname{Var}(Y)
++ 2(4)(2)\operatorname{Cov}(X,Y).
+\]</span></p>
+<p>Because</p>
+<p><span class="math display">\[
+\operatorname{Cov}(X,Y)
+= \rho \sigma_X \sigma_Y
+= (-0.2)(3)(2)
+= -1.2,
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+\operatorname{Var}(Z)
+= 16(9) + 4(4) + 2(4)(2)(-1.2)
+= 144 + 16 - 19.2
+= 140.8.
+\]</span></p>
+<p>Therefore</p>
+<p><span class="math display">\[
+Z \sim N(41,\; 140.8).
+\]</span></p>
+</div>
+<ul>
+<li>Specify <span class="math inline">\(E(X \mid Y)\)</span>.</li>
+</ul>
+<div class="example">
+<p><span class="math display">\[
+E(X \mid Y = y)
+= \mu_X + \rho \frac{\sigma_X}{\sigma_Y}(y - \mu_Y)
+\]</span></p>
+<p>Substituting the values <span class="math inline">\(\mu_X = 7,\; \mu_Y = 5,\; \sigma_X = 3,\; \sigma_Y = 2,\; \rho = -0.2\)</span>:</p>
+<p><span class="math display">\[
+E(X \mid Y = y)
+= 7 + (-0.2)\frac{3}{2}(y - 5)
+\]</span></p>
+<p><span class="math display">\[
+E(X \mid Y = y)
+= 7 - 0.3(y - 5)
+\]</span></p>
+<p>Expanded form:</p>
+<p><span class="math display">\[
+E(X \mid Y = y)
+= 8.5 - 0.3y
+\]</span></p>
+</div>
+</section>
+</section>
+<section id="references" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<p>Jones, O., Maillardet, R., &amp; Robinson, A. (2014). Introduction to scientific programming and simulation using R (2nd ed.). Chapman &amp; Hall/CRC. https://doi.org/10.1201/b17079</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02_4_workshop.html" class="pagination-link" aria-label="Workshop Activities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02_6_workshop_sol.html" class="pagination-link" aria-label="Python Workshop Solutions">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>R and Python for Computer Simulation<br> by Sam Wiwatanapataphee</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

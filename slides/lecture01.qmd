@@ -1,0 +1,1384 @@
+---
+title: "STAT2005 Computer Simulation"
+subtitle: "Lecture 1 — Introduction to Computer Simulation"
+author: 
+  - name: Sam Wiwatanapataphee (275287a@curtin.edu.au)
+date: "2026-02-19"
+date-format: "D MMM YYYY"
+format:
+  revealjs:
+    theme: [simple, custom.scss]
+    logo: figs/curtin-logo2.png
+    margin: 0.05
+    center: false
+    slide-number: true
+    incremental: true
+    toc: false
+    code-line-numbers: true
+    code-copy: true
+    scrollable: true
+    title-slide: false
+    embed-resources: false # true to export as single html: not compatible with chalkboard
+    # scroll-view: true
+    menu:
+      titleSelector: 'h1, h2, h3'
+      useTextContentForMissingTitles: false 
+      hideMissingTitles: true
+    chalkboard: true
+    # Use this if you want a wider slide layout:
+    # width: 1280 (default is 1050)
+    # height: 720 (default is 700)
+execute:
+  echo: true
+  warning: false
+  message: false
+# jupyter: python3 # cannot have both r and python
+---
+
+## Goals today
+
+- Unit Information
+- Blackboard Tour
+- **Lecture 1: Introduction to computer simulation**
+    - 1.1 What is Simulation?
+    - 1.2 Simulation Workflow
+    - 1.3 Simulation vs Analytical Solutions
+    - 1.4 Random Number Generation (LCGs, Uniform)
+    - 1.5 Revision: Probability Tools for Simulation
+
+
+# Unit Information {.center}
+
+---
+
+<br> <br>
+
+:::: {.columns}
+::: {.column .fragment width="52%"}
+
+### Unit Learning Outcomes
+
+On successful completion of this unit you are expected to:
+
+1. explain the scope and limitation of simulation;
+2. develop simulation procedures in an appropriate computing environment;
+3. analyse and interpret simulation result;
+4. apply simulation techniques in a discipline specific context.
+
+<br>
+
+### Learning Activities {.fragment}
+
+- Lecture (F2F, live via iLecture): 
+    - Thursday 10am &ndash; 12pm at 201.412
+- Workshop (F2F, live via MS Team, start in Week 1): 
+    - Thursday 12pm &ndash; 2pm at 312.222
+- Please **bring your own device** to both sessions.
+
+:::
+::: {.column width="48%"}
+
+### Assessments {.fragment}
+
+::: {.fragment}
+| Task                | Value | Due                |
+|:--------------------|:------|:-------------------|
+| Computer-based test | 20%   | Week 5 & 11        |
+| Project             | 30%   | Week 6 & 14        |
+| Final Exam          | 50%   | Week 16 &ndash; 17 |
+:::
+
+<br>
+
+- More details will be posted on BB.
+
+<br>
+
+
+### Programming Language {.fragment}
+
+- **R** (required; assessed) 
+- **Python** (optional; not assessed)
+- Choose either R or Python to complete the project.
+
+:::
+::::
+
+
+# [Blackboard Tour](https://lms.curtin.edu.au)
+
+::: notes
+- Mainly using **R** for all learning activities and computer-based test. 
+- **Python** code will be provided as complementary materials.
+- You can choose either R or Python to complete the project.
+- BB tour: outline, announcements, reading lists, materials, assessments, etc.
+- Make use of facilities! (how to print/scan, free software: ms office, endnote, matlab, etc. and onedrive)
+:::
+
+---
+
+## Unit Content {visibility="hidden"}
+
+::: {.block .blue data-title="Univariate"}
+- Pseudo Random Generator (the Linear Congruential Generator (LCG));
+- Uniform; Inversion; Accept-Reject;
+- Bayesian Beta-Biomial; Bayesian Normal
+:::
+
+::: {.block .orange data-title="Phase 2: Multivariate"}
+- Joint PMF/PDF;
+- Correlated Random Variables;
+- Bayesian Bivariate
+:::
+
+::: {.block .green data-title="Phase 3: Advanced"}
+- Monte Carlo (MC);
+- Markov Chain Monte Carlo (MCMC): Gibbs Sampler;
+- Expectation-Maximisation (EM) Algorithm;
+- Case Studies
+:::
+
+&nbsp; **Phase 4: Revision**
+
+
+
+# Lecture 1: Introduction to Computer Simulation
+
+---
+
+#### In the mid-1940s...
+
+:::: {.columns}
+::: {.column .fragment .center width="33%"}
+**Stanisław Ulam**
+![](https://upload.wikimedia.org/wikipedia/commons/8/8a/STAN_ULAM_HOLDING_THE_FERMIAC.jpg){width=58%}
+![](https://upload.wikimedia.org/wikipedia/commons/5/59/GNOME_Aisleriot_Solitaire_%28cropped%29.png){.fragment width=58%}
+
+:::{.fragment}
+*"What is the probability that a solitaire game can be won?"*
+:::
+
+:::{.fragment}
+*"Why not just play a thousand times and count how often I win?"*
+:::
+
+
+:::
+::: {.column .fragment .center width="33%"}
+**John Von Neumann**
+![](https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif){width=58%}
+
+:::{.fragment}
+*"If we can solve solitaire this way, we can solve anything this way."*
+:::
+
+- Humans can't repeat a process thousands of times quickly enough.
+- Machines can.
+
+
+:::
+::: {.column .fragment .center width="33%"}
+**ENIAC**
+
+(Electronic Numerical Integrator and Computer) 
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg/1280px-Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg){width=90%}
+
+::: {.fragment}
+Together, Ulam and von Neumann developed a new method:
+:::
+- simulate randomness
+- repeat the process thousands of times
+- let the pattern emerge from noise
+- They named it **Monte Carlo**, after the famous casino.
+:::
+::::
+
+::: aside
+Wikipedia contributors. (n.d.). Monte Carlo method. In *Wikipedia*. Retrieved February 2, 2026, from https://en.wikipedia.org/wiki/Monte_Carlo_method#History
+:::
+
+::: notes
+- They both are working for the Manhattan Project during WWII
+- And just in time, the world had just built its first giant electronic computers, ENIAC, originally designed for wartime artillery calculations
+:::
+
+---
+
+
+## 1.1 What is Simulation?
+
+
+Science and engineering are based on three pillars:
+
+:::: {.columns}
+::: {.column .fragment .center width="33%"}
+**Observations**
+:::
+::: {.column .fragment .center width="33%"}
+**Experimentation**
+:::
+::: {.column .fragment .center width="33%"}
+**Computation**
+:::
+::::
+
+:::: {.columns}
+::: {.column .fragment .center .block .red width="30%"}
+Measure and record real outcomes
+:::
+::: {.column .fragment .center .block .blue width="30%"}
+Try experimenting with different assumptions (priors)
+:::
+::: {.column .fragment .center .block .yellow width="30%"}
+Simulate many possible scenarios to see what's likely
+:::
+::::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+**Simulation** is using a computer to  **imitate a real-world random process**  in order to learn about its behaviour.
+:::
+
+::: {.fragment}
+It is a way of doing *experiments*  when real experiments are expensive, slow, or impossible.
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+<span style="color:darkgreen;">**What can be simulated?**</span> Many coin tosses, customer arrivals in a shop, rainfall over a year, the lifetime of a machine/battery, the decaying of a radioactive source, etc.
+:::
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment .block .grey .center}
+<span style="color:crimson; font-size:24px;">**Simulation = model + randomness + repetition**</span>
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+- A **model** of the process  
+- **Randomness** to reflect uncertainty  
+- **Repetition** to understand variability
+
+::: {.fragment}
+Simulation is **systematic**, follows **explicit rules**, and produces **reproducible results**.
+:::
+
+::: notes
+- prior beliefs: flipping a coin, is it biased or fair. Neutral, sceptical, or optimistic have different underlying probability distributions.
+:::
+
+---
+
+## 1.2 Simulation Workflow
+
+If simulation is an experiment on a computer, then we need to ask:
+
+- How do we *design* the experiment?
+- How do we *run* it?
+- How do we *learn* from the results?
+
+
+::: {.fragment}
+<div class="flowchart" aria-label="Problem to Conclusion flowchart">
+  <div class="node" style="background: rgba(0,90,180,0.08);">Problem</div>
+  <div class="arrow" aria-hidden="true">→</div>
+
+  <div class="node" style="background: rgba(0, 120, 60, 0.08);">Model</div>
+  <div class="arrow" aria-hidden="true">→</div>
+
+  <div class="node" style="background: rgba(170, 90, 0, 0.10);">Simulation</div>
+  <div class="arrow" aria-hidden="true">→</div>
+
+  <div class="node" style="background: rgba(170, 0, 0, 0.10);">Analysis</div>
+  <div class="arrow" aria-hidden="true">→</div>
+
+  <div class="node" style="background: rgba(170, 160, 0, 0.10);">Conclusion</div>
+</div>
+:::
+
+
+::: {.fragment}
+<span style="color:darkgreen;">**Examples**</span>: How long will customers wait in a coffee-shop queue?
+:::
+
+::: {.fragment .block .blue data-title="Problem"}
+- "If customers arrive randomly, how long will they wait in line?"
+- "Do I need a second barista during busy hours?"
+:::
+
+::: {.fragment .block .green data-title="Model"}
+- Customers arrive according to a random process (e.g., exponential inter‑arrival times).
+- Service times are also random (e.g., normally or exponentially distributed).
+- There is one barista (one server)
+- Customers form a single queue.
+- This is a **queueing model** &ndash; a classic simulation setup
+:::
+
+::: notes
+- There are actually multiple workflows proposed by many researchers, but I like this one for its simplicity.
+- Model (assumptions)
+:::
+
+---
+
+
+::: { .block .yellow data-title="Simulation"}
+- Generate random arrival times and random service times
+- Track the queue length over time
+- Record each customer's waiting time
+- Repeat for thousands of simulated hours
+:::
+
+::: {.fragment .block .orange data-title="Analysis"}
+- Average and maximum waiting time
+- Distribution of waiting times
+- Probability that the queue exceeds 5 people
+- Comparison between one‑barista vs two‑barista scenarios
+- **Visualisation:** histograms, time‑series plots, boxplots.
+:::
+
+::: {.fragment .block .red data-title="Conclusion"}
+- With one barista, average wait = 6 minutes, and long queues occur 30% of the time.
+- With two baristas, average wait = 3 minutes, and long queues almost never form.
+- Recommendation: add a second barista during peak hours.
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment .block .grey}
+<div style="text-align:center">**The simulation answers the original question.**</div>
+:::
+
+---
+
+:::: {.columns}
+::: {.column width="50%"}
+```{mermaid}
+%%| label: Workflow
+%%| echo: false
+%%{init: {'flowchart': {'nodeSpacing': 10, 'rankSpacing': 10}}}%%
+flowchart TB
+  A[Formulate<br/>problem] --> B[Data &<br/>Assumption] --> C([Assumptions<br/>OK?])
+  C -->|Yes| D[ Program<br/>model] --> E([Model<br/>OK?])
+  E -->|Yes| F[Analyse] --> G[Conclusion]
+
+  C -->|No| R((Revise))
+  E -->|No| R
+  R --> A
+  R --> B
+```
+:::
+::: {.column width="50%"}
+#### Designing a Simulation Study Flowchart
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+<span style="color:#da7800;">**Key idea**</span>
+:::
+
+- Simulation studies are **iterative**
+- Validation happens early and often
+- Revision is normal, not failure
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+<span style="color:darkgreen;">**Example**</span> Queueing system
+:::
+
+1. **Problem:** Wait time, service time
+2. **Data & Assumption:** Arrival rates, service times, single queue, identical agents
+3. **Assumptions OK?** Poisson or constant arrivals? Heavy-tailed service times?
+4. **Model:** Discrete-event simulation
+5. **Model OK?** Code correctness, matches reality
+6. **Analyse:** Performance measures, CIs, visualise
+7. **Conclusion:** Recommendations, expected improvement, limitations, and next steps
+:::
+::::
+
+
+::: notes
+2. Arrival rates and service times (derived from timestamps), identical agents (baristas, call centre agents...)
+3. Heavy-tailed (lots of outliers or extreme cases)
+4. Discrete event simulation: model a system as a sequence of distinct events in time, so allowing the simulation to jump directly to the next event assuming that the system is unchanged.
+5. Model OK? Sanity check (zero arrivals ⇒ zero wait; huge staffing ⇒ near-zero wait), validate with historical data.
+6. Analyse: mean, median, percentile of wait time, CIs, do some meaningful plots.
+7. Conclusion: recommend add more barista, improved wait time, limitations: maybe better data.
+:::
+
+---
+
+## {auto-animate=true}
+
+::: {style="margin-top: 100px;"}
+“Simulation is not magic.”
+:::
+
+## {auto-animate=true}
+
+::: {style="margin-top: 150px; font-size: 3em; color: crimson;"}
+“Simulation is not magic.”
+:::
+
+:::: {.columns}
+
+::: {.column width=33% .fragment .center}
+**Garbage in → garbage out**
+
+
+If the model is wrong,  
+the results will be wrong.
+:::
+
+::: {.column width=33% .fragment .center}
+
+**Model assumptions matter**
+
+Every simulation depends on:
+
+- assumptions about *randomness*
+- assumptions about *structure*
+- assumptions about *parameters*
+
+:::
+
+::: {.column width=33% .fragment .center}
+
+**Simulation approximates**
+
+Simulation produces:
+
+- *estimates*
+- *variability*
+- *uncertainty*
+  
+- Never exact answers.
+
+:::
+
+::::
+
+
+::: notes
+- Garbage in, Garbage out
+From the queue example,
+If I assume customers arrive exactly every 2 minutes,
+and that service time is constant,
+the simulation will look beautifully stable.
+
+It will also be completely unrealistic.
+
+Simulation is obedient. It will faithfully simulate nonsense if you feed it nonsense.
+
+- Assumptions
+Structure: distribution (queue example, is it poisson arrivals?, exponential service times? independence?)
+
+- Simulation only estimates
+
+Say, if we have different seeds -> different results.
+If you run my code and I run my code,
+we will not get identical estimates — but we should get similar conclusions.
+That's what simulation really matters.
+
+:::
+
+---
+
+## 1.3 Simulation vs Analytical Solutions
+
+Simulation and analytical solutions are two different ways of answering scientific or engineering questions. They often aim at the same goal, but they work in fundamentally different ways and shine in different situations.
+
+<span style="display: block; margin: 24px 0;"></span>
+
+:::: {.columns}
+::: {.column .fragment width="50%"}
+
+<div style="text-align:center; font-size:24px; color: Indigo;">**Analytical solutions**</div>
+
+- Formulas/exact, showing how variables relate
+- Strong assumptions
+- Often elegant and fast to compute
+
+::: {.fragment}
+<div style="color: #da7800;">**When to use**</div>
+:::
+
+- The system is simple enough to model with equations
+- The mathematics is tractable
+- You need exact results
+- You want to understand the structure of the problem
+
+::: {.fragment}
+<div style="color: darkgreen;">**Example**</div>
+:::
+
+::: {.fragment}
+For a simple queue with arrival rate $\lambda$ and service rate $\mu,$ the average number of customers in the system is:
+
+$$
+L=\frac{\lambda }{\mu -\lambda }
+$$
+:::
+
+:::
+::: {.column .fragment width="50%"}
+
+<div style="text-align:center; font-size:24px; color: Indigo;">**Simulation**</div>
+
+- Produces approximate answers
+- Handles complex, realistic systems
+- Requires computational power
+- Flexible: you can model almost anything
+
+::: {.fragment}
+<div style="color: #da7800;">**When to use**</div>
+:::
+
+- The system is too complicated for closed‑form math
+- You want to include realistic randomness
+- You want to test "what‑if" scenarios
+- You need distributions, not just averages
+
+::: {.fragment}
+<div style="color: darkgreen;">**Example**</div> If the café has:
+:::
+
+- two baristas with different speeds
+- customers who sometimes abandon the queue
+- peak and off‑peak arrival patterns
+- priority customers (e.g., mobile orders)
+
+
+:::
+::::
+
+
+::: notes
+- Formulas or exact expressions
+- Assumptions (linearity, independence, symmetry, etc.)
+- There is no simple formula for this (simulation example). 
+
+
+:::
+
+---
+
+#### A simple side-by-side example
+
+<center>
+<div style="width:90%;">
+
+| Question | Analytical | Simulation |
+|:-------------:|:--------:|:-------------:|
+| "What's the probability of getting exactly 7 heads in 10 flips?" | Use binomial formula: $\dbinom{10}{7}0.5^{10}$ | Simulate 10,000 sets of 10 flips and count how often 7 heads appear |
+| "What's the distribution of waiting times in a complex queue?" | No closed‑form solution | Simulate arrivals and service events many times |
+| "How does changing a parameter affect the system?" | Differentiate the formula | Re‑run the simulation with new parameters |
+
+: {.striped}
+
+</div>
+</center>
+
+
+<br>
+
+#### Comparison {.fragment}
+
+::: {.fragment}
+<center>
+<div style="width:80%;">
+
+| Analytical | Simulation |
+|:-----------:|:------------:|
+| Exact (if possible) | Approximate |
+| Requires tractable math | Requires computation |
+| Fast once derived | Slower, but flexible |
+| Limited by assumptions | Handles complexity |
+
+: {.striped}
+
+</div>
+</center>
+:::
+
+<br>
+
+::: {.fragment}
+Simulation trades exactness for generality and understanding. To simulate anything, we need randomness, control over randomness, and reproducibility.
+:::
+
+::: {.fragment}
+This brings us to <span style="color:crimson;">**random number generation**</span>.
+:::
+
+
+---
+
+## 1.4 Random Number Generation
+
+#### True Randomness
+
+::: {.fragment}
+True randomness comes from **physical processes** that are inherently unpredictable.
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+<div style="color: darkgreen;">**Example**</div>
+
+| | | |
+|:------------:|:------------:|:------------:|
+| [radioactive decay](https://en.wikipedia.org/wiki/Radioactive_decay) | [thermal noise](https://en.wikipedia.org/wiki/Johnson%E2%80%93Nyquist_noise) | [atmospheric noise](https://en.wikipedia.org/wiki/Atmospheric_noise) |
+| [quantum events](https://en.wikipedia.org/wiki/Quantum_indeterminacy) | rolling a real die | flipping a real coin |
+:::
+
+::: {.fragment}
+These processes have no underlying pattern.
+If you repeat them, you cannot predict the next outcome, even in principle.
+:::
+
+
+::: {.fragment .block .grey}
+<div style="text-align:center">True randomness is **non‑deterministic**.</div>
+:::
+
+
+::: {.notes}
+- radioactive decay: it is impossible to predict exactly when a specific nucleus will decay, as each decay event is a probabilistic occurrence governed by quantum mechanics.
+- quantum events are random due to principles of quantum mechanics, where the quantum particle can exist in multiple states simultaneously (superposition).
+- thermal noise: current noise generated by the thermal agitation of electrons in electrical circuits
+- atmospheric noise: radio noise caused by nature, e.g., lightning discharge in thunderstorms ~ 3.5m discharge per day
+
+:::
+
+<br>
+
+#### Pseudorandom $\neq$ Random {.fragment}
+
+::: {.fragment}
+Computers do **not** generate truly random numbers. They use **pseudorandom number generators** (PRNGs)
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+- starts with a **seed**
+- applies a **deterministic formula**
+- produces a long sequence of numbers that look random
+- but are fully **reproducible** (if using the same seed)
+
+::: {.fragment .block .grey}
+<div style="text-align: center;">Pseudorandom numbers are **deterministic randomness**.</div>
+:::
+
+::: notes
+- Deterministic algorithms always produce the same output for a given input, while non-deterministic algorithms can yield different outputs for the same input.
+- Reproducibility is useful for debugging and controlled experimentation (thinking about working and sharing codes as a team)
+Examples for PRNGs: Monte Carlo, Bayesian MCMC, cryptographic protocols (with special RNGs called H(ardware)RNG the same as lottery / secured authentication, using physical noise as a seed to imitate true randomness).
+:::
+
+---
+
+## 1.4.1 Linear Congruential Generators (LCGs)
+
+LCGs are the simplest and most historically important PRNGs. They were used in early Monte Carlo simulations. It is easy to implement, fast, and memory-light.
+An LCG produces a sequence of integers using a recurrence relation:
+
+$$
+X_{n+1} = (aX_n + c) \mod m,
+$$
+
+where $X$ is the sequence of pseudo-random values and 
+
+:::: {.columns}
+::: {.column}
+- the modulus $m, 0 < m$
+- the multiplier $a, 0 < a < m$
+:::
+::: {.column}
+- the increment $c, 0 \leq c < m$
+- the seed or start values $X_0, 0 \leq X_0 < m$
+:::
+::::
+
+<!-- Then you convert it to a Uniform(0,1) value by: $\quad U_n=\frac{X_n}{m}$ -->
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+```{r}
+#| label: LCG example
+lcg <- function(n, seed = 1, a = 1664525, c = 1013904223, m = 2^32) {
+  x <- numeric(n)
+  x[1] <- seed
+  for (i in 2:n) {
+    x[i] <- (a * x[i-1] + c) %% m
+  }
+  return(x)
+}
+set.seed(123)
+u <- lcg(1000); head(u)
+```
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+An LCG produces **integers**, and the range of those integers is determined entirely by the choice of parameters $a, c,$ and especially $m.$ These integer are always between 0 and $m-1.$
+:::
+
+
+::: notes
+- modulo: the function returns the remainder of when divided by m. 1mod(5)=1, 5mod(5)=0, 6mod(5)=1, 17mod(5)=2
+- worked quite well but very sensitive to the choice of parameter values a,c,m.
+- parameter values use in R code is from
+(Thomopolous (2013))
+:::
+
+---
+
+```{r}
+#| label: Bad LCG
+# Bad LCG
+lcg <- function(n, seed = 1, a = 5, c = 1, m = 16) {
+  x <- numeric(n)
+  x[1] <- seed
+  for (i in 2:n) {
+    x[i] <- (a * x[i-1] + c) %% m
+  }
+  u <- x / m   # convert to Uniform(0,1)
+  return(u)
+}
+set.seed(123); u <- lcg(5000)
+```
+
+
+:::: {.columns}
+::: {.column .fragment}
+```{r}
+#| label: Bad LCG Histogram
+hist(u, breaks=30, col="skyblue",
+     xlab="Value", main="",
+     cex.axis=1.8, cex.lab=1.8)
+```
+:::
+::: {.column .fragment}
+```{r}
+#| label: Bad LCG Pair plot
+plot(u[-5000], u[-1], pch=16, cex=2, 
+    xlab = "u_n", ylab = "u_{n+1}",
+    cex.axis=1.8, cex.lab=1.8)
+```
+:::
+::::
+
+::: {.fragment}
+The nature of modulo arithmetic means the sequence will eventually repeat itself. Therefore, LCGs have structural weaknesses: short periods, visible lattice patterns, poor performance in high-dimensional simulations.
+:::
+
+::: notes
+1. Histogram: does it look uniform? Some values are ignored
+2. Scatterplot of successive pairs: reveals lattice structure
+:::
+
+---
+
+```{r}
+#| label: Good LCG
+# Good LCG
+lcg <- function(n, seed, a, c, m, as.uniform = TRUE) {
+  x <- numeric(n)
+  x[1] <- seed
+  for (i in 2:n) {
+    x[i] <- (a * x[i - 1] + c) %% m
+  }
+  if (as.uniform) {
+    return(x / m)   # convert to Uniform(0,1)
+  } else {
+    return(x)       # return raw integers
+  }
+}
+set.seed(123); u <- lcg(n=5000, seed=1, a=1664525, c=1013904223, m=2^32)
+```
+
+
+:::: {.columns}
+::: {.column .fragment}
+```{r}
+#| label: Good LCG Histogram
+hist(u, breaks=30, col="skyblue",
+    main="", xlab="Value",
+    cex.axis=1.8, cex.lab=1.8)
+```
+:::
+::: {.column .fragment}
+```{r}
+#| label: Good LCG Pair plot
+# Successive pair plot
+plot(u[-5000], u[-1], pch=16, cex=0.5,
+    cex.axis=1.8, cex.lab=1.8)
+```
+:::
+::::
+
+::: aside
+Press, W. H., Teukolsky, S. A., Vetterling, W. T., & Flannery, B. P. (2007). *Numerical recipes: The art of scientific computing (3rd ed.)*. Cambridge University Press
+:::
+
+---
+
+## 1.4.2 Uniform(0,1) Random Number (Mersenne Twister)
+
+Mersenne Twister is the modern default pseudorandom number generator in R, Python, NumPy, MATLAB, Julia, and many other systems. It’s designed to produce high‑quality Uniform(0,1) values for simulation.
+
+<span style="display: block; margin: 24px 0;"></span>
+
+
+$$
+U \sim Uniform(0,1)
+$$
+
+- Equally likely takes values between 0 and 1
+- Imagine repeatedly picking a point at random on the interval (0,1) for a thousand time.
+- Over many draws, the points spread out evenly
+
+::: {.fragment}
+```{r}
+#| label: runif(1000,0,1)
+set.seed(123); u <- runif(1000, 0, 1)
+```
+:::
+
+:::: {.columns}
+::: {.column .fragment width="48%"}
+
+<center>
+```{r}
+#| label: Uniform(0,1) Scatter
+#| fig-align: "center"
+#| echo: false
+#| code-summary: "Code"
+#| fig-height: 7
+
+plot(u, pch = 16, col = "darkgreen",
+     main = "Random Draws from Uniform(0,1)",
+     xlab = "Index", ylab = "Value",
+     cex.main = 2.2,   # Increase main title size by 50%
+     cex.lab = 1.8,    # Increase axis labels size by 20%
+     cex.axis = 1.8,     # Keep axis text at default size
+     )
+```
+</center>
+:::
+
+::: {.column .fragment  width="48%"}
+<center>
+```{r}
+#| label: Uniform(0,1) Histogram
+#| fig-align: "center"
+#| echo: false
+#| code-summary: "Code"
+#| fig-height: 7
+hist(u,
+     breaks = 20,
+     col = "skyblue",
+     main = "Histogram of Uniform(0,1) Samples",
+     xlab = "Value",
+     ylab = "Frequency",
+     freq = FALSE,
+     cex.main = 2.2,   # Increase main title size by 50%
+     cex.lab = 1.8,    # Increase axis labels size by 20%
+     cex.axis = 1.8,     # Keep axis text at default size
+     )
+lines(density(u), col = "blue", lwd = 2)
+
+```
+</center>
+
+:::
+::::
+
+::: notes
+- Histogram: the bar is roughly the same height, almost flat shape, as seen by density curve.
+- Density curve will get flatter as the sample size grows, as the true density of Uniform(0,1) is flat at 1.
+- The density curve wiggles because of random noise from simulation.
+:::
+
+---
+
+#### Why Uniform(0,1) is important?
+
+Because if you can generate high‑quality Uniform(0,1) values, you can transform them into any other distribution!
+
+::: {.fragment .block .blue fragment-index=1}
+**Bernoulli(p)**
+
+::: {.fragment .center fragment-index=5}
+Generate $U \rightarrow$ If $U < p$, return 1, else return 0
+:::
+:::
+
+::: {.fragment .block .green fragment-index=2}
+**Exponential($\lambda$)**
+
+::: {.fragment .center fragment-index=6}
+Use the [inverse](https://en.wikipedia.org/wiki/Inverse_transform_sampling#Examples) CDF: $\qquad X=-\frac{1}{\lambda }\ln (1-U)$
+:::
+:::
+
+::: {.fragment .block .yellow fragment-index=3}
+**Normal(0,1)**
+
+::: {.fragment .center fragment-index=7}
+Use the [Box–Muller transform](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform): $\qquad Z=\sqrt{-2\ln U_1}\, \cos (2\pi U_2)$
+:::
+:::
+
+
+::: {.fragment}
+Every simulation — from Ulam’s solitaire experiments to modern Bayesian MCMC — relies on the ability to generate random draws.
+The workflow is always
+::::
+
+- Start with Uniform(0,1)
+- Transform it into the distribution you need
+- Use those draws to simulate the system
+- Repeat thousands of times
+
+::: {.fragment .block .grey}
+<div style="text-align:center">**"if you can simulate randomness, you can solve problems too hard for equations."**</div>
+:::
+
+::: notes
+- Two Uniform(0,1) values → one Normal value.
+- Poisson, Gamma, Beta
+- MCMC: Markov Chain Monte Carlo
+:::
+
+---
+
+```{r}
+#| label: Generated vs Transform Exp
+#| fig-height: 6
+#| code-fold: true
+#| code-summary: ""
+
+set.seed(123)
+# Step 1: generate Uniform(0,1) values
+u <- runif(1000)
+
+# Step 2: transform them into Exponential(lambda)
+lambda <- 2   # rate parameter
+x <- -log(1 - u) / lambda
+
+# Step 3: Plot and compare with R's built-in rexp()
+x_builtin <- rexp(1000, rate = lambda)
+hist(x, breaks = 30, col = rgb(0,0,1,0.4), freq = FALSE,
+     main = "Comparison of PDF of exponential distribution: Transform vs rexp()")
+hist(x_builtin, breaks = 30, col = rgb(1,0,0,0.4), freq = FALSE, add = TRUE)
+legend("topright", legend = c("Transform", "rexp()"),
+       fill = c(rgb(0,0,1,0.4), rgb(1,0,0,0.4)))
+```
+
+::: notes
+The two histograms overlap almost perfectly.
+:::
+
+
+---
+
+## 1.5 Revision: Probability Tools for Simulation
+
+### 1.5.1 Basic Concepts and Definitions
+
+::: {.block .purple .fragment}
+**Sample space** ($\Omega$): The set of *all possible outcomes* of an experiment. <br> For example, a sample space for rolling a fair die is $\Omega = \{1,2,3,4,5,6\}.$
+:::
+
+::: {.block .blue .fragment}
+**Event** ($A$): A subset of the sample space. For example, let $x$ be an individual's total cholesterol in mg/dL, the event that an individual has high cholesterol is $A = \{x\in \Omega \,|\, x > 200 \}.$ Or, for a single die roll, $A = \{1,4,6\}.$
+:::
+
+::: {.block .green .fragment}
+**Complement** ($A^c$): The event that $A$ does not occur. From the previous example, $A^c = \{2,3,5\}.$
+:::
+
+::: {.block .yellow .fragment}
+**Union** ($A \cup B$): The event that either $A$ occurs <span style="color:crimson;">**or**</span> $B$ occurs. Let $A=\{1,2\}$ and $B= \{1, 3, 5\}$. Then $A \cup B = \{1, 2, 3, 5 \}.$
+:::
+
+::: {.block .orange .fragment}
+**Intersection** ($A \cap B$): The event that both $A$ <span style="color:crimson;">**and**</span> $B$ occur. Using the previous example, $A \cap B = \{1\}$.
+:::
+
+
+::: {.block .red .fragment}
+**Disjoint**: Events that have no outcomes in common. For example, if $A=\{2, 4, 6 \}$ and $B= \{1, 3, 5\}$, then $A$ and $B$ are disjoint since $A \cap B = \emptyset$, where $\emptyset$ represents the empty set (the set with no elements).
+:::
+
+::: notes
+We are not reviewing probability for exams.
+We are reviewing probability as a **language** to describe simulation output.
+:::
+
+---
+
+:::: {.columns}
+
+::: {.column .fragment}
+
+#### 1.5.1 Basic Concepts and Definitions (continue)
+
+We have the following laws for any three events $A, B, C \subseteq \Omega.$
+
+- **Commutative Laws:** 
+$$
+\begin{align*} 
+  A \cup B &= B \cup A \\ 
+  A \cap B &= B \cap A 
+\end{align*}
+$$
+
+- **Associative Laws:** 
+$$
+\begin{align*} A \cup (B \cup C) &= (A \cup B) \cup C \\ 
+  A \cap (B \cap C) &= (A \cap B) \cap C 
+\end{align*}
+$$
+
+- **Distributive Laws:** 
+$$
+\begin{align*} 
+  A \cap (B \cup C) &= (A \cap B) \cup (A \cap C) \\
+  A \cup (B \cap C) &= (A \cup B) \cap (A \cup C) 
+\end{align*}
+$$
+
+- **De Morgan’s Laws:** 
+$$
+\begin{align*} 
+  (A \cup B)^c &= A^c \cap B^c \\ 
+  (A \cap B)^c &= A^c \cup B^c 
+\end{align*}
+$$
+
+:::
+
+::: {.column .fragment}
+
+### 1.5.2 Axioms of Probability
+
+For any random experiment, $P$ is a *probability measure* defined on a sample space $\Omega$, such that the following axioms are satisfied.
+
+1. $P(\Omega) = 1$
+2. If $A \subseteq \Omega$ is an event, then $P(A) \ge 0$
+3. If $A$ and $B$ are disjoint, then 
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+This axiom extends to any finite (or countable) collection of pairwise disjoint events.
+
+::: {.fragment}
+**Properties of Probability Measures**
+:::
+
+1. $P(A^c) = 1 - P(A)$
+2. $P(\emptyset) = 0$
+3. If $A \subseteq B$, then $P(A) \le P(B)$
+
+::: {.fragment}
+Addition Law: 
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+:::
+
+
+:::
+::::
+
+
+::: notes
+- For section 1.5.1-1.5.5, I won't go through it in much detail. Since, you probably have already learned it in STAT1005. 
+- We will touch on these topics again in the following lectures, when we introduce a much complicated method. 
+- But for now, these are there for your references.
+- So, I'll skip to something that is relevant for this lecture, which is section 1.5.6 RVs (page 24)
+:::
+
+---
+
+
+### 1.5.3 Law of Total Probability
+
+::: {.fragment}
+Let $A_i$ for $i=1,\ldots, k$ be mutually exclusive and exhaustive events, i.e. $\displaystyle \cup^k_{i=1} A_i = \Omega$, and $B$ be any other event.
+$$
+P(B) = P\left [ B \cap \left ( \overset{k}{\underset{i=1}{\cup}} A_i \right ) \right ] = \sum^k_{i=1} P(B \cap A_i ) = \sum^k_{i=1} P(B|A_i)P(A_i)
+$$
+:::
+
+
+### 1.5.4 Conditional Probability {.fragment}
+
+::: {.fragment}
+For any events $A$ and $B,$ conditional probability is defined as: 
+$$
+P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{ provided that } \quad P(B) \ne 0
+$$
+:::
+
+::: {.fragment}
+Rearranging the conditional probability formula gives the **Multiplication Rule** for probabilities: 
+$$P(A \cap B) = P(A|B) P(B) = P(B|A) P(A)$$
+:::
+
+::: {.fragment}
+If the probability of $A$ is not affected by whether or not event $B$ occurs, then $A$ is said to be **independent** of $B$. 
+$$ P(A|B) = P(A) \quad \text{ and } \quad P(B) \neq 0 \quad \Leftrightarrow \quad P(A \cap B)=P(A)P(B)$$
+:::
+
+
+### 1.5.5 Bayes' Theorem {.fragment}
+
+::: {.fragment}
+For mutually exclusive and exhaustive events, $B_1, B_2, \ldots, B_n, P(B_k|A) = \dfrac{P(A|B_k) P(B_k)}{\sum_{i=1}^n P(A|B_i)P(B_i)}$
+:::
+
+::: notes
+- mutually exclusive: two events that cannot occur simultaneously
+- exhaustive event $\cup^k_{i=1} A_i = \Omega$: All events A_i cover the entire sample space.
+:::
+
+---
+
+
+### 1.5.6 Random Variables
+
+<span style="display: block; margin: 24px 0;"></span>
+
+A random variable (RV) is a numerical quantity whose value is determined by a random process.
+
+- It’s a mapping from outcomes → numbers
+- It’s how probability becomes something we can compute with
+- It’s the bridge between randomness and simulation
+
+::: {.fragment}
+In simulation, random variables are the *objects we generate*.
+:::
+
+
+::: {.fragment}
+Everything they do later is built on the *ability to generate RVs with specific distributions*. In other word, 
+
+::: {.block .grey .center}
+RVs are the *currency of simulation*.
+:::
+:::
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+:::: .{columns}
+::: {.column .fragment}
+<div style="text-align: center; color: blue;">**DISCRETE**</div>
+
+Take countable values
+
+<span style="color:darkgreen;">**Examples**</span>
+
+- Number of customers arriving in an hour
+- Number of heads in 10 flips
+- Poisson, Binomial, Geometric
+:::
+::: {.column .fragment}
+<div style="text-align: center; color: blue;">**CONTINUOUS**</div>
+
+Take values in an interval
+
+<span style="color:darkgreen;">**Examples**</span>
+
+- Waiting time
+- Service duration
+- Normal, Exponential, Uniform
+:::
+::::
+
+
+:::: {.columns}
+::: {.column .fragment width=32%}
+
+::: {.block .green .center}
+**PMF/PDF**
+:::
+
+:::
+
+::: {.column .fragment width=32%}
+
+::: {.block .blue .center}
+**CDF**
+:::
+
+:::
+
+::: {.column .fragment width=32%}
+
+::: {.block .orange .center}
+**E(X) & Var(X)**
+:::
+
+:::
+::::
+
+---
+
+### 1.5.7 Probability Distributions (PMF / PDF / CDF)
+
+<span style="display: block; margin: 24px 0;"></span>
+
+- The distribution of probabilities for a **discrete** RV can be described by its probability mass function (PMF),
+$$p(x) = P(X=x).$$
+
+- The distribution of probabilities for a **continuous** RV can be described by its probability density function (PDF),
+$$f(x) \geq 0 \quad \forall x, \quad \int^\infty_{-\infty} f(x)\,dx = 1 \quad \text{ and } \quad P(a\leq X \leq b) = \int_a^b f(x)\,dx.$$
+
+- The cumulative distribution function (CDF) for the RV $X$ is $F(x) = P ( X\leq x)$ (discrete & continuous)
+$$F(x)= \int_{-\infty}^x f(t)\,dt. \quad \text{(continuous)}$$
+
+### 1.5.8 Expectation $E(X)$ or $\mu$ {.fragment}
+
+<span style="display: block; margin: 24px 0;"></span>
+
+- Let $X$ be a **discrete** RV with a set of possible values $D$, then $\displaystyle \mathbb{E} (X) = \underset{x\in D}{\sum} xp(x)$
+
+- Let $X$ be a **continuous** RV with the support $D$, then $\displaystyle \mathbb{E} (X) = \int_D xf(x) \,dx$
+
+
+---
+
+#### Properties of the Expectation Operator
+
+- **Constant rule:** If $a$ is a finite constant, then $\mathbb{E} (a) = a.$
+
+- **Linearity of expectation:** For any RVs $X$, $Y$, and any constants $a,b \in \mathbb{R},$ 
+$$\mathbb{E} (aX + bY)=a\mathbb{E} (X) + b \mathbb{E} (Y).$$
+
+- **Expectation of a function:** For any function $h(x)$ such that the expectation exists, 
+
+    - if $X$ is a **discrete** RV with a set of possible values $D$ and PMF $p(x),$ then
+    $$ \mathbb{E} \left [ h(X) \right ] = \underset{x\in D}{\sum} h(x)p(x) \quad\text{provided the sum converges.}$$
+    
+
+    - if $X$ is a **continuous** RV with support $D$ and PDF $f(x),$ then 
+    $$ \mathbb{E} \left [ h(X) \right ] = \int_D h(x)f(x)\,dx \quad \text{provided the integral exists.}$$
+    
+
+### 1.5.9 Variance $Var(X)$ or $\sigma^2$ {.fragment}
+
+::: {.fragment}
+Let $h(x) = \left (x-\mathbb{E} [X] \right )^2,$ then
+$Var(X) = \mathbb{E} \left [ h(x) \right ] = \mathbb{E} [(x-\mathbb{E}[X])^2] = \mathbb{E}[X^2] - \mathbb{E}[X]^2.$
+
+The variance is also known as the *second centralised moment*. $\sigma_X$ is the *standard deviation* of $X.$
+:::
+
+::: {.fragment}
+**Higher order moment:** Let $h(x) = \left [ X-\mathbb{E} (X) \right ]^n$, then $\mathbb{E} [h(x)]$ is called the $n^{th}$ centralised moment (if exists). These are associated with other properties of the probability distributions, e.g., **skewness** and **kurtosis**.
+:::
+
+::: notes
+- Higher order moment: The definition above extends to higher order
+:::
+
+
+---
+
+### 1.5.10 Law of Large Numbers (LLNs)
+
+If we repeat the same random experiment many times,  the **average result** stabilises.
+
+::: {.fragment}
+Let $X_1, X_2, \dots, X_n$ be independent, identically distributed (i.i.d.) with mean $E[X]$.
+:::
+
+::: {.fragment}
+Then as $n \to \infty,$
+$$
+\bar{X}_n=\frac{1}{n}\sum_{i=1}^n X_i \;\longrightarrow\; E[X]
+$$
+(in the sense that the average gets closer to the true mean).
+:::
+
+::: {.fragment}
+**Simulation takeaway:** more replications $n \Rightarrow$ more stable estimates (but never perfectly exact).
+:::
+
+```{r}
+#| label: LLN setup
+#| echo: false
+set.seed(123)
+n <- 5000
+```
+
+<span style="display: block; margin: 24px 0;"></span>
+
+:::: {.columns .fragment}
+:::  {.column}
+
+```{r}
+#| fig-align: center
+#| code-fold: true
+#| label: LLNs with Binomial
+#| code-summary: "Flipping a fair coin for 5000 times."
+
+# Demonstrate the LLN with coin tosses
+x <- rbinom(5000, size = 1, prob = 0.5)   # 1 = Head, 0 = Tail
+running_mean <- cumsum(x) / seq_len(n)
+
+plot(running_mean, type = "l",
+     xlab = "Number of tosses (n)",
+     ylab = "Running mean (proportion of heads)",
+     main = "LLNs: Proportion of Heads",
+     cex.main = 2.2,
+     cex.lab = 1.8,
+     cex.axis = 1.8,
+     )
+
+abline(h = 0.5, lwd = 2)  # true mean
+```
+:::
+
+::: {.column}
+```{r}
+#| fig-align: center
+#| code-fold: true
+#| label: LLNs with Exp(1)
+#| code-summary: "Simulate Exp(1) for 5000 times."
+
+# LLN with an Exponential(1) random variable (true mean = 1)
+x <- rexp(n, rate = 1)
+running_mean <- cumsum(x) / seq_len(n)
+
+plot(running_mean, type = "l",
+     xlab = "Number of samples (n)",
+     ylab = "Running mean",
+     main = "LLNs: Exponential(1)",
+      cex.main = 2.2,
+     cex.lab = 1.8,
+     cex.axis = 1.8,
+     )
+
+abline(h = 1, lwd = 2)  # true mean
+```
+:::
+::::
+
+::: notes
+- Comparing between discrete (binomial) and continuous (exp)
+- Coin toss is bounded by [0,1] but Exp(1) is unbounded.
+- Coin toss's running mean stabilises quickly, while Exp(1) is noisy for much longer.
+- Anyway, the average converges eventually.
+- The Law of Large Numbers always works — but how quickly it works depends on how variable the random variable is.
+:::

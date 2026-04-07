@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture01_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture01_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture01_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture01_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture01_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture01_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture01_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Sam Wiwatanapataphee (275287a@curtin.edu.au)">
+  <meta name="dcterms.date" content="2026-02-19">
+  <title>STAT2005 Computer Simulation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture01_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture01_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="lecture01_files/libs/revealjs/dist/theme/quarto-a5e566b93b0a24466b261f5c6a2fec9a.css">
+  <link href="lecture01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture01_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture01_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="lecture01_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="lecture01_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="lecture01_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="lecture01_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="lecture01_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">STAT2005 Computer Simulation</h1>
+  <p class="subtitle">Lecture 1 — Introduction to Computer Simulation</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Sam Wiwatanapataphee (275287a@curtin.edu.au) 
+</div>
+</div>
+</div>
+
+  <p class="date">19 Feb 2026</p>
+</section>
+<section id="goals-today" class="slide level2">
+<h2>Goals today</h2>
+<ul>
+<li class="fragment">Unit Information</li>
+<li class="fragment">Blackboard Tour</li>
+<li class="fragment"><strong>Lecture 1: Introduction to computer simulation</strong>
+<ul>
+<li class="fragment">1.1 What is Simulation?</li>
+<li class="fragment">1.2 Simulation Workflow</li>
+<li class="fragment">1.3 Simulation vs Analytical Solutions</li>
+<li class="fragment">1.4 Random Number Generation (LCGs, Uniform)</li>
+<li class="fragment">1.5 Revision: Probability Tools for Simulation</li>
+</ul></li>
+</ul>
+</section>
+<section>
+<section id="unit-information" class="title-slide slide level1 center">
+<h1>Unit Information</h1>
+
+</section>
+<section class="slide level2 scrollable">
+
+<p><br> <br></p>
+<div class="columns">
+<div class="column fragment" style="width:52%;">
+<h3 id="unit-learning-outcomes">Unit Learning Outcomes</h3>
+<p>On successful completion of this unit you are expected to:</p>
+<ol type="1">
+<li class="fragment">explain the scope and limitation of simulation;</li>
+<li class="fragment">develop simulation procedures in an appropriate computing environment;</li>
+<li class="fragment">analyse and interpret simulation result;</li>
+<li class="fragment">apply simulation techniques in a discipline specific context.</li>
+</ol>
+<p><br></p>
+<h3 class="fragment" id="learning-activities">Learning Activities</h3>
+<ul>
+<li class="fragment">Lecture (F2F, live via iLecture):
+<ul>
+<li class="fragment">Thursday 10am – 12pm at 201.412</li>
+</ul></li>
+<li class="fragment">Workshop (F2F, live via MS Team, start in Week 1):
+<ul>
+<li class="fragment">Thursday 12pm – 2pm at 312.222</li>
+</ul></li>
+<li class="fragment">Please <strong>bring your own device</strong> to both sessions.</li>
+</ul>
+</div><div class="column" style="width:48%;">
+<h3 class="fragment" id="assessments">Assessments</h3>
+<div class="fragment">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Task</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Due</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Computer-based test</td>
+<td style="text-align: left;">20%</td>
+<td style="text-align: left;">Week 5 &amp; 11</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Project</td>
+<td style="text-align: left;">30%</td>
+<td style="text-align: left;">Week 6 &amp; 14</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Final Exam</td>
+<td style="text-align: left;">50%</td>
+<td style="text-align: left;">Week 16 – 17</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<ul>
+<li class="fragment">More details will be posted on BB.</li>
+</ul>
+<p><br></p>
+<h3 class="fragment" id="programming-language">Programming Language</h3>
+<ul>
+<li class="fragment"><strong>R</strong> (required; assessed)</li>
+<li class="fragment"><strong>Python</strong> (optional; not assessed)</li>
+<li class="fragment">Choose either R or Python to complete the project.</li>
+</ul>
+</div></div>
+</section></section>
+<section>
+<section id="blackboard-tour" class="title-slide slide level1 center">
+<h1><a href="https://lms.curtin.edu.au">Blackboard Tour</a></h1>
+<aside class="notes">
+<ul>
+<li>Mainly using <strong>R</strong> for all learning activities and computer-based test.</li>
+<li><strong>Python</strong> code will be provided as complementary materials.</li>
+<li>You can choose either R or Python to complete the project.</li>
+<li>BB tour: outline, announcements, reading lists, materials, assessments, etc.</li>
+<li>Make use of facilities! (how to print/scan, free software: ms office, endnote, matlab, etc. and onedrive)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+</section>
+<section>
+<section id="lecture-1-introduction-to-computer-simulation" class="title-slide slide level1 center">
+<h1>Lecture 1: Introduction to Computer Simulation</h1>
+
+</section>
+<section class="slide level2">
+
+<h4 id="in-the-mid-1940s">In the mid-1940s…</h4>
+<div class="columns">
+<div class="column fragment center" style="width:33%;">
+<p><strong>Stanisław Ulam</strong> <img data-src="https://upload.wikimedia.org/wikipedia/commons/8/8a/STAN_ULAM_HOLDING_THE_FERMIAC.jpg" style="width:58.0%"> <img data-src="https://upload.wikimedia.org/wikipedia/commons/5/59/GNOME_Aisleriot_Solitaire_%28cropped%29.png" class="fragment" style="width:58.0%"></p>
+<div class="fragment">
+<p><em>“What is the probability that a solitaire game can be won?”</em></p>
+</div>
+<div class="fragment">
+<p><em>“Why not just play a thousand times and count how often I win?”</em></p>
+</div>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>John Von Neumann</strong> <img data-src="https://upload.wikimedia.org/wikipedia/commons/5/5e/JohnvonNeumann-LosAlamos.gif" style="width:58.0%"></p>
+<div class="fragment">
+<p><em>“If we can solve solitaire this way, we can solve anything this way.”</em></p>
+</div>
+<ul>
+<li class="fragment">Humans can’t repeat a process thousands of times quickly enough.</li>
+<li class="fragment">Machines can.</li>
+</ul>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>ENIAC</strong></p>
+<p>(Electronic Numerical Integrator and Computer)</p>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg/1280px-Glen_Beck_and_Betty_Snyder_program_the_ENIAC_in_building_328_at_the_Ballistic_Research_Laboratory.jpg" style="width:90.0%"></p>
+<div class="fragment">
+<p>Together, Ulam and von Neumann developed a new method:</p>
+</div>
+<ul>
+<li class="fragment">simulate randomness</li>
+<li class="fragment">repeat the process thousands of times</li>
+<li class="fragment">let the pattern emerge from noise</li>
+<li class="fragment">They named it <strong>Monte Carlo</strong>, after the famous casino.</li>
+</ul>
+</div></div>
+
+<aside class="notes">
+<ul>
+<li>They both are working for the Manhattan Project during WWII</li>
+<li>And just in time, the world had just built its first giant electronic computers, ENIAC, originally designed for wartime artillery calculations</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside><div>
+<p>Wikipedia contributors. (n.d.). Monte Carlo method. In <em>Wikipedia</em>. Retrieved February 2, 2026, from https://en.wikipedia.org/wiki/Monte_Carlo_method#History</p>
+</div></aside></section>
+<section id="what-is-simulation" class="slide level2">
+<h2>1.1 What is Simulation?</h2>
+<p>Science and engineering are based on three pillars:</p>
+<div class="columns">
+<div class="column fragment center" style="width:33%;">
+<p><strong>Observations</strong></p>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>Experimentation</strong></p>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>Computation</strong></p>
+</div></div>
+<div class="columns">
+<div class="column fragment center block red" style="width:30%;">
+<p>Measure and record real outcomes</p>
+</div><div class="column fragment center block blue" style="width:30%;">
+<p>Try experimenting with different assumptions (priors)</p>
+</div><div class="column fragment center block yellow" style="width:30%;">
+<p>Simulate many possible scenarios to see what’s likely</p>
+</div></div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p><strong>Simulation</strong> is using a computer to <strong>imitate a real-world random process</strong> in order to learn about its behaviour.</p>
+</div>
+<div class="fragment">
+<p>It is a way of doing <em>experiments</em> when real experiments are expensive, slow, or impossible.</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p><span style="color:darkgreen;"><strong>What can be simulated?</strong></span> Many coin tosses, customer arrivals in a shop, rainfall over a year, the lifetime of a machine/battery, the decaying of a radioactive source, etc.</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment block grey center">
+<p><span style="color:crimson; font-size:24px;"><strong>Simulation = model + randomness + repetition</strong></span></p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<ul>
+<li class="fragment">A <strong>model</strong> of the process<br>
+</li>
+<li class="fragment"><strong>Randomness</strong> to reflect uncertainty<br>
+</li>
+<li class="fragment"><strong>Repetition</strong> to understand variability</li>
+</ul>
+<div class="fragment">
+<p>Simulation is <strong>systematic</strong>, follows <strong>explicit rules</strong>, and produces <strong>reproducible results</strong>.</p>
+</div>
+<aside class="notes">
+<ul>
+<li>prior beliefs: flipping a coin, is it biased or fair. Neutral, sceptical, or optimistic have different underlying probability distributions.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simulation-workflow" class="slide level2">
+<h2>1.2 Simulation Workflow</h2>
+<p>If simulation is an experiment on a computer, then we need to ask:</p>
+<ul>
+<li class="fragment">How do we <em>design</em> the experiment?</li>
+<li class="fragment">How do we <em>run</em> it?</li>
+<li class="fragment">How do we <em>learn</em> from the results?</li>
+</ul>
+<div class="fragment">
+<div class="flowchart" aria-label="Problem to Conclusion flowchart">
+<div class="node" style="background: rgba(0,90,180,0.08);">
+Problem
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(0, 120, 60, 0.08);">
+Model
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 90, 0, 0.10);">
+Simulation
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 0, 0, 0.10);">
+Analysis
+</div>
+<div class="arrow" aria-hidden="true">
+→
+</div>
+<div class="node" style="background: rgba(170, 160, 0, 0.10);">
+Conclusion
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span style="color:darkgreen;"><strong>Examples</strong></span>: How long will customers wait in a coffee-shop queue?</p>
+</div>
+<div class="fragment block blue" data-title="Problem">
+<ul>
+<li class="fragment">“If customers arrive randomly, how long will they wait in line?”</li>
+<li class="fragment">“Do I need a second barista during busy hours?”</li>
+</ul>
+</div>
+<div class="fragment block green" data-title="Model">
+<ul>
+<li class="fragment">Customers arrive according to a random process (e.g., exponential inter‑arrival times).</li>
+<li class="fragment">Service times are also random (e.g., normally or exponentially distributed).</li>
+<li class="fragment">There is one barista (one server)</li>
+<li class="fragment">Customers form a single queue.</li>
+<li class="fragment">This is a <strong>queueing model</strong> – a classic simulation setup</li>
+</ul>
+</div>
+<aside class="notes">
+<ul>
+<li>There are actually multiple workflows proposed by many researchers, but I like this one for its simplicity.</li>
+<li>Model (assumptions)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="block yellow" data-title="Simulation">
+<ul>
+<li class="fragment">Generate random arrival times and random service times</li>
+<li class="fragment">Track the queue length over time</li>
+<li class="fragment">Record each customer’s waiting time</li>
+<li class="fragment">Repeat for thousands of simulated hours</li>
+</ul>
+</div>
+<div class="fragment block orange" data-title="Analysis">
+<ul>
+<li class="fragment">Average and maximum waiting time</li>
+<li class="fragment">Distribution of waiting times</li>
+<li class="fragment">Probability that the queue exceeds 5 people</li>
+<li class="fragment">Comparison between one‑barista vs two‑barista scenarios</li>
+<li class="fragment"><strong>Visualisation:</strong> histograms, time‑series plots, boxplots.</li>
+</ul>
+</div>
+<div class="fragment block red" data-title="Conclusion">
+<ul>
+<li class="fragment">With one barista, average wait = 6 minutes, and long queues occur 30% of the time.</li>
+<li class="fragment">With two baristas, average wait = 3 minutes, and long queues almost never form.</li>
+<li class="fragment">Recommendation: add a second barista during peak hours.</li>
+</ul>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment block grey">
+<div style="text-align:center">
+<strong>The simulation answers the original question.</strong>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div id="Workflow">
+<div>
+<pre class="mermaid mermaid-js" data-label="Workflow">%%{init: {'flowchart': {'nodeSpacing': 10, 'rankSpacing': 10}}}%%
+flowchart TB
+  A[Formulate&lt;br/&gt;problem] --&gt; B[Data &amp;&lt;br/&gt;Assumption] --&gt; C([Assumptions&lt;br/&gt;OK?])
+  C --&gt;|Yes| D[ Program&lt;br/&gt;model] --&gt; E([Model&lt;br/&gt;OK?])
+  E --&gt;|Yes| F[Analyse] --&gt; G[Conclusion]
+
+  C --&gt;|No| R((Revise))
+  E --&gt;|No| R
+  R --&gt; A
+  R --&gt; B
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<h4 id="designing-a-simulation-study-flowchart">Designing a Simulation Study Flowchart</h4>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p><span style="color:#da7800;"><strong>Key idea</strong></span></p>
+</div>
+<ul>
+<li class="fragment">Simulation studies are <strong>iterative</strong></li>
+<li class="fragment">Validation happens early and often</li>
+<li class="fragment">Revision is normal, not failure</li>
+</ul>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p><span style="color:darkgreen;"><strong>Example</strong></span> Queueing system</p>
+</div>
+<ol type="1">
+<li class="fragment"><strong>Problem:</strong> Wait time, service time</li>
+<li class="fragment"><strong>Data &amp; Assumption:</strong> Arrival rates, service times, single queue, identical agents</li>
+<li class="fragment"><strong>Assumptions OK?</strong> Poisson or constant arrivals? Heavy-tailed service times?</li>
+<li class="fragment"><strong>Model:</strong> Discrete-event simulation</li>
+<li class="fragment"><strong>Model OK?</strong> Code correctness, matches reality</li>
+<li class="fragment"><strong>Analyse:</strong> Performance measures, CIs, visualise</li>
+<li class="fragment"><strong>Conclusion:</strong> Recommendations, expected improvement, limitations, and next steps</li>
+</ol>
+</div></div>
+<aside class="notes">
+<ol start="2" type="1">
+<li>Arrival rates and service times (derived from timestamps), identical agents (baristas, call centre agents…)</li>
+<li>Heavy-tailed (lots of outliers or extreme cases)</li>
+<li>Discrete event simulation: model a system as a sequence of distinct events in time, so allowing the simulation to jump directly to the next event assuming that the system is unchanged.</li>
+<li>Model OK? Sanity check (zero arrivals ⇒ zero wait; huge staffing ⇒ near-zero wait), validate with historical data.</li>
+<li>Analyse: mean, median, percentile of wait time, CIs, do some meaningful plots.</li>
+<li>Conclusion: recommend add more barista, improved wait time, limitations: maybe better data.</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div style="margin-top: 100px;">
+<p>“Simulation is not magic.”</p>
+</div>
+</section>
+<section id="section-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<div style="margin-top: 150px; font-size: 3em; color: crimson;">
+<p>“Simulation is not magic.”</p>
+</div>
+<div class="columns">
+<div class="column fragment center" style="width:33%;">
+<p><strong>Garbage in → garbage out</strong></p>
+<p>If the model is wrong,<br>
+the results will be wrong.</p>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>Model assumptions matter</strong></p>
+<p>Every simulation depends on:</p>
+<ul>
+<li class="fragment">assumptions about <em>randomness</em></li>
+<li class="fragment">assumptions about <em>structure</em></li>
+<li class="fragment">assumptions about <em>parameters</em></li>
+</ul>
+</div><div class="column fragment center" style="width:33%;">
+<p><strong>Simulation approximates</strong></p>
+<p>Simulation produces:</p>
+<ul>
+<li class="fragment"><p><em>estimates</em></p></li>
+<li class="fragment"><p><em>variability</em></p></li>
+<li class="fragment"><p><em>uncertainty</em></p></li>
+<li class="fragment"><p>Never exact answers.</p></li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Garbage in, Garbage out From the queue example, If I assume customers arrive exactly every 2 minutes, and that service time is constant, the simulation will look beautifully stable.</li>
+</ul>
+<p>It will also be completely unrealistic.</p>
+<p>Simulation is obedient. It will faithfully simulate nonsense if you feed it nonsense.</p>
+<ul>
+<li><p>Assumptions Structure: distribution (queue example, is it poisson arrivals?, exponential service times? independence?)</p></li>
+<li><p>Simulation only estimates</p></li>
+</ul>
+<p>Say, if we have different seeds -&gt; different results. If you run my code and I run my code, we will not get identical estimates — but we should get similar conclusions. That’s what simulation really matters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="simulation-vs-analytical-solutions" class="slide level2">
+<h2>1.3 Simulation vs Analytical Solutions</h2>
+<p>Simulation and analytical solutions are two different ways of answering scientific or engineering questions. They often aim at the same goal, but they work in fundamentally different ways and shine in different situations.</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<div style="text-align:center; font-size:24px; color: Indigo;">
+<strong>Analytical solutions</strong>
+</div>
+<ul>
+<li class="fragment">Formulas/exact, showing how variables relate</li>
+<li class="fragment">Strong assumptions</li>
+<li class="fragment">Often elegant and fast to compute</li>
+</ul>
+<div class="fragment">
+<div style="color: #da7800;">
+<strong>When to use</strong>
+</div>
+</div>
+<ul>
+<li class="fragment">The system is simple enough to model with equations</li>
+<li class="fragment">The mathematics is tractable</li>
+<li class="fragment">You need exact results</li>
+<li class="fragment">You want to understand the structure of the problem</li>
+</ul>
+<div class="fragment">
+<div style="color: darkgreen;">
+<strong>Example</strong>
+</div>
+</div>
+<div class="fragment">
+<p>For a simple queue with arrival rate <span class="math inline">\(\lambda\)</span> and service rate <span class="math inline">\(\mu,\)</span> the average number of customers in the system is:</p>
+<p><span class="math display">\[
+L=\frac{\lambda }{\mu -\lambda }
+\]</span></p>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<div style="text-align:center; font-size:24px; color: Indigo;">
+<strong>Simulation</strong>
+</div>
+<ul>
+<li class="fragment">Produces approximate answers</li>
+<li class="fragment">Handles complex, realistic systems</li>
+<li class="fragment">Requires computational power</li>
+<li class="fragment">Flexible: you can model almost anything</li>
+</ul>
+<div class="fragment">
+<div style="color: #da7800;">
+<strong>When to use</strong>
+</div>
+</div>
+<ul>
+<li class="fragment">The system is too complicated for closed‑form math</li>
+<li class="fragment">You want to include realistic randomness</li>
+<li class="fragment">You want to test “what‑if” scenarios</li>
+<li class="fragment">You need distributions, not just averages</li>
+</ul>
+<div class="fragment">
+<div style="color: darkgreen;">
+<strong>Example</strong>
+</div>
+<p>If the café has:</p>
+</div>
+<ul>
+<li class="fragment">two baristas with different speeds</li>
+<li class="fragment">customers who sometimes abandon the queue</li>
+<li class="fragment">peak and off‑peak arrival patterns</li>
+<li class="fragment">priority customers (e.g., mobile orders)</li>
+</ul>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Formulas or exact expressions</li>
+<li>Assumptions (linearity, independence, symmetry, etc.)</li>
+<li>There is no simple formula for this (simulation example).</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="a-simple-side-by-side-example">A simple side-by-side example</h4>
+<center>
+<div style="width:90%;">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 25%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Question</th>
+<th style="text-align: center;">Analytical</th>
+<th style="text-align: center;">Simulation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">“What’s the probability of getting exactly 7 heads in 10 flips?”</td>
+<td style="text-align: center;">Use binomial formula: <span class="math inline">\(\dbinom{10}{7}0.5^{10}\)</span></td>
+<td style="text-align: center;">Simulate 10,000 sets of 10 flips and count how often 7 heads appear</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">“What’s the distribution of waiting times in a complex queue?”</td>
+<td style="text-align: center;">No closed‑form solution</td>
+<td style="text-align: center;">Simulate arrivals and service events many times</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">“How does changing a parameter affect the system?”</td>
+<td style="text-align: center;">Differentiate the formula</td>
+<td style="text-align: center;">Re‑run the simulation with new parameters</td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+<p><br></p>
+<h4 class="fragment" id="comparison">Comparison</h4>
+<div class="fragment">
+<center>
+<div style="width:80%;">
+<table class="table-striped caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: center;">Analytical</th>
+<th style="text-align: center;">Simulation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Exact (if possible)</td>
+<td style="text-align: center;">Approximate</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Requires tractable math</td>
+<td style="text-align: center;">Requires computation</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Fast once derived</td>
+<td style="text-align: center;">Slower, but flexible</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Limited by assumptions</td>
+<td style="text-align: center;">Handles complexity</td>
+</tr>
+</tbody>
+</table>
+</div>
+</center>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>Simulation trades exactness for generality and understanding. To simulate anything, we need randomness, control over randomness, and reproducibility.</p>
+</div>
+<div class="fragment">
+<p>This brings us to <span style="color:crimson;"><strong>random number generation</strong></span>.</p>
+</div>
+</section>
+<section id="random-number-generation" class="slide level2">
+<h2>1.4 Random Number Generation</h2>
+<h4 id="true-randomness">True Randomness</h4>
+<div class="fragment">
+<p>True randomness comes from <strong>physical processes</strong> that are inherently unpredictable.</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<div style="color: darkgreen;">
+<strong>Example</strong>
+</div>
+<table class="caption-top">
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Radioactive_decay">radioactive decay</a></td>
+<td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Johnson%E2%80%93Nyquist_noise">thermal noise</a></td>
+<td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Atmospheric_noise">atmospheric noise</a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><a href="https://en.wikipedia.org/wiki/Quantum_indeterminacy">quantum events</a></td>
+<td style="text-align: center;">rolling a real die</td>
+<td style="text-align: center;">flipping a real coin</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>These processes have no underlying pattern. If you repeat them, you cannot predict the next outcome, even in principle.</p>
+</div>
+<div class="fragment block grey">
+<div style="text-align:center">
+True randomness is <strong>non‑deterministic</strong>.
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>radioactive decay: it is impossible to predict exactly when a specific nucleus will decay, as each decay event is a probabilistic occurrence governed by quantum mechanics.</li>
+<li>quantum events are random due to principles of quantum mechanics, where the quantum particle can exist in multiple states simultaneously (superposition).</li>
+<li>thermal noise: current noise generated by the thermal agitation of electrons in electrical circuits</li>
+<li>atmospheric noise: radio noise caused by nature, e.g., lightning discharge in thunderstorms ~ 3.5m discharge per day</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p><br></p>
+<h4 class="fragment" id="pseudorandom-neq-random">Pseudorandom <span class="math inline">\(\neq\)</span> Random</h4>
+<div class="fragment">
+<p>Computers do <strong>not</strong> generate truly random numbers. They use <strong>pseudorandom number generators</strong> (PRNGs)</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<ul>
+<li class="fragment">starts with a <strong>seed</strong></li>
+<li class="fragment">applies a <strong>deterministic formula</strong></li>
+<li class="fragment">produces a long sequence of numbers that look random</li>
+<li class="fragment">but are fully <strong>reproducible</strong> (if using the same seed)</li>
+</ul>
+<div class="fragment block grey">
+<div style="text-align: center;">
+Pseudorandom numbers are <strong>deterministic randomness</strong>.
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Deterministic algorithms always produce the same output for a given input, while non-deterministic algorithms can yield different outputs for the same input.</li>
+<li>Reproducibility is useful for debugging and controlled experimentation (thinking about working and sharing codes as a team) Examples for PRNGs: Monte Carlo, Bayesian MCMC, cryptographic protocols (with special RNGs called H(ardware)RNG the same as lottery / secured authentication, using physical noise as a seed to imitate true randomness).</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="linear-congruential-generators-lcgs" class="slide level2">
+<h2>1.4.1 Linear Congruential Generators (LCGs)</h2>
+<p>LCGs are the simplest and most historically important PRNGs. They were used in early Monte Carlo simulations. It is easy to implement, fast, and memory-light. An LCG produces a sequence of integers using a recurrence relation:</p>
+<p><span class="math display">\[
+X_{n+1} = (aX_n + c) \mod m,
+\]</span></p>
+<p>where <span class="math inline">\(X\)</span> is the sequence of pseudo-random values and</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li class="fragment">the modulus <span class="math inline">\(m, 0 &lt; m\)</span></li>
+<li class="fragment">the multiplier <span class="math inline">\(a, 0 &lt; a &lt; m\)</span></li>
+</ul>
+</div><div class="column">
+<ul>
+<li class="fragment">the increment <span class="math inline">\(c, 0 \leq c &lt; m\)</span></li>
+<li class="fragment">the seed or start values <span class="math inline">\(X_0, 0 \leq X_0 &lt; m\)</span></li>
+</ul>
+</div></div>
+<!-- Then you convert it to a Uniform(0,1) value by: $\quad U_n=\frac{X_n}{m}$ -->
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>lcg <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">seed =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">1664525</span>, <span class="at">c =</span> <span class="dv">1013904223</span>, <span class="at">m =</span> <span class="dv">2</span><span class="sc">^</span><span class="dv">32</span>) {</span>
+<span id="cb1-2"><a href=""></a>  x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb1-3"><a href=""></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> seed</span>
+<span id="cb1-4"><a href=""></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {</span>
+<span id="cb1-5"><a href=""></a>    x[i] <span class="ot">&lt;-</span> (a <span class="sc">*</span> x[i<span class="dv">-1</span>] <span class="sc">+</span> c) <span class="sc">%%</span> m</span>
+<span id="cb1-6"><a href=""></a>  }</span>
+<span id="cb1-7"><a href=""></a>  <span class="fu">return</span>(x)</span>
+<span id="cb1-8"><a href=""></a>}</span>
+<span id="cb1-9"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb1-10"><a href=""></a>u <span class="ot">&lt;-</span> <span class="fu">lcg</span>(<span class="dv">1000</span>); <span class="fu">head</span>(u)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]          1 1015568748 1586005467 2165703038 3027450565  217083232</code></pre>
+</div>
+</div>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p>An LCG produces <strong>integers</strong>, and the range of those integers is determined entirely by the choice of parameters <span class="math inline">\(a, c,\)</span> and especially <span class="math inline">\(m.\)</span> These integer are always between 0 and <span class="math inline">\(m-1.\)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>modulo: the function returns the remainder of when divided by m. 1mod(5)=1, 5mod(5)=0, 6mod(5)=1, 17mod(5)=2</li>
+<li>worked quite well but very sensitive to the choice of parameter values a,c,m.</li>
+<li>parameter values use in R code is from (Thomopolous (2013))</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 scrollable">
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Bad LCG</span></span>
+<span id="cb3-2"><a href=""></a>lcg <span class="ot">&lt;-</span> <span class="cf">function</span>(n, <span class="at">seed =</span> <span class="dv">1</span>, <span class="at">a =</span> <span class="dv">5</span>, <span class="at">c =</span> <span class="dv">1</span>, <span class="at">m =</span> <span class="dv">16</span>) {</span>
+<span id="cb3-3"><a href=""></a>  x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb3-4"><a href=""></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> seed</span>
+<span id="cb3-5"><a href=""></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {</span>
+<span id="cb3-6"><a href=""></a>    x[i] <span class="ot">&lt;-</span> (a <span class="sc">*</span> x[i<span class="dv">-1</span>] <span class="sc">+</span> c) <span class="sc">%%</span> m</span>
+<span id="cb3-7"><a href=""></a>  }</span>
+<span id="cb3-8"><a href=""></a>  u <span class="ot">&lt;-</span> x <span class="sc">/</span> m   <span class="co"># convert to Uniform(0,1)</span></span>
+<span id="cb3-9"><a href=""></a>  <span class="fu">return</span>(u)</span>
+<span id="cb3-10"><a href=""></a>}</span>
+<span id="cb3-11"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>); u <span class="ot">&lt;-</span> <span class="fu">lcg</span>(<span class="dv">5000</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="columns">
+<div class="column fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">hist</span>(u, <span class="at">breaks=</span><span class="dv">30</span>, <span class="at">col=</span><span class="st">"skyblue"</span>,</span>
+<span id="cb4-2"><a href=""></a>     <span class="at">xlab=</span><span class="st">"Value"</span>, <span class="at">main=</span><span class="st">""</span>,</span>
+<span id="cb4-3"><a href=""></a>     <span class="at">cex.axis=</span><span class="fl">1.8</span>, <span class="at">cex.lab=</span><span class="fl">1.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Bad%20LCG%20Histogram-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">plot</span>(u[<span class="sc">-</span><span class="dv">5000</span>], u[<span class="sc">-</span><span class="dv">1</span>], <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="dv">2</span>, </span>
+<span id="cb5-2"><a href=""></a>    <span class="at">xlab =</span> <span class="st">"u_n"</span>, <span class="at">ylab =</span> <span class="st">"u_{n+1}"</span>,</span>
+<span id="cb5-3"><a href=""></a>    <span class="at">cex.axis=</span><span class="fl">1.8</span>, <span class="at">cex.lab=</span><span class="fl">1.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Bad%20LCG%20Pair%20plot-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<div class="fragment">
+<p>The nature of modulo arithmetic means the sequence will eventually repeat itself. Therefore, LCGs have structural weaknesses: short periods, visible lattice patterns, poor performance in high-dimensional simulations.</p>
+</div>
+<aside class="notes">
+<ol type="1">
+<li>Histogram: does it look uniform? Some values are ignored</li>
+<li>Scatterplot of successive pairs: reveals lattice structure</li>
+</ol>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="co"># Good LCG</span></span>
+<span id="cb6-2"><a href=""></a>lcg <span class="ot">&lt;-</span> <span class="cf">function</span>(n, seed, a, c, m, <span class="at">as.uniform =</span> <span class="cn">TRUE</span>) {</span>
+<span id="cb6-3"><a href=""></a>  x <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb6-4"><a href=""></a>  x[<span class="dv">1</span>] <span class="ot">&lt;-</span> seed</span>
+<span id="cb6-5"><a href=""></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n) {</span>
+<span id="cb6-6"><a href=""></a>    x[i] <span class="ot">&lt;-</span> (a <span class="sc">*</span> x[i <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> c) <span class="sc">%%</span> m</span>
+<span id="cb6-7"><a href=""></a>  }</span>
+<span id="cb6-8"><a href=""></a>  <span class="cf">if</span> (as.uniform) {</span>
+<span id="cb6-9"><a href=""></a>    <span class="fu">return</span>(x <span class="sc">/</span> m)   <span class="co"># convert to Uniform(0,1)</span></span>
+<span id="cb6-10"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb6-11"><a href=""></a>    <span class="fu">return</span>(x)       <span class="co"># return raw integers</span></span>
+<span id="cb6-12"><a href=""></a>  }</span>
+<span id="cb6-13"><a href=""></a>}</span>
+<span id="cb6-14"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>); u <span class="ot">&lt;-</span> <span class="fu">lcg</span>(<span class="at">n=</span><span class="dv">5000</span>, <span class="at">seed=</span><span class="dv">1</span>, <span class="at">a=</span><span class="dv">1664525</span>, <span class="at">c=</span><span class="dv">1013904223</span>, <span class="at">m=</span><span class="dv">2</span><span class="sc">^</span><span class="dv">32</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="columns">
+<div class="column fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">hist</span>(u, <span class="at">breaks=</span><span class="dv">30</span>, <span class="at">col=</span><span class="st">"skyblue"</span>,</span>
+<span id="cb7-2"><a href=""></a>    <span class="at">main=</span><span class="st">""</span>, <span class="at">xlab=</span><span class="st">"Value"</span>,</span>
+<span id="cb7-3"><a href=""></a>    <span class="at">cex.axis=</span><span class="fl">1.8</span>, <span class="at">cex.lab=</span><span class="fl">1.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Good%20LCG%20Histogram-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="co"># Successive pair plot</span></span>
+<span id="cb8-2"><a href=""></a><span class="fu">plot</span>(u[<span class="sc">-</span><span class="dv">5000</span>], u[<span class="sc">-</span><span class="dv">1</span>], <span class="at">pch=</span><span class="dv">16</span>, <span class="at">cex=</span><span class="fl">0.5</span>,</span>
+<span id="cb8-3"><a href=""></a>    <span class="at">cex.axis=</span><span class="fl">1.8</span>, <span class="at">cex.lab=</span><span class="fl">1.8</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Good%20LCG%20Pair%20plot-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+
+<aside><div>
+<p>Press, W. H., Teukolsky, S. A., Vetterling, W. T., &amp; Flannery, B. P. (2007). <em>Numerical recipes: The art of scientific computing (3rd ed.)</em>. Cambridge University Press</p>
+</div></aside></section>
+<section id="uniform01-random-number-mersenne-twister" class="slide level2">
+<h2>1.4.2 Uniform(0,1) Random Number (Mersenne Twister)</h2>
+<p>Mersenne Twister is the modern default pseudorandom number generator in R, Python, NumPy, MATLAB, Julia, and many other systems. It’s designed to produce high‑quality Uniform(0,1) values for simulation.</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+U \sim Uniform(0,1)
+\]</span></p>
+<ul>
+<li class="fragment">Equally likely takes values between 0 and 1</li>
+<li class="fragment">Imagine repeatedly picking a point at random on the interval (0,1) for a thousand time.</li>
+<li class="fragment">Over many draws, the points spread out evenly</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>); u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="columns">
+<div class="column fragment" style="width:48%;">
+<center>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Uniform(0,1)%20Scatter-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</center>
+</div><div class="column fragment" style="width:48%;">
+<center>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/Uniform(0,1)%20Histogram-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</center>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Histogram: the bar is roughly the same height, almost flat shape, as seen by density curve.</li>
+<li>Density curve will get flatter as the sample size grows, as the true density of Uniform(0,1) is flat at 1.</li>
+<li>The density curve wiggles because of random noise from simulation.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="why-uniform01-is-important">Why Uniform(0,1) is important?</h4>
+<p>Because if you can generate high‑quality Uniform(0,1) values, you can transform them into any other distribution!</p>
+<div class="fragment block blue" data-fragment-index="1">
+<p><strong>Bernoulli(p)</strong></p>
+<div class="fragment center" data-fragment-index="5">
+<p>Generate <span class="math inline">\(U \rightarrow\)</span> If <span class="math inline">\(U &lt; p\)</span>, return 1, else return 0</p>
+</div>
+</div>
+<div class="fragment block green" data-fragment-index="2">
+<p><strong>Exponential(<span class="math inline">\(\lambda\)</span>)</strong></p>
+<div class="fragment center" data-fragment-index="6">
+<p>Use the <a href="https://en.wikipedia.org/wiki/Inverse_transform_sampling#Examples">inverse</a> CDF: <span class="math inline">\(\qquad X=-\frac{1}{\lambda }\ln (1-U)\)</span></p>
+</div>
+</div>
+<div class="fragment block yellow" data-fragment-index="3">
+<p><strong>Normal(0,1)</strong></p>
+<div class="fragment center" data-fragment-index="7">
+<p>Use the <a href="https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform">Box–Muller transform</a>: <span class="math inline">\(\qquad Z=\sqrt{-2\ln U_1}\, \cos (2\pi U_2)\)</span></p>
+</div>
+</div>
+<div class="fragment">
+<p>Every simulation — from Ulam’s solitaire experiments to modern Bayesian MCMC — relies on the ability to generate random draws. The workflow is always</p>
+</div>
+<ul>
+<li class="fragment">Start with Uniform(0,1)</li>
+<li class="fragment">Transform it into the distribution you need</li>
+<li class="fragment">Use those draws to simulate the system</li>
+<li class="fragment">Repeat thousands of times</li>
+</ul>
+<div class="fragment block grey">
+<div style="text-align:center">
+<strong>“if you can simulate randomness, you can solve problems too hard for equations.”</strong>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Two Uniform(0,1) values → one Normal value.</li>
+<li>Poisson, Gamma, Beta</li>
+<li>MCMC: Markov Chain Monte Carlo</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="cell">
+<details class="code-fold">
+<summary></summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb10-2"><a href=""></a><span class="co"># Step 1: generate Uniform(0,1) values</span></span>
+<span id="cb10-3"><a href=""></a>u <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">1000</span>)</span>
+<span id="cb10-4"><a href=""></a></span>
+<span id="cb10-5"><a href=""></a><span class="co"># Step 2: transform them into Exponential(lambda)</span></span>
+<span id="cb10-6"><a href=""></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span>   <span class="co"># rate parameter</span></span>
+<span id="cb10-7"><a href=""></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">log</span>(<span class="dv">1</span> <span class="sc">-</span> u) <span class="sc">/</span> lambda</span>
+<span id="cb10-8"><a href=""></a></span>
+<span id="cb10-9"><a href=""></a><span class="co"># Step 3: Plot and compare with R's built-in rexp()</span></span>
+<span id="cb10-10"><a href=""></a>x_builtin <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1000</span>, <span class="at">rate =</span> lambda)</span>
+<span id="cb10-11"><a href=""></a><span class="fu">hist</span>(x, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.4</span>), <span class="at">freq =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb10-12"><a href=""></a>     <span class="at">main =</span> <span class="st">"Comparison of PDF of exponential distribution: Transform vs rexp()"</span>)</span>
+<span id="cb10-13"><a href=""></a><span class="fu">hist</span>(x_builtin, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>), <span class="at">freq =</span> <span class="cn">FALSE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-14"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Transform"</span>, <span class="st">"rexp()"</span>),</span>
+<span id="cb10-15"><a href=""></a>       <span class="at">fill =</span> <span class="fu">c</span>(<span class="fu">rgb</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="fl">0.4</span>), <span class="fu">rgb</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="fl">0.4</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="lecture01_files/figure-revealjs/Generated%20vs%20Transform%20Exp-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>The two histograms overlap almost perfectly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="revision-probability-tools-for-simulation" class="slide level2">
+<h2>1.5 Revision: Probability Tools for Simulation</h2>
+<h3 id="basic-concepts-and-definitions">1.5.1 Basic Concepts and Definitions</h3>
+<div class="block purple fragment">
+<p><strong>Sample space</strong> (<span class="math inline">\(\Omega\)</span>): The set of <em>all possible outcomes</em> of an experiment. <br> For example, a sample space for rolling a fair die is <span class="math inline">\(\Omega = \{1,2,3,4,5,6\}.\)</span></p>
+</div>
+<div class="block blue fragment">
+<p><strong>Event</strong> (<span class="math inline">\(A\)</span>): A subset of the sample space. For example, let <span class="math inline">\(x\)</span> be an individual’s total cholesterol in mg/dL, the event that an individual has high cholesterol is <span class="math inline">\(A = \{x\in \Omega \,|\, x &gt; 200 \}.\)</span> Or, for a single die roll, <span class="math inline">\(A = \{1,4,6\}.\)</span></p>
+</div>
+<div class="block green fragment">
+<p><strong>Complement</strong> (<span class="math inline">\(A^c\)</span>): The event that <span class="math inline">\(A\)</span> does not occur. From the previous example, <span class="math inline">\(A^c = \{2,3,5\}.\)</span></p>
+</div>
+<div class="block yellow fragment">
+<p><strong>Union</strong> (<span class="math inline">\(A \cup B\)</span>): The event that either <span class="math inline">\(A\)</span> occurs <span style="color:crimson;"><strong>or</strong></span> <span class="math inline">\(B\)</span> occurs. Let <span class="math inline">\(A=\{1,2\}\)</span> and <span class="math inline">\(B= \{1, 3, 5\}\)</span>. Then <span class="math inline">\(A \cup B = \{1, 2, 3, 5 \}.\)</span></p>
+</div>
+<div class="block orange fragment">
+<p><strong>Intersection</strong> (<span class="math inline">\(A \cap B\)</span>): The event that both <span class="math inline">\(A\)</span> <span style="color:crimson;"><strong>and</strong></span> <span class="math inline">\(B\)</span> occur. Using the previous example, <span class="math inline">\(A \cap B = \{1\}\)</span>.</p>
+</div>
+<div class="block red fragment">
+<p><strong>Disjoint</strong>: Events that have no outcomes in common. For example, if <span class="math inline">\(A=\{2, 4, 6 \}\)</span> and <span class="math inline">\(B= \{1, 3, 5\}\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint since <span class="math inline">\(A \cap B = \emptyset\)</span>, where <span class="math inline">\(\emptyset\)</span> represents the empty set (the set with no elements).</p>
+</div>
+<aside class="notes">
+<p>We are not reviewing probability for exams. We are reviewing probability as a <strong>language</strong> to describe simulation output.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 scrollable">
+
+<div class="columns">
+<div class="column fragment">
+<h4 id="basic-concepts-and-definitions-continue">1.5.1 Basic Concepts and Definitions (continue)</h4>
+<p>We have the following laws for any three events <span class="math inline">\(A, B, C \subseteq \Omega.\)</span></p>
+<ul>
+<li class="fragment"><p><strong>Commutative Laws:</strong> <span class="math display">\[
+\begin{align*}
+A \cup B &amp;= B \cup A \\
+A \cap B &amp;= B \cap A
+\end{align*}
+\]</span></p></li>
+<li class="fragment"><p><strong>Associative Laws:</strong> <span class="math display">\[
+\begin{align*} A \cup (B \cup C) &amp;= (A \cup B) \cup C \\
+A \cap (B \cap C) &amp;= (A \cap B) \cap C
+\end{align*}
+\]</span></p></li>
+<li class="fragment"><p><strong>Distributive Laws:</strong> <span class="math display">\[
+\begin{align*}
+A \cap (B \cup C) &amp;= (A \cap B) \cup (A \cap C) \\
+A \cup (B \cap C) &amp;= (A \cup B) \cap (A \cup C)
+\end{align*}
+\]</span></p></li>
+<li class="fragment"><p><strong>De Morgan’s Laws:</strong> <span class="math display">\[
+\begin{align*}
+(A \cup B)^c &amp;= A^c \cap B^c \\
+(A \cap B)^c &amp;= A^c \cup B^c
+\end{align*}
+\]</span></p></li>
+</ul>
+</div><div class="column fragment">
+<h3 id="axioms-of-probability">1.5.2 Axioms of Probability</h3>
+<p>For any random experiment, <span class="math inline">\(P\)</span> is a <em>probability measure</em> defined on a sample space <span class="math inline">\(\Omega\)</span>, such that the following axioms are satisfied.</p>
+<ol type="1">
+<li class="fragment"><span class="math inline">\(P(\Omega) = 1\)</span></li>
+<li class="fragment">If <span class="math inline">\(A \subseteq \Omega\)</span> is an event, then <span class="math inline">\(P(A) \ge 0\)</span></li>
+<li class="fragment">If <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint, then <span class="math display">\[
+P(A \cup B) = P(A) + P(B)
+\]</span> This axiom extends to any finite (or countable) collection of pairwise disjoint events.</li>
+</ol>
+<div class="fragment">
+<p><strong>Properties of Probability Measures</strong></p>
+</div>
+<ol type="1">
+<li class="fragment"><span class="math inline">\(P(A^c) = 1 - P(A)\)</span></li>
+<li class="fragment"><span class="math inline">\(P(\emptyset) = 0\)</span></li>
+<li class="fragment">If <span class="math inline">\(A \subseteq B\)</span>, then <span class="math inline">\(P(A) \le P(B)\)</span></li>
+</ol>
+<div class="fragment">
+<p>Addition Law: <span class="math display">\[P(A \cup B) = P(A) + P(B) - P(A \cap B)\]</span></p>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>For section 1.5.1-1.5.5, I won’t go through it in much detail. Since, you probably have already learned it in STAT1005.</li>
+<li>We will touch on these topics again in the following lectures, when we introduce a much complicated method.</li>
+<li>But for now, these are there for your references.</li>
+<li>So, I’ll skip to something that is relevant for this lecture, which is section 1.5.6 RVs (page 24)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="law-of-total-probability">1.5.3 Law of Total Probability</h3>
+<div class="fragment">
+<p>Let <span class="math inline">\(A_i\)</span> for <span class="math inline">\(i=1,\ldots, k\)</span> be mutually exclusive and exhaustive events, i.e.&nbsp;<span class="math inline">\(\displaystyle \cup^k_{i=1} A_i = \Omega\)</span>, and <span class="math inline">\(B\)</span> be any other event. <span class="math display">\[
+P(B) = P\left [ B \cap \left ( \overset{k}{\underset{i=1}{\cup}} A_i \right ) \right ] = \sum^k_{i=1} P(B \cap A_i ) = \sum^k_{i=1} P(B|A_i)P(A_i)
+\]</span></p>
+</div>
+<h3 class="fragment" id="conditional-probability">1.5.4 Conditional Probability</h3>
+<div class="fragment">
+<p>For any events <span class="math inline">\(A\)</span> and <span class="math inline">\(B,\)</span> conditional probability is defined as: <span class="math display">\[
+P(A|B) = \frac{P(A \cap B)}{P(B)} \quad \text{ provided that } \quad P(B) \ne 0
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Rearranging the conditional probability formula gives the <strong>Multiplication Rule</strong> for probabilities: <span class="math display">\[P(A \cap B) = P(A|B) P(B) = P(B|A) P(A)\]</span></p>
+</div>
+<div class="fragment">
+<p>If the probability of <span class="math inline">\(A\)</span> is not affected by whether or not event <span class="math inline">\(B\)</span> occurs, then <span class="math inline">\(A\)</span> is said to be <strong>independent</strong> of <span class="math inline">\(B\)</span>. <span class="math display">\[ P(A|B) = P(A) \quad \text{ and } \quad P(B) \neq 0 \quad \Leftrightarrow \quad P(A \cap B)=P(A)P(B)\]</span></p>
+</div>
+<h3 class="fragment" id="bayes-theorem">1.5.5 Bayes’ Theorem</h3>
+<div class="fragment">
+<p>For mutually exclusive and exhaustive events, <span class="math inline">\(B_1, B_2, \ldots, B_n, P(B_k|A) = \dfrac{P(A|B_k) P(B_k)}{\sum_{i=1}^n P(A|B_i)P(B_i)}\)</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>mutually exclusive: two events that cannot occur simultaneously</li>
+<li>exhaustive event <span class="math inline">\(\cup^k_{i=1} A_i = \Omega\)</span>: All events A_i cover the entire sample space.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="random-variables">1.5.6 Random Variables</h3>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>A random variable (RV) is a numerical quantity whose value is determined by a random process.</p>
+<ul>
+<li class="fragment">It’s a mapping from outcomes → numbers</li>
+<li class="fragment">It’s how probability becomes something we can compute with</li>
+<li class="fragment">It’s the bridge between randomness and simulation</li>
+</ul>
+<div class="fragment">
+<p>In simulation, random variables are the <em>objects we generate</em>.</p>
+</div>
+<div class="fragment">
+<p>Everything they do later is built on the <em>ability to generate RVs with specific distributions</em>. In other word,</p>
+<div class="block grey center">
+<p>RVs are the <em>currency of simulation</em>.</p>
+</div>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class=".{columns}">
+<div class="column fragment">
+<div style="text-align: center; color: blue;">
+<strong>DISCRETE</strong>
+</div>
+<p>Take countable values</p>
+<p><span style="color:darkgreen;"><strong>Examples</strong></span></p>
+<ul>
+<li class="fragment">Number of customers arriving in an hour</li>
+<li class="fragment">Number of heads in 10 flips</li>
+<li class="fragment">Poisson, Binomial, Geometric</li>
+</ul>
+</div><div class="column fragment">
+<div style="text-align: center; color: blue;">
+<strong>CONTINUOUS</strong>
+</div>
+<p>Take values in an interval</p>
+<p><span style="color:darkgreen;"><strong>Examples</strong></span></p>
+<ul>
+<li class="fragment">Waiting time</li>
+<li class="fragment">Service duration</li>
+<li class="fragment">Normal, Exponential, Uniform</li>
+</ul>
+</div></div>
+<div class="columns">
+<div class="column fragment" style="width:32%;">
+<div class="block green center">
+<p><strong>PMF/PDF</strong></p>
+</div>
+</div><div class="column fragment" style="width:32%;">
+<div class="block blue center">
+<p><strong>CDF</strong></p>
+</div>
+</div><div class="column fragment" style="width:32%;">
+<div class="block orange center">
+<p><strong>E(X) &amp; Var(X)</strong></p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="probability-distributions-pmf-pdf-cdf">1.5.7 Probability Distributions (PMF / PDF / CDF)</h3>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<ul>
+<li class="fragment"><p>The distribution of probabilities for a <strong>discrete</strong> RV can be described by its probability mass function (PMF), <span class="math display">\[p(x) = P(X=x).\]</span></p></li>
+<li class="fragment"><p>The distribution of probabilities for a <strong>continuous</strong> RV can be described by its probability density function (PDF), <span class="math display">\[f(x) \geq 0 \quad \forall x, \quad \int^\infty_{-\infty} f(x)\,dx = 1 \quad \text{ and } \quad P(a\leq X \leq b) = \int_a^b f(x)\,dx.\]</span></p></li>
+<li class="fragment"><p>The cumulative distribution function (CDF) for the RV <span class="math inline">\(X\)</span> is <span class="math inline">\(F(x) = P ( X\leq x)\)</span> (discrete &amp; continuous) <span class="math display">\[F(x)= \int_{-\infty}^x f(t)\,dt. \quad \text{(continuous)}\]</span></p></li>
+</ul>
+<h3 class="fragment" id="expectation-ex-or-mu">1.5.8 Expectation <span class="math inline">\(E(X)\)</span> or <span class="math inline">\(\mu\)</span></h3>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<ul>
+<li class="fragment"><p>Let <span class="math inline">\(X\)</span> be a <strong>discrete</strong> RV with a set of possible values <span class="math inline">\(D\)</span>, then <span class="math inline">\(\displaystyle \mathbb{E} (X) = \underset{x\in D}{\sum} xp(x)\)</span></p></li>
+<li class="fragment"><p>Let <span class="math inline">\(X\)</span> be a <strong>continuous</strong> RV with the support <span class="math inline">\(D\)</span>, then <span class="math inline">\(\displaystyle \mathbb{E} (X) = \int_D xf(x) \,dx\)</span></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="properties-of-the-expectation-operator">Properties of the Expectation Operator</h4>
+<ul>
+<li class="fragment"><p><strong>Constant rule:</strong> If <span class="math inline">\(a\)</span> is a finite constant, then <span class="math inline">\(\mathbb{E} (a) = a.\)</span></p></li>
+<li class="fragment"><p><strong>Linearity of expectation:</strong> For any RVs <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and any constants <span class="math inline">\(a,b \in \mathbb{R},\)</span> <span class="math display">\[\mathbb{E} (aX + bY)=a\mathbb{E} (X) + b \mathbb{E} (Y).\]</span></p></li>
+<li class="fragment"><p><strong>Expectation of a function:</strong> For any function <span class="math inline">\(h(x)\)</span> such that the expectation exists,</p>
+<ul>
+<li class="fragment"><p>if <span class="math inline">\(X\)</span> is a <strong>discrete</strong> RV with a set of possible values <span class="math inline">\(D\)</span> and PMF <span class="math inline">\(p(x),\)</span> then <span class="math display">\[ \mathbb{E} \left [ h(X) \right ] = \underset{x\in D}{\sum} h(x)p(x) \quad\text{provided the sum converges.}\]</span></p></li>
+<li class="fragment"><p>if <span class="math inline">\(X\)</span> is a <strong>continuous</strong> RV with support <span class="math inline">\(D\)</span> and PDF <span class="math inline">\(f(x),\)</span> then <span class="math display">\[ \mathbb{E} \left [ h(X) \right ] = \int_D h(x)f(x)\,dx \quad \text{provided the integral exists.}\]</span></p></li>
+</ul></li>
+</ul>
+<h3 class="fragment" id="variance-varx-or-sigma2">1.5.9 Variance <span class="math inline">\(Var(X)\)</span> or <span class="math inline">\(\sigma^2\)</span></h3>
+<div class="fragment">
+<p>Let <span class="math inline">\(h(x) = \left (x-\mathbb{E} [X] \right )^2,\)</span> then <span class="math inline">\(Var(X) = \mathbb{E} \left [ h(x) \right ] = \mathbb{E} [(x-\mathbb{E}[X])^2] = \mathbb{E}[X^2] - \mathbb{E}[X]^2.\)</span></p>
+<p>The variance is also known as the <em>second centralised moment</em>. <span class="math inline">\(\sigma_X\)</span> is the <em>standard deviation</em> of <span class="math inline">\(X.\)</span></p>
+</div>
+<div class="fragment">
+<p><strong>Higher order moment:</strong> Let <span class="math inline">\(h(x) = \left [ X-\mathbb{E} (X) \right ]^n\)</span>, then <span class="math inline">\(\mathbb{E} [h(x)]\)</span> is called the <span class="math inline">\(n^{th}\)</span> centralised moment (if exists). These are associated with other properties of the probability distributions, e.g., <strong>skewness</strong> and <strong>kurtosis</strong>.</p>
+</div>
+<aside class="notes">
+<ul>
+<li>Higher order moment: The definition above extends to higher order</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="law-of-large-numbers-llns">1.5.10 Law of Large Numbers (LLNs)</h3>
+<p>If we repeat the same random experiment many times, the <strong>average result</strong> stabilises.</p>
+<div class="fragment">
+<p>Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be independent, identically distributed (i.i.d.) with mean <span class="math inline">\(E[X]\)</span>.</p>
+</div>
+<div class="fragment">
+<p>Then as <span class="math inline">\(n \to \infty,\)</span> <span class="math display">\[
+\bar{X}_n=\frac{1}{n}\sum_{i=1}^n X_i \;\longrightarrow\; E[X]
+\]</span> (in the sense that the average gets closer to the true mean).</p>
+</div>
+<div class="fragment">
+<p><strong>Simulation takeaway:</strong> more replications <span class="math inline">\(n \Rightarrow\)</span> more stable estimates (but never perfectly exact).</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="columns fragment">
+<div class="column">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Flipping a fair coin for 5000 times.</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># Demonstrate the LLN with coin tosses</span></span>
+<span id="cb11-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(<span class="dv">5000</span>, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)   <span class="co"># 1 = Head, 0 = Tail</span></span>
+<span id="cb11-3"><a href=""></a>running_mean <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(x) <span class="sc">/</span> <span class="fu">seq_len</span>(n)</span>
+<span id="cb11-4"><a href=""></a></span>
+<span id="cb11-5"><a href=""></a><span class="fu">plot</span>(running_mean, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb11-6"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Number of tosses (n)"</span>,</span>
+<span id="cb11-7"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Running mean (proportion of heads)"</span>,</span>
+<span id="cb11-8"><a href=""></a>     <span class="at">main =</span> <span class="st">"LLNs: Proportion of Heads"</span>,</span>
+<span id="cb11-9"><a href=""></a>     <span class="at">cex.main =</span> <span class="fl">2.2</span>,</span>
+<span id="cb11-10"><a href=""></a>     <span class="at">cex.lab =</span> <span class="fl">1.8</span>,</span>
+<span id="cb11-11"><a href=""></a>     <span class="at">cex.axis =</span> <span class="fl">1.8</span>,</span>
+<span id="cb11-12"><a href=""></a>     )</span>
+<span id="cb11-13"><a href=""></a></span>
+<span id="cb11-14"><a href=""></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">0.5</span>, <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># true mean</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/LLNs%20with%20Binomial-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Simulate Exp(1) for 5000 times.</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="co"># LLN with an Exponential(1) random variable (true mean = 1)</span></span>
+<span id="cb12-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> <span class="dv">1</span>)</span>
+<span id="cb12-3"><a href=""></a>running_mean <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(x) <span class="sc">/</span> <span class="fu">seq_len</span>(n)</span>
+<span id="cb12-4"><a href=""></a></span>
+<span id="cb12-5"><a href=""></a><span class="fu">plot</span>(running_mean, <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb12-6"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Number of samples (n)"</span>,</span>
+<span id="cb12-7"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Running mean"</span>,</span>
+<span id="cb12-8"><a href=""></a>     <span class="at">main =</span> <span class="st">"LLNs: Exponential(1)"</span>,</span>
+<span id="cb12-9"><a href=""></a>      <span class="at">cex.main =</span> <span class="fl">2.2</span>,</span>
+<span id="cb12-10"><a href=""></a>     <span class="at">cex.lab =</span> <span class="fl">1.8</span>,</span>
+<span id="cb12-11"><a href=""></a>     <span class="at">cex.axis =</span> <span class="fl">1.8</span>,</span>
+<span id="cb12-12"><a href=""></a>     )</span>
+<span id="cb12-13"><a href=""></a></span>
+<span id="cb12-14"><a href=""></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># true mean</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture01_files/figure-revealjs/LLNs%20with%20Exp(1)-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Comparing between discrete (binomial) and continuous (exp)</li>
+<li>Coin toss is bounded by [0,1] but Exp(1) is unbounded.</li>
+<li>Coin toss’s running mean stabilises quickly, while Exp(1) is noisy for much longer.</li>
+<li>Anyway, the average converges eventually.</li>
+<li>The Law of Large Numbers always works — but how quickly it works depends on how variable the random variable is.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figs/curtin-logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture01_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture01_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture01_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture01_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"titleSelector":"h1, h2, h3","hideMissingTitles":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>
