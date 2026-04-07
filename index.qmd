@@ -1,0 +1,175 @@
+---
+title: "Sam Wiwatanapataphee (she/her)"
+subtitle: | 
+        PhD (Maths & Stats), lecturer, and data scientist
+image: /assets/images/image.png
+format:
+  html:
+    grid:
+      body-width: 800px
+about:
+  id: my-about
+  template: solana
+  image: /assets/images/me-0-crop.jpg
+  image-width: 9em
+  image-shape: round
+  links:
+    - text: '{{< iconify fa7-solid:envelope >}} Email'
+      href: mailto:dwiwat97@gmail.com
+      aria-label: Envelope logo for email
+    - text: '{{< iconify lucide:university >}} Curtin Profile'
+      href: https://staffportal.curtin.edu.au/staff/profile/view/sam-wiwatanapataphee-0f5d3774/
+      aria-label: Curtin Staff Profile
+      target: _blank
+    - text: '{{< iconify fa7-brands:orcid title="ORCID logo" label="ORCID logo" >}} ORCID'
+      href: https://orcid.org/0000-0003-2966-5084
+      aria-label: ORCID logo
+      target: _blank
+      rel: noopener noreferrer
+    - text: '{{< iconify fa7-brands:linkedin >}} LinkedIn'
+      href: https://www.linkedin.com/in/dwiwat97/
+      aria-label: LinkedIn logo
+      target: _blank
+      rel: noopener noreferrer
+    - text: '{{< iconify octicon:mark-github-16 >}} GitHub'
+      href: https://github.com/zamnolence
+      aria-label: GitHub logo
+      target: _blank
+      rel: noopener noreferrer
+
+---
+
+:::: {#my-about}
+:::
+
+
+:::: {.about-body}
+
+
+I am a lecturer in AI & data science specialising in data-driven optimisation and computer simulation using Python, R, and MATLAB. I completed a PhD in Mathematics and Statistics with research spanning fractional differential equations, space–time modelling, and blockchain-based smart grid systems.
+
+Currently, I focus on fostering an inclusive, project-based learning environment that connects mathematical and statistical theory with real-world applications that highlight sustainability and responsible decision-making.
+
+
+## {{< iconify octicon:briefcase-24 >}} Work Experience
+
+::: {.callout-tip icon="false"}
+### <span style="font-size: 1.5em; margin-left: .5em;">{{< iconify lucide:university >}} &nbsp; Curtin University, Australia</span>
+
+::: {style="font-size: 1.1em;"}
+| | |
+|:--------------|----:|
+| **Associate Lecturer**<br><span style="color: #979797;">I'm currently teaching the unit *Computer Simulation* (onshore), *Economics* (offshore), and *Supply Chain Modelling and Optimisation* (offshore) and supervising 12 UG/MS students.</span> | 2026 - Present |
+| **Sessional Academic**<br><span style="color: #979797;">Teaching and tutoring 600+ UG students onshore and offshore across nine units in maths, stats, data science, and finance, including:<br></span> | 2023 - 2025 |
+| **Research Assistant**<br><span style="color: #979797;">Solving DEs with FEM for bridge structural analysis.<br> Output was published in 2019.</span> | Feb - Nov 2018 |
+
+: {.borderless .hover}
+:::
+
+:::
+
+::: {.callout-tip icon="false"}
+### <span style="font-size: 1.5em; margin-left: .5em;">{{< iconify streamline:office-worker >}} &nbsp; Thanachart Insurance PCL, Thailand</span>
+
+::: {style="font-size: 1.1em;"}
+| | |
+|:----------------|----:|
+| **Intern Analyst**<br><span style="color: #979797;">Conducted advanced statistical research on motor insurance risk, customer retention, and renewal rates;<br>Developed Tableau dashboards for KPI monitoring and insights.</span> | 2018 - 2019 |
+
+: {.borderless .hover}
+:::
+:::
+
+## {{< iconify octicon:mortar-board-24 >}} Education {.education}
+
+| | |
+|:----------------------------------|----:|
+| **_Ph.D._ in Mathematics and Statistics**<br>*Curtin Univerity, Australia*<br><span style="color: #979797;">*RTP Scholarship Recipient*<br>**Thesis:** *Blockchain-based Renewable Energy Trading and Storage Optimisation*</span> | 2025 |
+| **_Master_ of Data Science** (*Distinction*)<br>*The University of Western Australia, Australia* | 2021 |
+| **_Bachelor_ of Science** (*Actuarial Science*)<br>*Curtin University, Australia*<br><span style="color: #979797;">Actuaries Institute Australia's Foundation program<br>• CT1 Financial Mathematics;<br>• CB1 Business Finance;<br>• CS1 Actuarial Statistics<br>• CB2 Business Economics;<br>• CM2 Financial Engineerng & Loss Reserving</span> | 2018 |
+
+: {.borderless .hover}
+
+
+
+## {{< iconify octicon:tools-24 >}} Technical Skills
+
+I work in quantitative analysis, statistical modelling, and actuarial methods, supported by experience in data analytics, technical development, and teaching.
+
+<span class="badge rounded-pill bg-light">{{< iconify devicon:python title="Python" label="Python" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify fa7-brands:r-project title="R" label="R" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:matlab title="MATLAB" label="MATLAB" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:visualbasic title="VB" label="VB" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:git title="Git" label="Git" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify file-icons:latex title="LaTeX" label="LaTeX" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify material-icon-theme:quarto title="Quarto" label="Quarto" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify logos:mysql title="MySQL" label="MySQL" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:html5-wordmark title="HTML5" label="HTML5" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:css title="CSS" label="CSS" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:javascript title="JS" label="JS" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:linux title="linux" label="linux" >}}</span>
+
+
+
+
+::: {.callout-tip icon="false"}
+### <span style="font-size: 1.5em; margin-left: 1em;">{{< iconify carbon:ibm-software-watsonx-data-analyze-and-process >}} Analytical & Modelling</span>
+
+- Mathematical and statistical modelling
+- Machine learning and deep learning models for predictive and data-driven analysis
+- Simulation and optimisation, including Monte Carlo simulation and supply chain modelling
+- Actuarial modelling, including time series forecasting, stochastic processes, and risk modelling
+- Insurance analytics, including loss modelling, customer retention analysis, and KPI/dashboard development
+
+:::
+
+
+::: {.callout-tip icon="false"}
+### <span style="font-size: 1.5em; margin-left: 1em;">{{< iconify hugeicons:teacher >}} Teaching & Academic Practice </span>
+
+- Curriculum design in economics and optimisation; coordination of academic units
+- Delivered tutorials, workshops, and mentored students on applied projects
+- Experienced with LMS platforms (Blackboard, Moodle) and modern quantitative pedagogy
+:::
+
+::: {.callout-tip icon="false"}
+### <span style="font-size: 1.5em; margin-left: 1em;">{{< iconify material-symbols:code >}} Techinal & Development </span>
+
+- Web development: HTML, CSS, JavaScript
+- Tools & environments: Git, Unix/Linux
+- Scientific writing and documentation using LaTeX
+:::
+
+## {{< iconify octicon:beaker-24 >}} Research & Publications
+
+My research focuses on integrating mathematical, statistical, and computational methods to address real‑world sustainability challenges, in particular:
+
+- Multifractal Models for Financial Time Series
+- Optimisation of Battery Storage Systems using Big Data from Smart Grids 
+- ML for Predictive Maintenance in Sustainable Wind and Solar Systems
+- AI-Based Financial Risk Management under Market Volatility
+
+| Year | Publication |
+|:---:|-------------|
+| 2026 | Sawangtong, W., Wiwatanataphee, D. & Sawangtong, P. Extended Caputo Space–Fractional Black–Scholes Equation with Scale-Dependent Diffusion. AIMS Mathmatics, 2026, 11(3): 7468-7496. [https://doi.org/10.3934/math.2026306](https://www.aimspress.com/article/doi/10.3934/math.2026306) | 
+| 2025 | Wiwatanapataphee, D., Wu, Y., Sawangtong, W. & Sawangtong, P. Modeling Anomalous Diffusion and Volatility in the Australian National Electricity Market Using a Space-Fractional Black-Scholes Framework[J]. AIMS Mathematics, 2025, 10(5): 12388-12420. [https://doi.org/10.3934/math.2025560](https://doi.org/10.3934/math.2025560) |
+| 2019 | Wiwatanapataphee, D., Khajohnsaksumeth, N. & Wu, Y.H. Effect of Beam Joinery on Bridge Structural Stability. Advanced Differential Equation 2019, 225 (2019). [https://doi.org/10.1186/s13662-019-2158-5](https://doi.org/10.1186/s13662-019-2158-5) |
+| **Date** | **Conference** |
+| 2-6 Feb 2025 | Gave a talk on the topic of "Fractional Black-Scholes Model for Pricing Derivatives in the Australian Electricity Market" at ANZIAM 2025 Conference, Pacific Bay Resort, Coffs Harbour, NSW. |
+| 16-18 Dec 2018 | Gave a talk on the topic of "Effect of beam joinery on bridge structural stability" at ICMA-MU 2018: The 2018 International Conference in Mathematics and Applications, The Century Park Hotel, Bangkok, Thailand. |
+
+: {.hover}
+
+## {{< iconify tabler:certificate >}} Certificates
+
+| | | |
+|--:|:------------|----------:|
+| 2026 | Provide First Aid<br>First Aid for Mental Health | St John Ambulance Western Australia |
+| 2026 | Emergency Fire Warden | ALCAN Fire Safety |
+| 2024 | AI Intensive Bootcamp | VP Akkodis Academy Australia |
+| 2018 | Statistical Tools for Risk Modelling | Thammasat University |
+
+: {.borderless .hover}
+
+
+:::

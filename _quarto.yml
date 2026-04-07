@@ -1,0 +1,78 @@
+project:
+  type: website
+
+website:
+  title: "Sam Wiwatanapataphee"
+  description: "Course notes and portfolio by Sam Wiwatanapataphee"
+  image: /assets/images/image.png
+  site-url: https://zamnolence.github.io
+  repo-url: https://github.com/zamnolence/zamnolence.github.io
+  repo-link-target: _blank
+  repo-link-rel: noopener noreferrer
+  open-graph: true
+  page-navigation: true
+  back-to-top-navigation: true
+  page-footer:
+    border: true
+    background: dark
+    foreground: light
+    left: |
+      © Copyright 2026, [Sam Wiwatanapataphee](https://zamnolence.github.io){target="_blank" rel="noopener noreferrer"}
+    right: |
+      Powered by [Quarto](https://quarto.org){target="_blank" rel="noopener noreferrer"}.
+  navbar:
+    title: false
+    search: true
+    logo: /assets/images/image.png
+    logo-alt: "SW logo"
+    right:
+      - text: Home
+        href: index.qmd
+      - text: Teaching
+        href: teaching.qmd
+      - text: '{{< iconify fa7-solid:envelope >}}'
+        href: mailto:"dwiwat97@gmail.com"
+        target: _blank
+        rel: noopener noreferrer
+      - text: '{{< iconify fa7-brands:orcid >}}'
+        href: "https://orcid.org/0000-0003-2966-5084"
+        target: _blank
+        rel: noopener noreferrer
+      - text: '{{< iconify fa7-brands:linkedin >}}'
+        href: "https://www.linkedin.com/in/dwiwat97/"
+        target: _blank
+        rel: noopener noreferrer
+      - text: '{{< iconify octicon:mark-github-16 >}}'
+        href: "https://github.com/zamnolence"
+        target: _blank
+        rel: noopener noreferrer
+      - text: '{{< iconify brandico:lastfm >}}'
+        href: https://last.fm/user/zamnolence
+        target: _blank
+      
+
+format:
+  html:
+    theme:
+      - minty
+      - brand
+    css: assets/stylesheets/styles.css
+    include-in-header:
+      text: |
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    page-layout: article
+    toc: true
+    lang: en-GB
+    code-copy: true
+    code-link: false
+    code-overflow: wrap
+    anchor-sections: true
+    link-external-newwindow: true
+    fig-align: center
+    code-tools:
+      source: false
+      toggle: false
+      caption: none
+
+
+

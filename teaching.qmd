@@ -1,0 +1,62 @@
+---
+title: "{{< iconify hugeicons:teacher >}} Teaching Materials"
+title-block-banner: false
+page-layout: full
+listing:
+  - id: projects
+    categories: false
+    sort-ui: false
+    sort: "date desc"
+    type: grid
+    filter-ui: true
+    max-description-length: 300
+    page-size: 9
+    fields: [image, date, title, description, categories]
+    image-height: 15em
+    feed:
+      language: en-gb
+    contents:
+
+      - path: https://zamnolence.github.io/_book
+        image: assets/images/compsim-blog.png
+        title: "R and Python for Computer Simulation"
+        description: 'STAT2005 Computer Simulation course notes, slides, and workshop activities'
+        date: "2026-04-06"
+        categories: [Teaching, Statististics, Computing, R, Python, Undergraduate]
+
+      - path: https://github.com/zamnolence/Economics-at-YSU
+        image: assets/images/econ-blog.png
+        title: "YSU Economics"
+        description: 'Economics lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
+        date: "2025-06-13"
+        categories: [Teaching, Finance, Undergraduate]
+
+      - path: assets/media/Calculus_Ref_Sheet.pdf
+        image: assets/images/calculus-blog.png
+        title: "Calculus Reference Sheet"
+        description: 'Printable reference sheet for foundation mathematics and calculus including trignomometric/hyperbolic functions and identities, complex numbers, derivatives, integrals,limit, series test, polynomial approximation, Taylor series, first and second order differential equations, matrix operations, system of linear equations, lines and planes in space, and vector.'
+        date: "2025-03-10"
+        categories: [Teaching, Mathematics, Calculus, Undergraduate]
+
+      - path: assets/media/Hypothesis_Ref_Sheet.pdf
+        image: assets/images/hypothesis-blog.png
+        title: "Hypothesis Testing Reference Sheet"
+        description: 'Printable reference sheet for hypothesis testing including one-proportion z-test, two-proportion z-test, one-sample t-test, paired t-test, two-sample t-test, F-test, and chi-squared test.'
+        date: "2025-05-10"
+        categories: [Teaching, Statistics, Undergraduate]
+
+      - path: assets/media/Probability_Ref_Sheet.pdf
+        image: assets/images/distributions-blog.png
+        title: "Probability Distributions Reference Sheet"
+        description: 'Printable reference sheet for standard discrete and continuous probability distributions. This includes description, mean, variance, PMF/PDF, and CDF function for each distribution.'
+        date: "2025-05-22"
+        categories: [Teaching, Statistics, Undergraduate]
+
+      - path: assets/media/Statistics_Summary_of_Theory.pdf
+        image: assets/images/stats-summary-blog.png
+        title: "Statistical Probability and Data Analysis"
+        description: 'Printable summary sheet  for first-year statistical probability and data analysis course.'
+        date: "2025-05-30"
+        categories: [Teaching, Statistics, Undergraduate]
+---
+

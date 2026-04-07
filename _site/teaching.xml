@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Sam Wiwatanapataphee</title>
+<link>https://zamnolence.github.io/teaching.html</link>
+<atom:link href="https://zamnolence.github.io/teaching.xml" rel="self" type="application/rss+xml"/>
+<description>Course notes and portfolio by Sam Wiwatanapataphee</description>
+<language>en-gb</language>
+<image>
+<url>https://zamnolence.github.io/assets/images/image.png</url>
+<title>Sam Wiwatanapataphee</title>
+<link>https://zamnolence.github.io/teaching.html</link>
+</image>
+<generator>quarto-1.8.27</generator>
+<lastBuildDate>Sun, 05 Apr 2026 16:00:00 GMT</lastBuildDate>
+<item>
+  <title>R and Python for Computer Simulation</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>STAT2005 Computer Simulation course notes, slides, and workshop activities</description>
+  <category>Teaching</category>
+  <category>Statististics</category>
+  <category>Computing</category>
+  <category>R</category>
+  <category>Python</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Sun, 05 Apr 2026 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/compsim-blog.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>YSU Economics</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Economics lecture slides, workshop activities, and assessments (accessible until 30 June 2025).</description>
+  <category>Teaching</category>
+  <category>Finance</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Thu, 12 Jun 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/econ-blog.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>Statistical Probability and Data Analysis</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Printable summary sheet  for first-year statistical probability and data analysis course.</description>
+  <category>Teaching</category>
+  <category>Statistics</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Thu, 29 May 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/stats-summary-blog.png" medium="image" type="image/png" height="114" width="144"/>
+</item>
+<item>
+  <title>Probability Distributions Reference Sheet</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Printable reference sheet for standard discrete and continuous probability distributions. This includes description, mean, variance, PMF/PDF, and CDF function for each distribution.</description>
+  <category>Teaching</category>
+  <category>Statistics</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Wed, 21 May 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/distributions-blog.png" medium="image" type="image/png" height="98" width="144"/>
+</item>
+<item>
+  <title>Hypothesis Testing Reference Sheet</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Printable reference sheet for hypothesis testing including one-proportion z-test, two-proportion z-test, one-sample t-test, paired t-test, two-sample t-test, F-test, and chi-squared test.</description>
+  <category>Teaching</category>
+  <category>Statistics</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Fri, 09 May 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/hypothesis-blog.png" medium="image" type="image/png" height="98" width="144"/>
+</item>
+<item>
+  <title>Calculus Reference Sheet</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Printable reference sheet for foundation mathematics and calculus including trignomometric/hyperbolic functions and identities, complex numbers, derivatives, integrals,limit, series test, polynomial approximation, Taylor series, first and second order differential equations, matrix operations, system of linear equations, lines and planes in space, and vector.</description>
+  <category>Teaching</category>
+  <category>Mathematics</category>
+  <category>Calculus</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Sun, 09 Mar 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/calculus-blog.png" medium="image" type="image/png" height="114" width="144"/>
+</item>
+</channel>
+</rss>
