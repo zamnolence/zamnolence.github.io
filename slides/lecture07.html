@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="lecture07_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lecture07_files/libs/quarto-html/tabby.min.js"></script>
+<script src="lecture07_files/libs/quarto-html/popper.min.js"></script>
+<script src="lecture07_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="lecture07_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lecture07_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="lecture07_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.27">
+
+  <meta name="author" content="Sam Wiwatanapataphee (275287a@curtin.edu.au)">
+  <meta name="dcterms.date" content="2026-04-23">
+  <title>STAT2005 Computer Simulation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="lecture07_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="lecture07_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="lecture07_files/libs/revealjs/dist/theme/quarto-a5e566b93b0a24466b261f5c6a2fec9a.css">
+  <link href="lecture07_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="lecture07_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="lecture07_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="lecture07_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="lecture07_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="lecture07_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="lecture07_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="lecture07_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="lecture07_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">STAT2005 Computer Simulation</h1>
+  <p class="subtitle">Lecture 7 — Stochastic Modelling</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Sam Wiwatanapataphee (275287a@curtin.edu.au) 
+</div>
+</div>
+</div>
+
+  <p class="date">23 Apr 2026</p>
+</section>
+<section id="goals-today" class="slide level2">
+<h2>Goals today</h2>
+<p><br></p>
+<div class="columns">
+<div class="column">
+<ul>
+<li class="fragment"><strong>Part 1:</strong> Introduction to Stochastic Process
+<ul>
+<li class="fragment">Anatomy of a stochastic process</li>
+<li class="fragment">Examples:
+<ul>
+<li class="fragment">Bernoulli process</li>
+<li class="fragment">Random walk</li>
+<li class="fragment">Brownian motion</li>
+<li class="fragment">Geometric Brownian motion (GBM)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br></p>
+<ul>
+<li class="fragment"><strong>Part 2:</strong> Poisson Process
+<ul>
+<li class="fragment">Homogeneous Poisson process (HPP)</li>
+<li class="fragment">Non-homogeneous Poisson process (NHPP)
+<ul>
+<li class="fragment">Thinning algorithm</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column">
+<ul>
+<li class="fragment"><strong>Part 3:</strong> Markov Process and Queueing Theory
+<ul>
+<li class="fragment">Markov property</li>
+<li class="fragment">Queueing theory
+<ul>
+<li class="fragment">Kendall’s notation</li>
+<li class="fragment">M/M/1 queue</li>
+<li class="fragment">M/M/c queue</li>
+<li class="fragment">Case Study: EV charging station</li>
+</ul></li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section>
+<section id="part-1-introduction-to-stochastic-processes" class="title-slide slide level1 center">
+<h1>Part 1: Introduction to Stochastic Processes</h1>
+
+</section>
+<section id="motivation-from-random-variables-processes" class="slide level2">
+<h2>Motivation: From Random Variables → Processes</h2>
+<ul>
+<li class="fragment"><p>So far, we simulated <strong>random variables</strong> <span class="math inline">\(\rightarrow\)</span> one outcome</p></li>
+<li class="fragment"><p>Now, we simulate <strong>random processes</strong> <span class="math inline">\(\rightarrow\)</span> evolution over time</p></li>
+<li class="fragment"><p>This allows us to model dynamic systems with inherent randomness, such as:</p>
+<ul>
+<li class="fragment">Stock prices</li>
+<li class="fragment">Population growth</li>
+<li class="fragment">Environmental systems</li>
+<li class="fragment">Customer arrivals</li>
+</ul></li>
+</ul>
+<div class="note fragment">
+<p><strong>A stochastic process is</strong></p>
+<p>A collection of random variables indexed by time</p>
+<p><span class="math display">\[
+\{X_t : t \in T\}
+\]</span></p>
+<p>where</p>
+<ul>
+<li class="fragment"><span class="math inline">\(t\)</span>: time index</li>
+<li class="fragment"><span class="math inline">\(T\)</span>: time index set (discrete or continuous)</li>
+<li class="fragment"><span class="math inline">\(X_t\)</span>: random variable at time <span class="math inline">\(t\)</span>.</li>
+<li class="fragment"><span class="math inline">\(X_t \in S\)</span>: state space (discrete or continuous)</li>
+</ul>
+</div>
+</section>
+<section id="anatomy-of-a-stochastic-process" class="slide level2">
+<h2>Anatomy of a Stochastic Process</h2>
+<p>The two key dimensions of a stochastic process are:</p>
+<div class="block green center fragment" data-fragment-index="1">
+<p>Index set</p>
+</div>
+<table class="table-striped table-hover fragment caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 40%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Index set</th>
+<th style="text-align: center;">Discrete-Time</th>
+<th style="text-align: center;">Continuous-Time</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Characteristic</td>
+<td style="text-align: center;">Observed at fixed time steps</td>
+<td style="text-align: center;">Evolves continuously over time</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Notation</td>
+<td style="text-align: center;"><span class="math inline">\(T = \{0,1,2,...\}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(T \in [0,\infty)\)</span> or <span class="math inline">\(T \in \mathbb{R}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Examples</td>
+<td style="text-align: center;">daily stock prices, number of customers every minute, population size per year</td>
+<td style="text-align: center;">arrival times of customers, radioactive decay, diffusion processes</td>
+</tr>
+</tbody>
+</table>
+<div class="block red center fragment" data-fragment-index="2">
+<p>State space</p>
+</div>
+<table class="table-striped table-hover fragment caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 40%">
+<col style="width: 44%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">State spac</th>
+<th style="text-align: center;">Discrete State Space</th>
+<th style="text-align: center;">Continuous State Space</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Characteristic</td>
+<td style="text-align: center;">Finite or countable values</td>
+<td style="text-align: center;">Values in an interval</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Notation</td>
+<td style="text-align: center;">Finite categories: <span class="math inline">\(X_t \in \{1,...,K\}\)</span><br>Counts: <span class="math inline">\(X_t \in \{0,1,2,...\}\)</span><br>Integer: <span class="math inline">\(X_t \in \mathbb{Z}\)</span></td>
+<td style="text-align: center;">Unrestricted: <span class="math inline">\(X_t \in \mathbb{R}\)</span><br>Positive: <span class="math inline">\(X_t &gt; 0\)</span><br>Bounded: <span class="math inline">\(a &lt; X_t &lt; b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">Examples</td>
+<td style="text-align: center;">queue length, number of infected individuals, number of packets in a network</td>
+<td style="text-align: center;">stock prices, temperature, rainfall, waiting time, volatility processes</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+<h3 id="dependence-structure">Dependence Structure</h3>
+<p><br></p>
+<p>Unlike independent random variables, stochastic processes often exhibit <strong>dependence over time.</strong></p>
+<div class="example fragment">
+<p><strong>Examples:</strong></p>
+<ul>
+<li class="fragment">Number of customers in a queue at time <span class="math inline">\(t+1\)</span> depends on the number at time <span class="math inline">\(t\)</span>.</li>
+<li class="fragment">Stock price at time <span class="math inline">\(t+1\)</span> depends on the price at time <span class="math inline">\(t\)</span> (and other factors).</li>
+<li class="fragment">Temperature at time <span class="math inline">\(t+1\)</span> depends on the temperature at time <span class="math inline">\(t\)</span> (and other factors).</li>
+</ul>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>The dependence structure of a stochastic process describes</p>
+</div>
+<div class="block blue center fragment">
+<p>How the random variables <span class="math inline">\(X_t\)</span> are related to each other across time.</p>
+</div>
+<p><br></p>
+<div class="center fragment">
+<p>But how do we know whether:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(X_{t+1}\)</span> depends on <span class="math inline">\(X_t\)</span>?</li>
+<li class="fragment"><span class="math inline">\(X_{t+1}\)</span> dependes on the whole history <span class="math inline">\(X_0, X_1, ..., X_t\)</span>?</li>
+<li class="fragment">or <span class="math inline">\(X_{t+1}\)</span> is independent of the past?</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="dependence-structure-continue">Dependence Structure (Continue)</h4>
+<p>The dependence structure can take various forms, such as:</p>
+<div class="block blue center fragment">
+<p><strong>Independence</strong></p>
+<p>The future state is independent of the past states.</p>
+<p>E.g., a sequence of i.i.d. random variables and Monte Carlo simulations with independent samples.</p>
+</div>
+<div class="block green center fragment">
+<p><strong>Markov dependence (memoryless)</strong></p>
+<p>The future state depends only on the current state, not on the past states.</p>
+<p>E.g., Markov chains, where <span class="math inline">\(P(X_{t+1} | X_t) = P(X_{t+1} | X_t, X_{t-1}, ...)\)</span>.</p>
+</div>
+<div class="block red center fragment">
+<p><strong>Autoregressive dependence</strong></p>
+<p>The future state depends on a linear combination of past states.</p>
+<p>E.g., AR(p) models in time series analysis, where <span class="math inline">\(X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + ... + \phi_p X_{t-p} + \epsilon_t\)</span>.</p>
+</div>
+<div class="block purple center fragment">
+<p><strong>Long-range dependence</strong></p>
+<p>The future state depends on a long history of past states.</p>
+<p>E.g., fractional Brownian motion, moving average processes, or certain types of time series with long memory.</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="stationarity">Stationarity</h3>
+<p>A stochastic process is <strong>stationary</strong> if its statistical properties do not change over time. We can say that:</p>
+<ul>
+<li class="fragment">the process “looks the same” today as it does tomorrow, and as it did yesterday.</li>
+<li class="fragment">time shifts do not affect the distribution of the process.</li>
+</ul>
+<div class="fragment">
+<p>This allows us to make predictions and draw conclusions about the process based on past observations (historical data), without worrying about changes in the underlying distribution.</p>
+</div>
+<h4 class="fragment" id="strict-stationarity">Strict Stationarity</h4>
+<div class="note fragment">
+<p>A stochastic process is <strong>strictly stationary</strong> if all joint distributions are invariant under time shifts:</p>
+<p><span class="math display">\[
+(X_t, X_{t+1}, ..., X_{t+k}) \stackrel{d}{=} (X_{t+h}, X_{t+1+h}, ..., X_{t+k+h}) \quad \forall t, h, k.
+\]</span></p>
+<p>where <span class="math inline">\(\stackrel{d}{=}\)</span> represents <em>equality in distribution</em>.</p>
+</div>
+<h4 class="fragment" id="weak-stationarity">Weak Stationarity</h4>
+<div class="note fragment">
+<p>A process is <strong>weakly stationary</strong> if:</p>
+<ol type="1">
+<li class="fragment"><span class="math inline">\(\mathbb{E}[X_t] = \mu, \forall t\)</span> (constant mean).</li>
+<li class="fragment"><span class="math inline">\(\text{Var}(X_t) = \sigma^2 &lt; \infty, \forall t\)</span> (finite variance)</li>
+<li class="fragment"><span class="math inline">\(\text{Cov}(X_t, X_{t+k}) = \gamma(k), \forall t,k\)</span> (autocovariance depends only on lag <span class="math inline">\(k\)</span>).</li>
+</ol>
+</div>
+</section>
+<section id="examples-of-stochastic-processes" class="slide level2">
+<h2>Examples of Stochastic Processes</h2>
+<p><br></p>
+<div class="center">
+<p>In this unit, we will explore some common examples of stochastic processes, including:</p>
+<p><br></p>
+</div>
+<div class="columns">
+<div class="block purple column center fragment" style="width:30%;">
+<p>Bernoulli process</p>
+</div><div class="block blue column center fragment" style="width:30%;">
+<p>Random walk</p>
+</div><div class="block green column center fragment" style="width:30%;">
+<p>Wiener process</p>
+</div></div>
+<p><br></p>
+<div class="columns">
+<div class="block yellow column center fragment" style="width:30%;">
+<p>Geometric Brownian motion</p>
+</div><div class="block orange column center fragment" style="width:30%;">
+<p>Poisson process</p>
+</div><div class="block red column center fragment" style="width:30%;">
+<p>Markov process</p>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="bernoulli-process">Bernoulli Process</h3>
+<ul>
+<li class="fragment"><p>A <strong>Bernoulli process</strong> is a sequence of independent Bernoulli trials, where each trial has two possible outcomes (success or failure) with constant probability.</p></li>
+<li class="fragment"><p>It is a <strong>discrete-time, discrete-state stochastic process</strong> that models a series of binary events.</p></li>
+</ul>
+<div class="example fragment">
+<p><strong>Example: Biased Coin Tossing</strong></p>
+<p>Simulate tossing a biased coin 1000 times, where the probability of heads (success) is 0.3 and tails (failure) is 0.7.</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span>  <span class="co"># number of time steps</span></span>
+<span id="cb1-4"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fl">0.3</span>   <span class="co"># probability of success</span></span>
+<span id="cb1-5"><a href=""></a></span>
+<span id="cb1-6"><a href=""></a><span class="co"># simulate Bernoulli process</span></span>
+<span id="cb1-7"><a href=""></a>bernoulli_process <span class="ot">&lt;-</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">1</span>, <span class="at">prob =</span> p)</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a><span class="co"># display the first 20 outcomes</span></span>
+<span id="cb1-10"><a href=""></a><span class="fu">head</span>(bernoulli_process, <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Although Bernoulli processes have no temporal dependence, they are still stochastic processes because they are indexed collections of random variables.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="random-walk">Random Walk</h3>
+<ul>
+<li class="fragment">Random walk is a simple stochastic process that models a path consisting of a succession of random steps.</li>
+</ul>
+<div class="example fragment">
+<p><strong>Example:</strong> Discrete-time, discrete-state random walk</p>
+<p><span class="math display">\[
+X_0 = 0, \quad X_{t} = X_{t-1} + Z_t = \sum_{i=1}^t Z_i, \quad t = 1, 2, ...
+\]</span></p>
+<p>where</p>
+<p><span class="math display">\[
+Z_t = \begin{cases}+1 &amp; \text{with probability } p \\
+-1 &amp; \text{with probability } 1-p \end{cases}
+\]</span></p>
+<p>and <span class="math inline">\(Z_t\)</span> are i.i.d. random variables.</p>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Random Walk</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb3-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb3-3"><a href=""></a>steps <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), n, <span class="at">replace=</span><span class="cn">TRUE</span>)</span>
+<span id="cb3-4"><a href=""></a>S <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(steps)</span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb3-7"><a href=""></a><span class="fu">plot</span>(S, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">xlab=</span><span class="st">"Step"</span>, <span class="at">ylab=</span><span class="st">"Position"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb3-8"><a href=""></a><span class="fu">abline</span>(<span class="at">h=</span><span class="dv">0</span>, <span class="at">col=</span><span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column center fragment" style="width:32%;">
+<p>Path is <strong>jagged</strong></p>
+</div><div class="column center fragment" style="width:32%;">
+<p>Variance grows with time</p>
+</div><div class="column center fragment" style="width:32%;">
+<p>No smoothness</p>
+</div></div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="wiener-process-brownian-motion">Wiener Process (Brownian Motion)</h3>
+<p>Now refine:</p>
+<div class="columns">
+<div class="column center block yellow fragment" style="width:30%;">
+<p>Smaller step size</p>
+</div><div class="column center block green fragment" style="width:30%;">
+<p>Variance grows with time</p>
+</div><div class="column center block blue fragment" style="width:30%;">
+<p>No smoothness</p>
+</div></div>
+<div class="fragment">
+<p>Let:</p>
+</div>
+<div class="columns">
+<div class="column block purple center fragment" style="width:45%;">
+<p>Step size <span class="math inline">\(\rightarrow \sqrt{\Delta t}\)</span></p>
+</div><div class="column block red center fragment" style="width:45%;">
+<p>Number of steps <span class="math inline">\(\rightarrow\)</span> increases</p>
+</div></div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Brownian Motion</strong></p>
+</div>
+<div class="callout-content">
+<p><br> A <strong>continuous-time, continuous-state</strong> process <span class="math inline">\(W_t\)</span> such that:</p>
+<ol type="1">
+<li class="fragment"><span class="math inline">\(W_0 = 0\)</span> (starts at zero).</li>
+<li class="fragment"><span class="math inline">\(W_t\)</span> has independent increments.
+<ul>
+<li class="fragment">for any <span class="math inline">\(0 \leq s &lt; t\)</span>, the increment <span class="math inline">\(W_t - W_s\)</span> is independent of the past.</li>
+</ul></li>
+<li class="fragment"><span class="math inline">\(W_t\)</span> has normally distributed increments
+<ul>
+<li class="fragment"><span class="math inline">\(W_t - W_s \sim N(0, t-s)\)</span> for <span class="math inline">\(0 \leq s &lt; t\)</span>.</li>
+</ul></li>
+<li class="fragment"><span class="math inline">\(W_t\)</span> has continuous paths.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="generalised-wiener-process">Generalised Wiener Process</h3>
+<ul>
+<li class="fragment">If the mean of the increments is non-zero, we can introduce a drift term <span class="math inline">\(\mu\)</span> to model a process with a trend, and</li>
+<li class="fragment">if the variance of the increments is not equal to 1, we can introduce a volatility term <span class="math inline">\(\sigma\)</span> to model a process with different levels of variability.</li>
+</ul>
+<div class="note fragment">
+<p>A <strong>generalised Wiener process</strong> <span class="math inline">\(X_t\)</span> is defined as:</p>
+<p><span class="math display">\[
+X_t = \mu t + \sigma W_t.
+\]</span></p>
+<p>where <span class="math inline">\(\mu\)</span> is drift (trend) and <span class="math inline">\(\sigma\)</span> is volatility (randomness).</p>
+</div>
+<div class="example fragment">
+<p><strong>Example:</strong> Simulate a standard Wiener process and a generalised Wiener process with <span class="math inline">\(\mu = 2.0\)</span> and <span class="math inline">\(\sigma = 1.5\)</span>.</p>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Sample Path of Standard vs Drifted Wiener Process</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)       </span>
+<span id="cb4-2"><a href=""></a>T  <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href=""></a>n  <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb4-4"><a href=""></a>dt <span class="ot">&lt;-</span> T <span class="sc">/</span> n <span class="co"># increment size</span></span>
+<span id="cb4-5"><a href=""></a>t  <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, T, <span class="at">length.out =</span> n <span class="sc">+</span> <span class="dv">1</span>) <span class="co"># time points from "0" to T</span></span>
+<span id="cb4-6"><a href=""></a></span>
+<span id="cb4-7"><a href=""></a><span class="co"># Standard Wiener increments</span></span>
+<span id="cb4-8"><a href=""></a>dW <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(dt))</span>
+<span id="cb4-9"><a href=""></a></span>
+<span id="cb4-10"><a href=""></a><span class="co"># Standard Wiener process</span></span>
+<span id="cb4-11"><a href=""></a><span class="co"># W(t) ~ N(0, t)</span></span>
+<span id="cb4-12"><a href=""></a>W <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(dW))</span>
+<span id="cb4-13"><a href=""></a></span>
+<span id="cb4-14"><a href=""></a><span class="co"># Drifted Wiener process</span></span>
+<span id="cb4-15"><a href=""></a><span class="co"># X(t) ~ N(mu*t, sigma^2 * t)</span></span>
+<span id="cb4-16"><a href=""></a>mu    <span class="ot">&lt;-</span> <span class="fl">2.0</span></span>
+<span id="cb4-17"><a href=""></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb4-18"><a href=""></a>X <span class="ot">&lt;-</span> mu <span class="sc">*</span> t <span class="sc">+</span> sigma <span class="sc">*</span> W</span>
+<span id="cb4-19"><a href=""></a></span>
+<span id="cb4-20"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<span id="cb4-21"><a href=""></a></span>
+<span id="cb4-22"><a href=""></a><span class="fu">plot</span>(</span>
+<span id="cb4-23"><a href=""></a>  t, W, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb4-24"><a href=""></a>  <span class="at">xlab =</span> <span class="st">"Time t"</span>, <span class="at">ylab =</span> <span class="st">"Value"</span>, <span class="at">ylim =</span> <span class="fu">range</span>(W, X),</span>
+<span id="cb4-25"><a href=""></a>  <span class="at">main =</span> <span class="st">"Sample Path of Standard and Drifted Wiener Processes"</span></span>
+<span id="cb4-26"><a href=""></a>)</span>
+<span id="cb4-27"><a href=""></a></span>
+<span id="cb4-28"><a href=""></a><span class="fu">lines</span>(t, X, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb4-29"><a href=""></a></span>
+<span id="cb4-30"><a href=""></a><span class="fu">legend</span>(</span>
+<span id="cb4-31"><a href=""></a>  <span class="st">"topleft"</span>,</span>
+<span id="cb4-32"><a href=""></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Standard"</span>, <span class="st">"Drifted"</span>),</span>
+<span id="cb4-33"><a href=""></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb4-34"><a href=""></a>  <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span></span>
+<span id="cb4-35"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Multiple realisations of standard vs drifted Wiener process</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb5-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb5-3"><a href=""></a>m <span class="ot">&lt;-</span> <span class="dv">20</span></span>
+<span id="cb5-4"><a href=""></a>dt <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> n</span>
+<span id="cb5-5"><a href=""></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> n <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb5-6"><a href=""></a></span>
+<span id="cb5-7"><a href=""></a>Z <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(n <span class="sc">*</span> m, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(dt)), n, m)</span>
+<span id="cb5-8"><a href=""></a>W <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="dv">0</span>, <span class="fu">apply</span>(Z, <span class="dv">2</span>, cumsum))</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a>mu <span class="ot">&lt;-</span> <span class="fl">2.0</span></span>
+<span id="cb5-11"><a href=""></a>sigma <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb5-12"><a href=""></a></span>
+<span id="cb5-13"><a href=""></a>Wd <span class="ot">&lt;-</span> mu <span class="sc">*</span> t <span class="sc">+</span> sigma <span class="sc">*</span> W</span>
+<span id="cb5-14"><a href=""></a></span>
+<span id="cb5-15"><a href=""></a>ylim <span class="ot">&lt;-</span> <span class="fu">range</span>(W, Wd)</span>
+<span id="cb5-16"><a href=""></a></span>
+<span id="cb5-17"><a href=""></a><span class="fu">matplot</span>(t, W, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb5-18"><a href=""></a>        <span class="at">ylim =</span> ylim, <span class="at">xlab =</span> <span class="st">"Time t"</span>, <span class="at">ylab =</span> <span class="st">"Value"</span>)</span>
+<span id="cb5-19"><a href=""></a><span class="fu">matlines</span>(t, Wd, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb5-20"><a href=""></a></span>
+<span id="cb5-21"><a href=""></a><span class="fu">legend</span>(<span class="st">"topleft"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Standard"</span>, <span class="st">"Drifted"</span>),</span>
+<span id="cb5-22"><a href=""></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="lecture07_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><ul>
+<li class="fragment">In practice, we often simulate multiple realisations of a stochastic process to understand its variability and behaviour under different scenarios.</li>
+</ul>
+</section>
+<section id="geometric-brownian-motion-gbm" class="slide level2">
+<h2>Geometric Brownian Motion (GBM)</h2>
+<ul>
+<li class="fragment">A <strong>continuous-time stochastic process</strong> that models the evolution of stock prices <span class="math inline">\(S_t\)</span> and other financial assets.</li>
+<li class="fragment">Also known as the <em>exponential</em> Brownian motion as it’s defined as exponential of a Brownian motion with drift.</li>
+</ul>
+<div class="note fragment">
+<p>A stochastic process <span class="math inline">\(S_t\)</span> follows a GBM if it can be expressed as the solution to the stochastic differential equation (SDE):</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+dS_t = \mu S_t dt + \sigma S_t dW_t
+\]</span></p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>where <span class="math inline">\(\mu\)</span> is the drift (expected return), <span class="math inline">\(\sigma\)</span> is the volatility, and <span class="math inline">\(W_t\)</span> is a standard Wiener process.</p>
+<p>The solution to this SDE can be written in closed form as</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+\boxed{S_t = S_0 \exp\left( \left(\mu - \frac{\sigma^2}{2}\right) t + \sigma W_t \right)}
+\]</span></p>
+<p>where <span class="math inline">\(S_0\)</span> is the initial price.</p>
+<p>Also, the log returns of the GBM process are normally distributed, which can be shown as follows:</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+\log\left(\frac{S_t}{S_0}\right) \sim N\left(\left(\mu - \frac{\sigma^2}{2}\right) t, \sigma^2 t\right)
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">This model is frequently used for <em>Monte Carlo simulations</em> in finance, option pricing, and risk management due to its mathematical tractability and ability to capture key features of asset price dynamics, such as volatility and drift.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="example">
+<p><strong>Example:</strong> Simulating stock prices using Geometric Brownian Motion with initial price <span class="math inline">\(S_0 = 100\)</span>, drift <span class="math inline">\(\mu = 0.1\)</span>, volatility <span class="math inline">\(\sigma = 0.2\)</span>, time horizon <span class="math inline">\(T = 5\)</span> year, and number of time steps <span class="math inline">\(n = 1000\)</span>.</p>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Sample Path of Geometric Brownian Motion</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb6-2"><a href=""></a></span>
+<span id="cb6-3"><a href=""></a><span class="co"># Parameters</span></span>
+<span id="cb6-4"><a href=""></a>S0 <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb6-5"><a href=""></a>mu <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb6-6"><a href=""></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb6-7"><a href=""></a>T <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb6-8"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb6-9"><a href=""></a>dt <span class="ot">&lt;-</span> T <span class="sc">/</span> n</span>
+<span id="cb6-10"><a href=""></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, T, <span class="at">length.out =</span> n <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb6-11"><a href=""></a></span>
+<span id="cb6-12"><a href=""></a><span class="co"># Simulate standard Wiener process</span></span>
+<span id="cb6-13"><a href=""></a>W <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">cumsum</span>(<span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="fu">sqrt</span>(dt))))</span>
+<span id="cb6-14"><a href=""></a></span>
+<span id="cb6-15"><a href=""></a><span class="co"># Simulate Geometric Brownian Motion</span></span>
+<span id="cb6-16"><a href=""></a>S <span class="ot">&lt;-</span> S0 <span class="sc">*</span> <span class="fu">exp</span>((mu <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> sigma<span class="sc">^</span><span class="dv">2</span>) <span class="sc">*</span> t <span class="sc">+</span> sigma <span class="sc">*</span> W)</span>
+<span id="cb6-17"><a href=""></a></span>
+<span id="cb6-18"><a href=""></a><span class="co"># Plot the sample path of Geometric Brownian Motion</span></span>
+<span id="cb6-19"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb6-20"><a href=""></a><span class="fu">plot</span>(t, S, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"darkgreen"</span>,</span>
+<span id="cb6-21"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Time t"</span>, <span class="at">ylab =</span> <span class="st">"Stock Price S(t)"</span>,</span>
+<span id="cb6-22"><a href=""></a>     <span class="at">main =</span> <span class="st">"Geometric Brownian Motion Sample Path"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">GBM shows how the stock price evolves over time with a positive drift and volatility, resulting in an exponential growth pattern with random fluctuations.</li>
+<li class="fragment">The sample path illustrates the typical behaviour of stock prices, which can experience significant variability while generally trending upwards due to the positive drift.</li>
+</ul>
+</section></section>
+<section>
+<section id="part-2-poisson-process" class="title-slide slide level1 center">
+<h1>Part 2: Poisson Process</h1>
+
+</section>
+<section id="introduction-to-poisson-process" class="slide level2 scrollable">
+<h2>Introduction to Poisson Process</h2>
+<div class="note fragment">
+<p>The Poisson process is a <strong>continuous-time, discrete-state stochastic process</strong> that models the occurrence of random events over time. It can be defined as</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+\{N_t, t \geq 0\}
+\]</span></p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>where <span class="math inline">\(N_t\)</span> represents the number of events that have occurred by time <span class="math inline">\(t\)</span>.</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<h4 class="fragment" id="properties-of-poisson-process">Properties of Poisson Process</h4>
+<div class="block grey fragment">
+<ol type="1">
+<li class="fragment"><span class="math inline">\(N_0 = 0\)</span> (starts at zero).</li>
+</ol>
+</div>
+<div class="block purple fragment">
+<ol start="2" type="1">
+<li class="fragment"><strong>Independent increments</strong>: the number of events in disjoint time intervals are independent.</li>
+</ol>
+</div>
+<div class="block blue fragment">
+<ol start="3" type="1">
+<li class="fragment"><strong>Stationary increments</strong>: the distribution of the number of events in any time interval depends only on the length of the interval, not on its location.</li>
+</ol>
+</div>
+<div class="block green fragment">
+<ol start="4" type="1">
+<li class="fragment"><strong>Poisson distribution of counts</strong>: the number of events in any time interval of length <span class="math inline">\(t\)</span> follows <span class="math inline">\(N_t \sim \text{Poisson}(\lambda t)\)</span>, where <span class="math inline">\(\lambda\)</span> is the rate of the process. Therefore, <span class="math display">\[
+P(N_t = k) = \frac{(\lambda t)^k e^{-\lambda t}}{k!}, \quad k = 0, 1, 2, ...
+\]</span></li>
+</ol>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h4 id="properties-of-poisson-process-continue">Properties of Poisson Process (Continue)</h4>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="block yellow fragment">
+<ol start="5" type="1">
+<li class="fragment"><strong>Exponential inter-arrival times</strong>: the time between consecutive events (inter-arrival times) are i.i.d. exponential random variables: <span class="math display">\[
+T \sim \text{Exponential}(\lambda) \quad \text{with} \quad f_T(t) = \lambda e^{-\lambda t}, \quad t &gt; 0.
+\]</span></li>
+</ol>
+</div>
+<div class="block orange fragment">
+<ol start="6" type="1">
+<li class="fragment"><p><strong>Memoryless property</strong>: the waiting time until the next event does not depend on how much time has already elapsed since the last event.</p>
+<p><span class="math display">\[
+P(T &gt; s + t | T &gt; s) = P(T &gt; t) \quad \forall s, t \geq 0.
+\]</span></p></li>
+</ol>
+</div>
+<div class="block red fragment">
+<ol start="7" type="1">
+<li class="fragment"><strong>Mean and variance</strong>: the mean and variance of <span class="math inline">\(N_t\)</span> are both equal to <span class="math inline">\(\lambda t\)</span>.</li>
+</ol>
+</div>
+<div class="block grey fragment">
+<ol start="8" type="1">
+<li class="fragment"><strong>Additivity</strong>: If <span class="math inline">\(N_t\)</span> and <span class="math inline">\(M_t\)</span> are independent Poisson processes with rates <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span>, then the combined process <span class="math inline">\(N_t + M_t\)</span> is also a Poisson process with rate <span class="math inline">\(\lambda_1 + \lambda_2\)</span>.</li>
+</ol>
+</div>
+<div class="block purple fragment">
+<ol start="9" type="1">
+<li class="fragment"><p><strong>Thinning</strong>: If we have a Poisson process with rate <span class="math inline">\(\lambda\)</span> and we independently keep each event with probability <span class="math inline">\(p,\)</span> then the resulting process is also a Poisson process with rate <span class="math inline">\(p\lambda\)</span>.</p>
+<ul>
+<li class="fragment">This allows us to model situations where only a <em>fraction</em> of the events are observed or relevant.</li>
+</ul></li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="homogeneous-poisson-process-hpp">Homogeneous Poisson Process (HPP)</h3>
+<div style="margin-left: 12em;">
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+    A((0)) --&gt;|"$$\lambda$$"| B((1))
+    B --&gt;|"$$\lambda$$"| C((2))
+    C --&gt;|"$$\lambda$$"| D(("$$\cdots$$"))
+    D --&gt;|"$$\lambda$$"| E(("$$k$$"))
+    E --&gt;|"$$\lambda$$"| F(("$$\cdots$$"))
+
+    A --- B --- C --- D --- E --- F
+
+    linkStyle 5,6,7,8,9 stroke:#ffffff
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">HPP is a process with a constant rate <span class="math inline">\(\lambda\)</span> over time.</li>
+<li class="fragment">The expected number of events in any time interval of length <span class="math inline">\(t\)</span> is <span class="math inline">\(\lambda t\)</span>, regardless of when the interval starts.</li>
+<li class="fragment">HPP is often used to model events that occur randomly and independently over time, such as the arrival of customers at a store or the occurrence of phone calls at a call center.</li>
+</ul>
+<div class="example fragment">
+<p><strong>Example</strong>: Write a function to simulate the arrival times of events in a homogeneous Poisson process with rate <span class="math inline">\(\lambda\)</span> over a time interval <span class="math inline">\([0, T_{\text{max}}]\)</span>.</p>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>simulate_hpp <span class="ot">&lt;-</span> <span class="cf">function</span>(lambda, T_max) {</span>
+<span id="cb7-2"><a href=""></a>  times <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb7-3"><a href=""></a>  t <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb7-4"><a href=""></a>  </span>
+<span id="cb7-5"><a href=""></a>  <span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb7-6"><a href=""></a>    t <span class="ot">&lt;-</span> t <span class="sc">+</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> lambda)   <span class="co"># exponential interarrival time</span></span>
+<span id="cb7-7"><a href=""></a>    <span class="cf">if</span> (t <span class="sc">&gt;</span> T_max) <span class="cf">break</span></span>
+<span id="cb7-8"><a href=""></a>    times <span class="ot">&lt;-</span> <span class="fu">c</span>(times, t)</span>
+<span id="cb7-9"><a href=""></a>  }</span>
+<span id="cb7-10"><a href=""></a>  </span>
+<span id="cb7-11"><a href=""></a>  <span class="fu">return</span>(times)</span>
+<span id="cb7-12"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="example">
+<p><strong>Example</strong>: Simulating a HPP with rate <span class="math inline">\(\lambda = 2\)</span> events per unit time over the interval <span class="math inline">\([0, 10]\)</span>.</p>
+</div>
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>event_times_hpp <span class="ot">&lt;-</span> <span class="fu">simulate_hpp</span>(<span class="at">lambda =</span> <span class="dv">2</span>, <span class="at">T_max =</span> <span class="dv">10</span>)</span>
+<span id="cb8-2"><a href=""></a><span class="fu">round</span>(event_times_hpp, <span class="dv">2</span>) <span class="co"># event times </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 1.11 1.21 2.60 2.86 3.43 5.45 6.39 7.06 7.66 8.00 8.23 8.40 8.83 9.13</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">length</span>(event_times_hpp) <span class="co"># number of events in [0, T_max]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb12-2"><a href=""></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>, event_times_hpp), <span class="dv">0</span><span class="sc">:</span><span class="fu">length</span>(event_times_hpp),</span>
+<span id="cb12-3"><a href=""></a>     <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">length</span>(event_times_hpp) <span class="sc">+</span> <span class="dv">1</span>),</span>
+<span id="cb12-4"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"N(t)"</span>, <span class="at">main =</span> <span class="st">"HPP Sample Path"</span>)</span>
+<span id="cb12-5"><a href=""></a><span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="lecture07_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>The sample path of the HPP shows the number of events <span class="math inline">\(N(t)\)</span> increasing in a stepwise manner as time progresses, with the inter-arrival times between events following an exponential distribution. The rate <span class="math inline">\(\lambda\)</span> determines how frequently events occur, and the plot illustrates the random nature of event occurrences over time.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We can also check the count distribution of <span class="math inline">\(N_t\)</span> for the HPP by simulating many trajectories and comparing the empirical distribution with the theoretical <strong>Poisson distribution</strong>.</p>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>counts <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, <span class="fu">length</span>(<span class="fu">simulate_hpp</span>(<span class="at">lambda =</span> <span class="dv">2</span>, <span class="at">T_max =</span> <span class="dv">10</span>)))</span>
+<span id="cb13-2"><a href=""></a><span class="fu">mean</span>(counts) <span class="co"># should be close to lambda * T_max</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.9756</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">var</span>(counts) <span class="co"># should also be close to lambda * T_max</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.65894</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Distribution of Counts for HPP</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="co"># Empirical distribution of counts</span></span>
+<span id="cb17-2"><a href=""></a><span class="fu">hist</span>(counts, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-3"><a href=""></a>     <span class="at">main =</span> <span class="st">"Distribution of Nt for HPP"</span>, <span class="at">xlab =</span> <span class="st">"Count"</span>)</span>
+<span id="cb17-4"><a href=""></a>x_vals <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="fu">max</span>(counts)</span>
+<span id="cb17-5"><a href=""></a><span class="co"># Theoretical Poisson distribution with mean lambda * T_max</span></span>
+<span id="cb17-6"><a href=""></a><span class="fu">points</span>(x_vals, <span class="fu">dpois</span>(x_vals, <span class="at">lambda =</span> <span class="dv">2</span> <span class="sc">*</span> <span class="dv">10</span>), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb17-7"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Empirical"</span>, <span class="st">"Theoretical"</span>),</span>
+<span id="cb17-8"><a href=""></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"black"</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">19</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-10-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>The empirical distribution of the counts <span class="math inline">\(N_t\)</span> closely matches the theoretical Poisson distribution with mean <span class="math inline">\(\lambda T_{\max}\)</span>.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="non-homogeneous-poisson-process-nhpp">Non-homogeneous Poisson Process (NHPP)</h3>
+<div class="fragment" style="margin-left: 12em;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+        A((0)) --&gt;|"$$\lambda_0$$"| B((1))
+        B --&gt;|"$$\lambda_1$$"| C((2))
+        C --&gt;|"$$\lambda_2$$"| D(("$$\cdots$$"))
+        D --&gt;|"$$\lambda_{k-1}$$"| E(("$$k$$"))
+        E --&gt;|"$$\lambda_{k}$$"| F(("$$\cdots$$"))
+
+        A --- B --- C --- D --- E --- F
+
+    linkStyle 5,6,7,8,9 stroke:#ffffff
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">NHPP is a Poisson process where the rate <span class="math inline">\(\lambda(t)\)</span> <strong>varies over time</strong>.</li>
+<li class="fragment">The expected number of events in a time interval depends on the specific time period.</li>
+</ul>
+<div class="example fragment">
+<p><strong>Example</strong>: Simulating a NHPP with a rate function <span class="math display">\[
+\lambda(t) = 2 + \sin(t), \quad 0 \leq t \leq 10.
+\]</span></p>
+<p>The function is always positive and oscillates between 1 and 3, with an average rate of 2 events per unit time.</p>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Intensity Function for NHPP</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>lambda_fun <span class="ot">&lt;-</span> <span class="cf">function</span>(t) <span class="dv">2</span> <span class="sc">+</span> <span class="fu">sin</span>(t)</span>
+<span id="cb18-2"><a href=""></a>T_max <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb18-3"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb18-4"><a href=""></a><span class="fu">curve</span>(<span class="fu">lambda_fun</span>(x), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> T_max, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb18-5"><a href=""></a>      <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">lambda</span>(t)))</span>
+<span id="cb18-6"><a href=""></a><span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-12-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="thinning-algorithm-for-simulating-nhpp">Thinning Algorithm for Simulating NHPP</h3>
+<p>A standard simulation method is <strong>thinning</strong>, where we simulate a HPP with a rate equal to the maximum of <span class="math inline">\(\lambda(t)\)</span>, and then we randomly keep each event with probability <span class="math inline">\(\lambda(t)/\lambda_{\max}\)</span>.</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="tip center fragment">
+<p><strong>Simulation Steps</strong></p>
+<ol type="1">
+<li class="fragment">Find an upper bound <span class="math inline">\(\lambda_{\max}\)</span> such that <span class="math inline">\(\lambda(t) \leq \lambda_{\max}\)</span> for all <span class="math inline">\(t\)</span>.</li>
+<li class="fragment">Simulate a HPP with rate <span class="math inline">\(\lambda_{\max}\)</span> to generate candidate event times.</li>
+<li class="fragment">Keep a proposed event time <span class="math inline">\(t\)</span> with probability <span class="math inline">\(\dfrac{\lambda(t)}{\lambda_{\max}},\)</span> otherwise discard it.</li>
+</ol>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="example fragment">
+<p><strong>Example (Continue)</strong>: Simulating a NHPP with a rate function</p>
+<p><span class="math display">\[
+\lambda(t) = 2 + \sin(t), \quad 0 \leq t \leq 10.
+\]</span></p>
+</div>
+<ol type="1">
+<li class="fragment"><p>Find <span class="math inline">\(\lambda_{\max}\)</span>,</p>
+<ul>
+<li class="fragment">The sine curve oscillates between -1 and 1. By adding 2, the maximum value of <span class="math inline">\(\lambda(t)\)</span> is <span class="math inline">\(2 + 1 = 3\)</span>. Thus, we can choose <span class="math inline">\(\lambda_{\max} = 3\)</span>.</li>
+</ul></li>
+</ol>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>For a more complex rate function, we may need to use numerical methods (differentiation) to find <span class="math inline">\(\lambda_{\max}\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<ol start="2" type="1">
+<li class="fragment">Simulate a HPP with rate <span class="math inline">\(\lambda_{\max} = 3\)</span> to generate candidate event times, and then apply the thinning algorithm to keep events with probability <span class="math inline">\(\lambda(t)/\lambda_{\max}\)</span>.</li>
+</ol>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>simulate_nhpp_thinning <span class="ot">&lt;-</span> <span class="cf">function</span>(lambda_fun, lambda_max, T_max) {</span>
+<span id="cb19-2"><a href=""></a>  t <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb19-3"><a href=""></a>  accepted_times <span class="ot">&lt;-</span> <span class="fu">c</span>()</span>
+<span id="cb19-4"><a href=""></a>  </span>
+<span id="cb19-5"><a href=""></a>  <span class="cf">while</span> (<span class="cn">TRUE</span>) {</span>
+<span id="cb19-6"><a href=""></a>    t <span class="ot">&lt;-</span> t <span class="sc">+</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> lambda_max)   <span class="co"># HPP(lambda_max)</span></span>
+<span id="cb19-7"><a href=""></a>    <span class="cf">if</span> (t <span class="sc">&gt;</span> T_max) <span class="cf">break</span></span>
+<span id="cb19-8"><a href=""></a>    </span>
+<span id="cb19-9"><a href=""></a>    <span class="co"># Accept with probability lambda(t) / lambda_max</span></span>
+<span id="cb19-10"><a href=""></a>    <span class="cf">if</span> (<span class="fu">runif</span>(<span class="dv">1</span>) <span class="sc">&lt;=</span> <span class="fu">lambda_fun</span>(t) <span class="sc">/</span> lambda_max) { </span>
+<span id="cb19-11"><a href=""></a>      accepted_times <span class="ot">&lt;-</span> <span class="fu">c</span>(accepted_times, t)</span>
+<span id="cb19-12"><a href=""></a>    }</span>
+<span id="cb19-13"><a href=""></a>  }</span>
+<span id="cb19-14"><a href=""></a>  </span>
+<span id="cb19-15"><a href=""></a>  <span class="fu">return</span>(accepted_times)</span>
+<span id="cb19-16"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Notice that the thinning algorithm is a <strong>acceptance-rejection</strong> sampling method, and its efficiency depends on how close <span class="math inline">\(\lambda_{\max}\)</span> is to the actual maximum of <span class="math inline">\(\lambda(t)\)</span>. If <span class="math inline">\(\lambda_{\max}\)</span> is much larger than the typical values of <span class="math inline">\(\lambda(t)\)</span>, we will reject many candidate events, leading to a less efficient simulation. Therefore, the acceptance rate is</p>
+<p><span class="math display">\[\text{Acceptance Rate} = \frac{\int_0^{T_{\max}} \lambda(t) dt}{\lambda_{\max} T_{\max}}.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Theoretically, the expected count (and variance) of events in the interval <span class="math inline">\([0, T_{\max}]\)</span> for a NHPP is given by the integral of the rate function:</p>
+<p><span class="math display">\[
+\mathbb{E}[N_{T_{\max}}] = \int_0^{T_{\max}} \lambda(t) dt.
+\]</span></p>
+<div class="fragment">
+<p>For <span class="math inline">\(\lambda(t) = 2 + \sin(t)\)</span>, we can compute the expected count as follows:</p>
+<p><span class="math display">\[
+\int_0^{10} (2 + \sin(t)) dt = 20 - \cos(10) + 1 \approx 21.839.
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Using R,</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>expected_count <span class="ot">&lt;-</span> <span class="fu">integrate</span>(lambda_fun, <span class="at">lower =</span> <span class="dv">0</span>, <span class="at">upper =</span> T_max)<span class="sc">$</span>value</span>
+<span id="cb20-2"><a href=""></a>expected_count</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 21.83907</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Compare the expected count with the actual count from the simulation:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb22-2"><a href=""></a>event_times_nhpp <span class="ot">&lt;-</span> <span class="fu">simulate_nhpp_thinning</span>(lambda_fun, <span class="at">lambda_max =</span> <span class="dv">3</span>, <span class="at">T_max =</span> <span class="dv">10</span>)</span>
+<span id="cb22-3"><a href=""></a><span class="fu">round</span>(event_times_nhpp, <span class="dv">2</span>) <span class="co"># event times</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.83 0.84 0.95 1.08 1.35 1.64 1.92 2.54 2.86 3.42 4.22 5.79 5.92 6.00 6.25
+[16] 6.39 6.93 7.20 8.24 9.68 9.69 9.73 9.73 9.75</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">length</span>(event_times_nhpp) <span class="co"># number of events in [0, T_max]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Since this is only one simulation, the count may not be exactly equal to the expected count, but it should be reasonably close.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="cell" data-layout-align="center">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">par</span>(<span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb26-2"><a href=""></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">0</span>, event_times_nhpp), <span class="dv">0</span><span class="sc">:</span><span class="fu">length</span>(event_times_nhpp),</span>
+<span id="cb26-3"><a href=""></a>     <span class="at">type =</span> <span class="st">"s"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb26-4"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Time"</span>, <span class="at">ylab =</span> <span class="st">"N(t)"</span>,</span>
+<span id="cb26-5"><a href=""></a>     <span class="at">main =</span> <span class="st">"Nonhomogeneous Poisson Process"</span>)</span>
+<span id="cb26-6"><a href=""></a><span class="fu">grid</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+</div>
+<img data-src="lecture07_files/figure-revealjs/unnamed-chunk-16-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>The sample path of the NHPP shows the number of events <span class="math inline">\(N(t)\)</span> increasing in a stepwise manner, but the rate of increase varies over time according to the rate function <span class="math inline">\(\lambda(t)\)</span>. The inter-arrival times are not exponentially distributed with a constant rate, and the process exhibits non-stationary increments due to the time-varying intensity.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<p>Extend the simulation to multiple runs to check the distribution of counts <span class="math inline">\(N_t\)</span>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>counts_nhpp <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, </span>
+<span id="cb27-2"><a href=""></a>                         <span class="fu">length</span>(<span class="fu">simulate_nhpp_thinning</span>(lambda_fun, <span class="at">lambda_max =</span> <span class="dv">3</span>, <span class="at">T_max =</span> <span class="dv">10</span>)))</span>
+<span id="cb27-3"><a href=""></a><span class="fu">cat</span>(<span class="st">"Mean: "</span>, <span class="fu">mean</span>(counts_nhpp), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, <span class="st">"Variance: "</span>, <span class="fu">var</span>(counts_nhpp), <span class="at">sep=</span><span class="st">""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Mean: 21.78
+Variance: 21.33627</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Distribution of Counts for NHPP</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="co"># Empirical distribution of counts</span></span>
+<span id="cb29-2"><a href=""></a><span class="fu">hist</span>(counts_nhpp, <span class="at">breaks =</span> <span class="dv">30</span>, <span class="at">probability =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-3"><a href=""></a>     <span class="at">main =</span> <span class="st">"Distribution of Nt for NHPP"</span>,</span>
+<span id="cb29-4"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Count"</span>)</span>
+<span id="cb29-5"><a href=""></a>x_vals <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="fu">max</span>(counts_nhpp)</span>
+<span id="cb29-6"><a href=""></a><span class="co"># Theoretical Poisson distribution with mean equal to the expected count</span></span>
+<span id="cb29-7"><a href=""></a><span class="fu">points</span>(x_vals, <span class="fu">dpois</span>(x_vals, expected_count), <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> <span class="fl">0.6</span>)</span>
+<span id="cb29-8"><a href=""></a></span>
+<span id="cb29-9"><a href=""></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Empirical"</span>, <span class="st">"Theoretical"</span>),</span>
+<span id="cb29-10"><a href=""></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"black"</span>), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">19</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="lecture07_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>Although the rate varies over time, the number of events in a fixed interval <span class="math inline">\(N_T\)</span> of a NHPP over a fixed interval <span class="math inline">\([0, T]\)</span> is Poisson distributed with mean (and variance) <span class="math inline">\(\int_0^T \lambda(t) dt\)</span>. What changes relative to the homogeneous case is the lack of stationary increments.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="comparison-of-hpp-and-nhpp">Comparison of HPP and NHPP</h3>
+<table class="table-striped table-hover caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Feature</th>
+<th>HPP</th>
+<th>NHPP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rate / Intensity</td>
+<td>Constant rate <span class="math inline">\(\lambda &gt; 0\)</span></td>
+<td>Time‑varying rate <span class="math inline">\(\lambda(t) \ge 0\)</span></td>
+</tr>
+<tr class="even">
+<td>Time</td>
+<td>Continuous</td>
+<td>Continuous</td>
+</tr>
+<tr class="odd">
+<td>State Space</td>
+<td>Discrete: <span class="math inline">\(\{0,1,2,\dots\}\)</span></td>
+<td>Discrete: <span class="math inline">\(\{0,1,2,\dots\}\)</span></td>
+</tr>
+<tr class="even">
+<td>Independent Increments</td>
+<td>✓ Yes</td>
+<td>✓ Yes</td>
+</tr>
+<tr class="odd">
+<td>Stationary Increments</td>
+<td>✓ Yes</td>
+<td>✗ No</td>
+</tr>
+<tr class="even">
+<td>Count Distribution</td>
+<td><span class="math inline">\(N_t \sim \text{Poisson}(\lambda t)\)</span></td>
+<td><span class="math inline">\(N_t \sim \text{Poisson}\!\left(\int_0^t \lambda(s)\,ds\right)\)</span></td>
+</tr>
+<tr class="odd">
+<td>Mean of <span class="math inline">\(N_t\)</span></td>
+<td><span class="math inline">\(\lambda t\)</span></td>
+<td><span class="math inline">\(\displaystyle \int_0^t \lambda(s)\,ds\)</span></td>
+</tr>
+<tr class="even">
+<td>Variance of <span class="math inline">\(N_t\)</span></td>
+<td><span class="math inline">\(\lambda t\)</span></td>
+<td><span class="math inline">\(\displaystyle \int_0^t \lambda(s)\,ds\)</span></td>
+</tr>
+<tr class="odd">
+<td>Inter‑arrival Times</td>
+<td>i.i.d. Exponential(<span class="math inline">\(\lambda\)</span>)</td>
+<td>Not identical; depend on <span class="math inline">\(\lambda(t)\)</span></td>
+</tr>
+<tr class="even">
+<td>Memoryless Property</td>
+<td>✓ Yes (exponential waiting times)</td>
+<td>✗ No (globally)</td>
+</tr>
+<tr class="odd">
+<td>Typical Simulation Method</td>
+<td>Exponential inter‑arrival times</td>
+<td>Thinning</td>
+</tr>
+<tr class="even">
+<td>Examples</td>
+<td>Phone calls, radioactive decay</td>
+<td>Rush‑hour traffic, daily demand patterns</td>
+</tr>
+</tbody>
+</table>
+</section></section>
+<section>
+<section id="part-3-markov-process-and-queueing-theory" class="title-slide slide level1 center">
+<h1>Part 3: Markov Process and Queueing Theory</h1>
+
+</section>
+<section id="introduction-to-markov-process" class="slide level2">
+<h2>Introduction to Markov Process</h2>
+<div class="note">
+<p>A stochastic process <span class="math inline">\(\{X_t\}\)</span> is a Markov process if it satisfies the <strong>Markov property</strong>:</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+\boxed{P(X_{t+1} | X_t, X_{t-1}, ..., X_0) = P(X_{t+1} | X_t) \quad \forall t.}
+\]</span></p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>The property implies that the future state of the process depends only on the current state and not on the past states.</p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>This does <em>not</em> mean that the process is independent over time. Rather, the dependence is fully summarised by the current state.</p>
+</div>
+</div>
+</div>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p>Many of the stochastic processes introduced earlier in this lecture are Markov processes:</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<table class="table-striped table-hover caption-top">
+<thead>
+<tr class="header">
+<th>Process</th>
+<th>Time</th>
+<th>State Space</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bernoulli process</td>
+<td>Discrete</td>
+<td><span class="math inline">\(\{0,1\}\)</span></td>
+</tr>
+<tr class="even">
+<td>Random walk</td>
+<td>Discrete</td>
+<td><span class="math inline">\(\mathbb{Z}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Wiener process</td>
+<td>Continuous</td>
+<td><span class="math inline">\(\mathbb{R}\)</span></td>
+</tr>
+<tr class="even">
+<td>Poisson process</td>
+<td>Continuous</td>
+<td><span class="math inline">\(\{0,1,2,\dots\}\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p>This illustrates that the Markov property is <strong>not tied to a specific model</strong>, but rather describes a <strong>dependence structure</strong> shared by many different stochastic processes.</p>
+</div>
+</section>
+<section id="why-markov-processes" class="slide level2">
+<h2>Why Markov Processes?</h2>
+<div class="block purple center fragment">
+<p><strong>Easy to simulate</strong><br>
+Simulation proceeds step‑by‑step using a simple recursion: <span class="math display">\[
+X_{t+1} \sim P(\cdot \mid X_t).
+\]</span></p>
+</div>
+<div class="block blue center fragment">
+<p><strong>Natural system representation</strong><br>
+Many real‑world systems evolve based on their current configuration:</p>
+<ul>
+<li class="fragment">queue length</li>
+<li class="fragment">inventory level</li>
+<li class="fragment">system status (working / failed)</li>
+<li class="fragment">current price or position</li>
+</ul>
+</div>
+<div class="block orange center fragment">
+<p><strong>Foundation for advanced simulation methods</strong> Markov processes underpin:</p>
+<ul>
+<li class="fragment">random walks</li>
+<li class="fragment">queueing models</li>
+<li class="fragment">discrete‑event simulation</li>
+<li class="fragment">Markov Chain Monte Carlo (MCMC)</li>
+</ul>
+</div>
+<div class="fragment">
+<p>Because only the current state is required, Markov models are particularly well suited for <strong>long‑run simulation and performance analysis</strong>.</p>
+</div>
+</section>
+<section id="queuing-theory" class="slide level2">
+<h2>Queuing theory</h2>
+<p>Queueing systems are among the most important and widely studied applications of Markov processes, and they also provide a natural entry point to discrete‑event simulation.</p>
+<div class="fragment">
+<div style="margin-left: 13em;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+        A(Arrival) --&gt;|Waiting| B(Service)
+        B --&gt;|Departure| C((...))
+        style C fill:#FFFFFF00, stroke:#FFFFFF00, color:#FFFFFF00;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+<p>A queueing system evolves through a sequence of <em>events</em>. Between these events, the state of the system <span class="math inline">\(X_t\)</span> (the number of customers in the system at time <span class="math inline">\(t\)</span>) remains unchanged.</p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>The state of the system changes only at discrete event times, and the future evolution of the system depends only on its current state (e.g., how many customers are currently in the queue), making it a Markov process.</p>
+</div>
+</div>
+</div>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment">
+<p>A modelling framework for queueing systems typically involves specifying:</p>
+</div>
+<ul>
+<li class="fragment"><strong>Arrival process</strong>: How customers arrive (e.g., Poisson, deterministic).</li>
+<li class="fragment"><strong>Service process</strong>: How customers are served (e.g., exponential, deterministic).</li>
+<li class="fragment"><strong>Number of servers</strong>: How many servers are available (e.g., single, multiple).</li>
+<li class="fragment"><strong>Queue discipline</strong>: How customers are prioritised (e.g., first‑come‑first‑served, priority).</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="kendalls-notation">Kendall’s Notation</h3>
+<p>Kendall’s notation is a standard way to classify and describe different types of queueing systems using the format:</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+A / S / c / K / N / D
+\]</span></p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p>where:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(A\)</span>: Arrival process (e.g., M for Markovian/Poisson, D for deterministic).</li>
+<li class="fragment"><span class="math inline">\(S\)</span>: Service time distribution (e.g., M for Markovian/exponential, D for deterministic).</li>
+<li class="fragment"><span class="math inline">\(c\)</span>: Number of servers.</li>
+<li class="fragment"><span class="math inline">\(K\)</span>: System capacity (maximum number of customers in the system).</li>
+<li class="fragment"><span class="math inline">\(N\)</span>: Population size (number of potential customers).</li>
+<li class="fragment"><span class="math inline">\(D\)</span>: Queue discipline (e.g., FCFS for first‑come‑first‑served).</li>
+</ul>
+<div class="fragment">
+<p>E.g., an M/M/1 queue represents a system with Poisson arrivals, exponential service times, and a single server.</p>
+</div>
+<h4 class="fragment" id="common-values-for-a-and-s-in-kendalls-notation">Common Values for <span class="math inline">\(A\)</span> and <span class="math inline">\(S\)</span> in Kendall’s Notation</h4>
+<div class="fragment">
+<table class="table-striped table-hover caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 82%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symbol</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>M</td>
+<td>Markovian (exponential inter-arrival or service times)</td>
+</tr>
+<tr class="even">
+<td>D</td>
+<td>Deterministic (fixed inter-arrival or service times)</td>
+</tr>
+<tr class="odd">
+<td>G</td>
+<td>General (arbitrary distribution for inter-arrival or service times)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="mm1-queue" class="slide level2">
+<h2>M/M/1 Queue</h2>
+<p>The M/M/1 queue is a <strong>continuous‑time Markov process</strong> whose state space <span class="math inline">\(X_t\)</span> is the set of non-negative integers <span class="math inline">\(\{0, 1, 2, \ldots\}\)</span> where the value corresponds to the number of customers in the system.</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<h4 class="fragment" id="assumptions">Assumptions</h4>
+<div class="block yellow fragment">
+<p><strong>Arrivals</strong> follow a Poisson process with rate <span class="math inline">\(\lambda\)</span>,</p>
+</div>
+<div class="block orange fragment">
+<p><strong>Service times</strong> are exponentially distributed with rate <span class="math inline">\(\mu\)</span>,</p>
+</div>
+<div class="block green fragment">
+<p>All arrivals and service times are (usually) independent of each other.</p>
+</div>
+<div class="block blue fragment">
+<p>A <strong>single server</strong> provides service to customers one at a time on a <strong>first‑come‑first‑served</strong> basis.</p>
+</div>
+<div class="block purple fragment">
+<p>The queue has <strong>infinite capacity</strong> and no customer is turned away.</p>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment" style="margin-left: 12em;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">graph LR
+        A((0)) --&gt;|"$$\lambda$$"| B((1))
+        B --&gt;|"$$\lambda$$"| C((2))
+        C --&gt; D(("$$\cdots$$"))
+        D --&gt;|"$$\lambda$$"| E(("$$k$$"))
+        E --&gt;|"$$\lambda$$"| F(("$$\cdots$$"))
+
+        F --&gt;|"$$\mu$$"| E
+        E --&gt;|"$$\mu$$"| D
+        D --&gt; C
+        C --&gt;|"$$\mu$$"| B
+        B --&gt;|"$$\mu$$"| A
+
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="foundation-of-queueing-theory">Foundation of Queueing Theory</h3>
+<p>A <em>stable</em> queueing system is characterised by <strong>three foundational relationships</strong>:</p>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-tip no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>1. Utilisation (traffic intensity) and Stationary Distribution</strong><br>
+Determines whether the system is <strong>stable</strong>:<br>
+<span class="math display">\[
+\rho = \frac{\lambda}{c\mu} &lt; 1.
+\]</span></p>
+<p>If <span class="math inline">\(\rho \ge 1\)</span>, the queue grows without bound.</p>
+<div class="fragment">
+<p>If <span class="math inline">\(\rho &lt; 1\)</span> and <span class="math inline">\(c=1,\)</span> the system has a <strong>stationary distribution</strong> for the number of customers in the system: <span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+\pi_n = (1-\rho) \rho^n, \quad n = 0, 1, 2, \ldots
+\]</span></p>
+<p><span style="display: block; margin: 24px 0;"></span> This is exactly the <strong>geometric distribution with parameter <span class="math inline">\(1-\rho\)</span></strong>.</p>
+</div>
+<div class="fragment">
+<p>If <span class="math inline">\(\rho &lt; 1\)</span> and <span class="math inline">\(c &gt; 1,\)</span> the stationary distribution is <strong>piecewise Poisson-geometric</strong>:</p>
+<p><span class="math display">\[
+\pi_n =
+\begin{cases}
+\displaystyle
+\frac{a^n}{n!}\, P_0, &amp; 0 \le n &lt; c, \\[.5em]
+\displaystyle
+\frac{a^c}{c!}\, \rho^{\,n-c}\, P_0, &amp; n \ge c.
+\end{cases}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>where <span class="math inline">\(P_0\)</span> is the normalising constant or the <strong>system empty probability</strong> given by</p>
+<p><span class="math display">\[
+P_0 = \left(
+\sum_{k=0}^{c-1} \frac{a^k}{k!}
+\;+\;
+\frac{a^c}{c!} \cdot \frac{1}{1-\rho}
+\right)^{-1}.
+\]</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<table class="table-striped table-hover caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 65%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Utilisation</th>
+<th>System</th>
+<th>Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\rho &lt; 0.6\)</span></td>
+<td>Underutilised</td>
+<td>Consider reducing capacity or increasing demand</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(0.6 \le \rho &lt; 0.8\)</span></td>
+<td>Efficient</td>
+<td>System is well balanced</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(0.8 \le \rho &lt; 1\)</span></td>
+<td>High utilisation</td>
+<td>Monitor closely for potential congestion</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\rho \ge 1\)</span></td>
+<td>Unstable</td>
+<td>Increase capacity or reduce demand; otherwise, queue will grow indefinitely</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>2. Little’s Law</strong><br>
+The average number of customers in the system <span class="math inline">\(L\)</span> is equal to the average arrival rate <span class="math inline">\(\lambda\)</span> multiplied by the average time <span class="math inline">\(W\)</span> each customer spends in the system:</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<p><span class="math display">\[
+L = \lambda W,\qquad L_q = \lambda W_q.
+\]</span></p>
+<p>This holds for <em>any</em> stable queue, regardless of distributional assumptions.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-important no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p><strong>3. Erlang‑C formula</strong><br>
+Applies specifically to <strong>M/M/c</strong> queues and gives the probability of waiting:</p>
+<p><span class="math display">\[
+P(\text{wait}) = P(W&gt;0) = \text{Erlang‑C}(\lambda, \mu, c) =
+\frac{\displaystyle
+\frac{(\lambda/\mu)^c}{c!}\,\frac{1}{1-\rho}
+}{
+\displaystyle
+\sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!}
++
+\frac{(\lambda/\mu)^c}{c!}\,\frac{1}{1-\rho}
+}.
+\]</span></p>
+<p>For <span class="math inline">\(c=1,\)</span> this reduces to <span class="math inline">\(P(\text{wait}) = \rho\)</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="example">
+<p><strong>Example:</strong> Simulate an M/M/1 queue with the following parameters:</p>
+<ul>
+<li class="fragment">initial state (number of customers) <span class="math inline">\(X_0 = 0\)</span>.</li>
+<li class="fragment">arrival rate <span class="math inline">\(\lambda = 2\)</span></li>
+<li class="fragment">service rate <span class="math inline">\(\mu = 3\)</span></li>
+<li class="fragment">a total simulation time of 10 units.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Simulating an M/M/1 Queue</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>simulate_mm1 <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">lambda =</span> <span class="dv">2</span>, <span class="at">mu =</span> <span class="dv">3</span>, </span>
+<span id="cb30-2"><a href=""></a>                         <span class="at">sim_time =</span> <span class="dv">10</span>, <span class="at">seed =</span> <span class="dv">1234</span>) {</span>
+<span id="cb30-3"><a href=""></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(seed)) <span class="fu">set.seed</span>(seed)</span>
+<span id="cb30-4"><a href=""></a></span>
+<span id="cb30-5"><a href=""></a>  X <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb30-6"><a href=""></a>  T <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb30-7"><a href=""></a></span>
+<span id="cb30-8"><a href=""></a>  time_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>)</span>
+<span id="cb30-9"><a href=""></a>  state_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>)</span>
+<span id="cb30-10"><a href=""></a>  event_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Start"</span>)</span>
+<span id="cb30-11"><a href=""></a></span>
+<span id="cb30-12"><a href=""></a>  <span class="co"># Schedule first arrival</span></span>
+<span id="cb30-13"><a href=""></a>  T_a <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> lambda)</span>
+<span id="cb30-14"><a href=""></a>  T_s <span class="ot">&lt;-</span> <span class="cn">Inf</span> <span class="co"># no service when system is empty</span></span>
+<span id="cb30-15"><a href=""></a></span>
+<span id="cb30-16"><a href=""></a>  <span class="cf">while</span> (T <span class="sc">&lt;</span> sim_time) {</span>
+<span id="cb30-17"><a href=""></a></span>
+<span id="cb30-18"><a href=""></a>    <span class="cf">if</span> (<span class="fu">min</span>(T_a, T_s) <span class="sc">&gt;</span> sim_time) <span class="cf">break</span></span>
+<span id="cb30-19"><a href=""></a></span>
+<span id="cb30-20"><a href=""></a>    <span class="cf">if</span> (T_a <span class="sc">&lt;</span> T_s) {   <span class="co"># Arrival event</span></span>
+<span id="cb30-21"><a href=""></a>      T <span class="ot">&lt;-</span> T_a</span>
+<span id="cb30-22"><a href=""></a>      X <span class="ot">&lt;-</span> X <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb30-23"><a href=""></a>      event <span class="ot">&lt;-</span> <span class="st">"Arrival"</span></span>
+<span id="cb30-24"><a href=""></a></span>
+<span id="cb30-25"><a href=""></a>      <span class="co"># Schedule next arrival</span></span>
+<span id="cb30-26"><a href=""></a>      T_a <span class="ot">&lt;-</span> T <span class="sc">+</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> lambda)</span>
+<span id="cb30-27"><a href=""></a></span>
+<span id="cb30-28"><a href=""></a>      <span class="co"># If server was idle, start service</span></span>
+<span id="cb30-29"><a href=""></a>      <span class="cf">if</span> (X <span class="sc">==</span> <span class="dv">1</span>) {</span>
+<span id="cb30-30"><a href=""></a>        T_s <span class="ot">&lt;-</span> T <span class="sc">+</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> mu)</span>
+<span id="cb30-31"><a href=""></a>      }</span>
+<span id="cb30-32"><a href=""></a></span>
+<span id="cb30-33"><a href=""></a>    } <span class="cf">else</span> {           <span class="co"># Departure event</span></span>
+<span id="cb30-34"><a href=""></a>      T <span class="ot">&lt;-</span> T_s</span>
+<span id="cb30-35"><a href=""></a>      X <span class="ot">&lt;-</span> X <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb30-36"><a href=""></a>      event <span class="ot">&lt;-</span> <span class="st">"Departure"</span></span>
+<span id="cb30-37"><a href=""></a></span>
+<span id="cb30-38"><a href=""></a>      <span class="co"># If there are still customers, schedule next departure</span></span>
+<span id="cb30-39"><a href=""></a>      <span class="cf">if</span> (X <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb30-40"><a href=""></a>        T_s <span class="ot">&lt;-</span> T <span class="sc">+</span> <span class="fu">rexp</span>(<span class="dv">1</span>, <span class="at">rate =</span> mu)</span>
+<span id="cb30-41"><a href=""></a>      } <span class="cf">else</span> {</span>
+<span id="cb30-42"><a href=""></a>        T_s <span class="ot">&lt;-</span> <span class="cn">Inf</span></span>
+<span id="cb30-43"><a href=""></a>      }</span>
+<span id="cb30-44"><a href=""></a>    }</span>
+<span id="cb30-45"><a href=""></a></span>
+<span id="cb30-46"><a href=""></a>    time_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(time_vec, T)</span>
+<span id="cb30-47"><a href=""></a>    state_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(state_vec, X)</span>
+<span id="cb30-48"><a href=""></a>    event_vec <span class="ot">&lt;-</span> <span class="fu">c</span>(event_vec, event)</span>
+<span id="cb30-49"><a href=""></a>  }</span>
+<span id="cb30-50"><a href=""></a></span>
+<span id="cb30-51"><a href=""></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb30-52"><a href=""></a>    <span class="at">time =</span> <span class="fu">round</span>(time_vec, <span class="dv">4</span>),</span>
+<span id="cb30-53"><a href=""></a>    <span class="at">state =</span> state_vec,</span>
+<span id="cb30-54"><a href=""></a>    <span class="at">event =</span> event_vec</span>
+<span id="cb30-55"><a href=""></a>  )</span>
+<span id="cb30-56"><a href=""></a>}</span>
+<span id="cb30-57"><a href=""></a></span>
+<span id="cb30-58"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">simulate_mm1</span>(<span class="at">lambda =</span> <span class="dv">2</span>, <span class="at">mu =</span> <span class="dv">3</span>, <span class="at">sim_time =</span> <span class="dv">10</span>, <span class="at">seed =</span> <span class="dv">1234</span>)</span>
+<span id="cb30-59"><a href=""></a></span>
+<span id="cb30-60"><a href=""></a><span class="fu">plot</span>(</span>
+<span id="cb30-61"><a href=""></a>  df<span class="sc">$</span>time, df<span class="sc">$</span>state,</span>
+<span id="cb30-62"><a href=""></a>  <span class="at">type =</span> <span class="st">"s"</span>,</span>
+<span id="cb30-63"><a href=""></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">10</span>),</span>
+<span id="cb30-64"><a href=""></a>  <span class="at">xlab =</span> <span class="st">"Time"</span>,</span>
+<span id="cb30-65"><a href=""></a>  <span class="at">ylab =</span> <span class="st">"Number in system"</span>,</span>
+<span id="cb30-66"><a href=""></a>  <span class="at">main =</span> <span class="st">"M/M/1 sample path"</span></span>
+<span id="cb30-67"><a href=""></a>)</span>
+<span id="cb30-68"><a href=""></a></span>
+<span id="cb30-69"><a href=""></a><span class="fu">points</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>state, </span>
+<span id="cb30-70"><a href=""></a>       <span class="at">pch =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>event <span class="sc">==</span> <span class="st">"Arrival"</span>, <span class="dv">16</span>, <span class="fu">ifelse</span>(df<span class="sc">$</span>event <span class="sc">==</span> <span class="st">"Departure"</span>, <span class="dv">17</span>, <span class="dv">15</span>)),</span>
+<span id="cb30-71"><a href=""></a>       <span class="at">col =</span> <span class="fu">ifelse</span>(df<span class="sc">$</span>event <span class="sc">==</span> <span class="st">"Arrival"</span>, <span class="st">"blue"</span>, <span class="fu">ifelse</span>(df<span class="sc">$</span>event <span class="sc">==</span> <span class="st">"Departure"</span>, <span class="st">"red"</span>, <span class="st">"black"</span>)))</span>
+<span id="cb30-72"><a href=""></a></span>
+<span id="cb30-73"><a href=""></a><span class="fu">legend</span>(</span>
+<span id="cb30-74"><a href=""></a>  <span class="st">"topleft"</span>, <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">bty =</span> <span class="st">"n"</span>,</span>
+<span id="cb30-75"><a href=""></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Arrival"</span>, <span class="st">"Departure"</span>, <span class="st">"Start"</span>),</span>
+<span id="cb30-76"><a href=""></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">16</span>, <span class="dv">17</span>, <span class="dv">15</span>),</span>
+<span id="cb30-77"><a href=""></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>, <span class="st">"black"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="lecture07_files/figure-revealjs/unnamed-chunk-21-1.png" class="quarto-figure quarto-figure-center" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="performance-analysis-of-mm1-queue">Performance Analysis of M/M/1 Queue</h3>
+<p>For an M/M/1 queue with arrival rate <span class="math inline">\(\lambda\)</span> and service rate <span class="math inline">\(\mu\)</span> (with <span class="math inline">\(\rho = \lambda/\mu &lt; 1\)</span>), we can derive the following performance metrics:</p>
+<ol type="1">
+<li class="fragment"><p><strong>Utilisation ratio</strong> <span class="math inline">\(\rho:\)</span> The proportion of time the server is busy can be estimated from the simulation as <span style="display: block; margin: 24px 0;"></span> <span class="math display">\[
+\hat{\rho} = \frac{\sum_{i=1}^{n} \mathbf{1}(X_{t_i} &gt; 0) (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+\]</span> <span style="display: block; margin: 24px 0;"></span> and theoretically, it should equal <span class="math inline">\(\rho\)</span>. Here, <span class="math inline">\(\mathbf{1}(X_{t_i} &gt; 0)\)</span> is an indicator function that equals 1 when the server is busy (i.e., at least one customer in the system) and 0 otherwise.</p></li>
+<li class="fragment"><p><strong>Average number of customers in the system</strong> <span class="math inline">\(L\)</span></p>
+<ul>
+<li class="fragment">Empirically, we can compute the <strong>time‑weighted average</strong> number of customers in the system from the simulation data: <span style="display: block; margin: 24px 0;"></span> <span class="math display">\[
+\hat{L} = \frac{\sum_{i=1}^{n} X_{t_i} (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+\]</span> <span style="display: block; margin: 24px 0;"></span> where <span class="math inline">\(X_{t_i}\)</span> is the number of customers in the system during the interval <span class="math inline">\([t_i, t_{i+1})\)</span>.</li>
+<li class="fragment">Theoretically, the number of customers in the system is geometrically distributed with parameter <span class="math inline">\(1-\rho\)</span> in the long run, so the average is <span class="math display">\[
+L = \frac{\rho}{1-\rho}.
+\]</span></li>
+</ul></li>
+</ol>
+</section>
+<section class="slide level2 scrollable">
+
+<ol start="3" type="1">
+<li class="fragment"><p><strong>Average number of customers in the queue</strong> <span class="math inline">\(L_q\)</span>: The average number of customers waiting in the queue (excluding the one in service) can be estimated as <span class="math display">\[
+\hat{L}_q = \hat{L} - \rho,
+\]</span> and the theoretical value is <span class="math display">\[
+L_q = \frac{\rho^2}{1-\rho}.
+\]</span></p></li>
+<li class="fragment"><p><strong>Response/System time</strong> <span class="math inline">\(W\)</span>: The average time a customer spends in the system (waiting + service) can be estimated via <strong>Little’s Law</strong>: <span class="math display">\[
+\hat{W} = \frac{\hat{L}}{\lambda}.
+\]</span> The theoretical value is <span class="math display">\[
+W = \frac{1}{\mu - \lambda}.
+\]</span></p></li>
+<li class="fragment"><p><strong>Waiting time</strong> <span class="math inline">\(W_q\)</span>: The average time a customer spends waiting in the queue can be estimated as <span class="math display">\[
+\hat{W}_q = \hat{W} - \frac{1}{\mu},
+\]</span> and the theoretical value is <span class="math display">\[
+W_q = \frac{\rho}{\mu - \lambda}.
+\]</span></p></li>
+<li class="fragment"><p><strong>System empty probability</strong> <span class="math inline">\(P_0\)</span>: The proportion of time the system is empty can be estimated as <span class="math display">\[
+\hat{P}(X=0) = \frac{\sum_{i=1}^{n} \mathbf{1}(X_{t_i} = 0) (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+\]</span> and theoretically, it should equal <span class="math inline">\(1-\rho\)</span>.</p></li>
+</ol>
+</section>
+<section class="slide level2">
+
+<div class="example">
+<p><strong>Example:</strong> Using the simulated data from the M/M/1 queue, estimate the performance metrics and compare them with the theoretical values.</p>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Performance Analysis of M/M/1 Queue</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>lambda <span class="ot">&lt;-</span> <span class="dv">2</span></span>
+<span id="cb31-2"><a href=""></a>mu <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb31-3"><a href=""></a>rho <span class="ot">&lt;-</span> lambda <span class="sc">/</span> mu</span>
+<span id="cb31-4"><a href=""></a></span>
+<span id="cb31-5"><a href=""></a><span class="co"># simulate for a longer time to get more accurate estimates of performance metrics</span></span>
+<span id="cb31-6"><a href=""></a>df <span class="ot">&lt;-</span> <span class="fu">simulate_mm1</span>(<span class="at">lambda =</span> lambda, <span class="at">mu =</span> mu, <span class="at">sim_time =</span> <span class="dv">10000</span>, <span class="at">seed =</span> <span class="dv">1234</span>)</span>
+<span id="cb31-7"><a href=""></a></span>
+<span id="cb31-8"><a href=""></a><span class="co"># durations spent in each state</span></span>
+<span id="cb31-9"><a href=""></a>durations <span class="ot">&lt;-</span> <span class="fu">diff</span>(df<span class="sc">$</span>time) <span class="co"># time spent in each interval</span></span>
+<span id="cb31-10"><a href=""></a>states <span class="ot">&lt;-</span> df<span class="sc">$</span>state[<span class="sc">-</span><span class="fu">nrow</span>(df)]   <span class="co"># state held over each interval</span></span>
+<span id="cb31-11"><a href=""></a></span>
+<span id="cb31-12"><a href=""></a><span class="co"># Theoretical performance metrics</span></span>
+<span id="cb31-13"><a href=""></a>rho <span class="ot">&lt;-</span> lambda <span class="sc">/</span> mu</span>
+<span id="cb31-14"><a href=""></a>L_theory <span class="ot">&lt;-</span> rho <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> rho)</span>
+<span id="cb31-15"><a href=""></a>Lq_theory <span class="ot">&lt;-</span> rho<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">-</span> rho)</span>
+<span id="cb31-16"><a href=""></a>W_theory <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> (mu <span class="sc">-</span> lambda)</span>
+<span id="cb31-17"><a href=""></a>Wq_theory <span class="ot">&lt;-</span> rho <span class="sc">/</span> (mu <span class="sc">-</span> lambda)</span>
+<span id="cb31-18"><a href=""></a>P0_theory <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> rho</span>
+<span id="cb31-19"><a href=""></a></span>
+<span id="cb31-20"><a href=""></a><span class="co"># Empirical performance metrics</span></span>
+<span id="cb31-21"><a href=""></a>rho_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>((states <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">*</span> durations) <span class="sc">/</span> <span class="fu">sum</span>(durations)</span>
+<span id="cb31-22"><a href=""></a>L_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(states <span class="sc">*</span> durations) <span class="sc">/</span> <span class="fu">sum</span>(durations)</span>
+<span id="cb31-23"><a href=""></a>Lq_hat <span class="ot">&lt;-</span> L_hat <span class="sc">-</span> rho_hat</span>
+<span id="cb31-24"><a href=""></a>W_hat <span class="ot">&lt;-</span> L_hat <span class="sc">/</span> lambda</span>
+<span id="cb31-25"><a href=""></a>Wq_hat <span class="ot">&lt;-</span> W_hat <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> mu</span>
+<span id="cb31-26"><a href=""></a>P0_hat <span class="ot">&lt;-</span> <span class="fu">sum</span>((states <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">*</span> durations) <span class="sc">/</span> <span class="fu">sum</span>(durations)</span>
+<span id="cb31-27"><a href=""></a></span>
+<span id="cb31-28"><a href=""></a><span class="fu">data.frame</span>(</span>
+<span id="cb31-29"><a href=""></a>   <span class="at">Metric =</span> <span class="fu">c</span>(<span class="st">"Utilisation"</span>, <span class="st">"Avg. number in system"</span>, <span class="st">"Avg. number in queue"</span>, </span>
+<span id="cb31-30"><a href=""></a>              <span class="st">"Avg. response time"</span>, <span class="st">"Avg. waiting time"</span>, <span class="st">"System empty probability"</span>),</span>
+<span id="cb31-31"><a href=""></a>   <span class="at">Simulated =</span> <span class="fu">c</span>(rho_hat, L_hat, Lq_hat, W_hat, Wq_hat, P0_hat),</span>
+<span id="cb31-32"><a href=""></a>   <span class="at">Theoretical =</span> <span class="fu">c</span>(rho, L_theory, Lq_theory, W_theory, Wq_theory, P0_theory)</span>
+<span id="cb31-33"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    Metric Simulated Theoretical
+1              Utilisation 0.6635262   0.6666667
+2    Avg. number in system 1.9706788   2.0000000
+3     Avg. number in queue 1.3071526   1.3333333
+4       Avg. response time 0.9853394   1.0000000
+5        Avg. waiting time 0.6520061   0.6666667
+6 System empty probability 0.3364738   0.3333333</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment">the system is stable since <span class="math inline">\(\rho = 2/3 &lt; 1\)</span>,</li>
+<li class="fragment">the server is busy about 67% of the time,</li>
+<li class="fragment">the average number of customers <em>in the system</em> is around 2 persons,</li>
+<li class="fragment">the average number of customers <em>in a queue</em> is around 1.33 persons (typically, between 1 and 2 customers are waiting for service),</li>
+<li class="fragment">the average response time is around 1 unit,</li>
+<li class="fragment">the average waiting time is around 0.67 units, and</li>
+<li class="fragment">the system is empty about 33% of the time.</li>
+</ul>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>With large simulation time, the simulated performance metrics should be close to their theoretical values, confirming that our simulation is consistent with the properties of the M/M/1 queue.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We can also check the <strong>stationary distribution</strong> of the number of customers in the system.</p>
+<div class="cell" data-layout-align="center">
+<details class="code-fold">
+<summary>Stationary Distribution of M/M/1 Queue</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># Time spent in each state</span></span>
+<span id="cb33-2"><a href=""></a>time_in_state <span class="ot">&lt;-</span> <span class="fu">tapply</span>(durations, states, sum)</span>
+<span id="cb33-3"><a href=""></a>max_state <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">as.integer</span>(<span class="fu">names</span>(time_in_state)))</span>
+<span id="cb33-4"><a href=""></a>pi_hat <span class="ot">&lt;-</span> <span class="fu">numeric</span>(max_state <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb33-5"><a href=""></a>pi_hat[<span class="fu">as.integer</span>(<span class="fu">names</span>(time_in_state)) <span class="sc">+</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> time_in_state <span class="sc">/</span> <span class="fu">sum</span>(durations)</span>
+<span id="cb33-6"><a href=""></a></span>
+<span id="cb33-7"><a href=""></a><span class="co"># Theoretical stationary distribution: P(N=n) = (1-rho) rho^n</span></span>
+<span id="cb33-8"><a href=""></a>n_vals <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>max_state</span>
+<span id="cb33-9"><a href=""></a>pi_theory <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> rho) <span class="sc">*</span> rho<span class="sc">^</span>n_vals</span>
+<span id="cb33-10"><a href=""></a></span>
+<span id="cb33-11"><a href=""></a><span class="fu">barplot</span>(</span>
+<span id="cb33-12"><a href=""></a>  pi_hat,</span>
+<span id="cb33-13"><a href=""></a>  <span class="at">names.arg =</span> n_vals,</span>
+<span id="cb33-14"><a href=""></a>  <span class="at">col =</span> <span class="st">"grey80"</span>,</span>
+<span id="cb33-15"><a href=""></a>  <span class="at">border =</span> <span class="st">"white"</span>,</span>
+<span id="cb33-16"><a href=""></a>  <span class="at">main =</span> <span class="st">"Stationary distribution of number of customers in M/M/1"</span>,</span>
+<span id="cb33-17"><a href=""></a>  <span class="at">xlab =</span> <span class="st">"Number of customers"</span>,</span>
+<span id="cb33-18"><a href=""></a>  <span class="at">ylab =</span> <span class="st">"Probability"</span></span>
+<span id="cb33-19"><a href=""></a>)</span>
+<span id="cb33-20"><a href=""></a></span>
+<span id="cb33-21"><a href=""></a><span class="fu">points</span>(</span>
+<span id="cb33-22"><a href=""></a>  <span class="at">x =</span> <span class="fu">seq_along</span>(n_vals),</span>
+<span id="cb33-23"><a href=""></a>  <span class="at">y =</span> pi_theory,</span>
+<span id="cb33-24"><a href=""></a>  <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb33-25"><a href=""></a>  <span class="at">col =</span> <span class="st">"red"</span></span>
+<span id="cb33-26"><a href=""></a>)</span>
+<span id="cb33-27"><a href=""></a></span>
+<span id="cb33-28"><a href=""></a><span class="fu">legend</span>(</span>
+<span id="cb33-29"><a href=""></a>  <span class="st">"topright"</span>,</span>
+<span id="cb33-30"><a href=""></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Simulated"</span>, <span class="st">"Theoretical"</span>),</span>
+<span id="cb33-31"><a href=""></a>  <span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"grey80"</span>, <span class="cn">NA</span>),</span>
+<span id="cb33-32"><a href=""></a>  <span class="at">border =</span> <span class="fu">c</span>(<span class="st">"white"</span>, <span class="cn">NA</span>),</span>
+<span id="cb33-33"><a href=""></a>  <span class="at">pch =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="dv">19</span>),</span>
+<span id="cb33-34"><a href=""></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"black"</span>, <span class="st">"red"</span>)</span>
+<span id="cb33-35"><a href=""></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+
+</div>
+<img data-src="lecture07_files/figure-revealjs/unnamed-chunk-23-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section class="slide level2">
+
+<h3 id="mmc-queue">M/M/c Queue</h3>
+<p>The <strong>M/M/c queue</strong> generalises the M/M/1 model to the case of <strong>multiple identical servers</strong> operating in parallel.</p>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="note fragment">
+<p>Let <span class="math inline">\(X_t\)</span> denote the total number of customers in the system (waiting + in service) at time <span class="math inline">\(t\)</span>.</p>
+<p>The state space is <span class="math inline">\(\{0,1,2,\ldots\}.\)</span></p>
+<p>The process can be considered as a <strong>birth–death process</strong> with:</p>
+<ul>
+<li class="fragment"><strong>Birth rate</strong> (arrival rate), for all states: <span style="display: block; margin: 24px 0;"></span> <span class="math display">\[
+\lambda_n = \lambda, \qquad n \ge 0.
+\]</span> <span style="display: block; margin: 24px 0;"></span></li>
+<li class="fragment"><strong>Death rate</strong> (service completion rate), which depends on how many servers are busy <span class="math inline">\(n\)</span>: <span style="display: block; margin: 24px 0;"></span> <span class="math display">\[
+\mu_n =
+\begin{cases}
+n\mu, &amp; n = 1,2,\ldots,c-1, \\
+c\mu, &amp; n \ge c.
+\end{cases}
+\]</span> <span style="display: block; margin: 24px 0;"></span></li>
+<li class="fragment">when <span class="math inline">\(n &lt; c\)</span>, only <span class="math inline">\(n\)</span> servers are busy,</li>
+<li class="fragment">when <span class="math inline">\(n \ge c\)</span>, all servers are busy.</li>
+</ul>
+</div>
+<p><span style="display: block; margin: 24px 0;"></span></p>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>For a stable M/M/c queue (i.e., <span class="math inline">\(\rho = \lambda/(c\mu) &lt; 1\)</span>), the system is characterised by the same three foundational relationships as the M/M/1 queue (p.&nbsp;36-37), but with different formulas for the stationary distribution and performance metrics.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="performance-metrics-for-mmc-queue">Performance Metrics for M/M/c Queue</h3>
+<p>The <em>theoretical</em> performance measures can be derived from the Little’s Law and the properties of M/M/<span class="math inline">\(c\)</span>.</p>
+<ol type="1">
+<li class="fragment"><strong>Per-server utilisation:</strong> Because all servers are statistically identical, the theoretical utilisation per server is <span style="display: block; margin: 24px 0;"></span> <span class="math display">\[
+\rho_i = \rho = \frac{\lambda}{c\mu}
+\]</span></li>
+</ol>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Empirically, we can estimate the utilisation of each server from the simulation data as the proportion of time that server is busy. Then,</p>
+<p><span class="math display">\[
+\hat{\rho}_i = \frac{\text{busy time for server } i}{\text{total simulation time}} = \frac{\displaystyle\sum_{\text{jobs served by } i}(\text{end} - \text{start})}{\text{total simulation time}}.
+\]</span></p>
+<p>However, due to the random nature of the simulation and the fact that servers may not be perfectly balanced in terms of workload, the estimated utilisation <span class="math inline">\(\hat{\rho}_i\)</span> for each server may differ from the theoretical value <span class="math inline">\(\rho\)</span>.</p>
+<div class="fragment">
+<p>Regardless, the <strong>average utilisation across all servers</strong> or the system-wide utilisation,</p>
+<p><span class="math display">\[
+\frac{1}{c} \sum_{i=1}^{c} \hat{\rho}_i \approx \rho,
+\]</span></p>
+<p><strong>converges to <span class="math inline">\(\rho\)</span></strong> if the simulation is run for a sufficiently long time (due to LLNs) and the system is stable.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h4 id="performance-metrics-for-mmc-queue-continue">Performance Metrics for M/M/c Queue (Continue)</h4>
+<div class="columns">
+<div class="column">
+<ol start="2" type="1">
+<li class="fragment"><p><strong>Average number of customers in queue</strong></p>
+<p><span class="math display">\[
+L_q = \frac{P(\text{wait})\,\rho}{1-\rho},
+\]</span></p>
+<p>where <span class="math inline">\(P(\text{wait})\)</span> is given by the Erlang‑C formula.</p></li>
+<li class="fragment"><p><strong>Average number of customers in system</strong></p>
+<p><span class="math display">\[
+L = L_q + \frac{\lambda}{\mu}.
+\]</span></p></li>
+<li class="fragment"><p><strong>Average waiting time</strong></p>
+<p><span class="math display">\[
+W_q = \frac{L_q}{\lambda}.
+\]</span></p></li>
+</ol>
+</div><div class="column">
+<ol start="5" type="1">
+<li class="fragment"><p><strong>Average response/system time</strong></p>
+<p><span class="math display">\[
+W = W_q + \frac{1}{\mu}.
+\]</span></p></li>
+<li class="fragment"><p><strong>System empty probability</strong></p>
+<p><span class="math display">\[
+P_0 = \left( \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!}\frac{1}{1-\rho} \right)^{-1}.
+\]</span></p></li>
+</ol>
+</div></div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>The empircal performance metrics can be estimated from the simulation data using the same methods as for the M/M/1 queue, but with appropriate adjustments for multiple servers.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>The worked example of M/M/<span class="math inline">\(c\)</span> can be found in <a href="https://zamnolence.github.io/_book/10_4_EVbays.html">🚗 EV Charging Bays Simulation</a>.</p>
+</div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figs/curtin-logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="lecture07_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="lecture07_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="lecture07_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="lecture07_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"titleSelector":"h1, h2, h3","hideMissingTitles":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

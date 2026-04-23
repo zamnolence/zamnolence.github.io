@@ -1,0 +1,1791 @@
+---
+title: "STAT2005 Computer Simulation"
+subtitle: "Lecture 7 — Stochastic Modelling"
+author: 
+  - name: Sam Wiwatanapataphee (275287a@curtin.edu.au)
+date: "2026-04-23"
+date-format: "D MMM YYYY"
+format:
+  revealjs:
+    html-math-method: mathjax
+    theme: [simple, custom.scss]
+    logo: figs/curtin-logo2.png
+    margin: 0.05
+    center: false
+    slide-number: true
+    incremental: true
+    toc: false
+    code-line-numbers: true
+    code-copy: true
+    scrollable: true
+    title-slide: false
+    embed-resources: false # true to export as single html: not compatible with chalkboard
+    # scroll-view: true
+    menu:
+      titleSelector: 'h1, h2, h3'
+      useTextContentForMissingTitles: false 
+      hideMissingTitles: true
+    chalkboard: true
+    # Use this if you want a wider slide layout:
+    # width: 1280 (default is 1050)
+    # height: 720 (default is 700)
+execute:
+  echo: true
+  warning: false
+  message: false
+# jupyter: python3 # cannot have both r and python
+---
+
+## Goals today
+
+<br>
+
+:::: {.columns}
+::: {.column}
+- **Part 1:** Introduction to Stochastic Process
+    - Anatomy of a stochastic process
+    - Examples:
+        - Bernoulli process
+        - Random walk
+        - Brownian motion
+        - Geometric Brownian motion (GBM)
+
+<br>
+
+- **Part 2:** Poisson Process
+    - Homogeneous Poisson process (HPP)
+    - Non-homogeneous Poisson process (NHPP)
+        - Thinning algorithm
+
+:::
+
+::: {.column}
+
+- **Part 3:** Markov Process and Queueing Theory
+    - Markov property
+    - Queueing theory
+      - Kendall's notation
+      - M/M/1 queue
+      - M/M/c queue
+      - Case Study: EV charging station
+:::
+
+::::
+
+# Part 1: Introduction to Stochastic Processes
+
+## Motivation: From Random Variables → Processes
+
+- So far, we simulated **random variables** $\rightarrow$ one outcome
+
+- Now, we simulate **random processes** $\rightarrow$ evolution over time
+
+- This allows us to model dynamic systems with inherent randomness, such as:
+
+    - Stock prices
+    - Population growth
+    - Environmental systems
+    - Customer arrivals
+
+::: {.note .fragment}
+**A stochastic process is**
+
+A collection of random variables indexed by time
+
+$$
+\{X_t : t \in T\}
+$$
+
+where 
+
+- $t$: time index
+- $T$: time index set (discrete or continuous)
+- $X_t$: random variable at time $t$.
+- $X_t \in S$: state space (discrete or continuous)
+
+:::
+
+---
+
+## Anatomy of a Stochastic Process
+
+The two key dimensions of a stochastic process are:
+
+::: {.block .green .center .fragment fragment-index=1} 
+Index set
+:::
+
+
+| Index set | Discrete-Time | Continuous-Time |
+|:-------:|:-----------------------:|:-------------------------:|
+| Characteristic | Observed at fixed time steps | Evolves continuously over time |
+| Notation | $T = \{0,1,2,...\}$ | $T \in [0,\infty)$ or $T \in \mathbb{R}$ |
+| Examples | daily stock prices, number of customers every minute, population size per year | arrival times of customers, radioactive decay, diffusion processes |
+
+: {.striped .hover .fragment}
+
+::: {.block .red .center .fragment fragment-index=2}
+State space
+:::
+
+| State spac | Discrete State Space | Continuous State Space |
+|:-------:|:-----------------------:|:-------------------------:|
+| Characteristic | Finite or countable values | Values in an interval |
+| Notation | Finite categories: $X_t \in \{1,...,K\}$<br>Counts: $X_t \in \{0,1,2,...\}$<br>Integer: $X_t \in \mathbb{Z}$ | Unrestricted: $X_t \in \mathbb{R}$<br>Positive: $X_t > 0$<br>Bounded: $a < X_t < b$ |
+| Examples | queue length, number of infected individuals, number of packets in a network | stock prices, temperature, rainfall, waiting time, volatility processes |
+
+: {.striped .hover .fragment}
+
+---
+
+### Dependence Structure
+
+<br>
+
+Unlike independent random variables, stochastic processes often exhibit **dependence over time.** 
+
+::: {.example .fragment}
+**Examples:**
+
+- Number of customers in a queue at time $t+1$ depends on the number at time $t$.
+- Stock price at time $t+1$ depends on the price at time $t$ (and other factors).
+- Temperature at time $t+1$ depends on the temperature at time $t$ (and other factors).
+
+:::
+
+<br>
+
+::: {.fragment}
+The dependence structure of a stochastic process describes
+:::
+
+::: {.block .blue .center .fragment}
+How the random variables $X_t$ are related to each other across time. 
+:::
+
+<br>
+
+::: {.center .fragment}
+But how do we know whether:
+
+- $X_{t+1}$ depends on $X_t$?
+- $X_{t+1}$ dependes on the whole history $X_0, X_1, ..., X_t$?
+- or $X_{t+1}$ is independent of the past?
+
+:::
+
+---
+
+#### Dependence Structure (Continue)
+
+The dependence structure can take various forms, such as:
+
+
+::: {.block .blue .center .fragment}
+**Independence** 
+
+The future state is independent of the past states.
+
+E.g., a sequence of i.i.d. random variables and Monte Carlo simulations with independent samples.
+:::
+
+
+::: {.block .green .center .fragment}
+**Markov dependence (memoryless)**
+
+The future state depends only on the current state, not on the past states.
+
+E.g., Markov chains, where $P(X_{t+1} | X_t) = P(X_{t+1} | X_t, X_{t-1}, ...)$.
+
+:::
+
+::: {.block .red .center .fragment}
+**Autoregressive dependence**
+
+The future state depends on a linear combination of past states.
+
+E.g., AR(p) models in time series analysis, where $X_t = \phi_1 X_{t-1} + \phi_2 X_{t-2} + ... + \phi_p X_{t-p} + \epsilon_t$.
+:::
+
+::: {.block .purple .center .fragment}
+**Long-range dependence**
+
+The future state depends on a long history of past states.
+
+E.g., fractional Brownian motion, moving average processes, or certain types of time series with long memory.
+:::
+
+---
+
+### Stationarity
+
+A stochastic process is **stationary** if its statistical properties do not change over time. We can say that:
+
+- the process "looks the same" today as it does tomorrow, and as it did yesterday.
+- time shifts do not affect the distribution of the process.
+
+::: {.fragment}
+This allows us to make predictions and draw conclusions about the process based on past observations (historical data), without worrying about changes in the underlying distribution.
+:::
+
+#### Strict Stationarity {.fragment}
+
+::: {.note .fragment}
+A stochastic process is **strictly stationary** if all joint distributions are invariant under time shifts:
+
+$$
+(X_t, X_{t+1}, ..., X_{t+k}) \stackrel{d}{=} (X_{t+h}, X_{t+1+h}, ..., X_{t+k+h}) \quad \forall t, h, k.
+$$
+
+where $\stackrel{d}{=}$ represents *equality in distribution*.
+:::
+
+#### Weak Stationarity {.fragment}
+
+::: {.note .fragment}
+A process is **weakly stationary** if:
+
+1. $\mathbb{E}[X_t] = \mu, \forall t$ (constant mean).
+2. $\text{Var}(X_t) = \sigma^2 < \infty, \forall t$ (finite variance)
+3. $\text{Cov}(X_t, X_{t+k}) = \gamma(k), \forall t,k$ (autocovariance depends only on lag $k$).
+
+:::
+
+---
+
+## Examples of Stochastic Processes
+
+<br>
+
+::: {.center}
+In this unit, we will explore some common examples of stochastic processes, including:
+
+<br>
+
+:::
+
+:::: {.columns}
+::: {.block .purple .column .center .fragment width=30%}
+Bernoulli process
+:::
+::: {.block .blue .column .center .fragment width=30%}
+Random walk
+:::
+::: {.block .green .column .center .fragment width=30%}
+Wiener process
+:::
+::::
+
+<br>
+
+:::: {.columns}
+::: {.block .yellow .column .center .fragment width=30%}
+Geometric Brownian motion
+:::
+::: {.block .orange .column .center .fragment width=30%}
+Poisson process
+:::
+::: {.block .red .column .center .fragment width=30%}
+Markov process
+:::
+::::
+
+
+---
+
+### Bernoulli Process
+
+- A **Bernoulli process** is a sequence of independent Bernoulli trials, where each trial has two possible outcomes (success or failure) with constant probability.
+
+- It is a **discrete-time, discrete-state stochastic process** that models a series of binary events.
+
+::: {.example .fragment}
+**Example: Biased Coin Tossing**
+
+Simulate tossing a biased coin 1000 times, where the probability of heads (success) is 0.3 and tails (failure) is 0.7.
+
+:::
+
+::: {.fragment}
+```{r}
+set.seed(1234)
+
+n <- 1000  # number of time steps
+p <- 0.3   # probability of success
+
+# simulate Bernoulli process
+bernoulli_process <- rbinom(n, size = 1, prob = p)
+
+# display the first 20 outcomes
+head(bernoulli_process, 20)
+```
+
+:::
+
+:::{.callout-caution .fragment appearance="simple" style="font-size:1.4em;"}
+Although Bernoulli processes have no temporal dependence, they are still stochastic processes because they are indexed collections of random variables.
+:::
+
+
+---
+
+### Random Walk
+
+- Random walk is a simple stochastic process that models a path consisting of a succession of random steps.
+
+::: {.example .fragment}
+**Example:**  Discrete-time, discrete-state random walk
+
+$$
+X_0 = 0, \quad X_{t} = X_{t-1} + Z_t = \sum_{i=1}^t Z_i, \quad t = 1, 2, ...
+$$
+
+where
+
+$$
+Z_t = \begin{cases}+1 & \text{with probability } p \\
+-1 & \text{with probability } 1-p \end{cases}
+$$
+
+and $Z_t$ are i.i.d. random variables. 
+:::
+
+::: {.fragment}
+```{r}
+#| fig-height: 2
+#| fig-align: center
+#| code-fold: true
+#| code-summary: Random Walk
+set.seed(1234)
+n <- 500
+steps <- sample(c(-1,1), n, replace=TRUE)
+S <- cumsum(steps)
+
+par(mar=c(4,4,1,1))
+plot(S, type="l", lwd=2, xlab="Step", ylab="Position", col="blue")
+abline(h=0, col="red")
+```
+
+:::
+
+:::: {.columns}
+::: {.column .center .fragment width=32%}
+Path is **jagged**
+:::
+::: {.column .center .fragment width=32%}
+Variance grows with time
+:::
+::: {.column .center .fragment width=32%}
+No smoothness
+:::
+::::
+
+---
+
+### Wiener Process (Brownian Motion)
+
+Now refine:
+
+:::: {.columns}
+::: {.column .center .block .yellow .fragment width=30%}
+Smaller step size
+:::
+::: {.column .center .block .green .fragment width=30%}
+Variance grows with time
+:::
+::: {.column .center .block .blue .fragment width=30%}
+No smoothness
+:::
+::::
+
+::: {.fragment}
+Let:
+:::
+
+:::: {.columns}
+::: {.column .block .purple .center .fragment width=45%}
+Step size $\rightarrow \sqrt{\Delta t}$
+:::
+::: {.column .block .red .center .fragment width=45%}
+Number of steps $\rightarrow$ increases
+:::
+::::
+
+
+::: {.callout-note .fragment appearance="simple" style="font-size:1.4em;"}
+#### Brownian Motion
+
+<br>
+A **continuous-time, continuous-state** process $W_t$ such that:
+
+1. $W_0 = 0$ (starts at zero).
+2. $W_t$ has independent increments.
+    - for any $0 \leq s < t$, the increment $W_t - W_s$ is independent of the past.
+3. $W_t$ has normally distributed increments
+    - $W_t - W_s \sim N(0, t-s)$ for $0 \leq s < t$.
+4. $W_t$ has continuous paths.
+:::
+
+
+---
+
+### Generalised Wiener Process
+
+- If the mean of the increments is non-zero, we can introduce a drift term $\mu$ to model a process with a trend, and 
+- if the variance of the increments is not equal to 1, we can introduce a volatility term $\sigma$ to model a process with different levels of variability.
+
+::: {.note .fragment}
+A **generalised Wiener process** $X_t$ is defined as:
+
+$$
+X_t = \mu t + \sigma W_t.
+$$ 
+
+where $\mu$ is drift (trend) and $\sigma$ is volatility (randomness).
+
+:::
+
+::: {.example .fragment}
+**Example:** Simulate a standard Wiener process and a generalised Wiener process with $\mu = 2.0$ and $\sigma = 1.5$.
+:::
+
+::: {.fragment}
+```{r}
+#| fig-align: center
+#| code-fold: true
+#| code-summary: Sample Path of Standard vs Drifted Wiener Process
+#| fig-height: 3
+set.seed(1234)       
+T  <- 1
+n  <- 1000
+dt <- T / n # increment size
+t  <- seq(0, T, length.out = n + 1) # time points from "0" to T
+
+# Standard Wiener increments
+dW <- rnorm(n, mean = 0, sd = sqrt(dt))
+
+# Standard Wiener process
+# W(t) ~ N(0, t)
+W <- c(0, cumsum(dW))
+
+# Drifted Wiener process
+# X(t) ~ N(mu*t, sigma^2 * t)
+mu    <- 2.0
+sigma <- 1.5
+X <- mu * t + sigma * W
+
+par(mar=c(4,4,1,1))
+
+plot(
+  t, W, type = "l", lwd = 2, col = "blue",
+  xlab = "Time t", ylab = "Value", ylim = range(W, X),
+  main = "Sample Path of Standard and Drifted Wiener Processes"
+)
+
+lines(t, X, lwd = 2, col = "red")
+
+legend(
+  "topleft",
+  legend = c("Standard", "Drifted"),
+  col = c("blue", "red"),
+  lwd = 2, bty = "n"
+)
+```
+
+:::
+
+---
+
+```{r}
+#| fig-align: center
+#| code-fold: true
+#| code-summary: Multiple realisations of standard vs drifted Wiener process
+set.seed(1234)
+n <- 1000
+m <- 20
+dt <- 1 / n
+t <- seq(0, 1, length.out = n + 1)
+
+Z <- matrix(rnorm(n * m, mean = 0, sd = sqrt(dt)), n, m)
+W <- rbind(0, apply(Z, 2, cumsum))
+
+mu <- 2.0
+sigma <- 1.5
+
+Wd <- mu * t + sigma * W
+
+ylim <- range(W, Wd)
+
+matplot(t, W, type = "l", lty = 1, col = "blue",
+        ylim = ylim, xlab = "Time t", ylab = "Value")
+matlines(t, Wd, lty = 1, col = "red")
+
+legend("topleft", legend = c("Standard", "Drifted"),
+       col = c("blue", "red"), lwd = 2, bty = "n")
+```
+
+- In practice, we often simulate multiple realisations of a stochastic process to understand its variability and behaviour under different scenarios.
+
+---
+
+## Geometric Brownian Motion (GBM)
+
+- A **continuous-time stochastic process** that models the evolution of stock prices $S_t$ and other financial assets. 
+- Also known as the *exponential* Brownian motion as it's defined as exponential of a Brownian motion with drift.
+
+::: {.note .fragment}
+A stochastic process $S_t$ follows a GBM if it can be expressed as the solution to the stochastic differential equation (SDE):
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+dS_t = \mu S_t dt + \sigma S_t dW_t
+$$ 
+
+<span style="display: block; margin: 24px 0;"></span>
+
+where $\mu$ is the drift (expected return), $\sigma$ is the volatility, and $W_t$ is a standard Wiener process. 
+
+The solution to this SDE can be written in closed form as
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+\boxed{S_t = S_0 \exp\left( \left(\mu - \frac{\sigma^2}{2}\right) t + \sigma W_t \right)}
+$$
+
+where $S_0$ is the initial price.
+
+Also, the log returns of the GBM process are normally distributed, which can be shown as follows:
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+\log\left(\frac{S_t}{S_0}\right) \sim N\left(\left(\mu - \frac{\sigma^2}{2}\right) t, \sigma^2 t\right)
+$$
+
+:::
+
+- This model is frequently used for *Monte Carlo simulations* in finance, option pricing, and risk management due to its mathematical tractability and ability to capture key features of asset price dynamics, such as volatility and drift.
+
+---
+
+::: {.example}
+**Example:** Simulating stock prices using Geometric Brownian Motion with initial price $S_0 = 100$,  drift $\mu = 0.1$, volatility $\sigma = 0.2$, time horizon $T = 5$ year, and number of time steps $n = 1000$.
+:::
+
+
+::: {.fragment}
+```{r}
+#| fig-align: center
+#| fig-height: 3.5
+#| code-fold: true
+#| code-summary: Sample Path of Geometric Brownian Motion
+set.seed(1234)
+
+# Parameters
+S0 <- 100
+mu <- 0.1
+sigma <- 0.2
+T <- 5
+n <- 1000
+dt <- T / n
+t <- seq(0, T, length.out = n + 1)
+
+# Simulate standard Wiener process
+W <- c(0, cumsum(rnorm(n, mean = 0, sd = sqrt(dt))))
+
+# Simulate Geometric Brownian Motion
+S <- S0 * exp((mu - 0.5 * sigma^2) * t + sigma * W)
+
+# Plot the sample path of Geometric Brownian Motion
+par(mar=c(4,4,2,1))
+plot(t, S, type = "l", lwd = 2, col = "darkgreen",
+     xlab = "Time t", ylab = "Stock Price S(t)",
+     main = "Geometric Brownian Motion Sample Path")
+```
+
+:::
+
+- GBM shows how the stock price evolves over time with a positive drift and volatility, resulting in an exponential growth pattern with random fluctuations.
+- The sample path illustrates the typical behaviour of stock prices, which can experience significant variability while generally trending upwards due to the positive drift.
+
+
+
+# Part 2: Poisson Process
+
+## Introduction to Poisson Process
+
+
+::: {.note .fragment}
+The Poisson process is a **continuous-time, discrete-state stochastic process** that models the occurrence of random events over time. It can be defined as
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+\{N_t, t \geq 0\}
+$$
+
+<span style="display: block; margin: 24px 0;"></span>
+
+where $N_t$ represents the number of events that have occurred by time $t$. 
+
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+#### Properties of Poisson Process {.fragment}
+
+
+::: {.block .grey .fragment}
+1. $N_0 = 0$ (starts at zero).
+:::
+
+::: {.block .purple .fragment}
+2. **Independent increments**: the number of events in disjoint time intervals are independent.
+:::
+
+::: {.block .blue .fragment}
+3. **Stationary increments**: the distribution of the number of events in any time interval depends only on the length of the interval, not on its location.
+:::
+
+::: {.block .green .fragment}
+4. **Poisson distribution of counts**: the number of events in any time interval of length $t$ follows $N_t \sim \text{Poisson}(\lambda t)$, where $\lambda$ is the rate of the process. Therefore,
+    $$
+    P(N_t = k) = \frac{(\lambda t)^k e^{-\lambda t}}{k!}, \quad k = 0, 1, 2, ...
+    $$
+
+:::
+
+---
+
+#### Properties of Poisson Process (Continue)
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.block .yellow .fragment}
+5. **Exponential inter-arrival times**: the time between consecutive events (inter-arrival times) are i.i.d. exponential random variables:
+    $$
+    T \sim \text{Exponential}(\lambda) \quad \text{with} \quad f_T(t) = \lambda e^{-\lambda t}, \quad t > 0.
+    $$
+
+:::
+
+::: {.block .orange .fragment}
+6. **Memoryless property**: the waiting time until the next event does not depend on how much time has already elapsed since the last event.
+
+    $$
+    P(T > s + t | T > s) = P(T > t) \quad \forall s, t \geq 0.
+    $$
+
+:::
+
+::: {.block .red .fragment}
+7. **Mean and variance**: the mean and variance of $N_t$ are both equal to $\lambda t$.
+:::
+
+::: {.block .grey .fragment}
+8. **Additivity**: If $N_t$ and $M_t$ are independent Poisson processes with rates $\lambda_1$ and $\lambda_2$, then the combined process $N_t + M_t$ is also a Poisson process with rate $\lambda_1 + \lambda_2$.
+:::
+
+::: {.block .purple .fragment}
+
+9. **Thinning**: If we have a Poisson process with rate $\lambda$ and we independently keep each event with probability $p,$ then the resulting process is also a Poisson process with rate $p\lambda$. 
+
+    - This allows us to model situations where only a *fraction* of the events are observed or relevant.
+
+:::
+
+---
+
+### Homogeneous Poisson Process (HPP)
+
+::: {style="margin-left: 12em;"}
+```{mermaid}
+%%| echo: false
+%%| fig-align: center
+graph LR
+    A((0)) -->|"$$\lambda$$"| B((1))
+    B -->|"$$\lambda$$"| C((2))
+    C -->|"$$\lambda$$"| D(("$$\cdots$$"))
+    D -->|"$$\lambda$$"| E(("$$k$$"))
+    E -->|"$$\lambda$$"| F(("$$\cdots$$"))
+
+    A --- B --- C --- D --- E --- F
+
+    linkStyle 5,6,7,8,9 stroke:#ffffff
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+```
+
+:::
+
+- HPP is a process with a constant rate $\lambda$ over time. 
+- The expected number of events in any time interval of length $t$ is $\lambda t$, regardless of when the interval starts. 
+- HPP is often used to model events that occur randomly and independently over time, such as the arrival of customers at a store or the occurrence of phone calls at a call center. 
+
+
+
+::: {.example .fragment}
+**Example**: Write a function to simulate the arrival times of events in a homogeneous Poisson process with rate $\lambda$ over a time interval $[0, T_{\text{max}}]$.
+
+:::
+
+::: {.fragment}
+```{r}
+simulate_hpp <- function(lambda, T_max) {
+  times <- c()
+  t <- 0
+  
+  while (TRUE) {
+    t <- t + rexp(1, rate = lambda)   # exponential interarrival time
+    if (t > T_max) break
+    times <- c(times, t)
+  }
+  
+  return(times)
+}
+```
+
+:::
+
+---
+
+::: {.example }
+**Example**: Simulating a HPP with rate $\lambda = 2$ events per unit time over the interval $[0, 10]$.
+
+:::
+
+```{r}
+#| fig-align: center
+#| fig-height: 3
+event_times_hpp <- simulate_hpp(lambda = 2, T_max = 10)
+round(event_times_hpp, 2) # event times 
+
+length(event_times_hpp) # number of events in [0, T_max]
+
+par(mar=c(4,4,2,1))
+plot(c(0, event_times_hpp), 0:length(event_times_hpp),
+     type = "s", lwd = 2, xlim = c(0, 10), ylim = c(0, length(event_times_hpp) + 1),
+     xlab = "Time", ylab = "N(t)", main = "HPP Sample Path")
+grid()
+```
+
+::: {.fragment}
+The sample path of the HPP shows the number of events $N(t)$ increasing in a stepwise manner as time progresses, with the inter-arrival times between events following an exponential distribution. The rate $\lambda$ determines how frequently events occur, and the plot illustrates the random nature of event occurrences over time.
+:::
+
+---
+
+We can also check the count distribution of $N_t$ for the HPP by simulating many trajectories and comparing the empirical distribution with the theoretical **Poisson distribution**.
+
+::: {.fragment}
+```{r}
+counts <- replicate(5000, length(simulate_hpp(lambda = 2, T_max = 10)))
+mean(counts) # should be close to lambda * T_max
+var(counts) # should also be close to lambda * T_max
+```
+
+:::
+
+::: {.fragment}
+```{r}
+#| fig-align: center
+#| fig-height: 3
+#| code-fold: true
+#| code-summary: Distribution of Counts for HPP
+# Empirical distribution of counts
+hist(counts, breaks = 30, probability = TRUE,
+     main = "Distribution of Nt for HPP", xlab = "Count")
+x_vals <- 0:max(counts)
+# Theoretical Poisson distribution with mean lambda * T_max
+points(x_vals, dpois(x_vals, lambda = 2 * 10), pch = 19, cex = 0.6)
+legend("topright", legend = c("Empirical", "Theoretical"),
+       col = c("grey", "black"), pch = c(15, 19), lwd = c(2, 2), bty = "n")
+```
+
+:::
+
+::: {.fragment}
+The empirical distribution of the counts $N_t$ closely matches the theoretical Poisson distribution with mean $\lambda T_{\max}$. 
+:::
+
+---
+
+### Non-homogeneous Poisson Process (NHPP)
+
+::: {.fragment style="margin-left: 12em;"}
+```{mermaid}
+%%| echo: false
+graph LR
+        A((0)) -->|"$$\lambda_0$$"| B((1))
+        B -->|"$$\lambda_1$$"| C((2))
+        C -->|"$$\lambda_2$$"| D(("$$\cdots$$"))
+        D -->|"$$\lambda_{k-1}$$"| E(("$$k$$"))
+        E -->|"$$\lambda_{k}$$"| F(("$$\cdots$$"))
+
+        A --- B --- C --- D --- E --- F
+
+    linkStyle 5,6,7,8,9 stroke:#ffffff
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+```
+
+:::
+
+- NHPP is a Poisson process where the rate $\lambda(t)$ **varies over time**. 
+- The expected number of events in a time interval depends on the specific time period. 
+
+
+::: {.example .fragment}
+**Example**: Simulating a NHPP with a rate function
+$$
+\lambda(t) = 2 + \sin(t), \quad 0 \leq t \leq 10.
+$$
+
+The function is always positive and oscillates between 1 and 3, with an average rate of 2 events per unit time.
+:::
+
+::: {.fragment}
+```{r}
+#| code-fold: true
+#| code-summary: Intensity Function for NHPP
+#| fig-align: center
+#| fig-height: 2.5
+lambda_fun <- function(t) 2 + sin(t)
+T_max <- 10
+par(mar=c(4,4,2,1))
+curve(lambda_fun(x), from = 0, to = T_max, lwd = 2,
+      xlab = "Time", ylab = expression(lambda(t)))
+grid()
+```
+:::
+
+---
+
+### Thinning Algorithm for Simulating NHPP
+
+A standard simulation method is **thinning**, where we simulate a HPP with a rate equal to the maximum of $\lambda(t)$, and then we randomly keep each event with probability $\lambda(t)/\lambda_{\max}$. 
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.tip .center .fragment}
+
+**Simulation Steps**
+
+1. Find an upper bound $\lambda_{\max}$ such that $\lambda(t) \leq \lambda_{\max}$ for all $t$.
+2. Simulate a HPP with rate $\lambda_{\max}$ to generate candidate event times.
+3. Keep a proposed event time $t$ with probability $\dfrac{\lambda(t)}{\lambda_{\max}},$ otherwise discard it.
+
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.example .fragment}
+**Example (Continue)**: Simulating a NHPP with a rate function
+
+$$
+\lambda(t) = 2 + \sin(t), \quad 0 \leq t \leq 10.
+$$
+
+:::
+
+1. Find $\lambda_{\max}$, 
+
+   - The sine curve oscillates between -1 and 1. By adding 2, the maximum value of $\lambda(t)$ is $2 + 1 = 3$. Thus, we can choose $\lambda_{\max} = 3$.
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.callout-tip .fragment appearance="simple" style="font-size:1.4em;"}
+For a more complex rate function, we may need to use numerical methods (differentiation) to find $\lambda_{\max}$.
+:::
+
+---
+
+2. Simulate a HPP with rate $\lambda_{\max} = 3$ to generate candidate event times, and then apply the thinning algorithm to keep events with probability $\lambda(t)/\lambda_{\max}$.
+
+::: {.fragment}
+```{r}
+simulate_nhpp_thinning <- function(lambda_fun, lambda_max, T_max) {
+  t <- 0
+  accepted_times <- c()
+  
+  while (TRUE) {
+    t <- t + rexp(1, rate = lambda_max)   # HPP(lambda_max)
+    if (t > T_max) break
+    
+    # Accept with probability lambda(t) / lambda_max
+    if (runif(1) <= lambda_fun(t) / lambda_max) { 
+      accepted_times <- c(accepted_times, t)
+    }
+  }
+  
+  return(accepted_times)
+}
+```
+
+:::
+
+::: {.callout-note .fragment appearance="simple" style="font-size:1.4em;"}
+Notice that the thinning algorithm is a **acceptance-rejection** sampling method, and its efficiency depends on how close $\lambda_{\max}$ is to the actual maximum of $\lambda(t)$. If $\lambda_{\max}$ is much larger than the typical values of $\lambda(t)$, we will reject many candidate events, leading to a less efficient simulation. Therefore, the acceptance rate is
+
+$$\text{Acceptance Rate} = \frac{\int_0^{T_{\max}} \lambda(t) dt}{\lambda_{\max} T_{\max}}.
+$$
+
+:::
+
+
+---
+
+Theoretically, the expected count (and variance) of events in the interval $[0, T_{\max}]$ for a NHPP is given by the integral of the rate function:
+
+$$
+\mathbb{E}[N_{T_{\max}}] = \int_0^{T_{\max}} \lambda(t) dt.
+$$
+
+::: {.fragment}
+
+For $\lambda(t) = 2 + \sin(t)$, we can compute the expected count as follows:
+
+$$
+\int_0^{10} (2 + \sin(t)) dt = 20 - \cos(10) + 1 \approx 21.839.
+$$
+
+:::
+
+::: {.fragment}
+Using R,
+
+```{r}
+expected_count <- integrate(lambda_fun, lower = 0, upper = T_max)$value
+expected_count
+```
+
+:::
+
+::: {.fragment}
+Compare the expected count with the actual count from the simulation:
+
+```{r}
+set.seed(1234)
+event_times_nhpp <- simulate_nhpp_thinning(lambda_fun, lambda_max = 3, T_max = 10)
+round(event_times_nhpp, 2) # event times
+length(event_times_nhpp) # number of events in [0, T_max]
+```
+
+:::
+
+::: {.fragment}
+Since this is only one simulation, the count may not be exactly equal to the expected count, but it should be reasonably close.
+:::
+
+
+---
+
+```{r}
+#| fig-align: center
+par(mar=c(4,4,2,1))
+plot(c(0, event_times_nhpp), 0:length(event_times_nhpp),
+     type = "s", lwd = 2,
+     xlab = "Time", ylab = "N(t)",
+     main = "Nonhomogeneous Poisson Process")
+grid()
+```
+
+::: {.fragment}
+The sample path of the NHPP shows the number of events $N(t)$ increasing in a stepwise manner, but the rate of increase varies over time according to the rate function $\lambda(t)$. The inter-arrival times are not exponentially distributed with a constant rate, and the process exhibits non-stationary increments due to the time-varying intensity.
+:::
+
+---
+
+Extend the simulation to multiple runs to check the distribution of counts $N_t$:
+
+```{r}
+counts_nhpp <- replicate(5000, 
+                         length(simulate_nhpp_thinning(lambda_fun, lambda_max = 3, T_max = 10)))
+cat("Mean: ", mean(counts_nhpp), "\n", "Variance: ", var(counts_nhpp), sep="")
+```
+
+```{r}
+#| fig-align: center
+#| fig-height: 3
+#| code-fold: true
+#| code-summary: Distribution of Counts for NHPP
+# Empirical distribution of counts
+hist(counts_nhpp, breaks = 30, probability = TRUE,
+     main = "Distribution of Nt for NHPP",
+     xlab = "Count")
+x_vals <- 0:max(counts_nhpp)
+# Theoretical Poisson distribution with mean equal to the expected count
+points(x_vals, dpois(x_vals, expected_count), pch = 19, cex = 0.6)
+
+legend("topright", legend = c("Empirical", "Theoretical"),
+       col = c("grey", "black"), pch = c(15, 19), lwd = c(2, 2), bty = "n")
+       
+```
+
+
+::: {.fragment}
+Although the rate varies over time, the number of events in a fixed interval $N_T$ of a NHPP over a fixed interval $[0, T]$ is Poisson distributed with mean (and variance) $\int_0^T \lambda(t) dt$. What changes relative to the homogeneous case is the lack of stationary increments.
+
+:::
+
+---
+
+### Comparison of HPP and NHPP
+
+| Feature | HPP | NHPP |
+|-------|-------|-------|
+| Rate / Intensity | Constant rate $\lambda > 0$ | Time‑varying rate $\lambda(t) \ge 0$ |
+| Time | Continuous | Continuous |
+| State Space | Discrete: $\{0,1,2,\dots\}$ | Discrete: $\{0,1,2,\dots\}$ |
+| Independent Increments | ✓ Yes | ✓ Yes |
+| Stationary Increments | ✓ Yes | ✗ No |
+| Count Distribution | $N_t \sim \text{Poisson}(\lambda t)$ | $N_t \sim \text{Poisson}\!\left(\int_0^t \lambda(s)\,ds\right)$ |
+| Mean of $N_t$ | $\lambda t$ | $\displaystyle \int_0^t \lambda(s)\,ds$ |
+| Variance of $N_t$ | $\lambda t$ | $\displaystyle \int_0^t \lambda(s)\,ds$ |
+| Inter‑arrival Times | i.i.d. Exponential($\lambda$) | Not identical; depend on $\lambda(t)$ |
+| Memoryless Property | ✓ Yes (exponential waiting times) | ✗ No (globally) |
+| Typical Simulation Method | Exponential inter‑arrival times | Thinning |
+| Examples | Phone calls, radioactive decay | Rush‑hour traffic, daily demand patterns |
+
+: {.striped .hover}
+
+
+# Part 3: Markov Process and Queueing Theory
+
+## Introduction to Markov Process
+
+::: {.note}
+A stochastic process $\{X_t\}$ is a Markov process if it satisfies the **Markov property**:
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+\boxed{P(X_{t+1} | X_t, X_{t-1}, ..., X_0) = P(X_{t+1} | X_t) \quad \forall t.}
+$$
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+The property implies that the future state of the process depends only on the current state and not on the past states. 
+
+:::
+
+::: {.callout-important .fragment appearance="simple" style="font-size:1.4em;"}
+This does *not* mean that the process is independent over time. Rather, the dependence is fully summarised by the current state.
+:::
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+Many of the stochastic processes introduced earlier in this lecture are Markov processes:
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+| Process                         | Time       | State Space         | 
+| ------------------------------- | ---------- | ------------------- |
+| Bernoulli process               | Discrete   | $\{0,1\}$         |
+| Random walk                     | Discrete   | $\mathbb{Z}$      |
+| Wiener process                  | Continuous | $\mathbb{R}$      |
+| Poisson process                 | Continuous | $\{0,1,2,\dots\}$ |
+
+: {.striped .hover}
+
+:::
+
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+This illustrates that the Markov property is **not tied to a specific model**, but rather describes a **dependence structure** shared by many different stochastic processes.
+
+:::
+
+--- 
+
+## Why Markov Processes?
+
+
+::: {.block .purple .center .fragment}
+**Easy to simulate**  
+Simulation proceeds step‑by‑step using a simple recursion:
+$$
+X_{t+1} \sim P(\cdot \mid X_t).
+$$
+:::
+
+::: {.block .blue .center .fragment}
+**Natural system representation**  
+Many real‑world systems evolve based on their current configuration:
+
+*   queue length
+*   inventory level
+*   system status (working / failed)
+*   current price or position
+:::
+
+::: {.block .orange .center .fragment}
+**Foundation for advanced simulation methods**
+Markov processes underpin:
+
+*   random walks
+*   queueing models
+*   discrete‑event simulation
+*   Markov Chain Monte Carlo (MCMC)
+:::
+
+
+::: {.fragment}
+Because only the current state is required, Markov models are particularly well suited for **long‑run simulation and performance analysis**.
+:::
+
+---
+
+## Queuing theory
+
+Queueing systems are among the most important and widely studied applications of Markov processes, and they also provide a natural entry point to discrete‑event simulation.
+
+::: {.fragment}
+::: {style="margin-left: 13em;"}
+```{mermaid}
+%%| echo: false
+graph LR
+        A(Arrival) -->|Waiting| B(Service)
+        B -->|Departure| C((...))
+        style C fill:#FFFFFF00, stroke:#FFFFFF00, color:#FFFFFF00;
+```
+
+:::
+
+A queueing system evolves through a sequence of *events*. Between these events, the state of the system $X_t$ (the number of customers in the system at time $t$) remains unchanged.
+:::
+
+::: {.callout-tip .fragment style="font-size:1.4em;"}
+The state of the system changes only at discrete event times, and the future evolution of the system depends only on its current state (e.g., how many customers are currently in the queue), making it a Markov process.
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment}
+A modelling framework for queueing systems typically involves specifying:
+:::
+
+- **Arrival process**: How customers arrive (e.g., Poisson, deterministic).
+- **Service process**: How customers are served (e.g., exponential, deterministic).
+- **Number of servers**: How many servers are available (e.g., single, multiple).
+- **Queue discipline**: How customers are prioritised (e.g., first‑come‑first‑served, priority).
+
+
+---
+
+### Kendall's Notation
+
+Kendall's notation is a standard way to classify and describe different types of queueing systems using the format:
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+A / S / c / K / N / D
+$$  
+
+<span style="display: block; margin: 24px 0;"></span>
+
+where:
+
+- $A$: Arrival process (e.g., M for Markovian/Poisson, D for deterministic).
+- $S$: Service time distribution (e.g., M for Markovian/exponential,
+D for deterministic).
+- $c$: Number of servers.
+- $K$: System capacity (maximum number of customers in the system).
+- $N$: Population size (number of potential customers).
+- $D$: Queue discipline (e.g., FCFS for first‑come‑first‑served).
+
+::: {.fragment}
+E.g., an M/M/1 queue represents a system with Poisson arrivals, exponential service times, and a single server.
+:::
+
+
+
+#### Common Values for $A$ and $S$ in Kendall's Notation {.fragment}
+
+::: {.fragment}
+
+| Symbol | Description                         |
+|--------|-------------------------------------|
+| M      | Markovian (exponential inter-arrival or service times) |
+| D      | Deterministic (fixed inter-arrival or service times) |
+| G      | General (arbitrary distribution for inter-arrival or service times) |
+
+: {.striped .hover}
+
+:::
+
+---
+
+## M/M/1 Queue
+
+The M/M/1 queue is a **continuous‑time Markov process** whose state space $X_t$ is the set of non-negative integers $\{0, 1, 2, \ldots\}$ where the value corresponds to the number of customers in the system.
+
+<span style="display: block; margin: 24px 0;"></span>
+
+#### Assumptions  {.fragment}
+
+::: {.block .yellow .fragment}
+**Arrivals** follow a Poisson process with rate $\lambda$,
+:::
+
+::: {.block .orange .fragment}
+**Service times** are exponentially distributed with rate $\mu$,
+:::
+
+::: {.block .green .fragment}
+All arrivals and service times are (usually) independent of each other.
+:::
+
+::: {.block .blue .fragment}
+A **single server** provides service to customers one at a time on a **first‑come‑first‑served** basis.
+:::
+
+::: {.block .purple .fragment}
+The queue has **infinite capacity** and no customer is turned away.
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment style="margin-left: 12em;"}
+```{mermaid}
+%%| echo: false
+graph LR
+        A((0)) -->|"$$\lambda$$"| B((1))
+        B -->|"$$\lambda$$"| C((2))
+        C --> D(("$$\cdots$$"))
+        D -->|"$$\lambda$$"| E(("$$k$$"))
+        E -->|"$$\lambda$$"| F(("$$\cdots$$"))
+
+        F -->|"$$\mu$$"| E
+        E -->|"$$\mu$$"| D
+        D --> C
+        C -->|"$$\mu$$"| B
+        B -->|"$$\mu$$"| A
+
+    style D fill:#FFFFFF00, stroke:#FFFFFF00;
+    style F fill:#FFFFFF00, stroke:#FFFFFF00;
+```
+
+:::
+
+---
+
+### Foundation of Queueing Theory 
+
+A *stable* queueing system is characterised by **three foundational relationships**:
+
+::: {.callout-tip .fragment appearance="minimal" style="font-size:1.4em;"}
+**1. Utilisation (traffic intensity) and Stationary Distribution**  
+Determines whether the system is **stable**:  
+$$
+\rho = \frac{\lambda}{c\mu} < 1.
+$$  
+
+If $\rho \ge 1$, the queue grows without bound.
+
+::: {.fragment}
+If $\rho < 1$ and $c=1,$ the system  has a **stationary distribution** for the number of customers in the system:
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+\pi_n = (1-\rho) \rho^n, \quad n = 0, 1, 2, \ldots
+$$
+
+<span style="display: block; margin: 24px 0;"></span>
+This is exactly the **geometric distribution with parameter $1-\rho$**.
+
+:::
+
+::: {.fragment}
+
+If $\rho < 1$ and $c > 1,$ the stationary distribution is **piecewise Poisson-geometric**:
+
+$$
+\pi_n =
+\begin{cases}
+\displaystyle
+\frac{a^n}{n!}\, P_0, & 0 \le n < c, \\[.5em]
+\displaystyle
+\frac{a^c}{c!}\, \rho^{\,n-c}\, P_0, & n \ge c.
+\end{cases}
+$$
+
+:::
+
+::: {.fragment}
+where $P_0$ is the normalising constant or the **system empty probability** given by
+
+$$
+P_0 = \left(
+\sum_{k=0}^{c-1} \frac{a^k}{k!}
+\;+\;
+\frac{a^c}{c!} \cdot \frac{1}{1-\rho}
+\right)^{-1}.
+$$
+
+:::
+
+:::
+
+
+
+---
+
+::: {.fragment}
+
+| Utilisation | System | Recommendation |
+|--------|--------|------------------------------|
+| $\rho < 0.6$            | Underutilised   | Consider reducing capacity or increasing demand |
+| $0.6 \le \rho < 0.8$ | Efficient       | System is well balanced |
+| $0.8 \le \rho < 1$ | High utilisation | Monitor closely for potential congestion |
+| $\rho \ge 1$ | Unstable        | Increase capacity or reduce demand; otherwise, queue will grow indefinitely |
+
+: {.striped .hover}
+
+:::
+
+
+::: {.callout-note .fragment appearance="minimal" style="font-size:1.4em;"}
+**2. Little’s Law**  
+The average number of customers in the  system $L$ is equal to the average arrival rate $\lambda$ multiplied by the average time $W$ each customer spends in the system:  
+
+<span style="display: block; margin: 24px 0;"></span>
+
+$$
+L = \lambda W,\qquad L_q = \lambda W_q.
+$$  
+
+This holds for *any* stable queue, regardless of distributional assumptions.
+:::
+
+
+::: {.callout-important .fragment appearance="minimal" style="font-size:1.4em;"}
+
+**3. Erlang‑C formula**  
+Applies specifically to **M/M/c** queues and gives the probability of waiting:  
+
+$$
+P(\text{wait}) = P(W>0) = \text{Erlang‑C}(\lambda, \mu, c) =
+\frac{\displaystyle
+\frac{(\lambda/\mu)^c}{c!}\,\frac{1}{1-\rho}
+}{
+\displaystyle
+\sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!}
++
+\frac{(\lambda/\mu)^c}{c!}\,\frac{1}{1-\rho}
+}.
+$$
+
+For $c=1,$ this reduces to $P(\text{wait}) = \rho$.
+
+:::
+
+
+---
+
+::: {.example}
+
+**Example:** Simulate an M/M/1 queue with the following parameters:
+
+- initial state (number of customers) $X_0 = 0$.
+- arrival rate $\lambda = 2$
+- service rate $\mu = 3$
+- a total simulation time of 10 units.
+
+:::
+
+::: {.fragment}
+```{r}
+#| code-fold: true
+#| code-summary: Simulating an M/M/1 Queue
+#| fig-align: center
+#| fig-height: 4
+simulate_mm1 <- function(lambda = 2, mu = 3, 
+                         sim_time = 10, seed = 1234) {
+  if (!is.null(seed)) set.seed(seed)
+
+  X <- 0
+  T <- 0
+
+  time_vec <- c(0)
+  state_vec <- c(0)
+  event_vec <- c("Start")
+
+  # Schedule first arrival
+  T_a <- rexp(1, rate = lambda)
+  T_s <- Inf # no service when system is empty
+
+  while (T < sim_time) {
+
+    if (min(T_a, T_s) > sim_time) break
+
+    if (T_a < T_s) {   # Arrival event
+      T <- T_a
+      X <- X + 1
+      event <- "Arrival"
+
+      # Schedule next arrival
+      T_a <- T + rexp(1, rate = lambda)
+
+      # If server was idle, start service
+      if (X == 1) {
+        T_s <- T + rexp(1, rate = mu)
+      }
+
+    } else {           # Departure event
+      T <- T_s
+      X <- X - 1
+      event <- "Departure"
+
+      # If there are still customers, schedule next departure
+      if (X > 0) {
+        T_s <- T + rexp(1, rate = mu)
+      } else {
+        T_s <- Inf
+      }
+    }
+
+    time_vec <- c(time_vec, T)
+    state_vec <- c(state_vec, X)
+    event_vec <- c(event_vec, event)
+  }
+
+  data.frame(
+    time = round(time_vec, 4),
+    state = state_vec,
+    event = event_vec
+  )
+}
+
+df <- simulate_mm1(lambda = 2, mu = 3, sim_time = 10, seed = 1234)
+
+plot(
+  df$time, df$state,
+  type = "s",
+  xlim = c(0, 10),
+  xlab = "Time",
+  ylab = "Number in system",
+  main = "M/M/1 sample path"
+)
+
+points(df$time, df$state, 
+       pch = ifelse(df$event == "Arrival", 16, ifelse(df$event == "Departure", 17, 15)),
+       col = ifelse(df$event == "Arrival", "blue", ifelse(df$event == "Departure", "red", "black")))
+
+legend(
+  "topleft", ncol = 3, bty = "n",
+  legend = c("Arrival", "Departure", "Start"),
+  pch = c(16, 17, 15),
+  col = c("blue", "red", "black"))
+```
+
+:::
+
+
+---
+
+### Performance Analysis of M/M/1 Queue
+
+For an M/M/1 queue with arrival rate $\lambda$ and service rate $\mu$ (with $\rho = \lambda/\mu < 1$), we can derive the following performance metrics:
+
+1. **Utilisation ratio** $\rho:$ 
+    The proportion of time the server is busy can be estimated from the simulation as
+    <span style="display: block; margin: 24px 0;"></span>
+    $$
+    \hat{\rho} = \frac{\sum_{i=1}^{n} \mathbf{1}(X_{t_i} > 0) (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+    $$
+    <span style="display: block; margin: 24px 0;"></span>
+    and theoretically, it should equal $\rho$. Here, $\mathbf{1}(X_{t_i} > 0)$ is an indicator function that equals 1 when the server is busy (i.e., at least one customer in the system) and 0 otherwise.
+
+2. **Average number of customers in the system** $L$
+   - Empirically, we can compute the **time‑weighted average** number of customers in the system from the simulation data:
+   <span style="display: block; margin: 24px 0;"></span>
+    $$
+    \hat{L} = \frac{\sum_{i=1}^{n} X_{t_i} (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+    $$
+    <span style="display: block; margin: 24px 0;"></span>
+    where $X_{t_i}$ is the number of customers in the system during the interval $[t_i, t_{i+1})$.
+   - Theoretically, the number of customers in the system is geometrically distributed with parameter $1-\rho$ in the long run, so the average is
+    $$
+    L = \frac{\rho}{1-\rho}.
+    $$
+
+
+---
+
+3. **Average number of customers in the queue** $L_q$: The average number of customers waiting in the queue (excluding the one in service) can be estimated as
+    $$
+    \hat{L}_q = \hat{L} - \rho,
+    $$
+    and the theoretical value is
+    $$
+    L_q = \frac{\rho^2}{1-\rho}.
+    $$
+
+4. **Response/System time** $W$: The average time a customer spends in the system (waiting + service) can be estimated via **Little's Law**:
+    $$
+    \hat{W} = \frac{\hat{L}}{\lambda}.
+    $$
+    The theoretical value is
+    $$
+    W = \frac{1}{\mu - \lambda}.
+    $$
+
+5. **Waiting time** $W_q$: The average time a customer spends waiting in the queue can be estimated as
+    $$
+    \hat{W}_q = \hat{W} - \frac{1}{\mu},
+    $$
+    and the theoretical value is
+    $$
+    W_q = \frac{\rho}{\mu - \lambda}.
+    $$
+
+6. **System empty probability** $P_0$: The proportion of time the system is empty can be estimated as
+    $$
+    \hat{P}(X=0) = \frac{\sum_{i=1}^{n} \mathbf{1}(X_{t_i} = 0) (t_{i+1} - t_i)}{\sum_{i=1}^{n} (t_{i+1} - t_i)},
+    $$
+    and theoretically, it should equal $1-\rho$.
+
+---
+
+
+::: {.example}
+**Example:** Using the simulated data from the M/M/1 queue, estimate the performance metrics and compare them with the theoretical values.
+:::
+
+```{r}
+#| code-fold: true
+#| code-summary: Performance Analysis of M/M/1 Queue
+lambda <- 2
+mu <- 3
+rho <- lambda / mu
+
+# simulate for a longer time to get more accurate estimates of performance metrics
+df <- simulate_mm1(lambda = lambda, mu = mu, sim_time = 10000, seed = 1234)
+
+# durations spent in each state
+durations <- diff(df$time) # time spent in each interval
+states <- df$state[-nrow(df)]   # state held over each interval
+
+# Theoretical performance metrics
+rho <- lambda / mu
+L_theory <- rho / (1 - rho)
+Lq_theory <- rho^2 / (1 - rho)
+W_theory <- 1 / (mu - lambda)
+Wq_theory <- rho / (mu - lambda)
+P0_theory <- 1 - rho
+
+# Empirical performance metrics
+rho_hat <- sum((states > 0) * durations) / sum(durations)
+L_hat <- sum(states * durations) / sum(durations)
+Lq_hat <- L_hat - rho_hat
+W_hat <- L_hat / lambda
+Wq_hat <- W_hat - 1 / mu
+P0_hat <- sum((states == 0) * durations) / sum(durations)
+
+data.frame(
+   Metric = c("Utilisation", "Avg. number in system", "Avg. number in queue", 
+              "Avg. response time", "Avg. waiting time", "System empty probability"),
+   Simulated = c(rho_hat, L_hat, Lq_hat, W_hat, Wq_hat, P0_hat),
+   Theoretical = c(rho, L_theory, Lq_theory, W_theory, Wq_theory, P0_theory)
+)
+```
+
+- the system is stable since $\rho = 2/3 < 1$,
+- the server is busy about 67% of the time,
+- the average number of customers *in the system* is around 2 persons, 
+- the average number of customers *in a queue* is around 1.33 persons (typically, between 1 and 2 customers are waiting for service), 
+- the average response time is around 1 unit,
+- the average waiting time is around 0.67 units, and
+- the system is empty about 33% of the time.
+
+::: {.fragment .callout-tip appearance="simple" style="font-size:1.4em;"}
+With large simulation time, the simulated performance metrics should be close to their theoretical values, confirming that our simulation is consistent with the properties of the M/M/1 queue.
+:::
+
+---
+
+We can also check the **stationary distribution** of the number of customers in the system.
+```{r}
+#| fig-align: center
+#| code-fold: true
+#| code-summary: Stationary Distribution of M/M/1 Queue
+# Time spent in each state
+time_in_state <- tapply(durations, states, sum)
+max_state <- max(as.integer(names(time_in_state)))
+pi_hat <- numeric(max_state + 1)
+pi_hat[as.integer(names(time_in_state)) + 1] <- time_in_state / sum(durations)
+
+# Theoretical stationary distribution: P(N=n) = (1-rho) rho^n
+n_vals <- 0:max_state
+pi_theory <- (1 - rho) * rho^n_vals
+
+barplot(
+  pi_hat,
+  names.arg = n_vals,
+  col = "grey80",
+  border = "white",
+  main = "Stationary distribution of number of customers in M/M/1",
+  xlab = "Number of customers",
+  ylab = "Probability"
+)
+
+points(
+  x = seq_along(n_vals),
+  y = pi_theory,
+  pch = 19,
+  col = "red"
+)
+
+legend(
+  "topright",
+  legend = c("Simulated", "Theoretical"),
+  fill = c("grey80", NA),
+  border = c("white", NA),
+  pch = c(NA, 19),
+  col = c("black", "red")
+)
+```
+
+---
+
+### M/M/c Queue
+
+The **M/M/c queue** generalises the M/M/1 model to the case of **multiple identical servers** operating in parallel.
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.note .fragment}
+Let $X_t$ denote the total number of customers in the system (waiting + in service) at time $t$. 
+
+The state space is $\{0,1,2,\ldots\}.$ 
+
+The process can be considered as a **birth–death process** with:
+
+*   **Birth rate** (arrival rate), for all states:
+    <span style="display: block; margin: 24px 0;"></span>
+    $$
+    \lambda_n = \lambda, \qquad n \ge 0.
+    $$
+    <span style="display: block; margin: 24px 0;"></span>
+*   **Death rate** (service completion rate), which depends on how many servers are busy $n$:
+    <span style="display: block; margin: 24px 0;"></span>
+    $$
+    \mu_n =
+    \begin{cases}
+    n\mu, & n = 1,2,\ldots,c-1, \\
+    c\mu, & n \ge c.
+    \end{cases}
+    $$
+    <span style="display: block; margin: 24px 0;"></span>
+  - when $n < c$, only $n$ servers are busy,
+  - when $n \ge c$, all servers are busy.
+
+:::
+
+<span style="display: block; margin: 24px 0;"></span>
+
+::: {.fragment .callout-tip appearance="simple" style="font-size:1.4em;"}
+For a stable M/M/c queue (i.e., $\rho = \lambda/(c\mu) < 1$), the system is characterised by the same three foundational relationships as the M/M/1 queue (p. 36-37), but with different formulas for the stationary distribution and performance metrics.
+:::
+
+---
+
+### Performance Metrics for M/M/c Queue
+
+
+The *theoretical* performance measures can be derived from the Little's Law and the properties of M/M/$c$.
+
+1.  **Per-server utilisation:** Because all servers are statistically identical, the theoretical utilisation per server is 
+    <span style="display: block; margin: 24px 0;"></span>
+    $$
+    \rho_i = \rho = \frac{\lambda}{c\mu}
+    $$
+
+::: {.fragment .callout-caution appearance="simple" style="font-size:1.4em;"}
+
+Empirically, we can estimate the utilisation of each server from the simulation data as the proportion of time that server is busy. Then,
+
+$$
+\hat{\rho}_i = \frac{\text{busy time for server } i}{\text{total simulation time}} = \frac{\displaystyle\sum_{\text{jobs served by } i}(\text{end} - \text{start})}{\text{total simulation time}}.
+$$
+
+However, due to the random nature of the simulation and the fact that servers may not be perfectly balanced in terms of workload, the estimated utilisation $\hat{\rho}_i$ for each server may differ from the theoretical value $\rho$. 
+
+::: {.fragment}
+
+Regardless, the **average utilisation across all servers** or the system-wide utilisation,
+
+$$
+\frac{1}{c} \sum_{i=1}^{c} \hat{\rho}_i \approx \rho,
+$$
+
+**converges to $\rho$** if the simulation is run for a sufficiently long time (due to LLNs) and the system is stable. 
+
+:::
+
+:::
+
+---
+
+#### Performance Metrics for M/M/c Queue (Continue)
+
+
+:::: {.columns}
+::: {.column}
+2.  **Average number of customers in queue**
+
+    $$
+    L_q = \frac{P(\text{wait})\,\rho}{1-\rho},
+    $$
+
+    where $P(\text{wait})$ is given by the Erlang‑C formula.
+
+3.  **Average number of customers in system**
+
+    $$
+    L = L_q + \frac{\lambda}{\mu}.
+    $$
+
+4.  **Average waiting time**
+
+    $$
+    W_q = \frac{L_q}{\lambda}.
+    $$
+
+:::
+::: {.column}
+
+5.  **Average response/system time**
+
+    $$
+    W = W_q + \frac{1}{\mu}.
+    $$
+
+6.  **System empty probability**
+
+    $$
+    P_0 = \left( \sum_{n=0}^{c-1} \frac{(\lambda/\mu)^n}{n!} + \frac{(\lambda/\mu)^c}{c!}\frac{1}{1-\rho} \right)^{-1}.
+    $$
+
+:::
+::::
+
+::: {.callout-note .fragment appearance="simple" style="font-size:1.4em;"}
+The empircal performance metrics can be estimated from the simulation data using the same methods as for the M/M/1 queue, but with appropriate adjustments for multiple servers.
+:::
+
+::: {.fragment}
+The worked example of M/M/$c$ can be found in [🚗 EV Charging Bays Simulation](https://zamnolence.github.io/_book/10_4_EVbays.html).
+:::
