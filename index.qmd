@@ -46,7 +46,7 @@ about:
 :::: {.about-body}
 
 
-I am a lecturer in AI & data science specialising in data-driven optimisation and computer simulation using Python, R, and MATLAB. I completed a PhD in Mathematics and Statistics with research spanning fractional differential equations, space–time modelling, and blockchain-based smart grid systems.
+I am a lecturer and researcher in AI & data science specialising in data-driven optimisation and computer simulation using Python, R, and MATLAB. I completed a PhD in Mathematics and Statistics with research spanning fractional differential equations, space–time modelling, and blockchain-based smart grid systems.
 
 Currently, I focus on fostering an inclusive, project-based learning environment that connects mathematical and statistical theory with real-world applications that highlight sustainability and responsible decision-making.
 
@@ -59,9 +59,9 @@ Currently, I focus on fostering an inclusive, project-based learning environment
 ::: {style="font-size: 1.1em;"}
 | | |
 |:--------------|----:|
-| **Associate Lecturer**<br><span style="color: #979797;">I'm currently teaching the unit *Computer Simulation* (onshore), *Economics* (offshore), and *Supply Chain Modelling and Optimisation* (offshore) and supervising 12 UG/MS students.</span> | 2026 - Present |
-| **Sessional Academic**<br><span style="color: #979797;">Teaching and tutoring 600+ UG students onshore and offshore across nine units in maths, stats, data science, and finance, including:<br></span> | 2023 - 2025 |
-| **Research Assistant**<br><span style="color: #979797;">Solving DEs with FEM for bridge structural analysis.<br> Output was published in 2019.</span> | Feb - Nov 2018 |
+| **Associate Lecturer**<br><span style="color: #979797;">I'm currently teaching the unit *Computer Simulation* (onshore), *Economics* (offshore), and *Supply Chain Modelling and Optimisation* (offshore) and supervising 12 UG/MS students</span> | 2026 - Present |
+| **Sessional Academic**<br><span style="color: #979797;">Teaching and tutoring 600+ UG students onshore and offshore across nine units in mathematics, statistics, data science, and actuarial science<br></span> | 2023 - 2025 |
+| **Research Assistant**<br><span style="color: #979797;">Solving DEs with FEM for bridge structural analysis<br> Output was published in 2019.</span> | Feb - Nov 2018 |
 
 : {.borderless .hover}
 :::
@@ -170,6 +170,5 @@ My research focuses on integrating mathematical, statistical, and computational 
 | 2018 | Statistical Tools for Risk Modelling | Thammasat University |
 
 : {.borderless .hover}
-
 
 :::

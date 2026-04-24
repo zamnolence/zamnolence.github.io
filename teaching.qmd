@@ -22,14 +22,21 @@ listing:
         title: "R and Python for Computer Simulation"
         description: 'STAT2005 Computer Simulation course notes, slides, and workshop activities'
         date: "2026-04-06"
-        categories: [Teaching, Statististics, Computing, R, Python, Undergraduate]
+        categories: [Teaching, Statistics, Computing, R, Python, Undergraduate]
 
       - path: https://github.com/zamnolence/Economics-at-YSU
         image: assets/images/econ-blog.png
-        title: "YSU Economics"
+        title: "Actuarial Economics (YSU)"
         description: 'Economics lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
         date: "2025-06-13"
-        categories: [Teaching, Finance, Undergraduate]
+        categories: [Teaching, Finance, Actuarial science, Undergraduate]
+
+      - path: https://github.com/Ben-wiwat/SCMO
+        image: assets/images/scmo-blog.png
+        title: "Supply Chain Modelling (YSU)"
+        description: 'Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
+        date: "2025-06-13"
+        categories: [Teaching, Optimisation, Python, Undergraduate]
 
       - path: assets/media/Calculus_Ref_Sheet.pdf
         image: assets/images/calculus-blog.png
