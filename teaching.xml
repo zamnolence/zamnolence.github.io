@@ -22,7 +22,7 @@
   <link>https://zamnolence.github.io/</link>
   <description>STAT2005 Computer Simulation course notes, slides, and workshop activities</description>
   <category>Teaching</category>
-  <category>Statististics</category>
+  <category>Statistics</category>
   <category>Computing</category>
   <category>R</category>
   <category>Python</category>
@@ -32,15 +32,28 @@
   <media:content url="https://zamnolence.github.io/assets/images/compsim-blog.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
-  <title>YSU Economics</title>
+  <title>Actuarial Economics (YSU)</title>
   <link>https://zamnolence.github.io/</link>
   <description>Economics lecture slides, workshop activities, and assessments (accessible until 30 June 2025).</description>
   <category>Teaching</category>
   <category>Finance</category>
+  <category>Actuarial science</category>
   <category>Undergraduate</category>
   <guid>https://zamnolence.github.io/</guid>
   <pubDate>Thu, 12 Jun 2025 16:00:00 GMT</pubDate>
   <media:content url="https://zamnolence.github.io/assets/images/econ-blog.png" medium="image" type="image/png" height="96" width="144"/>
+</item>
+<item>
+  <title>Supply Chain Modelling (YSU)</title>
+  <link>https://zamnolence.github.io/</link>
+  <description>Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2025).</description>
+  <category>Teaching</category>
+  <category>Optimisation</category>
+  <category>Python</category>
+  <category>Undergraduate</category>
+  <guid>https://zamnolence.github.io/</guid>
+  <pubDate>Thu, 12 Jun 2025 16:00:00 GMT</pubDate>
+  <media:content url="https://zamnolence.github.io/assets/images/scmo-blog.png" medium="image" type="image/png" height="96" width="144"/>
 </item>
 <item>
   <title>Statistical Probability and Data Analysis</title>
