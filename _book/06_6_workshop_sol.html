@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>33&nbsp; Python Workshop Solutions – R and Python for Computer Simulation (v1.1.0)</title>
+<title>33&nbsp; Python Workshop Solutions – R and Python for Computer Simulation (v1.2.0)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./10_case_studies.html" rel="next">
+<link href="./07_timeseries.html" rel="next">
 <link href="./06_5_workshop_sol.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -74,10 +74,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-774f581f871a14bd68681a78fcf41193.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-774f581f871a14bd68681a78fcf41193.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-9f3bb4a36277630c9a94b62b6e028d80.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-774f581f871a14bd68681a78fcf41193.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -141,7 +145,169 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -169,8 +335,9 @@ window.Quarto = {
       <img src="./logo_.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
       </a>
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">R and Python for Computer Simulation (v1.1.0)</a> 
+      <a href="./">R and Python for Computer Simulation (v1.2.0)</a> 
         <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -194,13 +361,42 @@ window.Quarto = {
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><strong>Introduction</strong></span></a>
+            <a href="./00_workshop_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Workshop Setup Guide</strong></span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_r_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">R on RStudio</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_python_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python on VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_quarto_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto and Git on VS Code (Optional)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./01_introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01_1_simulation_intro.html" class="sidebar-item-text sidebar-link">
@@ -237,11 +433,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./02_distributions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Statistical Distributions</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02_1_univariate.html" class="sidebar-item-text sidebar-link">
@@ -278,11 +474,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./03_inference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Statistical Inference</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03_1_frequentist.html" class="sidebar-item-text sidebar-link">
@@ -319,11 +515,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./04_simulation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Univariate Simulation</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_1_transformation_rvs.html" class="sidebar-item-text sidebar-link">
@@ -366,11 +562,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./05_multivariate.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Multivariate Simulation</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05_1_transformation_mvs.html" class="sidebar-item-text sidebar-link">
@@ -413,11 +609,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="./06_stochastic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><strong>Stochastic Modelling</strong></span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06_1_process.html" class="sidebar-item-text sidebar-link">
@@ -458,35 +654,100 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><strong>Case Studies</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <a href="./07_timeseries.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Time Series Modelling</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_1_white_noise.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">White Noise</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_2_ar.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">Autoregressive Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_3_acf.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">Autocorrelation Function</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_4_var.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">Vector Autoregressive Model</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_5_extension.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">38</span>&nbsp; <span class="chapter-title">Other Time Series Models</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_6_workshop.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">39</span>&nbsp; <span class="chapter-title">Workshop Activities</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_7_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">40</span>&nbsp; <span class="chapter-title">R Workshop Solutions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_8_workshop_sol.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">41</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="./10_case_studies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong>Case Studies</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10_1_epidemic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">34</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
+ <span class="menu-text"><span class="chapter-number">42</span>&nbsp; <span class="chapter-title">🦠 Epidemic Modelling</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10_2_pollution.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">35</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></span></a>
+ <span class="menu-text"><span class="chapter-number">43</span>&nbsp; <span class="chapter-title">🌫️ Air Pollution Monitoring</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10_3_portfolio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">36</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">44</span>&nbsp; <span class="chapter-title">📈 Portfolio Risk Simulation</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10_4_EVbays.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">37</span>&nbsp; <span class="chapter-title">🚗 EV Charging Bays Simulation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">45</span>&nbsp; <span class="chapter-title">🚗 EV Charging Bays Simulation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_5_traffic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">46</span>&nbsp; <span class="chapter-title">🚥 Traffic Flow Simulation</span></span></a>
   </div>
 </li>
       </ul>
@@ -516,6 +777,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
+
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06_stochastic.html"><strong>Stochastic Modelling</strong></a></li><li class="breadcrumb-item"><a href="./06_6_workshop_sol.html"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">33</span>&nbsp; <span class="chapter-title">Python Workshop Solutions</span></h1>
@@ -541,7 +803,7 @@ window.Quarto = {
 <ol type="a">
 <li>Simulate the process over a time interval of 8 hours (i.e., from <span class="math inline">\(t=0\)</span> to <span class="math inline">\(t=8\)</span>) using the inter-arrival time method. Set seed using set.seed(1234) before simulating the process.</li>
 </ol>
-<div id="d6416060" class="cell" data-execution_count="1">
+<div id="a0dd703b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_hpp(lmbda, T_max):</span>
@@ -559,7 +821,7 @@ window.Quarto = {
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">1234</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>event_times_hpp <span class="op">=</span> simulate_hpp(lmbda <span class="op">=</span> <span class="dv">5</span>, T_max <span class="op">=</span> <span class="dv">8</span>)</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(event_times_hpp, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>array([0.04, 0.24, 0.35, 0.66, 0.96, 1.03, 1.09, 1.42, 2.05, 2.47, 2.56,
        2.69, 2.92, 3.17, 3.27, 3.43, 3.57, 3.57, 3.87, 4.3 , 4.39, 4.58,
        4.6 , 4.69, 5.23, 5.44, 5.54, 5.85, 5.93, 6.1 , 6.5 , 6.62, 6.94,
@@ -569,7 +831,7 @@ window.Quarto = {
 <ol start="2" type="a">
 <li>Plot the number of events <span class="math inline">\(N(t)\)</span> against time <span class="math inline">\(t\)</span> for the simulated process.</li>
 </ol>
-<div id="27d648c4" class="cell" data-execution_count="2">
+<div id="e11bab22" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.step(np.concatenate(([<span class="dv">0</span>], event_times_hpp)), np.arange(<span class="bu">len</span>(event_times_hpp) <span class="op">+</span> <span class="dv">1</span>), where<span class="op">=</span><span class="st">'post'</span>)</span>
@@ -589,9 +851,9 @@ window.Quarto = {
 <ol start="3" type="a">
 <li>Calculate the average number of events <em>per hour</em> from your simulation and compare it to the theoretical rate <span class="math inline">\(\lambda\)</span>.</li>
 </ol>
-<div id="b12cdb59" class="cell" data-execution_count="3">
+<div id="83f117d5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(event_times_hpp) <span class="op">/</span> <span class="dv">8</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>4.625</code></pre>
 </div>
 </div>
@@ -599,7 +861,7 @@ window.Quarto = {
 <ol start="4" type="a">
 <li>Repeat the simulation 1000 times and plot the distribution of the total number of events in 8 hours. Does it match the expected Poisson distribution with mean <span class="math inline">\(\lambda \times T\)</span>?</li>
 </ol>
-<div id="4b178236" class="cell" data-execution_count="4">
+<div id="618421f6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> poisson</span>
@@ -652,7 +914,7 @@ window.Quarto = {
 <ol start="5" type="a">
 <li>Calculate the empirical probability of observing exactly 40 events in 8 hours and compare it to the theoretical probability from the Poisson distribution</li>
 </ol>
-<div id="ad3c43f7" class="cell" data-execution_count="5">
+<div id="b0d33e24" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical probability of exactly 40 events:"</span>, np.mean(total_events <span class="op">==</span> <span class="dv">40</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical probability of exactly 40 events:"</span>, <span class="bu">round</span>(poisson.pmf(<span class="dv">40</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>), <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -663,7 +925,7 @@ Theoretical probability of exactly 40 events: 0.0629</code></pre>
 <ol start="6" type="a">
 <li>Calculate the empirical probability of observing more than 50 events in 8 hours and compare it to the theoretical probability from the Poisson distribution.</li>
 </ol>
-<div id="79eb9d79" class="cell" data-execution_count="6">
+<div id="78f5c353" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Empirical probability of more than 50 events:"</span>, np.mean(total_events <span class="op">&gt;</span> <span class="dv">50</span>))</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Theoretical probability of more than 50 events:"</span>, <span class="bu">round</span>(<span class="dv">1</span> <span class="op">-</span> poisson.cdf(<span class="dv">50</span>, <span class="dv">5</span> <span class="op">*</span> <span class="dv">8</span>), <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -686,7 +948,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol type="a">
 <li>Plot the intensity function <span class="math inline">\(\lambda(t)\)</span> over the time interval <span class="math inline">\([0, 10]\)</span>.</li>
 </ol>
-<div id="3db6a94f" class="cell" data-execution_count="7">
+<div id="3a34e41c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -716,7 +978,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol start="2" type="a">
 <li>Use the thinning algorithm to simulate a NHPP with this intensity function over the time interval <span class="math inline">\([0, 10]\)</span>. Set seed using <code>set.seed(1234)</code> before simulating the process.</li>
 </ol>
-<div id="43bae6ac" class="cell" data-execution_count="8">
+<div id="eb4ebcb8" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_nhpp_thinning(lambda_fun, lambda_max, T_max):</span>
@@ -740,7 +1002,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>T_max <span class="op">=</span> <span class="dv">10</span></span>
 <span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>event_times_nhpp <span class="op">=</span> simulate_nhpp_thinning(lambda_fun, lambda_max, T_max)</span>
 <span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>np.<span class="bu">round</span>(event_times_nhpp, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>array([2.14, 3.32, 3.45, 3.54, 4.05, 4.45, 4.76, 4.82, 4.97, 4.98, 4.99,
        5.22, 5.23, 5.33, 5.36, 5.57, 5.81, 6.2 , 7.  , 7.24, 7.36, 7.55,
        8.04, 8.24, 9.32, 9.91])</code></pre>
@@ -749,7 +1011,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol start="3" type="a">
 <li>Report the number of events that occurred in the simulated NHPP. Compare it to the expected number of events.</li>
 </ol>
-<div id="c8b2ea9b" class="cell" data-execution_count="9">
+<div id="438fdcb3" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># simulated number of events</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(event_times_nhpp)</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -769,7 +1031,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol start="4" type="a">
 <li>Plot the cumulative count of events over time, i.e., plot <span class="math inline">\(N(t)\)</span> against <span class="math inline">\(t.\)</span></li>
 </ol>
-<div id="776790cf" class="cell" data-execution_count="10">
+<div id="c0a2330a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.step(np.concatenate(([<span class="dv">0</span>], event_times_nhpp)), np.arange(<span class="bu">len</span>(event_times_nhpp) <span class="op">+</span> <span class="dv">1</span>), where<span class="op">=</span><span class="st">'post'</span>, linewidth<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Time"</span>)</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"N(t)"</span>)</span>
@@ -803,7 +1065,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <li>service rate <span class="math inline">\(\mu = 2\)</span> per server</li>
 <li>a total simulation time of 720 hours (60 working days for 12 hours per day).</li>
 </ul>
-<div id="842e8a82" class="cell" data-execution_count="11">
+<div id="86460671" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -927,7 +1189,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol type="a">
 <li>Conduct a comparative analysis if EV adoption increases, i.e., re-run the simulation with <span class="math inline">\(\lambda = 3.5\)</span> cars/hour. How do the average waiting time (<span class="math inline">\(W_q\)</span>) and utilisation (<span class="math inline">\(\rho\)</span>) change?</li>
 </ol>
-<div id="95217315" class="cell" data-execution_count="12">
+<div id="14c5a33e" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Erlang-C formula for M/M/c probability of waiting</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -1012,7 +1274,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a>    results <span class="op">=</span> pd.concat([results, col], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>results</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="26">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -1122,7 +1384,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol start="2" type="a">
 <li>What if charging is slower in winter? Increase the mean charging time to 37.5 minutes (i.e., <span class="math inline">\(\mu = 1.6\)</span>). How does this affect utilisation and waiting?</li>
 </ol>
-<div id="fa89c6b1" class="cell" data-execution_count="13">
+<div id="35d3784a" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>results2 <span class="op">=</span> pd.DataFrame({<span class="st">"Metric"</span>: metrics})</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mu_values <span class="op">=</span> [<span class="dv">2</span>, <span class="fl">1.6</span>]</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> mu <span class="kw">in</span> mu_values:</span>
@@ -1130,7 +1392,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    results2 <span class="op">=</span> pd.concat([results2, col], axis<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>results2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="27">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <div>
 
 
@@ -1239,7 +1501,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <ol start="3" type="a">
 <li>The university is planning to add more chargers to the station as the analysis (from part (a) and (b)) shows that the current system will be heavily utilised if the arrival rate increases or if the service rate decreases only by just a little. Suppose that in the next couple years the arrival rate is expected to increase to 4 cars/hour and the mean charging time during winter is 37.5 minutes (i.e., <span class="math inline">\(\mu = 1.6\)</span>), how many chargers should the university plan to install?</li>
 </ol>
-<div id="ca523b14" class="cell" data-execution_count="14">
+<div id="fa7a1f82" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>c_values <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>]</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>rho_values <span class="op">=</span> [<span class="dv">4</span> <span class="op">/</span> (c <span class="op">*</span> <span class="fl">1.6</span>) <span class="cf">for</span> c <span class="kw">in</span> c_values]</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>pd.DataFrame({</span>
@@ -1247,7 +1509,7 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Utilisation"</span>: [<span class="bu">round</span>(rho, <span class="dv">3</span>) <span class="cf">for</span> rho <span class="kw">in</span> rho_values],</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Recommendation"</span>: [<span class="st">"Underutilised"</span> <span class="cf">if</span> rho <span class="op">&lt;</span> <span class="fl">0.6</span> <span class="cf">else</span> <span class="st">"Efficient"</span> <span class="cf">if</span> rho <span class="op">&lt;</span> <span class="fl">0.8</span> <span class="cf">else</span> <span class="st">"High utilisation"</span> <span class="cf">if</span> rho <span class="op">&lt;</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"Not Recommended"</span> <span class="cf">for</span> rho <span class="kw">in</span> rho_values]</span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="28">
+<div class="cell-output cell-output-display" data-execution_count="14">
 <div>
 
 
@@ -1298,6 +1560,19 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {
@@ -1703,8 +1978,8 @@ Theoretical probability of more than 50 events: 0.0526</code></pre>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./10_case_studies.html" class="pagination-link" aria-label="<strong>Case Studies</strong>">
-        <span class="nav-page-text"><strong>Case Studies</strong></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./07_timeseries.html" class="pagination-link" aria-label="<strong>Time Series Modelling</strong>">
+        <span class="nav-page-text"><strong>Time Series Modelling</strong></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
