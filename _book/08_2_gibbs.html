@@ -1142,61 +1142,61 @@ N(-2.4,0.36).
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fl">0.8</span> <span class="sc">*</span> (<span class="sc">-</span><span class="dv">3</span>), <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.36</span>))</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">round</span>(x1, <span class="dv">2</span>); x1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.47</code></pre>
+<pre><code>[1] -2.94</code></pre>
 </div>
 </div>
-<p>  <span class="math inline">\(\therefore X^{(1)} = -2.47.\)</span> Now update <span class="math inline">\(Y\)</span> using the newly updated value <span class="math inline">\(X^{(1)}\)</span>:</p>
+<p>  <span class="math inline">\(\therefore X^{(1)} = -2.94.\)</span> Now update <span class="math inline">\(Y\)</span> using the newly updated value <span class="math inline">\(X^{(1)}\)</span>:</p>
 <p><span class="math display">\[
 Y^{(1)} \sim N(0.8X^{(1)},0.36)
 =
-N(-1.976,0.36).
+N(-2.352,0.36).
 \]</span></p>
 <p>  Randomly draw a value from this distribution:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fl">0.8</span> <span class="sc">*</span> x1, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.36</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y1 <span class="ot">&lt;-</span> <span class="fu">round</span>(y1, <span class="dv">2</span>); y1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -2.39</code></pre>
+<pre><code>[1] -2.48</code></pre>
 </div>
 </div>
-<p>  <span class="math inline">\(\therefore Y^{(1)} = -2.39.\)</span> Thus, after the first iteration, we have</p>
+<p>  <span class="math inline">\(\therefore Y^{(1)} = -2.48.\)</span> Thus, after the first iteration, we have</p>
 <p><span class="math display">\[
-\boxed{(X^{(1)},Y^{(1)}) = (-2.47,-2.39)}.
+\boxed{(X^{(1)},Y^{(1)}) = (-2.94,-2.48)}.
 \]</span></p>
 <ul>
 <li><p><span style="color:blue;"><strong>At iteration <span class="math inline">\(t=1\)</span></strong></span>,</p>
-<p>we repeat the same process. First update <span class="math inline">\(X\)</span> using <span class="math inline">\(Y^{(1)}=-2.39\)</span>:</p></li>
+<p>we repeat the same process. First update <span class="math inline">\(X\)</span> using <span class="math inline">\(Y^{(1)}=-2.48\)</span>:</p></li>
 </ul>
 <p><span class="math display">\[
 X^{(2)} \sim N(0.8Y^{(1)},0.36)
 =
-N(-1.912,0.36).
+N(-1.984,0.36).
 \]</span></p>
 <p>  Randomly draw a value from this distribution:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fl">0.8</span> <span class="sc">*</span> y1, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.36</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> <span class="fu">round</span>(x2, <span class="dv">2</span>); x2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -1.42</code></pre>
+<pre><code>[1] -0.8</code></pre>
 </div>
 </div>
-<p>  <span class="math inline">\(\therefore X^{(2)} = -1.42.\)</span> Now update <span class="math inline">\(Y\)</span> using the newly updated value <span class="math inline">\(X^{(2)}\)</span>:</p>
+<p>  <span class="math inline">\(\therefore X^{(2)} = -0.8.\)</span> Now update <span class="math inline">\(Y\)</span> using the newly updated value <span class="math inline">\(X^{(2)}\)</span>:</p>
 <p><span class="math display">\[
 Y^{(2)} \sim N(0.8X^{(2)},0.36)
 =
-N(-1.136,0.36)
+N(-0.64,0.36)
 \]</span></p>
 <p>  Randomly draw a value from this distribution:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean =</span> <span class="fl">0.8</span> <span class="sc">*</span> x2, <span class="at">sd =</span> <span class="fu">sqrt</span>(<span class="fl">0.36</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> <span class="fu">round</span>(y2, <span class="dv">2</span>); y2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.07</code></pre>
+<pre><code>[1] -0.31</code></pre>
 </div>
 </div>
 <p>Thus,</p>
 <p><span class="math display">\[
-\boxed{(X^{(2)},Y^{(2)})=(-1.42,-0.07)}.
+\boxed{(X^{(2)},Y^{(2)})=(-0.8,-0.31)}.
 \]</span></p>
 <p>By repeating this process for many iterations, we generate a sequence of samples that approximates the target bivariate normal distribution.</p>
 </section>
@@ -1375,7 +1375,7 @@ These are the three conditional distributions used in the Gibbs sampler. -->
 <div id="fig-multivariate-gibbs" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-multivariate-gibbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="figs/3d-gibbs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;43.2: Multivariate Gibbs Sampling"><img src="figs/3d-gibbs.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%"></a>
+<a href="figs/3d-gibbs.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;43.2: Multivariate Gibbs Sampling"><img src="figs/3d-gibbs.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:45.0%"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-multivariate-gibbs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;43.2: Multivariate Gibbs Sampling
