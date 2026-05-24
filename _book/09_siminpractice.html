@@ -798,6 +798,32 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Throughout this course, we have explored how simulation can be used to model randomness, generate complex random variables, analyse stochastic systems, and estimate unknown quantities using Monte Carlo methods. We have also seen how modern simulation techniques such as Markov chain Monte Carlo (MCMC) allow us to work with probability distributions that are difficult or impossible to analyse directly.</p>
+<p>In practice, however, building a simulation model is often only the beginning. Real-world simulation studies must also address important practical questions:</p>
+<ul>
+<li>How can simulation estimates be made more accurate?</li>
+<li>How can computational cost be reduced?</li>
+<li>How can simulation be used to compare competing decisions or system designs?</li>
+<li>How can we efficiently explore large and complex input spaces?</li>
+</ul>
+<p>This chapter focuses on these practical aspects of simulation.</p>
+<p>We begin by introducing variance reduction methods, which improve the efficiency of Monte Carlo simulation by reducing estimator variability without necessarily increasing the number of simulation runs. In particular, we study:</p>
+<ul>
+<li>Importance Sampling, which focuses simulation effort on the most influential regions of the sample space;</li>
+<li>Stratified Sampling, which improves coverage by partitioning the sample space into representative regions;</li>
+<li>Latin Hypercube Sampling (LHS), which extends stratified sampling ideas to higher-dimensional simulation problems.</li>
+</ul>
+<p>These methods are especially valuable when simulations are computationally expensive or when estimating rare events and extreme outcomes.</p>
+<p>The chapter then introduces the idea of simulation optimisation and design of experiments (DoE). Rather than using simulation only to understand system behaviour, these approaches use simulation to support decision-making and system improvement. Applications include:</p>
+<ul>
+<li>choosing the number of servers in a queueing system;</li>
+<li>optimising EV charging infrastructure;</li>
+<li>comparing inventory policies;</li>
+<li>tuning machine learning hyperparameters;</li>
+<li>and evaluating alternative operational strategies.</li>
+</ul>
+<p>Design of experiments provides systematic ways to explore simulation inputs efficiently, helping practitioners gain more information using fewer simulation runs.</p>
+<p>Overall, this chapter emphasises that simulation is not only a mathematical or computational tool, but also a practical framework for experimentation, optimisation, and decision-making under uncertainty. These ideas play an increasingly important role in modern statistics, engineering, sustainability, operations research, finance, and artificial intelligence. ￼</p>
 
 
 
