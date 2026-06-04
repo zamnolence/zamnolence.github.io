@@ -98,7 +98,7 @@
     code span.vs { color: #20794d; } /* VerbatimString */
     code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="01lecture_files/libs/revealjs/dist/theme/quarto-f778c447a763546b3edea68196b5a5ee.css">
+  <link rel="stylesheet" href="01lecture_files/libs/revealjs/dist/theme/quarto-31e77d737e81b9b945dd1098fae77c0e.css">
   <link href="01lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="01lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="01lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -1395,7 +1395,7 @@ Lecturer: Sam Wiwatanapataphee
 
 <div class="columns">
 <div class="column fragment" style="width:50%;">
-<div id="acee10e9" class="cell" data-execution_count="1">
+<div id="4fbf3c26" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -1430,7 +1430,7 @@ Lecturer: Sam Wiwatanapataphee
 </div>
 </div>
 </div><div class="column fragment" style="width:50%;">
-<div id="a840926f" class="cell" data-execution_count="2">
+<div id="3f7a6583" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">200</span>)</span>
@@ -1577,10 +1577,9 @@ f''(3) &amp;= 6 &gt; 0 \\
 </section>
 <section class="slide level2">
 
-<div style="text-align: center;">
-<div id="b2148aa2" class="cell" data-execution_count="3">
+<div id="a540c296" class="cell" data-execution_count="3">
 <details class="code-fold">
-<summary>Code</summary>
+<summary>Finding critical points of f(x) = x³ - 6x² + 9x</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb4-2"><a href=""></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
 <span id="cb4-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1598,28 +1597,37 @@ f''(3) &amp;= 6 &gt; 0 \\
 <span id="cb4-15"><a href=""></a>x_crit <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>])</span>
 <span id="cb4-16"><a href=""></a>y_crit <span class="op">=</span> x_crit<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">6</span><span class="op">*</span>x_crit<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x_crit</span>
 <span id="cb4-17"><a href=""></a></span>
-<span id="cb4-18"><a href=""></a><span class="co"># Plot</span></span>
-<span id="cb4-19"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
-<span id="cb4-20"><a href=""></a>plt.plot(x, y)</span>
-<span id="cb4-21"><a href=""></a>plt.scatter(x_crit, y_crit, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb4-22"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
-<span id="cb4-23"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
-<span id="cb4-24"><a href=""></a>plt.title(<span class="st">"f(x) = x³ - 6x² + 9x"</span>)</span>
-<span id="cb4-25"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb4-26"><a href=""></a></span>
-<span id="cb4-27"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-18"><a href=""></a>x_crit, y_crit</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>(array([1, 3]), array([4, 0]))</code></pre>
+</div>
+</div>
+<p><br></p>
+<div id="0d6a781f" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Plotting f(x) and its critical points</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="co"># Plot</span></span>
+<span id="cb6-2"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>,<span class="dv">4</span>))</span>
+<span id="cb6-3"><a href=""></a>plt.plot(x, y)</span>
+<span id="cb6-4"><a href=""></a>plt.scatter(x_crit, y_crit, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb6-5"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb6-6"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb6-7"><a href=""></a>plt.title(<span class="st">"f(x) = x³ - 6x² + 9x"</span>)</span>
+<span id="cb6-8"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb6-9"><a href=""></a></span>
+<span id="cb6-10"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="01lecture_files/figure-revealjs/cell-4-output-1.png" width="629" height="481"></p>
+<p><img data-src="01lecture_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="554" height="407"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="fragment">
+<div class="fragment center">
 <p>Are these the ultimate maximum and minimum of the function <span class="math inline">\(f(x)\)</span>?</p>
-</div>
 </div>
 </section>
 <section class="slide level2 scrollable">
@@ -1708,34 +1716,34 @@ f(2) &amp;= 17 \\
 <section class="slide level2">
 
 <div style="text-align: center;">
-<div id="637320c5" class="cell" data-execution_count="4">
+<div id="49374db8" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Define the function</span></span>
-<span id="cb5-2"><a href=""></a><span class="kw">def</span> f(x):</span>
-<span id="cb5-3"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
-<span id="cb5-4"><a href=""></a></span>
-<span id="cb5-5"><a href=""></a><span class="co"># Generate x values</span></span>
-<span id="cb5-6"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">400</span>)</span>
-<span id="cb5-7"><a href=""></a>y <span class="op">=</span> f(x)</span>
-<span id="cb5-8"><a href=""></a></span>
-<span id="cb5-9"><a href=""></a><span class="co"># Plot the function</span></span>
-<span id="cb5-10"><a href=""></a>plt.figure()</span>
-<span id="cb5-11"><a href=""></a>plt.plot(x, y)</span>
-<span id="cb5-12"><a href=""></a>plt.scatter(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-13"><a href=""></a>plt.scatter(<span class="dv">2</span>, <span class="dv">17</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-14"><a href=""></a>plt.scatter(<span class="op">-</span><span class="fl">2.29</span>, <span class="fl">9.3</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-15"><a href=""></a>plt.scatter(<span class="fl">0.29</span>, <span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
-<span id="cb5-16"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
-<span id="cb5-17"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
-<span id="cb5-18"><a href=""></a>plt.title(<span class="st">"f(x) = x³ + 3x² − 2x + 1"</span>)</span>
-<span id="cb5-19"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb5-20"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="co"># Define the function</span></span>
+<span id="cb7-2"><a href=""></a><span class="kw">def</span> f(x):</span>
+<span id="cb7-3"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb7-4"><a href=""></a></span>
+<span id="cb7-5"><a href=""></a><span class="co"># Generate x values</span></span>
+<span id="cb7-6"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">400</span>)</span>
+<span id="cb7-7"><a href=""></a>y <span class="op">=</span> f(x)</span>
+<span id="cb7-8"><a href=""></a></span>
+<span id="cb7-9"><a href=""></a><span class="co"># Plot the function</span></span>
+<span id="cb7-10"><a href=""></a>plt.figure()</span>
+<span id="cb7-11"><a href=""></a>plt.plot(x, y)</span>
+<span id="cb7-12"><a href=""></a>plt.scatter(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-13"><a href=""></a>plt.scatter(<span class="dv">2</span>, <span class="dv">17</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-14"><a href=""></a>plt.scatter(<span class="op">-</span><span class="fl">2.29</span>, <span class="fl">9.3</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-15"><a href=""></a>plt.scatter(<span class="fl">0.29</span>, <span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb7-16"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb7-17"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb7-18"><a href=""></a>plt.title(<span class="st">"f(x) = x³ + 3x² − 2x + 1"</span>)</span>
+<span id="cb7-19"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb7-20"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="01lecture_files/figure-revealjs/cell-5-output-1.png" width="837" height="481"></p>
+<p><img data-src="01lecture_files/figure-revealjs/cell-6-output-1.png" width="837" height="481"></p>
 </figure>
 </div>
 </div>
@@ -1967,33 +1975,33 @@ Q(\mathbf{x})=\mathbf{x}^T\mathbf{Hx}
 </section>
 <section class="slide level2">
 
-<div id="72d5185a" class="cell" data-execution_count="5">
+<div id="dbb9c690" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb6-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb6-3"><a href=""></a></span>
-<span id="cb6-4"><a href=""></a><span class="co"># Define the function</span></span>
-<span id="cb6-5"><a href=""></a><span class="kw">def</span> f(x, y):</span>
-<span id="cb6-6"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x<span class="op">*</span>y</span>
-<span id="cb6-7"><a href=""></a></span>
-<span id="cb6-8"><a href=""></a><span class="co"># Create grid</span></span>
-<span id="cb6-9"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
-<span id="cb6-10"><a href=""></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
-<span id="cb6-11"><a href=""></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
-<span id="cb6-12"><a href=""></a>Z <span class="op">=</span> f(X, Y)</span>
-<span id="cb6-13"><a href=""></a></span>
-<span id="cb6-14"><a href=""></a><span class="co"># Contour plot</span></span>
-<span id="cb6-15"><a href=""></a>plt.figure()</span>
-<span id="cb6-16"><a href=""></a>plt.contour(X, Y, Z, levels<span class="op">=</span><span class="dv">30</span>)</span>
-<span id="cb6-17"><a href=""></a>plt.xlabel(<span class="st">'x'</span>)</span>
-<span id="cb6-18"><a href=""></a>plt.ylabel(<span class="st">'y'</span>)</span>
-<span id="cb6-19"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb8-3"><a href=""></a></span>
+<span id="cb8-4"><a href=""></a><span class="co"># Define the function</span></span>
+<span id="cb8-5"><a href=""></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb8-6"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x<span class="op">*</span>y</span>
+<span id="cb8-7"><a href=""></a></span>
+<span id="cb8-8"><a href=""></a><span class="co"># Create grid</span></span>
+<span id="cb8-9"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb8-10"><a href=""></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb8-11"><a href=""></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb8-12"><a href=""></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb8-13"><a href=""></a></span>
+<span id="cb8-14"><a href=""></a><span class="co"># Contour plot</span></span>
+<span id="cb8-15"><a href=""></a>plt.figure()</span>
+<span id="cb8-16"><a href=""></a>plt.contour(X, Y, Z, levels<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb8-17"><a href=""></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb8-18"><a href=""></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb8-19"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="01lecture_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="837" height="450"></p>
+<p><img data-src="01lecture_files/figure-revealjs/cell-7-output-1.png" class="quarto-figure quarto-figure-center" width="837" height="450"></p>
 </figure>
 </div>
 </div>
@@ -2119,14 +2127,14 @@ L(x,\lambda,\mu)=f(x)+\sum_{i=1}^m\lambda_i h_i(x)+\sum_{j=1}^p\mu_jg_j(x),
 <li class="fragment"><strong>Stationarity</strong> Compute the first-order partial derivatives of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(x_i, \lambda\)</span> and <span class="math inline">\(\mu\)</span>, and set them equal to zero. Solve for <span class="math inline">\(x_i, \lambda\)</span> and <span class="math inline">\(\mu\)</span>.</li>
 </ol>
 <div class="fragment" style="font-size: 90%;">
-<p>Mimimising <span class="math inline">\(f(x)\)</span>:</p>
+<p>Minimising <span class="math inline">\(f(x)\)</span>:</p>
 <p><span class="space-out"></span></p>
-<p><span class="math inline">\(\qquad \nabla_x L(x^*,\lambda^*,\mu^*)=\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p u_j^*\nabla g_j(x^*)=0\)</span></p>
+<p><span class="math inline">\(\qquad \nabla_x L(x^*,\lambda^*,\mu^*)=\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p \mu_j^*\nabla g_j(x^*)=0\)</span></p>
 </div>
 <div class="fragment" style="font-size: 90%;">
 <p>Maximising <span class="math inline">\(f(x)\)</span>:</p>
 <p><span class="space-out"></span></p>
-<p><span class="math inline">\(\qquad\nabla_x L(x^*,\lambda^*,\mu^*)={\color{red}-}\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p u_j^*\nabla g_j(x^*)=0\)</span></p>
+<p><span class="math inline">\(\qquad\nabla_x L(x^*,\lambda^*,\mu^*)={\color{red}-}\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p \mu_j^*\nabla g_j(x^*)=0\)</span></p>
 </div>
 <ol start="2" type="1">
 <li class="fragment"><p><strong>Primal feasibility</strong> <span class="math inline">\(\; h_i(x^*)=0, \; i=1,...,m, \;\text{and} \;\; g_j(x^*)\leq 0, \; j=1,...,p\)</span></p></li>

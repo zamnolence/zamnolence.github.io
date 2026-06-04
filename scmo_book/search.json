@@ -10,11 +10,31 @@
     ]
   },
   {
+    "objectID": "index.html#announcements-faqs",
+    "href": "index.html#announcements-faqs",
+    "title": "Supply Chain Modelling and Optimisation",
+    "section": "Announcements & FAQs",
+    "text": "Announcements & FAQs\n\n\n\n\n\n\nCautionTutorial Solutions and 2025 Materials Posted\n\n\n\nSolutions to tutorial questions will be posted here the day after the class. Students are encouraged to attempt the questions on their own before referring to the solutions. No submission of tutorial questions is required.\nThe materials for the 2025 class, including lecture slides and exam materials, have also been uploaded to this page for reference.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
     "objectID": "index.html#unit-materials-june-2026-class",
     "href": "index.html#unit-materials-june-2026-class",
     "title": "Supply Chain Modelling and Optimisation",
     "section": "Unit Materials (June 2026 Class)",
-    "text": "Unit Materials (June 2026 Class)\n\n\n\nDate\nTime\nTopic\nLT\nTUT\nSOLS\n\n\n\n\nThu 4\n6:10 - 9:40 PM\nIntro to Supply Chain & Optimisation\n\n\n\n\n\nFri 5\n6:10 - 9:40 PM\nNetwork Design - Single-Echelon Single-Commodity (SESC)\n\n\n\n\n\nSat 6\n5 PM\nAssignment Releases\n\n\n\n\n\nSun 7\n1:30 - 5:10 PM\nNetwork Design - Two-Echelon Multi-Commodity (TEMC)\n\n\n\n\n\nMon 8\n6:10 - 9:40 PM\nNetwork Design under Uncertainty\n\n\n\n\n\nTue 9\n6:10 - 9:40 PM\nDemand Forecasting Techniques\n\n\n\n\n\nWed 10\n6:10 - 9:40 PM\nInventory Model: Single-Commodity\n\n\n\n\n\nThu 11\n8:00 - 11:40 AM\nInventory Model: Discount and Multi-Commodity\n\n\n\n\n\nFri 12\n6:10 - 9:40 PM\nStochastic Inventory Model: Single and Multi-Period\n\n\n\n\n\nSat 13\n1:30 - 5:10 PM\nRevisionAssignment Due at 5:10 PM",
+    "text": "Unit Materials (June 2026 Class)\nUpdates from last year:\n\nMigrate from PDF to HTML format for lecture slides and tutorial materials.\nAdd more contents to the lecture slides, including more examples and detailed explanations.\nAdd Python code snippets to materials.\nAdd more tutorial questions and solutions.\n\n\n\n\nDate\nTime\nTopic\nLT\nTUT\nSOLS\n\n\n\n\nThu 4\n6:10 - 9:40 PM\nIntro to Supply Chain & Optimisation\n\n\n\n\n\nFri 5\n6:10 - 9:40 PM\nNetwork Design - Single-Echelon Single-Commodity (SESC)\n\n\n\n\n\nSat 6\n5 PM\nAssignment Releases\n\n\n\n\n\nSun 7\n1:30 - 5:10 PM\nNetwork Design - Two-Echelon Multi-Commodity (TEMC)\n\n\n\n\n\nMon 8\n6:10 - 9:40 PM\nNetwork Design under Uncertainty\n\n\n\n\n\nTue 9\n6:10 - 9:40 PM\nDemand Forecasting Techniques\n\n\n\n\n\nWed 10\n6:10 - 9:40 PM\nInventory Model: Single-Commodity\n\n\n\n\n\nThu 11\n8:00 - 11:40 AM\nInventory Model: Discount and Multi-Commodity\n\n\n\n\n\nFri 12\n6:10 - 9:40 PM\nStochastic Inventory Model: Single and Multi-Period\n\n\n\n\n\nSat 13\n1:30 - 5:10 PM\nRevisionAssignment Due at 5:10 PM",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#materials",
+    "href": "index.html#materials",
+    "title": "Supply Chain Modelling and Optimisation",
+    "section": "2025 Materials",
+    "text": "2025 Materials\n\nLecture Slides\n\nLecture 1\nLecture 2\nLecture 3\nLecture 4\nLecture 5\nLecture 6\nLecture 7\nLecture 8\n\nExam Materials\n\nExam Paper\nSolutions",
     "crumbs": [
       "Preface"
     ]
