@@ -34,7 +34,7 @@ listing:
       - path: https://github.com/zamnolence/scmo_book
         image: assets/images/scmo-blog.png
         title: "Supply Chain Modelling (YSU)"
-        description: 'Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
+        description: 'Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2026).'
         date: "2025-06-13"
         categories: [Teaching, Optimisation, Python, Undergraduate]
 
