@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="01lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="01lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="01lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="01lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="01lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="01lecture_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="01lecture_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Lecturer: Sam Wiwatanapataphee">
+  <title>Topic 1: Introduction to Supply Chain and Optimisation</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="01lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="01lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="01lecture_files/libs/revealjs/dist/theme/quarto-f778c447a763546b3edea68196b5a5ee.css">
+  <link href="01lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="01lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="01lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="01lecture_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="01lecture_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="01lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Topic 1: Introduction to Supply Chain and Optimisation</h1>
+  <p class="subtitle">05115130 Supply Chain Modelling and Optimisation</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Lecturer: Sam Wiwatanapataphee 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:275287a@curtin.edu.au">275287a@curtin.edu.au</a>
+</div>
+        <p class="quarto-title-affiliation">
+            School of EECMS, Curtin University
+          </p>
+    </div>
+</div>
+
+  <p class="date">4 Jun 2026</p>
+</section>
+<section id="goals-today" class="slide level2 scrollable">
+<h2>Goals today</h2>
+<ol start="0" type="1">
+<li class="fragment">Unit information</li>
+</ol>
+<p><span class="space-out"></span></p>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<ol type="1">
+<li class="fragment">Introduction to Supply Chain</li>
+</ol>
+<ul>
+<li class="fragment">What is Supply Chain?</li>
+<li class="fragment">Supply Chain Network Flows</li>
+<li class="fragment">Roles of Logistics in Supply Chain</li>
+<li class="fragment">Supply Chain Management (SCM)</li>
+<li class="fragment">Push-Pull Strategies in SCM</li>
+<li class="fragment">Case Studies</li>
+<li class="fragment">Supply Chain Network Design</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<ol start="2" type="1">
+<li class="fragment">Review of Optimisation Problems</li>
+</ol>
+<ul>
+<li class="fragment">Unconstrained Optimisation</li>
+<li class="fragment">Constrained Optimisation</li>
+<li class="fragment">Mixed Constrained Optimisation</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="materials">Materials</h3>
+<ul>
+<li>Unit Page: <a href="https://zamnolence.github.io/scmo.html">zamnolence.github.io/scmo.html</a></li>
+</ul>
+<h3 id="assessments">Assessments</h3>
+<ol type="1">
+<li><strong>20% Assignment</strong></li>
+</ol>
+<ul>
+<li><strong>Available:</strong> 6 June (5 PM), <strong>Due:</strong> 13 June (5:10 PM)</li>
+<li>Submit a <strong>hard copy in class</strong> or submit it <strong>digitally via WeChat</strong> (ID: <strong>cubdwi</strong>)</li>
+<li>If submit via WeChat, please tell me your name (in English) and student ID, and wait for confirmation.</li>
+</ul>
+<ol start="2" type="1">
+<li><strong>80% Final Exam</strong> (<strong>Duration:</strong> 2 hours)</li>
+</ol>
+<ul>
+<li>Formulas are given</li>
+</ul>
+<h3 id="core-readings">Core Readings</h3>
+<ul>
+<li><a href="https://doi.org/10.1002/0470014040">Ghiani, Gianpaolo, Gilbert Laporte, and Roberto Musmanno, 2003. “Introduction to logistics systems planning and control”. https://doi.org/10.1002/0470014040.</a></li>
+</ul>
+</section>
+<section id="unit-contents" class="slide level2">
+<h2>Unit Contents</h2>
+<h3 id="i.-logistics-network-design">I. Logistics Network Design</h3>
+<ul>
+<li class="fragment">Single-Echelon Single-Commodity (SESC) Location Models;</li>
+<li class="fragment">Two-Echelon Multi-Commodity (TEMC) Location Models;</li>
+<li class="fragment">Network Design under Uncertainty</li>
+</ul>
+<h3 id="ii.-demand-forecasting">II. Demand Forecasting</h3>
+<ul>
+<li class="fragment">Time Series Regression Models;</li>
+<li class="fragment">Time Series Decomposition</li>
+</ul>
+<h3 id="iii.-inventory-models">III. Inventory Models</h3>
+<ul>
+<li class="fragment">Deterministic: Single Commodity, Discount &amp; Multicommodity;</li>
+<li class="fragment">Stochastic: Single-Period &amp; Multi-Period Models</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Now let’s take a closer look at the core content of this unit.</p></li>
+<li><p>The unit is organised into three major themes: Logistics Network Design, Demand Forecasting, and Inventory Models.</p></li>
+</ul>
+<p>_ Begin with Logistics Network Design, which focuses on how supply chain networks are structured and optimised.</p>
+<ul>
+<li><p>First, we’ll study Single-Echelon, Single-Commodity Location Models.</p>
+<ul>
+<li><p>These models help us determine the optimal location of facilities—such as warehouses or distribution centres—when dealing with one product and one level of distribution.</p></li>
+<li><p>Next, we move to Two-Echelon, Multicommodity Location Models.</p></li>
+<li><p>Here, the system becomes more realistic and complex. We consider multiple layers in the supply chain — for example, factories and warehouses — and multiple products flowing through the network.</p></li>
+<li><p>Finally, we’ll examine Network Design under Uncertainty. In reality, demand, costs, and supply conditions are rarely certain. We will learn how to incorporate uncertainty into our models to make more robust strategic decisions.</p></li>
+</ul></li>
+<li><p>The second theme is Demand Forecasting.</p>
+<ul>
+<li><p>Accurate forecasts are critical because SC decisions rely heavily on future demand estimates.</p></li>
+<li><p>We’ll cover Time Series Regression Models, which use historical data to identify trends and relationships.</p></li>
+<li><p>We’ll also study Time Series Decomposition, where we break demand data into components such as trend, seasonality, and random variation. This helps us better understand patterns and improve forecast accuracy.</p></li>
+</ul></li>
+<li><p>The third major component is Inventory Models.</p>
+<ul>
+<li><p>We begin with Deterministic Inventory Models, where demand is assumed to be known and constant.</p></li>
+<li><p>Then we move to Stochastic Inventory Models, where demand is uncertain.</p></li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="introduction-to-supply-chain" class="slide level2">
+<h2>1. Introduction to Supply Chain</h2>
+<h3 id="what-is-supply-chain-sc">1.1 What is Supply Chain (SC)?</h3>
+<p>A SC is a network of individuals and companies involved in the production &amp; distribution of goods or services, from raw material suppliers to manufacturers, …, to the end customers.</p>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/sc-details.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>Now let’s begin with the fundamental question: What is a SC?</p></li>
+<li><p>A SC is a network of individuals and organisations involved in producing and delivering goods or services — starting from raw material suppliers and ending with the final customer.</p></li>
+<li><p>It is important to emphasise the word network. A supply chain is not just one company. It includes multiple interconnected entities working together to create value.</p></li>
+<li><p>Let’s walk through the typical stages shown in this diagram.</p></li>
+<li><p>At the beginning of the supply chain, we have suppliers providing raw materials or basic components to manufacturers. For example, steel suppliers provide materials to car manufacturers, or farmers supply ingredients to food producers. Without suppliers, production cannot begin.</p></li>
+<li><p>Next are the manufacturers transforming raw materials into finished or semi-finished goods. They usually produce goods in large quantities using machinery, labour, and technology. This is where value is significantly added to the product.</p></li>
+<li><p>After production, goods move to distributors. Distributors are responsible for storing and transporting products to retailers or other businesses. This often involves warehouses, logistics centres, and transportation systems. Their role is to ensure products are available where and when they are needed.</p></li>
+<li><p>Next, we have retailers. Retailers sell goods directly to consumers. Examples include supermarkets, shops, and online stores. They are the link between businesses and final customers.</p></li>
+<li><p>Finally, at the end of the supply chain, we have the customers. Customers purchase and use the products. Ultimately, the entire supply chain exists to satisfy customer demand.</p></li>
+<li></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="supply-chain-network-flows">1.2 Supply Chain Network Flows</h3>
+
+<img data-src="figs/sc-flow.jpg" class="quarto-figure quarto-figure-center r-stretch" style="width:88.0%"><div class="fragment">
+<p><b>Logistics</b> is the process of coordinating the efficient flow of goods, services, and related information. It involves planning, implementing, and controlling the movement and sometimes warehousing of goods throughout the supply chain. Logistics is a critical component that holds the supply chain together.</p>
+</div>
+<aside class="notes">
+<ul>
+<li><p>On this slide, we can see the structure of a typical SC network and 3 key flows that connect all participants. At the top, we have the main supply chain actors: Suppliers – provide raw materials or components; Manufacturers – convert raw materials into finished products; Distributors – store and transport products in bulk; Retailers – sell products to end users; Customers – The final consumers of the product.</p></li>
+<li><p>Now let’s look at the three major flows that link these entities:</p></li>
+<li><p>First, the Materials Flow. This moves from left to right — starting with suppliers and ending with customers. It represents the physical movement of raw materials, components, and finished goods across the supply chain.</p></li>
+<li><p>Second, the Financial or Money Flow. This moves in the opposite direction — from customers back to suppliers. Customers pay retailers, retailers pay distributors, distributors pay manufacturers, and manufacturers pay suppliers. This backward flow represents payments, credit terms, and financial transactions.</p></li>
+<li><p>Third, the Information Flow. This flow moves in both directions. Information includes demand forecasts, order details, inventory levels, delivery status, and production schedules. Effective information sharing is critical because it coordinates activities and reduces uncertainty across the supply chain.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="roles-of-logistics-in-supply-chain">1.3 Roles of Logistics in Supply Chain</h3>
+<div class="columns">
+<div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/roles-transport.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<div style="text-align: center;">
+<p><b>Transportation management</b></p>
+<p>Planning, organising, and executing movement of goods from one place to another.</p>
+</div>
+</div><div class="column fragment" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/roles-wh.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<div style="text-align: center; color: blue;">
+<p><b>Warehousing &amp; inventory management</b></p>
+<p>Managing inventory levels, storing, and retrieving products</p>
+</div>
+</div><div class="column fragment" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/roles-order.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<div style="text-align: center;">
+<p><b>Order fulfillment</b></p>
+<p>Handling customer orders from initial receipt to delivery. (Customer services)</p>
+</div>
+</div><div class="column fragment" style="width:20%;">
+<img data-src="figs/roles-pack.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%">
+<div style="text-align: center; color: blue">
+<p><b>Packaging</b></p>
+<p>Designing, producing, and delivering packaging materials and supplies to warehouses</p>
+</div>
+</div><div class="column fragment" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/roles-rev.jpg" class="quarto-figure quarto-figure-center" style="width:80.0%"></p>
+</figure>
+</div>
+<div style="text-align: center;">
+<p><b>Reverse logistics</b></p>
+<p>Returning goods to their original manufacturer after they have been used.</p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="static-facilities-in-supply-chain">Static Facilities in Supply Chain</h3>
+<div class="small-table">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 71%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Facility</th>
+<th>Roles in the SC</th>
+<th>Operations</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Plant/Factory</strong></td>
+<td>Supplier/Manufacturer</td>
+<td>Produces or manufactures goods</td>
+</tr>
+<tr class="even">
+<td><strong>Warehouse</strong></td>
+<td>Distributor</td>
+<td>Stores and holds inventory; often receives shipments from suppliers</td>
+</tr>
+<tr class="odd">
+<td><strong>Distribution Centre</strong></td>
+<td>Distributor/Wholesaler</td>
+<td>Receives, processes, and sends out orders to customers</td>
+</tr>
+<tr class="even">
+<td><strong>Fulfillment Centre</strong></td>
+<td>Distributor</td>
+<td>Reorders and prepares products for shipping to customers</td>
+</tr>
+<tr class="odd">
+<td><strong>Cross Dock</strong></td>
+<td>Distributor</td>
+<td>Direct transfer of goods from vehicles to vehicles</td>
+</tr>
+<tr class="even">
+<td><strong>Locker</strong></td>
+<td>Distributor</td>
+<td>Stores non-perishable materials temporarily while being moved between facilities (e.g., inventory, shipping)</td>
+</tr>
+<tr class="odd">
+<td><strong>Service Outlet</strong></td>
+<td>Retailer/Service Provider</td>
+<td>Provides value-added services to customers (e.g., repair, maintenance, consulting)</td>
+</tr>
+<tr class="even">
+<td><strong>Parking Lot</strong></td>
+<td>Dispatcher</td>
+<td>Supports the movement of personnel and vehicles within the facility</td>
+</tr>
+<tr class="odd">
+<td><strong>Collection Centre</strong></td>
+<td>Collector</td>
+<td>Collects and stores waste materials or hazardous goods temporarily until disposal</td>
+</tr>
+<tr class="even">
+<td><strong>Disposal Centre</strong></td>
+<td>Disposer</td>
+<td>Handles the removal and destruction of unwanted or hazardous materials</td>
+</tr>
+</tbody>
+</table>
+</div>
+<aside class="notes">
+<ul>
+<li>This slide lists the static facilities commonly found in supply chains, along with their roles and operations.</li>
+<li>Fulfillment centre: small distribution hubs located at various locations to improve delivery speed and customer service. They receive products from manufacturers or warehouses, process orders, and prepare items for shipping to customers.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="supply-chain-management-scm">1.4 Supply Chain Management (SCM)</h3>
+<p>The process of integrating, planning, sourcing, manufacturing, and delivering products from raw materials to end customers, while measuring and evaluating <strong>key performance indicators (KPIs)</strong> to ensure customer satisfaction and profitability.</p>
+<p><span class="space-out"></span></p>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<h3 id="scm-pyramid">SCM Pyramid</h3>
+<p>This performance management framework is often represented by the <strong>SCM Pyramid</strong>, which illustrates the hierarchy of SC objectives and performance metrics.</p>
+<ol type="1">
+<li class="fragment">Strategy (Long-term, Top)</li>
+<li class="fragment">Planning (Medium-term, Middle)</li>
+<li class="fragment">Operations (Short-term, Base)</li>
+</ol>
+</div><div class="column fragment" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/pyramid.png" class="quarto-figure quarto-figure-center" style="width:100.0%"></p>
+</figure>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li><p>SCM is essential for ensuring efficient delivery of products and services, reducing costs, and maintaining quality.</p></li>
+<li><p>We can understand SCM as a three-level pyramid.</p></li>
+<li><p>At the top is <strong>Strategy</strong>, which focuses on long-term decisions like network design, sourcing, and sustainability. These decisions shape the overall supply chain structure.</p></li>
+<li><p>In the middle is <strong>Planning</strong>, which involves forecasting demand, managing inventory, and balancing capacity. Planning connects strategy with day-to-day activities.</p></li>
+<li><p>At the base is <strong>Operations</strong>, which covers daily production, order fulfillment, and delivery execution.</p></li>
+<li><p>For SCM to be successful, these three levels must work together. Companies like Amazon and Zara succeed because they align long-term strategy, seasonal planning, and efficient daily operations.</p></li>
+<li><p>In short, effective SCM integrates strategy, planning, and operations to create competitive advantage.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="strategy-long-term">1.4.1 Strategy (Long-term)</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><br></p>
+<ul>
+<li class="fragment">Aligns with competitive strategy</li>
+<li class="fragment">Efficiency vs.&nbsp;Responsiveness</li>
+<li class="fragment">Network design</li>
+<li class="fragment">Make-or-buy decisions</li>
+<li class="fragment">Sustainability &amp; risk management</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/strategy.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+</div></div>
+<div class="fragment">
+<p><span style="color: blue;"><strong>Example</strong></span> IKEA focuses on cost efficiency and flat-pack design to reduce logistic costs.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/ikea.png" class="quarto-figure quarto-figure-center" style="width:20.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>This slide explains the strategic, long-term level of SCM.</p></li>
+<li><p>SC strategy must align with the company’s overall competitive strategy.</p></li>
+<li><p>If a company competes on low cost, its SC should focus on efficiency. If it competes on speed or customization, it should focus more on responsiveness.</p></li>
+<li><p>Key strategic decisions include network design — such as where to locate factories and warehouses</p></li>
+<li><p>Make-or-buy decisions, meaning whether to produce internally or outsource.</p></li>
+<li><p>Sustainability and risk management are also important at this level.</p></li>
+<li><p>For example, IKEA supports its low-cost strategy through flat-pack designs, which reduce transportation and logistics costs.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="planning-medium-term">1.4.2 Planning (Medium-term)</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><br> - Demand forecasting - Aggregate &amp; capacity planning - Inventory planning - Sales &amp; Operations Planning (S&amp;OP) - Distribution &amp; procurement planning</p>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/planning.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+</div></div>
+<div class="fragment">
+<p><b style="color: blue;">Example</b> Kmart uses demand forecasts to plan inventory before holiday seasons</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/kmart.png" class="quarto-figure quarto-figure-center" style="width:25.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>This slide focuses on the planning level of SCM, which is medium-term. Planning connects long-term strategy with daily operations.</p></li>
+<li><p>One key activity is demand forecasting, where companies predict future customer demand.</p></li>
+<li><p>Based on forecasts, companies conduct aggregate and capacity planning to ensure they have enough production resources.</p></li>
+<li><p>They also perform inventory planning to determine how much stock to hold and where to store it.</p></li>
+<li><p>Another important process is Sales and Operations Planning, or S&amp;OP, which aligns sales forecasts with production and supply capabilities.</p></li>
+<li><p>Finally, planning includes distribution and procurement decisions, ensuring products and materials are available at the right time and place.</p></li>
+<li><p>For example, Kmart uses demand forecasts to increase inventory before holiday seasons to meet higher customer demand.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="operation-short-term">1.4.3 Operation (Short-term)</h4>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><br></p>
+<ul>
+<li class="fragment">Order management</li>
+<li class="fragment">Production scheduling</li>
+<li class="fragment">Inventory &amp; warehouse operations</li>
+<li class="fragment">Transportation &amp; logistics</li>
+<li class="fragment">Quality &amp; reverse logistics</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/operation.png" class="quarto-figure quarto-figure-center" style="width:85.0%"></p>
+</figure>
+</div>
+</div></div>
+<div class="fragment">
+<p><b style="color: blue;">Example</b> McDonald’s manages daily food deliveries to ensure freshness</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/mc.png" class="quarto-figure quarto-figure-center" style="width:15.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>This slide focuses on the operational, short-term level of SCM. Operations deal with daily execution activities.</p></li>
+<li><p>This includes order management, which ensures customer orders are processed accurately and on time.</p></li>
+<li><p>It also involves production scheduling, where companies decide what to produce and when.</p></li>
+<li><p>Another key area is inventory and warehouse operations, managing stock levels and storage efficiently.</p></li>
+<li><p>Operations also cover transportation and logistics, ensuring products are delivered quickly and cost-effectively.</p></li>
+<li><p>Finally, it includes quality management and reverse logistics, such as handling returns and defective products.</p></li>
+<li><p>For example, McDonald’s manages daily food deliveries worldwide to ensure freshness and consistent quality.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="push-vs.-pull-strategy-in-sc-management">1.5 Push vs.&nbsp;Pull Strategy in SC Management</h3>
+<p>Supply chains can be managed using push, pull, or a hybrid (push–pull) strategy, depending on how demand information is used.</p>
+<div class="fragment">
+<h4 id="push-strategy">1.5.1 Push Strategy</h4>
+<p>A push strategy is driven by demand forecasts. Products are produced and distributed in advance, before actual customer orders are received.</p>
+</div>
+<div class="fragment">
+<p><strong>Key Characteristics</strong></p>
+</div>
+<ul>
+<li class="fragment">Based on forecasted demand</li>
+<li class="fragment">Production starts before customer orders</li>
+<li class="fragment">Suitable for stable and predictable demand</li>
+<li class="fragment">Focuses on high capacity utilization and low cost</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>This slide introduces Push versus Pull strategies in SCM. SC can be managed using a push strategy, a pull strategy, or a hybrid approach, depending on how demand information is used.</p></li>
+<li><p>Let’s first focus on the Push Strategy.</p></li>
+<li><p>A push strategy is driven by demand forecasts. Companies produce and distribute products in advance, before receiving actual customer orders.</p></li>
+<li><p>The key characteristics are:</p></li>
+<li><p>First, it is based on forecasted demand.</p></li>
+<li><p>Second, production starts before customer orders are placed.</p></li>
+<li><p>Third, it is most suitable for stable and predictable demand.</p></li>
+<li><p>Finally, it focuses on high capacity utilization and low production costs, often benefiting from economies of scale.</p></li>
+<li><p>In summary, a push strategy highlights efficiency and cost reduction, but it depends heavily on the accuracy of demand forecasts.”</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<p><strong>Advantages</strong></p>
+<ul>
+<li class="fragment">Economies of scale</li>
+<li class="fragment">Lower production costs</li>
+<li class="fragment">Efficient for mass production</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>Disadvantages</strong></p>
+<ul>
+<li class="fragment">Risk of overproduction</li>
+<li class="fragment">High inventory holding costs</li>
+<li class="fragment">Less responsive to demand changes</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Example</strong></p>
+</div>
+<ul>
+<li class="fragment">Consumer packaged goods (e.g., canned food, detergents)</li>
+<li class="fragment">Traditional manufacturing with long lead times</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Now let’s look at the advantages and disadvantages of the push strategy.</p></li>
+<li><p>Starting with the advantages:</p></li>
+<li><p>Push systems benefit from economies of scale, since large production batches reduce the cost per unit.</p></li>
+<li><p>They also lead to lower production costs due to efficient resource utilization.</p></li>
+<li><p>This approach is highly efficient for mass production, especially when demand is stable and predictable.</p></li>
+<li><p>However, there are also disadvantages.</p></li>
+<li><p>There is a risk of overproduction if forecasts are inaccurate.</p></li>
+<li><p>It can result in high inventory holding costs, because products are produced before actual demand is confirmed.</p></li>
+<li><p>And finally, push systems are less responsive to sudden demand changes.</p></li>
+<li><p>Typical examples include consumer packaged goods, such as canned food or detergents,</p></li>
+<li><p>and traditional manufacturing industries with long lead times.</p></li>
+<li><p>In summary, push strategy works best in stable environments but carries forecasting risks.”</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<h4 id="pull-strategy">1.5.2 Pull Strategy</h4>
+<p>A pull strategy is driven by actual customer demand. Products are produced only after an order is received.</p>
+</div>
+<div class="fragment">
+<p><strong>Key Characteristics</strong></p>
+</div>
+<ul>
+<li class="fragment">Based on real customer orders</li>
+<li class="fragment">Production starts after demand is known</li>
+<li class="fragment">Suitable for uncertain or customized demand</li>
+<li class="fragment">Focuses on responsiveness and flexibility</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Now let’s look at the Pull Strategy.</p></li>
+<li><p>Unlike the push strategy, a pull strategy is driven by actual customer demand. Products are produced only after a customer order is received.</p></li>
+<li><p>The key characteristics are:</p></li>
+<li><p>First, it is based on real customer orders rather than forecasts.</p></li>
+<li><p>Second, production starts only after demand is confirmed.</p></li>
+<li><p>Third, it is suitable for uncertain, variable, or customized demand.</p></li>
+<li><p>And finally, it focuses on responsiveness and flexibility rather than cost efficiency.</p></li>
+<li><p>This approach reduces the risk of overproduction and excess inventory, but it may require flexible production systems and shorter lead times.</p></li>
+<li><p>In summary, the pull strategy prioritizes responsiveness and customer satisfaction, especially in dynamic or customized markets.”</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<p><strong>Advantages</strong></p>
+<ul>
+<li class="fragment">Lower inventory levels</li>
+<li class="fragment">Reduced risk of excess stock</li>
+<li class="fragment">High customer satisfaction</li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<p><strong>Disadvantages</strong></p>
+<ul>
+<li class="fragment">Higher unit costs</li>
+<li class="fragment">Requires fast response and flexible systems</li>
+<li class="fragment">Possible delays if capacity is limited</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><strong>Example</strong></p>
+</div>
+<ul>
+<li class="fragment">Custom-made products</li>
+<li class="fragment">Dell’s build-to-order computers</li>
+<li class="fragment">Fast fashion (partially pull-based)</li>
+</ul>
+<aside class="notes">
+<p>Now let’s examine the advantages and disadvantages of the pull strategy.</p>
+<ul>
+<li><p>Starting with the advantages:</p></li>
+<li><p>Pull systems maintain lower inventory levels, since production begins only after receiving customer orders.</p></li>
+<li><p>This leads to a reduced risk of excess stock and expiry.</p></li>
+<li><p>It also improves customer satisfaction, especially when products are customized to specific needs.</p></li>
+<li><p>However, there are also disadvantages.</p></li>
+<li><p>Pull systems often have higher unit costs, because they do not benefit as much from economies of scale.</p></li>
+<li><p>They require fast response times and flexible production systems.</p></li>
+<li><p>And if capacity is limited, there may be delays in fulfilling orders.</p></li>
+<li><p>Examples include custom-made products, Dell’s build-to-order computers, and parts of the fast fashion industry, which combine pull elements to respond quickly to trends.</p></li>
+<li><p>In summary, pull strategy increases responsiveness but may involve higher costs and operational complexity.”</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<h4 id="pushpull-strategy-hybrid">1.5.3 Push–Pull Strategy (Hybrid)</h4>
+</div>
+<ul>
+<li class="fragment">Upstream activities (suppliers, manufacturing) use push</li>
+<li class="fragment">Downstream activities (final assembly, distribution) use pull</li>
+</ul>
+<div class="fragment">
+<div style="color: blue;">
+<p><b>Example : Apple</b></p>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Push</strong></p>
+</div>
+<ul>
+<li class="fragment">Component sourcing based on forecasts</li>
+<li class="fragment">Large-scale manufacturing</li>
+</ul>
+<div class="fragment">
+<p><strong>Push-Pull Boundary</strong></p>
+</div>
+<ul>
+<li class="fragment">Final assembly &amp; regional distribution</li>
+</ul>
+<div class="fragment">
+<p><strong>Pull Boundary</strong></p>
+</div>
+<ul>
+<li class="fragment">Customer demand via online &amp; retail stores</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>This slide explains the Push–Pull Strategy, also known as the hybrid strategy. In this approach, part of the supply chain operates under a push system, while the other part operates under a pull system.</p></li>
+<li><p>Typically, upstream activities, such as suppliers and large-scale manufacturing, use a push approach based on demand forecasts.</p></li>
+<li><p>Meanwhile, downstream activities, such as final assembly and distribution, use a pull approach based on actual customer demand.</p></li>
+<li><p>The key concept here is the push–pull boundary. Before this boundary, activities are forecast-driven. After this boundary, activities are demand-driven.</p></li>
+<li><p>For example, Apple uses this hybrid model.</p></li>
+<li><p>It sources components and conducts large-scale manufacturing based on forecasts — this is the push part.</p></li>
+<li><p>However, final assembly and regional distribution respond more closely to actual customer demand — this is the pull part.</p></li>
+<li><p>In summary, the push–pull strategy combines efficiency upstream with responsiveness downstream.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<div style="color: blue;">
+<p><b>Example : Toyota</b></p>
+</div>
+</div>
+<ul>
+<li class="fragment">Push for parts production, pull for assembly using Just-In-Time.</li>
+</ul>
+<div class="fragment">
+<p><strong>Push</strong> (Forecast-driven upstream):</p>
+</div>
+<ul>
+<li class="fragment">Suppliers → Parts Production</li>
+</ul>
+<div class="fragment">
+<p><strong>Push-Pull Boundary</strong></p>
+</div>
+<ul>
+<li class="fragment">Assembly Plants (Just-In-Time)</li>
+</ul>
+<div class="fragment">
+<p><strong>Pull</strong> (Demand-driven downstream)</p>
+</div>
+<ul>
+<li class="fragment">Distribution → Dealers → Customers</li>
+</ul>
+<div class="fragment">
+<div style="color: red;">
+<p><b>Flow Diagram</b></p>
+</div>
+</div>
+<ul>
+<li class="fragment">Suppliers → Parts → Assembly Plants → Distribution → Dealers → Customers PUSH &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PUSH &nbsp;&nbsp;&nbsp;&nbsp; BOUNDARY &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PULL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PULL &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PULL</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Toyota applies a hybrid approach. It uses push for parts production and pull for final assembly through its Just-In-Time, or JIT, system.</p></li>
+<li><p>Upstream, in the push stage, suppliers produce parts based on forecasts. This ensures efficiency and stable production.</p></li>
+<li><p>The push–pull boundary occurs at the assembly plants. Here, Toyota applies Just-In-Time principles, meaning parts arrive exactly when needed for assembly.</p></li>
+<li><p>Downstream, the system becomes pull-based. Distribution to dealers and final sales to customers are driven by actual demand.</p></li>
+<li><p>So the flow is: Suppliers to parts production — push.</p></li>
+<li><p>Assembly plants — the boundary.</p></li>
+<li><p>Then distribution, dealers, and customers — pull.</p></li>
+<li><p>In summary, Toyota combines forecast-driven efficiency upstream with demand-driven responsiveness downstream, achieving both cost control and flexibility.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="case-studies">1.6 Case Studies</h3>
+<h4 id="manufacturing-case-toyota">Manufacturing Case: Toyota</h4>
+<div class="block fragment" data-title="Problem">
+<p>High inventory cost &amp; production inefficiencies</p>
+</div>
+<div class="block fragment" data-title="Decision">
+<p>Implement Just-In-Time (JIT) and lean supply chain strategy</p>
+</div>
+<div class="block fragment" data-title="Outcome">
+<p>Reduced inventory, faster production cycles, lower costs</p>
+</div>
+<p><br></p>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/toyota.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li><p>This slide presents Toyota’s manufacturing case study.</p></li>
+<li><p>The problem was high inventory costs and production inefficiencies, which increased expenses and reduced flexibility.</p></li>
+<li><p>Toyota’s decision was to implement Just-In-Time, or JIT, along with a lean supply chain strategy. This approach focuses on producing and delivering parts only when they are needed, reducing waste.</p></li>
+<li><p>The outcome was lower inventory levels, faster production cycles, and reduced costs.</p></li>
+<li><p>In summary, Toyota improved efficiency and competitiveness by adopting a lean, demand-driven production system.</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/toyota-sc.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide shows the overall structure of Toyota’s supply chain, from suppliers to customers.</p>
+<p>It begins with suppliers, who provide raw materials and parts while maintaining strict quality standards.</p>
+<p>Next are the manufacturers, who produce and supply components, ensuring timely delivery to the next stage.</p>
+<p>At the assembly plants, Toyota applies Just-In-Time and lean production principles. Parts arrive exactly when needed, reducing inventory and eliminating waste.</p>
+<p>After assembly, vehicles move to distribution centers, where Toyota optimizes transportation routes to ensure efficient delivery.</p>
+<p>Then vehicles are sent to dealers, and finally to customers, who receive, use, and maintain their cars.</p>
+<p>Overall, this flow demonstrates how Toyota integrates quality control, lean manufacturing, and efficient distribution to create a highly coordinated and cost-effective supply chain.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/toyota-py.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide presents Toyota’s SCM Pyramid, showing how strategy, planning, and operations are aligned.</p>
+<p>At the top is Strategy, which focuses on long-term direction. Toyota’s strategy is built around the Toyota Production System, or TPS, lean manufacturing, and strong global supplier partnerships. This sets the foundation for efficiency and continuous improvement.</p>
+<p>In the middle is Planning, which operates at the medium-term level. This includes demand forecasting, capacity and production planning, and Just-In-Time inventory management. Planning ensures that supply matches expected demand.</p>
+<p>At the base is Operations, which focuses on short-term daily activities. This includes daily line scheduling, the Kanban system, Kaizen continuous improvement, and strict quality control.</p>
+<ul>
+<li><p>Kanban is a visual pull system that controls production and inventory by producing only what is needed, when it is needed, and in the amount needed.</p></li>
+<li><p>Kaizen is a philosophy of continuous, small improvements involving everyone to enhance efficiency, quality, and productivity over time.</p></li>
+</ul>
+<p>Overall, the pyramid shows how Toyota integrates long-term strategy, medium-term planning, and short-term operations into one coordinated system.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>Toyota SCM Timeline</p>
+<div class="block blue fragment" data-title="LONG-TERM (Strategy – Years)">
+<ul>
+<li class="fragment">Plant location</li>
+<li class="fragment">Supplier selection</li>
+<li class="fragment">Technology investment</li>
+</ul>
+</div>
+<div class="block green fragment" data-title="MEDIUM-TERM (Planning – Months)">
+<ul>
+<li class="fragment">Production volume planning</li>
+<li class="fragment">Capacity &amp; workforce planning</li>
+</ul>
+</div>
+<div class="block red fragment" data-title="SHORT-TERM (Operations – Daily)">
+<ul>
+<li class="fragment">Line scheduling</li>
+<li class="fragment">Quality checks</li>
+<li class="fragment">On-time delivery</li>
+</ul>
+</div>
+<aside class="notes">
+<p>This slide shows Toyota’s SCM timeline across three levels.</p>
+<p>At the long-term strategic level, Toyota decides on plant locations, selects suppliers, and invests in technology. These decisions shape the supply chain for years.</p>
+<p>At the medium-term planning level, Toyota plans production volumes and manages capacity and workforce to match expected demand.</p>
+<p>At the short-term operational level, the focus is on daily line scheduling, quality checks, and ensuring on-time delivery.</p>
+<p>Overall, Toyota aligns long-term strategy, monthly planning, and daily operations to maintain efficiency and competitiveness.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="retail-case-kmart">Retail Case: Kmart</h4>
+<div class="block fragment" data-title="Problem">
+<p>Demand variability and stockouts across stores</p>
+</div>
+<div class="block fragment" data-title="Decision">
+<p>Advanced demand forecasting &amp; centralized planning</p>
+</div>
+<div class="block fragment" data-title="Outcome">
+<p>High product availability with low inventory costs</p>
+</div>
+<p><br></p>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/kmart.png" class="quarto-figure quarto-figure-center" style="width:30.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<p>This slide presents the Kmart retail case.</p>
+<p>The main problem was demand variability and stockouts across stores, leading to lost sales and inefficient inventory levels.</p>
+<p>Kmart’s decision was to implement advanced demand forecasting and centralized planning to improve coordination and visibility.</p>
+<p>The outcome was higher product availability with lower inventory costs.</p>
+<p>In summary, better forecasting and centralized control helped Kmart balance supply and demand more effectively while improving customer service.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/kmart-sc.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide illustrates Kmart’s supply chain from suppliers to customers.</p>
+<p>Suppliers provide goods and raw materials to manufacturers, who produce and deliver finished products.</p>
+<p>These products move to distribution centers, where they are stored and prepared for replenishment.</p>
+<p>Next, goods are sent to Kmart stores, where inventory is managed and products are sold.</p>
+<p>Finally, customers purchase the products to meet their needs.</p>
+<p>Overall, effective coordination across suppliers, distribution centers, and stores ensures product availability and smooth retail operations.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/kmart-py.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide presents Kmart’s Supply Chain Management pyramid, showing how strategy, planning, and operations are aligned.</p>
+<p>At the top is Strategy, which focuses on long-term direction and competitive advantage. Kmart follows a low-cost, high-availability strategy, aiming to offer affordable products while keeping shelves well stocked.</p>
+<p>In the middle is Planning, which operates at the medium-term level. Kmart uses advanced demand forecasting and inventory planning to better predict customer demand and manage stock levels efficiently.</p>
+<p>At the base is Operations, which focuses on short-term daily execution. This includes efficient logistics and automated replenishment systems to ensure products are delivered to stores on time.</p>
+<p>Overall, the pyramid shows how Kmart connects long-term strategy, data-driven planning, and efficient operations to improve product availability while controlling costs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="healthcare-case-hospital-supply-chain">Healthcare Case: Hospital Supply Chain</h4>
+<div class="block fragment" data-title="Problem">
+<p>Shortages of critical medical supplies</p>
+</div>
+<div class="block fragment" data-title="Decision">
+<p>Strategic supplier partnerships &amp; safety stock planning</p>
+</div>
+<div class="block fragment" data-title="Outcome">
+<p>Improved patient care and reduced emergency shortages</p>
+</div>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/hospital-logo.png" class="quarto-figure quarto-figure-center" style="width:20.0%"></p>
+</figure>
+</div>
+</div>
+<aside class="notes">
+<p>This slide presents a healthcare case focusing on a hospital supply chain.</p>
+<p>The problem was shortages of critical medical supplies, which directly affected patient care and emergency response.</p>
+<p>The decision was to establish strategic supplier partnerships and implement proper safety stock planning. By working closely with reliable suppliers and maintaining buffer inventory for essential items, the hospital reduced supply risks.</p>
+<p>The outcome was improved patient care and fewer emergency shortages. Critical supplies became more consistently available, especially during high-demand situations.</p>
+<p>In summary, better supplier collaboration and inventory planning strengthened the hospital’s supply chain and enhanced service quality.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/hospital-sc.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide shows the hospital supply chain from suppliers to patients.</p>
+<p>Suppliers provide raw materials, and manufacturers produce medical products while ensuring quality and timely delivery.</p>
+<p>These products move to inventory and warehousing, where supplies are stored and tracked.</p>
+<p>They are then distributed to hospital departments, such as emergency and surgical units, to ensure timely availability.</p>
+<p>Finally, patients receive care supported by these supplies.</p>
+<p>Overall, the hospital supply chain focuses on reliability, quality, and availability, since shortages can directly affect patient safety.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+
+<img data-src="figs/hospital-py.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"><aside class="notes">
+<p>This slide presents the hospital’s Supply Chain Management pyramid, showing how strategy, planning, and operations are aligned.</p>
+<p>At the top is Strategy, which focuses on long-term decisions. Hospitals secure contracts with reliable suppliers and establish emergency stock levels to manage risk and ensure supply continuity.</p>
+<p>In the middle is Planning, which operates at the medium-term level. This includes forecasting demand for medical supplies and planning inventory levels for critical items such as medicines and surgical equipment.</p>
+<p>At the base is Operations, which focuses on daily activities. Hospitals monitor key inventory in real time, replenish stock as needed, and coordinate closely with departments to ensure timely availability.</p>
+<p>Overall, this pyramid shows how strategic sourcing, careful planning, and efficient daily operations work together to support patient care and reduce supply shortages.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="supply-chain-network-design">1.7 Supply Chain Network Design</h3>
+<p>Supply chain network design is the strategic configuration of a supply chain with the following objectives.</p>
+<ul>
+<li class="fragment">Minimise total supply chain cost</li>
+<li class="fragment">Reduce lead time</li>
+<li class="fragment">Improve customer service</li>
+<li class="fragment">Optimise inventory and resources</li>
+<li class="fragment">Increase coordination across the supply chain</li>
+<li class="fragment">Maximise overall supply chain profitability</li>
+</ul>
+<aside class="notes">
+<p>Supply chain network design refers to the strategic configuration of the supply chain — meaning decisions about the number, location, and capacity of facilities such as factories, warehouses, and distribution centers.</p>
+<p>The main objective is to minimize total supply chain cost, including production, transportation, and inventory costs.</p>
+<p>At the same time, companies aim to reduce lead time, so customers receive products faster.</p>
+<p>Another goal is to improve customer service, ensuring high product availability and reliability.</p>
+<p>Network design also helps optimize inventory and resources, avoiding excess stock or underutilized capacity.</p>
+<p>It improves coordination across different supply chain partners</p>
+<p>and ultimately aims to maximize overall profitability.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>The following factors affect network design:</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li class="fragment">Demand Forecasting</li>
+<li class="fragment">Location of Facilities</li>
+<li class="fragment">Inventory Management</li>
+<li class="fragment">Network Capacity</li>
+<li class="fragment">Supplier &amp; Vendor</li>
+<li class="fragment">Management</li>
+<li class="fragment">Customer Service Levels</li>
+<li class="fragment">Technology &amp; Information Systems</li>
+</ul>
+</div><div class="column">
+<ul>
+<li class="fragment">Regulatory &amp; Compliance</li>
+<li class="fragment">Cost Analysis</li>
+<li class="fragment">Risk Management</li>
+<li class="fragment">Sustainability &amp; Environmental Impact</li>
+<li class="fragment">Competitive Factors</li>
+<li class="fragment">Market Dynamics</li>
+<li class="fragment">Globalisation</li>
+</ul>
+</div></div>
+</section>
+<section id="review-of-optimisation-problems" class="slide level2">
+<h2>2. Review of Optimisation Problems</h2>
+<div class="block fragment" data-title="Definition">
+<p>Optimisation is the mathematical discipline that deals with maximising and minimising functions under certain conditions or constraints.</p>
+</div>
+<ul>
+<li class="fragment">These functions are called objective functions.</li>
+<li class="fragment">There are 2 types of optimisation problems, depending on whether there is constraint on the decision variables <span class="math inline">\(x\)</span> and <span class="math inline">\(y.\)</span></li>
+</ul>
+<div class="columns">
+<div class="column fragment" style="width:40%;">
+<div style="text-align: center;">
+<p><strong>Unconstrained optimisation</strong></p>
+</div>
+<p><span class="math display">\[\min f(x,y) = x^2+2y^2 \]</span></p>
+</div><div class="column fragment" style="width:60%;">
+<div style="text-align: center;">
+<p><strong>Constrained optimisation</strong></p>
+</div>
+<p><span class="math display">\[\min f(x,y) = x^2 + 2y^2 \]</span> <span class="math display">\[-2&lt;x&lt;5,\, y \ge 1\]</span></p>
+</div></div>
+</section>
+<section class="slide level2 scrollable">
+
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<div id="acee10e9" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href=""></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb1-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a>mpl.rcParams[<span class="st">'font.size'</span>] <span class="op">=</span> <span class="dv">14</span> </span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">200</span>)</span>
+<span id="cb1-8"><a href=""></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">200</span>)</span>
+<span id="cb1-9"><a href=""></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb1-10"><a href=""></a></span>
+<span id="cb1-11"><a href=""></a>Z <span class="op">=</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>Y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb1-12"><a href=""></a></span>
+<span id="cb1-13"><a href=""></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb1-14"><a href=""></a>ax<span class="op">=</span>fig.add_subplot(projection<span class="op">=</span><span class="st">'3d'</span>)</span>
+<span id="cb1-15"><a href=""></a>ax.plot_surface(X, Y, Z)</span>
+<span id="cb1-16"><a href=""></a></span>
+<span id="cb1-17"><a href=""></a>ax.set_xlabel(<span class="st">"X"</span>)</span>
+<span id="cb1-18"><a href=""></a>ax.set_ylabel(<span class="st">"Y"</span>)</span>
+<span id="cb1-19"><a href=""></a>ax.set_zlabel(<span class="st">"Z"</span>)</span>
+<span id="cb1-20"><a href=""></a>ax.set_title(<span class="st">"f(x, y) = x² + 2y²"</span>)</span>
+<span id="cb1-21"><a href=""></a></span>
+<span id="cb1-22"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="01lecture_files/figure-revealjs/cell-2-output-1.png" width="408" height="420"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column fragment" style="width:50%;">
+<div id="a840926f" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">200</span>)</span>
+<span id="cb2-2"><a href=""></a>y <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">5</span>, <span class="dv">200</span>)</span>
+<span id="cb2-3"><a href=""></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>Z <span class="op">=</span> X<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>Y<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a>fig <span class="op">=</span> plt.figure()</span>
+<span id="cb2-8"><a href=""></a>plt.contour(X, Y, Z, levels<span class="op">=</span><span class="dv">50</span>)</span>
+<span id="cb2-9"><a href=""></a>plt.xlabel(<span class="st">"X"</span>)</span>
+<span id="cb2-10"><a href=""></a>plt.ylabel(<span class="st">"Y"</span>)</span>
+<span id="cb2-11"><a href=""></a>plt.title(<span class="st">"f(x, y) = x² + 2y², x ∈ (-2, 5), y ∈ (0, ∞)"</span>)</span>
+<span id="cb2-12"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="01lecture_files/figure-revealjs/cell-3-output-1.png" width="814" height="465"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>The code in the image is importing Python libraries commonly used for numerical computation and data visualization:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href=""></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb3-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h3 id="what-each-line-means">What Each Line Means</h3>
+<ol type="1">
+<li><p><strong><code>import numpy as np</code></strong></p>
+<ul>
+<li>Imports the <strong>NumPy</strong> library.</li>
+<li><code>np</code> is a common alias used for convenience.</li>
+<li>NumPy is used for numerical operations, arrays, matrices, and mathematical functions.</li>
+</ul></li>
+<li><p><strong><code>import matplotlib as mpl</code></strong></p>
+<ul>
+<li>Imports the main <strong>Matplotlib</strong> library.</li>
+<li><code>mpl</code> is a shorthand alias.</li>
+<li>It provides plotting and visualization functionality.</li>
+</ul></li>
+<li><p><strong><code>import matplotlib.pyplot as plt</code></strong></p>
+<ul>
+<li>Imports the <strong>pyplot</strong> module from Matplotlib.</li>
+<li><code>plt</code> is the standard alias.</li>
+<li>Pyplot is used to create graphs such as line charts, bar charts, scatter plots, etc.</li>
+</ul></li>
+</ol>
+<hr>
+<h3 id="simple-explanation">Simple Explanation</h3>
+<ul>
+<li><strong>NumPy (<code>np</code>)</strong> → For calculations and numerical data</li>
+<li><strong>Matplotlib (<code>plt</code>)</strong> → For plotting and visualizing data</li>
+</ul>
+<p>These imports are typically used together when analyzing and visualizing data in Python.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="local-maximum-and-minimum">2.1 Local Maximum and Minimum</h3>
+<div class="columns">
+<div class="column block yellow fragment" style="width:30%;">
+<div style="text-align: center;">
+<p><strong>First order</strong></p>
+</div>
+<p><span class="math display">\[
+\begin{align*}
+&amp;f'(x^*) = 0,\\
+x^* \,&amp;\text{is the critical point}
+\end{align*}
+\]</span></p>
+<p><br></p>
+</div><div class="column block green fragment" style="width:60%;">
+<div style="text-align: center;">
+<p><strong>Second order</strong></p>
+</div>
+<p><span class="math display">\[
+\begin{align*}
+f''(x^*)&lt;0, \; &amp;x^* \text{is (local) max.}\\
+f''(x^*)&gt;0, \; &amp;x^* \text{is (local) min.}\\
+f''(x^*)=0, \; &amp;x^* \text{can be max, min or neither.}
+\end{align*}
+\]</span></p>
+</div></div>
+<div class="fragment">
+<p><strong>Example.</strong> Find the local max and min points of <span class="math inline">\(f(x)=x^3-6x^2+9x\)</span></p>
+</div>
+<div class="columns">
+<div class="column fragment" style="width:40%;">
+<p><span class="math display">\[
+\begin{align*}
+f'(x)=3x^2-12x+9 &amp;= 0 \\
+3(x^2-4x+3) &amp;= 0 \\
+3(x-3)(x-1) &amp;= 0 \\
+x^* &amp;= 1, 3
+\end{align*}
+\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[
+f(1)=4 \rightarrow (1,4), \; f(3)=0 \rightarrow (3,0)
+\]</span></p>
+</div>
+</div><div class="column fragment" style="width:60%;">
+<p><span class="math display">\[
+\begin{align*}
+f''(x) &amp;= 6x-12=6(x-2) \\
+f''(1) &amp;= -6 &lt; 0 \\
+        &amp;\rightarrow \textbf{local max at } (1,4) \\
+f''(3) &amp;= 6 &gt; 0 \\
+        &amp;\rightarrow \textbf{local min at } (3,0)
+\end{align*}
+\]</span></p>
+</div></div>
+<aside class="notes">
+<p>This slide explains how to find local maximum and minimum points using first and second derivatives.</p>
+<p>First, the first-order condition: We set the first derivative equal to zero, f’(x<em>)= 0, The values of x</em> are called critical points.</p>
+<p>Next, we apply the second-order condition: f’’(x*) &lt; 0, the point is a local maximum.</p>
+<p>If f’’(x*) &gt; 0, the point is a local minimum.</p>
+<p>If f’’’(x*) = 0, the test is inconclusive.</p>
+<p>Now, let’s look at the example:</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<div style="text-align: center;">
+<div id="b2148aa2" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href=""></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span>
+<span id="cb4-3"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href=""></a></span>
+<span id="cb4-5"><a href=""></a>mpl.rcParams[<span class="st">'font.size'</span>] <span class="op">=</span> <span class="dv">18</span> </span>
+<span id="cb4-6"><a href=""></a></span>
+<span id="cb4-7"><a href=""></a><span class="co"># Define the function</span></span>
+<span id="cb4-8"><a href=""></a><span class="kw">def</span> f(x):</span>
+<span id="cb4-9"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">6</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x</span>
+<span id="cb4-10"><a href=""></a></span>
+<span id="cb4-11"><a href=""></a><span class="co"># Generate x values</span></span>
+<span id="cb4-12"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb4-13"><a href=""></a>y <span class="op">=</span> f(x)</span>
+<span id="cb4-14"><a href=""></a></span>
+<span id="cb4-15"><a href=""></a>x_crit <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">3</span>])</span>
+<span id="cb4-16"><a href=""></a>y_crit <span class="op">=</span> x_crit<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> <span class="dv">6</span><span class="op">*</span>x_crit<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x_crit</span>
+<span id="cb4-17"><a href=""></a></span>
+<span id="cb4-18"><a href=""></a><span class="co"># Plot</span></span>
+<span id="cb4-19"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>,<span class="dv">5</span>))</span>
+<span id="cb4-20"><a href=""></a>plt.plot(x, y)</span>
+<span id="cb4-21"><a href=""></a>plt.scatter(x_crit, y_crit, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb4-22"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb4-23"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb4-24"><a href=""></a>plt.title(<span class="st">"f(x) = x³ - 6x² + 9x"</span>)</span>
+<span id="cb4-25"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb4-26"><a href=""></a></span>
+<span id="cb4-27"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="01lecture_files/figure-revealjs/cell-4-output-1.png" width="629" height="481"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Are these the ultimate maximum and minimum of the function <span class="math inline">\(f(x)\)</span>?</p>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="global-maximum-and-minimum">2.2 Global Maximum and Minimum</h3>
+<div class="columns">
+<div class="column fragment" style="width:45%;">
+<p>Optima can occur in the three places:</p>
+<ol type="1">
+<li class="fragment">The boundary of the domain</li>
+<li class="fragment">A non-differentiable point</li>
+<li class="fragment">A point <span class="math inline">\(x^∗\)</span> with <span class="math inline">\(\nabla f(x^*)=0.\)</span> <br> (i.e.&nbsp;<span class="math inline">\(f'(x^*)=0\)</span> for 1D) <img data-src="figs/max-min.png" class="quarto-figure quarto-figure-center" style="width:92.0%"></li>
+</ol>
+</div><div class="column fragment" style="width:55%;">
+<p><br></p>
+<p>Then,</p>
+<ul>
+<li class="fragment"><p>A local maximum is a point that <span class="math inline">\(f(x^*) \geq f(x), \forall x\,\)</span> in some open interval containing <span class="math inline">\(x^*.\)</span></p></li>
+<li class="fragment"><p>A local minimum is a point that <span class="math inline">\(f(x^*) \leq f(x), \forall x\,\)</span> in some open interval containing <span class="math inline">\(x^*.\)</span></p></li>
+<li class="fragment"><p>A global maximum is a point that <span class="math inline">\(f(x^*) \geq f(x), \forall x\,\)</span> in the domain of <span class="math inline">\(f.\)</span></p></li>
+<li class="fragment"><p>A global minimum is a point that <span class="math inline">\(f(x^*) \leq f(x), \forall x\,\)</span> in the domain of <span class="math inline">\(f.\)</span></p></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p>From the second derivatives, we can conclude that</p>
+<div class="block green">
+<ul>
+<li class="fragment">When <span class="math inline">\(f''(x) \geq 0, \forall x,\)</span> i.e., <span class="math inline">\(f(x)\)</span> is a <b>convex</b> function, then the local minimum <span class="math inline">\(x^*\)</span> is the <b>global minimum</b> of <span class="math inline">\(f(x).\)</span></li>
+</ul>
+</div>
+<div class="block red">
+<ul>
+<li class="fragment">When <span class="math inline">\(f''(x) \leq 0, \forall x,\)</span> i.e., <span class="math inline">\(f(x)\)</span> is a <b>concave</b> function, then the local maximum <span class="math inline">\(x^*\)</span> is the <b>global maximum</b> of <span class="math inline">\(f(x).\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/concave-convex.png" class="quarto-figure quarto-figure-center" style="width:50.0%"></p>
+</figure>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example.</strong> Find the local and global maximum and minimum points of the function <span class="math inline">\(f(x)=x^3+3x^2-2x+1\)</span> for <span class="math inline">\(x \in [-4,2]\)</span></p>
+<div class="columns">
+<div class="column fragment" style="width:45%;">
+<p><span class="math display">\[f'(x)=3x^2+6x-2=0\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{align*}
+x &amp;= \frac{-b \pm \sqrt{b^2-4ac}}{2a} \\
+  &amp;= \frac{-6 \pm \sqrt{6^2-4(3)(-2)}}{2(3)} \\
+x_1 &amp;= -1-\sqrt{15}/3, \\ x_2 &amp;= -1+\sqrt{15}/3
+\end{align*}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[(x_1,y_1) = (-2.29, 9.30)\]</span> <span class="math display">\[(x_2, y_2) = (0.29, 0.70)\]</span></p>
+</div>
+</div><div class="column fragment" style="width:55%;">
+<p><span class="math display">\[
+\begin{align*}
+f''(x) &amp;= 6x+6 \\
+f''(x_1) &amp;= -7.75 &lt;0 \\
+&amp;\rightarrow (-2.29, 9.30) \textbf{ is local max} \\
+f''(x_2) &amp;= 7.75 &gt;0 \\
+&amp;\rightarrow (0.29, 0.70) \textbf{ is local min}
+\end{align*}
+\]</span></p>
+<div class="fragment">
+<p>Check the boundaries: <span class="math display">\[
+\begin{align*}
+f(-4) &amp;= -7 \\
+&amp;\rightarrow (-4,-7) \textbf{ is global min}\\
+f(2) &amp;= 17 \\
+&amp;\rightarrow (2,17) \textbf{ is global max}
+\end{align*}
+\]</span></p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div style="text-align: center;">
+<div id="637320c5" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="co"># Define the function</span></span>
+<span id="cb5-2"><a href=""></a><span class="kw">def</span> f(x):</span>
+<span id="cb5-3"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">3</span><span class="op">*</span>x<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a><span class="co"># Generate x values</span></span>
+<span id="cb5-6"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">400</span>)</span>
+<span id="cb5-7"><a href=""></a>y <span class="op">=</span> f(x)</span>
+<span id="cb5-8"><a href=""></a></span>
+<span id="cb5-9"><a href=""></a><span class="co"># Plot the function</span></span>
+<span id="cb5-10"><a href=""></a>plt.figure()</span>
+<span id="cb5-11"><a href=""></a>plt.plot(x, y)</span>
+<span id="cb5-12"><a href=""></a>plt.scatter(<span class="op">-</span><span class="dv">4</span>, <span class="op">-</span><span class="dv">7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-13"><a href=""></a>plt.scatter(<span class="dv">2</span>, <span class="dv">17</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'red'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-14"><a href=""></a>plt.scatter(<span class="op">-</span><span class="fl">2.29</span>, <span class="fl">9.3</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-15"><a href=""></a>plt.scatter(<span class="fl">0.29</span>, <span class="fl">0.7</span>, s<span class="op">=</span><span class="dv">150</span>, color<span class="op">=</span><span class="st">'blue'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb5-16"><a href=""></a>plt.xlabel(<span class="st">"x"</span>)</span>
+<span id="cb5-17"><a href=""></a>plt.ylabel(<span class="st">"f(x)"</span>)</span>
+<span id="cb5-18"><a href=""></a>plt.title(<span class="st">"f(x) = x³ + 3x² − 2x + 1"</span>)</span>
+<span id="cb5-19"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb5-20"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="01lecture_files/figure-revealjs/cell-5-output-1.png" width="837" height="481"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="hessian-matrix-2nd-derivative-test">2.3 Hessian Matrix (2nd Derivative Test)</h3>
+<div style="font-size: 90%;">
+<p>To find the maximum and minimum values for a function <span class="math inline">\(f(x)\)</span> of several independent variable <span class="math inline">\(x\)</span>, we</p>
+<ol type="1">
+<li class="fragment">calculate <span class="math inline">\(\nabla f(x)\)</span> and set it to zero,</li>
+<li class="fragment">solve the equation to get a solution vector <span class="math inline">\(x^*,\)</span></li>
+<li class="fragment">calculate <span class="math inline">\(\nabla^2 f(x)\)</span>, and evaluate <span class="math inline">\(\nabla^2 f(x)\)</span> at <span class="math inline">\(x^*.\)</span></li>
+</ol>
+<div class="fragment">
+<p>For a scalar function of several variables <span class="math inline">\(f: \mathcal{R}^n \rightarrow \mathcal{R}\,\)</span>, we conduct second derivative test by setting up the Hessian matrix given by</p>
+</div>
+</div>
+<div class="fragment" style="font-size: 85%;">
+<p><span class="math display">\[
+\mathbf{H}(x)\equiv\nabla^2 f(\mathbf{x}) =
+\begin{bmatrix}
+  \dfrac{\partial^2 f}{\partial x_1^2} &amp; \dfrac{\partial^2 f}{\partial x_1 \partial x_2} &amp; \cdots &amp; \dfrac{\partial^2 f}{\partial x_1 \partial x_n} \\[-.5em]
+  \dfrac{\partial^2 f}{\partial x_2 \partial x_1} &amp; \dfrac{\partial^2 f}{\partial^2 x_2} &amp; \cdots &amp; \dfrac{\partial^2 f}{\partial x_2 \partial x_n} \\[-1em]
+  \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\[-.5em]
+  \dfrac{\partial^2 f}{\partial x_n \partial x_1} &amp;
+  \dfrac{\partial^2 f}{\partial x_n \partial x_2} &amp;
+  \cdots &amp; \dfrac{\partial^2 f}{\partial^2 x_n}
+\end{bmatrix}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="quadratic-form-test-definition-based">2.3.1 Quadratic Form Test (Definition-Based)</h4>
+<p>Suppose that <span class="math inline">\(x^*\)</span> is a critical point of <span class="math inline">\(f(x)\)</span>, i.e., <span class="math inline">\(\nabla f(\mathbf{x}^*)=0,\)</span> and <span class="math inline">\(\mathbf{H(x^*)}\)</span> is symmetric matrix. The expression</p>
+<p><span class="math display">\[
+Q(\mathbf{x})=\mathbf{x}^T\mathbf{Hx}
+\]</span></p>
+<p>is a <b>scalar</b> known as the quadratic form associated with <span class="math inline">\(\mathbf{H}\)</span>. Then, we can conclude that</p>
+<div class="fragment" style="font-size: 100%;">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 37%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(Q(\mathbf{x})\)</span></th>
+<th><strong>Hessian Type</strong></th>
+<th><strong>Critical Point Conclusion</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(&gt;0, \forall \mathbf{x}\neq0\)</span></td>
+<td>Positive definite</td>
+<td>Local minimum</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(&lt;0, \forall \mathbf{x}\neq0\)</span></td>
+<td>Negative definite</td>
+<td>Local maximum</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\geq0, \text{some } 0\)</span></td>
+<td>Positive semi-definite</td>
+<td>Inconclusive – min or saddle</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\leq0, \text{some }  0\)</span></td>
+<td>Negative semi-definite</td>
+<td>Inconclusive – max or saddle</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(=0, \forall \mathbf{x}\neq0\)</span></td>
+<td>Zero matrix</td>
+<td>Inconclusive – higher-order needed</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\exists\mathbf{x}: Q&gt;0, \newline \exists\mathbf{y}:Q&lt;0\)</span></td>
+<td>Indefinite</td>
+<td>Saddle point</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="eigenvalue-test">2.3.2 Eigenvalue Test</h4>
+<p>For any <span class="math inline">\(n \times n\)</span> square matrix <span class="math inline">\(\mathbf{H}\)</span> the eigenvalues <span class="math inline">\(\lambda\)</span> are the roots of the <b>characteristic polynomial:</b> <span class="math display">\[
+\det(\mathbf{H}-\lambda\mathbf{I})=0.
+\]</span> This gives a degree-<span class="math inline">\(n\)</span> polynomial in <span class="math inline">\(\lambda.\)</span> The roots of this polynomial are the eigenvalues.</p>
+<div class="fragment" style="font-size: 90%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 29%">
+<col style="width: 30%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Eigenvalues of H</strong></th>
+<th><strong>Hessian Type</strong></th>
+<th><strong>Critical Point Conclusion</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>All positive</td>
+<td>Positive definite</td>
+<td>Local minimum</td>
+</tr>
+<tr class="even">
+<td>All negative</td>
+<td>Negative definite</td>
+<td>Local maximum</td>
+</tr>
+<tr class="odd">
+<td>All +, at least one zero</td>
+<td>Positive semi-definite</td>
+<td>Inconclusive: min/saddle</td>
+</tr>
+<tr class="even">
+<td>All -, at least one zero</td>
+<td>Negative semi-definite</td>
+<td>Inconclusive: max/saddle</td>
+</tr>
+<tr class="odd">
+<td>All zero</td>
+<td>Zero matrix</td>
+<td>Inconclusive: higher-order needed</td>
+</tr>
+<tr class="even">
+<td>Mixed signs</td>
+<td>Indefinite</td>
+<td>Saddle point</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Eigenvalue (Review)</strong></p>
+<div class="fragment" style="font-size: 80%;">
+<p>For any <span class="math inline">\(n\times n\)</span> square matrix <span class="math inline">\(\mathbf{A}\)</span>, the eigenvalues <span class="math inline">\(\lambda\)</span> are the roots of the <strong>characteristic polynomial:</strong> <span class="math inline">\(\det(\mathbf{A}-\lambda\mathbf{I})=0.\)</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p>For a symmetric <span class="math inline">\(2\times 2\)</span> matrix, <span class="math inline">\(\mathbf{A}=\begin{bmatrix} a&amp;b\\c&amp;d \end{bmatrix}\)</span></p>
+<p><span class="math display">\[
+\det(\mathbf{A}-\lambda\mathbf{I}) =
+\begin{vmatrix} a-\lambda &amp; b \\ c &amp; d-\lambda \end{vmatrix} = (a-\lambda)(d-\lambda)-bc
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p>For a symmetric <span class="math inline">\(3\times 3\)</span> matrix, <span class="math inline">\(\mathbf{A}=\begin{bmatrix} a&amp;b&amp;c\\d&amp;e&amp;f\\g&amp;h&amp;i \end{bmatrix}\)</span> <span class="math display">\[
+\begin{align*}
+\det(\mathbf{A}-\lambda\mathbf{I}) &amp;=
+\begin{vmatrix} a-\lambda &amp; b &amp; c \\ d &amp; e-\lambda &amp; f \\ g &amp; h &amp; i-\lambda \end{vmatrix} \\ &amp;= (a-\lambda) \begin{vmatrix} e-\lambda &amp; f \\ h &amp; i-\lambda \end{vmatrix} - b \begin{vmatrix} d &amp; f \\ g &amp; i-\lambda \end{vmatrix} + c \begin{vmatrix} d &amp; e-\lambda \\ g &amp; h \end{vmatrix}
+\end{align*}
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p>For matrix size <span class="math inline">\(n\times n\)</span>, <span class="math inline">\(n&gt;4\)</span>, there’s no general formula and numerical methods are needed for calculation.</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<div style="font-size: 80%;">
+<p><strong>Example.</strong> Find to local maximum and minimum points of <span class="math inline">\(f(x,y)=x^3-y^3+9xy.\)</span> <br></p>
+<ol type="1">
+<li class="fragment">Calculate the first order partial derivatives, i.e., gradient of <span class="math inline">\(f(x,y)\)</span> and set them equal to zero <span class="math display">\[
+\nabla f(x,y) = \begin{pmatrix} \dfrac{\partial f }{\partial x} \\ \dfrac{\partial f}{\partial y}\end{pmatrix} = \begin{pmatrix} 3x^2+9y \\ -3y^2+9x \end{pmatrix} = 0
+\]</span></li>
+</ol>
+<p><br></p>
+<ol start="2" type="1">
+<li class="fragment">Solve for <span class="math inline">\((x^*,y^*)\)</span></li>
+</ol>
+<div class="fragment">
+<p>From <span class="math inline">\(\partial f/\partial x, \qquad 3x^2+9y=0 \rightarrow y = -\dfrac{x^2}{3}\)</span></p>
+</div>
+<div class="fragment">
+<p>Substitute into <span class="math inline">\(\partial f/\partial y, \qquad -3\left(-\dfrac{x^2}{3}\right)^2 + 9x = x\left(-\dfrac{x^3}{3}+9\right) = 0 \rightarrow x=0,3\)</span></p>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>Critical points are <span class="math inline">\((0,0)\)</span> and <span class="math inline">\((3, -3)\)</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<div style="font-size: 80%;">
+<ol start="3" type="1">
+<li class="fragment"><p>Compute the Hessian matrix of <span class="math inline">\(f(x,y)\)</span> <span class="math display">\[
+\nabla^2 f(x,y) = \begin{bmatrix} \dfrac{\partial^2 f}{\partial x^2} &amp; \dfrac{\partial^2 f}{\partial x \partial y} \\ \dfrac{\partial^2 f}{\partial y \partial x} &amp; \dfrac{\partial^2 f}{\partial y^2} \end{bmatrix} = \begin{bmatrix} 6x &amp; 9 \\ 9 &amp; -6y\end{bmatrix}
+\]</span></p></li>
+<li class="fragment"><p>Evaluate the Hessian at critical points</p></li>
+</ol>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p>At <span class="math inline">\((0,0): H=\begin{bmatrix}0&amp;9\\9&amp;0\end{bmatrix}\)</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p><span class="math display">\[
+\det(H-\lambda I) = \begin{vmatrix}-\lambda&amp;9\\9&amp;-\lambda\end{vmatrix} = \lambda^2-9^2 = (\lambda-9)(\lambda+9)=0
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p><span class="math inline">\(\therefore\lambda = -9, 9 \rightarrow\)</span> Mixed signs <span class="math inline">\(\rightarrow\)</span> Indefinite <span class="math inline">\(\rightarrow\)</span> Saddle point at <span class="math inline">\((0,0)\)</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p>At <span class="math inline">\((3,-3): H=\begin{bmatrix}18&amp;9\\9&amp;18\end{bmatrix}\)</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p><span class="math display">\[
+\det(H-\lambda I) = \begin{vmatrix}18-\lambda&amp;9\\9&amp;18-\lambda\end{vmatrix} = (18-\lambda)^2-9^2 = (9-\lambda)(27-\lambda)=0
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 80%;">
+<p><span class="math inline">\(\therefore\lambda = 9, 27 \rightarrow\)</span> Both positive <span class="math inline">\(\rightarrow\)</span> Positive definite <span class="math inline">\(\rightarrow\)</span> Local minimum at <span class="math inline">\((3,-3)\)</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="72d5185a" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb6-3"><a href=""></a></span>
+<span id="cb6-4"><a href=""></a><span class="co"># Define the function</span></span>
+<span id="cb6-5"><a href=""></a><span class="kw">def</span> f(x, y):</span>
+<span id="cb6-6"><a href=""></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">3</span> <span class="op">-</span> y<span class="op">**</span><span class="dv">3</span> <span class="op">+</span> <span class="dv">9</span><span class="op">*</span>x<span class="op">*</span>y</span>
+<span id="cb6-7"><a href=""></a></span>
+<span id="cb6-8"><a href=""></a><span class="co"># Create grid</span></span>
+<span id="cb6-9"><a href=""></a>x <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb6-10"><a href=""></a>y <span class="op">=</span> np.linspace(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">400</span>)</span>
+<span id="cb6-11"><a href=""></a>X, Y <span class="op">=</span> np.meshgrid(x, y)</span>
+<span id="cb6-12"><a href=""></a>Z <span class="op">=</span> f(X, Y)</span>
+<span id="cb6-13"><a href=""></a></span>
+<span id="cb6-14"><a href=""></a><span class="co"># Contour plot</span></span>
+<span id="cb6-15"><a href=""></a>plt.figure()</span>
+<span id="cb6-16"><a href=""></a>plt.contour(X, Y, Z, levels<span class="op">=</span><span class="dv">30</span>)</span>
+<span id="cb6-17"><a href=""></a>plt.xlabel(<span class="st">'x'</span>)</span>
+<span id="cb6-18"><a href=""></a>plt.ylabel(<span class="st">'y'</span>)</span>
+<span id="cb6-19"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="01lecture_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="837" height="450"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h4 id="hessian-matrix-in-action">2.3.3 Hessian Matrix in Action</h4>
+<p>Suppose a company’s profit function is given by</p>
+<p><span class="math display">\[
+f(q_1,q_2)=q_1(50-5q_1)+q2(100-10q_2)-(90+20(q_1+q_2)).
+\]</span></p>
+<ol type="1">
+<li class="fragment">Find the critical points <span class="math inline">\(\quad\nabla f(q_1,q_2) = \begin{bmatrix} 50-10q_1-20 \\ 100-20q_2-20 \end{bmatrix} = 0\)</span></li>
+</ol>
+<div class="r-stack fragment">
+<p><span class="math inline">\(q_1=3\)</span> and <span class="math inline">\(q_2=4\)</span></p>
+</div>
+<ol start="2" type="1">
+<li class="fragment"><p>Setup Hessian matrix <span class="math inline">\(\nabla^2 f(q_1,q_2)=\begin{bmatrix} -10 &amp; 0 \\ 0 &amp; -20\end{bmatrix}\)</span></p></li>
+<li class="fragment"><p>Determine the eigenvalue(s) of the Hessian matrix</p></li>
+</ol>
+<div class="fragment">
+<p><span class="math display">\[
+\det(H-\lambda I) = \begin{vmatrix} -10-\lambda &amp; 0 \\ 0 &amp; -20-\lambda \end{vmatrix} = (\lambda+10)(\lambda+20)=0
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(\therefore \lambda=-10,-20 \rightarrow\,\)</span> Negative definite <span class="math inline">\(\rightarrow\)</span> Local max at <span class="math inline">\((3,4)\)</span> output level</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h3 id="constrained-optimisation-lagrange-multiplier-method">2.4 Constrained optimisation: Lagrange Multiplier Method</h3>
+<div style="font-size: 90%;">
+<p><span class="math display">\[
+\begin{align*}
+\max/\min \qquad &amp;f(x_1,x_2,...,x_n) \\
+\text{subject to} \qquad &amp;g_i(x_1,x_2,...,x_n)=0,\quad i=1,2,...,m
+\end{align*}
+\]</span></p>
+<ol type="1">
+<li class="fragment"><p>Construct the Lagrange function <span class="math display">\[
+F=f(x_1,x_2,...,x_n)-\sum_{i=1}^m \lambda_i g_i(x_1,x_2,...,x_m)=f-\lambda g
+\]</span></p></li>
+<li class="fragment"><p>Find all values of <span class="math inline">\((x_1,x_2,...,x_n)\)</span> such that <span class="math display">\[
+\begin{cases}
+\frac{\partial F}{\partial x_i}=0, &amp; (i=1,2,...,n) \\
+g_i=0, &amp; (i=1,2,...,m) \quad (\text{obtained from } \frac{\partial F}{\partial \lambda_i}=0)
+\end{cases}
+\]</span></p></li>
+<li class="fragment"><p>Evaluate <span class="math inline">\(f(x_1,x_2,...,x_n)\)</span> at all the points that result from step 2.</p></li>
+</ol>
+<ul>
+<li class="fragment">The largest of these values is the max of 𝑓 subject to the constraints;</li>
+<li class="fragment">The smallest is the min of 𝑓 subject to the constraints.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<p><strong>Example.</strong> Find the extreme values of <span class="math inline">\(f(x,y)=x^2-2y^2\)</span> on the circle <span class="math inline">\(x^2+y^2=1\)</span></p>
+<p><br></p>
+<div class="fragment">
+<p>In this case, our constraint is <span class="math inline">\(\quad g(x,y)=x^2+y^2-1=0\)</span></p>
+</div>
+<ol type="1">
+<li class="fragment"><p>Construct the Lagrange function <span class="math display">\[
+F=f-\lambda g=x^2-2y^2-\lambda(x^2+y^2-1)
+\]</span></p></li>
+<li class="fragment"><p>Find all values of <span class="math inline">\((x_1,x_2,...,x_n)\)</span> <span class="math display">\[
+\begin{cases}
+\dfrac{\partial F}{\partial x}=2x-2\lambda x=0, &amp; \rightarrow x(1-\lambda)=0 \,\;\;\qquad (1)\\
+\dfrac{\partial F}{\partial y}=-4y-2\lambda y=0, &amp; \rightarrow -y(2+\lambda)=0 \qquad (2)\\
+\dfrac{\partial F}{\partial \lambda}=-(x^2+y^2-1)=0, &amp; \hfill (3)
+\end{cases}
+\]</span></p></li>
+</ol>
+</section>
+<section class="slide level2 scrollable">
+
+<p>From <span class="math inline">\((1), x=0\)</span> or <span class="math inline">\(\lambda=1.\)</span></p>
+<ul>
+<li class="fragment">If <span class="math inline">\(x=0, (3)\)</span> yields <span class="math inline">\(y=1, -1.\)</span></li>
+<li class="fragment">If <span class="math inline">\(\lambda=1, (2)\)</span> yields <span class="math inline">\(y=0,\)</span> and consequently <span class="math inline">\((3)\)</span> yields <span class="math inline">\(x=1,-1\)</span>.</li>
+</ul>
+<div class="fragment">
+<p>Hence, <span class="math inline">\(f\)</span> has possible extreme values at the points <span class="math inline">\((0, 1),  (0, -1),  (1, 0),  (-1, 0)\)</span></p>
+</div>
+<ol start="3" type="1">
+<li class="fragment">Evaluating <span class="math inline">\(f\)</span> at these points gives <span class="math display">\[f(0,1)=2,\quad f(0,−1)=2,\quad f(1,0)=1,\quad f(−1,0)=1
+\]</span></li>
+</ol>
+<div class="r-stack fragment">
+<p><span class="math inline">\(\therefore \min f = f(\pm 1,0)=1, \quad \max f = f(0, \pm 1)=2\)</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="mixed-constrained-optimisation">2.5 Mixed Constrained Optimisation</h3>
+<p>A general mixed constrained multi-dimensional problem is</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{Minimise} \quad &amp;f(x),\; x\in\mathcal{R}^n \\
+\text{subject to} \quad &amp;h_i(x) = 0, \quad i=1,2,...,m \quad \text{Equality constraints} \\
+&amp;g_j(x) \leq 0, \quad j=1,2,...,p \quad \text{Inequality constraints}
+\end{align*}
+\]</span></p>
+<div class="fragment">
+<p>The Lagrangian function is <span class="math display">\[
+L(x,\lambda,\mu)=f(x)+\sum_{i=1}^m\lambda_i h_i(x)+\sum_{j=1}^p\mu_jg_j(x),
+\]</span></p>
+<p>where <span class="math inline">\(\lambda_i\)</span> are the multipliers for the equality constraints and <span class="math inline">\(\mu_i\)</span> for the inequality constraints.</p>
+</div>
+<div class="fragment">
+<p>The <strong>Karush-Kuhn-Tucker (KKT)</strong> conditions are necessary for a point <span class="math inline">\(x^*\)</span> to be a local minimum (assuming suitable regularity conditions).</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<h4 id="the-karush-kuhn-tucker-kkt-conditions">2.5.1 The Karush-Kuhn-Tucker (KKT) conditions</h4>
+<ol type="1">
+<li class="fragment"><strong>Stationarity</strong> Compute the first-order partial derivatives of <span class="math inline">\(L\)</span> with respect to <span class="math inline">\(x_i, \lambda\)</span> and <span class="math inline">\(\mu\)</span>, and set them equal to zero. Solve for <span class="math inline">\(x_i, \lambda\)</span> and <span class="math inline">\(\mu\)</span>.</li>
+</ol>
+<div class="fragment" style="font-size: 90%;">
+<p>Mimimising <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="space-out"></span></p>
+<p><span class="math inline">\(\qquad \nabla_x L(x^*,\lambda^*,\mu^*)=\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p u_j^*\nabla g_j(x^*)=0\)</span></p>
+</div>
+<div class="fragment" style="font-size: 90%;">
+<p>Maximising <span class="math inline">\(f(x)\)</span>:</p>
+<p><span class="space-out"></span></p>
+<p><span class="math inline">\(\qquad\nabla_x L(x^*,\lambda^*,\mu^*)={\color{red}-}\nabla f(x^*)+\sum_{i=1}^m \lambda_i^*\nabla h_i(x^*)+\sum_{j=1}^p u_j^*\nabla g_j(x^*)=0\)</span></p>
+</div>
+<ol start="2" type="1">
+<li class="fragment"><p><strong>Primal feasibility</strong> <span class="math inline">\(\; h_i(x^*)=0, \; i=1,...,m, \;\text{and} \;\; g_j(x^*)\leq 0, \; j=1,...,p\)</span></p></li>
+<li class="fragment"><p><strong>Dual feasibility</strong> <span class="math inline">\(\quad \mu_j^* \geq 0, \; j=1,...,p\)</span></p></li>
+<li class="fragment"><p><strong>Complementary slackness</strong> <span class="math inline">\(\quad \mu_j^* g_j(x^*)=0, \; j=1,...,p\)</span></p></li>
+</ol>
+</section>
+<section class="slide level2 scrollable">
+
+<p><strong>Example.</strong></p>
+<p><span class="math display">\[
+\begin{align*}
+\text{Minimise} \quad &amp;x^2+y^2 \\
+\text{subject to} \quad &amp;h(x,y)=x+y-1=0 \\
+&amp;g(x,y)=x-0.5\leq 0
+\end{align*}
+\]</span></p>
+<ol type="1">
+<li class="fragment"><p>From the Lagrangian <span class="math inline">\(\quad L=x^2-y^2+\lambda(x+y-1)+\mu(x-0.5)\)</span></p></li>
+<li class="fragment"><p>Compute the partial derivatives (stationarity)</p></li>
+</ol>
+<div class="fragment">
+<p><span class="math display">\[\begin{align*}
+\nabla_x L &amp;= 2x+\lambda+\mu =0, \tag{1} \\
+\nabla_y L &amp;= 2y+\lambda =0, \tag{2} \\
+\nabla_\lambda L &amp;= (x+y-1)=0, \tag{3} \\
+\nabla_\mu L &amp;= x-0.5=0, \quad \text{if }\mu&gt;0. \tag{4}
+\end{align*}\]</span></p>
+</div>
+<div class="fragment">
+<p>Note that if the inequality constraint is inactive (i.e.&nbsp;<span class="math inline">\(x−0.5&lt;0\)</span>), then <span class="math inline">\(\mu\)</span> can be zero. However, if it is active (i.e.&nbsp;<span class="math inline">\(x−0.5=0\)</span>), then <span class="math inline">\((4)\)</span> must hold.</p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<ol start="3" type="1">
+<li class="fragment">Solve the system</li>
+</ol>
+<div class="fragment">
+<ul>
+<li class="fragment">From <span class="math inline">\((4), x=0.5.\)</span></li>
+<li class="fragment">Substitute <span class="math inline">\(x=0.5\)</span> into <span class="math inline">\((3)\)</span> yields <span class="math inline">\(y=0.5.\)</span></li>
+<li class="fragment">Substitute <span class="math inline">\(y=0.5\)</span> into <span class="math inline">\((2)\)</span> yields <span class="math inline">\(\lambda=-1.\)</span></li>
+<li class="fragment">Substitute <span class="math inline">\(x=0.5\)</span> and <span class="math inline">\(\lambda=−1\)</span> into <span class="math inline">\((1)\)</span> yields <span class="math inline">\(\mu=0.\)</span></li>
+</ul>
+</div>
+<ol start="4" type="1">
+<li class="fragment">Verify the KKT conditions</li>
+</ol>
+<ul>
+<li class="fragment"><p><em>Stationarity:</em> Equation <span class="math inline">\((1)\)</span> and <span class="math inline">\((2)\)</span> are satisfied with the computed value.</p></li>
+<li class="fragment"><p><em>Primal feasibility:</em> We have <span class="math inline">\(x+y=1\)</span> and <span class="math inline">\(g(x,y)=0.5−0.5=0\)</span> <br> (thus <span class="math inline">\(x−0.5=0\leq0\)</span>)</p></li>
+<li class="fragment"><p><em>Dual feasibility:</em> <span class="math inline">\(\mu=0\geq 0\)</span></p></li>
+<li class="fragment"><p><em>Complementary slackness:</em> <span class="math inline">\(\mu\,g(x,y)=0\cdot 0 =0\)</span></p></li>
+</ul>
+<div class="fragment">
+<p><span class="math inline">\(\therefore\)</span> the candidate optimal point is <span class="math inline">\((x,y)=(0.5, 0.5)\)</span> with the objective minimum of <span class="math inline">\(f(0.5, 0.5)=0.5.\)</span></p>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figs/curtin-logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="01lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="01lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="01lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="01lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"titleSelector":"h1, h2, h3","hideMissingTitles":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

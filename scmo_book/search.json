@@ -1,0 +1,88 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Supply Chain Modelling and Optimisation",
+    "section": "",
+    "text": "Preface\nModern supply chains are complex systems that require effective planning, analysis, and decision-making to ensure the efficient flow of goods, information, and resources. This unit introduces the fundamental concepts and quantitative methods used to model and optimise supply chain operations.\nThe material covers logistics network design, demand forecasting, and inventory management, with an emphasis on mathematical modelling and optimisation techniques. Through practical examples and case studies, students will learn how analytical tools can be applied to real-world industrial problems.\nThese materials are intended to support learning in INDE2000/5000 Supply Chain Modelling and Optimisation and 05115130 Supply Chain Modelling and Optimisation (供应链建模与优化), providing both theoretical foundations and practical insights. By engaging with the material, students will develop the skills needed to analyse supply chain systems, evaluate alternative solutions, and make informed operational and strategic decisions.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#unit-materials-june-2026-class",
+    "href": "index.html#unit-materials-june-2026-class",
+    "title": "Supply Chain Modelling and Optimisation",
+    "section": "Unit Materials (June 2026 Class)",
+    "text": "Unit Materials (June 2026 Class)\n\n\n\nDate\nTime\nTopic\nLT\nTUT\nSOLS\n\n\n\n\nThu 4\n6:10 - 9:40 PM\nIntro to Supply Chain & Optimisation\n\n\n\n\n\nFri 5\n6:10 - 9:40 PM\nNetwork Design - Single-Echelon Single-Commodity (SESC)\n\n\n\n\n\nSat 6\n5 PM\nAssignment Releases\n\n\n\n\n\nSun 7\n1:30 - 5:10 PM\nNetwork Design - Two-Echelon Multi-Commodity (TEMC)\n\n\n\n\n\nMon 8\n6:10 - 9:40 PM\nNetwork Design under Uncertainty\n\n\n\n\n\nTue 9\n6:10 - 9:40 PM\nDemand Forecasting Techniques\n\n\n\n\n\nWed 10\n6:10 - 9:40 PM\nInventory Model: Single-Commodity\n\n\n\n\n\nThu 11\n8:00 - 11:40 AM\nInventory Model: Discount and Multi-Commodity\n\n\n\n\n\nFri 12\n6:10 - 9:40 PM\nStochastic Inventory Model: Single and Multi-Period\n\n\n\n\n\nSat 13\n1:30 - 5:10 PM\nRevisionAssignment Due at 5:10 PM",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html",
+    "href": "01tutorial.html",
+    "title": "1  Tutorial",
+    "section": "",
+    "text": "Part A: Supply Chain Concepts and Roles",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html#part-a-supply-chain-concepts-and-roles",
+    "href": "01tutorial.html#part-a-supply-chain-concepts-and-roles",
+    "title": "1  Tutorial",
+    "section": "",
+    "text": "Question 1\nOutline the main responsibilities of manufacturers, distributors, and retailers in evaluating and enhancing their operations, decision-making procedures, and management of the supply chain.\n\n\nQuestion 2\nDefine the objectives pursued by manufacturers, distributors, and retailers within the supply chains of the following products.\n\nSmartphone\nComputer\nKitchenware",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html#part-b-optimisation-concepts",
+    "href": "01tutorial.html#part-b-optimisation-concepts",
+    "title": "1  Tutorial",
+    "section": "Part B: Optimisation Concepts",
+    "text": "Part B: Optimisation Concepts\n\nQuestion 1\nConsider the function\n\\[\nf(x,y)=\\frac{x+y}{x^2+y^2+1}.\n\\]\n\nFind the gradient of the function.\nDetermine the critical (stationary) points.\nFind the Hessian of the function.\nClassify the stationary points as saddle points, strict or non-strict local/global minima, or strict or non-strict local/global maxima.\n\n\n\nQuestion 2\nA Cobb-Douglas production function for a new company is given by\n\\[\nf(x,y)=50x^{2/5}y^{3/5},\n\\]\nwhere \\(x\\) represents units of labour and \\(y\\) represents units of capital. Suppose each unit of labour costs \\(\\$100\\) and each unit of capital costs \\(\\$200\\). If the budget constraint is \\(\\$30{,}000\\), find the maximum production level for this manufacturer.\n\n\nQuestion 3\nConsider the optimisation problem\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\\\\n\\text{subject to}\\quad & x_1+2x_2=5.\n\\end{aligned}\n\\]\n\nWrite down the Lagrangian formula \\(L(x_1,x_2,\\lambda)\\).\nDetermine all constraints of \\(L(x_1,x_2,\\lambda)\\).\nFind the values of \\(x_1\\) and \\(x_2\\).\n\n\n\nQuestion 4\nConsider the optimisation problem\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\\\\n\\text{subject to}\\quad & x_1+2x_2=5,\\\\\n& 2x_1-x_2=10.\n\\end{aligned}\n\\]\n\nWrite down the Lagrangian formula \\(L(x_1,x_2,\\lambda_1,\\lambda_2)\\).\nDetermine all constraints of \\(L(x_1,x_2,\\lambda_1,\\lambda_2)\\).\n\n\n\nQuestion 5\nConsider the optimisation problem\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\\\\n\\text{subject to}\\quad & x_1+2x_2=5,\\\\\n& 2x_1-x_2=10,\\\\\n& x_1+x_2\\le 4.\n\\end{aligned}\n\\]\n\nWrite down the Lagrangian formula \\(L(x_1,x_2,\\lambda_1,\\lambda_2,\\mu)\\).\nDetermine all constraints of \\(L(x_1,x_2,\\lambda_1,\\lambda_2,\\mu)\\).",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html#part-c-critical-points-of-functions",
+    "href": "01tutorial.html#part-c-critical-points-of-functions",
+    "title": "1  Tutorial",
+    "section": "Part C: Critical Points of Functions",
+    "text": "Part C: Critical Points of Functions\nFor each function below:\n\nFind all critical points by setting the partial derivatives to zero.\nForm the Hessian matrix at each critical point.\nClassify each critical point as a local minimum, local maximum, saddle point, or inconclusive using the second derivative test.\n\n\nFunctions\n\n\\(f(x,y)=(x-2)^2+2(y-1)^2\\)\n\\(f(x,y)=x^3+y^3-3xy\\)\n\\(f(x,y)=2xy-x^4-x^2-y^2\\)\n\\(f(x,y)=e^{-(x^2+y^2)}\\)\n\\(f(x,y)=\\sin(x)\\sin(y)\\)\n\\(f(x,y)=\\ln(1+x^2+y^2)\\)\n\\(f(x,y,z)=x^2+y^2-z^2\\)",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html#part-d-lagrange-multipliers",
+    "href": "01tutorial.html#part-d-lagrange-multipliers",
+    "title": "1  Tutorial",
+    "section": "Part D: Lagrange Multipliers",
+    "text": "Part D: Lagrange Multipliers\nUse the method of Lagrange multipliers to find and classify the extrema, local or global, for the following problems.\n\n\\(f(x,y)=x^2+y^2\\), subject to \\(x+y=1\\).\n\\(f(x,y)=xy\\), subject to \\(x^2+y^2=1\\).\n\\(f(x,y)=x^2+4xy+y^2\\), subject to \\(x+y=3\\).\n\\(f(x,y)=e^{xy}\\), subject to \\(x^2+y^2=1\\).\n\\(f(x,y)=x^3y\\), subject to \\(x^2+y^2=1\\).\n\\(f(x,y)=\\sin(x)+\\cos(y)\\), subject to \\(x+y=\\pi/2\\).\n\\(f(x,y,z)=x+y+z\\), subject to \\(x^2+y^2+z^2=1\\).",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  },
+  {
+    "objectID": "01tutorial.html#part-e-kkt-conditions",
+    "href": "01tutorial.html#part-e-kkt-conditions",
+    "title": "1  Tutorial",
+    "section": "Part E: KKT Conditions",
+    "text": "Part E: KKT Conditions\nUse the KKT conditions to find and classify the extrema for the following problems. For inequalities, rewrite them in the form \\(g(x)\\le 0\\) if necessary.\n\nQuestion 1\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x,y)=(x-1)^2+(y-2)^2\\\\\n\\text{subject to}\\quad & -x-y+3\\le 0,\\\\\n& -x\\le 0.\n\\end{aligned}\n\\]\n\n\nQuestion 2\n\\[\n\\begin{aligned}\n\\text{Maximise}\\quad & f(x,y)=x^2y\\\\\n\\text{subject to}\\quad & x+y-1=0,\\\\\n& -x\\le 0.\n\\end{aligned}\n\\]\n\n\nQuestion 3\n\\[\n\\begin{aligned}\n\\text{Maximise}\\quad & f(x,y)=\\ln(x)+\\ln(y)\\\\\n\\text{subject to}\\quad & x+y-1=0,\\\\\n& -x\\le 0,\\\\\n& -y\\le 0.\n\\end{aligned}\n\\]\n\n\nQuestion 4\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x,y)=e^x+e^y\\\\\n\\text{subject to}\\quad & x+y=0,\\\\\n& x-1\\le 0.\n\\end{aligned}\n\\]\n\n\nQuestion 5\n\\[\n\\begin{aligned}\n\\text{Minimise}\\quad & f(x,y,z)=x^2+y^2+z^2\\\\\n\\text{subject to}\\quad & x+y+z-1=0,\\\\\n& -x\\le 0.\n\\end{aligned}\n\\]",
+    "crumbs": [
+      "1 Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Tutorial</span>"
+    ]
+  }
+]

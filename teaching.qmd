@@ -31,7 +31,7 @@ listing:
         date: "2025-06-13"
         categories: [Teaching, Finance, Actuarial science, Undergraduate]
 
-      - path: https://github.com/Ben-wiwat/SCMO
+      - path: https://github.com/zamnolence/scmo_book
         image: assets/images/scmo-blog.png
         title: "Supply Chain Modelling (YSU)"
         description: 'Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
