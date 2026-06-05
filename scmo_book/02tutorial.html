@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ben W. and Sam W.">
-<meta name="dcterms.date" content="2026-06-04">
 
-<title>Supply Chain Modelling and Optimisation</title>
+<title>tutorial – Supply Chain Modelling and Optimisation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -35,7 +33,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./00_python_setup.html" rel="next">
+<link href="./01solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -50,7 +48,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-e6d568464a03255c354358ed153408dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/bootstrap/bootstrap-dark-e8dc00ed3bb19e3a690cd1027ec58c34.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <link href="site_libs/bootstrap/bootstrap-e6d568464a03255c354358ed153408dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -82,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-sidebar floating fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -253,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Preface</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02tutorial.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">02tutorial.html</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -292,7 +289,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
   </div>
 </li>
@@ -344,16 +341,16 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text"><strong>2 Network Design: SESC</strong></span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02tutorial.html" class="sidebar-item-text sidebar-link">
+  <a href="./02tutorial.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">02tutorial.html</span></span></a>
   </div>
 </li>
@@ -388,222 +385,16 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
-    <h2 id="toc-title">Table of contents</h2>
-   
-  <ul>
-  <li><a href="#preface" id="toc-preface" class="nav-link active" data-scroll-target="#preface">Preface</a>
-  <ul>
-  <li><a href="#announcements-faqs" id="toc-announcements-faqs" class="nav-link" data-scroll-target="#announcements-faqs">Announcements &amp; FAQs</a></li>
-  <li><a href="#unit-materials-june-2026-class" id="toc-unit-materials-june-2026-class" class="nav-link" data-scroll-target="#unit-materials-june-2026-class">Unit Materials (June 2026 Class)</a></li>
-  <li><a href="#materials" id="toc-materials" class="nav-link" data-scroll-target="#materials">2025 Materials</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Supply Chain Modelling and Optimisation</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02tutorial.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">02tutorial.html</span></a></li></ol></nav></header>
 
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Ben W. and Sam W. </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 4, 2026</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 
-<section id="preface" class="level1 unnumbered">
-<h1 class="unnumbered">Preface</h1><p><img src="cover.png" title="Supply Chain Modelling and Optimisation" class="quarto-cover-image nolightbox img-fluid"></p>
-<p>Modern supply chains are complex systems that require effective planning, analysis, and decision-making to ensure the efficient flow of goods, information, and resources. This unit introduces the fundamental concepts and quantitative methods used to model and optimise supply chain operations.</p>
-<p>The material covers logistics network design, demand forecasting, and inventory management, with an emphasis on mathematical modelling and optimisation techniques. Through practical examples and case studies, students will learn how analytical tools can be applied to real-world industrial problems.</p>
-<p>These materials are intended to support learning in <strong>INDE2000/5000 Supply Chain Modelling and Optimisation</strong> and <strong>05115130 Supply Chain Modelling and Optimisation (供应链建模与优化)</strong>, providing both theoretical foundations and practical insights. By engaging with the material, students will develop the skills needed to analyse supply chain systems, evaluate alternative solutions, and make informed operational and strategic decisions.</p>
-<section id="announcements-faqs" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="announcements-faqs">Announcements &amp; FAQs</h2>
-<div class="callout callout-style-simple callout-tip no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Assignment Released
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Date: 5 June 2026 (05:00 PM)</p>
-<p>The assignment for this unit has been released and is available <a href="https://zamnolence.github.io/scmo_book/2025/scmo-2026-assignment.pdf">here</a>. The assignment is due on 13 June 2026 at 5:10 PM. Students are encouraged to start working on the assignment early and seek help if needed.</p>
-<p>The assignment is designed to be a practice for the final exam, covering the key topics and concepts discussed in the lectures. It is recommended to attempt the assignment questions on your own before referring to any solutions or seeking help.</p>
-<p>The solutions will be posted on 24 June 2026. Submission later than this date will not be accepted. Please make sure to submit your assignment on time.</p>
-</div>
-</div>
-<div class="callout callout-style-simple callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Caution</span>Tutorial Solutions and 2025 Materials Posted
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Date:5 June 2026 (12:30 AM)</p>
-<p>Solutions to tutorial questions will be posted here the day after the class. Students are encouraged to attempt the questions on their own before referring to the solutions. No submission of tutorial questions is required.</p>
-<p>The materials for the 2025 class, including lecture slides and exam materials, have also been uploaded to this page for reference.</p>
-</div>
-</div>
-</section>
-<section id="unit-materials-june-2026-class" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="unit-materials-june-2026-class">Unit Materials (June 2026 Class)</h2>
-<p>Updates from last year:</p>
-<ul>
-<li>Migrate from PDF to HTML format for lecture slides and tutorial materials.</li>
-<li>Add more contents to the lecture slides, including more examples, detailed explanations, and Python code snippets.</li>
-<li>Add more tutorial questions and solutions.</li>
-</ul>
-<table class="table-striped table-hover caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: center;">Date</th>
-<th style="text-align: center;">Time</th>
-<th>Topic</th>
-<th style="text-align: center;">LT</th>
-<th style="text-align: center;">TUT</th>
-<th style="text-align: center;">SOLS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;">Thu 4</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>1. Intro to Supply Chain &amp; Optimisation</td>
-<td style="text-align: center;"><a href="https://zamnolence.github.io/scmo-slides/01lecture#/title-slide"><iconify-icon role="img" inline="" icon="grommet-icons:workshop" aria-label="Lecture" title="Lecture"></iconify-icon></a></td>
-<td style="text-align: center;"><a href="01tutorial.html"><iconify-icon role="img" inline="" icon="fe:document" aria-label="Tutorial" title="Tutorial"></iconify-icon></a></td>
-<td style="text-align: center;"><a href="01solutions.html"><iconify-icon role="img" inline="" icon="ant-design:solution-outlined" aria-label="Solutions" title="Solutions"></iconify-icon></a></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Fri 5</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>2. Network Design - Single-Echelon Single-Commodity (SESC)</td>
-<td style="text-align: center;"><a href="https://zamnolence.github.io/scmo-slides/02lecture#/title-slide"><iconify-icon role="img" inline="" icon="grommet-icons:workshop" aria-label="Lecture" title="Lecture"></iconify-icon></a></td>
-<td style="text-align: center;"><a href="https://zamnolence.github.io/scmo_book/2026/scmo-tut2.pdf"><iconify-icon role="img" inline="" icon="fe:document" aria-label="Tutorial" title="Tutorial"></iconify-icon></a></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;"></td>
-<td style="text-align: center;">5 PM</td>
-<td><a href="https://zamnolence.github.io/scmo_book/2026/scmo-2026-assignment.pdf">Assignment Released</a></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Sun 7</td>
-<td style="text-align: center;">1:30 - 5:10 PM</td>
-<td>3. Network Design - Two-Echelon Multi-Commodity (TEMC)</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Mon 8</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>4. Network Design under Uncertainty</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Tue 9</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>5. Demand Forecasting Techniques</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Wed 10</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>6. Inventory Model: Single-Commodity</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Thu 11</td>
-<td style="text-align: center;">8:00 - 11:40 AM</td>
-<td>7. Inventory Model: Discount and Multi-Commodity</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="odd">
-<td style="text-align: center;">Fri 12</td>
-<td style="text-align: center;">6:10 - 9:40 PM</td>
-<td>8. Stochastic Inventory Model: Single and Multi-Period</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-<tr class="even">
-<td style="text-align: center;">Sat 13</td>
-<td style="text-align: center;">1:30 - 5:10 PM</td>
-<td>Revision<br><strong>Assignment Due at 5:10 PM</strong></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;"></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="materials" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="materials">2025 Materials</h2>
-<ul>
-<li>Lecture Slides
-<ul>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/01_Introduction.pdf">Lecture 1: Introduction to Supply Chain and Optimisation</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/02_SC_NetworkDesign_SESC.pdf">Lecture 2: Network Design - SESC</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/03_SC_NetworkDesign_TEMC.pdf">Lecture 3: Network Design - TEMC</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/04_SC_NetworkDesign_Uncertainty.pdf">Lecture 4: Network Design under Uncertainty</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/05_Forecasting_Techniques.pdf">Lecture 5: Demand Forecasting Techniques</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/06_InventoryModel.pdf">Lecture 6: Inventory Model - Single-Commodity</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/07_InventoryModel_with_Discount.pdf">Lecture 7: Inventory Model - Discount</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/08_Stochastic_InventoryModel.pdf">Lecture 8: Stochastic Inventory Model</a></li>
-</ul></li>
-<li>Exam Materials
-<ul>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/scmo-exam-2025.pdf">Exam Paper</a></li>
-<li><a href="https://zamnolence.github.io/scmo_book/2025/scmo-exam-sols-2025.pdf">Solutions</a></li>
-</ul></li>
-</ul>
 
-
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1021,11 +812,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./01solutions.html" class="pagination-link" aria-label="Tutorial 1 Exercises Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial 1 Exercises Solutions</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_python_setup.html" class="pagination-link" aria-label="Python on VS Code">
-        <span class="nav-page-text">Python on VS Code</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
