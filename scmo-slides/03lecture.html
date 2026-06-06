@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="03lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="03lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="03lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="03lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="03lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="03lecture_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="03lecture_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="03lecture_files/libs/quarto-contrib/iconify-3.0.0/iconify-icon.min.js"></script><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Lecturer: Sam Wiwatanapataphee">
+  <title>Topic 3: Network Design - Two-Echelon Multi-Commodity (TEC)</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="03lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="03lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="03lecture_files/libs/revealjs/dist/theme/quarto-31e77d737e81b9b945dd1098fae77c0e.css">
+  <link href="03lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="03lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="03lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="03lecture_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="03lecture_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="03lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="03lecture_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="03lecture_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="03lecture_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Topic 3: Network Design - Two-Echelon Multi-Commodity (TEC)</h1>
+  <p class="subtitle">05115130 Supply Chain Modelling and Optimisation</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Lecturer: Sam Wiwatanapataphee 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:275287a@curtin.edu.au">275287a@curtin.edu.au</a>
+</div>
+        <p class="quarto-title-affiliation">
+            School of EECMS, Curtin University
+          </p>
+    </div>
+</div>
+
+  <p class="date">7 Jun 2026</p>
+</section>
+<section id="goals-today" class="slide level2 scrollable">
+<h2>Goals today</h2>
+<p><span class="space-out"></span></p>
+<ol type="1">
+<li class="fragment">Two-Echelon Multi-Commodity (TEC) Models
+<ul>
+<li class="fragment">Introduction to TEMC</li>
+<li class="fragment">Commodity types</li>
+<li class="fragment">Network structure and decisions</li>
+<li class="fragment">Objectives, decision variables, and constraints</li>
+</ul></li>
+<li class="fragment">TEMC Examples
+<ul>
+<li class="fragment">Example 1
+<ul>
+<li class="fragment">Model formulation</li>
+<li class="fragment">Python implementation (Case analysis)</li>
+</ul></li>
+<li class="fragment">Example 2
+<ul>
+<li class="fragment">Model formulation</li>
+<li class="fragment">Python implementation</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+<section>
+<section id="two-echelon-multi-commodity-location-model-temc" class="title-slide slide level1 center">
+<h1>1. Two-Echelon Multi-Commodity Location Model (TEMC)</h1>
+
+</section>
+<section id="introduction-to-temc" class="slide level2">
+<h2>1.1 Introduction to TEMC</h2>
+<p>A <strong>TEMC</strong> is an optimisation framework used in logistics and SCM for decisions involving facility location and routing of <strong>multiple commodities</strong> across a <strong>two-tier distribution system</strong>. It involves optimal selection of facilities (e.g., distribution centres) and routing of commodities from origins to destinations.</p>
+<p><span class="space-out"></span></p>
+<h4 class="fragment" id="key-characteristics">Key Characteristics</h4>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<ul>
+<li class="fragment"><strong>Multi-Commodity Framework</strong>
+<ul>
+<li class="fragment">Handles multiple products simultaneously<br>
+</li>
+<li class="fragment">Each product may have:
+<ul>
+<li class="fragment">Different supplier capacities<br>
+</li>
+<li class="fragment">Different customer demands<br>
+</li>
+<li class="fragment">Different transportation costs<br>
+</li>
+</ul></li>
+</ul></li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<ul>
+<li class="fragment"><strong>Two-Echelon Structure</strong>
+<ul>
+<li class="fragment"><strong>Echelon 1:</strong> <br>Suppliers → DCs</li>
+<li class="fragment"><strong>Echelon 2:</strong> <br>DCs → Customers<br>
+</li>
+</ul></li>
+<li class="fragment"><strong>Objective:</strong> minimises total cost</li>
+<li class="fragment"><strong>Decision variables:</strong> facility location and flow decisions</li>
+</ul>
+</div></div>
+
+<aside><div>
+<p>DCs = Distribution Centres</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h4 id="example-supply-chain-for-a-supermarket-chain">Example: Supply chain for a supermarket chain</h4>
+<div class="columns">
+<div class="column center fragment" style="width:35%;">
+<p><iconify-icon role="img" inline="" icon="streamline-ultimate-color:shipment-cargo-boat" style="font-size: 5em;" aria-label="Icon shipment-cargo-boat from streamline-ultimate-color Iconify.design set." title="Icon shipment-cargo-boat from streamline-ultimate-color Iconify.design set."></iconify-icon></p>
+<p><strong>Suppliers</strong></p>
+<p>Multiple suppliers providing different products (e.g., fresh produce, packaged goods) to distribution centres.</p>
+</div><div class="column center fragment" style="width:33%;">
+<p><iconify-icon role="img" inline="" icon="streamline-ultimate-color:warehouse-storage-2" style="font-size: 5em;" aria-label="Icon warehouse-storage-2 from streamline-ultimate-color Iconify.design set." title="Icon warehouse-storage-2 from streamline-ultimate-color Iconify.design set."></iconify-icon></p>
+<p><strong>DCs</strong></p>
+<p>Centralised facilities that receive products from suppliers, store them, and distribute to retail stores.</p>
+</div><div class="column center fragment" style="width:29%;">
+<p><iconify-icon role="img" inline="" icon="streamline-ultimate-color:farmers-market-kiosk-1" style="font-size: 5em;" aria-label="Icon farmers-market-kiosk-1 from streamline-ultimate-color Iconify.design set." title="Icon farmers-market-kiosk-1 from streamline-ultimate-color Iconify.design set."></iconify-icon></p>
+<p><strong>Customers</strong></p>
+<p>Retail stores that require various products to meet consumer demand.</p>
+</div></div>
+<ul>
+<li class="fragment"><strong>Echelon 1:</strong> Suppliers → DCs</li>
+<li class="fragment"><strong>Echelon 2:</strong> DCs → Customers</li>
+<li class="fragment"><strong>Commodities:</strong> Fresh produce (perishable), packaged food (non-perishable), personal care, electronics (low volume, high value)</li>
+</ul>
+</section>
+<section id="commodity-types" class="slide level2">
+<h2>1.2 Commodity Types</h2>
+<div style="font-size: 80%">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 32%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Perishable goods</strong></td>
+<td style="text-align: left;">Require refrigeration/fast delivery</td>
+<td style="text-align: left;">Fresh fruits and vegetables, meat, dairy products (milk, cheese)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Packaged consumer goods (non-perishable)</strong></td>
+<td style="text-align: left;">Standard shelf-stable products</td>
+<td style="text-align: left;">Canned food, snacks, beverages, cleaning supplies, detergents</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Health and personal care</strong></td>
+<td style="text-align: left;">Often require clean handling, sometimes regulated</td>
+<td style="text-align: left;">Medicines and pharmaceuticals, cosmetics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Electronics and Appliances</strong></td>
+<td style="text-align: left;">Sensitive, often high-value</td>
+<td style="text-align: left;">Smart phones, laptops, home appliances, batteries and chargers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Industrial goods and raw materials</strong></td>
+<td style="text-align: left;">Used in manufacturing or construction</td>
+<td style="text-align: left;">Steel, copper, aluminum, machinery parts, building materials, chemicals</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Apparel and textiles</strong></td>
+<td style="text-align: left;">Non-perishable, high volume</td>
+<td style="text-align: left;">Clothing, shoes, beddings, fabrics</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Hazardous materials</strong></td>
+<td style="text-align: left;">Special safety and transport regulations apply</td>
+<td style="text-align: left;">Flammable liquids, gases under pressure, toxic substances, explosives</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Automotive products</strong></td>
+<td style="text-align: left;">Bulk or spare parts</td>
+<td style="text-align: left;">Tires, engine parts, lubricants, windshields</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment"><strong>Multicommodity flows:</strong> Manages multiple products with distinct characteristics.</li>
+</ul>
+</div>
+</section>
+<section id="network-structure-and-decisions" class="slide level2 scrollable">
+<h2>1.3 Network Structure and Decisions</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+  "flowchart": {
+    "padding": 70
+  },
+  "themeVariables": {
+    "fontSize": "44px"
+  }
+}}%%
+flowchart LR
+    S1((" S1 "))
+    S2((" S2 "))
+    DC1((" DC1 "))
+    DC2((" DC2 "))
+    C1((" C1 "))
+    C2((" C2 "))
+    C3((" C3 "))
+
+    S1 --&gt; DC1
+    S1 --&gt; DC2
+    S2 --&gt; DC1
+    S2 --&gt; DC2
+    DC1 --&gt; C1
+    DC1 --&gt; C2
+    DC1 --&gt; C3
+    DC2 --&gt; C1
+    DC2 --&gt; C2
+    DC2 --&gt; C3
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<ol type="1">
+<li class="fragment"><strong>Where to locate:</strong>
+<ul>
+<li class="fragment">Suppliers (tier 1)</li>
+<li class="fragment">DCs (tier 2)</li>
+</ul></li>
+<li class="fragment"><strong>Which facility serves whom:</strong>
+<ul>
+<li class="fragment">Which DCs are supplied by which suppliers</li>
+<li class="fragment">Which DCs serve which retail stores</li>
+</ul></li>
+<li class="fragment"><strong>How much each commodity flows:</strong>
+<ul>
+<li class="fragment">From Supplier → DC</li>
+<li class="fragment">From DC → Stores</li>
+</ul></li>
+</ol>
+</div></div>
+</section>
+<section id="objectives-decision-variables-and-constraints" class="slide level2">
+<h2>1.4 Objectives, Decision Variables, and Constraints</h2>
+<div style="font-size: 92%">
+<h4 class="fragment" id="objectives">Objectives</h4>
+<ul>
+<li class="fragment">Minimising fixed facility opening costs</li>
+<li class="fragment">Minimising total transportation costs for each commodity and path</li>
+<li class="fragment">Minimising possible storage/handling costs</li>
+<li class="fragment">Ensuring service-level compliance</li>
+</ul>
+<h4 class="fragment" id="decision-variables">Decision Variables</h4>
+<ul>
+<li class="fragment"><strong>Facility Location Variables:</strong> Indicate opening of DCs.</li>
+<li class="fragment"><strong>Commodity Allocation Variables:</strong> Routing of commodities.</li>
+<li class="fragment"><strong>Flow Variables:</strong> Quantities of each commodity shipped along each path.</li>
+</ul>
+<h4 class="fragment" id="constraints">Constraints</h4>
+<ul>
+<li class="fragment"><strong>Capacity constraints:</strong> Maximum throughput at each facility.</li>
+<li class="fragment"><strong>Demand fulfilment:</strong> Customer demands must be satisfied.</li>
+<li class="fragment"><strong>Flow conservation:</strong> Balance of commodity flows at intermediate nodes.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="temc-examples" class="title-slide slide level1 center">
+<h1>2. TEMC Examples</h1>
+
+</section>
+<section id="temc-example-1" class="slide level2 scrollable">
+<h2>2.1 TEMC Example 1</h2>
+<p>Consider a two-echelon, multi-product distribution network.</p>
+<ul>
+<li class="fragment"><strong>First echelon:</strong> suppliers <strong>S1</strong> and <strong>S2</strong> ship products to potential distribution centres <strong>DC1</strong> and <strong>DC2</strong>, which consolidate and forward goods to customers.</li>
+<li class="fragment"><strong>Second echelon:</strong> customers <strong>C1</strong>, <strong>C2</strong>, and <strong>C3</strong> receive two products, <strong>P1</strong> and <strong>P2</strong>, each with specific supply and demand levels.</li>
+</ul>
+<h4 class="fragment" id="problem-statements">Problem statements</h4>
+<ol type="1">
+<li class="fragment">Which DCs (<strong>DC1</strong>, <strong>DC2</strong>, or <strong>both</strong>) should be operational to minimise total cost?</li>
+<li class="fragment">How much of each product (<strong>P1</strong>, <strong>P2</strong>) should be shipped from each supplier (<strong>S1</strong>, <strong>S2</strong>) to each selected DC?</li>
+<li class="fragment">How much of each product should be shipped from the selected DCs to each customer (<strong>C1</strong>, <strong>C2</strong>, <strong>C3</strong>)?</li>
+<li class="fragment">What is the optimal allocation strategy to minimise total costs (including transportation, fixed, and handling costs)?</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<div style="font-size: 90%">
+<table class="table-striped caption-top">
+<caption>Table 1. Supplier Capacities and Supplier → DC Transportation Cost</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Supplier</th>
+<th>Product</th>
+<th style="text-align: right;">Capacity (units)</th>
+<th style="text-align: right;">Cost to DC1 ($/unit)</th>
+<th style="text-align: right;">Cost to DC2 ($/unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1</td>
+<td>P1</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td>S1</td>
+<td>P2</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>S2</td>
+<td>P1</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td>S2</td>
+<td>P2</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+<table class="table-striped caption-top">
+<caption>Table 2. DC Capacity and DC → Customer Transportation Cost</caption>
+<colgroup>
+<col style="width: 11%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Capacity (units)</th>
+<th style="text-align: right;">Cost to C1 ($/unit)</th>
+<th style="text-align: right;">Cost to C2 ($/unit)</th>
+<th style="text-align: right;">Cost to C3 ($/unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DC1</td>
+<td style="text-align: right;">350</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+</tr>
+<tr class="even">
+<td>DC2</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<div class="columns">
+<div class="column">
+<table class="table-striped caption-top">
+<caption>Table 3. Customer Demands (units)</caption>
+<thead>
+<tr class="header">
+<th>Customer</th>
+<th style="text-align: right;">Demand P1</th>
+<th style="text-align: right;">Demand P2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C1</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>C2</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td>C3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">70</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column">
+<table class="table-striped caption-top">
+<caption>Table 4. DC Fixed and Variable Costs</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Fixed Cost ($)</th>
+<th style="text-align: right;">Variable Cost ($/unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DC1</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr class="even">
+<td>DC2</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="model-formulation">2.1.1 Model Formulation</h3>
+<div class="columns">
+<div class="column fragment" style="width:50%;">
+<h4 id="i.-set-model-variables">I. Set Model Variables</h4>
+<ul>
+<li class="fragment"><span class="math inline">\(V_1 = \{\text{S1}, \text{S2}\}:\)</span> <strong>Suppliers</strong></li>
+<li class="fragment"><span class="math inline">\(V_2 = \{\text{DC1}, \text{DC2}\}:\)</span> DCs</li>
+<li class="fragment"><span class="math inline">\(V_3 = \{\text{C1}, \text{C2}, \text{C3}\}:\)</span> Customers</li>
+<li class="fragment"><span class="math inline">\(H = \{\text{P1}, \text{P2}\}:\)</span> <strong>Products</strong></li>
+</ul>
+</div><div class="column fragment" style="width:50%;">
+<h4 id="ii.-model-parameters">II. Model Parameters</h4>
+<ul>
+<li class="fragment"><span class="math inline">\(p_i^h:\)</span> <strong>Supplier capacities</strong></li>
+<li class="fragment"><span class="math inline">\(K_j:\)</span> DC capacities</li>
+<li class="fragment"><span class="math inline">\(D_k^h:\)</span> <strong>Customer demand</strong></li>
+<li class="fragment"><span class="math inline">\(c_{ijk}^h:\)</span> <strong>Transportation costs</strong></li>
+<li class="fragment"><span class="math inline">\(f_j:\)</span> Fixed costs of DCs</li>
+<li class="fragment"><span class="math inline">\(g_j:\)</span> <strong>Variable costs of DCs</strong></li>
+</ul>
+</div></div>
+<h4 class="fragment" id="iii.-decision-variables">III. Decision Variables</h4>
+<ul>
+<li class="fragment"><p><span class="math inline">\(x_{ijk}^h \ge 0:\)</span><strong>Flow of product <span class="math inline">\(h\)</span> from supplier <span class="math inline">\(i\)</span> via DC <span class="math inline">\(j\)</span> to customer <span class="math inline">\(k\)</span></strong></p></li>
+<li class="fragment"><p><span class="math inline">\(y_{jk} \in \{0,1\}\)</span>: 1 if DC <span class="math inline">\(j\)</span> serves customer <span class="math inline">\(k\)</span>, 0 otherwise</p></li>
+<li class="fragment"><p><span class="math inline">\(z_j \in \{0,1\}\)</span>: 1 if DC <span class="math inline">\(j\)</span> is opened, 0 otherwise</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h4 id="iv.-objective-function">IV. Objective Function</h4>
+<p><span class="math display">\[
+\text{Min }
+\color{blue}{
+\sum_{i \in V_1}\sum_{j \in V_2}\sum_{k \in V_3}\sum_{h \in H}
+c_{ijk}^h x_{ijk}^h}
++
+\sum_{j \in V_2}
+\left(
+\color{red}{f_j z_j}
++
+\color{green}{g_j \sum_{k \in V_3}\sum_{h \in H} D_k^h y_{jk}}
+\right)
+\]</span></p>
+<div class="center">
+<div class="columns">
+<div class="column fragment" style="width:30%;">
+<p><span style="color: blue;"><strong>Transportation cost</strong></span></p>
+</div><div class="column fragment" style="width:20%;">
+<p><span style="color: red;"><strong>Facility opening cost</strong></span></p>
+</div><div class="column fragment" style="width:20%;">
+<p><span style="color: green;"><strong>Variable handling cost</strong></span></p>
+</div></div>
+</div>
+<ul>
+<li class="fragment"><span style="color: blue;"><strong>Transportation Costs:</strong></span> Both echelons (Supplier → DC and DC → Customer)
+<ul>
+<li class="fragment">E.g. Transportation cost from S1 → DC1 → C1 is given by</li>
+</ul></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+    \sum_{h\in \{P1,P2\}} [c_{S1,DC1}^h + c_{DC1,C1}^h] \cdot x_{S1,DC1,C1}^h \\
+= [c_{S1,DC1}^{P1} + c_{DC1,C1}^{P1}] \cdot x_{S1,DC1,C1}^{P1}
+    + [c_{S1,DC1}^{P2} + c_{DC1,C1}^{P2}] \cdot x_{S1,DC1,C1}^{P2}
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 36px;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>How many transportation terms do we have in total?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Number of transportation terms equal to number of possible paths. - Suppliers: ∣V1∣=2, DCs: ∣V2∣=2, Customers: ∣V3∣=3, Commodities: ∣H∣=2 - Total number of transportation term is |V1| x |V2| x |V3| x |H| = 2 x 2 x 3 x 2 = 24 terms</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h4 id="iv.-objective-function-1">IV. Objective Function</h4>
+<p><span class="math display">\[
+\text{Min }
+\color{blue}{
+\sum_{i \in V_1}\sum_{j \in V_2}\sum_{k \in V_3}\sum_{h \in H}
+c_{ijk}^h x_{ijk}^h}
++
+\sum_{j \in V_2}
+\left(
+\color{red}{f_j z_j}
++
+\color{green}{g_j \sum_{k \in V_3}\sum_{h \in H} D_k^h y_{jk}}
+\right)
+\]</span></p>
+<div class="center">
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="color: blue;"><strong>Transportation cost</strong></span></p>
+</div><div class="column" style="width:20%;">
+<p><span style="color: red;"><strong>Facility opening cost</strong></span></p>
+</div><div class="column" style="width:20%;">
+<p><span style="color: green;"><strong>Variable handling cost</strong></span></p>
+</div></div>
+</div>
+<ul>
+<li class="fragment"><span style="color: red;"><strong>Facility Opening Costs:</strong></span></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+500 z_{DC1} + 400 z_{DC2}
+\]</span></p>
+</div>
+<ul>
+<li class="fragment"><span style="color: green;"><strong>Variable Handling Costs:</strong></span> cost of processing all demand handled by each DC</li>
+</ul>
+<div class="fragment" style="font-size: 90%;">
+<p><span class="math display">\[
+1 \times (\text{total units handled by DC1})
++
+1.5 \times (\text{total units handled by DC2}) \\
+=
+1 \times \sum_{k \in V_3}\sum_{h \in H} D_k^h y_{DC1,k}
++
+1.5 \times \sum_{k \in V_3}\sum_{h \in H} D_k^h y_{DC2,k}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="v.-constraints">V. Constraints</h4>
+<h5 class="fragment" id="i-supplier-capacity-constraints">(i) Supplier Capacity Constraints</h5>
+<div class="fragment">
+<p>For each supplier <span class="math inline">\(𝑖\)</span> and product <span class="math inline">\(ℎ\)</span>, the total quantity shipped (via any DC <span class="math inline">\(𝑗\)</span> to any customer <span class="math inline">\(𝑘\)</span>) must not exceed the supplier’s capacity for that product.</p>
+<div style="font-size: 85%;">
+<p><span class="math display">\[
+\sum_{j \in V_2}\sum_{k \in V_3} x_{ijk}^h
+\le p_i^h,
+\quad \forall i \in V_1, h \in H
+\]</span></p>
+</div>
+</div>
+<div class="fragment">
+<p>E.g. for Supplier S1, Product P1, the possible flows are:</p>
+</div>
+<div class="columns">
+<div class="column center">
+<ul>
+<li class="fragment">S1 → DC1 → C1</li>
+<li class="fragment">S1 → DC1 → C2</li>
+<li class="fragment">S1 → DC1 → C3</li>
+</ul>
+</div><div class="column" style="text-align: left;">
+<ul>
+<li class="fragment">S1 → DC2 → C1</li>
+<li class="fragment">S1 → DC2 → C2</li>
+<li class="fragment">S1 → DC2 → C3</li>
+</ul>
+</div></div>
+<div class="fragment" style="font-size: 85%;">
+<p><span class="math display">\[
+x_{S1,DC1,C1}^{P1} + x_{S1,DC1,C2}^{P1} + x_{S1,DC1,C3}^{P1} + x_{S1,DC2,C1}^{P1} + x_{S1,DC2,C2}^{P1} + x_{S1,DC2,C3}^{P1} \le 100
+\]</span></p>
+</div>
+<div class="fragment" style="font-size: 36px;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>How many supplier capacity constraints do we have in total?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Number of supplier capacity constraints equal to number of suppliers times number of products. - Suppliers: ∣V1∣=2, Products: ∣H∣=2 - Total number of supplier capacity constraints is |V1| x |H| = 2 x 2 = 4 constraints</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h5 id="ii-demand-satisfaction-constraints-under-single-sourcing-assumption">(ii) Demand Satisfaction Constraints (under single-sourcing assumption)</h5>
+<div style="font-size:90%;">
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="fragment" data-fragment-index="1">
+<p><span class="math display">\[
+\sum_{i \in V_1} x_{ijk}^h
+= D_k^h y_{jk},
+\quad \forall j,k,h
+\]</span></p>
+</div>
+<div class="fragment" data-fragment-index="3">
+<p><span class="math display">\[
+\sum_{j \in V_2} y_{jk} = 1,
+\quad \forall k \in V_3
+\]</span></p>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="fragment" data-fragment-index="2">
+<p>Each customer <span class="math inline">\(𝑘\)</span> must receive their full demand for product <span class="math inline">\(ℎ\)</span> only from the DC <span class="math inline">\(𝑗\)</span> that serves them</p>
+</div>
+<p><span class="space-out"></span></p>
+<div class="fragment" data-fragment-index="4">
+<p>= 1 if DC <span class="math inline">\(j\)</span> serves customer <span class="math inline">\(k\)</span></p>
+</div>
+</div></div>
+<div class="fragment" data-fragment-index="5">
+<p>E.g. for Customer C1 and Product P1:</p>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="fragment" data-fragment-index="6">
+<p><span class="math display">\[
+x_{S1,DC1,C1}^{P1} + x_{S2,DC1,C1}^{P1} = 80 y_{DC1,C1}
+\]</span></p>
+</div>
+<p><span style="display: block; margin: 48px 0;"></span></p>
+<div class="fragment" data-fragment-index="8">
+<p><span class="math display">\[
+y_{DC1,C1} + y_{DC2,C1} = 1
+\]</span></p>
+</div>
+</div><div class="column" style="width:55%;">
+<div class="fragment" data-fragment-index="7">
+<p>If DC1 serves C1, it must deliver all 80 units of P1 via flows from S1 and/or S2</p>
+</div>
+<p><span class="space-out"></span></p>
+<div class="fragment" data-fragment-index="9">
+<p>Ensures that each customer is assigned to exactly one DC (i.e., single-sourcing)</p>
+</div>
+</div></div>
+</div>
+<div class="fragment" style="font-size: 36px;" data-fragment-index="10">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>How many demand satisfaction constraints do we have in total?</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Number of demand satisfaction constraints equal to number of customers times number of products times the number of DCs plus the number of customers (for the single-sourcing constraints). - Customers: ∣V3∣=3, Products: ∣H∣=2, DCs: ∣V2∣=2 - Total number of demand satisfaction constraints is (|V3| x |H| x |V2|) + |V3| = (3 x 2 x 2) + 3 = 15 constraints</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h5 id="iii-dc-capacity-constraints">(iii) DC Capacity Constraints</h5>
+<div class="columns" style="font-size: 86%;">
+<div class="column fragment" style="width:40%;">
+<p><span class="math display">\[
+\sum_{k \in V_3}\sum_{h \in H}
+D_k^h y_{jk}
+\le
+K_j z_j,
+\; \forall j \in V_2
+\]</span></p>
+</div><div class="column fragment" style="width:60%;">
+<p>For each DCs <span class="math inline">\(𝑗\)</span>, the total demand it is responsible for (across all customers and all products) must not exceed its capacity <span class="math inline">\(𝐾_𝑗​\)</span> — and only if it’s open.</p>
+</div></div>
+<div class="fragment" style="font-size: 86%;">
+<p>E.g. DC1 capacity constraint:</p>
+<p><span class="math display">\[
+\left(80+50\right)y_{DC1,C1}+\left(120+100\right)y_{DC1,C2}+\left(60+70\right)y_{DC1,C3}\le350z_{DC1}
+\]</span></p>
+</div>
+<h5 class="fragment" id="iv-dc-opening-constraints">(iv) DC Opening Constraints</h5>
+<div class="columns" style="font-size: 86%;">
+<div class="column fragment" style="width:40%;">
+<p><span class="math display">\[
+y_{jk} \le z_j,
+\quad \forall j,k
+\]</span></p>
+</div><div class="column fragment" style="width:50%;">
+<p>Links customer assignment to the DC opening decision.</p>
+</div></div>
+<h5 class="fragment" id="v-number-of-dcs-constraint">(v) Number of DCs Constraint</h5>
+<div class="columns" style="font-size: 86%;">
+<div class="column fragment" style="width:40%;">
+<p><span class="math display">\[
+\sum_{j \in V_2} z_j = p
+\]</span></p>
+</div><div class="column fragment" style="width:50%;">
+<p>Ensure that exactly <span class="math inline">\(𝑝\)</span> DCs are opened, depending on the objectives.</p>
+</div></div>
+<h5 class="fragment" id="vi-variable-bounds-and-binary-constraints">(vi) Variable Bounds and Binary Constraints</h5>
+<div class="fragment" style="font-size: 86%;">
+<p><span class="math display">\[
+x_{ijk}^h \ge 0;\quad y_{jk} \in \{0,1\}; \quad z_j \in \{0,1\}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="python-implementation-of-temc-case-i-ignoring-facility-costs">2.1.2 Python Implementation of TEMC (Case I: Ignoring Facility Costs)</h3>
+<div id="8f51d1eb" class="cell" data-message="false" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pulp</span>
+<span id="cb1-2"><a href=""></a></span>
+<span id="cb1-3"><a href=""></a><span class="co"># Initialize the model</span></span>
+<span id="cb1-4"><a href=""></a>model <span class="op">=</span> pulp.LpProblem(<span class="st">"TEMC"</span>, pulp.LpMinimize)</span>
+<span id="cb1-5"><a href=""></a></span>
+<span id="cb1-6"><a href=""></a><span class="co"># Sets</span></span>
+<span id="cb1-7"><a href=""></a>suppliers <span class="op">=</span> [<span class="st">'S1'</span>, <span class="st">'S2'</span>]</span>
+<span id="cb1-8"><a href=""></a>dcs <span class="op">=</span> [<span class="st">'DC1'</span>, <span class="st">'DC2'</span>]</span>
+<span id="cb1-9"><a href=""></a>customers <span class="op">=</span> [<span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span>]</span>
+<span id="cb1-10"><a href=""></a>products <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>]</span>
+<span id="cb1-11"><a href=""></a></span>
+<span id="cb1-12"><a href=""></a><span class="co"># Parameters</span></span>
+<span id="cb1-13"><a href=""></a>supply <span class="op">=</span> {(<span class="st">'S1'</span>,<span class="st">'P1'</span>):<span class="dv">100</span>, (<span class="st">'S1'</span>,<span class="st">'P2'</span>):<span class="dv">150</span>,</span>
+<span id="cb1-14"><a href=""></a>          (<span class="st">'S2'</span>,<span class="st">'P1'</span>):<span class="dv">200</span>, (<span class="st">'S2'</span>,<span class="st">'P2'</span>):<span class="dv">100</span>}</span>
+<span id="cb1-15"><a href=""></a></span>
+<span id="cb1-16"><a href=""></a>dc_capacity <span class="op">=</span> {<span class="st">'DC1'</span>:<span class="dv">350</span>, <span class="st">'DC2'</span>:<span class="dv">200</span>}</span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a>demand <span class="op">=</span> {(<span class="st">'C1'</span>,<span class="st">'P1'</span>):<span class="dv">80</span>, (<span class="st">'C1'</span>,<span class="st">'P2'</span>):<span class="dv">50</span>,</span>
+<span id="cb1-19"><a href=""></a>          (<span class="st">'C2'</span>,<span class="st">'P1'</span>):<span class="dv">120</span>, (<span class="st">'C2'</span>,<span class="st">'P2'</span>):<span class="dv">100</span>,</span>
+<span id="cb1-20"><a href=""></a>          (<span class="st">'C3'</span>,<span class="st">'P1'</span>):<span class="dv">60</span>, (<span class="st">'C3'</span>,<span class="st">'P2'</span>):<span class="dv">70</span>}</span>
+<span id="cb1-21"><a href=""></a></span>
+<span id="cb1-22"><a href=""></a>cost_sup_dc <span class="op">=</span> {(<span class="st">'S1'</span>,<span class="st">'DC1'</span>):<span class="dv">3</span>, (<span class="st">'S1'</span>,<span class="st">'DC2'</span>):<span class="dv">4</span>,</span>
+<span id="cb1-23"><a href=""></a>               (<span class="st">'S2'</span>,<span class="st">'DC1'</span>):<span class="dv">2</span>, (<span class="st">'S2'</span>,<span class="st">'DC2'</span>):<span class="dv">5</span>}</span>
+<span id="cb1-24"><a href=""></a></span>
+<span id="cb1-25"><a href=""></a>cost_dc_cust <span class="op">=</span> {(<span class="st">'DC1'</span>,<span class="st">'C1'</span>):<span class="dv">4</span>, (<span class="st">'DC1'</span>,<span class="st">'C2'</span>):<span class="dv">3</span>, (<span class="st">'DC1'</span>,<span class="st">'C3'</span>):<span class="dv">6</span>,</span>
+<span id="cb1-26"><a href=""></a>                (<span class="st">'DC2'</span>,<span class="st">'C1'</span>):<span class="dv">5</span>, (<span class="st">'DC2'</span>,<span class="st">'C2'</span>):<span class="dv">4</span>, (<span class="st">'DC2'</span>,<span class="st">'C3'</span>):<span class="dv">2</span>}</span>
+<span id="cb1-27"><a href=""></a></span>
+<span id="cb1-28"><a href=""></a><span class="co"># Decision variables</span></span>
+<span id="cb1-29"><a href=""></a>x <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_sup_dc'</span>, (suppliers, dcs, products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb1-30"><a href=""></a>y <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_dc_cust'</span>, (dcs, customers, products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb1-31"><a href=""></a>z <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'dc_open'</span>, dcs, cat<span class="op">=</span><span class="st">'Binary'</span>)</span>
+<span id="cb1-32"><a href=""></a></span>
+<span id="cb1-33"><a href=""></a><span class="co"># Objective Function</span></span>
+<span id="cb1-34"><a href=""></a>model <span class="op">+=</span> (</span>
+<span id="cb1-35"><a href=""></a>    pulp.lpSum(cost_sup_dc[s,dc] <span class="op">*</span> x[s][dc][p] <span class="cf">for</span> s <span class="kw">in</span> suppliers <span class="cf">for</span> dc <span class="kw">in</span> dcs <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">+</span></span>
+<span id="cb1-36"><a href=""></a>    pulp.lpSum(cost_dc_cust[dc,c] <span class="op">*</span> y[dc][c][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs <span class="cf">for</span> c <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products)</span>
+<span id="cb1-37"><a href=""></a>)</span>
+<span id="cb1-38"><a href=""></a></span>
+<span id="cb1-39"><a href=""></a><span class="co"># Constraints</span></span>
+<span id="cb1-40"><a href=""></a><span class="co"># Supplier capacities</span></span>
+<span id="cb1-41"><a href=""></a><span class="cf">for</span> s <span class="kw">in</span> suppliers:</span>
+<span id="cb1-42"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb1-43"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[s][dc][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs) <span class="op">&lt;=</span> supply[s,p]</span>
+<span id="cb1-44"><a href=""></a></span>
+<span id="cb1-45"><a href=""></a><span class="co"># DC capacities</span></span>
+<span id="cb1-46"><a href=""></a><span class="cf">for</span> dc <span class="kw">in</span> dcs:</span>
+<span id="cb1-47"><a href=""></a>    model <span class="op">+=</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> c <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">&lt;=</span> dc_capacity[dc] <span class="op">*</span> z[dc]</span>
+<span id="cb1-48"><a href=""></a></span>
+<span id="cb1-49"><a href=""></a><span class="co"># Demand satisfaction</span></span>
+<span id="cb1-50"><a href=""></a><span class="cf">for</span> c <span class="kw">in</span> customers:</span>
+<span id="cb1-51"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb1-52"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs) <span class="op">==</span> demand[c,p]</span>
+<span id="cb1-53"><a href=""></a></span>
+<span id="cb1-54"><a href=""></a><span class="co"># Flow conservation (DC level)</span></span>
+<span id="cb1-55"><a href=""></a><span class="cf">for</span> dc <span class="kw">in</span> dcs:</span>
+<span id="cb1-56"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb1-57"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[s][dc][p] <span class="cf">for</span> s <span class="kw">in</span> suppliers) <span class="op">==</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> c <span class="kw">in</span> customers)</span>
+<span id="cb1-58"><a href=""></a></span>
+<span id="cb1-59"><a href=""></a><span class="co"># Solve the model</span></span>
+<span id="cb1-60"><a href=""></a>model.solve(pulp.PULP_CBC_CMD(msg<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb1-61"><a href=""></a></span>
+<span id="cb1-62"><a href=""></a><span class="co"># Output the results</span></span>
+<span id="cb1-63"><a href=""></a><span class="bu">print</span>(<span class="st">"Status:"</span>, pulp.LpStatus[model.status],</span>
+<span id="cb1-64"><a href=""></a>      <span class="st">", Total Cost ="</span>, pulp.value(model.objective))</span>
+<span id="cb1-65"><a href=""></a></span>
+<span id="cb1-66"><a href=""></a><span class="cf">for</span> v <span class="kw">in</span> model.variables():</span>
+<span id="cb1-67"><a href=""></a>    <span class="cf">if</span> v.varValue <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb1-68"><a href=""></a>        <span class="bu">print</span>(v.name, <span class="st">"="</span>, v.varValue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status: Optimal , Total Cost = 2710.0
+dc_open_DC1 = 1.0
+dc_open_DC2 = 1.0
+flow_dc_cust_DC1_C1_P1 = 80.0
+flow_dc_cust_DC1_C1_P2 = 50.0
+flow_dc_cust_DC1_C2_P1 = 120.0
+flow_dc_cust_DC1_C2_P2 = 100.0
+flow_dc_cust_DC2_C3_P1 = 60.0
+flow_dc_cust_DC2_C3_P2 = 70.0
+flow_sup_dc_S1_DC1_P2 = 50.0
+flow_sup_dc_S1_DC2_P1 = 60.0
+flow_sup_dc_S1_DC2_P2 = 70.0
+flow_sup_dc_S2_DC1_P1 = 200.0
+flow_sup_dc_S2_DC1_P2 = 100.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="case-i-ignoring-facility-costs-optimal-solution">Case I (Ignoring Facility Costs): Optimal Solution</h4>
+<div class="columns" style="font-size: 90%;">
+<div class="column fragment center">
+<table class="caption-top">
+<caption>Table 5. Supplier <span class="math inline">\(\rightarrow\)</span> DC Flows (units)</caption>
+<thead>
+<tr class="header">
+<th>Supplier</th>
+<th style="text-align: right;">DC</th>
+<th style="text-align: right;">P1</th>
+<th style="text-align: right;">P2</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1</td>
+<td style="text-align: right;">DC1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>S1</td>
+<td style="text-align: right;">DC2</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">130</td>
+</tr>
+<tr class="odd">
+<td>S2</td>
+<td style="text-align: right;">DC1</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td>S2</td>
+<td style="text-align: right;">DC2</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column fragment center">
+<table class="caption-top">
+<caption>Table 6. DC <span class="math inline">\(\rightarrow\)</span> Customer Flows (units)</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Customer</th>
+<th style="text-align: right;">P1</th>
+<th style="text-align: right;">P2</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DC1</td>
+<td style="text-align: right;">C1</td>
+<td style="text-align: right;">80</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">130</td>
+</tr>
+<tr class="even">
+<td>DC1</td>
+<td style="text-align: right;">C2</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">220</td>
+</tr>
+<tr class="odd">
+<td>DC2</td>
+<td style="text-align: right;">C3</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">130</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="columns">
+<div class="column fragment" style="font-size: 90%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+  "flowchart": {
+    "padding": 40,
+    "nodeSpacing": 50,
+    "rankSpacing": 70
+  },
+  "themeVariables": {
+    "fontSize": "20px"
+  }
+}}%%
+
+flowchart LR
+
+    S1((S1))
+    S2((S2))
+
+    DC1((DC1))
+    DC2((DC2))
+
+    C1((C1))
+    C2((C2))
+    C3((C3))
+
+    %% Supplier -&gt; DC
+    S1 --&gt;|P2: 50| DC1
+
+    S2 --&gt;|P1: 200&lt;br&gt;P2: 100| DC1
+
+    S1 --&gt;|P1: 60&lt;br&gt;P2: 70| DC2
+
+    %% DC -&gt; Customer
+    DC1 --&gt;|P1: 80&lt;br&gt;P2: 50| C1
+
+    DC1 --&gt;|P1: 120&lt;br&gt;P2: 100| C2
+
+    DC2 --&gt;|P1: 60&lt;br&gt;P2: 70| C3
+
+    %% Highlight open DCs
+    style DC1 fill:#c8e6c9
+    style DC2 fill:#c8e6c9
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column fragment">
+<ul>
+<li class="fragment"><strong>Total cost:</strong> $2,710</li>
+<li class="fragment"><strong>Decision:</strong> Open both DCs</li>
+<li class="fragment"><strong>DC1</strong> serves <strong>C1</strong> and <strong>C2</strong>, using<br>130 + 220 = 350 units of its 350-unit capacity (100% utilisation).</li>
+<li class="fragment"><strong>DC2</strong> serves <strong>C3</strong>, using 130 units of its 200-unit capacity (65% utilisation).</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div style="font-size: 90%">
+<table class="table-striped caption-top">
+<caption>Table 1. Supplier Capacities and Supplier → DC Transportation Cost</caption>
+<colgroup>
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Supplier</th>
+<th>Product</th>
+<th style="text-align: right;">Capacity (units)</th>
+<th style="text-align: right;">Cost to DC1 ($/unit)</th>
+<th style="text-align: right;">Cost to DC2 ($/unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1</td>
+<td>P1</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td>S1</td>
+<td>P2</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="odd">
+<td>S2</td>
+<td>P1</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td>S2</td>
+<td>P2</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="columns" style="font-size: 90%;">
+<div class="column fragment" style="width:40%;">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+  "flowchart": {
+    "padding": 30,
+    "nodeSpacing": 50,
+    "rankSpacing": 60
+  },
+  "themeVariables": {
+    "fontSize": "20px"
+  }
+}}%%
+
+flowchart LR
+
+    S1((S1))
+    S2((S2))
+
+    DC1((DC1))
+    DC2((DC2))
+
+    C1((C1))
+    C2((C2))
+    C3((C3))
+
+    %% Supplier -&gt; DC
+    S1 --&gt;|P2: 50| DC1
+
+    S2 --&gt;|P1: 200&lt;br&gt;P2: 100| DC1
+
+    S1 --&gt;|P1: 60&lt;br&gt;P2: 70| DC2
+
+    %% DC -&gt; Customer
+    DC1 --&gt;|P1: 80&lt;br&gt;P2: 50| C1
+
+    DC1 --&gt;|P1: 120&lt;br&gt;P2: 100| C2
+
+    DC2 --&gt;|P1: 60&lt;br&gt;P2: 70| C3
+
+    %% Highlight open DCs
+    style DC1 fill:#c8e6c9
+    style DC2 fill:#c8e6c9
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column fragment" style="width:60%;">
+<table class="table-striped caption-top">
+<caption>Table 7. Transportation Cost Breakdown</caption>
+<thead>
+<tr class="header">
+<th>Arc</th>
+<th style="text-align: right;">$/unit</th>
+<th style="text-align: right;">Total Units</th>
+<th style="text-align: right;">Total Cost ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>S1 → DC1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">150</td>
+</tr>
+<tr class="even">
+<td>S1 → DC2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">520</td>
+</tr>
+<tr class="odd">
+<td>S2 → DC1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">600</td>
+</tr>
+<tr class="even">
+<td>DC1 → C1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">520</td>
+</tr>
+<tr class="odd">
+<td>DC1 → C2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">220</td>
+<td style="text-align: right;">660</td>
+</tr>
+<tr class="even">
+<td>DC2 → C3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">260</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>2,710</strong></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="python-implementation-of-temc-case-ii-including-facility-costs">2.1.3 Python Implementation of TEMC (Case II: Including Facility Costs)</h3>
+<div id="ccf94cfe" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> pulp</span>
+<span id="cb3-2"><a href=""></a></span>
+<span id="cb3-3"><a href=""></a><span class="co"># Initialise the model</span></span>
+<span id="cb3-4"><a href=""></a>model <span class="op">=</span> pulp.LpProblem(<span class="st">"TEMC_with_Facility_Costs_Integer"</span>, pulp.LpMinimize)</span>
+<span id="cb3-5"><a href=""></a></span>
+<span id="cb3-6"><a href=""></a><span class="co"># Sets</span></span>
+<span id="cb3-7"><a href=""></a>suppliers <span class="op">=</span> [<span class="st">'S1'</span>, <span class="st">'S2'</span>]</span>
+<span id="cb3-8"><a href=""></a>dcs <span class="op">=</span> [<span class="st">'DC1'</span>, <span class="st">'DC2'</span>]</span>
+<span id="cb3-9"><a href=""></a>customers <span class="op">=</span> [<span class="st">'C1'</span>, <span class="st">'C2'</span>, <span class="st">'C3'</span>]</span>
+<span id="cb3-10"><a href=""></a>products <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>]</span>
+<span id="cb3-11"><a href=""></a></span>
+<span id="cb3-12"><a href=""></a><span class="co"># Parameters</span></span>
+<span id="cb3-13"><a href=""></a>supply <span class="op">=</span> {(<span class="st">'S1'</span>,<span class="st">'P1'</span>): <span class="dv">100</span>, (<span class="st">'S1'</span>,<span class="st">'P2'</span>): <span class="dv">150</span>,</span>
+<span id="cb3-14"><a href=""></a>          (<span class="st">'S2'</span>,<span class="st">'P1'</span>): <span class="dv">200</span>, (<span class="st">'S2'</span>,<span class="st">'P2'</span>): <span class="dv">100</span>}</span>
+<span id="cb3-15"><a href=""></a>dc_capacity <span class="op">=</span> {<span class="st">'DC1'</span>: <span class="dv">350</span>, <span class="st">'DC2'</span>: <span class="dv">200</span>}</span>
+<span id="cb3-16"><a href=""></a></span>
+<span id="cb3-17"><a href=""></a>demand <span class="op">=</span> {(<span class="st">'C1'</span>,<span class="st">'P1'</span>): <span class="dv">80</span>, (<span class="st">'C1'</span>,<span class="st">'P2'</span>): <span class="dv">50</span>,</span>
+<span id="cb3-18"><a href=""></a>          (<span class="st">'C2'</span>,<span class="st">'P1'</span>): <span class="dv">120</span>, (<span class="st">'C2'</span>,<span class="st">'P2'</span>): <span class="dv">100</span>,</span>
+<span id="cb3-19"><a href=""></a>          (<span class="st">'C3'</span>,<span class="st">'P1'</span>): <span class="dv">60</span>, (<span class="st">'C3'</span>,<span class="st">'P2'</span>): <span class="dv">70</span>}</span>
+<span id="cb3-20"><a href=""></a></span>
+<span id="cb3-21"><a href=""></a>cost_sup_dc <span class="op">=</span> {(<span class="st">'S1'</span>,<span class="st">'DC1'</span>): <span class="dv">3</span>, (<span class="st">'S1'</span>,<span class="st">'DC2'</span>): <span class="dv">4</span>,</span>
+<span id="cb3-22"><a href=""></a>               (<span class="st">'S2'</span>,<span class="st">'DC1'</span>): <span class="dv">2</span>, (<span class="st">'S2'</span>,<span class="st">'DC2'</span>): <span class="dv">5</span>}</span>
+<span id="cb3-23"><a href=""></a></span>
+<span id="cb3-24"><a href=""></a>cost_dc_cust <span class="op">=</span> {(<span class="st">'DC1'</span>,<span class="st">'C1'</span>): <span class="dv">4</span>, (<span class="st">'DC1'</span>,<span class="st">'C2'</span>): <span class="dv">3</span>, (<span class="st">'DC1'</span>,<span class="st">'C3'</span>): <span class="dv">6</span>,</span>
+<span id="cb3-25"><a href=""></a>                (<span class="st">'DC2'</span>,<span class="st">'C1'</span>): <span class="dv">5</span>, (<span class="st">'DC2'</span>,<span class="st">'C2'</span>): <span class="dv">4</span>, (<span class="st">'DC2'</span>,<span class="st">'C3'</span>): <span class="dv">2</span>}</span>
+<span id="cb3-26"><a href=""></a></span>
+<span id="cb3-27"><a href=""></a><span class="co"># Facility costs</span></span>
+<span id="cb3-28"><a href=""></a>fixed_cost <span class="op">=</span> {<span class="st">'DC1'</span>: <span class="dv">500</span>, <span class="st">'DC2'</span>: <span class="dv">400</span>}</span>
+<span id="cb3-29"><a href=""></a>handling_cost <span class="op">=</span> {<span class="st">'DC1'</span>: <span class="dv">1</span>, <span class="st">'DC2'</span>: <span class="fl">1.5</span>}</span>
+<span id="cb3-30"><a href=""></a></span>
+<span id="cb3-31"><a href=""></a><span class="co"># Decision variables</span></span>
+<span id="cb3-32"><a href=""></a>x <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_sup_dc'</span>, (suppliers, dcs, products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb3-33"><a href=""></a>y <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_dc_cust'</span>, (dcs, customers, products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb3-34"><a href=""></a>z <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'dc_open'</span>, dcs, cat<span class="op">=</span><span class="st">'Binary'</span>)</span>
+<span id="cb3-35"><a href=""></a></span>
+<span id="cb3-36"><a href=""></a><span class="co"># Objective Function (Transportation + Facility Costs)</span></span>
+<span id="cb3-37"><a href=""></a>model <span class="op">+=</span> (</span>
+<span id="cb3-38"><a href=""></a>    pulp.lpSum(cost_sup_dc[s,dc] <span class="op">*</span> x[s][dc][p] <span class="cf">for</span> s <span class="kw">in</span> suppliers <span class="cf">for</span> dc <span class="kw">in</span> dcs <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">+</span></span>
+<span id="cb3-39"><a href=""></a>    pulp.lpSum(cost_dc_cust[dc,c] <span class="op">*</span> y[dc][c][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs <span class="cf">for</span> c <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">+</span></span>
+<span id="cb3-40"><a href=""></a>    pulp.lpSum(fixed_cost[dc] <span class="op">*</span> z[dc] <span class="op">+</span> handling_cost[dc] <span class="op">*</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> c <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="cf">for</span> dc <span class="kw">in</span> dcs)</span>
+<span id="cb3-41"><a href=""></a>)</span>
+<span id="cb3-42"><a href=""></a></span>
+<span id="cb3-43"><a href=""></a><span class="co"># Supplier capacities</span></span>
+<span id="cb3-44"><a href=""></a><span class="cf">for</span> s <span class="kw">in</span> suppliers:</span>
+<span id="cb3-45"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb3-46"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[s][dc][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs) <span class="op">&lt;=</span> supply[s, p]</span>
+<span id="cb3-47"><a href=""></a></span>
+<span id="cb3-48"><a href=""></a><span class="co"># DC capacity constraints (flows only allowed if facility is open)</span></span>
+<span id="cb3-49"><a href=""></a><span class="cf">for</span> dc <span class="kw">in</span> dcs:</span>
+<span id="cb3-50"><a href=""></a>    model <span class="op">+=</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> c <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">&lt;=</span> dc_capacity[dc] <span class="op">*</span> z[dc]</span>
+<span id="cb3-51"><a href=""></a></span>
+<span id="cb3-52"><a href=""></a><span class="co"># Demand satisfaction constraints</span></span>
+<span id="cb3-53"><a href=""></a><span class="cf">for</span> c <span class="kw">in</span> customers:</span>
+<span id="cb3-54"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb3-55"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> dc <span class="kw">in</span> dcs) <span class="op">==</span> demand[c, p]</span>
+<span id="cb3-56"><a href=""></a></span>
+<span id="cb3-57"><a href=""></a><span class="co"># Flow conservation constraints at DCs (inflow equals outflow for each product)</span></span>
+<span id="cb3-58"><a href=""></a><span class="cf">for</span> dc <span class="kw">in</span> dcs:</span>
+<span id="cb3-59"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb3-60"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[s][dc][p] <span class="cf">for</span> s <span class="kw">in</span> suppliers) <span class="op">==</span> pulp.lpSum(y[dc][c][p] <span class="cf">for</span> c <span class="kw">in</span> customers)</span>
+<span id="cb3-61"><a href=""></a></span>
+<span id="cb3-62"><a href=""></a><span class="co"># Solve the model</span></span>
+<span id="cb3-63"><a href=""></a>model.solve(pulp.PULP_CBC_CMD(msg<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb3-64"><a href=""></a></span>
+<span id="cb3-65"><a href=""></a><span class="co"># Output results</span></span>
+<span id="cb3-66"><a href=""></a><span class="bu">print</span>(<span class="st">"Status:"</span>, pulp.LpStatus[model.status])</span>
+<span id="cb3-67"><a href=""></a><span class="bu">print</span>(<span class="st">"Total Cost ="</span>, pulp.value(model.objective))</span>
+<span id="cb3-68"><a href=""></a></span>
+<span id="cb3-69"><a href=""></a><span class="cf">for</span> v <span class="kw">in</span> model.variables():</span>
+<span id="cb3-70"><a href=""></a>    <span class="cf">if</span> v.varValue <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-71"><a href=""></a>        <span class="bu">print</span>(v.name, <span class="st">"="</span>, v.varValue)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status: Optimal
+Total Cost = 4155.0
+dc_open_DC1 = 1.0
+dc_open_DC2 = 1.0
+flow_dc_cust_DC1_C1_P1 = 80.0
+flow_dc_cust_DC1_C1_P2 = 50.0
+flow_dc_cust_DC1_C2_P1 = 120.0
+flow_dc_cust_DC1_C2_P2 = 100.0
+flow_dc_cust_DC2_C3_P1 = 60.0
+flow_dc_cust_DC2_C3_P2 = 70.0
+flow_sup_dc_S1_DC1_P2 = 50.0
+flow_sup_dc_S1_DC2_P1 = 60.0
+flow_sup_dc_S1_DC2_P2 = 70.0
+flow_sup_dc_S2_DC1_P1 = 200.0
+flow_sup_dc_S2_DC1_P2 = 100.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="case-ii-optimal-solution">Case II: Optimal Solution</h4>
+<ul>
+<li class="fragment">The flow and DCs opening decisions remain the same as in Case I, but now we also consider the facility opening and handling costs in cost calculation.</li>
+</ul>
+<table class="table-striped fragment caption-top">
+<caption>Table 8. Cost Breakdown for Case II</caption>
+<colgroup>
+<col style="width: 71%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cost Component</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Transportation (same as Case I)</td>
+<td style="text-align: right;">$2,710</td>
+</tr>
+<tr class="even">
+<td>Fixed Facility Costs <span class="math inline">\((500 + 400)\)</span></td>
+<td style="text-align: right;">$900</td>
+</tr>
+<tr class="odd">
+<td>Handling Costs <span class="math inline">\(((1 \times 350) + (1.5 \times 130))\)</span></td>
+<td style="text-align: right;">$545</td>
+</tr>
+<tr class="even">
+<td><strong>Total Cost</strong></td>
+<td style="text-align: right;"><strong>$4,155</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment">The addition of fixed and handling costs does not change the optimal network design; it only increases the total cost from 2,710 to 4,155.</li>
+<li class="fragment">Opening both DCs remains economically necessary to satisfy demand given the capacity constraints.</li>
+</ul>
+</section>
+<section id="temc-example-2" class="slide level2 scrollable">
+<h2>2.2 TEMC Example 2</h2>
+<div style="font-size: 90%;">
+<ul>
+<li class="fragment">An electronics company plans to optimise the distribution of two products: <strong>Smartphones (P1)</strong> and <strong>Laptops (P2)</strong>.</li>
+<li class="fragment">The company has <strong>two factories (FA and FB)</strong> that produce these products.</li>
+<li class="fragment">The company is considering opening <strong>two potential DCs (DCE and DCW)</strong>.</li>
+<li class="fragment">These DCs would serve <strong>three customer regions (RC, RS, RN)</strong>.</li>
+<li class="fragment">The goal is to <strong>minimise total costs</strong> while meeting customer demands and respecting supplier and DC capacities.</li>
+</ul>
+</div>
+<h4 class="fragment" id="problem-statement">Problem Statement</h4>
+<div style="font-size: 90%;">
+<ol type="1">
+<li class="fragment">Which DCs (DCE, DCW, or both) should be operational to minimise total cost?</li>
+<li class="fragment">How much of each product (P1, P2) should be shipped from each supplier (FA, FB) to each selected DC?</li>
+<li class="fragment">How much of each product should be shipped from the selected DCs to each customer region (RC, RS, RN)?</li>
+<li class="fragment">What is the optimal allocation strategy to minimise total costs (including transportation, fixed, and handling costs)?</li>
+</ol>
+</div>
+</section>
+<section class="slide level2">
+
+<div class="columns">
+<div class="column fragment" style="width:30%;">
+<table class="table-striped caption-top">
+<caption>Table 1. Supplier Capacities (units)</caption>
+<thead>
+<tr class="header">
+<th>Supplier</th>
+<th>P1</th>
+<th>P2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FA</td>
+<td>500</td>
+<td>300</td>
+</tr>
+<tr class="even">
+<td>FB</td>
+<td>400</td>
+<td>400</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column fragment" style="width:70%;">
+<table class="table-striped caption-top">
+<caption>Table 2. DC Information</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Capacity</th>
+<th style="text-align: right;">Fixed Cost ($)</th>
+<th style="text-align: right;">Handling Cost ($/unit)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">2</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td style="text-align: right;">500</td>
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">1.5</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<p><br></p>
+<div class="columns">
+<div class="column fragment" style="width:33%;">
+<table class="table-striped caption-top">
+<caption>Table 3. Customer Demands (units)</caption>
+<thead>
+<tr class="header">
+<th>Customer</th>
+<th>P1</th>
+<th>P2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RC</td>
+<td>200</td>
+<td>150</td>
+</tr>
+<tr class="even">
+<td>RS</td>
+<td>300</td>
+<td>250</td>
+</tr>
+<tr class="odd">
+<td>RN</td>
+<td>200</td>
+<td>150</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column fragment" style="width:33%;">
+<table class="table-striped caption-top">
+<caption>Table 4. Transportation Costs (Suppliers → DCs) ($/unit)</caption>
+<thead>
+<tr class="header">
+<th>Supplier</th>
+<th>DCE</th>
+<th>DCW</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FA</td>
+<td>5</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>FB</td>
+<td>4</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column fragment" style="width:33%;">
+<table class="table-striped caption-top">
+<caption>Table 5. Transportation Costs (DCs → Customers) ($/unit)</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th>RC</th>
+<th>RS</th>
+<th>RN</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td>4</td>
+<td>7</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td>5</td>
+<td>2</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="model-formulation-1">2.2.1 Model Formulation</h3>
+<h4 class="fragment" id="i.-sets-and-indices">I. Sets and Indices</h4>
+<div class="columns" style="font-size: 90%;">
+<div class="column">
+<ul>
+<li class="fragment"><span class="math inline">\(I\)</span>: Set of suppliers (indexed by <span class="math inline">\(i\)</span>)</li>
+<li class="fragment"><span class="math inline">\(J\)</span>: Set of candidate DCs (indexed by <span class="math inline">\(j\)</span>)</li>
+</ul>
+</div><div class="column">
+<ul>
+<li class="fragment"><span class="math inline">\(K\)</span>: Set of customers (indexed by <span class="math inline">\(k\)</span>)</li>
+<li class="fragment"><span class="math inline">\(H\)</span>: Set of products (indexed by <span class="math inline">\(h\)</span>)</li>
+</ul>
+</div></div>
+<h4 class="fragment" id="ii.-decision-variables">II. Decision Variables</h4>
+<div style="font-size: 90%;">
+<ul>
+<li class="fragment"><span class="math inline">\(x_{ij}^{h}\)</span>: Quantity of product <span class="math inline">\(h\)</span> shipped from supplier <span class="math inline">\(i\)</span> to DC <span class="math inline">\(j\)</span></li>
+<li class="fragment"><span class="math inline">\(y_{jk}^{h}\)</span>: Quantity of product <span class="math inline">\(h\)</span> shipped from DC <span class="math inline">\(j\)</span> to customer <span class="math inline">\(k\)</span></li>
+<li class="fragment"><span class="math inline">\(z_{j}\)</span>: Binary variable (1 if DC <span class="math inline">\(j\)</span> is opened, 0 otherwise)</li>
+</ul>
+</div>
+<h4 class="fragment" id="iii.-parameters">III. Parameters</h4>
+<div class="columns" style="font-size: 86%;">
+<div class="column" style="width:60%;">
+<ul>
+<li class="fragment"><span class="math inline">\(P_{i}^{h}\)</span>: Production capacity of supplier <span class="math inline">\(i\)</span> for product <span class="math inline">\(h\)</span></li>
+<li class="fragment"><span class="math inline">\(K_{j}\)</span>: Maximum capacity of DC <span class="math inline">\(j\)</span></li>
+<li class="fragment"><span class="math inline">\(D_{k}^{h}\)</span>: Demand of customer <span class="math inline">\(k\)</span> for product <span class="math inline">\(h\)</span></li>
+<li class="fragment"><span class="math inline">\(C_{ij}\)</span>: Cost per unit from supplier <span class="math inline">\(i\)</span> to DC <span class="math inline">\(j\)</span></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<ul>
+<li class="fragment"><span class="math inline">\(C_{jk}\)</span>: Cost per unit from DC <span class="math inline">\(j\)</span> to customer <span class="math inline">\(k\)</span></li>
+<li class="fragment"><span class="math inline">\(f_j\)</span>: Fixed cost of opening DC <span class="math inline">\(j\)</span></li>
+<li class="fragment"><span class="math inline">\(g_j\)</span>: Handling cost per unit at DC <span class="math inline">\(j\)</span></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h4 id="iv.-objective-function-2">IV. Objective Function</h4>
+<div style="font-size: 90%;">
+<p><span class="math display">\[
+\min
+\color{blue}{\sum_{i \in I}\sum_{j \in J}\sum_{h \in H} C_{ij} x_{ij}^{h}}
++
+\color{green}{\sum_{j \in J}\sum_{k \in K}\sum_{h \in H} C_{jk} y_{jk}^{h}}
++
+\color{purple}{\sum_{j \in J}\left(f_j z_{j} + g_j\sum_{k \in K}\sum_{h \in H} y_{jk}^{h}\right)}
+\]</span></p>
+</div>
+<div class="columns">
+<div class="column center" style="width:6%;">
+
+</div><div class="column center fragment" style="width:27%;">
+<p><span style="color:blue;"> <strong>Supplier → DC</strong><br> transportation cost </span></p>
+</div><div class="column center fragment" style="width:30%;">
+<p><span style="color:green;"> <strong>DC → Customer </strong><br> transportation cost </span></p>
+</div><div class="column center fragment" style="width:30%;">
+<p><span style="color:purple;"> <strong>DC fixed</strong> +<br><strong>handling cost</strong> </span></p>
+</div></div>
+<div class="columns">
+<div class="column" style="width:7%;">
+
+</div><div class="column fragment center" style="width:57%;">
+<p><span class="math inline">\(\underbrace{\hspace{8em}}\)</span><br> Mathematically equivalent to Example 1’s transportation costs if we define <span class="math inline">\(C_{ijk}^h = C_{ij}^h + C_{jk}^h\)</span></p>
+</div><div class="column fragment center" style="width:31%;">
+<p><iconify-icon role="img" inline="" icon="bi:arrow-down" style="font-size: 48px;" aria-label="Icon arrow-down from bi Iconify.design set." title="Icon arrow-down from bi Iconify.design set."></iconify-icon><br> <span class="math inline">\(𝑦_{𝑗𝑘}^ℎ\)</span> is a flow variable not binary; thus, we don’t need to multiply <span class="math inline">\(𝐷_𝑘^ℎ\)</span></p>
+</div></div>
+<h4 class="fragment" id="v.-constraints-1">V. Constraints</h4>
+<h5 class="fragment" id="i-supplier-capacity-total-shipments-from-a-supplier-must-not-exceed-its-capacity">(i) Supplier Capacity: Total shipments from a supplier must not exceed its capacity</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+\sum_{j \in J} x_{ij}^{h} \leq P_{i}^{h},
+\quad \forall i \in I, h \in H
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h5 id="ii-dc-capacity-dc-shipments-must-not-exceed-the-dcs-capacity-if-opened">(ii) DC Capacity: DC shipments must not exceed the DC’s capacity if opened</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+\sum_{k \in K}\sum_{h \in H} y_{jk}^{h}
+\leq K_{j} z_{j},
+\quad \forall j \in J
+\]</span></p>
+</div>
+<h5 class="fragment" id="iii-demand-fulfillment-demand-for-each-product-at-each-customer-must-be-fully-met">(iii) Demand Fulfillment: Demand for each product at each customer must be fully met</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+\sum_{j \in J} y_{jk}^{h}
+= D_{k}^{h},
+\quad \forall k \in K, h \in H
+\]</span></p>
+</div>
+<h5 class="fragment" id="iv-flow-conservation-at-dcs-the-quantity-entering-a-dc-must-equal-quantity-leaving">(iv) Flow Conservation at DCs: The quantity entering a DC must equal quantity leaving</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+\sum_{i \in I} x_{ij}^{h}
+=
+\sum_{k \in K} y_{jk}^{h},
+\quad \forall j \in J, h \in H
+\]</span></p>
+</div>
+<h5 class="fragment" id="v-facility-opening-binary-ensure-that-dc-opening-decisions-remain-binary">(v) Facility Opening (Binary): Ensure that DC opening decisions remain binary</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+z_j \in \{0,1\},
+\quad \forall j \in J
+\]</span></p>
+</div>
+<h5 class="fragment" id="vi-non-negativity">(vi) Non-Negativity</h5>
+<div class="fragment" style="font-size: 89%;">
+<p><span class="math display">\[
+x_{ij}^{h}, y_{jk}^{h} \geq 0,
+\quad \forall i,j,k,h
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="python-implementation-of-temc">2.2.2 Python Implementation of TEMC</h3>
+<div id="957976d6" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> pulp</span>
+<span id="cb5-2"><a href=""></a></span>
+<span id="cb5-3"><a href=""></a><span class="co"># Initialize the model</span></span>
+<span id="cb5-4"><a href=""></a>model <span class="op">=</span> pulp.LpProblem(<span class="st">"TEMC_Example2"</span>, pulp.LpMinimize)</span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a><span class="co"># Sets</span></span>
+<span id="cb5-7"><a href=""></a>suppliers <span class="op">=</span> [<span class="st">'FA'</span>, <span class="st">'FB'</span>]</span>
+<span id="cb5-8"><a href=""></a>dcs <span class="op">=</span> [<span class="st">'DCE'</span>, <span class="st">'DCW'</span>]</span>
+<span id="cb5-9"><a href=""></a>customers <span class="op">=</span> [<span class="st">'RC'</span>, <span class="st">'RS'</span>, <span class="st">'RN'</span>]</span>
+<span id="cb5-10"><a href=""></a>products <span class="op">=</span> [<span class="st">'P1'</span>, <span class="st">'P2'</span>]</span>
+<span id="cb5-11"><a href=""></a></span>
+<span id="cb5-12"><a href=""></a><span class="co"># Parameters</span></span>
+<span id="cb5-13"><a href=""></a>supply <span class="op">=</span> {</span>
+<span id="cb5-14"><a href=""></a>    (<span class="st">'FA'</span>, <span class="st">'P1'</span>): <span class="dv">500</span>, (<span class="st">'FA'</span>, <span class="st">'P2'</span>): <span class="dv">300</span>,</span>
+<span id="cb5-15"><a href=""></a>    (<span class="st">'FB'</span>, <span class="st">'P1'</span>): <span class="dv">400</span>, (<span class="st">'FB'</span>, <span class="st">'P2'</span>): <span class="dv">400</span></span>
+<span id="cb5-16"><a href=""></a>}</span>
+<span id="cb5-17"><a href=""></a></span>
+<span id="cb5-18"><a href=""></a>dc_capacity <span class="op">=</span> {<span class="st">'DCE'</span>: <span class="dv">700</span>, <span class="st">'DCW'</span>: <span class="dv">600</span>}</span>
+<span id="cb5-19"><a href=""></a></span>
+<span id="cb5-20"><a href=""></a>demand <span class="op">=</span> {</span>
+<span id="cb5-21"><a href=""></a>    (<span class="st">'RC'</span>, <span class="st">'P1'</span>): <span class="dv">200</span>, (<span class="st">'RC'</span>, <span class="st">'P2'</span>): <span class="dv">150</span>,</span>
+<span id="cb5-22"><a href=""></a>    (<span class="st">'RS'</span>, <span class="st">'P1'</span>): <span class="dv">300</span>, (<span class="st">'RS'</span>, <span class="st">'P2'</span>): <span class="dv">250</span>,</span>
+<span id="cb5-23"><a href=""></a>    (<span class="st">'RN'</span>, <span class="st">'P1'</span>): <span class="dv">200</span>, (<span class="st">'RN'</span>, <span class="st">'P2'</span>): <span class="dv">200</span></span>
+<span id="cb5-24"><a href=""></a>}</span>
+<span id="cb5-25"><a href=""></a></span>
+<span id="cb5-26"><a href=""></a>cost_sup_dc <span class="op">=</span> {</span>
+<span id="cb5-27"><a href=""></a>    (<span class="st">'FA'</span>, <span class="st">'DCE'</span>): <span class="dv">5</span>, (<span class="st">'FA'</span>, <span class="st">'DCW'</span>): <span class="dv">7</span>,</span>
+<span id="cb5-28"><a href=""></a>    (<span class="st">'FB'</span>, <span class="st">'DCE'</span>): <span class="dv">6</span>, (<span class="st">'FB'</span>, <span class="st">'DCW'</span>): <span class="dv">3</span></span>
+<span id="cb5-29"><a href=""></a>}</span>
+<span id="cb5-30"><a href=""></a></span>
+<span id="cb5-31"><a href=""></a>cost_dc_cust <span class="op">=</span> {</span>
+<span id="cb5-32"><a href=""></a>    (<span class="st">'DCE'</span>, <span class="st">'RC'</span>): <span class="dv">3</span>, (<span class="st">'DCE'</span>, <span class="st">'RS'</span>): <span class="dv">7</span>, (<span class="st">'DCE'</span>, <span class="st">'RN'</span>): <span class="dv">4</span>,</span>
+<span id="cb5-33"><a href=""></a>    (<span class="st">'DCW'</span>, <span class="st">'RC'</span>): <span class="dv">4</span>, (<span class="st">'DCW'</span>, <span class="st">'RS'</span>): <span class="dv">2</span>, (<span class="st">'DCW'</span>, <span class="st">'RN'</span>): <span class="dv">5</span></span>
+<span id="cb5-34"><a href=""></a>}</span>
+<span id="cb5-35"><a href=""></a></span>
+<span id="cb5-36"><a href=""></a>fixed_cost <span class="op">=</span> {<span class="st">'DCE'</span>: <span class="dv">1000</span>, <span class="st">'DCW'</span>: <span class="dv">1200</span>}</span>
+<span id="cb5-37"><a href=""></a>handling_cost <span class="op">=</span> {<span class="st">'DCE'</span>: <span class="dv">2</span>, <span class="st">'DCW'</span>: <span class="fl">1.5</span>}</span>
+<span id="cb5-38"><a href=""></a></span>
+<span id="cb5-39"><a href=""></a><span class="co"># Decision variables</span></span>
+<span id="cb5-40"><a href=""></a>x <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_sup_dc'</span>, ((i,j,p) <span class="cf">for</span> i <span class="kw">in</span> suppliers <span class="cf">for</span> j <span class="kw">in</span> dcs <span class="cf">for</span> p <span class="kw">in</span> products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb5-41"><a href=""></a>y <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'flow_dc_cust'</span>, ((j,k,p) <span class="cf">for</span> j <span class="kw">in</span> dcs <span class="cf">for</span> k <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products), lowBound<span class="op">=</span><span class="dv">0</span>, cat<span class="op">=</span><span class="st">'Continuous'</span>)</span>
+<span id="cb5-42"><a href=""></a>z <span class="op">=</span> pulp.LpVariable.dicts(<span class="st">'dc_open'</span>, dcs, cat<span class="op">=</span><span class="st">'Binary'</span>)</span>
+<span id="cb5-43"><a href=""></a></span>
+<span id="cb5-44"><a href=""></a><span class="co"># Create Objective function</span></span>
+<span id="cb5-45"><a href=""></a>model <span class="op">+=</span> (</span>
+<span id="cb5-46"><a href=""></a>    pulp.lpSum(cost_sup_dc[i,j]<span class="op">*</span>x[i,j,p] <span class="cf">for</span> i <span class="kw">in</span> suppliers <span class="cf">for</span> j <span class="kw">in</span> dcs <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">+</span></span>
+<span id="cb5-47"><a href=""></a>    pulp.lpSum(cost_dc_cust[j,k]<span class="op">*</span>y[j,k,p] <span class="cf">for</span> j <span class="kw">in</span> dcs <span class="cf">for</span> k <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">+</span></span>
+<span id="cb5-48"><a href=""></a>    pulp.lpSum(fixed_cost[j]<span class="op">*</span>z[j] <span class="cf">for</span> j <span class="kw">in</span> dcs) <span class="op">+</span></span>
+<span id="cb5-49"><a href=""></a>    pulp.lpSum(handling_cost[j]<span class="op">*</span>y[j,k,p] <span class="cf">for</span> j <span class="kw">in</span> dcs <span class="cf">for</span> k <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products)</span>
+<span id="cb5-50"><a href=""></a>), <span class="st">"Total_Cost"</span></span>
+<span id="cb5-51"><a href=""></a></span>
+<span id="cb5-52"><a href=""></a><span class="co"># Supplier capacity constraints</span></span>
+<span id="cb5-53"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> suppliers:</span>
+<span id="cb5-54"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb5-55"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[i,j,p] <span class="cf">for</span> j <span class="kw">in</span> dcs) <span class="op">&lt;=</span> supply[i,p]</span>
+<span id="cb5-56"><a href=""></a></span>
+<span id="cb5-57"><a href=""></a><span class="co"># DC capacity constraints (only if opened)</span></span>
+<span id="cb5-58"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> dcs:</span>
+<span id="cb5-59"><a href=""></a>    model <span class="op">+=</span> pulp.lpSum(y[j,k,p] <span class="cf">for</span> k <span class="kw">in</span> customers <span class="cf">for</span> p <span class="kw">in</span> products) <span class="op">&lt;=</span> dc_capacity[j] <span class="op">*</span> z[j]</span>
+<span id="cb5-60"><a href=""></a></span>
+<span id="cb5-61"><a href=""></a><span class="co"># Demand fulfillment constraints</span></span>
+<span id="cb5-62"><a href=""></a><span class="cf">for</span> k <span class="kw">in</span> customers:</span>
+<span id="cb5-63"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb5-64"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(y[j,k,p] <span class="cf">for</span> j <span class="kw">in</span> dcs) <span class="op">==</span> demand[k,p]</span>
+<span id="cb5-65"><a href=""></a></span>
+<span id="cb5-66"><a href=""></a><span class="co"># Flow conservation constraints at DCs</span></span>
+<span id="cb5-67"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> dcs:</span>
+<span id="cb5-68"><a href=""></a>    <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb5-69"><a href=""></a>        model <span class="op">+=</span> pulp.lpSum(x[i,j,p] <span class="cf">for</span> i <span class="kw">in</span> suppliers) <span class="op">==</span> pulp.lpSum(y[j,k,p] <span class="cf">for</span> k <span class="kw">in</span> customers)</span>
+<span id="cb5-70"><a href=""></a></span>
+<span id="cb5-71"><a href=""></a><span class="co"># Solve the optimization problem</span></span>
+<span id="cb5-72"><a href=""></a>model.solve(pulp.PULP_CBC_CMD(msg<span class="op">=</span><span class="dv">0</span>))</span>
+<span id="cb5-73"><a href=""></a></span>
+<span id="cb5-74"><a href=""></a><span class="co"># Output results</span></span>
+<span id="cb5-75"><a href=""></a><span class="bu">print</span>(<span class="st">"Status:"</span>, pulp.LpStatus[model.status])</span>
+<span id="cb5-76"><a href=""></a><span class="bu">print</span>(<span class="st">"Total Cost = $"</span>, pulp.value(model.objective))</span>
+<span id="cb5-77"><a href=""></a></span>
+<span id="cb5-78"><a href=""></a><span class="co"># Facility decision outputs</span></span>
+<span id="cb5-79"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> dcs:</span>
+<span id="cb5-80"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"DC </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> Open:"</span>, z[j].varValue)</span>
+<span id="cb5-81"><a href=""></a></span>
+<span id="cb5-82"><a href=""></a><span class="co"># Flow outputs (Supplier -&gt; DC)</span></span>
+<span id="cb5-83"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> suppliers:</span>
+<span id="cb5-84"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> dcs:</span>
+<span id="cb5-85"><a href=""></a>        <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb5-86"><a href=""></a>            <span class="cf">if</span> x[i,j,p].varValue <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-87"><a href=""></a>                <span class="bu">print</span>(<span class="ss">f"Flow from Supplier </span><span class="sc">{</span>i<span class="sc">}</span><span class="ss"> to DC </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss">, Product </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>x[i,j,p]<span class="sc">.</span>varValue<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-88"><a href=""></a></span>
+<span id="cb5-89"><a href=""></a><span class="co"># Flow outputs (DC -&gt; Customer)</span></span>
+<span id="cb5-90"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> dcs:</span>
+<span id="cb5-91"><a href=""></a>    <span class="cf">for</span> k <span class="kw">in</span> customers:</span>
+<span id="cb5-92"><a href=""></a>        <span class="cf">for</span> p <span class="kw">in</span> products:</span>
+<span id="cb5-93"><a href=""></a>            <span class="cf">if</span> y[j,k,p].varValue <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-94"><a href=""></a>                <span class="bu">print</span>(<span class="ss">f"Flow from DC </span><span class="sc">{</span>j<span class="sc">}</span><span class="ss"> to Customer </span><span class="sc">{</span>k<span class="sc">}</span><span class="ss">, Product </span><span class="sc">{</span>p<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>y[j,k,p]<span class="sc">.</span>varValue<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Status: Optimal
+Total Cost = $ 13600.0
+DC DCE Open: 1.0
+DC DCW Open: 1.0
+Flow from Supplier FA to DC DCE, Product P1: 400.0
+Flow from Supplier FA to DC DCE, Product P2: 300.0
+Flow from Supplier FB to DC DCW, Product P1: 300.0
+Flow from Supplier FB to DC DCW, Product P2: 300.0
+Flow from DC DCE to Customer RC, Product P1: 200.0
+Flow from DC DCE to Customer RC, Product P2: 100.0
+Flow from DC DCE to Customer RN, Product P1: 200.0
+Flow from DC DCE to Customer RN, Product P2: 200.0
+Flow from DC DCW to Customer RC, Product P2: 50.0
+Flow from DC DCW to Customer RS, Product P1: 300.0
+Flow from DC DCW to Customer RS, Product P2: 250.0</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="optimal-solution">Optimal Solution</h4>
+<div class="columns">
+<div class="column">
+<div class="fragment" style="font-size: 90%;" data-fragment-index="1">
+<table class="table-striped caption-top">
+<caption>Table 6. Supplier <span class="math inline">\(\rightarrow\)</span> DC Flows</caption>
+<thead>
+<tr class="header">
+<th>Factory</th>
+<th style="text-align: right;">DC</th>
+<th style="text-align: right;">P1</th>
+<th style="text-align: right;">P2</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FA</td>
+<td style="text-align: right;">DCE</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">700</td>
+</tr>
+<tr class="even">
+<td>FB</td>
+<td style="text-align: right;">DCW</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">600</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment" data-fragment-index="3">
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+  "flowchart": {
+    "padding": 60,
+    "nodeSpacing": 70,
+    "rankSpacing": 70
+  },
+  "themeVariables": {
+    "fontSize": "20px"
+  }
+}}%%
+flowchart LR
+
+    FA((FA))
+    FB((FB))
+
+    DCE((DCE))
+    DCW((DCW))
+
+    RC((RC))
+    RS((RS))
+    RN((RN))
+
+    %% Factory to DC flows
+    FA --&gt;|P1: 400&lt;br&gt;P2: 300| DCE
+    FB --&gt;|P1: 300&lt;br&gt;P2: 300| DCW
+
+    %% DC to customer region flows
+    DCE --&gt;|P1: 200&lt;br&gt;P2: 100| RC
+    DCE --&gt;|P1: 200&lt;br&gt;P2: 200| RN
+
+    DCW --&gt;|P2: 50| RC
+    DCW --&gt;|P1: 300&lt;br&gt;P2: 250| RS
+
+    %% Open DCs
+    style DCE fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+    style DCW fill:#c8e6c9,stroke:#2e7d32,stroke-width:2px
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="fragment" style="font-size: 80%;" data-fragment-index="2">
+<table class="table-striped caption-top">
+<caption>Table 7. DC <span class="math inline">\(\rightarrow\)</span> Customer Flows</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Region</th>
+<th style="text-align: right;">P1</th>
+<th style="text-align: right;">P2</th>
+<th style="text-align: right;">Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td style="text-align: right;">RC</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td>DCE</td>
+<td style="text-align: right;">RN</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="odd">
+<td>DCW</td>
+<td style="text-align: right;">RC</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td style="text-align: right;">RS</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">550</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment" style="font-size: 90%;" data-fragment-index="4">
+<ul>
+<li class="fragment"><strong>Total cost</strong> = $13,600</li>
+<li class="fragment"><strong>Decision:</strong> Open both DCs</li>
+<li class="fragment"><strong>DCE</strong> is supplied entirely by <strong>FA</strong> and serves <strong>RC</strong> and <strong>RN</strong>.</li>
+<li class="fragment"><strong>DCW</strong> is supplied entirely by <strong>FB</strong> and serves <strong>RS</strong> and <strong>RC</strong>.</li>
+<li class="fragment"><strong>RC</strong> receives products from both DCs, while <strong>RS</strong> is served only by <strong>DCW</strong> and <strong>RN</strong> only by <strong>DCE</strong>.</li>
+</ul>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h4 id="total-cost-breakdown">Total Cost Breakdown</h4>
+<div style="font-size: 75%;">
+<table class="table-striped caption-top">
+<caption>Table 8. Supplier → DC Transportation Cost</caption>
+<thead>
+<tr class="header">
+<th>Factory</th>
+<th>DC</th>
+<th style="text-align: right;">Product</th>
+<th style="text-align: right;">Flow</th>
+<th style="text-align: right;">Unit cost</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>FA</td>
+<td>DCE</td>
+<td style="text-align: right;">P1</td>
+<td style="text-align: right;">400</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">2,000</td>
+</tr>
+<tr class="even">
+<td>FA</td>
+<td>DCE</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1,500</td>
+</tr>
+<tr class="odd">
+<td>FB</td>
+<td>DCW</td>
+<td style="text-align: right;">P1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="even">
+<td>FB</td>
+<td>DCW</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>1,300</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>5,300</strong></td>
+</tr>
+</tbody>
+</table>
+<table class="table-striped caption-top">
+<caption>Table 9. DC → Customer Transportation Cost</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th>Region</th>
+<th style="text-align: right;">Product</th>
+<th style="text-align: right;">Flow</th>
+<th style="text-align: right;">Unit cost</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td>RC</td>
+<td style="text-align: right;">P1</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">600</td>
+</tr>
+<tr class="even">
+<td>DCE</td>
+<td>RC</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="odd">
+<td>DCE</td>
+<td>RN</td>
+<td style="text-align: right;">P1</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">800</td>
+</tr>
+<tr class="even">
+<td>DCE</td>
+<td>RN</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">800</td>
+</tr>
+<tr class="odd">
+<td>DCW</td>
+<td>RC</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">200</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td>RS</td>
+<td style="text-align: right;">P1</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">600</td>
+</tr>
+<tr class="odd">
+<td>DCW</td>
+<td>RS</td>
+<td style="text-align: right;">P2</td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">500</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>1,300</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>3,800</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="font-size: 80%;">
+<table class="table-striped caption-top">
+<caption>Table 10. DC Fixed Costs</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Open?</th>
+<th style="text-align: right;">Fixed cost</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,000</td>
+<td style="text-align: right;">1,000</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1,200</td>
+<td style="text-align: right;">1,200</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>2,200</strong></td>
+</tr>
+</tbody>
+</table>
+<table class="table-striped caption-top">
+<caption>Table 11. DC Handling Costs</caption>
+<thead>
+<tr class="header">
+<th>DC</th>
+<th style="text-align: right;">Total flow handled</th>
+<th style="text-align: right;">Unit handling cost</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>DCE</td>
+<td style="text-align: right;">700</td>
+<td style="text-align: right;">2.00</td>
+<td style="text-align: right;">1,400</td>
+</tr>
+<tr class="even">
+<td>DCW</td>
+<td style="text-align: right;">600</td>
+<td style="text-align: right;">1.50</td>
+<td style="text-align: right;">900</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>1,300</strong></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"><strong>2,300</strong></td>
+</tr>
+</tbody>
+</table>
+<table class="table-striped caption-top">
+<caption>Table 12. Total Cost Breakdown</caption>
+<thead>
+<tr class="header">
+<th>Cost component</th>
+<th style="text-align: right;">Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factory → DC transportation</td>
+<td style="text-align: right;">5,300</td>
+</tr>
+<tr class="even">
+<td>DC → Customer transportation</td>
+<td style="text-align: right;">3,800</td>
+</tr>
+<tr class="odd">
+<td>Fixed DC opening cost</td>
+<td style="text-align: right;">2,200</td>
+</tr>
+<tr class="even">
+<td>Handling cost</td>
+<td style="text-align: right;">2,300</td>
+</tr>
+<tr class="odd">
+<td><strong>Total cost</strong></td>
+<td style="text-align: right;"><strong>13,600</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figs/curtin-logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="03lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="03lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="03lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="03lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"titleSelector":"h1, h2, h3","hideMissingTitles":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

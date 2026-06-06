@@ -24,7 +24,7 @@
     "href": "index.html#unit-materials-june-2026-class",
     "title": "Supply Chain Modelling and Optimisation",
     "section": "Unit Materials (June 2026 Class)",
-    "text": "Unit Materials (June 2026 Class)\nUpdates from last year:\n\nMigrate from PDF to HTML format for lecture slides and tutorial materials.\nAdd more contents to the lecture slides, including more examples, detailed explanations, and Python code snippets.\nAdd more tutorial questions and solutions.\n\n\n\n\nDate\nTime\nTopic\nLT\nTUT\nSOLS\n\n\n\n\nThu 4\n6:10 - 9:40 PM\n1. Intro to Supply Chain & Optimisation\n\n\n\n\n\nFri 5\n6:10 - 9:40 PM\n2. Network Design - Single-Echelon Single-Commodity (SESC)\n\n\n\n\n\n\n5 PM\nAssignment Released\n\n\n\n\n\nSun 7\n1:30 - 5:10 PM\n3. Network Design - Two-Echelon Multi-Commodity (TEMC)\n\n\n\n\n\nMon 8\n6:10 - 9:40 PM\n4. Network Design under Uncertainty\n\n\n\n\n\nTue 9\n6:10 - 9:40 PM\n5. Demand Forecasting Techniques\n\n\n\n\n\nWed 10\n6:10 - 9:40 PM\n6. Inventory Model: Single-Commodity\n\n\n\n\n\nThu 11\n8:00 - 11:40 AM\n7. Inventory Model: Discount and Multi-Commodity\n\n\n\n\n\nFri 12\n6:10 - 9:40 PM\n8. Stochastic Inventory Model: Single and Multi-Period\n\n\n\n\n\nSat 13\n1:30 - 5:10 PM\nRevisionAssignment Due at 5:10 PM",
+    "text": "Unit Materials (June 2026 Class)\nUpdates from last year:\n\nMigrate from PDF to HTML format for lecture slides and tutorial materials.\nAdd more contents to the lecture slides, including more examples, detailed explanations, and Python code snippets.\nAdd more tutorial questions and solutions.\n\nStatus:\n\nGreen icon: Materials are ready and available.\nOrange icon: Materials are waiting to be uploaded.\nRed icon: Materials are not yet available.\n\n\n\n\nDate\nTime\nTopic\nLT\nTUT\nSOLS\n\n\n\n\nThu 4\n6:10 - 9:40 PM\n1. Intro to Supply Chain & Optimisation\n\n\n\n\n\nFri 5\n6:10 - 9:40 PM\n2. Network Design - Single-Echelon Single-Commodity (SESC)\n\n\n\n\n\n\n5 PM\nAssignment Released\n\n\n\n\n\nSun 7\n1:30 - 5:10 PM\n3. Network Design - Two-Echelon Multi-Commodity (TEMC)\n\n\n\n\n\nMon 8\n6:10 - 9:40 PM\n4. Network Design under Uncertainty\n\n\n\n\n\nTue 9\n6:10 - 9:40 PM\n5. Demand Forecasting Techniques\n\n\n\n\n\nWed 10\n6:10 - 9:40 PM\n6. Inventory Model: Single-Commodity\n\n\n\n\n\nThu 11\n8:00 - 11:40 AM\n7. Inventory Model: Discount and Multi-Commodity\n\n\n\n\n\nFri 12\n6:10 - 9:40 PM\n8. Stochastic Inventory Model: Single and Multi-Period\n\n\n\n\n\nSat 13\n1:30 - 5:10 PM\nRevisionAssignment Due at 5:10 PM",
     "crumbs": [
       "Preface"
     ]
@@ -367,6 +367,72 @@
     "crumbs": [
       "<strong>2 Network Design: SESC</strong>",
       "Tutorial 2 Solutions"
+    ]
+  },
+  {
+    "objectID": "03tutorial.html",
+    "href": "03tutorial.html",
+    "title": "Tutorial 3 Exercises",
+    "section": "",
+    "text": "Question 1\nIn this tutorial, we will work through a series of exercises related to the Single-Echelon Single-Commodity (SESC) and the Two-Echelon Multi-Commodity (TEMC) network design problems. These exercises are designed to help you understand the formulation and solution of supply chain optimisation problems, which are common in supply chain management.\nGelido, a frozen food distribution company, is evaluating three potential distribution centre (DC) locations to serve four market regions. The company must decide which facilities to open and how to allocate market demands to minimise the total cost, including fixed facility costs and transportation costs.",
+    "crumbs": [
+      "<strong>3 Network Design: TEMC</strong>",
+      "Tutorial 3 Exercises"
+    ]
+  },
+  {
+    "objectID": "03tutorial.html#footnotes",
+    "href": "03tutorial.html#footnotes",
+    "title": "Tutorial 3 Exercises",
+    "section": "",
+    "text": "FMCG = Fast-moving consumer goods (sold quickly and at a relatively low cost)↩︎",
+    "crumbs": [
+      "<strong>3 Network Design: TEMC</strong>",
+      "Tutorial 3 Exercises"
+    ]
+  },
+  {
+    "objectID": "03solutions.html",
+    "href": "03solutions.html",
+    "title": "Tutorial 3 Solutions",
+    "section": "",
+    "text": "Question 1\nGelido, a frozen food distribution company, is evaluating three potential distribution centre (DC) locations to serve four market regions. The company must decide which facilities to open and how to allocate market demands to minimise the total cost, including fixed facility costs and transportation costs.",
+    "crumbs": [
+      "<strong>3 Network Design: TEMC</strong>",
+      "Tutorial 3 Solutions"
+    ]
+  },
+  {
+    "objectID": "03solutions.html#footnotes",
+    "href": "03solutions.html#footnotes",
+    "title": "Tutorial 3 Solutions",
+    "section": "",
+    "text": "FMCG = Fast-moving consumer goods (sold quickly and at a relatively low cost)↩︎",
+    "crumbs": [
+      "<strong>3 Network Design: TEMC</strong>",
+      "Tutorial 3 Solutions"
+    ]
+  },
+  {
+    "objectID": "04tutorial.html",
+    "href": "04tutorial.html",
+    "title": "Tutorial 4 Exercises",
+    "section": "",
+    "text": "This tutorial focuses on network design under uncertainty. The exercises are designed to help students understand the concepts and techniques related to making strategic decisions in supply chain management when faced with uncertain demand, supply, and other factors.\n\nQuestion 1\nMoon Micro is a small manufacturer of servers that currently builds all of its products in Santa Clara, California. As the market for servers has grown dramatically, the Santa Clara plant has reached a capacity of 10,000 servers per year. Moon is considering two options to increase its capacity. The first option is to add 10,000 capacity units to the Santa Clara plant at an annualised fixed cost of $10,000,000 plus $500 labour per server. The second option is to have Molectron, an independent assembler, manufacture servers for Moon at a cost of $2,000 for each server (excluding raw materials cost). Raw materials cost $8,000 per server, and Moon sells each server for $15,000.\n\nMoon must make this decision over a two-year time horizon. During each year, demand for Moon servers has an 80% chance of increasing 50% from the year before and a 20% chance of remaining the same. Molectron’s prices may also change.\nMolectron’s prices have a 50% chance of increasing 20% from the year before and a 50% chance of remaining the same as the year before.\nMolectron’s prices are fixed for the first year but have a 40% chance of increasing 25% in the second year and a 60% chance of remaining where they are.\n\n\n\n\nQuestion 2\nUnipart, a manufacturer of auto parts, is considering two different B2B marketplaces to purchase its MRO supplies. Both marketplaces offer a full line of supplies for products and shipping at similar prices. Both provide very similar service levels and lead times. However, their fee structures are quite different. The first marketplace, Parts4u.com, sells all of its products with a 5% commission tacked on top of the price of the product (not including shipping).\n\nAll MRO.com’s pricing is based on a subscription fee of $10 million that must be paid upfront for a two-year period and a commission of 1% on each transaction’s product price.\nUnipart spends about $150 million on MRO supplies yearly, although this varies with their utilisation. Next year will likely be a strong year, in which high utilisation will keep MRO spending at $150 million. However, there is a 25% chance that spending will drop by 10%. In the second year, there is a 50% chance that the spending level will stay where it was in the first year and a 50% chance that it will drop by another 10%.\nUnipart uses a discount rate of 20%.\n\nAssume all costs are incurred at the beginning of each year (so Year 1’s costs are incurred now, and Year 2 costs are incurred in a year).\n\n\n\n\nQuestion 3\n3COM is a server company with an annualised fixed cost of $2 million. As the market for servers has grown dramatically, its plant has reached a capacity of 10 thousand servers per year. 3com is considering adding 4 thousand units of capacity to the plant at an annualised fixed cost of $2.5 million. For each server, the production cost is $6,000, and the sales price is $10,000. During each year, demand for 3com servers has a 50% chance of increasing by 20% from the year before and a 50% chance of remaining the same as the year before. Production cost per server is fixed for the first year but has an 80% chance of increasing by 20% in the second year and a 20% chance of remaining the same as the year before. For a two-year time horizon, use a decision tree with a return rate of 0.1 to determine whether adding 4 thousand units or not adding of capacity to the plant is worthwhile if the lost sales cost per server is $1,000.",
+    "crumbs": [
+      "<strong>4 Network Design under Uncertainty</strong>",
+      "Tutorial 4 Exercises"
+    ]
+  },
+  {
+    "objectID": "05tutorial.html",
+    "href": "05tutorial.html",
+    "title": "Tutorial 5 Exercises",
+    "section": "",
+    "text": "Question 1\nA company records the following demand for a product over 12 periods.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPeriod\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n\n\n\n\nDemand\n210\n205\n198\n192\n188\n182\n178\n170\n165\n160\n155\n150\n\n\n\n\nThe data shows a downward trend in demand over time.\n\nForecast demand for the next four periods (13–16) using naive forecasting method, \\(F_{t+1} = D_t.\\)\nDiscuss how the naive method performs when demand exhibits a trend.\n\n\n\n\nQuestion 2\nUsing a 3-period moving average, compute forecasts for periods 13–16.\n\\[\nF_t = \\frac{A_{t-1} + A_{t-2} + A_{t-3}}{3}\n\\]\nwhere \\(A_t\\) is the actual demand in period \\(t\\).\n\n\n\nPeriod\nDemand \\(A_t\\)\nForecast \\(F_t\\)\n\n\n\n\n1\n210\n\n\n\n2\n205\n\n\n\n3\n198\n\n\n\n4\n192\n\n\n\n5\n188\n\n\n\n6\n182\n\n\n\n7\n178\n\n\n\n8\n170\n\n\n\n9\n165\n\n\n\n10\n160\n\n\n\n11\n155\n\n\n\n12\n150\n\n\n\n13\n\n\n\n\n14\n\n\n\n\n15\n\n\n\n\n16\n\n\n\n\n\nComment on whether the moving average method responds quickly to the downward trend.\n\n\n\nQuestion 3\nUse exponential smoothing with smoothing constant\n\\[\n\\alpha = 0.3\n\\]\nThe forecasting equation is\n\\[\nF_{t+1} = F_t + \\alpha (A_t - F_t)\n\\]\nAssume the initial forecast \\(F_1 = A_1\\), Compute forecasts for periods 13–16.\n\n\n\nPeriod\nDemand \\(A_t\\)\nForecast \\(F_t\\)\n\n\n\n\n1\n210\n\n\n\n2\n205\n\n\n\n3\n198\n\n\n\n4\n192\n\n\n\n5\n188\n\n\n\n6\n182\n\n\n\n7\n178\n\n\n\n8\n170\n\n\n\n9\n165\n\n\n\n10\n160\n\n\n\n11\n155\n\n\n\n12\n150\n\n\n\n13\n\n\n\n\n14\n\n\n\n\n15\n\n\n\n\n16\n\n\n\n\n\n\n\n\nQuestion 4\nFit a linear regression model\n\\[\n\\hat{Y}_t = a + bt\n\\]\n\nEstimate the parameters \\(a\\) and \\(b\\) using the least squares method.\n\n\n\n\n\nPeriod \\(X\\)\nDemand \\(Y\\)\n\\(X^2\\)\n\\(XY\\)\n\n\n\n\n\n\n1\n1\n210\n\n\n\n\n\n2\n2\n205\n\n\n\n\n\n3\n3\n198\n\n\n\n\n\n4\n4\n192\n\n\n\n\n\n5\n5\n188\n\n\n\n\n\n6\n6\n182\n\n\n\n\n\n7\n7\n178\n\n\n\n\n\n8\n8\n170\n\n\n\n\n\n9\n9\n165\n\n\n\n\n\n10\n10\n160\n\n\n\n\n\n11\n11\n155\n\n\n\n\n\n12\n12\n150\n\n\n\n\nsum\n78\n2183\n\n\n\n\n\n\n\\[\na = \\frac{\\sum Y - b\\left(\\sum X\\right)}{n}\n\\]\n\\[\nb = \\frac{n(\\sum XY) - (\\sum X)(\\sum Y)}{n(\\sum X^2) - (\\sum X)^2}\n\\]\n\nUse the estimated regression equation to forecast demand for periods 13–16.\n\n\n\n\nQuestion 5\n\nWhich forecasting method is most appropriate for data with a downward trend?\nWhy might moving average forecasts lag behind the actual demand when a trend exists?\nWhat are the advantages of using a trend model for forecasting?",
+    "crumbs": [
+      "<strong>5 Demand Forecasting</strong>",
+      "Tutorial 5 Exercises"
     ]
   }
 ]
