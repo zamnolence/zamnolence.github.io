@@ -107,7 +107,7 @@ I work in quantitative analysis, statistical modelling, and actuarial methods, s
 <span class="badge rounded-pill bg-light">{{< iconify devicon:html5-wordmark title="HTML5" label="HTML5" >}}</span>
 <span class="badge rounded-pill bg-light">{{< iconify devicon:css title="CSS" label="CSS" >}}</span>
 <span class="badge rounded-pill bg-light">{{< iconify devicon:javascript title="JS" label="JS" >}}</span>
-<span class="badge rounded-pill bg-light">{{< iconify devicon:linux title="linux" label="linux" >}}</span>
+<span class="badge rounded-pill bg-light">{{< iconify devicon:linux title="Linux" label="Linux" >}}</span>
 
 
 
@@ -129,11 +129,11 @@ I work in quantitative analysis, statistical modelling, and actuarial methods, s
 
 - Curriculum design in economics and optimisation; coordination of academic units
 - Delivered tutorials, workshops, and mentored students on applied projects
-- Experienced with LMS platforms (Blackboard, Moodle) and modern quantitative pedagogy
+- Experienced with LMS platforms (Blackboard, Canvas) and modern quantitative pedagogy
 :::
 
 ::: {.callout-tip icon="false"}
-### <span style="font-size: 1.5em; margin-left: 1em;">{{< iconify material-symbols:code >}} Techinal & Development </span>
+### <span style="font-size: 1.5em; margin-left: 1em;">{{< iconify material-symbols:code >}} Technical & Development </span>
 
 - Web development: HTML, CSS, JavaScript
 - Tools & environments: Git, Unix/Linux

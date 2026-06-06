@@ -27,15 +27,15 @@ listing:
       - path: https://github.com/zamnolence/Economics-at-YSU
         image: assets/images/econ-blog.png
         title: "Actuarial Economics (YSU)"
-        description: 'Economics lecture slides, workshop activities, and assessments (accessible until 30 June 2025).'
-        date: "2025-06-13"
+        description: 'Economics lecture slides, tutorials, workshop activities, and assessments.'
+        date: "2026-06-14"
         categories: [Teaching, Finance, Actuarial science, Undergraduate]
 
-      - path: https://github.com/zamnolence/scmo_book
+      - path: https://zamnolence.github.io/scmo_book/
         image: assets/images/scmo-blog.png
-        title: "Supply Chain Modelling (YSU)"
-        description: 'Supply Chain Modelling lecture slides, workshop activities, and assessments (accessible until 30 June 2026).'
-        date: "2025-06-13"
+        title: "Supply Chain Modelling and Optimisation"
+        description: 'Supply Chain Modelling and Optimisation lecture slides, tutorials, workshop activities, and assessments.'
+        date: "2026-06-04"
         categories: [Teaching, Optimisation, Python, Undergraduate]
 
       - path: assets/media/Calculus_Ref_Sheet.pdf
