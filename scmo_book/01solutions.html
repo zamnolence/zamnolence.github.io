@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tutorial 1 Exercises Solutions – Supply Chain Modelling and Optimisation</title>
+<title>Tutorial 1 Solutions – Supply Chain Modelling and Optimisation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -315,7 +315,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Exercises Solutions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -399,7 +399,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01solutions.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Tutorial 1 Exercises Solutions</span></a>
+ <span class="menu-text">Tutorial 1 Solutions</span></a>
   </div>
 </li>
       </ul>
@@ -416,7 +416,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">02tutorial.html</span></span></a>
+ <span class="menu-text">Tutorial 2 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 2 Solutions</span></a>
   </div>
 </li>
       </ul>
@@ -482,9 +488,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Exercises Solutions</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Solutions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="01sols" class="quarto-section-identifier">Tutorial 1 Exercises Solutions</span></h1>
+<h1 class="title"><span id="01sols" class="quarto-section-identifier">Tutorial 1 Solutions</span></h1>
 </div>
 
 
@@ -580,13 +586,13 @@ x &amp;= \pm \frac{1}{\sqrt{2}},
 \]</span></p>
 <p>Alternatively, we can use a symbolic computation tool to find the critical points directly.</p>
 </div>
-<div id="49d17b95" class="cell" data-execution_count="1">
+<div id="26f3b7ad" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> y) <span class="op">/</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>critical_points <span class="op">=</span> sp.solve([sp.diff(f, x), sp.diff(f, y)], (x, y))</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>critical_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="52">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <pre><code>[(-sqrt(2)/2, -sqrt(2)/2), (sqrt(2)/2, sqrt(2)/2)]</code></pre>
 </div>
 </div>
@@ -609,14 +615,14 @@ x &amp;= \pm \frac{1}{\sqrt{2}},
 \]</span></p>
 <p>Since the second partial derivatives are quite complex, we can also use a symbolic computation tool to find the Hessian matrix. The resulting Hessian matrix is</p>
 </div>
-<div id="ba516a5d" class="cell" data-execution_count="2">
+<div id="02ce5daf" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hessian matrix</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> y) <span class="op">/</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> sp.hessian(f, (x, y))</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>H</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="53">
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
 <p><span class="math inline">\(\displaystyle \left[\begin{matrix}\frac{8 x^{2} \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{4 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{2}} &amp; \frac{8 x y \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{2 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 y}{\left(x^{2} + y^{2} + 1\right)^{2}}\\\frac{8 x y \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{2 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 y}{\left(x^{2} + y^{2} + 1\right)^{2}} &amp; \frac{8 y^{2} \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{4 y}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{2}}\end{matrix}\right]\)</span></p>
 </div>
 </div>
@@ -650,12 +656,12 @@ Q(\mathbf{x}) = \mathbf{x}^T \mathbf{H} \mathbf{x}
 <p>Since the Hessian matrix is diagonal at the critical points, the eigenvalues are simply the diagonal entries. The signs of the eigenvalues will help us classify the stationary points.</p>
 <p>Alternatively, we can also use a symbolic computation tool to find the eigenvalues at each critical point. The signs of the eigenvalues will help us classify the stationary points.</p>
 </div>
-<div id="21349e32" class="cell" data-execution_count="3">
+<div id="cb6c851b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvalues of the Hessian matrix at each critical point</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> [H.subs({x: <span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>), y: <span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>)}).eigenvals(),</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               H.subs({x: <span class="op">-</span><span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>), y: <span class="op">-</span><span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>)}).eigenvals()]</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>eigenvalues</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="54">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>[{-sqrt(2)/2: 2}, {sqrt(2)/2: 2}]</code></pre>
 </div>
 </div>
@@ -2229,8 +2235,8 @@ x=y
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02tutorial.html" class="pagination-link" aria-label="02tutorial.html">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">02tutorial.html</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02tutorial.html" class="pagination-link" aria-label="Tutorial 2 Exercises">
+        <span class="nav-page-text">Tutorial 2 Exercises</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -31,6 +31,72 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="02lecture_files/libs/revealjs/dist/theme/quarto-31e77d737e81b9b945dd1098fae77c0e.css">
   <link href="02lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -398,7 +464,7 @@ V = V_1 \cup V_2, \qquad V_1 \cap V_2 = \emptyset
 </section>
 <section class="slide level2">
 
-<h4 class="unnumbered" id="constant-cost-facility-location-model-formulation">3.1 Constant-Cost Facility Location Model Formulation</h4>
+<h3 class="unnumbered" id="constant-cost-facility-location-model-formulation">3.1 Constant-Cost Facility Location Model Formulation</h3>
 <p><br></p>
 <div class="note">
 <ul>
@@ -417,7 +483,7 @@ V = V_1 \cup V_2, \qquad V_1 \cap V_2 = \emptyset
 </section>
 <section class="slide level2">
 
-<h4 class="unnumbered" id="constant-cost-model-example-warehouse-location-problem">3.2 Constant-Cost Model Example: Warehouse Location Problem</h4>
+<h3 class="unnumbered" id="constant-cost-model-example-warehouse-location-problem">3.2 Constant-Cost Model Example: Warehouse Location Problem</h3>
 <p>A retailer must determine optimal warehouse locations to distribute a single commodity (e.g., bottled water) to three customer zones. Two warehouse locations are available (W1 and W2).</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -586,34 +652,21 @@ y_{jk}\ge0\)</span></p>
 </div>
 <div class="columns">
 <div class="column center fragment" style="width:33%;">
-<h3 id="case-1">Case 1</h3>
+<h4 id="case-1">Case 1</h4>
 <p><strong>Warehouse 2 Open</strong></p>
 <p>Capacity: 250 &lt; 350</p>
 <p>❌ <strong>Infeasible</strong></p>
 </div><div class="column center fragment" style="width:33%;">
-<h3 id="case-2">Case 2</h3>
+<h4 id="case-2">Case 2</h4>
 <p><strong>Warehouse 1 Open</strong></p>
 <p>Capacity: 300 &lt; 350</p>
 <p>❌ <strong>Infeasible</strong></p>
 </div><div class="column center fragment" style="width:34%;">
-<h3 id="case-3">Case 3</h3>
+<h4 id="case-3">Case 3</h4>
 <p><strong>Both Warehouses Open</strong></p>
 <p>Capacity: 550 &gt; 350</p>
 <p>✅ <strong>Feasible</strong></p>
 </div></div>
-<aside class="notes">
-<p>Note. SESC model is commonly solved using Mixed-Integer Linear Programming (MILP), because binary decision variables are not suitable for Lagrangian method. Also, manual calculation will become infeasible as the number of variables and the complexity of the constraints and cost structure increase.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section class="slide level2">
 
@@ -698,6 +751,1256 @@ y_{jk}\ge0\)</span></p>
 </section>
 <section class="slide level2">
 
+<h3 id="python-implementation">3.3 Python Implementation</h3>
+<div style="font-size: 36px;">
+<div class="callout callout-warning no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>SESC model is commonly solved using <strong>Mixed-Integer Linear Programming (MILP)</strong> (<code>sciply.optimize.milp</code>), because binary decision variables are not suitable for Lagrangian method. Also, manual calculation will become infeasible as the number of variables and the complexity of the constraints and cost structure increase.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="bc297045" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Click to show Python code for SESC model</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href=""></a><span class="im">from</span> scipy.optimize <span class="im">import</span> milp, LinearConstraint, Bounds</span>
+<span id="cb1-3"><a href=""></a></span>
+<span id="cb1-4"><a href=""></a><span class="co"># Variables:</span></span>
+<span id="cb1-5"><a href=""></a><span class="co"># y1A, y1B, y1C, y2A, y2B, y2C, z1, z2</span></span>
+<span id="cb1-6"><a href=""></a></span>
+<span id="cb1-7"><a href=""></a>c <span class="op">=</span> np.array([</span>
+<span id="cb1-8"><a href=""></a>    <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>,    <span class="co"># y1A, y1B, y1C</span></span>
+<span id="cb1-9"><a href=""></a>    <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>,    <span class="co"># y2A, y2B, y2C</span></span>
+<span id="cb1-10"><a href=""></a>    <span class="dv">1000</span>, <span class="dv">800</span>   <span class="co"># z1, z2</span></span>
+<span id="cb1-11"><a href=""></a>])</span>
+<span id="cb1-12"><a href=""></a></span>
+<span id="cb1-13"><a href=""></a><span class="co"># Demand constraints:</span></span>
+<span id="cb1-14"><a href=""></a><span class="co"># y1A + y2A = 150</span></span>
+<span id="cb1-15"><a href=""></a><span class="co"># y1B + y2B = 120</span></span>
+<span id="cb1-16"><a href=""></a><span class="co"># y1C + y2C = 80</span></span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a>A_demand <span class="op">=</span> np.array([</span>
+<span id="cb1-19"><a href=""></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb1-20"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb1-21"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>]</span>
+<span id="cb1-22"><a href=""></a>])</span>
+<span id="cb1-23"><a href=""></a></span>
+<span id="cb1-24"><a href=""></a>demand_lb <span class="op">=</span> np.array([<span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">80</span>])</span>
+<span id="cb1-25"><a href=""></a>demand_ub <span class="op">=</span> np.array([<span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">80</span>])</span>
+<span id="cb1-26"><a href=""></a></span>
+<span id="cb1-27"><a href=""></a><span class="co"># Capacity constraints:</span></span>
+<span id="cb1-28"><a href=""></a><span class="co"># y1A + y1B + y1C &lt;= 300z1</span></span>
+<span id="cb1-29"><a href=""></a><span class="co"># y2A + y2B + y2C &lt;= 250z2</span></span>
+<span id="cb1-30"><a href=""></a></span>
+<span id="cb1-31"><a href=""></a>A_capacity <span class="op">=</span> np.array([</span>
+<span id="cb1-32"><a href=""></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">300</span>, <span class="dv">0</span>],</span>
+<span id="cb1-33"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">250</span>]</span>
+<span id="cb1-34"><a href=""></a>])</span>
+<span id="cb1-35"><a href=""></a></span>
+<span id="cb1-36"><a href=""></a>capacity_lb <span class="op">=</span> np.array([<span class="op">-</span>np.inf, <span class="op">-</span>np.inf])</span>
+<span id="cb1-37"><a href=""></a>capacity_ub <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb1-38"><a href=""></a></span>
+<span id="cb1-39"><a href=""></a><span class="co"># Combine constraints</span></span>
+<span id="cb1-40"><a href=""></a>A <span class="op">=</span> np.vstack([A_demand, A_capacity])</span>
+<span id="cb1-41"><a href=""></a></span>
+<span id="cb1-42"><a href=""></a>lb <span class="op">=</span> np.concatenate([demand_lb, capacity_lb])</span>
+<span id="cb1-43"><a href=""></a>ub <span class="op">=</span> np.concatenate([demand_ub, capacity_ub])</span>
+<span id="cb1-44"><a href=""></a></span>
+<span id="cb1-45"><a href=""></a>constraints <span class="op">=</span> LinearConstraint(A, lb, ub)</span>
+<span id="cb1-46"><a href=""></a></span>
+<span id="cb1-47"><a href=""></a><span class="co"># Bounds:</span></span>
+<span id="cb1-48"><a href=""></a><span class="co"># y &gt;= 0</span></span>
+<span id="cb1-49"><a href=""></a><span class="co"># 0 &lt;= z &lt;= 1</span></span>
+<span id="cb1-50"><a href=""></a>bounds <span class="op">=</span> Bounds(</span>
+<span id="cb1-51"><a href=""></a>    lb<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb1-52"><a href=""></a>    ub<span class="op">=</span>[np.inf, np.inf, np.inf, np.inf, np.inf, np.inf, <span class="dv">1</span>, <span class="dv">1</span>]</span>
+<span id="cb1-53"><a href=""></a>)</span>
+<span id="cb1-54"><a href=""></a></span>
+<span id="cb1-55"><a href=""></a><span class="co"># Integrality:</span></span>
+<span id="cb1-56"><a href=""></a><span class="co"># 0 = continuous</span></span>
+<span id="cb1-57"><a href=""></a><span class="co"># 1 = integer</span></span>
+<span id="cb1-58"><a href=""></a>integrality <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>])</span>
+<span id="cb1-59"><a href=""></a></span>
+<span id="cb1-60"><a href=""></a>result <span class="op">=</span> milp(</span>
+<span id="cb1-61"><a href=""></a>    c<span class="op">=</span>c,</span>
+<span id="cb1-62"><a href=""></a>    constraints<span class="op">=</span>constraints,</span>
+<span id="cb1-63"><a href=""></a>    bounds<span class="op">=</span>bounds,</span>
+<span id="cb1-64"><a href=""></a>    integrality<span class="op">=</span>integrality</span>
+<span id="cb1-65"><a href=""></a>)</span>
+<span id="cb1-66"><a href=""></a></span>
+<span id="cb1-67"><a href=""></a><span class="bu">print</span>(<span class="st">"Optimisation Success:"</span>, result.success)</span>
+<span id="cb1-68"><a href=""></a><span class="bu">print</span>(<span class="st">"Objective Function Value:"</span>, result.fun)</span>
+<span id="cb1-69"><a href=""></a><span class="bu">print</span>(<span class="st">"Decision Variables:"</span>, result.x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimisation Success: True
+Objective Function Value: 2700.0
+Decision Variables: [  0. 120.   0. 150.   0.  80.   1.   1.]</code></pre>
+</div>
+</div>
+<div style="font-size: 90%;">
+<p>Python returns the decision variables in the order: <span class="math inline">\([y_{1A}, y_{1B}, y_{1C}, y_{2A}, y_{2B}, y_{2C}, z_1, z_2]\)</span></p>
+<p><strong>Optimal Solution:</strong></p>
+<p><span class="math display">\[\boxed{
+y_{1A}=70,\; y_{1B}=120,\; y_{1C}=0,\; y_{2A}=80,\; y_{2B}=0,\; y_{2C}=80, \;z_1=1,\; z_2=1}
+\]</span></p>
+<p><strong>Minimum cost:</strong></p>
+<p><span class="math display">\[
+\boxed{Z=2700}
+\]</span></p>
+</div>
+</section>
+<section id="single-sourcing-extension" class="slide level2 unnumbered scrollable">
+<h2>4. Single-Sourcing Extension</h2>
+<p>A constraint that enforces each customer (or demand point) to be <strong>served by exactly one facility</strong> (e.g., warehouse, depot, plant)</p>
+<p><span class="space-out"></span></p>
+<div class="fragment">
+<p>In standard SESC models, the shipment variable <span class="math inline">\(y_{jk}\)</span> represents the amount of product shipped from facility <span class="math inline">\(j\)</span> to customer <span class="math inline">\(k\)</span>. Under single-sourcing, each customer <span class="math inline">\(k\)</span> must receive its entire demand from only one facility.</p>
+</div>
+<p><br></p>
+<h4 class="fragment" id="mathematically">Mathematically</h4>
+<div class="fragment">
+<p>Let <span class="math inline">\(x_{jk} \in \{0,1\}\)</span>: binary assignment - if facility <span class="math inline">\(j\)</span> serves customer <span class="math inline">\(k\)</span> or not.</p>
+</div>
+<ol type="1">
+<li class="fragment"><p>Demand assigned to one source only: <span class="math inline">\(\sum_j x_{jk} = 1, \quad \forall k \in V_2\)</span></p></li>
+<li class="fragment"><p>Flow consistency (linking constraint): <span class="math inline">\(y_{jk} = D_k x_{jk}, \quad \forall j \in V_1, k \in V_2\)</span></p></li>
+</ol>
+<ul>
+<li class="fragment">Shipments match full demand only if facility <span class="math inline">\(j\)</span> is assigned to serve customer <span class="math inline">\(k\)</span>.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="single-sourcing-example">4.1 Single-Sourcing Example</h3>
+<p>An emergency response organisation selects from four potential distribution facilities (F1, F2, F3, F4) to supply drinking water to six affected areas (A, B, C, D, E, F) following a natural disaster. Each area’s demand must be satisfied entirely from exactly one distribution facility.</p>
+<div class="columns" style="font-size: 90%;">
+<div class="column" style="width:50%;">
+<table class="caption-top">
+<caption>Table 1. Facility data</caption>
+<thead>
+<tr class="header">
+<th>Facility</th>
+<th>Capacity (litres)</th>
+<th style="text-align: right;">Fixed Cost ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F1</td>
+<td>400</td>
+<td style="text-align: right;">2000</td>
+</tr>
+<tr class="even">
+<td>F2</td>
+<td>350</td>
+<td style="text-align: right;">1800</td>
+</tr>
+<tr class="odd">
+<td>F3</td>
+<td>450</td>
+<td style="text-align: right;">2200</td>
+</tr>
+<tr class="even">
+<td>F4</td>
+<td>500</td>
+<td style="text-align: right;">2500</td>
+</tr>
+</tbody>
+</table>
+</div><div class="column" style="width:50%;">
+<table class="caption-top">
+<caption>Table 3. Transportation cost/unit</caption>
+<thead>
+<tr class="header">
+<th>Facility</th>
+<th style="text-align: right;">A</th>
+<th style="text-align: right;">B</th>
+<th style="text-align: right;">C</th>
+<th style="text-align: right;">D</th>
+<th style="text-align: right;">E</th>
+<th style="text-align: right;">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>F1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+<tr class="even">
+<td>F2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+</tr>
+<tr class="odd">
+<td>F3</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr class="even">
+<td>F4</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<table class="caption-top">
+<caption>Table 2. Affected area demand data</caption>
+<thead>
+<tr class="header">
+<th>Affected Area</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Demand (units)</td>
+<td>150</td>
+<td>100</td>
+<td>180</td>
+<td>150</td>
+<td>120</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2">
+
+<h5 class="fragment" id="sets-and-indices-1">Sets and indices</h5>
+<ul>
+<li class="fragment">Set of facilities: <span class="math inline">\(𝐽={1, 2, 3, 4}\)</span>, indexed by <span class="math inline">\(𝑗\)</span></li>
+<li class="fragment">Set of customer zones: <span class="math inline">\(𝐾={𝐴, 𝐵, 𝐶, 𝐷, 𝐸, 𝐹}\)</span>, indexed by <span class="math inline">\(𝑘\)</span></li>
+</ul>
+<h5 class="fragment" id="decision-variables-1">Decision variables</h5>
+<ul>
+<li class="fragment"><span class="math inline">\(z_j \in \{0,1\}\)</span>: Facility opening decisions variables:</li>
+<li class="fragment"><strong><span class="math inline">\(x_{jk} \in \{0,1\}\)</span>: Assignment decision (single-sourcing), if facility <span class="math inline">\(j\)</span> serves customer <span class="math inline">\(k\)</span> or not.</strong></li>
+<li class="fragment"><span class="math inline">\(y_{jk}\)</span>: Quantity shipped from warehouse <span class="math inline">\(j\)</span> to customer <span class="math inline">\(k\)</span>.</li>
+</ul>
+<h5 class="fragment" id="parameters-1">Parameters</h5>
+<ul>
+<li class="fragment"><span class="math inline">\(D_k\)</span>: Demand of customer <span class="math inline">\(k\)</span></li>
+<li class="fragment"><span class="math inline">\(c_{jk}\)</span>: Transportation cost per unit from facility <span class="math inline">\(j\)</span> to area <span class="math inline">\(k\)</span></li>
+<li class="fragment"><span class="math inline">\(K_j\)</span>: Capacity of facility <span class="math inline">\(j\)</span></li>
+<li class="fragment"><span class="math inline">\(f_j\)</span>: Fixed cost of opening warehouse <span class="math inline">\(j\)</span></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h5 id="objective-function-and-constraints">Objective function and constraints</h5>
+<div style="font-size: 85%;">
+<p><span class="math display">\[
+\min{Z}=\min{\sum_{j\in J}{\sum_{k\in K}{c_{jk}y_{jk}}+\sum_{j\in J}{f_jz_j}}}
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{s.t.} \;\sum_{j\in J}{x_{jk}=1,} \quad \forall k\in K \quad&amp;\textbf{Demand satisfaction (single-sourcing)} \\
+y_{jk}=D_k x_{jk}, \quad \forall j\in J, k\in K \quad&amp;\textbf{Flow consistency} \\[0.5em]
+\sum_{k\in K}{y_{jk}}\le K_j z_j, \quad \forall j\in J \quad&amp;\text{Capacity constraints} \\
+x_{jk}\le z_j, \quad \forall j\in J, k\in K \quad&amp;\textbf{Assignment only if facility is open} \\[0.7em]
+z_j\in\{0,1\}, \quad \forall j\in J \quad&amp;\text{Binary facility opening} \\[0.7em]
+x_{jk}\in\{0,1\}, \quad \forall j\in J, k\in K \quad&amp;\textbf{Binary assignment} \\[0.7em]
+y_{jk}\ge0, \quad \forall j\in J, k\in K \quad&amp;\text{Non-negativity}
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="python-implementation-1">4.2 Python Implementation</h3>
+<div id="0e892ca5" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Click to show Python code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href=""></a><span class="im">from</span> scipy.optimize <span class="im">import</span> milp, LinearConstraint, Bounds</span>
+<span id="cb3-3"><a href=""></a></span>
+<span id="cb3-4"><a href=""></a><span class="co"># Decision variables:</span></span>
+<span id="cb3-5"><a href=""></a><span class="co">#</span></span>
+<span id="cb3-6"><a href=""></a><span class="co"># x1A, x1B, x1C, x1D, x1E, x1F</span></span>
+<span id="cb3-7"><a href=""></a><span class="co"># x2A, x2B, x2C, x2D, x2E, x2F</span></span>
+<span id="cb3-8"><a href=""></a><span class="co"># x3A, x3B, x3C, x3D, x3E, x3F</span></span>
+<span id="cb3-9"><a href=""></a><span class="co"># x4A, x4B, x4C, x4D, x4E, x4F</span></span>
+<span id="cb3-10"><a href=""></a><span class="co"># z1, z2, z3, z4</span></span>
+<span id="cb3-11"><a href=""></a><span class="co">#</span></span>
+<span id="cb3-12"><a href=""></a><span class="co"># xij = 1 if area j is assigned to facility i</span></span>
+<span id="cb3-13"><a href=""></a><span class="co"># zi = 1 if facility i is opened</span></span>
+<span id="cb3-14"><a href=""></a></span>
+<span id="cb3-15"><a href=""></a>c <span class="op">=</span> np.array([</span>
+<span id="cb3-16"><a href=""></a>    <span class="dv">3</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">100</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">180</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">120</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb3-17"><a href=""></a>    <span class="dv">4</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">100</span>, <span class="dv">2</span><span class="op">*</span><span class="dv">180</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">120</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb3-18"><a href=""></a>    <span class="dv">3</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">2</span><span class="op">*</span><span class="dv">100</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">180</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">120</span>, <span class="dv">5</span><span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb3-19"><a href=""></a>    <span class="dv">5</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">100</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">180</span>, <span class="dv">2</span><span class="op">*</span><span class="dv">150</span>, <span class="dv">3</span><span class="op">*</span><span class="dv">120</span>, <span class="dv">4</span><span class="op">*</span><span class="dv">100</span>,</span>
+<span id="cb3-20"><a href=""></a>    <span class="dv">2000</span>, <span class="dv">1800</span>, <span class="dv">2200</span>, <span class="dv">2500</span></span>
+<span id="cb3-21"><a href=""></a>])</span>
+<span id="cb3-22"><a href=""></a></span>
+<span id="cb3-23"><a href=""></a><span class="co"># Demand assignment constraints:</span></span>
+<span id="cb3-24"><a href=""></a><span class="co"># Each affected area must be assigned to exactly one facility.</span></span>
+<span id="cb3-25"><a href=""></a></span>
+<span id="cb3-26"><a href=""></a>A_demand <span class="op">=</span> np.array([</span>
+<span id="cb3-27"><a href=""></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Area A</span></span>
+<span id="cb3-28"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Area B</span></span>
+<span id="cb3-29"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Area C</span></span>
+<span id="cb3-30"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Area D</span></span>
+<span id="cb3-31"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>],  <span class="co"># Area E</span></span>
+<span id="cb3-32"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>],  <span class="co"># Area F</span></span>
+<span id="cb3-33"><a href=""></a>])</span>
+<span id="cb3-34"><a href=""></a></span>
+<span id="cb3-35"><a href=""></a>A_demand <span class="op">=</span> np.hstack([A_demand, np.zeros((<span class="dv">6</span>, <span class="dv">4</span>))])</span>
+<span id="cb3-36"><a href=""></a></span>
+<span id="cb3-37"><a href=""></a>demand_lb <span class="op">=</span> np.ones(<span class="dv">6</span>)</span>
+<span id="cb3-38"><a href=""></a>demand_ub <span class="op">=</span> np.ones(<span class="dv">6</span>)</span>
+<span id="cb3-39"><a href=""></a></span>
+<span id="cb3-40"><a href=""></a><span class="co"># Capacity constraints:</span></span>
+<span id="cb3-41"><a href=""></a><span class="co"># demand_A*x1A + ... + demand_F*x1F &lt;= capacity_1*z1</span></span>
+<span id="cb3-42"><a href=""></a></span>
+<span id="cb3-43"><a href=""></a>A_capacity <span class="op">=</span> np.array([</span>
+<span id="cb3-44"><a href=""></a>    [<span class="dv">150</span>, <span class="dv">100</span>, <span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">400</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb3-45"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">100</span>, <span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">350</span>, <span class="dv">0</span>, <span class="dv">0</span>],</span>
+<span id="cb3-46"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">100</span>, <span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">450</span>, <span class="dv">0</span>],</span>
+<span id="cb3-47"><a href=""></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">150</span>, <span class="dv">100</span>, <span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">500</span>],</span>
+<span id="cb3-48"><a href=""></a>])</span>
+<span id="cb3-49"><a href=""></a></span>
+<span id="cb3-50"><a href=""></a>capacity_lb <span class="op">=</span> np.array([<span class="op">-</span>np.inf, <span class="op">-</span>np.inf, <span class="op">-</span>np.inf, <span class="op">-</span>np.inf])</span>
+<span id="cb3-51"><a href=""></a>capacity_ub <span class="op">=</span> np.array([<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>])</span>
+<span id="cb3-52"><a href=""></a></span>
+<span id="cb3-53"><a href=""></a><span class="co"># Combine constraints</span></span>
+<span id="cb3-54"><a href=""></a></span>
+<span id="cb3-55"><a href=""></a>A <span class="op">=</span> np.vstack([A_demand, A_capacity])</span>
+<span id="cb3-56"><a href=""></a></span>
+<span id="cb3-57"><a href=""></a>lb <span class="op">=</span> np.concatenate([demand_lb, capacity_lb])</span>
+<span id="cb3-58"><a href=""></a>ub <span class="op">=</span> np.concatenate([demand_ub, capacity_ub])</span>
+<span id="cb3-59"><a href=""></a></span>
+<span id="cb3-60"><a href=""></a>constraints <span class="op">=</span> LinearConstraint(A, lb, ub)</span>
+<span id="cb3-61"><a href=""></a></span>
+<span id="cb3-62"><a href=""></a><span class="co"># Bounds:</span></span>
+<span id="cb3-63"><a href=""></a><span class="co"># All xij and zi are binary, so bounds are 0 &lt;= variable &lt;= 1</span></span>
+<span id="cb3-64"><a href=""></a></span>
+<span id="cb3-65"><a href=""></a>bounds <span class="op">=</span> Bounds(</span>
+<span id="cb3-66"><a href=""></a>    lb<span class="op">=</span>np.zeros(<span class="dv">28</span>),</span>
+<span id="cb3-67"><a href=""></a>    ub<span class="op">=</span>np.ones(<span class="dv">28</span>)</span>
+<span id="cb3-68"><a href=""></a>)</span>
+<span id="cb3-69"><a href=""></a></span>
+<span id="cb3-70"><a href=""></a><span class="co"># Integrality:</span></span>
+<span id="cb3-71"><a href=""></a><span class="co"># 1 means integer.</span></span>
+<span id="cb3-72"><a href=""></a><span class="co"># Since all variables are bounded between 0 and 1, they are binary.</span></span>
+<span id="cb3-73"><a href=""></a></span>
+<span id="cb3-74"><a href=""></a>integrality <span class="op">=</span> np.ones(<span class="dv">28</span>)</span>
+<span id="cb3-75"><a href=""></a></span>
+<span id="cb3-76"><a href=""></a>result <span class="op">=</span> milp(</span>
+<span id="cb3-77"><a href=""></a>    c<span class="op">=</span>c,</span>
+<span id="cb3-78"><a href=""></a>    constraints<span class="op">=</span>constraints,</span>
+<span id="cb3-79"><a href=""></a>    bounds<span class="op">=</span>bounds,</span>
+<span id="cb3-80"><a href=""></a>    integrality<span class="op">=</span>integrality</span>
+<span id="cb3-81"><a href=""></a>)</span>
+<span id="cb3-82"><a href=""></a></span>
+<span id="cb3-83"><a href=""></a><span class="bu">print</span>(<span class="st">"Optimisation Success:"</span>, result.success)</span>
+<span id="cb3-84"><a href=""></a><span class="bu">print</span>(<span class="st">"Objective Function Value:"</span>, result.fun)</span>
+<span id="cb3-85"><a href=""></a><span class="bu">print</span>(<span class="st">"Decision Vars:"</span>, result.x)</span>
+<span id="cb3-86"><a href=""></a></span>
+<span id="cb3-87"><a href=""></a><span class="co"># Display solution more clearly</span></span>
+<span id="cb3-88"><a href=""></a></span>
+<span id="cb3-89"><a href=""></a>x <span class="op">=</span> result.x[:<span class="dv">24</span>].reshape(<span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb3-90"><a href=""></a>z <span class="op">=</span> result.x[<span class="dv">24</span>:]</span>
+<span id="cb3-91"><a href=""></a></span>
+<span id="cb3-92"><a href=""></a>facility_names <span class="op">=</span> [<span class="st">"F1"</span>, <span class="st">"F2"</span>, <span class="st">"F3"</span>, <span class="st">"F4"</span>]</span>
+<span id="cb3-93"><a href=""></a>area_names <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>]</span>
+<span id="cb3-94"><a href=""></a>demand <span class="op">=</span> np.array([<span class="dv">150</span>, <span class="dv">100</span>, <span class="dv">180</span>, <span class="dv">150</span>, <span class="dv">120</span>, <span class="dv">100</span>])</span>
+<span id="cb3-95"><a href=""></a>capacity <span class="op">=</span> np.array([<span class="dv">400</span>, <span class="dv">350</span>, <span class="dv">450</span>, <span class="dv">500</span>])</span>
+<span id="cb3-96"><a href=""></a></span>
+<span id="cb3-97"><a href=""></a>fac <span class="op">=</span> [facility_names[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>) <span class="cf">if</span> <span class="bu">round</span>(z[i]) <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb3-98"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Opened facilities: </span><span class="sc">{</span>fac<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-99"><a href=""></a></span>
+<span id="cb3-100"><a href=""></a>assignments <span class="op">=</span> []</span>
+<span id="cb3-101"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">6</span>):</span>
+<span id="cb3-102"><a href=""></a>    i <span class="op">=</span> np.argmax(x[:, j])</span>
+<span id="cb3-103"><a href=""></a>    assignments.append((area_names[j], facility_names[i]))</span>
+<span id="cb3-104"><a href=""></a></span>
+<span id="cb3-105"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Assignments: </span><span class="sc">{</span>assignments<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-106"><a href=""></a></span>
+<span id="cb3-107"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Facility usage:"</span>)</span>
+<span id="cb3-108"><a href=""></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">4</span>):</span>
+<span id="cb3-109"><a href=""></a>    used <span class="op">=</span> np.<span class="bu">sum</span>(demand <span class="op">*</span> x[i, :])</span>
+<span id="cb3-110"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>facility_names[i]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>used<span class="sc">:.0f}</span><span class="ss"> / </span><span class="sc">{</span>capacity[i]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimisation Success: True
+Objective Function Value: 6620.0
+Decision Vars: [-0.  0.  0.  0.  0.  0.  1.  0.  1.  0.  0.  0. -0. -0.  0.  0.  0.  0.
+  0.  1.  0.  1.  1.  1.  0.  1. -0.  1.]
+
+Opened facilities: ['F2', 'F4']
+
+Assignments: [('A', 'F2'), ('B', 'F4'), ('C', 'F2'), ('D', 'F4'), ('E', 'F4'), ('F', 'F4')]
+
+Facility usage:
+F1: 0 / 400
+F2: 330 / 350
+F3: 0 / 450
+F4: 470 / 500</code></pre>
+</div>
+</div>
+</section>
+<section id="piecewise-cost-models" class="slide level2 unnumbered">
+<h2>5. Piecewise Cost Models</h2>
+<p>The operating cost of a potential facility is usually a piecewise linear function. In the simplest case, there are only two piecewise lines. The operating costs of potential facility <span class="math inline">\(𝑖\)</span>, <span class="math inline">\(𝐶(𝑑)\)</span>, for a particular demand <span class="math inline">\(𝑑\)</span> are characterised by fixed costs (<span class="math inline">\(𝑓_𝑖'\)</span> and <span class="math inline">\(𝑓_𝑖''\)</span>) and marginal costs (<span class="math inline">\(𝑔_𝑖'\)</span> and <span class="math inline">\(𝑔_i''\)</span>). Then,</p>
+<div style="font-size: 85%;">
+<p><span class="math display">\[
+C(d) =
+\begin{cases}
+\color{blue}{f_i^\prime+g_i^\prime\cdot d} &amp;  0&lt;d\le d_b, \\
+\color{crimson}{f_i^{\prime\prime}+g_i^{\prime\prime}\cdot d} &amp;  d&gt;d_b, \\
+0 &amp;  d=0
+\end{cases}
+\]</span></p>
+</div>
+<div class="center">
+<p><img data-src="figs/piecewise.png" style="width:50.0%"></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="piecewise-cost-model-example">5.1 Piecewise Cost Model Example</h3>
+<p>Historical demand and costs data of a firm are given as follows</p>
+<div style="font-size: 70%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+<col style="width: 7%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>d</th>
+<th>1000</th>
+<th>2500</th>
+<th>3500</th>
+<th>6000</th>
+<th>8000</th>
+<th>9000</th>
+<th>9500</th>
+<th>12000</th>
+<th>13500</th>
+<th>15000</th>
+<th>16000</th>
+<th>18000</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>C(d)</td>
+<td>17579</td>
+<td>56350</td>
+<td>62208</td>
+<td>76403</td>
+<td>85491</td>
+<td>90237</td>
+<td>96251</td>
+<td>109429</td>
+<td>110755</td>
+<td>122432</td>
+<td>116816</td>
+<td>124736</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use the above data to model the relationship between demand and cost as a piecewise linear function with a known breakpoint at <span class="math inline">\(𝑑=𝑑_𝑏=3500\)</span>. Explain the results and formulate the optimisation model.</p>
+<div id="4ac2303a" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href=""></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit</span>
+<span id="cb5-4"><a href=""></a></span>
+<span id="cb5-5"><a href=""></a>d <span class="op">=</span> np.array([<span class="dv">1000</span>, <span class="dv">2500</span>, <span class="dv">3500</span>, <span class="dv">6000</span>, <span class="dv">8000</span>, <span class="dv">9000</span>, </span>
+<span id="cb5-6"><a href=""></a>              <span class="dv">9500</span>, <span class="dv">12000</span>, <span class="dv">13500</span>, <span class="dv">15000</span>, <span class="dv">16000</span>, <span class="dv">18000</span>])</span>
+<span id="cb5-7"><a href=""></a>C <span class="op">=</span> np.array([<span class="dv">17579</span>, <span class="dv">56350</span>, <span class="dv">62208</span>, <span class="dv">76403</span>, <span class="dv">85491</span>, <span class="dv">90237</span>,</span>
+<span id="cb5-8"><a href=""></a>              <span class="dv">96251</span>, <span class="dv">109429</span>, <span class="dv">110755</span>, <span class="dv">122432</span>, <span class="dv">116816</span>, <span class="dv">124736</span>])</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a><span class="co"># Breakpoint</span></span>
+<span id="cb5-11"><a href=""></a>d_b <span class="op">=</span> <span class="dv">3500</span></span>
+<span id="cb5-12"><a href=""></a></span>
+<span id="cb5-13"><a href=""></a><span class="co"># Fit piecewise linear functions</span></span>
+<span id="cb5-14"><a href=""></a><span class="kw">def</span> piecewise_linear(d, f1, g1, f2, g2):</span>
+<span id="cb5-15"><a href=""></a>    <span class="cf">return</span> np.where(d <span class="op">&lt;=</span> d_b, f1 <span class="op">+</span> g1 <span class="op">*</span> d, f2 <span class="op">+</span> g2 <span class="op">*</span> d)</span>
+<span id="cb5-16"><a href=""></a></span>
+<span id="cb5-17"><a href=""></a>popt, _ <span class="op">=</span> curve_fit(piecewise_linear, d, C)</span>
+<span id="cb5-18"><a href=""></a>f1, g1, f2, g2 <span class="op">=</span> popt</span>
+<span id="cb5-19"><a href=""></a><span class="bu">print</span>(<span class="st">"Piecewise linear parameters:"</span>)</span>
+<span id="cb5-20"><a href=""></a><span class="bu">print</span>(<span class="ss">f"f1 = </span><span class="sc">{</span>f1<span class="sc">:.2f}</span><span class="ss">, g1 = </span><span class="sc">{</span>g1<span class="sc">:.2f}</span><span class="ss">, f2 = </span><span class="sc">{</span>f2<span class="sc">:.2f}</span><span class="ss">, g2 = </span><span class="sc">{</span>g2<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb5-21"><a href=""></a></span>
+<span id="cb5-22"><a href=""></a><span class="co"># Plot data and fitted piecewise linear function</span></span>
+<span id="cb5-23"><a href=""></a>d_fit <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">20000</span>, <span class="dv">100</span>)</span>
+<span id="cb5-24"><a href=""></a>C_fit <span class="op">=</span> piecewise_linear(d_fit, <span class="op">*</span>popt)</span>
+<span id="cb5-25"><a href=""></a></span>
+<span id="cb5-26"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">2</span>))</span>
+<span id="cb5-27"><a href=""></a>plt.scatter(d, C, label<span class="op">=</span><span class="st">'Data'</span>, color<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb5-28"><a href=""></a>plt.plot(d_fit, C_fit, label<span class="op">=</span><span class="st">'Fitted Piecewise Linear'</span>, color<span class="op">=</span><span class="st">'black'</span>, linewidth<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb5-29"><a href=""></a>plt.plot(np.linspace(<span class="dv">0</span>,<span class="dv">3500</span>,<span class="dv">100</span>), f1 <span class="op">+</span> g1 <span class="op">*</span> np.linspace(<span class="dv">0</span>,<span class="dv">3500</span>,<span class="dv">100</span>), label<span class="op">=</span><span class="st">'Segment 1'</span>, color<span class="op">=</span><span class="st">'blue'</span>)</span>
+<span id="cb5-30"><a href=""></a>plt.plot(np.linspace(<span class="dv">3500</span>,<span class="dv">20000</span>,<span class="dv">100</span>), f2 <span class="op">+</span> g2 <span class="op">*</span> np.linspace(<span class="dv">3500</span>,<span class="dv">20000</span>,<span class="dv">100</span>), label<span class="op">=</span><span class="st">'Segment 2'</span>, color<span class="op">=</span><span class="st">'red'</span>)</span>
+<span id="cb5-31"><a href=""></a>plt.axvline(x<span class="op">=</span>d_b, color<span class="op">=</span><span class="st">'green'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">'Breakpoint d_b=3500'</span>)</span>
+<span id="cb5-32"><a href=""></a>plt.xlabel(<span class="st">'Demand (d)'</span>)</span>
+<span id="cb5-33"><a href=""></a>plt.ylabel(<span class="st">'Cost C(d)'</span>)</span>
+<span id="cb5-34"><a href=""></a>plt.grid()</span>
+<span id="cb5-35"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Piecewise linear parameters:
+f1 = 2252.37, g1 = 18.48, f2 = 54287.74, g2 = 4.15</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="02lecture_files/figure-revealjs/cell-4-output-2.png" class="quarto-figure quarto-figure-center" width="618" height="208"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div id="d18a26b7" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="02lecture_files/figure-revealjs/cell-5-output-1.png" class="quarto-figure quarto-figure-center" width="618" height="282"></p>
+</figure>
+</div>
+</div>
+</div>
+<div style="font-size: 85%;">
+<p><span class="math display">\[
+C(d) =
+\begin{cases}
+\color{blue}{f_i^\prime+g_i^\prime\cdot d} &amp;  0&lt;d\le d_b, \\
+\color{crimson}{f_i^{\prime\prime}+g_i^{\prime\prime}\cdot d} &amp;  d&gt;d_b, \\
+0 &amp;  d=0
+\end{cases}
+\Rightarrow
+C(d) =
+\begin{cases}
+\color{blue}{2252.37 + 18.48d} &amp;  0&lt;d\le \color{green}{3500}, \\
+\color{crimson}{54287.74 + 4.15d} &amp;  d&gt;\color{green}{3500}, \\
+0 &amp;  d=0
+\end{cases}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="piecewise-cost-model-example-cont.">5.1 Piecewise Cost Model Example (cont.)</h4>
+<div style="font-size: 90%">
+<p>A company is considering network design decisions over two planning periods and deciding between two warehouse locations (A and B) to serve three market regions (X, Y, and Z). Demand is uncertain and may vary between periods. The company must determine which warehouse(s) to open and how to allocate demand in each period to minimise total costs, including both fixed and transportation costs.</p>
+<table class="caption-top">
+<caption>Table 1. Capacity, demand, and transportation cost</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Warehouse/Market</th>
+<th style="text-align: right;">X</th>
+<th style="text-align: right;">Y</th>
+<th style="text-align: right;">Z</th>
+<th style="text-align: right;">Fixed Cost ($)</th>
+<th style="text-align: right;">Capacity (tonnes)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><strong>A</strong></td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">300</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">50,000</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><strong>B</strong></td>
+<td style="text-align: right;">250</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">200</td>
+<td style="text-align: right;">40,000</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Period 1 Demand</strong></td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+<p><span class="space-out"></span></p>
+<p><strong>Potential Demand Changes (Period 2)</strong></p>
+<ul>
+<li>Scenario 1: Market X increases by 10%, Y decreases by 20%, Z remains constant.</li>
+<li>Scenario 2: Market X decreases by 15%, Y increases by 25%, Z increases by 10%.</li>
+</ul>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="objective-function-and-contraints-period-1">Objective function and contraints (Period 1)</h4>
+<div style="font-size: 80%">
+<p><span class="math display">\[
+\min{Z}=\min{\sum_{j\in J}{\sum_{k\in K} C_{jk}+\sum_{j\in J}{f_jz_j}}},
+\]</span> where <span class="math inline">\(C_{jk}\)</span> is a cost of serving market <span class="math inline">\(k\)</span> from warehouse <span class="math inline">\(j:\)</span> <span class="math inline">\(C_{jk} = \begin{cases}f_i^\prime+g_i^\prime\cdot d &amp;  y_{jk}\le d_b, \\f_i^{\prime\prime}+g_i^{\prime\prime}\cdot d &amp; y_{jk}&gt;d_b.\end{cases}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{s.t.} \;\sum_{j\in J}{x_{jk}=1,} \quad \forall k\in K \quad&amp;\text{Demand satisfaction (single-sourcing)} \\
+y_{jk}=D_k x_{jk}, \quad \forall j\in J, k\in K \quad&amp;\text{Flow consistency} \\[0.5em]
+\sum_{k\in K}{y_{jk}}\le K_j z_j, \quad \forall j\in J \quad&amp;\text{Capacity constraints} \\
+x_{jk}\le z_j, \quad \forall j\in J, k\in K \quad&amp;\text{Assignment only if facility is open} \\[0.6em]
+z_j,x_{jk}\in\{0,1\}, \quad \forall j\in J \quad&amp;\text{Binary facility opening and assignment} \\[0.6em]
+y_{jk}\ge0, \quad \forall j\in J, k\in K \quad&amp;\text{Non-negativity}
+\end{aligned}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="additional-constraints-big-m-formulation">5.2 Additional constraints (Big-M Formulation)</h3>
+<h5 id="binary-piecewise-cost-function-assignment">Binary piecewise cost function assignment</h5>
+<div style="font-size: 80%">
+<p><span class="math display">\[
+w_{jk}\in\{0,1\}, \quad \forall j\in J, k\in K \quad
+\begin{cases}
+0:\text{ lower segment }  y_{jk} \le d_b \text{ is active} \\
+1:\text{ upper segment }  y_{jk} &gt; d_b \text{ is active}
+\end{cases}
+\]</span></p>
+</div>
+<h5 id="piecewise-cost-approximiation-big-m-form">Piecewise cost approximiation (Big-M Form)</h5>
+<div style="font-size: 80%">
+<p><span class="math display">\[
+\begin{aligned}
+C_{jk}\geq f_{jk}^\prime+g_{jk}^\prime\cdot y_{jk}-Mw_{jk} \quad &amp;\text{Lower segment constraint} \\[0.5em]
+C_{jk}\geq f_{jk}^{\prime\prime}+g_{jk}^{\prime\prime}\cdot y_{jk}-M{(1-w}_{jk}) \quad &amp;\text{Upper segment constraint} \\[0.5em]
+y_{jk}\le d_b+Mw_{jk} \quad &amp;\text{Breakpoint enforcement from below} \\[0.5em]
+y_{jk}\geq d_b+\epsilon-M(1-w_{jk}) \quad &amp;\text{Breakpoint enforcement from above}
+\end{aligned}
+\]</span></p>
+</div>
+<div style="font-size: 35px;">
+<div class="callout callout-important no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Big-M Formulation</strong></p>
+</div>
+<div class="callout-content">
+<p>Big-M is a common technique in mixed-integer programming to model <strong>logical conditions</strong>. The choice of M should be sufficiently large to effectively “turn off” the constraints when the corresponding binary variable is 0, but not so large as to cause numerical instability.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h4 id="piecewise-cost-approximation-big-m-form-explain">Piecewise cost approximation (Big-M Form) explain</h4>
+<div style="font-size: 80%">
+<p>Let <span class="math inline">\(M\)</span> be a sufficiently large constant (e.g., larger than the maximum possible cost difference between segments).</p>
+<div class="fragment">
+<p><strong>Scenario 1:</strong> Lower segment is active (<span class="math inline">\(w_{jk}=0\)</span>)</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+C_{jk}\geq f_{jk}^\prime+g_{jk}^\prime\cdot y_{jk}-Mw_{jk} \; &amp; \Rightarrow C_{jk}\geq f_{jk}^\prime+g_{jk}^\prime\cdot y_{jk} \; \text{(Active for lower segment)} \\[0.5em]
+C_{jk}\geq f_{jk}^{\prime\prime}+g_{jk}^{\prime\prime}\cdot y_{jk}-M{(1-w}_{jk}) \; &amp; \Rightarrow C_{jk} \ge \text{Large negative (Inactive, always satisfied)} \\[0.5em]
+y_{jk}\le d_b+Mw_{jk} \quad &amp; \Rightarrow y_{jk} \le d_b \;\text{(Active, enforce lower segment)} \\[0.5em]
+y_{jk}\geq d_b+\epsilon-M(1-w_{jk}) \quad &amp;\Rightarrow y_{jk} \ge  \text{Large negative (Inactive, always satisfied)}
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Scenario 2:</strong> Upper segment is active (<span class="math inline">\(w_{jk}=1\)</span>)</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+C_{jk}\geq f_{jk}^\prime+g_{jk}^\prime\cdot y_{jk}-Mw_{jk} \; &amp; \Rightarrow C_{jk}\geq  \text{Large negative (Inactive, always satisfied)} \\[0.5em]
+C_{jk}\geq f_{jk}^{\prime\prime}+g_{jk}^{\prime\prime}\cdot y_{jk}-M{(1-w}_{jk}) \; &amp; \Rightarrow C_{jk} \ge f_{jk}^{\prime\prime}+g_{jk}^{\prime\prime}\cdot y_{jk} \; \text{(Active for upper segment)} \\[0.5em]
+y_{jk}\le d_b+Mw_{jk} \quad &amp; \Rightarrow y_{jk} \le  \text{Large positive (Inactive, always satisfied)} \\[0.5em]
+y_{jk}\geq d_b+\epsilon-M(1-w_{jk}) \quad &amp;\Rightarrow y_{jk} \ge d_b+\epsilon \;\text{(Active, enforce upper segment)}
+\end{aligned}
+\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="extension-to-two-period-network-design">5.3 Extension to Two-Period Network Design</h3>
+<div style="font-size: 80%">
+<p>For a two-period network model, the objective is</p>
+<p><span class="math display">\[
+\min Z = \text{fixed opening cost} + \text{Period 1 operating cost} + \text{Expected Period 2 operating cost}
+\]</span></p>
+<p><span class="math display">\[
+\min Z = \sum_{j\in J}f_j z_j + \sum_{t\in T}\sum_{j\in J}\sum_{k\in K} C_{jk}^t, \quad T = \{1, 2\}
+\]</span></p>
+<p>Usually, the expected cost in Period 2 is calculated as a weighted average of costs across different demand scenarios, with weights corresponding to the <strong>probabilities of each scenario occurring</strong>.</p>
+<p><span class="math display">\[
+\min Z
+=
+\sum_{j\in J} f_j z_j
++
+\sum_{j\in J}\sum_{k\in K} C_{1jk}
++
+\sum_{s\in S}p_s
+\sum_{j\in J}\sum_{k\in K} C_{2sjk}
+\]</span></p>
+<p>where <span class="math inline">\(p_s\)</span> is the probability of scenario <span class="math inline">\(s\)</span>.</p>
+<p>If no scenario probabilities are given, common teaching options are:</p>
+<p><span class="math display">\[
+\min Z
+=
+\text{fixed cost}
++
+\text{Period 1 cost}
++
+\text{Scenario 1 cost}
++
+\text{Scenario 2 cost}
+\]</span></p>
+<p>or assume equal probabilities:</p>
+<p><span class="math display">\[
+p_1=p_2=0.5
+\]</span></p>
+<p>and minimise expected Period 2 cost.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="python-implementation-2">5.4 Python Implementation</h3>
+<div id="795823b9" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href=""></a><span class="im">from</span> scipy.optimize <span class="im">import</span> curve_fit, milp, LinearConstraint, Bounds</span>
+<span id="cb7-3"><a href=""></a></span>
+<span id="cb7-4"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-5"><a href=""></a><span class="co"># 1. Fit piecewise linear cost function</span></span>
+<span id="cb7-6"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-7"><a href=""></a></span>
+<span id="cb7-8"><a href=""></a>d <span class="op">=</span> np.array([<span class="dv">1000</span>, <span class="dv">2500</span>, <span class="dv">3500</span>, <span class="dv">6000</span>, <span class="dv">8000</span>, <span class="dv">9000</span>,</span>
+<span id="cb7-9"><a href=""></a>              <span class="dv">9500</span>, <span class="dv">12000</span>, <span class="dv">13500</span>, <span class="dv">15000</span>, <span class="dv">16000</span>, <span class="dv">18000</span>])</span>
+<span id="cb7-10"><a href=""></a></span>
+<span id="cb7-11"><a href=""></a>C <span class="op">=</span> np.array([<span class="dv">17579</span>, <span class="dv">56350</span>, <span class="dv">62208</span>, <span class="dv">76403</span>, <span class="dv">85491</span>, <span class="dv">90237</span>,</span>
+<span id="cb7-12"><a href=""></a>              <span class="dv">96251</span>, <span class="dv">109429</span>, <span class="dv">110755</span>, <span class="dv">122432</span>, <span class="dv">116816</span>, <span class="dv">124736</span>])</span>
+<span id="cb7-13"><a href=""></a></span>
+<span id="cb7-14"><a href=""></a>d_b <span class="op">=</span> <span class="dv">3500</span></span>
+<span id="cb7-15"><a href=""></a></span>
+<span id="cb7-16"><a href=""></a><span class="kw">def</span> piecewise_linear(d, f1, g1, f2, g2):</span>
+<span id="cb7-17"><a href=""></a>    <span class="cf">return</span> np.where(d <span class="op">&lt;=</span> d_b, f1 <span class="op">+</span> g1 <span class="op">*</span> d, f2 <span class="op">+</span> g2 <span class="op">*</span> d)</span>
+<span id="cb7-18"><a href=""></a></span>
+<span id="cb7-19"><a href=""></a>popt, _ <span class="op">=</span> curve_fit(piecewise_linear, d, C)</span>
+<span id="cb7-20"><a href=""></a></span>
+<span id="cb7-21"><a href=""></a>f1, g1, f2, g2 <span class="op">=</span> popt</span>
+<span id="cb7-22"><a href=""></a></span>
+<span id="cb7-23"><a href=""></a><span class="bu">print</span>(<span class="st">"Estimated piecewise cost function:"</span>)</span>
+<span id="cb7-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Lower segment: C(d) = </span><span class="sc">{</span>f1<span class="sc">:.2f}</span><span class="ss"> + </span><span class="sc">{</span>g1<span class="sc">:.2f}</span><span class="ss">d"</span>)</span>
+<span id="cb7-25"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Upper segment: C(d) = </span><span class="sc">{</span>f2<span class="sc">:.2f}</span><span class="ss"> + </span><span class="sc">{</span>g2<span class="sc">:.2f}</span><span class="ss">d"</span>)</span>
+<span id="cb7-26"><a href=""></a></span>
+<span id="cb7-27"><a href=""></a></span>
+<span id="cb7-28"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-29"><a href=""></a><span class="co"># 2. Network design data</span></span>
+<span id="cb7-30"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-31"><a href=""></a></span>
+<span id="cb7-32"><a href=""></a>warehouses <span class="op">=</span> [<span class="st">"A"</span>, <span class="st">"B"</span>]</span>
+<span id="cb7-33"><a href=""></a>markets <span class="op">=</span> [<span class="st">"X"</span>, <span class="st">"Y"</span>, <span class="st">"Z"</span>]</span>
+<span id="cb7-34"><a href=""></a>periods <span class="op">=</span> [<span class="st">"Period 1"</span>, <span class="st">"Period 2 - Scenario 1"</span>, <span class="st">"Period 2 - Scenario 2"</span>]</span>
+<span id="cb7-35"><a href=""></a></span>
+<span id="cb7-36"><a href=""></a>num_j <span class="op">=</span> <span class="bu">len</span>(warehouses)</span>
+<span id="cb7-37"><a href=""></a>num_k <span class="op">=</span> <span class="bu">len</span>(markets)</span>
+<span id="cb7-38"><a href=""></a>num_t <span class="op">=</span> <span class="bu">len</span>(periods)</span>
+<span id="cb7-39"><a href=""></a></span>
+<span id="cb7-40"><a href=""></a>fixed_cost <span class="op">=</span> np.array([<span class="dv">50000</span>, <span class="dv">40000</span>])</span>
+<span id="cb7-41"><a href=""></a>capacity <span class="op">=</span> np.array([<span class="dv">60</span>, <span class="dv">50</span>])</span>
+<span id="cb7-42"><a href=""></a></span>
+<span id="cb7-43"><a href=""></a><span class="co"># Period 1 demand</span></span>
+<span id="cb7-44"><a href=""></a>D1 <span class="op">=</span> np.array([<span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">20</span>])</span>
+<span id="cb7-45"><a href=""></a></span>
+<span id="cb7-46"><a href=""></a><span class="co"># Period 2 scenarios</span></span>
+<span id="cb7-47"><a href=""></a>D2_s1 <span class="op">=</span> np.array([</span>
+<span id="cb7-48"><a href=""></a>    <span class="dv">30</span> <span class="op">*</span> <span class="fl">1.10</span>,</span>
+<span id="cb7-49"><a href=""></a>    <span class="dv">40</span> <span class="op">*</span> <span class="fl">0.80</span>,</span>
+<span id="cb7-50"><a href=""></a>    <span class="dv">20</span></span>
+<span id="cb7-51"><a href=""></a>])</span>
+<span id="cb7-52"><a href=""></a></span>
+<span id="cb7-53"><a href=""></a>D2_s2 <span class="op">=</span> np.array([</span>
+<span id="cb7-54"><a href=""></a>    <span class="dv">30</span> <span class="op">*</span> <span class="fl">0.85</span>,</span>
+<span id="cb7-55"><a href=""></a>    <span class="dv">40</span> <span class="op">*</span> <span class="fl">1.25</span>,</span>
+<span id="cb7-56"><a href=""></a>    <span class="dv">20</span> <span class="op">*</span> <span class="fl">1.10</span></span>
+<span id="cb7-57"><a href=""></a>])</span>
+<span id="cb7-58"><a href=""></a></span>
+<span id="cb7-59"><a href=""></a>demand <span class="op">=</span> np.array([</span>
+<span id="cb7-60"><a href=""></a>    D1,</span>
+<span id="cb7-61"><a href=""></a>    D2_s1,</span>
+<span id="cb7-62"><a href=""></a>    D2_s2</span>
+<span id="cb7-63"><a href=""></a>])</span>
+<span id="cb7-64"><a href=""></a></span>
+<span id="cb7-65"><a href=""></a></span>
+<span id="cb7-66"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-67"><a href=""></a><span class="co"># 3. Decision variable structure</span></span>
+<span id="cb7-68"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-69"><a href=""></a></span>
+<span id="cb7-70"><a href=""></a><span class="co"># x[t,j,k] = 1 if market k is assigned to warehouse j in period/scenario t</span></span>
+<span id="cb7-71"><a href=""></a><span class="co"># y[t,j,k] = flow from warehouse j to market k in period/scenario t</span></span>
+<span id="cb7-72"><a href=""></a><span class="co"># cvar[t,j,k] = piecewise cost for serving market k from warehouse j</span></span>
+<span id="cb7-73"><a href=""></a><span class="co"># w[t,j,k] = 1 if upper piecewise segment is active</span></span>
+<span id="cb7-74"><a href=""></a><span class="co"># z[j] = 1 if warehouse j is opened</span></span>
+<span id="cb7-75"><a href=""></a></span>
+<span id="cb7-76"><a href=""></a>num_x <span class="op">=</span> num_t <span class="op">*</span> num_j <span class="op">*</span> num_k</span>
+<span id="cb7-77"><a href=""></a>num_y <span class="op">=</span> num_t <span class="op">*</span> num_j <span class="op">*</span> num_k</span>
+<span id="cb7-78"><a href=""></a>num_c <span class="op">=</span> num_t <span class="op">*</span> num_j <span class="op">*</span> num_k</span>
+<span id="cb7-79"><a href=""></a>num_w <span class="op">=</span> num_t <span class="op">*</span> num_j <span class="op">*</span> num_k</span>
+<span id="cb7-80"><a href=""></a>num_z <span class="op">=</span> num_j</span>
+<span id="cb7-81"><a href=""></a></span>
+<span id="cb7-82"><a href=""></a>start_x <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb7-83"><a href=""></a>start_y <span class="op">=</span> start_x <span class="op">+</span> num_x</span>
+<span id="cb7-84"><a href=""></a>start_c <span class="op">=</span> start_y <span class="op">+</span> num_y</span>
+<span id="cb7-85"><a href=""></a>start_w <span class="op">=</span> start_c <span class="op">+</span> num_c</span>
+<span id="cb7-86"><a href=""></a>start_z <span class="op">=</span> start_w <span class="op">+</span> num_w</span>
+<span id="cb7-87"><a href=""></a></span>
+<span id="cb7-88"><a href=""></a>num_vars <span class="op">=</span> start_z <span class="op">+</span> num_z</span>
+<span id="cb7-89"><a href=""></a></span>
+<span id="cb7-90"><a href=""></a><span class="kw">def</span> idx_x(t, j, k):</span>
+<span id="cb7-91"><a href=""></a>    <span class="cf">return</span> start_x <span class="op">+</span> t <span class="op">*</span> num_j <span class="op">*</span> num_k <span class="op">+</span> j <span class="op">*</span> num_k <span class="op">+</span> k</span>
+<span id="cb7-92"><a href=""></a></span>
+<span id="cb7-93"><a href=""></a><span class="kw">def</span> idx_y(t, j, k):</span>
+<span id="cb7-94"><a href=""></a>    <span class="cf">return</span> start_y <span class="op">+</span> t <span class="op">*</span> num_j <span class="op">*</span> num_k <span class="op">+</span> j <span class="op">*</span> num_k <span class="op">+</span> k</span>
+<span id="cb7-95"><a href=""></a></span>
+<span id="cb7-96"><a href=""></a><span class="kw">def</span> idx_c(t, j, k):</span>
+<span id="cb7-97"><a href=""></a>    <span class="cf">return</span> start_c <span class="op">+</span> t <span class="op">*</span> num_j <span class="op">*</span> num_k <span class="op">+</span> j <span class="op">*</span> num_k <span class="op">+</span> k</span>
+<span id="cb7-98"><a href=""></a></span>
+<span id="cb7-99"><a href=""></a><span class="kw">def</span> idx_w(t, j, k):</span>
+<span id="cb7-100"><a href=""></a>    <span class="cf">return</span> start_w <span class="op">+</span> t <span class="op">*</span> num_j <span class="op">*</span> num_k <span class="op">+</span> j <span class="op">*</span> num_k <span class="op">+</span> k</span>
+<span id="cb7-101"><a href=""></a></span>
+<span id="cb7-102"><a href=""></a><span class="kw">def</span> idx_z(j):</span>
+<span id="cb7-103"><a href=""></a>    <span class="cf">return</span> start_z <span class="op">+</span> j</span>
+<span id="cb7-104"><a href=""></a></span>
+<span id="cb7-105"><a href=""></a></span>
+<span id="cb7-106"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-107"><a href=""></a><span class="co"># 4. Objective function</span></span>
+<span id="cb7-108"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-109"><a href=""></a></span>
+<span id="cb7-110"><a href=""></a>obj <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-111"><a href=""></a></span>
+<span id="cb7-112"><a href=""></a><span class="co"># Minimise total piecewise cost</span></span>
+<span id="cb7-113"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-114"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-115"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-116"><a href=""></a>            obj[idx_c(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-117"><a href=""></a></span>
+<span id="cb7-118"><a href=""></a><span class="co"># Plus fixed warehouse opening costs</span></span>
+<span id="cb7-119"><a href=""></a><span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-120"><a href=""></a>    obj[idx_z(j)] <span class="op">=</span> fixed_cost[j]</span>
+<span id="cb7-121"><a href=""></a></span>
+<span id="cb7-122"><a href=""></a></span>
+<span id="cb7-123"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-124"><a href=""></a><span class="co"># 5. Constraints</span></span>
+<span id="cb7-125"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-126"><a href=""></a></span>
+<span id="cb7-127"><a href=""></a>A_rows <span class="op">=</span> []</span>
+<span id="cb7-128"><a href=""></a>lb <span class="op">=</span> []</span>
+<span id="cb7-129"><a href=""></a>ub <span class="op">=</span> []</span>
+<span id="cb7-130"><a href=""></a></span>
+<span id="cb7-131"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-132"><a href=""></a><span class="co"># Demand satisfaction:</span></span>
+<span id="cb7-133"><a href=""></a><span class="co"># sum_j x[t,j,k] = 1</span></span>
+<span id="cb7-134"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-135"><a href=""></a></span>
+<span id="cb7-136"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-137"><a href=""></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-138"><a href=""></a>        row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-139"><a href=""></a></span>
+<span id="cb7-140"><a href=""></a>        <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-141"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-142"><a href=""></a></span>
+<span id="cb7-143"><a href=""></a>        A_rows.append(row)</span>
+<span id="cb7-144"><a href=""></a>        lb.append(<span class="dv">1</span>)</span>
+<span id="cb7-145"><a href=""></a>        ub.append(<span class="dv">1</span>)</span>
+<span id="cb7-146"><a href=""></a></span>
+<span id="cb7-147"><a href=""></a></span>
+<span id="cb7-148"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-149"><a href=""></a><span class="co"># Flow consistency:</span></span>
+<span id="cb7-150"><a href=""></a><span class="co"># y[t,j,k] = demand[t,k] * x[t,j,k]</span></span>
+<span id="cb7-151"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-152"><a href=""></a></span>
+<span id="cb7-153"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-154"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-155"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-156"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-157"><a href=""></a></span>
+<span id="cb7-158"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-159"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span>demand[t, k]</span>
+<span id="cb7-160"><a href=""></a></span>
+<span id="cb7-161"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-162"><a href=""></a>            lb.append(<span class="dv">0</span>)</span>
+<span id="cb7-163"><a href=""></a>            ub.append(<span class="dv">0</span>)</span>
+<span id="cb7-164"><a href=""></a></span>
+<span id="cb7-165"><a href=""></a></span>
+<span id="cb7-166"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-167"><a href=""></a><span class="co"># Warehouse capacity:</span></span>
+<span id="cb7-168"><a href=""></a><span class="co"># sum_k y[t,j,k] &lt;= capacity[j] * z[j]</span></span>
+<span id="cb7-169"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-170"><a href=""></a></span>
+<span id="cb7-171"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-172"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-173"><a href=""></a>        row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-174"><a href=""></a></span>
+<span id="cb7-175"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-176"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-177"><a href=""></a></span>
+<span id="cb7-178"><a href=""></a>        row[idx_z(j)] <span class="op">=</span> <span class="op">-</span>capacity[j]</span>
+<span id="cb7-179"><a href=""></a></span>
+<span id="cb7-180"><a href=""></a>        A_rows.append(row)</span>
+<span id="cb7-181"><a href=""></a>        lb.append(<span class="op">-</span>np.inf)</span>
+<span id="cb7-182"><a href=""></a>        ub.append(<span class="dv">0</span>)</span>
+<span id="cb7-183"><a href=""></a></span>
+<span id="cb7-184"><a href=""></a></span>
+<span id="cb7-185"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-186"><a href=""></a><span class="co"># Assignment only if warehouse is open:</span></span>
+<span id="cb7-187"><a href=""></a><span class="co"># x[t,j,k] &lt;= z[j]</span></span>
+<span id="cb7-188"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-189"><a href=""></a></span>
+<span id="cb7-190"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-191"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-192"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-193"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-194"><a href=""></a></span>
+<span id="cb7-195"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-196"><a href=""></a>            row[idx_z(j)] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-197"><a href=""></a></span>
+<span id="cb7-198"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-199"><a href=""></a>            lb.append(<span class="op">-</span>np.inf)</span>
+<span id="cb7-200"><a href=""></a>            ub.append(<span class="dv">0</span>)</span>
+<span id="cb7-201"><a href=""></a></span>
+<span id="cb7-202"><a href=""></a></span>
+<span id="cb7-203"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-204"><a href=""></a><span class="co"># Big-M piecewise cost constraints</span></span>
+<span id="cb7-205"><a href=""></a><span class="co"># ------------------------------------------------------------</span></span>
+<span id="cb7-206"><a href=""></a></span>
+<span id="cb7-207"><a href=""></a>M <span class="op">=</span> <span class="dv">1_000_000</span></span>
+<span id="cb7-208"><a href=""></a>epsilon <span class="op">=</span> <span class="fl">1e-6</span></span>
+<span id="cb7-209"><a href=""></a></span>
+<span id="cb7-210"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(num_t):</span>
+<span id="cb7-211"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb7-212"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb7-213"><a href=""></a></span>
+<span id="cb7-214"><a href=""></a>            <span class="co"># c &gt;= f1*x + g1*y - M*w</span></span>
+<span id="cb7-215"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-216"><a href=""></a>            row[idx_c(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-217"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span>f1</span>
+<span id="cb7-218"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="op">-</span>g1</span>
+<span id="cb7-219"><a href=""></a>            row[idx_w(t, j, k)] <span class="op">=</span> M</span>
+<span id="cb7-220"><a href=""></a></span>
+<span id="cb7-221"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-222"><a href=""></a>            lb.append(<span class="dv">0</span>)</span>
+<span id="cb7-223"><a href=""></a>            ub.append(np.inf)</span>
+<span id="cb7-224"><a href=""></a></span>
+<span id="cb7-225"><a href=""></a>            <span class="co"># c &gt;= f2*x + g2*y - M*(1-w)</span></span>
+<span id="cb7-226"><a href=""></a>            <span class="co"># c - f2*x - g2*y - M*w &gt;= -M</span></span>
+<span id="cb7-227"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-228"><a href=""></a>            row[idx_c(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-229"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span>f2</span>
+<span id="cb7-230"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="op">-</span>g2</span>
+<span id="cb7-231"><a href=""></a>            row[idx_w(t, j, k)] <span class="op">=</span> <span class="op">-</span>M</span>
+<span id="cb7-232"><a href=""></a></span>
+<span id="cb7-233"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-234"><a href=""></a>            lb.append(<span class="op">-</span>M)</span>
+<span id="cb7-235"><a href=""></a>            ub.append(np.inf)</span>
+<span id="cb7-236"><a href=""></a></span>
+<span id="cb7-237"><a href=""></a>            <span class="co"># y &lt;= d_b*x + M*w</span></span>
+<span id="cb7-238"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-239"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-240"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span>d_b</span>
+<span id="cb7-241"><a href=""></a>            row[idx_w(t, j, k)] <span class="op">=</span> <span class="op">-</span>M</span>
+<span id="cb7-242"><a href=""></a></span>
+<span id="cb7-243"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-244"><a href=""></a>            lb.append(<span class="op">-</span>np.inf)</span>
+<span id="cb7-245"><a href=""></a>            ub.append(<span class="dv">0</span>)</span>
+<span id="cb7-246"><a href=""></a></span>
+<span id="cb7-247"><a href=""></a>            <span class="co"># y &gt;= (d_b + epsilon)*x - M*(1-w)</span></span>
+<span id="cb7-248"><a href=""></a>            <span class="co"># y - (d_b+epsilon)x - M*w &gt;= -M</span></span>
+<span id="cb7-249"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-250"><a href=""></a>            row[idx_y(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-251"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span>(d_b <span class="op">+</span> epsilon)</span>
+<span id="cb7-252"><a href=""></a>            row[idx_w(t, j, k)] <span class="op">=</span> <span class="op">-</span>M</span>
+<span id="cb7-253"><a href=""></a></span>
+<span id="cb7-254"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-255"><a href=""></a>            lb.append(<span class="op">-</span>M)</span>
+<span id="cb7-256"><a href=""></a>            ub.append(np.inf)</span>
+<span id="cb7-257"><a href=""></a></span>
+<span id="cb7-258"><a href=""></a>            <span class="co"># w &lt;= x</span></span>
+<span id="cb7-259"><a href=""></a>            row <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-260"><a href=""></a>            row[idx_w(t, j, k)] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-261"><a href=""></a>            row[idx_x(t, j, k)] <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb7-262"><a href=""></a></span>
+<span id="cb7-263"><a href=""></a>            A_rows.append(row)</span>
+<span id="cb7-264"><a href=""></a>            lb.append(<span class="op">-</span>np.inf)</span>
+<span id="cb7-265"><a href=""></a>            ub.append(<span class="dv">0</span>)</span>
+<span id="cb7-266"><a href=""></a></span>
+<span id="cb7-267"><a href=""></a></span>
+<span id="cb7-268"><a href=""></a>A <span class="op">=</span> np.vstack(A_rows)</span>
+<span id="cb7-269"><a href=""></a>constraints <span class="op">=</span> LinearConstraint(A, np.array(lb), np.array(ub))</span>
+<span id="cb7-270"><a href=""></a></span>
+<span id="cb7-271"><a href=""></a></span>
+<span id="cb7-272"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-273"><a href=""></a><span class="co"># 6. Bounds and integrality</span></span>
+<span id="cb7-274"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-275"><a href=""></a></span>
+<span id="cb7-276"><a href=""></a>lower_bounds <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-277"><a href=""></a>upper_bounds <span class="op">=</span> np.full(num_vars, np.inf)</span>
+<span id="cb7-278"><a href=""></a></span>
+<span id="cb7-279"><a href=""></a><span class="co"># x variables are binary</span></span>
+<span id="cb7-280"><a href=""></a>upper_bounds[start_x:start_y] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-281"><a href=""></a></span>
+<span id="cb7-282"><a href=""></a><span class="co"># w variables are binary</span></span>
+<span id="cb7-283"><a href=""></a>upper_bounds[start_w:start_z] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-284"><a href=""></a></span>
+<span id="cb7-285"><a href=""></a><span class="co"># z variables are binary</span></span>
+<span id="cb7-286"><a href=""></a>upper_bounds[start_z:] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-287"><a href=""></a></span>
+<span id="cb7-288"><a href=""></a>bounds <span class="op">=</span> Bounds(lower_bounds, upper_bounds)</span>
+<span id="cb7-289"><a href=""></a></span>
+<span id="cb7-290"><a href=""></a>integrality <span class="op">=</span> np.zeros(num_vars)</span>
+<span id="cb7-291"><a href=""></a></span>
+<span id="cb7-292"><a href=""></a><span class="co"># x binary</span></span>
+<span id="cb7-293"><a href=""></a>integrality[start_x:start_y] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-294"><a href=""></a></span>
+<span id="cb7-295"><a href=""></a><span class="co"># w binary</span></span>
+<span id="cb7-296"><a href=""></a>integrality[start_w:start_z] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-297"><a href=""></a></span>
+<span id="cb7-298"><a href=""></a><span class="co"># z binary</span></span>
+<span id="cb7-299"><a href=""></a>integrality[start_z:] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb7-300"><a href=""></a></span>
+<span id="cb7-301"><a href=""></a></span>
+<span id="cb7-302"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-303"><a href=""></a><span class="co"># 7. Solve MILP</span></span>
+<span id="cb7-304"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-305"><a href=""></a></span>
+<span id="cb7-306"><a href=""></a>result <span class="op">=</span> milp(</span>
+<span id="cb7-307"><a href=""></a>    c<span class="op">=</span>obj,</span>
+<span id="cb7-308"><a href=""></a>    constraints<span class="op">=</span>constraints,</span>
+<span id="cb7-309"><a href=""></a>    bounds<span class="op">=</span>bounds,</span>
+<span id="cb7-310"><a href=""></a>    integrality<span class="op">=</span>integrality</span>
+<span id="cb7-311"><a href=""></a>)</span>
+<span id="cb7-312"><a href=""></a></span>
+<span id="cb7-313"><a href=""></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Optimisation success:"</span>, result.success)</span>
+<span id="cb7-314"><a href=""></a><span class="bu">print</span>(<span class="st">"Objective value:"</span>, result.fun)</span>
+<span id="cb7-315"><a href=""></a></span>
+<span id="cb7-316"><a href=""></a></span>
+<span id="cb7-317"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-318"><a href=""></a><span class="co"># 8. Display solution</span></span>
+<span id="cb7-319"><a href=""></a><span class="co"># ============================================================</span></span>
+<span id="cb7-320"><a href=""></a></span>
+<span id="cb7-321"><a href=""></a>sol <span class="op">=</span> result.x</span>
+<span id="cb7-322"><a href=""></a></span>
+<span id="cb7-323"><a href=""></a>x_sol <span class="op">=</span> sol[start_x:start_y].reshape(num_t, num_j, num_k)</span>
+<span id="cb7-324"><a href=""></a>y_sol <span class="op">=</span> sol[start_y:start_c].reshape(num_t, num_j, num_k)</span>
+<span id="cb7-325"><a href=""></a>c_sol <span class="op">=</span> sol[start_c:start_w].reshape(num_t, num_j, num_k)</span>
+<span id="cb7-326"><a href=""></a>w_sol <span class="op">=</span> sol[start_w:start_z].reshape(num_t, num_j, num_k)</span>
+<span id="cb7-327"><a href=""></a>z_sol <span class="op">=</span> sol[start_z:]</span>
+<span id="cb7-328"><a href=""></a></span>
+<span id="cb7-329"><a href=""></a></span>
+<span id="cb7-330"><a href=""></a>opened <span class="op">=</span> [warehouses[j] <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j) <span class="cf">if</span> <span class="bu">round</span>(z_sol[j]) <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb7-331"><a href=""></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Opened warehouses: </span><span class="sc">{</span>opened<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Estimated piecewise cost function:
+Lower segment: C(d) = 2252.37 + 18.48d
+Upper segment: C(d) = 54287.74 + 4.15d
+
+Optimisation success: True
+Objective value: 115307.89026315846
+
+Opened warehouses: ['A', 'B']</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h5 id="period-1-results">Period 1 results</h5>
+<div id="7aa46938" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>):</span>
+<span id="cb9-2"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>periods[t]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb9-5"><a href=""></a>        assigned_j <span class="op">=</span> np.argmax(x_sol[t, :, k])</span>
+<span id="cb9-6"><a href=""></a>        <span class="bu">print</span>(</span>
+<span id="cb9-7"><a href=""></a>            <span class="ss">f"Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss"> assigned to Warehouse </span><span class="sc">{</span>warehouses[assigned_j]<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb9-8"><a href=""></a>            <span class="ss">f"with demand </span><span class="sc">{</span>demand[t, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb9-9"><a href=""></a>        )</span>
+<span id="cb9-10"><a href=""></a></span>
+<span id="cb9-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Warehouse usage:"</span>)</span>
+<span id="cb9-12"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb9-13"><a href=""></a>        used <span class="op">=</span> np.<span class="bu">sum</span>(y_sol[t, j, :])</span>
+<span id="cb9-14"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>used<span class="sc">:.2f}</span><span class="ss"> / </span><span class="sc">{</span>capacity[j]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-15"><a href=""></a></span>
+<span id="cb9-16"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Piecewise segment used:"</span>)</span>
+<span id="cb9-17"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb9-18"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb9-19"><a href=""></a>            <span class="cf">if</span> <span class="bu">round</span>(x_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb9-20"><a href=""></a>                segment <span class="op">=</span> <span class="st">"upper"</span> <span class="cf">if</span> <span class="bu">round</span>(w_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"lower"</span></span>
+<span id="cb9-21"><a href=""></a>                <span class="bu">print</span>(</span>
+<span id="cb9-22"><a href=""></a>                    <span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss"> to Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss">: "</span></span>
+<span id="cb9-23"><a href=""></a>                    <span class="ss">f"</span><span class="sc">{</span>segment<span class="sc">}</span><span class="ss"> segment, cost = </span><span class="sc">{</span>c_sol[t, j, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb9-24"><a href=""></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Period 1
+Market X assigned to Warehouse B with demand 30.00
+Market Y assigned to Warehouse A with demand 40.00
+Market Z assigned to Warehouse A with demand 20.00
+
+Warehouse usage:
+Warehouse A: 60.00 / 60
+Warehouse B: 30.00 / 50
+
+Piecewise segment used:
+Warehouse A to Market Y: lower segment, cost = 2991.68
+Warehouse A to Market Z: lower segment, cost = 2622.03
+Warehouse B to Market X: lower segment, cost = 2806.85</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h5 id="period-2---scenario-1-results">Period 2 - Scenario 1 results</h5>
+<div id="640750cd" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">2</span>):</span>
+<span id="cb11-2"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>periods[t]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb11-5"><a href=""></a>        assigned_j <span class="op">=</span> np.argmax(x_sol[t, :, k])</span>
+<span id="cb11-6"><a href=""></a>        <span class="bu">print</span>(</span>
+<span id="cb11-7"><a href=""></a>            <span class="ss">f"Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss"> assigned to Warehouse </span><span class="sc">{</span>warehouses[assigned_j]<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb11-8"><a href=""></a>            <span class="ss">f"with demand </span><span class="sc">{</span>demand[t, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb11-9"><a href=""></a>        )</span>
+<span id="cb11-10"><a href=""></a></span>
+<span id="cb11-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Warehouse usage:"</span>)</span>
+<span id="cb11-12"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb11-13"><a href=""></a>        used <span class="op">=</span> np.<span class="bu">sum</span>(y_sol[t, j, :])</span>
+<span id="cb11-14"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>used<span class="sc">:.2f}</span><span class="ss"> / </span><span class="sc">{</span>capacity[j]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb11-15"><a href=""></a></span>
+<span id="cb11-16"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Piecewise segment used:"</span>)</span>
+<span id="cb11-17"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb11-18"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb11-19"><a href=""></a>            <span class="cf">if</span> <span class="bu">round</span>(x_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb11-20"><a href=""></a>                segment <span class="op">=</span> <span class="st">"upper"</span> <span class="cf">if</span> <span class="bu">round</span>(w_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"lower"</span></span>
+<span id="cb11-21"><a href=""></a>                <span class="bu">print</span>(</span>
+<span id="cb11-22"><a href=""></a>                    <span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss"> to Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss">: "</span></span>
+<span id="cb11-23"><a href=""></a>                    <span class="ss">f"</span><span class="sc">{</span>segment<span class="sc">}</span><span class="ss"> segment, cost = </span><span class="sc">{</span>c_sol[t, j, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb11-24"><a href=""></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Period 2 - Scenario 1
+Market X assigned to Warehouse A with demand 33.00
+Market Y assigned to Warehouse B with demand 32.00
+Market Z assigned to Warehouse A with demand 20.00
+
+Warehouse usage:
+Warehouse A: 53.00 / 60
+Warehouse B: 32.00 / 50
+
+Piecewise segment used:
+Warehouse A to Market X: lower segment, cost = 2862.30
+Warehouse A to Market Z: lower segment, cost = 2622.03
+Warehouse B to Market Y: lower segment, cost = 2843.82</code></pre>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h5 id="period-2---scenario-2-results">Period 2 - Scenario 2 results</h5>
+<div id="fa29fcef" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a><span class="cf">for</span> t <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>,<span class="dv">3</span>):</span>
+<span id="cb13-2"><a href=""></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="sc">{</span>periods[t]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-3"><a href=""></a></span>
+<span id="cb13-4"><a href=""></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb13-5"><a href=""></a>        assigned_j <span class="op">=</span> np.argmax(x_sol[t, :, k])</span>
+<span id="cb13-6"><a href=""></a>        <span class="bu">print</span>(</span>
+<span id="cb13-7"><a href=""></a>            <span class="ss">f"Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss"> assigned to Warehouse </span><span class="sc">{</span>warehouses[assigned_j]<span class="sc">}</span><span class="ss"> "</span></span>
+<span id="cb13-8"><a href=""></a>            <span class="ss">f"with demand </span><span class="sc">{</span>demand[t, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb13-9"><a href=""></a>        )</span>
+<span id="cb13-10"><a href=""></a></span>
+<span id="cb13-11"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Warehouse usage:"</span>)</span>
+<span id="cb13-12"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb13-13"><a href=""></a>        used <span class="op">=</span> np.<span class="bu">sum</span>(y_sol[t, j, :])</span>
+<span id="cb13-14"><a href=""></a>        <span class="bu">print</span>(<span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>used<span class="sc">:.2f}</span><span class="ss"> / </span><span class="sc">{</span>capacity[j]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb13-15"><a href=""></a></span>
+<span id="cb13-16"><a href=""></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Piecewise segment used:"</span>)</span>
+<span id="cb13-17"><a href=""></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(num_j):</span>
+<span id="cb13-18"><a href=""></a>        <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(num_k):</span>
+<span id="cb13-19"><a href=""></a>            <span class="cf">if</span> <span class="bu">round</span>(x_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span>:</span>
+<span id="cb13-20"><a href=""></a>                segment <span class="op">=</span> <span class="st">"upper"</span> <span class="cf">if</span> <span class="bu">round</span>(w_sol[t, j, k]) <span class="op">==</span> <span class="dv">1</span> <span class="cf">else</span> <span class="st">"lower"</span></span>
+<span id="cb13-21"><a href=""></a>                <span class="bu">print</span>(</span>
+<span id="cb13-22"><a href=""></a>                    <span class="ss">f"Warehouse </span><span class="sc">{</span>warehouses[j]<span class="sc">}</span><span class="ss"> to Market </span><span class="sc">{</span>markets[k]<span class="sc">}</span><span class="ss">: "</span></span>
+<span id="cb13-23"><a href=""></a>                    <span class="ss">f"</span><span class="sc">{</span>segment<span class="sc">}</span><span class="ss"> segment, cost = </span><span class="sc">{</span>c_sol[t, j, k]<span class="sc">:.2f}</span><span class="ss">"</span></span>
+<span id="cb13-24"><a href=""></a>                )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Period 2 - Scenario 2
+Market X assigned to Warehouse A with demand 25.50
+Market Y assigned to Warehouse B with demand 50.00
+Market Z assigned to Warehouse A with demand 22.00
+
+Warehouse usage:
+Warehouse A: 47.50 / 60
+Warehouse B: 50.00 / 50
+
+Piecewise segment used:
+Warehouse A to Market X: lower segment, cost = 2723.68
+Warehouse A to Market Z: lower segment, cost = 2658.99
+Warehouse B to Market Y: lower segment, cost = 3176.51</code></pre>
+</div>
+</div>
 
 </section>
     </div>

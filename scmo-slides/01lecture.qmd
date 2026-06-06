@@ -1829,20 +1829,31 @@ $\therefore \min f = f(\pm 1,0)=1, \quad \max f = f(0, \pm 1)=2$
 
 A general mixed constrained multi-dimensional problem is
 
+::: {style="font-size: 85%;"}
 $$
 \begin{align*}
-\text{Minimise} \quad &f(x),\; x\in\mathcal{R}^n \\
+\text{Min/Max} \quad &f(x),\; x\in\mathcal{R}^n \\
 \text{subject to} \quad &h_i(x) = 0, \quad i=1,2,...,m \quad \text{Equality constraints} \\
 &g_j(x) \leq 0, \quad j=1,2,...,p \quad \text{Inequality constraints}
 \end{align*}
 $$
 
+:::
+
 ::: {.fragment}
 The Lagrangian function is
-$$
-L(x,\lambda,\mu)=f(x)+\sum_{i=1}^m\lambda_i h_i(x)+\sum_{j=1}^p\mu_jg_j(x),
-$$
+:::
 
+::: {.fragment style="font-size: 85%;"}
+$$
+\begin{aligned}
+L(x,\lambda,\mu)&=f(x)+\sum_{i=1}^m\lambda_i h_i(x)+\sum_{j=1}^p\mu_jg_j(x), \quad \text{Minimisation problem} \\
+L(x,\lambda,\mu)&={\color{red}-}f(x)+\sum_{i=1}^m\lambda_i h_i(x)+\sum_{j=1}^p\mu_jg_j(x), \quad \text{Maximisation problem}
+\end{aligned}
+$$
+:::
+
+::: {.fragment}
 where $\lambda_i$ are the multipliers for the equality constraints and $\mu_i$ for the inequality constraints.
 ::: 
 
@@ -1896,7 +1907,7 @@ $$
 \end{align*}
 $$
 
-1. From the Lagrangian $\quad L=x^2-y^2+\lambda(x+y-1)+\mu(x-0.5)$
+1. From the Lagrangian $\quad L=x^2+y^2+\lambda(x+y-1)+\mu(x-0.5)$
 
 2. Compute the partial derivatives (stationarity)
 

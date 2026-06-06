@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Tutorial 2 Exercises – Supply Chain Modelling and Optimisation</title>
+<title>Tutorial 2 Solutions – Supply Chain Modelling and Optimisation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -33,8 +68,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./02solutions.html" rel="next">
-<link href="./01solutions.html" rel="prev">
+<link href="./02tutorial.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -280,7 +314,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02tutorial.html">Tutorial 2 Exercises</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02solutions.html">Tutorial 2 Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -380,13 +414,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02tutorial.html" class="sidebar-item-text sidebar-link active">
+  <a href="./02tutorial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tutorial 2 Exercises</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./02solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Tutorial 2 Solutions</span></a>
   </div>
 </li>
@@ -438,9 +472,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02tutorial.html">Tutorial 2 Exercises</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02tutorial.html"><strong>2 Network Design: SESC</strong></a></li><li class="breadcrumb-item"><a href="./02solutions.html">Tutorial 2 Solutions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="02tut" class="quarto-section-identifier">Tutorial 2 Exercises</span></h1>
+<h1 class="title"><span id="02sols" class="quarto-section-identifier">Tutorial 2 Solutions</span></h1>
 </div>
 
 
@@ -457,15 +491,188 @@ window.Quarto = {
 </header>
 
 
-<p>This tutorial trains you to quantify the elements of an optimisation model:</p>
-<ul>
-<li><strong>Decision variables:</strong> quantities of resources used (e.g., money allocated) or levels of activities (e.g., units produced, gallons blended).</li>
-<li><strong>Objective:</strong> a function of decision variables to be maximised/minimised.</li>
-<li><strong>Constraints:</strong> relationships/limits the decision variables must satisfy.</li>
-</ul>
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
 <p>With precisely 2700 sq. cm. of cardboard, you wish to construct a box (width: <span class="math inline">\(x\)</span>, depth: <span class="math inline">\(y\)</span>, height: <span class="math inline">\(z\)</span>) containing a volume <span class="math inline">\(V\)</span>. You require the width to double its depth. You would like to maximise the volume of the box. Which values of <span class="math inline">\(x, y, z\)</span> will maximise the volume?</p>
+<div class="example">
+<ol type="1">
+<li><strong>Construct the objective function and constraints</strong>:</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\max\; &amp;f(x,y,z) = xyz \\
+\text{st:} \quad
+&amp;x = 2y \\
+&amp;2(xy + xz + yz) = 2700 \\
+&amp;x, y, z \ge 0
+\end{aligned}
+\]</span></p>
+<p>  Convert the maximisation problem to a minimisation problem in the standard form:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min\; &amp;f(x,y,z) = -xyz \\
+\text{st:} \quad
+&amp;x - 2y = 0 \\
+&amp;2(xy + xz + yz) - 2700 = 0 \\
+&amp;-x, -y, -z \le 0
+\end{aligned}
+\]</span></p>
+<ol start="2" type="1">
+<li><strong>Set up a Lagrangian function</strong></li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+L(x,y,z,\lambda_1,\lambda_2,\mu_1, \mu_2, \mu_3)
+= xyz &amp;+ \lambda_1(2(xy + xz + yz) - 2700) \\
+       &amp;+ \lambda_2(x-2y) \\
+       &amp;+ \mu_1 x + \mu_2 y +\mu_3 z
+\end{aligned}
+\]</span></p>
+<p>Since the optimum has <span class="math inline">\(x,y,z&gt;0,\)</span> the non-negativity constraints are not binding, so <span class="math inline">\(\mu_1=\mu_2=\mu_3=0\)</span>. Therefore,</p>
+<p><span class="math display">\[
+\begin{aligned}
+L(x,y,z,\lambda_1,\lambda_2,\mu_1, \mu_2, \mu_3)
+= xyz &amp;+ \lambda_1(2(xy + xz + yz) - 2700) \\
+       &amp;+ \lambda_2(x-2y)
+\end{aligned}
+\]</span></p>
+<p>From this, KKT’s dual feasibility and complementary slackness conditions are satisfied, so we can proceed to the stationarity and primal feasibility conditions.</p>
+<ol start="2" type="1">
+<li><strong>KKT’s stationarity</strong></li>
+</ol>
+<p>Solve for partial derivatives and set them equal to 0:</p>
+<p><span class="math display">\[
+\begin{aligned}
+L_x &amp;= yz - 2\lambda_1(y+z) - \lambda_2 + \mu_1 = 0 \\
+L_y &amp;= xz - 2\lambda_1(x+z) + 2\lambda_2 + \mu_2 = 0 \\
+L_z &amp;= xy - 2\lambda_1(x+y) + \mu_3 = 0 \\
+L_{\lambda_1} &amp;= 2(xy + xz + yz) - 2700 = 0 \\
+L_{\lambda_2} &amp;= x - 2y = 0 \\
+\end{aligned}
+\]</span></p>
+<p>From <span class="math inline">\(L_{\lambda_2}\)</span>,</p>
+<p><span class="math display">\[
+x = 2y
+\]</span></p>
+<p>From <span class="math inline">\(L_{\lambda_1}\)</span>, substitute <span class="math inline">\(x=2y\)</span>:</p>
+<p><span class="math display">\[
+2(2y^2+2yz+yz)=2700
+\]</span></p>
+<p><span class="math display">\[
+4y^2+6yz=2700
+\]</span></p>
+<p>Solve for <span class="math inline">\(z\)</span>:</p>
+<p><span class="math display">\[
+z=\frac{2700-4y^2}{6y}= \frac{450}{y}-\frac{2y}{3}
+\]</span></p>
+<p>Volume:</p>
+<p><span class="math display">\[
+V=xyz=(2y)(y)(z)=2y^2z
+\]</span></p>
+<p>Substitute <span class="math inline">\(z\)</span>:</p>
+<p><span class="math display">\[
+V(y)=2y^2\left(\frac{450}{y}-\frac{2y}{3}\right)
+=900y-\frac{4}{3}y^3
+\]</span></p>
+<p>Differentiate and set it equal to 0:</p>
+<p><span class="math display">\[
+\begin{aligned}
+V'(y)=900-4y^2&amp;=0 \\
+y^2&amp;=225 \\
+y&amp;=15
+\end{aligned}
+\]</span></p>
+<p>Then:</p>
+<p><span class="math display">\[
+x=2y=30
+\]</span></p>
+<p><span class="math display">\[
+z=\frac{450}{15}-\frac{2(15)}{3}=30-10=20
+\]</span></p>
+<p>So the optimal dimensions are:</p>
+<p><span class="math display">\[
+\boxed{x=30,\quad y=15,\quad z=20}
+\]</span></p>
+<ol start="3" type="1">
+<li><strong>Verify KKT’s primal feasibility</strong></li>
+</ol>
+<p>Substitute the optimal dimensions into the constraints <span class="math inline">\(L_{\lambda_1}\)</span> and <span class="math inline">\(L_{\lambda_2}\)</span>:</p>
+<p><span class="math display">\[
+L_{\lambda_1} = 2(2(15)^2+2(15)(20)+(15)(20)) - 2700 = 0 \quad \text{(Satisfied)}
+\]</span></p>
+<p><span class="math display">\[
+L_{\lambda_2} = 30 - 2(15) = 0 \quad \text{(Satisfied)}
+\]</span></p>
+<ol start="4" type="1">
+<li><strong>Calculate the maximum volume</strong></li>
+</ol>
+<p><span class="math display">\[
+V=30(15)(20)=\boxed{9000\text{ cm}^3}
+\]</span></p>
+</div>
+<div id="418f925a" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Variables</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x, y, z <span class="op">=</span> sp.symbols(<span class="st">"x y z"</span>, positive<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>lambda1, lambda2 <span class="op">=</span> sp.symbols(<span class="st">"lambda1 lambda2"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Objective and constraints</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>V <span class="op">=</span> x <span class="op">*</span> y <span class="op">*</span> z</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> (x<span class="op">*</span>y <span class="op">+</span> x<span class="op">*</span>z <span class="op">+</span> y<span class="op">*</span>z) <span class="op">-</span> <span class="dv">2700</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> x <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>y</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Lagrangian</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> V <span class="op">-</span> lambda1 <span class="op">*</span> g1 <span class="op">-</span> lambda2 <span class="op">*</span> g2</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># First-order conditions</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>equations <span class="op">=</span> [</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    sp.diff(L, x),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    sp.diff(L, y),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    sp.diff(L, z),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    g1,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    g2,</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>solution <span class="op">=</span> sp.solve(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    equations,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    [x, y, z, lambda1, lambda2],</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">dict</span><span class="op">=</span><span class="va">True</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Solutions:"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sol <span class="kw">in</span> solution:</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(sol)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep positive real solution</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>positive_solutions <span class="op">=</span> [</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    sol <span class="cf">for</span> sol <span class="kw">in</span> solution</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> sol[x].is_real <span class="kw">and</span> sol[y].is_real <span class="kw">and</span> sol[z].is_real</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="kw">and</span> sol[x] <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> sol[y] <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> sol[z] <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>best <span class="op">=</span> <span class="bu">max</span>(positive_solutions, key<span class="op">=</span><span class="kw">lambda</span> sol: V.subs(sol))</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Optimal dimensions:"</span>)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"x = </span><span class="sc">{</span>sp<span class="sc">.</span>simplify(best[x])<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span><span class="bu">float</span>(best[x])<span class="sc">:.4f}</span><span class="ss"> cm"</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"y = </span><span class="sc">{</span>sp<span class="sc">.</span>simplify(best[y])<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span><span class="bu">float</span>(best[y])<span class="sc">:.4f}</span><span class="ss"> cm"</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"z = </span><span class="sc">{</span>sp<span class="sc">.</span>simplify(best[z])<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span><span class="bu">float</span>(best[z])<span class="sc">:.4f}</span><span class="ss"> cm"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Maximum volume:"</span>)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"V = </span><span class="sc">{</span>sp<span class="sc">.</span>simplify(V.subs(best))<span class="sc">}</span><span class="ss"> = </span><span class="sc">{</span><span class="bu">float</span>(V.subs(best))<span class="sc">:.4f}</span><span class="ss"> cubic cm"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Solutions:
+{lambda1: 5, lambda2: -50, x: 30, y: 15, z: 20}
+
+Optimal dimensions:
+x = 30 = 30.0000 cm
+y = 15 = 15.0000 cm
+z = 20 = 20.0000 cm
+
+Maximum volume:
+V = 9000 = 9000.0000 cubic cm</code></pre>
+</div>
+</div>
 <hr>
 </section>
 <section id="question-2" class="level3">
@@ -534,6 +741,77 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Let decision variables be <span class="math inline">\(X_1,X_2,X_3,X_4\)</span> (pallets of Tahoe, Pacific, Savannah, Aspen). Write down the optimisation model to maximise profit, and solve for the optimal production plan. What is the maximum profit?</p>
+<div class="example">
+<p><strong>Objective function:</strong></p>
+<p><span class="math display">\[
+\max\; 450x_1 + 1150x_2 + 800x_3 + 400x_4
+\]</span></p>
+<p><strong>Constraints:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+50x_1 + 50x_2 + 100x_3 + 50x_4 &amp;\le 5800 \quad \text{(Glueing)} \\
+5x_1 + 15x_2 + 10x_3 + 5x_4 &amp;\le 730 \quad \text{(Pressing)} \\
+500x_1 + 400x_2 + 300x_3 + 200x_4 &amp;\le 29200 \quad \text{(Pine chips)} \\
+500x_1 + 750x_2 + 250x_3 + 500x_4 &amp;\le 60500 \quad \text{(Oak chips)} \\
+x_1, x_2, x_3, x_4 &amp;\ge 0
+\end{aligned}
+\]</span></p>
+<p>This can be solved using KKT. However, it is usually not the preferred manual method for solving linear programming problems, especially with 4 variables. Instead, we can use the <strong>Simplex method</strong> or an <strong>LP solver</strong>.</p>
+</div>
+<div id="a6b9b993" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> linprog</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Maximise: 450x1 + 1150x2 + 800x3 + 400x4</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># linprog minimises, so use negative coefficients</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([<span class="op">-</span><span class="dv">450</span>, <span class="op">-</span><span class="dv">1150</span>, <span class="op">-</span><span class="dv">800</span>, <span class="op">-</span><span class="dv">400</span>])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">50</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">50</span>],      <span class="co"># Glueing</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">5</span>, <span class="dv">15</span>, <span class="dv">10</span>, <span class="dv">5</span>],         <span class="co"># Pressing</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">500</span>, <span class="dv">400</span>, <span class="dv">300</span>, <span class="dv">200</span>],   <span class="co"># Pine chips</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">500</span>, <span class="dv">750</span>, <span class="dv">250</span>, <span class="dv">500</span>]    <span class="co"># Oak chips</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">5800</span>, <span class="dv">730</span>, <span class="dv">29200</span>, <span class="dv">60500</span>])</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> linprog(</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    c,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    A_ub<span class="op">=</span>A,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    b_ub<span class="op">=</span>b,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    bounds<span class="op">=</span>[(<span class="dv">0</span>, <span class="va">None</span>)] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"highs"</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.x)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="op">-</span>result.fun)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[23. 15. 39.  0.]
+58800.0</code></pre>
+</div>
+</div>
+<p><strong>Optimal solution</strong></p>
+<p><span class="math display">\[
+\boxed{x_10=23,\quad x_2=15,\quad x_3=39,\quad x_4=0}
+\]</span></p>
+<p>So the optimal production plan is:</p>
+<p><span class="math display">\[
+\boxed{\text{Tahoe: 23, Pacific: 15, Savannah: 39, Aspen: 0}}
+\]</span></p>
+<p>Maximum profit:</p>
+<p><span class="math display">\[
+Z=450(23)+1150(15)+800(39)+400(0)=\boxed{58,800}
+\]</span></p>
+<p>Resources used:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Glueing} &amp;= 50(23)+50(15)+100(39)+50(0) = 5800\\
+\text{Pressing} &amp;= 5(23)+15(15)+10(39)+5(0) = 730\\
+\text{Pine chips} &amp;= 500(23)+400(15)+300(39)+200(0) = 29200\\
+\text{Oak chips} &amp;= 500(23)+750(15)+250(39)+500(0) = 32500
+\end{aligned}
+\]</span></p>
+<p>So all requirements are satisfied.</p>
 <hr>
 </section>
 <section id="question-3" class="level2">
@@ -590,10 +868,83 @@ window.Quarto = {
 <p>The objective is to minimise the cost of the diet while satisfying the following nutritional requirements:</p>
 <ul>
 <li>At least 500 calories,</li>
-<li>At least 5 units of chocolate,</li>
+<li>At least 6 units of chocolate,</li>
 <li>At least 10 units of sugar, and</li>
 <li>At least 8 units of fat.</li>
 </ul>
+<p>Formulate the optimisation model and solve for the optimal diet plan.</p>
+<div class="example">
+<p><strong>Objective function:</strong> <span class="math display">\[
+\min\; 0.50x_0+0.20x_1+0.30x_2+0.80x_3
+\]</span></p>
+<p><strong>Constraints:</strong> <span class="math display">\[
+\begin{aligned}
+400x_0 + 200x_1 + 150x_2 + 500x_3 &amp;\ge 500,\\
+3x_0 + 2x_1 + 0x_2 + 0x_3 &amp;\ge 6,\\
+2x_0 + 2x_1 + 4x_2 + 4x_3 &amp;\ge 10,\\
+2x_0 + 4x_1 + 1x_2 + 5x_3 &amp;\ge 8,\\
+x_0,x_1,x_2,x_3 &amp;\ge 0.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="dc1bb7df" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> linprog</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cost coefficients</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([<span class="fl">0.50</span>, <span class="fl">0.20</span>, <span class="fl">0.30</span>, <span class="fl">0.80</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Nutrient matrix</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>A <span class="op">=</span> np.array([</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">400</span>, <span class="dv">200</span>, <span class="dv">150</span>, <span class="dv">500</span>],  <span class="co"># Calories</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">3</span>,   <span class="dv">2</span>,   <span class="dv">0</span>,   <span class="dv">0</span>],    <span class="co"># Chocolate</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>,   <span class="dv">2</span>,   <span class="dv">4</span>,   <span class="dv">4</span>],    <span class="co"># Sugar</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">2</span>,   <span class="dv">4</span>,   <span class="dv">1</span>,   <span class="dv">5</span>]     <span class="co"># Fat</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimum requirements</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> np.array([<span class="dv">500</span>, <span class="dv">6</span>, <span class="dv">10</span>, <span class="dv">8</span>])</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># linprog uses &lt;= constraints, so multiply by -1</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> linprog(</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    c,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    A_ub<span class="op">=-</span>A,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    b_ub<span class="op">=-</span>b,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    bounds<span class="op">=</span>[(<span class="dv">0</span>, <span class="va">None</span>)] <span class="op">*</span> <span class="dv">4</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"highs"</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.x)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.fun)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(A <span class="op">@</span> result.x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[0. 3. 1. 0.]
+0.9000000000000001
+[750.   6.  10.  13.]</code></pre>
+</div>
+</div>
+<p><strong>Optimal solution</strong></p>
+<p><span class="math display">\[
+\boxed{x_0=0,\quad x_1=3,\quad x_2=1,\quad x_3=0}
+\]</span></p>
+<p>So the optimal diet is:</p>
+<p><span class="math display">\[
+\boxed{\text{0 Brownies, 3 Ice Cream, 1 Cola, 0 Cheese Cake}}
+\]</span></p>
+<p>Minimum cost:</p>
+<p><span class="math display">\[
+Z=0.20(3)+0.30(1)=\boxed{0.90}
+\]</span></p>
+<p>Nutrients obtained:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Calories} &amp;= 750\\
+\text{Chocolate} &amp;= 6\\
+\text{Sugar} &amp;= 10\\
+\text{Fat} &amp;= 13
+\end{aligned}
+\]</span></p>
+<p>So all requirements are satisfied.</p>
 <hr>
 </section>
 <section id="question-4" class="level2">
@@ -645,6 +996,157 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+<p>Formulate the optimisation model to minimise the total shipping cost, and solve for the optimal shipping plan. What is the minimum total cost?</p>
+<div class="example">
+<p><strong>Objective function:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\min \; &amp;35x_{11} + 40x_{12} + 60x_{13} + 120x_{14} \\
+        &amp;+ 30x_{21} + 30x_{22} + 45x_{23} + 130x_{24} \\
+        &amp;+ 60x_{31} + 65x_{32} + 50x_{33} + 100x_{34}
+\end{aligned}
+\]</span></p>
+<p><strong>Capacity constraints:</strong> <span class="math display">\[
+\begin{aligned}
+x_{11}+x_{12}+x_{13}+x_{14} &amp;\le 12000 \quad \text{(Kansas City)}\\
+x_{21}+x_{22}+x_{23}+x_{24} &amp;\le 8000 \quad \text{(Denver)}\\
+x_{31}+x_{32}+x_{33}+x_{34} &amp;\le 5000 \quad \text{(Raleigh)}
+\end{aligned}
+\]</span></p>
+<p><strong>Demand constraints:</strong> <span class="math display">\[
+\begin{aligned}
+x_{11}+x_{21}+x_{31} &amp;= 9000 \quad \text{(Birmingham)}\\
+x_{12}+x_{22}+x_{32} &amp;= 3000 \quad \text{(Milwaukee)}\\
+x_{13}+x_{23}+x_{33} &amp;= 9500 \quad \text{(Los Angeles)}\\
+x_{14}+x_{24}+x_{34} &amp;= 1500 \quad \text{(Seattle)}\\
+x_{ij} &amp;\ge 0.
+\end{aligned}
+\]</span></p>
+</div>
+<div id="4cf85f88" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.optimize <span class="im">import</span> linprog</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Cost coefficients</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Order:</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># x11, x12, x13, x14,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># x21, x22, x23, x24,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># x31, x32, x33, x34</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> np.array([</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">35</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">120</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">45</span>, <span class="dv">130</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">50</span>, <span class="dv">100</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Capacity constraints: &lt;=</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>A_ub <span class="op">=</span> np.array([</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Kansas City</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Denver</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>]   <span class="co"># Raleigh</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>b_ub <span class="op">=</span> np.array([<span class="dv">12000</span>, <span class="dv">8000</span>, <span class="dv">5000</span>])</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Demand constraints: =</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>A_eq <span class="op">=</span> np.array([</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Birmingham</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>],  <span class="co"># Milwaukee</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>],  <span class="co"># Los Angeles</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>]   <span class="co"># Seattle</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>b_eq <span class="op">=</span> np.array([<span class="dv">9000</span>, <span class="dv">3000</span>, <span class="dv">9500</span>, <span class="dv">1500</span>])</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>bounds <span class="op">=</span> [(<span class="dv">0</span>, <span class="va">None</span>)] <span class="op">*</span> <span class="dv">12</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> linprog(</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    c,</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>    A_ub<span class="op">=</span>A_ub,</span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    b_ub<span class="op">=</span>b_ub,</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>    A_eq<span class="op">=</span>A_eq,</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    b_eq<span class="op">=</span>b_eq,</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    bounds<span class="op">=</span>bounds,</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>    method<span class="op">=</span><span class="st">"highs"</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.success)</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.fun)</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>True
+1010000.0
+[9000. 1000.    0.    0.    0. 2000. 6000.    0.    0.    0. 3500. 1500.]</code></pre>
+</div>
+</div>
+<p><strong>Optimal solution:</strong></p>
+<p>Python returns variable order as:</p>
+<p><span class="math display">\[[x_{11},x_{12},x_{13},x_{14},x_{21},x_{22},x_{23},x_{24},x_{31},x_{32},x_{33},x_{34}]
+\]</span></p>
+<p>So the optimal shipping plan is:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 16%">
+<col style="width: 15%">
+<col style="width: 18%">
+<col style="width: 11%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>From / To</th>
+<th style="text-align: right;">Birmingham</th>
+<th style="text-align: right;">Milwaukee</th>
+<th style="text-align: right;">Los Angeles</th>
+<th style="text-align: right;">Seattle</th>
+<th style="text-align: right;">Supply Used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Kansas City</td>
+<td style="text-align: right;">9000</td>
+<td style="text-align: right;">1000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">10000</td>
+</tr>
+<tr class="even">
+<td>Denver</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">6000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">8000</td>
+</tr>
+<tr class="odd">
+<td>Raleigh</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">3500</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">5000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Demands:</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Birmingham} &amp;= 9000\\
+\text{Milwaukee} &amp;= 1000+2000=3000\\
+\text{Los Angeles} &amp;= 6000+3500=9500\\
+\text{Seattle} &amp;= 1500
+\end{aligned}
+\]</span></p>
+<p><strong>Minimum cost:</strong></p>
+<p><span class="math display">\[
+35(9000)+40(1000)+30(2000)+45(6000)+50(3500)+100(1500)
+\]</span></p>
+<p>So:</p>
+<p><span class="math display">\[
+\boxed{\text{Minimum cost} = 1{,}010{,}000}
+\]</span></p>
 <hr>
 </section>
 <section id="question-5" class="level2">
@@ -682,7 +1184,7 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td>United States</td>
+<td>USA</td>
 <td>600</td>
 <td>1,200</td>
 <td>1,300</td>
@@ -692,7 +1194,7 @@ window.Quarto = {
 <td>$10,000</td>
 </tr>
 <tr class="even">
-<td>Germany</td>
+<td>GER</td>
 <td>1,300</td>
 <td>1,400</td>
 <td>600</td>
@@ -702,17 +1204,17 @@ window.Quarto = {
 <td>€15,000</td>
 </tr>
 <tr class="odd">
-<td>Japan</td>
+<td>JAP</td>
 <td>2,000</td>
-<td></td>
 <td>2,100</td>
 <td>1,400</td>
 <td>300</td>
 <td>900</td>
 <td>50</td>
+<td>¥1,800,000</td>
 </tr>
 <tr class="even">
-<td>Brazil</td>
+<td>BRA</td>
 <td>1,200</td>
 <td>800</td>
 <td>1,400</td>
@@ -722,7 +1224,7 @@ window.Quarto = {
 <td>BRL13,000</td>
 </tr>
 <tr class="odd">
-<td>India</td>
+<td>IND</td>
 <td>2,200</td>
 <td>2,300</td>
 <td>1,300</td>
@@ -774,9 +1276,9 @@ window.Quarto = {
 <td>BRL</td>
 <td>0.1775</td>
 <td>0.1560</td>
-<td></td>
 <td>22.22</td>
 <td>1.0000</td>
+<td>15.14</td>
 </tr>
 <tr class="odd">
 <td>INR</td>
@@ -788,6 +1290,116 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
+<div class="example">
+<p><strong>Sets</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+I &amp;= \{\text{US},\text{DE},\text{JP},\text{BR},\text{IN}\} \quad \text{(plants)} \\
+J &amp;= \{\text{NA},\text{SA},\text{EU},\text{JP},\text{AS}\} \quad \text{(markets)}
+\end{aligned}
+\]</span></p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><span class="math inline">\(D_j\)</span> : demand in market <span class="math inline">\(j\)</span> (tons/year)</li>
+<li><span class="math inline">\(K_i\)</span> : capacity of plant <span class="math inline">\(i\)</span> (tons/year)</li>
+<li><span class="math inline">\(c_{ij}\)</span> : transportation cost from plant <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span> (USD/ton)</li>
+<li><span class="math inline">\(p_i\)</span> : production cost at plant <span class="math inline">\(i\)</span> (local currency/ton)</li>
+<li><span class="math inline">\(r_i\)</span> : USD per unit of local currency at plant <span class="math inline">\(i\)</span></li>
+</ul>
+<p>Exchange rates (USD per local currency unit):</p>
+<p><span class="math display">\[
+r_{\text{US}}=1,\;
+r_{\text{DE}}=1.1374,\;
+r_{\text{JP}}=0.0070,\;
+r_{\text{BR}}=0.1775,\;
+r_{\text{IN}}=0.0117
+\]</span></p>
+<p>Define total unit delivered cost in USD:</p>
+<p><span class="math display">\[
+u_{ij} = r_i p_i + c_{ij}
+\]</span></p>
+<p><strong>Decision Variables</strong></p>
+<ul>
+<li><span class="math inline">\(x_{ij}\)</span> : tons shipped from plant <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(y_i = \sum_{j\in J} x_{ij}\)</span> : total production at plant <span class="math inline">\(i\)</span></li>
+</ul>
+<p><strong>(a) Fixed Exchange Rates, Minimum 50% Utilisation</strong></p>
+<p><span class="math display">\[
+\begin{aligned}
+\min \; &amp;\sum_{i\in I}\sum_{j\in J} u_{ij} x_{ij} \\
+\text{s.t. } &amp;\sum_{i\in I} x_{ij} = D_j \quad \forall j\in J \quad \text{Demand satisfaction} \\
+&amp;\sum_{j\in J} x_{ij} \le K_i\quad \forall i\in I \quad \text{Capacity constraints} \\
+&amp;\sum_{j\in J} x_{ij} \ge 0.5 K_i \quad \forall i\in I \quad \text{Minimum 50\% utilisation} \\
+&amp;x_{ij} \ge 0 \quad \forall i\in I, j\in J \quad \text{Non-negativity}
+\end{aligned}
+\]</span></p>
+<p><strong>(b) No Production Limits</strong></p>
+<p>In this case, capacity constraints and minimum utilisation constraints are removed.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\min \; &amp;\sum_{i\in I}\sum_{j\in J} u_{ij} x_{ij} \\
+\text{s.t. } &amp;\sum_{i\in I} x_{ij} = D_j \quad \forall j\in J \quad \text{Demand satisfaction} \\
+&amp;x_{ij} \ge 0 \quad \forall i\in I, j\in J \quad \text{Non-negativity}
+\end{aligned}
+\]</span></p>
+<p>This is the classical uncapacitated transportation problem.</p>
+<p><strong>(c) Allow 10% Capacity Expansion</strong></p>
+<p>Introduce binary decision variables:</p>
+<p><span class="math display">\[
+z_i =
+\begin{cases}
+1 &amp; \text{if plant } i \text{ expands by 10\%} \\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<p>Expanded capacity:</p>
+<p><span class="math display">\[
+(1+0.1 z_i)K_i
+\]</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\min \; &amp;\sum_{i\in I}\sum_{j\in J} u_{ij} x_{ij} \\
+\text{s.t. } &amp;\sum_{i\in I} x_{ij} = D_j \quad \forall j\in J \quad \text{Demand satisfaction} \\
+&amp;\sum_{j\in J} x_{ij} \le (1+0.1 z_i)K_i\quad \forall i\in I \quad \text{Expanded capacity constraints} \\
+&amp;\sum_{j\in J} x_{ij} \ge 0.5 K_i \quad \forall i\in I \quad \text{Minimum 50\% utilisation} \\
+&amp;z_i \in \{0,1\} \quad \forall i\in I \quad \text{Binary expansion decision} \\
+&amp;x_{ij} \ge 0 \quad \forall i\in I, j\in J \quad \text{Non-negativity}
+\end{aligned}
+\]</span></p>
+<p>To determine whether expansion reduces cost, compare the optimal objective value of this model with that of part (a)</p>
+<p><strong>(d) Accounting for Exchange Rate Uncertainty</strong></p>
+<p>Exchange rates should be treated as uncertain parameters.</p>
+<ul>
+<li><strong>Stochastic Programming</strong></li>
+</ul>
+<p>Let <span class="math inline">\(s\in S\)</span> be scenarios with probability <span class="math inline">\(\pi_s\)</span> and exchange rates <span class="math inline">\(r_i^{(s)}\)</span>.</p>
+<p><span class="math display">\[
+\min \sum_{s\in S} \pi_s
+\sum_{i\in I}\sum_{j\in J}
+\left( r_i^{(s)} p_i + c_{ij} \right)
+x_{ij}^{(s)}
+\]</span></p>
+<p>subject to demand and capacity constraints (with optional non-anticipativity constraints if decisions must be made before rates are known).</p>
+<ul>
+<li><strong>Robust Optimisation</strong></li>
+</ul>
+<p>If exchange rates lie in uncertainty set <span class="math inline">\(\mathcal{R}\)</span>:</p>
+<p><span class="math display">\[
+\min_{x} \;
+\max_{r\in \mathcal{R}}
+\sum_{i\in I}\sum_{j\in J}
+\left( r_i p_i + c_{ij} \right) x_{ij}
+\]</span></p>
+<p>This protects against worst-case exchange rate realizations.</p>
+<ul>
+<li><strong>Financial Hedging</strong></li>
+</ul>
+<p>Operational optimisation can be combined with financial instruments (forwards/options) to hedge currency exposure.</p>
+<ul>
+<li><strong>Rolling Horizon Re-optimisation</strong></li>
+</ul>
+<p>Re-solve the optimisation model periodically using updated exchange rates and demand forecasts.</p>
+</div>
 
 
 </section>
@@ -1208,14 +1820,11 @@ window.Quarto = {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./01solutions.html" class="pagination-link" aria-label="Tutorial 1 Solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial 1 Solutions</span>
+      <a href="./02tutorial.html" class="pagination-link" aria-label="Tutorial 2 Exercises">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial 2 Exercises</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./02solutions.html" class="pagination-link" aria-label="Tutorial 2 Solutions">
-        <span class="nav-page-text">Tutorial 2 Solutions</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
