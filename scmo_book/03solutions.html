@@ -634,22 +634,32 @@ C_{ij} = \tilde{c}_{ij} D_j, \quad \text{where} \quad \tilde{c}_{ij} = (0.98 \ti
 <li><span class="math inline">\(F = \{\text{Linares, Monclova, Monterrey}\}\)</span>: Set of potential facilities, indexed by <span class="math inline">\(i\)</span>.</li>
 <li><span class="math inline">\(M = \{\text{Bustamante, Saltillo, Santa Catarina, Montemorelos}\}\)</span>: Set of market regions, indexed by <span class="math inline">\(j\)</span>.</li>
 </ul>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><span class="math inline">\(f_i\)</span>: Fixed cost of opening facility <span class="math inline">\(i\)</span>.</li>
+<li><span class="math inline">\(K_i\)</span>: Capacity of facility <span class="math inline">\(i\)</span> (in hundred kg/year).</li>
+<li><span class="math inline">\(D_j\)</span>: Demand of market <span class="math inline">\(j\)</span> (in hundred kg/year).</li>
+<li><span class="math inline">\(v_i\)</span>: Variable cost per hundred kg at facility <span class="math inline">\(i\)</span> (in dollars).</li>
+<li><span class="math inline">\(\tilde{c}_{ij}\)</span>: Variable transportation cost per hundred kg from facility <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span> (in dollars).</li>
+<li><span class="math inline">\(C_{ij}\)</span>: Total transportation cost from facility <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span> (in dollars).</li>
+<li><span class="math inline">\(l_{ij}\)</span>: Distance from facility <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span> (in miles).</li>
+</ul>
 <p><strong>Decision Variables</strong></p>
 <ul>
-<li><span class="math inline">\(x_{ij}\)</span>: Quantity of product shipped from facility <span class="math inline">\(i\)</span> to market <span class="math inline">\(j\)</span> (in hundred kg).</li>
+<li><span class="math inline">\(x_{ij}\)</span>: The fraction of demand of market <span class="math inline">\(j\)</span> served by facility <span class="math inline">\(i\)</span> (between 0 and 1).</li>
 <li><span class="math inline">\(y_i\)</span>: Binary variable indicating whether facility <span class="math inline">\(i\)</span> is opened (1) or not (0).</li>
 </ul>
 <p><strong>Objective Function</strong></p>
 <p><span class="math display">\[
-\min \sum_{i \in V_1} \sum_{j \in V_2} C_{ij} x_{ij} + \sum_{i \in V_1} f_i y_i
+\min \sum_{i \in F} \sum_{j \in M} (v_i + \tilde{c}_{ij})D_j x_{ij} + \sum_{i \in F} f_i y_i
 \]</span></p>
 <p><strong>Constraints</strong></p>
 <p><span class="math display">\[
 \begin{align}
-\sum_{i \in V_1} x_{ij} &amp;= 1, \quad &amp;&amp;\forall j \in V_2 \\
-\sum_{j \in V_2} D_j x_{ij} &amp;\leq K_i y_i, \quad &amp;&amp;\forall i \in V_1 \\
-0 \leq x_{ij} &amp;\leq 1, \quad &amp;&amp;\forall i \in V_1, j \in V_2 \\
-y_i &amp;\in \{0,1\}, \quad &amp;&amp;\forall i \in V_1
+\sum_{i \in F} x_{ij} &amp;= 1, \quad &amp;&amp;\forall j \in M \\
+\sum_{j \in M} D_j x_{ij} &amp;\leq K_i y_i, \quad &amp;&amp;\forall i \in F \\
+0 \leq x_{ij} &amp;\leq 1, \quad &amp;&amp;\forall i \in F, j \in M \\
+y_i &amp;\in \{0,1\}, \quad &amp;&amp;\forall i \in F
 \end{align}
 \]</span></p>
 </div>
@@ -731,7 +741,7 @@ y_i &amp;\in \{0,1\}, \quad &amp;&amp;\forall i \in V_1
 <li>Identify any relevant constraints.</li>
 </ul>
 <div class="example">
-<p>*<strong>Sets</strong></p>
+<p><strong>Sets</strong></p>
 <ul>
 <li><span class="math inline">\(F = \{F_1, F_2\}\)</span>: Set of factories, indexed by <span class="math inline">\(i\)</span>.</li>
 <li><span class="math inline">\(W = \{W_1, W_2, W_3, W_4\}\)</span>: Set of warehouses, indexed by <span class="math inline">\(j\)</span>.</li>

@@ -966,7 +966,7 @@ x_{ijk}^h \ge 0;\quad y_{jk} \in \{0,1\}; \quad z_j \in \{0,1\}
 <section class="slide level2">
 
 <h3 id="python-implementation-of-temc-case-i-ignoring-facility-costs">2.1.2 Python Implementation of TEMC (Case I: Ignoring Facility Costs)</h3>
-<div id="8f51d1eb" class="cell" data-message="false" data-execution_count="1">
+<div id="9ddfe899" class="cell" data-message="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> pulp</span>
@@ -1369,7 +1369,7 @@ flowchart LR
 <section class="slide level2">
 
 <h3 id="python-implementation-of-temc-case-ii-including-facility-costs">2.1.3 Python Implementation of TEMC (Case II: Including Facility Costs)</h3>
-<div id="ccf94cfe" class="cell" data-execution_count="2">
+<div id="3bbf0f5f" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a><span class="im">import</span> pulp</span>
@@ -1566,13 +1566,13 @@ flow_sup_dc_S2_DC1_P2 = 100.0</code></pre>
 <tbody>
 <tr class="odd">
 <td>DCE</td>
-<td style="text-align: right;">600</td>
+<td style="text-align: right;">700</td>
 <td style="text-align: right;">1000</td>
 <td style="text-align: right;">2</td>
 </tr>
 <tr class="even">
 <td>DCW</td>
-<td style="text-align: right;">500</td>
+<td style="text-align: right;">600</td>
 <td style="text-align: right;">1200</td>
 <td style="text-align: right;">1.5</td>
 </tr>
@@ -1627,8 +1627,8 @@ flow_sup_dc_S2_DC1_P2 = 100.0</code></pre>
 </tr>
 <tr class="even">
 <td>FB</td>
-<td>4</td>
 <td>6</td>
+<td>3</td>
 </tr>
 </tbody>
 </table>
@@ -1646,15 +1646,15 @@ flow_sup_dc_S2_DC1_P2 = 100.0</code></pre>
 <tbody>
 <tr class="odd">
 <td>DCE</td>
-<td>4</td>
-<td>7</td>
 <td>3</td>
+<td>7</td>
+<td>4</td>
 </tr>
 <tr class="even">
 <td>DCW</td>
-<td>5</td>
-<td>2</td>
 <td>4</td>
+<td>2</td>
+<td>5</td>
 </tr>
 </tbody>
 </table>
@@ -1786,7 +1786,7 @@ x_{ij}^{h}, y_{jk}^{h} \geq 0,
 <section class="slide level2">
 
 <h3 id="python-implementation-of-temc">2.2.2 Python Implementation of TEMC</h3>
-<div id="957976d6" class="cell" data-execution_count="3">
+<div id="8ac02d15" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a><span class="im">import</span> pulp</span>
