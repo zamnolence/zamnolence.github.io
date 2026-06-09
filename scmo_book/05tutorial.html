@@ -475,6 +475,7 @@ window.Quarto = {
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
   <li><a href="#question-5" id="toc-question-5" class="nav-link" data-scroll-target="#question-5">Question 5</a></li>
+  <li><a href="#question-6" id="toc-question-6" class="nav-link" data-scroll-target="#question-6">Question 6</a></li>
   </ul>
 </nav>
     </div>
@@ -503,6 +504,53 @@ window.Quarto = {
 
 <section id="question-1" class="level3">
 <h3 class="anchored" data-anchor-id="question-1">Question 1</h3>
+<p>You are the inventory analyst for a distribution centre that tracks weekly product demand. You are tasked with using four different forecasting methods to predict demand for the upcoming week and evaluate their performance.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Week</th>
+<th style="text-align: right;">1</th>
+<th style="text-align: right;">2</th>
+<th style="text-align: right;">3</th>
+<th style="text-align: right;">4</th>
+<th style="text-align: right;">5</th>
+<th style="text-align: right;">6</th>
+<th style="text-align: right;">7</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Demand (Units)</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">130</td>
+<td style="text-align: right;">125</td>
+<td style="text-align: right;">135</td>
+<td style="text-align: right;">140</td>
+<td style="text-align: right;">150</td>
+<td style="text-align: right;">145</td>
+</tr>
+</tbody>
+</table>
+<ol type="i">
+<li>Treat Week as the independent variable and Demand as the dependent variable <span class="math inline">\(Y\)</span>.<br>
+</li>
+<li>Calculate the regression equation using the least squares method.<br>
+</li>
+<li>Use the equation to forecast demand for Week 8.<br>
+</li>
+<li>Using a 3-period SMA, compute the forecast for Week 8.<br>
+</li>
+<li>Using a 3-period WMA with weights: 0.5, 0.3, and 0.2 for most recent, middle, and oldest. Compute the forecast for Week 8.<br>
+</li>
+<li>Using SES with smoothing constant 0.4 and initial forecast 120. Compute the forecast for Week 8.<br>
+</li>
+<li>Compute the forecast errors (absolute error) for Weeks 4-7 using SMA, WMA, and SES.<br>
+</li>
+<li>Which method would you recommend for short-term forecasting in this case, and why?</li>
+</ol>
+</section>
+<section id="question-2" class="level3">
+<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
 <p>A company records the following demand for a product over 12 periods.</p>
 <div class="table-responsive">
 <table class="table-striped table-hover caption-top table">
@@ -564,8 +612,8 @@ window.Quarto = {
 </ol>
 <hr>
 </section>
-<section id="question-2" class="level3">
-<h3 class="anchored" data-anchor-id="question-2">Question 2</h3>
+<section id="question-3" class="level3">
+<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
 <p>Using a <strong>3-period moving average</strong>, compute forecasts for periods 13–16.</p>
 <p><span class="math display">\[
 F_t = \frac{A_{t-1} + A_{t-2} + A_{t-3}}{3}
@@ -665,8 +713,8 @@ F_t = \frac{A_{t-1} + A_{t-2} + A_{t-3}}{3}
 <p>Comment on whether the moving average method responds quickly to the downward trend.</p>
 <hr>
 </section>
-<section id="question-3" class="level3">
-<h3 class="anchored" data-anchor-id="question-3">Question 3</h3>
+<section id="question-4" class="level3">
+<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
 <p>Use <strong>exponential smoothing</strong> with smoothing constant</p>
 <p><span class="math display">\[
 \alpha = 0.3
@@ -769,8 +817,8 @@ F_{t+1} = F_t + \alpha (A_t - F_t)
 </table>
 <hr>
 </section>
-<section id="question-4" class="level3">
-<h3 class="anchored" data-anchor-id="question-4">Question 4</h3>
+<section id="question-5" class="level3">
+<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
 <p>Fit a linear regression model</p>
 <p><span class="math display">\[
 \hat{Y}_t = a + bt
@@ -907,8 +955,8 @@ b = \frac{n(\sum XY) - (\sum X)(\sum Y)}{n(\sum X^2) - (\sum X)^2}
 </ol>
 <hr>
 </section>
-<section id="question-5" class="level3">
-<h3 class="anchored" data-anchor-id="question-5">Question 5</h3>
+<section id="question-6" class="level3">
+<h3 class="anchored" data-anchor-id="question-6">Question 6</h3>
 <ol type="a">
 <li><p>Which forecasting method is most appropriate for data with a downward trend?</p></li>
 <li><p>Why might moving average forecasts lag behind the actual demand when a trend exists?</p></li>
