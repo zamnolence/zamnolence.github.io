@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Tutorial 1 Solutions – Supply Chain Modelling and Optimisation</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./02tutorial.html" rel="next">
+<link href="./01tutorial.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e6d568464a03255c354358ed153408dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-e8dc00ed3bb19e3a690cd1027ec58c34.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-e6d568464a03255c354358ed153408dd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Solutions</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./logo_.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./logo_.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Supply Chain Modelling and Optimisation</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>0 Workshop Setup Guide</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_python_setup.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python on VS Code</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./00_quarto_git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto and Git on VS Code (Optional)</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>1 Introduction</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 1 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01solutions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Tutorial 1 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>2 Network Design: SESC</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 2 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 2 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>3 Network Design: TEMC</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 3 Exercises</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 3 Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>4 Network Design under Uncertainty</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 4 Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>5 Demand Forecasting</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 5 Exercises</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text"><strong>6 Inventory Model: Single-Commodity</strong></span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text"><strong>7 Inventory Model: Discount and Multi-Commodity</strong></span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text"><strong>8 Stochastic Inventory Model</strong></span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="99">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#part-a-supply-chain-concepts-and-roles" id="toc-part-a-supply-chain-concepts-and-roles" class="nav-link active" data-scroll-target="#part-a-supply-chain-concepts-and-roles">Part A: Supply Chain Concepts and Roles</a>
+  <ul>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
+  </ul></li>
+  <li><a href="#part-b-optimisation-concepts" id="toc-part-b-optimisation-concepts" class="nav-link" data-scroll-target="#part-b-optimisation-concepts">Part B: Optimisation Concepts</a>
+  <ul>
+  <li><a href="#question-1-1" id="toc-question-1-1" class="nav-link" data-scroll-target="#question-1-1">Question 1</a></li>
+  <li><a href="#question-2-1" id="toc-question-2-1" class="nav-link" data-scroll-target="#question-2-1">Question 2</a></li>
+  <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
+  </ul></li>
+  <li><a href="#part-c-critical-points-of-functions" id="toc-part-c-critical-points-of-functions" class="nav-link" data-scroll-target="#part-c-critical-points-of-functions">Part C: Critical Points of Functions</a></li>
+  <li><a href="#part-d-lagrange-multipliers" id="toc-part-d-lagrange-multipliers" class="nav-link" data-scroll-target="#part-d-lagrange-multipliers">Part D: Lagrange Multipliers</a></li>
+  <li><a href="#part-e-kkt-conditions" id="toc-part-e-kkt-conditions" class="nav-link" data-scroll-target="#part-e-kkt-conditions">Part E: KKT Conditions</a>
+  <ul>
+  <li><a href="#question-1-2" id="toc-question-1-2" class="nav-link" data-scroll-target="#question-1-2">Question 1</a></li>
+  <li><a href="#question-2-2" id="toc-question-2-2" class="nav-link" data-scroll-target="#question-2-2">Question 2</a></li>
+  <li><a href="#question-3-1" id="toc-question-3-1" class="nav-link" data-scroll-target="#question-3-1">Question 3</a></li>
+  <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01tutorial.html"><strong>1 Introduction</strong></a></li><li class="breadcrumb-item"><a href="./01solutions.html">Tutorial 1 Solutions</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="01sols" class="quarto-section-identifier">Tutorial 1 Solutions</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="part-a-supply-chain-concepts-and-roles" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-a-supply-chain-concepts-and-roles">Part A: Supply Chain Concepts and Roles</h2>
+<section id="question-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h3>
+<p>Outline the main responsibilities of <strong>manufacturers, distributors,</strong> and <strong>retailers</strong> in evaluating and enhancing their operations, decision-making procedures, and management of the supply chain.</p>
+<div class="example">
+<p><strong>Manufacturers:</strong> design products, source materials, plan production, control quality, reduce production cost, and improve capacity/use of resources.</p>
+<p><strong>Distributors:</strong> store, consolidate, transport, manage inventory, coordinate deliveries, and reduce logistics cost.</p>
+<p><strong>Retailers:</strong> sell to customers, manage demand, pricing, service, shelf availability, and customer feedback.</p>
+</div>
+</section>
+<section id="question-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h3>
+<p>Define the objectives pursued by <strong>manufacturers, distributors</strong>, and <strong>retailers</strong> within the supply chains of the following products.</p>
+<ol type="1">
+<li>Smartphone</li>
+<li>Computer</li>
+<li>Kitchenware</li>
+</ol>
+<div class="example">
+<p><strong>Manufacturers:</strong> design and produce high-quality, innovative, and cost-effective smartphones/computers/kitchenware to meet consumer demand and maximise profit.</p>
+<p><strong>Distributors:</strong> efficiently distribute smartphones/computers/kitchenware to retailers, ensuring timely delivery and minimising logistics costs.</p>
+<p><strong>Retailers:</strong> provide a seamless shopping experience, manage inventory, and offer customer support to maximise sales and customer satisfaction.</p>
+</div>
+<hr>
+</section>
+</section>
+<section id="part-b-optimisation-concepts" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-b-optimisation-concepts">Part B: Optimisation Concepts</h2>
+<section id="question-1-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-1-1">Question 1</h3>
+<p>Consider the function</p>
+<p><span class="math display">\[
+f(x,y)=\frac{x+y}{x^2+y^2+1}.
+\]</span></p>
+<ol type="1">
+<li>Find the gradient of the function.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f = \left(\frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}\right)
+\]</span> where <span class="math display">\[
+\frac{\partial f}{\partial x} = \frac{(x^2+y^2+1)(1) - (x+y)(2x)}{(x^2+y^2+1)^2},
+\]</span> <span class="math display">\[
+\frac{\partial f}{\partial y} = \frac{(x^2+y^2+1)(1) - (x+y)(2y)}{(x^2+y^2+1)^2}.
+\]</span></p>
+</div>
+<ol start="2" type="1">
+<li>Determine the critical (stationary) points.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\frac{\partial f}{\partial x} = 0 \quad \text{and} \quad \frac{\partial f}{\partial y} = 0
+\]</span></p>
+<p>We have</p>
+<p><span class="math display">\[
+(x^2+y^2+1) - 2x(x+y) = 0 \tag{1}
+\]</span> <span class="math display">\[
+(x^2+y^2+1) - 2y(x+y) = 0. \tag{2}
+\]</span></p>
+<p>From (1) and (2), we can derive <span class="math display">\[
+2x(x+y) = 2y(x+y) \implies x = y \;\;\text{or}\;\; x+y=0.
+\]</span></p>
+<p>Substituting <span class="math inline">\(x=y\)</span> into (1) gives</p>
+<p><span class="math display">\[
+\begin{aligned}
+(x^2+x^2+1) - 2x(2x) &amp;= 0 \\
+2x^2 + 1 - 4x^2 &amp;= 0 \\
+-2x^2 + 1 &amp;= 0 \\
+x^2 &amp;= \frac{1}{2} \\
+x &amp;= \pm \frac{1}{\sqrt{2}},
+\end{aligned}
+\]</span></p>
+<p>which leads to the critical points</p>
+<p><span class="math display">\[
+\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right), \quad \left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right).
+\]</span></p>
+<p>Alternatively, we can use a symbolic computation tool to find the critical points directly.</p>
+</div>
+<div id="26f3b7ad" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> y) <span class="op">/</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>critical_points <span class="op">=</span> sp.solve([sp.diff(f, x), sp.diff(f, y)], (x, y))</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>critical_points</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<pre><code>[(-sqrt(2)/2, -sqrt(2)/2), (sqrt(2)/2, sqrt(2)/2)]</code></pre>
+</div>
+</div>
+<ol start="3" type="1">
+<li>Find the Hessian of the function.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\begin{aligned}
+\mathbf{H} &amp;= \begin{bmatrix}
+\dfrac{\partial^2 f}{\partial x^2} &amp; \dfrac{\partial^2 f}{\partial x \partial y} \\
+\dfrac{\partial^2 f}{\partial y \partial x} &amp; \dfrac{\partial^2 f}{\partial y^2}
+\end{bmatrix} \\
+&amp;= \dfrac{1}{(x^2+y^2+1)^3} \\
+&amp;\qquad \begin{bmatrix}
+6x(xy-y^2-1)+2(x^3-y^3-y) &amp; 6xy(x+y)-2(x^3+y^3+x+y) \\
+6xy(x+y)-2(x^3+y^3+x+y) &amp; 6y(xy-x^2-1)+2(y^3-x^3-x)
+\end{bmatrix}
+\end{aligned}
+\]</span></p>
+<p>Since the second partial derivatives are quite complex, we can also use a symbolic computation tool to find the Hessian matrix. The resulting Hessian matrix is</p>
+</div>
+<div id="02ce5daf" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hessian matrix</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy <span class="im">as</span> sp</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> sp.symbols(<span class="st">'x y'</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>f <span class="op">=</span> (x <span class="op">+</span> y) <span class="op">/</span> (x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> sp.hessian(f, (x, y))</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>H</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display cell-output-markdown" data-execution_count="2">
+<p><span class="math inline">\(\displaystyle \left[\begin{matrix}\frac{8 x^{2} \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{4 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{2}} &amp; \frac{8 x y \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{2 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 y}{\left(x^{2} + y^{2} + 1\right)^{2}}\\\frac{8 x y \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{2 x}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 y}{\left(x^{2} + y^{2} + 1\right)^{2}} &amp; \frac{8 y^{2} \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{3}} - \frac{4 y}{\left(x^{2} + y^{2} + 1\right)^{2}} - \frac{2 \left(x + y\right)}{\left(x^{2} + y^{2} + 1\right)^{2}}\end{matrix}\right]\)</span></p>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Classify the stationary points as saddle points, strict or non-strict local/global minima, or strict or non-strict local/global maxima.</li>
+</ol>
+<div class="example">
+<p><strong>Quadratic Form Test</strong></p>
+<p>Substitute the critical points into the Hessian matrix to evaluate the quadratic form</p>
+<p><span class="math display">\[
+H(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}) = \begin{bmatrix}\frac{-1}{\sqrt{2}} &amp; 0 \\ 0 &amp; \frac{-1}{\sqrt{2}}\end{bmatrix}, \;\; H\left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right) = \begin{bmatrix}\frac{1}{\sqrt{2}} &amp; 0 \\ 0 &amp; \frac{1}{\sqrt{2}}\end{bmatrix}.
+\]</span></p>
+<p>Then, evaluate the quadratic form at each critical point: <span class="math display">\[
+Q(\mathbf{x}) = \mathbf{x}^T \mathbf{H} \mathbf{x}
+\]</span></p>
+<p>For <span class="math inline">\(\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)\)</span>, we have</p>
+<p><span class="math display">\[
+\left[\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right]\begin{bmatrix}\frac{-1}{\sqrt{2}} &amp; 0 \\ 0 &amp; \frac{-1}{\sqrt{2}}\end{bmatrix}\begin{bmatrix}\frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}}\end{bmatrix} = -\frac{1}{\sqrt{2}} &lt; 0.
+\]</span></p>
+<p><span class="math inline">\(\therefore \left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)\)</span> is a local maximum.</p>
+<p>For <span class="math inline">\(\left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)\)</span>, we have</p>
+<p><span class="math display">\[
+\left[-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right]\begin{bmatrix}\frac{1}{\sqrt{2}} &amp; 0 \\ 0 &amp; \frac{1}{\sqrt{2}}\end{bmatrix}\begin{bmatrix}-\frac{1}{\sqrt{2}} \\ -\frac{1}{\sqrt{2}}\end{bmatrix} = \frac{1}{\sqrt{2}} &gt; 0.
+\]</span></p>
+<p><span class="math inline">\(\therefore \left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)\)</span> is a local minimum.</p>
+<p><strong>Eigenvalue Test</strong></p>
+<p>Alternatively, to classify the stationary points, we can evaluate the determinant of the Hessian matrix at each critical point.</p>
+<p><span class="math display">\[
+\det(\mathbf{H}-\lambda \mathbf{I}) = 0
+\]</span></p>
+<p>Since the Hessian matrix is diagonal at the critical points, the eigenvalues are simply the diagonal entries. The signs of the eigenvalues will help us classify the stationary points.</p>
+<p>Alternatively, we can also use a symbolic computation tool to find the eigenvalues at each critical point. The signs of the eigenvalues will help us classify the stationary points.</p>
+</div>
+<div id="cb6c851b" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Eigenvalues of the Hessian matrix at each critical point</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> [H.subs({x: <span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>), y: <span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>)}).eigenvals(),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>               H.subs({x: <span class="op">-</span><span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>), y: <span class="op">-</span><span class="dv">1</span><span class="op">/</span>sp.sqrt(<span class="dv">2</span>)}).eigenvals()]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>eigenvalues</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>[{-sqrt(2)/2: 2}, {sqrt(2)/2: 2}]</code></pre>
+</div>
+</div>
+<div class="example">
+<ul>
+<li><code>sympy.Matrix.eigenvals()</code> returns a dictionary <code>{eigenvalue: multiplicity}</code>, where multiplicity is the number of times the eigenvalue appears as a root of the characteristic polynomial.</li>
+<li>For the first critical point <span class="math inline">\(\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)\)</span>, the eigenvalues are both negative, indicating that this point is a local maximum.</li>
+<li>For the second critical point <span class="math inline">\(\left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)\)</span>, the eigenvalues are both positive, indicating that this point is a local minimum.</li>
+</ul>
+</div>
+</section>
+<section id="question-2-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-2-1">Question 2</h3>
+<p>A Cobb-Douglas production function for a new company is given by</p>
+<p><span class="math display">\[
+f(x,y)=50x^{2/5}y^{3/5},
+\]</span></p>
+<p>where <span class="math inline">\(x\)</span> represents units of labour and <span class="math inline">\(y\)</span> represents units of capital. Suppose each unit of labour costs <span class="math inline">\(\$100\)</span> and each unit of capital costs <span class="math inline">\(\$200\)</span>. If the budget constraint is <span class="math inline">\(\$30{,}000\)</span>, find the maximum production level for this manufacturer.</p>
+<div class="example">
+<p>The optimisation problem is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\max &amp;\quad f(x,y)=50x^{\frac25}y^{\frac35} \\
+\text{st.} &amp;\quad 100x + 200y = 30000.
+\end{aligned}
+\]</span></p>
+<p>Using the method of Lagrange multipliers,</p>
+<p><span class="math display">\[
+L(x,y,\lambda)
+=
+50x^{\frac25}y^{\frac35}
+-\lambda(100x+200y-30000).
+\]</span></p>
+<p>Set</p>
+<p><span class="math display">\[
+L_x=0,\qquad
+L_y=0,\qquad
+L_\lambda=0.
+\]</span></p>
+<p><span class="math display">\[
+L_x
+=
+20x^{-\frac35}y^{\frac35}
+-100\lambda
+=0,
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y
+=
+30x^{\frac25}y^{-\frac25}
+-200\lambda
+=0,
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda
+=
+-100x-200y+30000
+=0.
+\tag{3}
+\]</span></p>
+<p>From (1),</p>
+<p><span class="math display">\[
+\lambda
+=
+\frac{x^{-\frac35}y^{\frac35}}{5}.
+\tag{4}
+\]</span></p>
+<p>From (2),</p>
+<p><span class="math display">\[
+\lambda
+=
+\frac{3x^{\frac25}y^{-\frac25}}{20}.
+\tag{5}
+\]</span></p>
+<p>Equating (4) and (5),</p>
+<p><span class="math display">\[
+\frac{x^{-\frac35}y^{\frac35}}{5}
+=
+\frac{3x^{\frac25}y^{-\frac25}}{20},
+\]</span></p>
+<p>which gives</p>
+<p><span class="math display">\[
+x=\frac43 y.
+\tag{6}
+\]</span></p>
+<p>Substituting (6) into (3),</p>
+<p><span class="math display">\[
+-100x-200\left(\frac{3x}{4}\right)+30000=0,
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+x=120 \implies y = 90.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+f(120,90)
+=
+50(120)^{\frac25}(90)^{\frac35}
+\approx 5049.
+\]</span></p>
+<p><span class="math inline">\(\therefore\)</span> the maximum production level is 5049 units.</p>
+</div>
+</section>
+<section id="question-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h3>
+<p>Consider the optimisation problem</p>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Minimise}\quad &amp; f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad &amp; x_1+2x_2=5.
+\end{aligned}
+\]</span></p>
+<ol type="1">
+<li>Write down the Lagrangian formula <span class="math inline">\(L(x_1,x_2,\lambda)\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x_1,x_2,\lambda)
+=
+x_1^2+x_2^2+x_1x_2-5x_2
+-\lambda(x_1+2x_2-5).
+\]</span></p>
+</div>
+<ol start="2" type="1">
+<li>Determine all constraints of <span class="math inline">\(L(x_1,x_2,\lambda)\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\frac{\partial L}{\partial x_1}
+=
+2x_1+x_2-\lambda,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial x_2}
+=
+2x_2+x_1-5-2\lambda,
+\]</span></p>
+<p><span class="math display">\[
+\frac{\partial L}{\partial \lambda}
+=
+-x_1-2x_2+5,
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+x_1+2x_2-5=0,
+\qquad
+\lambda&gt;0.
+\]</span></p>
+</div>
+<ol start="3" type="1">
+<li>Find the values of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+2x_1+x_2-\lambda=0,
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+2x_2+x_1-5-2\lambda=0,
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+-x_1-2x_2+5\lambda=0.
+\tag{3}
+\]</span></p>
+<p>Using (1) and (2),</p>
+<p><span class="math display">\[
+2x_1+x_2
+=
+\frac12(2x_2+x_1-5),
+\]</span></p>
+<p>which gives</p>
+<p><span class="math display">\[
+x_1=-\frac53.
+\tag{4}
+\]</span></p>
+<p>Substituting (4) into (3),</p>
+<p><span class="math display">\[
+x_2=\frac{11}{3}.
+\]</span></p>
+<p>Hence,</p>
+<p><span class="math display">\[
+\boxed{x_1=-\frac53,\qquad x_2=\frac{11}{3}}.
+\]</span></p>
+</div>
+<!-- ### Question 4 {.unnumbered}
+
+Consider the optimisation problem
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad & x_1+2x_2=5,\\
+& 2x_1-x_2=10.
+\end{aligned}
+$$
+
+1. Write down the Lagrangian formula $L(x_1,x_2,\lambda_1,\lambda_2)$.
+2. Determine all constraints of $L(x_1,x_2,\lambda_1,\lambda_2)$.
+
+### Question 5 {.unnumbered}
+
+Consider the optimisation problem
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad & x_1+2x_2=5,\\
+& 2x_1-x_2=10,\\
+& x_1+x_2\le 4.
+\end{aligned}
+$$
+
+1. Write down the Lagrangian formula $L(x_1,x_2,\lambda_1,\lambda_2,\mu)$.
+2. Determine all constraints of $L(x_1,x_2,\lambda_1,\lambda_2,\mu)$. -->
+<hr>
+</section>
+</section>
+<section id="part-c-critical-points-of-functions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-c-critical-points-of-functions">Part C: Critical Points of Functions</h2>
+<p>For each function below:</p>
+<ol type="1">
+<li>Find all critical points by setting the partial derivatives to zero.</li>
+<li>Form the Hessian matrix at each critical point.</li>
+<li>Classify each critical point as a local minimum, local maximum, saddle point, or inconclusive using the second derivative test.</li>
+</ol>
+<p>Functions:</p>
+<ol type="1">
+<li><span class="math inline">\(f(x,y)=(x-2)^2+2(y-1)^2\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\begin{bmatrix}
+2(x-2)\\
+4(y-1)
+\end{bmatrix}
+=0
+\]</span></p>
+<p><span class="math display">\[
+f_x = 2(x-2)=0
+\Rightarrow x=2
+\]</span></p>
+<p><span class="math display">\[
+f_y = 4(y-1)=0
+\Rightarrow y=1
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow (2,1)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y)=
+\begin{bmatrix}
+2 &amp; 0\\
+0 &amp; 4
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\det(H-\lambda I)= \begin{vmatrix}
+2-\lambda &amp; 0\\
+0 &amp; 4-\lambda
+\end{vmatrix}
+=0
+\]</span></p>
+<p><span class="math display">\[
+(2-\lambda)(4-\lambda)=0
+\implies
+\lambda=2,4
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Positive definite } \Rightarrow \text{ Local minimum at }(2,1)}
+\]</span></p>
+</div>
+<ol start="2" type="1">
+<li><span class="math inline">\(f(x,y)=x^3+y^3-3xy\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\begin{bmatrix}
+3x^2-3y\\
+3y^2-3x
+\end{bmatrix}
+=0
+\]</span></p>
+<p><span class="math display">\[
+f_x = 3x^2-3y=0
+\Rightarrow y=x^2 \tag{1}
+\]</span></p>
+<p><span class="math display">\[
+f_y = 3y^2-3x=0
+\Rightarrow x=y^2 \tag{2}
+\]</span></p>
+<p>Substituting (1) into (2), <span class="math display">\[
+x=x^4 \implies
+x(x^3-1)=0 \implies
+x=0,1 \implies
+(0,0),\; (1,1)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y)=
+\begin{bmatrix}
+6x &amp; -3\\
+-3 &amp; 6y
+\end{bmatrix}
+\]</span></p>
+<p>At <span class="math inline">\((0,0)\)</span>,</p>
+<p><span class="math display">\[
+H(0,0)=
+\begin{bmatrix}
+0 &amp; -3\\
+-3 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+(\lambda-3)(\lambda+3)=0
+\implies
+\lambda=-3,3
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Indefinite } \Rightarrow \text{ Saddle point at }(0,0)}
+\]</span></p>
+<p>At <span class="math inline">\((1,1)\)</span>,</p>
+<p><span class="math display">\[
+H(1,1)=
+\begin{bmatrix}
+6 &amp; -3\\
+-3 &amp; 6
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+(6-\lambda)^2-9=0
+\implies
+\lambda=3,9
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Positive definite } \Rightarrow \text{ Local minimum at }(1,1)}
+\]</span></p>
+</div>
+<ol start="3" type="1">
+<li><span class="math inline">\(f(x,y)=2xy-x^4-x^2-y^2\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\begin{bmatrix}
+2y-4x^3-2x\\
+2x-2y
+\end{bmatrix}
+=0
+\]</span></p>
+<p><span class="math display">\[
+f_y = 2x-2y=0
+\Rightarrow y=x \tag{1}
+\]</span></p>
+<p>Substituting (1) into <span class="math inline">\(f_x\)</span>, <span class="math display">\[
+f_x =2x-4x^3-2x=-4x^3=0 \implies x=0
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow (0,0)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y)=
+\begin{bmatrix}
+-12x^2-2 &amp; 2\\
+2 &amp; -2
+\end{bmatrix}
+\]</span></p>
+<p>At <span class="math inline">\((0,0)\)</span>,</p>
+<p><span class="math display">\[
+H(0,0)=
+\begin{bmatrix}
+-2 &amp; 2\\
+2 &amp; -2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+(-2-\lambda)^2-4=0
+\implies
+\lambda=-4,0
+\]</span></p>
+<p>Inconclusive: maximum or saddle point <span class="math inline">\(\Rightarrow\)</span> Try evaluating near <span class="math inline">\((0,0)\)</span>.</p>
+<ul>
+<li><span class="math inline">\(f(0,0) = 0\)</span></li>
+<li><span class="math inline">\(f(0.1,0.1) = -0.0199 &lt; 0\)</span></li>
+<li><span class="math inline">\(f(-0.1,-0.1) = -0.0199 &lt; 0\)</span></li>
+<li><span class="math inline">\(f(0.1,-0.1) = -0.0201 &lt; 0\)</span></li>
+</ul>
+<p><span class="math display">\[
+\boxed{\text{Global maximum at }(0,0)}
+\]</span></p>
+</div>
+<ol start="4" type="1">
+<li><span class="math inline">\(f(x,y)=e^{-(x^2+y^2)}\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\begin{bmatrix}
+-2xe^{-(x^2+y^2)}\\
+-2ye^{-(x^2+y^2)}
+\end{bmatrix}
+=0
+\Rightarrow (0,0)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y)=
+e^{-(x^2+y^2)}
+\begin{bmatrix}
+4x^2-2 &amp; 4xy\\
+4xy &amp; 4y^2-2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+H(0,0)=
+\begin{bmatrix}
+-2 &amp; 0\\
+0 &amp; -2
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\lambda=-2,-2
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Negative definite } \Rightarrow \text{ Local maximum at }(0,0)}
+\]</span></p>
+</div>
+<ol start="5" type="1">
+<li><span class="math inline">\(f(x,y)=\sin(x)\sin(y)\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\begin{bmatrix}
+\cos(x)\sin(y)\\
+\sin(x)\cos(y)
+\end{bmatrix}
+=0
+\]</span></p>
+<p><span class="math display">\[
+f_x = \cos(x)\sin(y)=0 \implies \cos(x)=0 \;\; \text{or} \;\; \sin(y)=0
+\]</span></p>
+<p><span class="math display">\[
+f_y = \sin(x)\cos(y)=0 \implies \sin(x)=0 \;\; \text{or} \;\; \cos(y)=0
+\]</span></p>
+<p>Possible critical points occur where <span class="math display">\[
+\begin{aligned}
+x=n\pi&amp;,\quad y=m\pi \quad \text{or}\\
+x=\frac{\pi}{2}+n\pi&amp;,
+\quad
+y=\frac{\pi}{2}+m\pi
+\end{aligned}
+\]</span></p>
+<p>For all <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> in <span class="math inline">\(\mathbb{Z}\)</span>.</p>
+<p><span class="math display">\[
+\Rightarrow (0,0),\;(\pi/2, \pi/2),\;(\pi, \pi), ...
+\]</span> <span class="math display">\[
+H(x,y)=
+\begin{bmatrix}
+-\sin(x)\sin(y) &amp; \cos(x)\cos(y)\\
+\cos(x)\cos(y) &amp; -\sin(x)\sin(y)
+\end{bmatrix}
+\]</span></p>
+<p>At <span class="math inline">\((0,0)\)</span>,</p>
+<p><span class="math display">\[
+H(0,0)=
+\begin{bmatrix}
+0 &amp; 1\\
+1 &amp; 0
+\end{bmatrix}
+\implies
+\lambda=-1,1
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Indefinite } \Rightarrow \text{ Saddle point at }(0,0)}
+\]</span></p>
+<p>At <span class="math inline">\(\left(\frac{\pi}{2},\frac{\pi}{2}\right)\)</span>,</p>
+<p><span class="math display">\[
+H=
+\begin{bmatrix}
+-1 &amp; 0\\
+0 &amp; -1
+\end{bmatrix}
+\implies
+\lambda=-1,-1
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Negative definite } \Rightarrow \text{ Local maximum}}
+\]</span></p>
+<p>At <span class="math inline">\(\left(\frac{\pi}{2},\frac{3\pi}{2}\right)\)</span>,</p>
+<p><span class="math display">\[
+H=
+\begin{bmatrix}
+1 &amp; 0\\
+0 &amp; 1
+\end{bmatrix}
+\implies \lambda=1,1
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Positive definite } \Rightarrow \text{ Local minimum}}
+\]</span></p>
+</div>
+<ol start="6" type="1">
+<li><span class="math inline">\(f(x,y)=\ln(1+x^2+y^2)\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y)=
+\frac{1}{1+x^2+y^2}
+\begin{bmatrix}
+2x\\
+2y
+\end{bmatrix}
+=0
+\implies
+(0,0)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y)=\begin{bmatrix}
+\frac{2(1+x^2+y^2)-4x^2}{(1+x^2+y^2)^2} &amp; \frac{-4xy}{(1+x^2+y^2)^2} \\
+\frac{-4xy}{(1+x^2+y^2)^2} &amp; \frac{2(1+x^2+y^2)-4y^2}{(1+x^2+y^2)^2}
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+H(0,0)=
+\begin{bmatrix}
+2 &amp; 0\\
+0 &amp; 2
+\end{bmatrix}
+\implies
+\lambda=2,2
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Positive definite } \Rightarrow \text{ Local minimum at }(0,0)}
+\]</span></p>
+</div>
+<ol start="7" type="1">
+<li><span class="math inline">\(f(x,y,z)=x^2+y^2-z^2\)</span></li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+\nabla f(x,y,z)=
+\begin{bmatrix}
+2x\\
+2y\\
+-2z
+\end{bmatrix}
+=0
+\implies
+(0,0,0)
+\]</span></p>
+<p><span class="math display">\[
+H(x,y,z)=\begin{bmatrix}
+2 &amp; 0 &amp; 0\\
+0 &amp; 2 &amp; 0\\
+0 &amp; 0 &amp; -2
+\end{bmatrix} = H(0,0,0)
+\implies
+\lambda=2,2,-2
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Indefinite } \Rightarrow \text{ Saddle point at }(0,0,0)}
+\]</span></p>
+</div>
+<hr>
+</section>
+<section id="part-d-lagrange-multipliers" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-d-lagrange-multipliers">Part D: Lagrange Multipliers</h2>
+<p>Use the method of Lagrange multipliers to find and classify the extrema, local or global, for the following problems.</p>
+<ol type="1">
+<li><span class="math inline">\(f(x,y)=x^2+y^2\)</span>, subject to <span class="math inline">\(x+y=1\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda)=x^2+y^2-\lambda(x+y-1)
+\]</span></p>
+<p><span class="math display">\[
+L_x=2x-\lambda=0
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=2y-\lambda=0
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x+y-1)=0
+\tag{3}
+\]</span></p>
+<p>From (1) and (2), <span class="math display">\[
+2x=2y
+\Rightarrow x=y
+\]</span></p>
+<p>Substituting <span class="math inline">\(x=y\)</span> into (3), <span class="math display">\[
+2x=1
+\Rightarrow x=\frac12
+\implies \left(\frac12,\frac12\right)
+\]</span></p>
+<p><span class="math display">\[
+f(\frac12,\frac12)=\frac14+\frac14=\frac12
+\]</span></p>
+<p>Since <span class="math inline">\(f(x,y)\)</span> is a convex function and the constraint is linear, the critical point is a global minimum. <span class="math display">\[
+\boxed{\text{Global minimum at }\left(\frac12,\frac12\right)}
+\]</span></p>
+</div>
+<ol start="2" type="1">
+<li><span class="math inline">\(f(x,y)=xy\)</span>, subject to <span class="math inline">\(x^2+y^2=1\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda)=xy-\lambda(x+y^2-1)
+\]</span></p>
+<p><span class="math display">\[
+L_x=y-2x\lambda=0 \implies y = 2x\lambda
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=x-2y\lambda=0
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x+y^2-1)=0
+\tag{3}
+\]</span></p>
+<p>Substitute (1) into (2):</p>
+<p><span class="math display">\[
+x-4x\lambda^2=0
+\Rightarrow
+x(1-4\lambda^2)=0
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow
+x=0 \;\; \text{or} \;\; \lambda=\pm\frac12
+\]</span></p>
+<p>Substitute <span class="math inline">\(x=0\)</span> into (3)</p>
+<p><span class="math display">\[
+y = \pm 1 \implies (0,1), (0,-1)
+\]</span></p>
+<p>Substitute <span class="math inline">\(\lambda=\pm\frac12\)</span> into (1) <span class="math display">\[
+y = \pm x
+\]</span></p>
+<p>Substitute <span class="math inline">\(y=x\)</span> into (3)</p>
+<p><span class="math display">\[
+2x^2 - 1 = 0 \Rightarrow x = \pm \frac{1}{\sqrt{2}}
+\Rightarrow
+\left(\pm\frac{1}{\sqrt{2}}, \pm\frac{1}{\sqrt{2}}\right)
+\]</span></p>
+<p>Substitute <span class="math inline">\(y=-x\)</span> into (3)</p>
+<p><span class="math display">\[
+2x^2 - 1 = 0 \Rightarrow x = \pm \frac{1}{\sqrt{2}}
+\Rightarrow
+\left(\pm\frac{1}{\sqrt{2}}, \mp\frac{1}{\sqrt{2}}\right)
+\]</span></p>
+<p>Evaluate <span class="math inline">\(f(x,y)\)</span> at each critical point: <span class="math display">\[
+\begin{aligned}
+f(0,\pm 1) &amp;= 0, \\
+f\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right) &amp;= \frac{1}{2}, \quad
+f\left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right) = \frac{1}{2}, \\
+f\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right) &amp;= -\frac{1}{2}, \quad
+f\left(-\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right) = -\frac{1}{2}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Local maximum at }
+\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right), \left(-\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right)}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Local minimum at }
+\left(\frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}}\right), \left(-\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}\right)}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Saddle point at } (0,1), (0,-1)}
+\]</span></p>
+</div>
+<ol start="3" type="1">
+<li><span class="math inline">\(f(x,y)=x^2+4xy+y^2\)</span>, subject to <span class="math inline">\(x+y=3\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda)=x^2+4xy+y^2-\lambda(x+y-3)
+\]</span></p>
+<p><span class="math display">\[
+L_x=2x+4y-\lambda=0
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=4x+2y-\lambda=0
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x+y-3)=0
+\tag{3}
+\]</span></p>
+<p>From (1) and (2),</p>
+<p><span class="math display">\[
+2x+4y=4x+2y
+\]</span></p>
+<p><span class="math display">\[
+x=y
+\]</span></p>
+<p>Substitute into (3):</p>
+<p><span class="math display">\[
+2x=3
+\]</span></p>
+<p><span class="math display">\[
+x=\frac32,
+\qquad
+y=\frac32
+\Rightarrow
+\left(\frac32,\frac32\right)
+\]</span> <span class="math display">\[
+f(\frac32,\frac32)=13.5
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global maximum at }
+\left(\frac32,\frac32\right)}
+\]</span></p>
+</div>
+<ol start="4" type="1">
+<li><span class="math inline">\(f(x,y)=e^{xy}\)</span>, subject to <span class="math inline">\(x^2+y^2=1\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda)=e^y-\lambda(x^2+y^2-1)
+\]</span></p>
+<p><span class="math display">\[
+L_x=-2x\lambda=0 \implies \lambda = e^y/2x
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=e^y-2y\lambda=0 \implies \lambda = e^x/2y
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x^2+y^2-1)=0
+\tag{3}
+\]</span></p>
+<p>Equate (1) = (2) gives,</p>
+<p><span class="math display">\[
+x=y^2
+\]</span></p>
+<p>Substitute into (3):</p>
+<p><span class="math display">\[
+x^2 + x - 1 = 0
+\]</span></p>
+<p><span class="math display">\[
+x = \frac{-1 \pm \sqrt{1 - 4(1)(-1)}}{2} = \frac{-1 \pm \sqrt{5}}{2}
+\]</span></p>
+<p>Only positive root is valid since <span class="math inline">\(x=y^2 \ge 0\)</span>, so <span class="math display">\[
+\left(\frac{-1+\sqrt{5}}{2}, \pm \sqrt{\frac{-1+\sqrt{5}}{2}}\right) = (0.618, \pm 0.786)
+\]</span></p>
+<p><span class="math display">\[
+f(0.618, 0.786) \approx 1.458
+\]</span></p>
+<p><span class="math display">\[
+f(0.618, -0.786) \approx -1.458
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global maximum at }(0.618, 0.786)}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global minimum at }(0.618, -0.786)}
+\]</span></p>
+</div>
+<ol start="5" type="1">
+<li><span class="math inline">\(f(x,y)=x^3y\)</span>, subject to <span class="math inline">\(x^2+y^2=1\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda)=x^3y-\lambda(x^2+y^2-1)
+\]</span></p>
+<p><span class="math display">\[
+L_x=3x^2y-2x\lambda=0 \implies \lambda = \frac{3x^2y}{2x} = \frac{3xy}{2}
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=x^3-2y\lambda=0 \implies \lambda = \frac{x^3}{2y}
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x^2+y^2-1)=0
+\tag{3}
+\]</span></p>
+<p>Equate (1) = (2) gives,</p>
+<p><span class="math display">\[
+\frac{3xy}{2} = \frac{x^3}{2y}
+\Rightarrow
+x(x^2-3y^2) = 0
+\Rightarrow x = 0 \;\; \text{or} \;\; x^2 = 3y^2
+\]</span></p>
+<p>Substitute <span class="math inline">\(x=0\)</span> into (3): <span class="math display">\[
+y^2-1 = 0 \Rightarrow y = \pm 1 \rightarrow (0,\pm 1)
+\]</span></p>
+<p>Substitute <span class="math inline">\(x^2=3y^2\)</span> into (3):</p>
+<p><span class="math display">\[
+4y^2-1 = 0 \Rightarrow y = \pm \frac{1}{2} \Rightarrow \left(\pm\frac{\sqrt{3}}{2}, \frac12\right), \left(\pm\frac{\sqrt{3}}{2}, -\frac12\right)
+\]</span></p>
+<p>Evaluate <span class="math inline">\(f(x,y)\)</span> at each critical point: <span class="math display">\[
+\begin{aligned}
+f(0,\pm 1) &amp;= 0, \\
+f\left(\frac{\sqrt{3}}{2}, \frac12\right) &amp;= \frac{3\sqrt{3}}{16}, \quad
+f\left(-\frac{\sqrt{3}}{2}, -\frac12\right) = \frac{3\sqrt{3}}{16}, \\
+f\left(\frac{\sqrt{3}}{2}, -\frac12\right) &amp;= -\frac{3\sqrt{3}}{16}, \quad
+f\left(-\frac{\sqrt{3}} {2}, \frac12\right) = -\frac{3\sqrt{3}}{16}
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Saddle point at }(0,1), (0,-1)}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global maxima at }
+\left(\frac{\sqrt{3}}{2}, \frac12\right),
+\left(-\frac{\sqrt{3}}{2}, -\frac12\right)}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global minima at }
+\left(\frac{\sqrt{3}}{2}, -\frac12\right),
+\left(-\frac{\sqrt{3}}{2}, \frac12\right)}
+\]</span></p>
+</div>
+<ol start="6" type="1">
+<li><span class="math inline">\(f(x,y)=\sin(x)+\cos(y)\)</span>, subject to <span class="math inline">\(x+y=\pi/2\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,\lambda) = \sin(x)+\cos(y)-\lambda(x+y-\pi/2)
+\]</span></p>
+<p><span class="math display">\[
+L_x = \cos(x) - \lambda = 0 \tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y = -\sin(y) - \lambda = 0 \tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda = -(x+y-\pi/2) = 0 \tag{3}
+\]</span> From (1) and (2),</p>
+<p><span class="math display">\[
+\cos(x) + \sin(y) = 0 \tag{4}
+\]</span></p>
+<p>From (3) <span class="math display">\[
+y = \frac\pi2 -x
+\]</span></p>
+<p>Substitute in to (4):</p>
+<p><span class="math display">\[
+\cos(x) + \sin\left(\frac\pi2 - x\right) = 0
+\]</span></p>
+<p>Use identity: <span class="math inline">\(\sin\left(\frac\pi2 - x\right) = \cos(x)\)</span></p>
+<p><span class="math display">\[
+\cos(x) + \cos(x) = 2\cos(x) = 0 \Rightarrow \cos(x)=0
+\]</span></p>
+<p><span class="math display">\[
+x = \frac\pi2 + n\pi, \quad y = -n\pi, \quad n \in \mathbb{Z}
+\]</span></p>
+<p><span class="math display">\[
+\Rightarrow (\frac\pi2,0), (\frac{3\pi}{2}, -\pi), (\frac{5\pi}{2}, -2\pi), ...
+\]</span></p>
+<p>Evaluate <span class="math inline">\(f(x,y)\)</span> at each critical point:</p>
+<p><span class="math display">\[
+\begin{aligned}
+f\left(\frac\pi2,0\right) &amp;= 1, \\
+f\left(\frac{3\pi}{2}, -\pi\right) &amp;= -1, \\
+f\left(\frac{5\pi}{2}, -2\pi\right) &amp;= 1, ...
+\end{aligned}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global maxima at }\left(\frac\pi2,0\right), \left(\frac{5\pi}{2}, -2\pi\right), ...}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global minima at }\left(\frac{3\pi}{2}, -\pi\right), \left(\frac{7\pi}{2}, -3\pi\right), ...}
+\]</span></p>
+</div>
+<ol start="7" type="1">
+<li><span class="math inline">\(f(x,y,z)=x+y+z\)</span>, subject to <span class="math inline">\(x^2+y^2+z^2=1\)</span>.</li>
+</ol>
+<div class="example">
+<p><span class="math display">\[
+L(x,y,z,\lambda)=x+y+z-\lambda(x^2+y^2+z^2-1)
+\]</span></p>
+<p><span class="math display">\[
+L_x=1-2\lambda x=0
+\tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y=1-2\lambda y=0
+\tag{2}
+\]</span></p>
+<p><span class="math display">\[
+L_z=1-2\lambda z=0
+\tag{3}
+\]</span></p>
+<p><span class="math display">\[
+L_\lambda=-(x^2+y^2+z^2-1)=0
+\tag{4}
+\]</span></p>
+<p>From (1), (2), and (3),</p>
+<p><span class="math display">\[
+2\lambda x=2\lambda y=2\lambda z=1
+\]</span></p>
+<p><span class="math display">\[
+x=y=z
+\]</span></p>
+<p>Substitute into (4):</p>
+<p><span class="math display">\[
+3x^2=1
+\]</span></p>
+<p><span class="math display">\[
+x=\pm\frac1{\sqrt3}
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+(x,y,z)=
+\left(\frac1{\sqrt3},\frac1{\sqrt3},\frac1{\sqrt3}\right),
+\left(-\frac1{\sqrt3},-\frac1{\sqrt3},-\frac1{\sqrt3}\right)
+\]</span></p>
+<p><span class="math display">\[
+f\left(\frac1{\sqrt3},\frac1{\sqrt3},\frac1{\sqrt3}\right)
+=
+\sqrt3
+\]</span></p>
+<p><span class="math display">\[
+f\left(-\frac1{\sqrt3},-\frac1{\sqrt3},-\frac1{\sqrt3}\right)
+=
+-\sqrt3
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\text{Global maximum at }
+\left(\frac1{\sqrt3},\frac1{\sqrt3},\frac1{\sqrt3}\right)
+}
+\]</span></p>
+<p><span class="math display">\[
+\boxed{
+\text{Global minimum at }
+\left(-\frac1{\sqrt3},-\frac1{\sqrt3},-\frac1{\sqrt3}\right)
+}
+\]</span></p>
+</div>
+<hr>
+</section>
+<section id="part-e-kkt-conditions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="part-e-kkt-conditions">Part E: KKT Conditions</h2>
+<p>Use the KKT conditions to find and classify the extrema for the following problems. For inequalities, rewrite them in the form <span class="math inline">\(g(x)\le 0\)</span> if necessary.</p>
+<section id="question-1-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-1-2">Question 1</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Minimise}\quad &amp; f(x,y)=(x-1)^2+(y-2)^2\\
+\text{subject to}\quad &amp; -x-y+3\le 0,\\
+&amp; -x\le 0.
+\end{aligned}
+\]</span></p>
+<div class="example">
+<p>This is a case of two inequality constraints</p>
+<p><strong>Step 1: KKT Conditions</strong></p>
+<p>I. Stationarity:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\nabla L &amp;= \nabla f + \lambda_1 \nabla g_1 + \lambda_2 \nabla g_2 = 0 \\
+&amp;= \begin{bmatrix} 2(x-1) \\ 2(y-2) \end{bmatrix}
++ \lambda_1 \begin{bmatrix} -1 \\ -1 \end{bmatrix}
++ \lambda_2 \begin{bmatrix} -1 \\ 0 \end{bmatrix}
+= \begin{bmatrix} 0 \\ 0 \end{bmatrix} \\
+\end{aligned}
+\]</span> <span class="math display">\[
+L_x = 2(x-1) - \lambda_1 - \lambda_2 = 0 \tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y = 2(y-2) - \lambda_1 = 0 \tag{2}
+\]</span></p>
+<ol start="2" type="I">
+<li>Primal feasibility:</li>
+</ol>
+<p><span class="math display">\[
+g_1(x,y) \le 0, \quad g_2(x,y) \le 0.
+\]</span></p>
+<ol start="3" type="I">
+<li>Dual feasibility:</li>
+</ol>
+<p><span class="math display">\[
+\lambda_1, \lambda_2 \ge 0.
+\]</span></p>
+<ol start="4" type="I">
+<li>Complementary slackness:</li>
+</ol>
+<p><span class="math display">\[
+\lambda_1 g_1(x,y) = 0, \quad \lambda_2 g_2(x,y) = 0.
+\]</span></p>
+<p><strong>Step 2: Case Analysis (primal feasibility and complementary slackness)</strong></p>
+<ul>
+<li><strong>Case 1:</strong> <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> active (i.e.&nbsp;<span class="math inline">\(g_1 = g_2 = 0\)</span>)</li>
+</ul>
+<p><span class="math display">\[
+g_1 = 0 \implies
+-x-y+3=0,
+\Rightarrow
+x+y=3
+\]</span></p>
+<p><span class="math display">\[
+g_2 = 0 \implies
+x=0
+\Rightarrow (0, 3)
+\]</span></p>
+<p>Check (1): <span class="math display">\[
+-2-\lambda_1-\lambda_2 = 0 \Rightarrow \lambda_1 + \lambda_2 = -2
+\]</span></p>
+<p>Not possible since <span class="math inline">\(\lambda_1, \lambda_2 \ge 0\)</span>.</p>
+<p><span class="math inline">\(\Rightarrow\)</span> infeasible dual variables condition III.</p>
+<ul>
+<li><strong>Case 2:</strong> <span class="math inline">\(g_1\)</span> active, <span class="math inline">\(g_2\)</span> inactive (i.e.&nbsp;<span class="math inline">\(g_1 =0, \lambda_2=0\)</span>)</li>
+</ul>
+<p>From (1) and (2),</p>
+<p><span class="math display">\[
+2(x-1) = 2(y-2) \Rightarrow x = y-1
+\]</span></p>
+<p>Substitute into <span class="math inline">\(g_1=0\)</span>:</p>
+<p><span class="math display">\[
+-(y-1) - y + 3 = 0 \Rightarrow y = 2 \Rightarrow (1,2)
+\]</span></p>
+<p>Check condition II: <span class="math display">\[
+\begin{aligned}
+g_1 &amp;= -1-2+3=0 \Rightarrow \text{active, feasible} \\
+g_2 &amp;= -1 \le 0 \Rightarrow \text{inactive, feasible}
+\end{aligned}
+\]</span></p>
+<p>Check (1) and (2): <span class="math display">\[
+\lambda_1 = 0, \quad \lambda_2 = 0 \implies \text{Feasible dual variables}
+\]</span></p>
+<p><span class="math inline">\(\Rightarrow\)</span> Candidate point <span class="math inline">\((1,2)\)</span> satisfies all KKT conditions.</p>
+<ul>
+<li><strong>Case 3:</strong> <span class="math inline">\(g_2\)</span> active, <span class="math inline">\(g_1\)</span> inactive (i.e.&nbsp;g_2=0, _1 =0)</li>
+</ul>
+<p><span class="math display">\[
+g_2 = 0 \Rightarrow x = 0
+\]</span></p>
+<p>Check (1) <span class="math display">\[
+2(0-1)-\lambda_2 = 0 \Rightarrow \lambda_2 = -2 &lt; 0
+\]</span></p>
+<p><span class="math inline">\(\Rightarrow\)</span> Infeasible dual variables condition III.</p>
+<ul>
+<li><strong>Case 4:</strong> <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> inactive (i.e.&nbsp;<span class="math inline">\(\lambda_1 = \lambda_2 = 0\)</span>)</li>
+</ul>
+<p>From (1) and (2),</p>
+<p><span class="math display">\[
+2(x-1)=
+2(y-2) \implies x = y-1
+\]</span></p>
+<p>Check condition II: <span class="math display">\[
+g_1 = -1 -2 +3 = 0 \implies \text{active, not feasible}
+\]</span></p>
+<p>This contradicts case 4 assumption</p>
+<p><span class="math inline">\(\Rightarrow\)</span> Infeasible primal variables condition II.</p>
+<p>Therefore, the only candidate point is <span class="math inline">\((1,2)\)</span>.</p>
+<p><span class="math display">\[
+f(1,2)=0
+\]</span></p>
+<p><span class="math display">\[
+\boxed{\text{Global minimum at }(1,2)}
+\]</span></p>
+</div>
+<!-- ### Question 2 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Maximise}\quad & f(x,y)=x^2y\\
+\text{subject to}\quad & x+y-1=0,\\
+& -x\le 0.
+\end{aligned}
+$$
+
+::: {.example}
+
+::: -->
+</section>
+<section id="question-2-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-2-2">Question 2</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Maximise}\quad &amp; f(x,y)=\ln(x)+\ln(y)\\
+\text{subject to}\quad &amp; x+y-1=0,\\
+&amp; -x\le 0,\\
+&amp; -y\le 0.
+\end{aligned}
+\]</span></p>
+<div class="example">
+<p><strong>Step 1: KKT Conditions</strong></p>
+<p>I. Stationarity:</p>
+<p><span class="math display">\[
+\nabla L = \nabla f + \lambda \nabla h + \mu_1 \nabla g_1 + \mu_2 \nabla g_2 = 0
+\]</span></p>
+<p><span class="math display">\[
+L_x = -\frac1x + \lambda - \mu_1 = 0 \tag{1}
+\]</span></p>
+<p><span class="math display">\[
+L_y = -\frac1y + \lambda - \mu_2 = 0 \tag{2}
+\]</span></p>
+<ol start="2" type="I">
+<li><p>Primal feasibility: <span class="math inline">\(h=0, g_1 \le 0, g_2 \le 0\)</span></p></li>
+<li><p>Dual feasibility: <span class="math inline">\(\mu_1, \mu_2 \ge 0\)</span></p></li>
+<li><p>Complementary slackness: <span class="math inline">\(\mu_1(-x) = 0, \mu_2(-y) = 0\)</span></p></li>
+</ol>
+<p><strong>Step 2: Case Analysis (primal feasibility and complementary slackness)</strong></p>
+<p>Note that <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> cannot be active since <span class="math inline">\(1/x\)</span> and <span class="math inline">\(1/y\)</span> are undefined at <span class="math inline">\(x=0\)</span> and <span class="math inline">\(y=0\)</span>. Therefore, we have only one case to consider:</p>
+<ul>
+<li><strong>Case 1:</strong> <span class="math inline">\(g_1\)</span> and <span class="math inline">\(g_2\)</span> inactive (i.e.&nbsp;<span class="math inline">\(\mu_1 = \mu_2 = 0\)</span>)</li>
+</ul>
+<p>From (1) and (2),</p>
+<p><span class="math display">\[
+x=y
+\]</span></p>
+<p>Substitute in to <span class="math inline">\(h\)</span>,</p>
+<p><span class="math display">\[
+2x=1 \Rightarrow \left(\frac12, \frac12\right)
+\]</span></p>
+<p>This already satisfies all KKT conditions.</p>
+<p><span class="math display">\[
+\boxed{\text{Global maximum }f = -1.386 \text{ at }\left(\frac12, \frac12\right)}
+\]</span></p>
+</div>
+</section>
+<section id="question-3-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-3-1">Question 3</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Minimise}\quad &amp; f(x,y)=e^x+e^y\\
+\text{subject to}\quad &amp; x+y=0,\\
+&amp; x-1\le 0.
+\end{aligned}
+\]</span></p>
+<div class="example">
+<p><span class="math inline">\(\therefore\)</span> Global minimum <span class="math inline">\(f = 2\)</span> at <span class="math inline">\((0,0)\)</span>.</p>
+<p>Note that (1, -1) does not satisfy the KKT conditions.</p>
+</div>
+</section>
+<section id="question-4" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h3>
+<p><span class="math display">\[
+\begin{aligned}
+\text{Minimise}\quad &amp; f(x,y,z)=x^2+y^2+z^2\\
+\text{subject to}\quad &amp; x+y+z-1=0,\\
+&amp; -x\le 0.
+\end{aligned}
+\]</span></p>
+<div class="example">
+<p><span class="math inline">\(\therefore\)</span> Global minimum <span class="math inline">\(f = 1/3\)</span> at <span class="math inline">\((1/3,1/3,1/3)\)</span>.</p>
+<p>Note that (0, 1/2, 1/2) does not satisfy the KKT conditions.</p>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01tutorial.html" class="pagination-link" aria-label="Tutorial 1 Exercises">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial 1 Exercises</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./02tutorial.html" class="pagination-link" aria-label="Tutorial 2 Exercises">
+        <span class="nav-page-text">Tutorial 2 Exercises</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Supply Chain Modelling and Optimisation<br> © Copyright 2026, Ben W. and Sam W.</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>This book was built with ❤️ and <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

@@ -1,0 +1,88 @@
+# Preface {.unnumbered}
+
+Modern supply chains are complex systems that require effective planning, analysis, and decision-making to ensure the efficient flow of goods, information, and resources. This unit introduces the fundamental concepts and quantitative methods used to model and optimise supply chain operations.
+
+The material covers logistics network design, demand forecasting, and inventory management, with an emphasis on mathematical modelling and optimisation techniques. Through practical examples and case studies, students will learn how analytical tools can be applied to real-world industrial problems.
+
+These materials are intended to support learning in **INDE2000/5000 Supply Chain Modelling and Optimisation** and **05115130 Supply Chain Modelling and Optimisation (供应链建模与优化)**, providing both theoretical foundations and practical insights. By engaging with the material, students will develop the skills needed to analyse supply chain systems, evaluate alternative solutions, and make informed operational and strategic decisions.
+
+## Announcements & FAQs {.unnumbered}
+
+::: {.callout-important appearance="minimal"}
+### Assignment Due Date Extended & Tutorial Solutions
+Date: 8 June 2026 (4:00 PM)
+
+Since the class on Sat 13 June has been moved to Sun 14 June between 6:10 - 9:40 PM, the assignment due date has been extended to **14 June 2026 at 9:40 PM** (end of the class).
+
+Also, due to the consistently low participation rate, solutions to tutorial exercises will no longer be posted online from lecture 4 onward. Instead, solutions to all future tutorial exercises will be discussed and provided only during class sessions.
+
+Students who wish to benefit from the tutorial solutions are therefore expected to attend and participate in class.
+:::
+
+::: {.callout-tip appearance="minimal"}
+### Assignment Released
+
+Date: 5 June 2026 (5:00 PM)
+
+The assignment for this unit has been released and is available [here](https://zamnolence.github.io/scmo_book/2025/scmo-2026-assignment.pdf). The assignment is due on **14 June 2026 at 9:40 PM**. Students are encouraged to start working on the assignment early and seek help if needed.
+
+The assignment is designed to be a practice for the final exam, covering the key topics and concepts discussed in the lectures. It is recommended to attempt the assignment questions on your own before referring to any solutions or seeking help.
+
+The solutions will be posted on 24 June 2026. Submission later than this date will not be accepted. Please make sure to submit your assignment on time.
+:::
+
+::: {.callout-caution appearance="minimal"}
+#### Tutorial Solutions and 2025 Materials Posted
+
+Date:5 June 2026 (12:30 AM)
+
+Solutions to tutorial questions will be posted here the day after the class. Students are encouraged to attempt the questions on their own before referring to the solutions. No submission of tutorial questions is required.
+
+The materials for the 2025 class, including lecture slides and exam materials, have also been uploaded to this page for reference.
+:::
+
+## Unit Materials (June 2026 Class) {.unnumbered}
+
+**Updates from last year:**
+
+- Migrate from PDF to HTML format for lecture slides and tutorial materials.
+- Add more contents to the lecture slides, including more examples, detailed explanations, and Python code snippets.
+- Add more tutorial questions and solutions.
+
+**Status:**
+
+- <span style="color:#18bc9c;">**Green icon:**</span> Materials are ready and available.
+- <span style="color:orange;">**Orange icon:**</span> Materials are waiting to be uploaded.
+- <span style="color:red;">**Red icon:**</span> Materials are not yet available.
+
+
+| Date | Time | Topic | LT | TUT | SOLS |
+|:---------:|:---------:|-------------------------|:----:|:----:|:----:|
+| Thu 4 | 6:10 - 9:40 PM | 1. Intro to Supply Chain & Optimisation | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" >}}](https://zamnolence.github.io/scmo-slides/01lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" >}}](#01tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" >}}](#01sols) |
+| Fri 5 | 6:10 - 9:40 PM | 2. Network Design - Single-Echelon Single-Commodity (SESC) | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" >}}](https://zamnolence.github.io/scmo-slides/02lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" >}}](#02tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" >}}](#02sols) |
+| | 5 PM | [Assignment Released](https://zamnolence.github.io/scmo_book/2026/scmo-2026-assignment.pdf) | | | |
+| Sun 7 | 1:30 - 5:10 PM | 3. Network Design - Two-Echelon Multi-Commodity (TEMC) | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" >}}](https://zamnolence.github.io/scmo-slides/03lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" >}}](#03tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" >}}](#03sols) |
+| Mon 8 | 6:10 - 9:40 PM | 4. Network Design under Uncertainty | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" >}}](https://zamnolence.github.io/scmo-slides/04lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" >}}](#04tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" style="color:red;" >}}](#04sols) |
+| Tue 9 | 6:10 - 9:40 PM | 5. Demand Forecasting Techniques | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" >}}](https://zamnolence.github.io/scmo-slides/05lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" >}}](#05tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" style="color:red;" >}}](#05sols) |
+| Wed 10 | 6:10 - 9:40 PM | 6. Inventory Model: Single-Commodity | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture"  style="color:orange;" >}}](https://zamnolence.github.io/scmo-slides/06lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" style="color: orange;" >}}](#06tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" style="color:red;" >}}](#06sols) |
+| Thu 11 | 8:00 - 11:40 AM | 7. Inventory Model: Discount and Multi-Commodity | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" style="color:red;" >}}](https://zamnolence.github.io/scmo-slides/07lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" style="color: red;" >}}](#07tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" style="color:red;" >}}](#07sols) |
+| Fri 12 | 6:10 - 9:40 PM | 8. Stochastic Inventory Model: Single and Multi-Period | [{{< iconify grommet-icons:workshop title="Lecture" label="Lecture" style="color:red;" >}}](https://zamnolence.github.io/scmo-slides/08lecture#/title-slide) | [{{< iconify fe:document title="Tutorial" label="Tutorial" style="color: red;" >}}](#08tut) | [{{< iconify ant-design:solution-outlined title="Solutions" label="Solutions" style="color:red;" >}}](#08sols) |
+| Sun 14 | 6:10 - 9:40 PM | Revision<br>**Assignment Due at 9:40 PM** | | | |
+
+: {.striped .hover}
+
+## 2025 Materials {.unnumbered}
+
+- Lecture Slides
+    - [Lecture 1: Introduction to Supply Chain and Optimisation](https://zamnolence.github.io/scmo_book/2025/01_Introduction.pdf)
+    - [Lecture 2: Network Design - SESC](https://zamnolence.github.io/scmo_book/2025/02_SC_NetworkDesign_SESC.pdf)
+    - [Lecture 3: Network Design - TEMC](https://zamnolence.github.io/scmo_book/2025/03_SC_NetworkDesign_TEMC.pdf)
+    - [Lecture 4: Network Design under Uncertainty](https://zamnolence.github.io/scmo_book/2025/04_SC_NetworkDesign_Uncertainty.pdf)
+    - [Lecture 5: Demand Forecasting Techniques](https://zamnolence.github.io/scmo_book/2025/05_Forecasting_Techniques.pdf)
+    - [Lecture 6: Inventory Model - Single-Commodity](https://zamnolence.github.io/scmo_book/2025/06_InventoryModel.pdf)
+    - [Lecture 7: Inventory Model - Discount](https://zamnolence.github.io/scmo_book/2025/07_InventoryModel_with_Discount.pdf)
+    - [Lecture 8: Stochastic Inventory Model](https://zamnolence.github.io/scmo_book/2025/08_Stochastic_InventoryModel.pdf)
+
+- Exam Materials
+    - [Exam Paper](https://zamnolence.github.io/scmo_book/2025/scmo-exam-2025.pdf)
+    - [Solutions](https://zamnolence.github.io/scmo_book/2025/scmo-exam-sols-2025.pdf)

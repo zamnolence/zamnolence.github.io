@@ -1,0 +1,102 @@
+# Tutorial 2 Exercises {#02tut .unnumbered}
+
+This tutorial trains you to quantify the elements of an optimisation model:
+
+- **Decision variables:** quantities of resources used (e.g., money allocated) or levels of activities (e.g., units produced, gallons blended).
+- **Objective:** a function of decision variables to be maximised/minimised.
+- **Constraints:** relationships/limits the decision variables must satisfy.
+
+### Question 1
+
+With precisely 2700 sq. cm. of cardboard, you wish to construct a box (width: $x$, depth: $y$, height: $z$) containing a volume $V$. You require the width to double its depth. You would like to maximise the volume of the box. Which values of $x, y, z$ will maximise the volume?
+
+---
+
+### Question 2
+
+A manufacturing facility produces four types of wood panelling: Tahoe, Pacific, Savannah, and Aspen. Each product is manufactured using pine chips and oak chips and requires both gluing and pressing processes.
+
+The profit earned per pallet is as follows:
+
+- \$450 for Tahoe,
+- \$1140 for Pacific,
+- \$800 for Savannah, and
+- \$400 for Aspen.
+
+The factory operates under limited resource availability. During the planning period, there are 5,800 quarts of glue available, 730 pressing machine hours, and 29,200 pounds of pine chips. In addition, the supply of oak chips is limited to a fixed total amount.
+
+|| Tahoe | Pacific | Savannah | Aspen | Capacity |
+|---|---|---|---|---|---|
+| Glueing (quarts) | 50 | 50 | 100 | 50 | 5800 quarts |
+| Pressing (hours) | 5 | 15 | 10 | 5 | 730 hours |
+| Pine chips (pounds) | 500 | 400 | 300 | 200 | 29200 pounds |
+| Oak chips (pounds) | 500 | 750 | 250 | 500 | 60500 pounds |
+| Profit per pallet (\$) | 450 | 1150 | 800 | 400 | - |
+
+Let decision variables be $X_1,X_2,X_3,X_4$ (pallets of Tahoe, Pacific, Savannah, Aspen). Write down the optimisation model to maximise profit, and solve for the optimal production plan. What is the maximum profit?
+
+---
+
+## Question 3
+
+Consider the problem of diet optimisation. There are four different types of food: Brownies, Ice Cream, Cola, and Cheese Cake. The nutrition values and cost per unit are as follows: 
+
+
+| | Brownies | Ice Cream | Cola | Cheese Cake |
+|---|---|---|---|---|
+| Calories | 400 | 200 | 150 | 500 |
+| Chocolate | 3 | 2 | 0 | 0 |
+| Sugar | 2 | 2 | 4 | 4 |
+| Fat | 2 | 4 | 1 | 5 |
+| Cost (\$) | \$0.50 | \$0.20 | \$0.30 | \$0.80 |
+
+The objective is to minimise the cost of the diet while satisfying the following nutritional requirements:
+
+- At least 500 calories,
+- At least 5 units of chocolate,
+- At least 10 units of sugar, and
+- At least 8 units of fat.
+
+---
+
+## Question 4
+
+TowAlong makes trailers at Kansas City, Denver, and Raleigh plants and ships these units to Birmingham, Milwaukee, Los Angeles, and Seattle distribution centres. In planning production for the next year, TowAlong estimates Kansas City, Denver, and Raleigh plant’s unit shipping cost between any plant and distribution centre, plant capacities, and distribution centre demands. These numbers are given in the table.
+
+| Plant/DC | Birmingham | Milwaukee | LA | Seattle | Capacity |
+|---|---|---|---|---|---|
+| Kansas City | \$35 | \$40 | \$60 | \$120 | 12,000 |
+| Denver | \$30 | \$30 | \$45 | \$130 | 8,000 |
+| Raleigh | \$60 | \$65 | \$50 | \$100 | 5,000 |
+| Demand | 9,000 | 3,000 | 9,500 | 1,500 | - |
+
+---
+
+## Question 5
+
+Sunchem, a manufacturer of printing inks, has five manufacturing plants worldwide. Their locations and capacities are shown in Table 4 along with the cost of producing 1 ton of ink at each facility. The production costs are in the local currency of the country where the plant is located. The major markets for the inks are North America, South America, Europe, Japan, and the rest of Asia. Demand at each market is shown in Table 4. Transportation costs from each plant to each market in U.S. dollars are shown in Table 4. Management must come up with a production plan for the next year.
+
+(a) If exchange rates are expected as in Table 2, and no plant can run below 50 percent of capacity, how much should each plant produce and which markets should each plant supply?
+(b) If there are no limits on the amount produced in a plant, how much should each plant produce?
+(c) Can adding 10 percent of capacity in any plant reduce costs?
+(d) How should Sunchem account for the fact that exchange rates fluctuate over time?
+
+| Supply Region | N. America | S. America | Europe | Japan | Asia | Capacity (tons/year) | Production cost/ton |
+|---|---|---|---|---|---|---|---|
+| United States | 600 | 1,200 | 1,300 | 2,000 | 1,700 | 185 | \$10,000 |
+| Germany | 1,300 | 1,400 | 600 | 1,400 | 1,300 | 475 | €15,000 |
+| Japan | 2,000 | | 2,100 | 1,400 | 300 | 900 | 50 | | ¥1,800,000 |
+| Brazil | 1,200 | 800 | 1,400 | 2,100 | 2,100 | 210 | BRL13,000 |
+| India | 2,200 | 2,300 | 1,300 | 1,000 | 800 | 80 | INR400,000 |
+
+: Table 1. Transportation costs, production capacity, and cost by region
+
+| | USD | EUR | JPY | BRL | INR |
+|---|---|---|---|---|---|
+| USD | 1.0000 | 0.8794 | 141.94 | 5.6336 | 85.282 |
+| EUR | 1.1374 | 1.0000 | 161.45 | 6.408 | 97.0 |
+| JPY | 0.0070 | 0.0062 | 1.0000 | 0.045 | 0.60 |
+| BRL | 0.1775 | 0.1560 | | 22.22 | 1.0000 | 15.14 |
+| INR | 0.0117 | 0.0103 | 1.67 | 0.066 | 1.0000 |
+
+: Table 2. Exchange Rates as of April 2025

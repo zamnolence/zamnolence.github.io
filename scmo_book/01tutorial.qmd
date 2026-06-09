@@ -1,0 +1,180 @@
+# Tutorial 1 Exercises {#01tut .unnumbered}
+
+## Part A: Supply Chain Concepts and Roles {.unnumbered}
+
+### Question 1 {.unnumbered}
+
+Outline the main responsibilities of **manufacturers, distributors,** and **retailers** in evaluating and enhancing their operations, decision-making procedures, and management of the supply chain.
+
+### Question 2 {.unnumbered}
+
+Define the objectives pursued by **manufacturers, distributors**, and **retailers** within the supply chains of the following products.
+
+1. Smartphone 
+2. Computer
+3. Kitchenware
+
+---
+
+## Part B: Optimisation Concepts {.unnumbered}
+
+### Question 1 {.unnumbered}
+
+Consider the function
+
+$$
+f(x,y)=\frac{x+y}{x^2+y^2+1}.
+$$
+
+1. Find the gradient of the function.
+2. Determine the critical (stationary) points.
+3. Find the Hessian of the function.
+4. Classify the stationary points as saddle points, strict or non-strict local/global minima, or strict or non-strict local/global maxima.
+
+### Question 2 {.unnumbered}
+
+A Cobb-Douglas production function for a new company is given by
+
+$$
+f(x,y)=50x^{2/5}y^{3/5},
+$$
+
+where $x$ represents units of labour and $y$ represents units of capital. Suppose each unit of labour costs $\$100$ and each unit of capital costs $\$200$. If the budget constraint is $\$30{,}000$, find the maximum production level for this manufacturer.
+
+### Question 3 {.unnumbered}
+
+Consider the optimisation problem
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad & x_1+2x_2=5.
+\end{aligned}
+$$
+
+1. Write down the Lagrangian formula $L(x_1,x_2,\lambda)$.
+2. Determine all constraints of $L(x_1,x_2,\lambda)$.
+3. Find the values of $x_1$ and $x_2$.
+
+<!-- ### Question 4 {.unnumbered}
+
+Consider the optimisation problem
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad & x_1+2x_2=5,\\
+& 2x_1-x_2=10.
+\end{aligned}
+$$
+
+1. Write down the Lagrangian formula $L(x_1,x_2,\lambda_1,\lambda_2)$.
+2. Determine all constraints of $L(x_1,x_2,\lambda_1,\lambda_2)$.
+
+### Question 5 {.unnumbered}
+
+Consider the optimisation problem
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x_1,x_2)=x_1^2+x_2^2+x_1x_2-5x_2\\
+\text{subject to}\quad & x_1+2x_2=5,\\
+& 2x_1-x_2=10,\\
+& x_1+x_2\le 4.
+\end{aligned}
+$$
+
+1. Write down the Lagrangian formula $L(x_1,x_2,\lambda_1,\lambda_2,\mu)$.
+2. Determine all constraints of $L(x_1,x_2,\lambda_1,\lambda_2,\mu)$. -->
+
+---
+
+## Part C: Critical Points of Functions {.unnumbered}
+
+For each function below:
+
+1. Find all critical points by setting the partial derivatives to zero.
+2. Form the Hessian matrix at each critical point.
+3. Classify each critical point as a local minimum, local maximum, saddle point, or inconclusive using the second derivative test.
+
+Functions:
+
+1. $f(x,y)=(x-2)^2+2(y-1)^2$
+2. $f(x,y)=x^3+y^3-3xy$
+3. $f(x,y)=2xy-x^4-x^2-y^2$
+4. $f(x,y)=e^{-(x^2+y^2)}$
+5. $f(x,y)=\sin(x)\sin(y)$
+6. $f(x,y)=\ln(1+x^2+y^2)$
+7. $f(x,y,z)=x^2+y^2-z^2$
+
+---
+
+## Part D: Lagrange Multipliers {.unnumbered}
+
+Use the method of Lagrange multipliers to find and classify the extrema, local or global, for the following problems.
+
+1. $f(x,y)=x^2+y^2$, subject to $x+y=1$.
+2. $f(x,y)=xy$, subject to $x^2+y^2=1$.
+3. $f(x,y)=x^2+4xy+y^2$, subject to $x+y=3$.
+4. $f(x,y)=e^{xy}$, subject to $x^2+y^2=1$.
+5. $f(x,y)=x^3y$, subject to $x^2+y^2=1$.
+6. $f(x,y)=\sin(x)+\cos(y)$, subject to $x+y=\pi/2$.
+7. $f(x,y,z)=x+y+z$, subject to $x^2+y^2+z^2=1$.
+
+---
+
+## Part E: KKT Conditions {.unnumbered}
+
+Use the KKT conditions to find and classify the extrema for the following problems. For inequalities, rewrite them in the form $g(x)\le 0$ if necessary.
+
+### Question 1 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x,y)=(x-1)^2+(y-2)^2\\
+\text{subject to}\quad & -x-y+3\le 0,\\
+& -x\le 0.
+\end{aligned}
+$$
+
+<!-- ### Question 2 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Maximise}\quad & f(x,y)=x^2y\\
+\text{subject to}\quad & x+y-1=0,\\
+& -x\le 0.
+\end{aligned}
+$$ -->
+
+### Question 2 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Maximise}\quad & f(x,y)=\ln(x)+\ln(y)\\
+\text{subject to}\quad & x+y-1=0,\\
+& -x\le 0,\\
+& -y\le 0.
+\end{aligned}
+$$
+
+### Question 3 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x,y)=e^x+e^y\\
+\text{subject to}\quad & x+y=0,\\
+& x-1\le 0.
+\end{aligned}
+$$
+
+### Question 4 {.unnumbered}
+
+$$
+\begin{aligned}
+\text{Minimise}\quad & f(x,y,z)=x^2+y^2+z^2\\
+\text{subject to}\quad & x+y+z-1=0,\\
+& -x\le 0.
+\end{aligned}
+$$
+

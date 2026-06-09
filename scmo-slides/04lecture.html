@@ -603,7 +603,7 @@ Lecturer: Sam Wiwatanapataphee
 <p>Consider a simple example of receiving $1 in one year. The present value (PV) of that future cash flow can be calculated using the formula:</p>
 <div class="columns">
 <div class="column">
-<div id="6f506fba" class="cell" data-execution_count="1">
+<div id="b90cc305" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -620,7 +620,7 @@ Lecturer: Sam Wiwatanapataphee
 </div>
 </div></div>
 <div class="fragment">
-<div id="2df30b90" class="cell" data-execution_count="2">
+<div id="290727c0" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -2284,16 +2284,16 @@ NPV &amp;= PV - C_0 = 65,455 - 50,000 = \textbf{\$15,455} &gt; 0
   }
 }}%%
 flowchart LR
-  subgraph P0["Year 0::"]
+  subgraph P0["Year 0"]
   A([-$50k])
   end
 
-  subgraph P1["Year 1::"]
+  subgraph P1["Year 1"]
   A --&gt;|0.6| B([High&lt;br&gt;-$20k])
   A --&gt;|0.4| C([Low])
   end
 
-  subgraph P2["Year 2::"]
+  subgraph P2["Year 2"]
   B --&gt;|0.7| D([$150k])
   B --&gt;|0.3| E([$50k])
   end
@@ -2399,16 +2399,16 @@ NPV_\text{Year 0} = PV_\text{Year 0} - C_0 = 48,595 - 50,000 = \textbf{-\$1,405}
   }
 }}%%
 flowchart LR
-  subgraph P0["Year 0::"]
+  subgraph P0["Year 0"]
   A([-$50k])
   end
 
-  subgraph P1["Year 1::"]
+  subgraph P1["Year 1"]
   A --&gt;|0.6| B([$30k&lt;br&gt;-$20k])
   A --&gt;|0.4| C([$10k])
   end
 
-  subgraph P2["Year 2::"]
+  subgraph P2["Year 2"]
   B --&gt;|0.7| D([$150k])
   B --&gt;|0.3| E([$50k])
   end
@@ -2568,12 +2568,12 @@ NPV_\text{Year 0} = PV_\text{Year 0} - C_0 = 68,595 - 50,000 = \textbf{\$18,595}
 flowchart LR
 
 %% ----- Period 0 -----
-subgraph P0["Period 0::"]
+subgraph P0["Period 0"]
 A["D=100k&lt;br/&gt;p=$1.2"]
 end
 
 %% ----- Period 1 -----
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 B["D = 100(1.2) = 120&lt;br/&gt;&lt;br/&gt; P = 1.2(1.1) = $1.32"]
 C["D = _________________&lt;br/&gt;&lt;br/&gt; P = _________________"]
 D["D = _________________&lt;br/&gt;&lt;br/&gt; P = _________________"]
@@ -2634,12 +2634,12 @@ classDef default stroke:#000000,color:#000000;
 flowchart LR
 
 %% ----- Period 0 -----
-subgraph P0["Period 0::"]
+subgraph P0["Period 0"]
 A["D=100k&lt;br/&gt;p=$1.2"]
 end
 
 %% ----- Period 1 -----
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 B["D = 120&lt;br/&gt;P = $1.32"]
 C["D = 120&lt;br/&gt;P = $1.08"]
 D["D = 80&lt;br/&gt;P = $1.32"]
@@ -2700,12 +2700,12 @@ classDef default stroke:#000000,color:#000000;
 flowchart LR
 
 %% ----- Period 0 -----
-subgraph P0["Period 0::"]
+subgraph P0["Period 0"]
 A["D=100k&lt;br/&gt;p=$1.2"]
 end
 
 %% ----- Period 1 -----
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 B["D = 120&lt;br/&gt;P = $1.32"]
 C[" "]
 D[" "]
@@ -2713,7 +2713,7 @@ E[" "]
 end
 
 %% ----- Period 2 -----
-subgraph P2["Period 2::"]
+subgraph P2["Period 2"]
 F["D = ______________&lt;br/&gt;P = ______________"]
 G["D = ______________&lt;br/&gt;P = ______________"]
 H["D = ______________&lt;br/&gt;P = ______________"]
@@ -2778,12 +2778,12 @@ classDef default stroke:#000000,color:#000000, fill:#ffffff;
 flowchart LR
 
 %% ----- Period 0 -----
-subgraph P0["Period 0::"]
+subgraph P0["Period 0"]
 A["D=100k&lt;br/&gt;p=$1.2"]
 end
 
 %% ----- Period 1 -----
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 B["D = 120&lt;br/&gt;P = $1.32"]
 C[" "]
 D[" "]
@@ -2791,7 +2791,7 @@ E[" "]
 end
 
 %% ----- Period 2 -----
-subgraph P2["Period 2::"]
+subgraph P2["Period 2"]
 F["D = 144&lt;br/&gt;P = $1.45"]
 G["D = 144&lt;br/&gt;P = $1.19"]
 H["D = 96&lt;br/&gt;P = $1.45"]
@@ -2935,7 +2935,7 @@ classDef default stroke:#000000,color:#000000, fill:#ffffff;
 
 <div style="font-size: 85%;">
 <ol start="2" type="1">
-<li>Calculate EMV for each node at Period 1, where <span class="math inline">\(EMV = \sum(\text{Probability} \times \text{Profit})\)</span></li>
+<li>Calculate <span class="math inline">\(EMV_2\)</span> for each node at Period 1, where <span class="math inline">\(EMV_2 = \sum(\text{Probability} \times \text{Profit}_2)\)</span></li>
 </ol>
 </div>
 <div class="columns" style="font-size: 83%">
@@ -3012,8 +3012,8 @@ classDef default stroke:#000000,color:#000000, fill:#ffffff;
 </div><div class="column" style="width:70%;">
 <ul>
 <li class="fragment">For each terminal node, calculate EV.</li>
-<li class="fragment">Sum the corresponding EVs to get EMV for each node at Period 1.</li>
-<li class="fragment"><strong>Example.</strong> Red Node (D=120, P=$1.32):</li>
+<li class="fragment">Sum the corresponding EVs to get <span class="math inline">\(EMV_2\)</span>.</li>
+<li class="fragment"><strong>Example.</strong> Red Node <span class="math inline">\((D = 120, P = \$1.32)\)</span>:</li>
 </ul>
 <div class="fragment">
 <div class="cell" data-reveal="true" data-layout-align="default">
@@ -3024,11 +3024,11 @@ classDef default stroke:#000000,color:#000000, fill:#ffffff;
 <pre class="mermaid mermaid-js">%%{init:{'flowchart':{'nodeSpacing': 10, 'rankSpacing': 40}}}%%
 flowchart LR
 
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 A["D=120&lt;br/&gt;p=$1.32"]
 end
 
-subgraph P2["Period 2::"]
+subgraph P2["Period 2"]
 B["D=144&lt;br/&gt;p=$1.45"]
 C["D=144&lt;br/&gt;p=$1.19"]
 D["D=96&lt;br/&gt;p=$1.45"]
@@ -3068,14 +3068,14 @@ linkStyle default stroke:#000,stroke-width:2px
 </div>
 </div>
 <ul>
-<li class="fragment">Red Node EMV = -8.28 + 1.08 - 5.52 + 0.72 = -12.00</li>
+<li class="fragment"><strong>Red Node:</strong> <span class="math inline">\(EMV_2\)</span> = -8.28 + 1.08 - 5.52 + 0.72 = -12.00</li>
 </ul>
 </div></div>
 </section>
 <section class="slide level2">
 
 <div style="font-size: 83%">
-<p>Calculate EMV for the blue node (D = 120, P = $1.08) at Period 1.</p>
+<p><strong>Exercise:</strong> Calculate <span class="math inline">\(EMV_2\)</span> for the blue node <span class="math inline">\((D = 120, P = \$1.08)\)</span>.</p>
 </div>
 <div class="columns" style="font-size: 83%">
 <div class="column" style="width:35%;">
@@ -3155,11 +3155,11 @@ linkStyle default stroke:#000,stroke-width:2px
 <pre class="mermaid mermaid-js">%%{init:{'flowchart':{'nodeSpacing': 15, 'rankSpacing': 40, 'curve': 'basis', 'layout': 'elk'}}}%%
 flowchart LR
 
-subgraph P1["Period 1::"]
+subgraph P1["Period 1"]
 A["D=120&lt;br/&gt;p=$1.08"]
 end
 
-subgraph P2["Period 2::"]
+subgraph P2["Period 2"]
 B["D=144&lt;br/&gt;p=$1.19"]
 C["D=144&lt;br/&gt;p=$0.97"]
 D["D=96&lt;br/&gt;p=$1.19"]
@@ -3195,28 +3195,27 @@ linkStyle default stroke:#000,stroke-width:2px
 </div>
 </div>
 </div>
-<p>Blue Node EMV =</p>
-<ul>
-<li class="fragment">Calculate the EMV for the other two nodes at Period 1.</li>
-</ul>
+<p>Blue Node <span class="math inline">\(EMV_2\)</span> =</p>
+<p>Yellow Node <span class="math inline">\(EMV_2\)</span> =</p>
+<p>Green Node <span class="math inline">\(EMV_2\)</span> =</p>
 </div></div>
 </section>
 <section class="slide level2 scrollable">
 
 <ol start="3" type="1">
-<li class="fragment">Calculate EMV at Period 0</li>
+<li class="fragment">Calculate Total EMV at Period 1</li>
 </ol>
 <div class="fragment" style="font-size: 85%">
 <div class="center" style="color:blue;">
-<p>P1 Nodes <span class="math inline">\(\quad\)</span> From step 2 <span class="math inline">\(\qquad\)</span> /1.1 <span class="math inline">\(\quad\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> D x P <span class="math inline">\(\;\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
+<p>P1 Nodes <span class="math inline">\(\;\;\)</span> Step 2 <span class="math inline">\(\quad\)</span> /1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> D x P <span class="math inline">\(\;\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 1 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_2\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_1\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>
@@ -3267,7 +3266,7 @@ linkStyle default stroke:#000,stroke-width:2px
 </tbody>
 </table>
 <p><span class="math display">\[
-EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
+EMV_\text{Period 1} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 \]</span></p>
 </div>
 <ol start="4" type="1">
@@ -3275,15 +3274,15 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 </ol>
 <div class="fragment" style="font-size: 85%">
 <div class="center" style="color:blue;">
-<p>P0 Node <span class="math inline">\(\;\;\)</span> From step 3 <span class="math inline">\(\quad\)</span> EMV/1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> D x P <span class="math inline">\(\;\;\)</span> NPV</p>
+<p>P0 Node <span class="math inline">\(\;\;\)</span> Step 3 <span class="math inline">\(\quad\)</span> /1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> D x P <span class="math inline">\(\;\;\)</span> NPV</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 0 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_1\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_0\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>
@@ -3301,9 +3300,12 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 </tr>
 </tbody>
 </table>
+<p><span class="space-out"></span></p>
+<div class="center">
 <ul>
 <li class="fragment">The NPV for option 1 is <strong>$5,471.07</strong> (if calculate exactly up to 2 decimal places)</li>
 </ul>
+</div>
 </div>
 </section>
 <section class="slide level2 scrollable">
@@ -3405,7 +3407,7 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 <div class="columns">
 <div class="column" style="width:29%;">
 <ol start="2" type="1">
-<li class="fragment">Calculate EMV for each node at Period 1</li>
+<li class="fragment">Calculate <span class="math inline">\(EMV_2\)</span> for each node at Period 1</li>
 </ol>
 <div class="fragment">
 <p><img data-src="figs/dts2.png" style="width:90.0%"></p>
@@ -3419,8 +3421,8 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: right;">Demand (D)</th>
-<th style="text-align: right;">Spot Price (P)</th>
+<th style="text-align: right;">D</th>
+<th style="text-align: right;">P</th>
 <th style="text-align: right;">Profit (Payoff)</th>
 <th style="text-align: right;">EV = Payoff x 0.25</th>
 </tr>
@@ -3486,10 +3488,10 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 </div></div>
 <div class="center">
 <ul>
-<li class="fragment">Red Node EMV = 2.97 + 5.83 + 4.28 + 4.28 = 17.36</li>
-<li class="fragment">Blue Node EMV = 5.83 + 8.25 + 4.28 + 4.28 = 22.64</li>
-<li class="fragment">Yellow Node EMV = 4.28 + 4.28 + -5.48 - 5.48 = -2.40</li>
-<li class="fragment">Green Node EMV = 4.28 + 4.28 - 5.48 - 5.48 = -2.40</li>
+<li class="fragment"><strong>Red Node</strong> <span class="math inline">\(EMV_2\)</span> = 2.97 + 5.83 + 4.28 + 4.28 = 17.36</li>
+<li class="fragment"><strong>Blue Node</strong> <span class="math inline">\(EMV_2\)</span> = 5.83 + 8.25 + 4.28 + 4.28 = 22.64</li>
+<li class="fragment"><strong>Yellow Node</strong> <span class="math inline">\(EMV_2\)</span> = 4.28 + 4.28 + -5.48 - 5.48 = -2.40</li>
+<li class="fragment"><strong>Green Node</strong> <span class="math inline">\(EMV_2\)</span> = 4.28 + 4.28 - 5.48 - 5.48 = -2.40</li>
 </ul>
 </div>
 </div>
@@ -3497,19 +3499,19 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 <section class="slide level2 scrollable">
 
 <ol start="3" type="1">
-<li class="fragment">Calculate EMV at Period 0</li>
+<li class="fragment">Calculate <span class="math inline">\(EMV_1\)</span> at Period 1</li>
 </ol>
 <div class="fragment" style="font-size: 85%">
 <div class="center" style="color:blue;">
-<p>P1 Nodes <span class="math inline">\(\quad\)</span> From step 2 <span class="math inline">\(\qquad\)</span> /1.1 <span class="math inline">\(\quad\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> 100+extra <span class="math inline">\(\;\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
+<p>P1 Nodes <span class="math inline">\(\;\)</span> Step 2 <span class="math inline">\(\;\;\)</span> /1.1 <span class="math inline">\(\;\)</span> 1.22 x D <span class="math inline">\(\;\)</span> 100+extra <span class="math inline">\(\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 1 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_2\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_1\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>
@@ -3560,7 +3562,7 @@ EMV_\text{Period 0} = -5.73 + 8.02 - 3.82 + 5.35 = \textbf{3.82}
 </tbody>
 </table>
 <p><span class="math display">\[
-EMV_\text{Period 0} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
+EMV_\text{Period 1} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
 \]</span></p>
 </div>
 <ol start="4" type="1">
@@ -3568,15 +3570,15 @@ EMV_\text{Period 0} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
 </ol>
 <div class="fragment" style="font-size: 80%">
 <div class="center" style="color:blue;">
-<p>P0 Node <span class="math inline">\(\;\;\)</span> From step 3 <span class="math inline">\(\quad\)</span> EMV/1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> 100+extra <span class="math inline">\(\;\;\)</span> NPV</p>
+<p>P0 Node <span class="math inline">\(\;\)</span> Step 3 <span class="math inline">\(\;\;\)</span> /1.1 <span class="math inline">\(\;\)</span> 1.22 x D <span class="math inline">\(\;\)</span> 100+extra <span class="math inline">\(\;\)</span> NPV</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 0 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_1\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_0\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>
@@ -3594,21 +3596,26 @@ EMV_\text{Period 0} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
 </tr>
 </tbody>
 </table>
+<p><span class="space-out"></span></p>
+<div class="center">
 <ul>
 <li class="fragment">The NPV for option 2 is <strong>$38,363.64</strong> (if calculate exactly up to 2 decimal places)</li>
 </ul>
+</div>
 </div>
 </section>
 <section class="slide level2">
 
 <div style="font-size: 85%;">
-<p><strong>Option 3:</strong> Sign a flexible lease with a minimum charge of $10,000, the company is able to</p>
+<p><strong>Option 3:</strong> Sign a flexible lease with a minimum charge of $10,000, the company has</p>
 <ul>
-<li class="fragment"><p>Have the flexibility of using between 60,000 and 100,000 sq.ft of warehouse space at $1/sq.ft./year.</p></li>
+<li class="fragment"><p>Flexibility of using between 60,000 and 100,000 sq.ft of warehouse space at $1/sq.ft./year.</p></li>
 <li class="fragment"><p>Pay $60,000/year for the first 60,000 sq.ft. and can then use up to another 40,000 sq.ft. on demand of $1/sq.ft.</p></li>
 </ul>
 <div class="fragment">
-<p>The total cost for this option is calculated by min(100000, D) x $1 + max(0, D-100000) x P.</p>
+<p><span class="math display">\[
+\text{Cost} = \min(100000, D) \times \$1 + \max(0, D-100000) \times P.
+\]</span></p>
 </div>
 <div class="fragment">
 <table class="table-striped caption-top">
@@ -3704,15 +3711,15 @@ EMV_\text{Period 0} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
 
 <div class="fragment" style="font-size: 90%">
 <div class="center" style="color:blue;">
-<p>P1 Nodes <span class="math inline">\(\quad\)</span> From step 2 <span class="math inline">\(\qquad\)</span> /1.1 <span class="math inline">\(\quad\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> flexible <span class="math inline">\(\;\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
+<p>P1 Nodes <span class="math inline">\(\;\;\)</span> Step 2 <span class="math inline">\(\;\;\)</span> /1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> flexible <span class="math inline">\(\;\;\)</span> Payoff <span class="math inline">\(\;\)</span> x0.25</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 1 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_2\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_1\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>
@@ -3763,21 +3770,21 @@ EMV_\text{Period 0} = 8.94 + 11.34 - 1.14 - 1.14 = \textbf{18.00}
 </tbody>
 </table>
 <p><span class="math display">\[
-EMV_\text{Period 0} = 9.40 + 11.80 + 8.40 + 8.40 = \textbf{38.00}
+EMV_\text{Period 1} = 9.40 + 11.80 + 8.40 + 8.40 = \textbf{38.00}
 \]</span></p>
 </div>
 <p><br></p>
 <div class="fragment" style="font-size:90%">
 <div class="center" style="color:blue;">
-<p>P0 Node <span class="math inline">\(\;\;\)</span> From step 3 <span class="math inline">\(\quad\)</span> EMV/1.1 <span class="math inline">\(\;\;\)</span> 1.22 x D <span class="math inline">\(\;\;\)</span> 100+upfront <span class="math inline">\(\;\;\)</span> NPV</p>
+<p><span class="math inline">\(\;\;\)</span> P0 Node <span class="math inline">\(\;\)</span> Step 3 <span class="math inline">\(\;\;\)</span> /1.1 <span class="math inline">\(\;\)</span> 1.22 x D <span class="math inline">\(\;\)</span> 100+upfront <span class="math inline">\(\,\)</span> NPV</p>
 </div>
 <table class="table-striped caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">D</th>
 <th style="text-align: right;">P</th>
-<th style="text-align: right;">Period 0 EMV</th>
-<th style="text-align: right;">Period 0 PV</th>
+<th style="text-align: right;"><span class="math inline">\(EMV_1\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(PV_0\)</span></th>
 <th style="text-align: right;">Revenue</th>
 <th style="text-align: right;">Cost</th>
 <th style="text-align: right;">Profit</th>

@@ -1,0 +1,193 @@
+# Tutorial 5 Exercises {#05tut .unnumbered}
+
+### Question 1
+
+You are the inventory analyst for a distribution centre that tracks weekly product demand. You are tasked with using four different forecasting methods to predict demand for the upcoming week and evaluate their performance.
+
+| Week | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Demand (Units) | 120 | 130 | 125 | 135 | 140 | 150 | 145 |
+
+(i) Treat Week as the independent variable and Demand as the dependent variable $Y$.  
+(ii) Calculate the regression equation using the least squares method.  
+(iii) Use the equation to forecast demand for Week 8.  
+(iv) Using a 3-period SMA, compute the forecast for Week 8.  
+(v) Using a 3-period WMA with weights: 0.5, 0.3, and 0.2 for most recent, middle, and oldest. Compute the forecast for Week 8.  
+(vi) Using SES with smoothing constant 0.4 and initial forecast 120. Compute the forecast for Week 8.  
+(vii) Compute the forecast errors (absolute error) for Weeks 4-7 using SMA, WMA, and SES.  
+(viii) Which method would you recommend for short-term forecasting in this case, and why?
+
+### Question 2
+
+A company records the following demand for a product over 12 periods.
+
+| Period | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|--------|---:|---:|---:|---:|---:|---:|---:|---:|---:|----:|----:|----:|
+| Demand | 210 | 205 | 198 | 192 | 188 | 182 | 178 | 170 | 165 | 160 | 155 | 150 |
+
+: {.responsive .striped .hover}
+
+
+The data shows a **downward trend** in demand over time.
+
+(a) Forecast demand for the next four periods (13--16) using naive forecasting method, $F_{t+1} = D_t.$
+
+(b) Discuss how the naive method performs when demand exhibits a trend.
+
+---
+
+### Question 3
+
+Using a **3-period moving average**, compute forecasts for periods 13--16.
+
+$$
+F_t = \frac{A_{t-1} + A_{t-2} + A_{t-3}}{3}
+$$
+
+where $A_t$ is the actual demand in period $t$.
+
+
+| Period | Demand $A_t$ | Forecast $F_t$|
+|--------|--------------|----------------|
+| 1 | 210 | |
+| 2 | 205 | |
+| 3 | 198 | |
+| 4 | 192 | |
+| 5 | 188 | |
+| 6 | 182 | |
+| 7 | 178 | |
+| 8 | 170 | |
+| 9 | 165 | |
+| 10 | 160 | |
+| 11 | 155 | |
+| 12 | 150 | |
+| 13 |     | |
+| 14 |     | |
+| 15 |     | |
+| 16 |     | |
+
+: {.striped .hover}
+
+Comment on whether the moving average method responds quickly to the downward trend.
+
+---
+
+### Question 4
+
+Use **exponential smoothing** with smoothing constant
+
+$$
+\alpha = 0.3
+$$
+
+The forecasting equation is
+
+$$
+F_{t+1} = F_t + \alpha (A_t - F_t)
+$$
+
+Assume the initial forecast $F_1 = A_1$, Compute forecasts for periods 13--16.
+
+
+| Period | Demand $A_t$ | Forecast $F_t$|
+|--------|--------------|----------------|
+| 1 | 210 | |
+| 2 | 205 | |
+| 3 | 198 | |
+| 4 | 192 | |
+| 5 | 188 | |
+| 6 | 182 | |
+| 7 | 178 | |
+| 8 | 170 | |
+| 9 | 165 | |
+| 10 | 160 | |
+| 11 | 155 | |
+| 12 | 150 | |
+| 13 |     | |
+| 14 |     | |
+| 15 |     | |
+| 16 |     | |
+
+: {.striped .hover}
+
+---
+
+### Question 5
+
+Fit a linear regression model
+
+$$
+\hat{Y}_t = a + bt
+$$
+
+
+(a) Estimate the parameters $a$ and $b$ using the least squares method.
+
+| | Period $X$ | Demand $Y$ | $X^2$ | $XY$ |
+|--|---|---|---|---|---|
+| | 1 | 1 | 210 | | |
+| | 2 | 2 | 205 | | |
+| | 3 | 3 | 198 | | |
+| | 4 | 4 | 192 | | |
+| | 5 | 5 | 188 | | |
+| | 6 | 6 | 182 | | |
+| | 7 | 7 | 178 | | |
+| | 8 | 8 | 170 | | |
+| | 9 | 9 | 165 | | |
+| | 10 | 10 | 160 | | |
+| | 11 | 11 | 155 | | |
+| | 12 | 12 | 150 | | |
+| sum | 78 | 2183 | | |
+
+: {.striped .hover}
+
+
+
+$$
+a = \frac{\sum Y - b\left(\sum X\right)}{n}
+$$ 
+
+
+$$
+b = \frac{n(\sum XY) - (\sum X)(\sum Y)}{n(\sum X^2) - (\sum X)^2}
+$$ 
+
+(b) Use the estimated regression equation to forecast demand for periods 13--16.
+
+---
+
+### Question 6
+
+(a) Which forecasting method is most appropriate for data with a downward trend?
+
+(b) Why might moving average forecasts lag behind the actual demand when a trend exists?
+
+(c) What are the advantages of using a trend model for forecasting?
+
+---
+
+<!-- ### Question 6
+
+A company observes quarterly demand for a seasonal product over 12 periods:
+
+| $t$ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|----:|----:|----:|
+| $D_t$ | 9000 | 14000 | 22000 | 30000 | 11000 | 16000 | 24000 | 34000 | 13000 | 17000 | 28000 | 36000 |
+
+: {.responsive .striped .hover}
+
+The seasonal cycle is quarterly ($p=4$).
+
+(a) Compute the average demand for each quarter.
+(b) Compute the overall average demand.
+(c) Estimate the multiplicative seasonal factors for all four quarters.
+(d) Deseasonalise the data.
+(e) Suppose the deseasonalised trend equation is
+    $$
+    \hat{D}_t = 15000 + 1200t.
+    $$
+    Forecast demand for periods 13,14,15, and 16 using
+    $$
+    F_{t+l} = \left[L + (t+l)T\right]S_{t+l}.
+    $$ -->
+   
