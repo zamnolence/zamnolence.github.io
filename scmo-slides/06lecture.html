@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="06lecture_files/libs/clipboard/clipboard.min.js"></script>
+<script src="06lecture_files/libs/quarto-html/tabby.min.js"></script>
+<script src="06lecture_files/libs/quarto-html/popper.min.js"></script>
+<script src="06lecture_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="06lecture_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="06lecture_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="06lecture_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.38">
+
+  <meta name="author" content="Lecturer: Sam Wiwatanapataphee">
+  <meta name="dcterms.date" content="2026-06-10">
+  <title>Topic 6: Inventory Model</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="06lecture_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="06lecture_files/libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="06lecture_files/libs/revealjs/dist/theme/quarto-31e77d737e81b9b945dd1098fae77c0e.css">
+  <link href="06lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="06lecture_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="06lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="06lecture_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="06lecture_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="06lecture_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="06lecture_files/libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="06lecture_files/libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="06lecture_files/libs/quarto-diagram/mermaid.css" rel="stylesheet">
+  
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    import elkLayouts from 'https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0/dist/mermaid-layout-elk.esm.min.mjs';
+    mermaid.registerLayoutLoaders(elkLayouts);
+  </script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Topic 6: Inventory Model</h1>
+  <p class="subtitle">05115130 Supply Chain Modelling and Optimisation</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Lecturer: Sam Wiwatanapataphee 
+</div>
+<div class="quarto-title-author-email">
+<a href="mailto:275287a@curtin.edu.au">275287a@curtin.edu.au</a>
+</div>
+        <p class="quarto-title-affiliation">
+            School of EECMS, Curtin University
+          </p>
+    </div>
+</div>
+
+  <p class="date">10 Jun 2026</p>
+</section>
+<section id="goals-today" class="slide level2 scrollable">
+<h2>Goals Today</h2>
+<ol type="1">
+<li class="fragment">Introduction to inventory model
+<ul>
+<li class="fragment">Inventory metrics</li>
+<li class="fragment">Inventory control objectives</li>
+<li class="fragment">Inventory cost components</li>
+<li class="fragment">Other variables</li>
+<li class="fragment">Types of inventory model</li>
+</ul></li>
+<li class="fragment">Economic order quantity (EOQ) model</li>
+<li class="fragment">Economic production quantity (EPQ) model</li>
+<li class="fragment">Reordering point and policy</li>
+</ol>
+</section>
+<section id="introduction" class="slide level2">
+<h2>1. Introduction</h2>
+<ul>
+<li class="fragment"><p><strong>Inventory:</strong> The stock of any item or resource used in an organisation.</p></li>
+<li class="fragment"><p><strong>Inventory system:</strong> Policies and controls to monitor stock levels and reorder timing/quantity.</p></li>
+</ul>
+<h4 class="center fragment" id="types-of-inventory">Types of Inventory</h4>
+<div class="columns">
+<div class="column center fragment">
+<div class="block green">
+<p><strong>Direct</strong></p>
+<p>Directly contributes to the production of finished goods. These are physical items that are integrated into the final product or play an active role in the manufacturing process.</p>
+<p><strong>Examples:</strong> Raw materials, WIP, finished goods, spare parts.</p>
+</div>
+</div><div class="column center fragment">
+<div class="block yellow">
+<p><strong>Indirect</strong></p>
+<p>Inventory that does not become part of the final product but is necessary to support the production or business operations.</p>
+<p><strong>Examples:</strong> Maintenance, Repair, and Operations (MRO) supplies, office supplies, tools, and equipment.</p>
+</div>
+</div></div>
+
+<!-- 
+- **Fluctuation:** Buffer stock, e.g. extra paper kept nearby a printer.
+- **Anticipation:** Stock built ahead, e.g. fans stocked before summer.
+- **Decoupling:** Safety stock that is set aside, e.g. extra raw materials.
+- **Transportation:** Items in transit. -->
+<aside><div>
+<p>WIP = work-in-process, items that are in the production process but are not yet finished goods.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h4 class="center" id="inventory-metrics">Inventory Metrics</h4>
+<p><span class="space-out"></span></p>
+<div style="font-size:0.85em;">
+<div class="columns">
+<div class="column" style="width:45%;">
+<h4 class="fragment" data-fragment-index="1" id="average-aggregate-inventory-value">Average aggregate inventory value</h4>
+<div class="fragment" data-fragment-index="2">
+<p><span class="math display">\[
+\boxed{\sum_{\text{all items}}(\text{Avg Units} \times \text{Cost per Unit})}
+\]</span></p>
+</div>
+<p><span class="space-out"></span></p>
+<h4 class="fragment" data-fragment-index="4" id="weeks-of-supply">Weeks of Supply</h4>
+<div class="fragment" data-fragment-index="5">
+<p><span class="math display">\[
+\boxed{\frac{\text{Avg aggregate inventory value}}{\text{the value of the sales per week}}}
+\]</span></p>
+</div>
+<p><br></p>
+<h4 class="fragment" data-fragment-index="7" id="inventory-turnover">Inventory Turnover</h4>
+<div class="fragment" data-fragment-index="8">
+<p><span class="math display">\[
+\boxed{\frac{\text{Avg Weekly Cost of Goods Sold}}{\text{Avg aggregate inventory value}}}
+\]</span></p>
+</div>
+</div><div class="column" style="width:55%;">
+<p><span class="space-out"></span></p>
+<div class="fragment" data-fragment-index="3">
+<p>The total average value of inventory held across all items, which helps track the financial investment tied up in inventory.</p>
+</div>
+<p><br></p>
+<p><span class="space-out"></span></p>
+<div class="fragment" data-fragment-index="6">
+<p>How long the avg inventory can support demand.</p>
+<p><strong>High value</strong>: overstocking or slow-moving inventory.</p>
+<p><strong>Low value:</strong> lean inventory or potential stockouts.</p>
+</div>
+<p><br></p>
+<p><span class="space-out"></span></p>
+<div class="fragment" data-fragment-index="9">
+<p>The number of times inventory is sold and replaced in a year, indicating how efficiently inventory is being used.</p>
+<p><strong>High turnover:</strong> implies faster sales or better inventory control.</p>
+<p><strong>Low turnover:</strong> could signal overstocking, obsolete items, or slow sales.</p>
+</div>
+</div></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="objectives-of-inventory-management">1.2 Objectives of Inventory Management</h3>
+<ul>
+<li class="fragment"><p><strong>An inventory model</strong> is a mathematical or analytical framework used by businesses to determine <strong>how much inventory to order, when to order it, and how to manage stock efficiently</strong>.</p></li>
+<li class="fragment"><p>The main goal is to <strong>balance costs and service levels</strong>—ensuring that products are available when needed while minimising expenses associated with ordering and holding inventory.</p></li>
+</ul>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>At its core, inventory management deals with three key questions:</p>
+<ul>
+<li class="fragment">How much to order?</li>
+<li class="fragment">When to order?</li>
+<li class="fragment">How to minimise total cost?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="inventory-cost-components">1.3 Inventory Cost Components</h3>
+<p>Inventory models help answer these questions by considering various <strong>cost components</strong>, such as</p>
+<div class="fragment">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Purchase Cost (PC)</td>
+<td>The amount paid to acquire inventory.</td>
+</tr>
+<tr class="even">
+<td>Inventory Holding Cost (IHC)</td>
+<td>The cost of storing and maintaining inventory over time, including storage, insurance, depreciation, and capital.</td>
+</tr>
+<tr class="odd">
+<td>Shortage Cost (SC)</td>
+<td>The cost incurred when demand cannot be met due to stockouts, which includes lost sales and emergency orders.</td>
+</tr>
+<tr class="even">
+<td>Ordering Cost (OC)</td>
+<td>The cost associated with placing an order or setting up a production batch.</td>
+</tr>
+<tr class="odd">
+<td>Total Inventory Cost (TC)</td>
+<td>With discount: <span class="math inline">\(TC = PC + IHC + SC + OC\)</span>; Without discount: <span class="math inline">\(TC = IHC + SC + OC\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p><strong>Objective:</strong> Determine the correct quantity to order that minimises the total cost.</p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="other-variables">1.4 Other Variables</h3>
+<p>Apart from costs, there are other variables which play an important role in decision-making,</p>
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Planning Horizon</td>
+<td>The period over which a particular inventory level will be maintained.</td>
+</tr>
+<tr class="even">
+<td>Demand</td>
+<td>The quantity of inventory required to meet customer needs, which can be deterministic or probabilistic.</td>
+</tr>
+<tr class="odd">
+<td>Lead-time</td>
+<td>The time between placing an order and receiving it, which can be deterministic or probabilistic.</td>
+</tr>
+<tr class="even">
+<td>Cycle-time (T)</td>
+<td>The time between placements of two orders.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li class="fragment"><strong>Deterministic:</strong> The exact quantity and timing are predictable and do not vary over time.</li>
+<li class="fragment"><strong>Probabilistic:</strong> Uncertain and described using probability distributions.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="types-of-inventory-models">1.5 Types of Inventory Models</h3>
+<div style="font-size:95%;">
+<ul>
+<li class="fragment"><p>More advanced models incorporate <strong>uncertainties in demand and lead time,</strong> such as probabilistic models, while others handle real-world complexities like bulk discounts or perishable goods.</p>
+<ul>
+<li class="fragment">Inventory models can be broadly classified into:</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="block blue center fragment">
+<p><strong>Deterministic models</strong></p>
+<p>assume demand and lead time are known and constant</p>
+</div>
+</div><div class="column">
+<div class="block purple center fragment">
+<p><strong>Stochastic models</strong></p>
+<p>account for uncertainty and variability in demand or supply</p>
+</div>
+</div></div>
+<ul>
+<li class="fragment">Also, <strong>resupply strategies</strong> can be classified into:</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="block green center fragment">
+<p><strong>Push System</strong></p>
+<p>Inventory is produced or ordered based on forecasted demand and pushed through the supply chain.</p>
+</div>
+</div><div class="column">
+<div class="block orange center fragment">
+<p><strong>Pull System</strong></p>
+<p>Inventory is produced or ordered in response to actual demand, pulling products through the supply chain.</p>
+</div>
+</div></div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="multi-echelon-inventory-systems">1.6 Multi-echelon Inventory Systems</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">%%{init: {
+  "flowchart": {
+    "htmlLabels": true,
+    "padding": 5,
+    "nodeSpacing": 35,
+    "rankSpacing": 25
+  },
+  "theme": "base",
+  "themeVariables": {
+    "fontSize": "16px",
+    "secondaryColor": "#ffffff"
+  }
+}}%%
+flowchart LR
+
+    %% ---------------------------
+    %% Layer 1
+    %% ---------------------------
+    subgraph TOP[ ]
+        direction LR
+        MP([Manufacturing&lt;br&gt;Plant])
+        FW([WHs])
+    end
+
+    %% ---------------------------
+    %% Layer 2
+    %% ---------------------------
+    subgraph MID[ ]
+        direction LR
+
+        V([Vendors])
+        RMI["RMI"]
+        CPI["CPI"]
+        WIP["WIP"]
+        FGI["FGI"]
+        W([W/S])
+        R([RET])
+    end
+
+    %% ---------------------------
+    %% Layer 3
+    %% ---------------------------
+    subgraph BOT[ ]
+        direction LR
+        DC([DCs])
+    end
+
+    %% Main flow
+    V --&gt;|Buying| RMI
+    V --&gt;|Buying| CPI
+    RMI --&gt;|Fabrication| CPI
+    CPI --&gt;|Initial&lt;br&gt;Assembly| WIP
+    WIP --&gt;|Final&lt;br&gt;Assembly| FGI
+
+    FGI --&gt; FW
+    FGI --&gt; DC
+    FW --&gt; W
+    DC --&gt; W
+    W --&gt; R
+
+    %% Invisible alignment helpers
+    MP --&gt; RMI
+    FW -.-&gt; W
+    RMI -.-&gt; DC
+
+    %% Styles
+    classDef inventory fill:#ffffff,stroke:#d33,stroke-width:2px,stroke-dasharray: 6 4;
+    classDef circle fill:#ffffff,stroke:#555,stroke-width:1.5px;
+    classDef invisible fill:none,stroke:none,color:none;
+    
+    class RMI,CPI,WIP,FGI inventory;
+    class V,FW,DC,W,R circle;
+    class TOP,MID,BOT invisible;
+    style MP fill:#ffffff,stroke:#ffffff;
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><strong>Inventory</strong> is represented by red-dashed rectangles, while <strong>entities</strong> (e.g.&nbsp;vendors, warehouses) are represented by circles.</p>
+
+<aside><div>
+<p>RMI = raw material inventory, CPI = component part inventory, WIP = work-in-process, FGI = finished goods inventory, W/S = wholesalers, DC = distribution centre, RET = retailer, WH = warehouse,</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h3 id="analytical-tools-for-inventory-management">1.7 Analytical Tools for Inventory Management</h3>
+<div class="columns">
+<div class="column">
+<div class="block blue center fragment">
+<p><strong>EOQ and EPQ Models</strong></p>
+<p>Economic Order Quantity and Economic Production Quantity models are fundamental tools for determining optimal order quantities that minimise total inventory costs.</p>
+</div>
+</div><div class="column">
+<div class="block yellow center fragment">
+<p><strong>Optimisation Models</strong></p>
+<p>Optimisation models are used to determine the best order quantities and inventory policies that minimise costs or maximise service levels under various constraints.</p>
+</div>
+</div></div>
+<div class="columns">
+<div class="column">
+<div class="block green center fragment">
+<p><strong>Monte Carlo Simulation</strong></p>
+<p>A computational technique that uses random sampling to estimate the probability distribution of outcomes for complex inventory systems.</p>
+</div>
+</div><div class="column">
+<div class="block purple center fragment">
+<p><strong>Newsvendor Model</strong></p>
+<p>The Newsvendor model is used to determine optimal order quantities for products with uncertain demand and a limited selling period.</p>
+</div>
+</div></div>
+</section>
+<section id="economic-order-quantity-eoq-model" class="slide level2">
+<h2>2. Economic Order Quantity (EOQ) Model</h2>
+<p>For a <strong>single-stocking point, single-commodity inventory system with constant demand and lead time (deterministic)</strong>, the parameters are as follows:</p>
+<div style="font-size:95%;">
+<table class="table-striped caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 90%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Notation</th>
+<th style="text-align: center;">Unit</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(C\)</span></td>
+<td style="text-align: center;">$/unit</td>
+<td style="text-align: left;">Purchase or manufacturing cost of an item</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(A\)</span></td>
+<td style="text-align: center;">$/order</td>
+<td style="text-align: left;">The ordering cost per order</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(h\)</span></td>
+<td style="text-align: center;">$/unit/time</td>
+<td style="text-align: left;">Inventory holding cost of an item per unit per time unit</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(k\)</span></td>
+<td style="text-align: center;">$/unit/time</td>
+<td style="text-align: left;">Shortage cost per unit short per time</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(D\)</span></td>
+<td style="text-align: center;">units/time</td>
+<td style="text-align: left;">Demand rate of per planning horizon, usually <strong>per year</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: center;">units</td>
+<td style="text-align: left;">Shortage quantity, a decision variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(Q\)</span></td>
+<td style="text-align: center;">units</td>
+<td style="text-align: left;">Order quantity, a decision variable</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(T\)</span></td>
+<td style="text-align: center;">Time</td>
+<td style="text-align: left;">Cycle time (time between orders), a decision variable</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><span class="math inline">\(R\)</span></td>
+<td style="text-align: center;">units</td>
+<td style="text-align: left;">Reorder level (inventory level at which an order is placed)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><span class="math inline">\(L\)</span></td>
+<td style="text-align: center;">Time</td>
+<td style="text-align: left;">Lead time</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<aside><div>
+<p>Important: Unit has to be consistent across parameters.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h3 id="inventory-order-cycle-in-the-basic-eoq-model">2.1 Inventory Order Cycle in the Basic EOQ Model</h3>
+
+<p><img data-src="figs/EOQ.png"></p>
+<aside><div>
+<p>Burnham and Mohanty (1988) advocate for a Uniform Order Quantity.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h3 id="eoq-model-formula">2.2 EOQ Model – Formula</h3>
+<div class="columns">
+<div class="column">
+<div class="fragment" data-fragment-index="1">
+<p><strong>Order Quantity</strong></p>
+<p><span class="space-out"></span></p>
+<p><span class="math display">\[
+\boxed{Q = D \times T}
+\]</span></p>
+<p><span class="space-out"></span></p>
+<p>Demand rate multiplied by cycle time. Make sure that the units for demand rate and cycle time are consistent.</p>
+</div>
+<p><br></p>
+<div class="fragment" data-fragment-index="3">
+<p><strong>Ordering Cost</strong></p>
+<p><span class="math display">\[
+\boxed{OC = \frac{D}{Q} \cdot A}
+\]</span></p>
+<p><span class="math inline">\(D/Q\)</span> is the number of orders placed during the planning horizon.<br>
+<span class="math inline">\(A\)</span> is the ordering cost per order.</p>
+</div>
+</div><div class="column">
+<div class="fragment" data-fragment-index="2">
+<p><strong>Inventory Holding Cost</strong></p>
+<p><span class="math display">\[
+\boxed{IHC = \frac{Q}{2} \cdot h}
+\]</span></p>
+<p>Average cycle inventory multiplied by holding cost per unit (<span class="math inline">\(h\)</span>).</p>
+</div>
+<p><br></p>
+<div class="fragment" data-fragment-index="4">
+<p><strong>Total Inventory Cost</strong></p>
+<p><span class="math display">\[
+TC = OC + IHC
+\]</span> <span class="math display">\[
+\boxed{TC = \frac{D}{Q} \cdot A + \frac{Q}{2} \cdot h}
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">How to minimise <span class="math inline">\(TC\)</span>?</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<ul>
+<li class="fragment"><p>From the <span class="math inline">\(TC\)</span> formula, determine the order quantity <span class="math inline">\(Q^*\)</span> that minimises it.</p></li>
+<li class="fragment"><p>Setting the first derivative of <span class="math inline">\(TC\)</span> with respect to <span class="math inline">\(Q\)</span> to zero and solving for <span class="math inline">\(Q\)</span>: <span class="math display">\[
+\frac{d}{dQ}TC = -\frac{D}{Q^2}A + \frac{h}{2} = 0 \implies \boxed{Q^* = \sqrt{\frac{2DA}{h}}},
+\]</span> where <span class="math inline">\(Q^*\)</span> is the <strong>optimal order quantity</strong> or optimal lot size.</p></li>
+<li class="fragment"><p><strong>The minimum total cost</strong> is obtained by substituting <span class="math inline">\(Q^*\)</span> back into <span class="math inline">\(TC\)</span>: <span class="math display">\[
+TC(Q^*) = \frac{D}{Q^*} \cdot A + \frac{Q^*}{2} \cdot h \implies \boxed{TC(Q^*) = \sqrt{2DAh}}
+\]</span></p></li>
+<li class="fragment"><p>If <strong>quantity discount</strong> is taken into account, then: <span class="math display">\[
+\boxed{TC = CD + \frac{D}{Q^*} \cdot A + \frac{Q^*}{2} \cdot h}
+\]</span></p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div style="font-size:1.4em;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>How often should an order be placed to maintain inventory efficiently?</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><strong>Cycle Time</strong></p>
+<p><span class="math display">\[
+\boxed{T = \frac{Q^*}{D}}
+\]</span></p>
+<p>The time interval between placing two consecutive orders, in years, months, or days depending on units.</p>
+</div>
+<div class="fragment">
+<p><strong>Order Frequency</strong></p>
+<p><span class="math display">\[
+\boxed{\text{Order Frequency} = \frac{D}{Q^*}}
+\]</span></p>
+<p>Number of orders placed per planning horizon, in years, months, or days depending on units.</p>
+</div>
+
+<aside><div>
+<p>These two are reciprocals of each other.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<h3 id="eoq-cost-trade-off">2.3 EOQ Cost Trade-Off</h3>
+<div style="font-size:85%;">
+<p>Let’s visualise the cost trade-off between ordering cost and holding cost, and how EOQ minimises total inventory cost. In this example, we will use the following parameters: <span class="math inline">\(D = 10000\)</span>, <span class="math inline">\(A = 50\)</span>, <span class="math inline">\(h = 2\)</span>.</p>
+</div>
+<div class="columns">
+<div class="column" style="font-size:85%;">
+<div id="a7e22d42" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="06lecture_files/figure-revealjs/cell-2-output-1.png" width="479" height="368"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>At EOQ, Ordering Cost = Holding Cost</p>
+<p>EOQ minimises total inventory cost</p>
+</div>
+</div><div class="column" style="font-size:85%;">
+<div id="f5449ded" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>EOQ (Q*): 707.11 units
+Cycle time (T): 0.0707 years</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="06lecture_files/figure-revealjs/cell-3-output-2.png" width="460" height="318"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">Large <span class="math inline">\(D\)</span> → larger order quantity<br>
+</li>
+<li class="fragment">High <span class="math inline">\(A\)</span> → order less frequently (larger <span class="math inline">\(Q\)</span>)<br>
+</li>
+<li class="fragment">High <span class="math inline">\(h\)</span> → smaller order quantity</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<h3 id="sensitivity-of-the-lot-size-model">2.4 Sensitivity of the Lot-Size Model</h3>
+<ul>
+<li class="fragment"><p>Examines how <strong>changes in the order quantity</strong> from the optimal EOQ value <strong>affect the total cost</strong>.</p></li>
+<li class="fragment"><p>It helps determine how critical it is to order exactly the EOQ, or whether <strong>near-optimal values</strong> are acceptable.</p></li>
+</ul>
+<h4 class="fragment center" id="why-is-it-important">Why is it important?</h4>
+<div class="columns">
+<div class="column">
+<div id="271c990c" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="06lecture_files/figure-revealjs/cell-4-output-1.png" width="479" height="368"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p><br></p>
+<ul>
+<li class="fragment">We might not always order <em>exactly</em> EOQ due to supplier constraints, quantity discounts, or packaging sizes.</li>
+<li class="fragment">The <span style="color:green;">total cost curve</span> is <em>relatively flat near EOQ</em>, so minor deviations in order size result in minimal cost changes.</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p>If the optimal lot size <span class="math inline">\(Q^* = EOQ\)</span>, and</p>
+<p><span class="math display">\[
+Q_1 = bQ^*, \quad b &gt; 0
+\]</span></p>
+<p>where <span class="math inline">\(b\)</span> is a multiplier, e.g.&nbsp;0.8 or 1.2.</p>
+<div class="fragment">
+<p>Then, the <strong>sensitivity ratio</strong> is:</p>
+<p><span class="math display">\[
+\boxed{\frac{TC(Q_1)}{TC(Q^*)} = \frac{1 + b^2}{2b}}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Example 1:</strong> Deviate from EOQ by 20%, i.e.&nbsp;<span class="math inline">\(b = 1.2\)</span>.</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\frac{TC(Q_1)}{TC(Q^*)} = \frac{1 + 1.44}{2.4} = \frac{2.44}{2.4} \approx 1.017
+\]</span></p>
+</div>
+<ul>
+<li class="fragment"><p>This means total cost increases by only 1.7%.</p></li>
+<li class="fragment"><p>If you cannot order at EOQ, small changes will not significantly impact cost.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<div class="fragment">
+<p><strong>Example 2:</strong> Determine the optimal lot size and the total variable cost associated with the policy of ordering quantities of that size.</p>
+<p>Annual demand of 20,000 units, ordering cost of $150 per order, and annual inventory carrying cost is $0.24 per unit.</p>
+</div>
+<div style="font-size:90%;">
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}}
+= \sqrt{\frac{2(20,000)(150)}{0.24}}
+= 5,000 \text{ units}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+TC(Q^*) = \frac{D}{Q^*} \cdot A + \frac{Q^*}{2} \cdot h
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+TC(Q^*) = \frac{20,000}{5,000} \cdot 150 + \frac{5,000}{2} \cdot 0.24 = \$1,200
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">Alternatively,</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+TC(Q^*) = \sqrt{2DAh} = \sqrt{2(20,000)(150)(0.24)} = \$1,200
+\]</span></p>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 3:</strong> A company uses rivets at a rate of 5,000 kg per year, with rivets costing $2 per kg. It costs $20 to place an order and the carrying cost of inventory is 10% per annum. How frequently should orders for rivets be placed and how much?</p>
+<div class="fragment">
+<p>From the question, we have:</p>
+</div>
+<ul>
+<li class="fragment"><span class="math inline">\(D = 5,000\)</span> kg/year</li>
+<li class="fragment"><span class="math inline">\(C = \$2\)</span> per kg</li>
+<li class="fragment"><span class="math inline">\(A = \$20\)</span> per order</li>
+<li class="fragment"><span class="math inline">\(h = C \times 10\% = 0.2\)</span>/unit/year</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}}
+= \sqrt{\frac{2(5,000)(20)}{0.2}}
+= 1,000 \text{ kg}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T = \frac{Q^*}{D} = \frac{1,000}{5,000} = 0.2 \text{ years} = 2.4 \text{ months}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 4:</strong> A supplier ships 100 units of a product every Monday. The purchase cost of product is $60 per unit. The cost of ordering and transportation from the supplier is $150 per order. The cost of carrying inventory is estimated at 15% per year of the purchase cost. Find the lot-size that will minimise the cost of the system. Also determine the optimum inventory cost.</p>
+<div class="fragment">
+<p>From the question, we have:</p>
+</div>
+<ul>
+<li class="fragment"><span class="math inline">\(D = 100\)</span> units/week <span class="math inline">\(= 100(52) = 5,200\)</span> units/year</li>
+<li class="fragment"><span class="math inline">\(C = \$60\)</span> per unit, <span class="math inline">\(A = \$150\)</span> per order</li>
+<li class="fragment"><span class="math inline">\(h = C \times 15\% = \$9\)</span> per unit per year</li>
+</ul>
+<div class="fragment" style="font-size:90%;">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}}
+= \sqrt{\frac{2(5,200)(150)}{9}}
+= 416.3333
+\]</span></p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Countable units must be ordered, so we need to round <span class="math inline">\(Q^*\)</span> to the nearest whole number. Should we round up to 417 units or round down to 416 units?</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<div style="font-size:1.4em;">
+<div class="callout callout-warning callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p><strong>Round up:</strong> Slightly more inventory, lower risk of shortage.</p>
+<p><strong>Round down:</strong> Preferred if strict space, riskier for stockouts.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Suppose we round down to 416 units, then the total cost is:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+TC(Q^*) = \frac{5,200}{416} \cdot 150 + \frac{416}{2} \cdot 9 = \$3,747.00
+\]</span></p>
+</div>
+<div class="fragment">
+<p>If we round up to 417 units, then the total cost is:</p>
+<p><span class="math display">\[
+TC(Q^*) = \frac{5,200}{417} \cdot 150 + \frac{417}{2} \cdot 9 = \$3,747.0036
+\]</span></p>
+</div>
+<ul>
+<li class="fragment"><p>The total cost is only slightly higher when rounding up (almost no different).</p></li>
+<li class="fragment"><p>So, the choice of rounding up or down does not significantly impact the total cost, and either option can be considered acceptable based on other factors such as storage space or risk tolerance.</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h3 id="eoq-model-with-shortage-allowed">2.5 EOQ Model with Shortage Allowed</h3>
+
+<img data-src="figs/EOQ-shortage.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<ul>
+<li>In the EOQ model with shortage allowed, we introduce a new decision variable <span class="math inline">\(S\)</span>, which represents the shortage quantity.</li>
+<li>The inventory cycle is divided into two phases: the first phase <span class="math inline">\(t_1\)</span> where inventory is available and the second phase <span class="math inline">\(t_2\)</span> where shortages occur until the next order arrives.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 id="eoq-model-with-shortage-allowed---formulas">2.5.1 EOQ Model with Shortage Allowed - Formulas</h3>
+<p><span class="space-out"></span></p>
+<div class="columns">
+<div class="column fragment">
+<p><strong>Inventory Holding Cost</strong></p>
+<p><span class="math display">\[
+\boxed{IHC = \frac{(Q^* - S)^2}{2Q^*} \cdot h}
+\]</span></p>
+<p>Average inventory level multiplied by holding cost per unit <span class="math inline">\(h\)</span>.</p>
+</div><div class="column fragment">
+<p><strong>Shortage Cost</strong></p>
+<p><span class="math display">\[
+\boxed{SC = \frac{S^2}{2Q^*} \cdot k}
+\]</span></p>
+<p>Average number of units short multiplied by shortage cost per unit <span class="math inline">\(k\)</span>.</p>
+</div></div>
+<p><span class="space-out"></span></p>
+<div class="fragment">
+<p><strong>Total Inventory Cost</strong></p>
+<p><span class="math display">\[
+TC = OC + IHC + SC
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\boxed{TC = \frac{D}{Q^*} \cdot A + \frac{(Q^* - S)^2}{2Q^*} \cdot h + \frac{S^2}{2Q^*} \cdot k}
+\]</span></p>
+</div>
+<aside class="notes">
+<ul>
+<li>The inventory holding cost is now based on the average inventory level during the cycle, which is affected by the shortage quantity <span class="math inline">\(S\)</span>.</li>
+<li>The new cost term, the shortage cost is calculated based on the average number of units short during the cycle, which is also influenced by <span class="math inline">\(S\)</span>.</li>
+<li>The total cost now includes the ordering cost, inventory holding cost, and shortage cost.</li>
+<li>Now, the question is what is our optimal lot size <span class="math inline">\(Q^*\)</span> and shortage quantity <span class="math inline">\(S\)</span> that minimises the total cost <span class="math inline">\(TC\)</span>?</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>Setting the first derivative of <span class="math inline">\(TC\)</span> with respect to <span class="math inline">\(Q^*\)</span> and <span class="math inline">\(S\)</span> to zero and solving for <span class="math inline">\(Q^*\)</span> and <span class="math inline">\(S\)</span>, we have:</p>
+<div class="columns">
+<div class="column fragment">
+<p><strong>Optimal lot size</strong></p>
+<p><span class="math display">\[
+\boxed{Q^* = \sqrt{\frac{2DA}{h}\frac{k+h}{k}}}
+\]</span></p>
+</div><div class="column fragment">
+<p><strong>Optimal shortage quantity</strong></p>
+<p><span class="math display">\[
+\boxed{S^* = Q^*\frac{h}{k+h}}
+\]</span></p>
+</div></div>
+<div class="columns">
+<div class="column">
+<div class="fragment">
+<p><strong>Optimal inventory level <span class="math inline">\(Q^* - S^*\)</span></strong></p>
+<p><span class="math display">\[
+Q^* - Q^*\frac{h}{k+h} = \boxed{Q^*\frac{k}{k+h}}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><strong>Minimum total cost</strong></p>
+<p><span class="math display">\[
+\boxed{TC^* = \sqrt{2DSAh\frac{k}{k+h}}}
+\]</span></p>
+</div>
+</div><div class="column fragment">
+<p><strong>Other formulas</strong></p>
+<ul>
+<li class="fragment">Cycle time <span class="math inline">\(T^* = Q^*/D\)</span></li>
+<li class="fragment">Order frequency = <span class="math inline">\(D/Q^*\)</span></li>
+<li class="fragment">Max inventory level = <span class="math inline">\(Q^* - S^*\)</span></li>
+<li class="fragment">Avg inventory level = <span class="math inline">\((Q^* - S^*)/2\)</span></li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 5.</strong> The annual demand for a certain item is 3,000 units per period. Unsatisfied demand causes a shortage cost of $0.75 per unit per year. The cost of initiating purchasing action is $15.00 per purchase and the holding cost is 15% of average inventory valuation per period. Item cost is $8.00 per unit. Find purchase quantity and the minimum inventory cost.</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>Given:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(D = 3,000\)</span> units</li>
+<li class="fragment"><span class="math inline">\(C = \$8\)</span> per unit</li>
+<li class="fragment"><span class="math inline">\(k = \$0.75\)</span> per unit per year</li>
+<li class="fragment"><span class="math inline">\(h = \$8 \times 15\% = \$1.20\)</span></li>
+<li class="fragment"><span class="math inline">\(A = \$15.00\)</span> per order</li>
+</ul>
+</div><div class="column" style="font-size:90%;">
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+Q^* &amp;= \sqrt{\frac{2DA}{h}\frac{k+h}{k}} \\
+&amp;= \sqrt{\frac{2(3000)(15)}{1.20}\frac{0.75 + 1.20}{0.75}} \\
+&amp;= 441.58 \approx 442
+\end{aligned}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\begin{aligned}
+TC^* &amp;= \sqrt{2DAh\frac{k}{k+h}} \\
+&amp;= \sqrt{2(3000)(15)(1.20)\frac{0.75}{0.75 + 1.20}} \\
+&amp;= \$203.81
+\end{aligned}
+\]</span></p>
+</div>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 6.</strong> A television manufacturing company produces its own speakers, which are used in the production of its television sets. The television sets are assembled on a continuous production line at a rate of 8,000 per month. The company is interested in determining when and how much to procure. Given.</p>
+<ul>
+<li>Each time a batch is produced, a set-up cost of $12,000 is incurred.</li>
+<li>The cost of keeping a speaker in stock is $0.30 per month.</li>
+<li>The production cost of a single speaker is $10.00 and can be assumed to be a unit cost.</li>
+<li>Shortage of a speaker, if it exists, costs $1.10 per month.</li>
+</ul>
+<p>Given:</p>
+<div class="columns">
+<div class="column">
+<ul>
+<li class="fragment"><span class="math inline">\(D = 8000\)</span> units per month</li>
+<li class="fragment"><span class="math inline">\(A = \$12,000\)</span> per batch</li>
+</ul>
+</div><div class="column">
+<ul>
+<li class="fragment"><span class="math inline">\(h = \$0.3\)</span> per unit per month</li>
+<li class="fragment"><span class="math inline">\(k = \$1.10\)</span> per month</li>
+</ul>
+</div></div>
+</section>
+<section class="slide level2">
+
+<div style="font-size:85%;">
+<ul>
+<li class="fragment"><strong>When shortages are not allowed:</strong></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}}
+= \sqrt{\frac{2(8000)(12000)}{0.3}}
+= 25,298 \text{ speakers}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T = \frac{Q^*}{D} = \frac{25298}{8000} = 3.16 \text{ months}
+\]</span></p>
+</div>
+<ul>
+<li class="fragment"><strong>When shortages are allowed:</strong></li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}\frac{k+h}{k}}
+= \sqrt{\frac{2(8000)(12000)}{0.3}\frac{1.10 + 0.3}{1.10}}
+= 28,540 \text{ speakers}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T = \frac{Q^*}{D} = \frac{28540}{8000} = 3.57 \text{ months}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+\text{Optimal number of speakers stored} = Q^*\frac{k}{k+h} = 22,424 \text{ speakers}
+\]</span></p>
+</div>
+<div class="fragment center">
+<p>A shortage of 28,540 - 22,424 = 6,116 speakers. Alternatively, <span class="math inline">\(S^* = Q^*\dfrac{h}{k+h} \approx 6,116.\)</span></p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>When shortages are not allowed, 25,298 speakers are to be produced every 3.2 months.</li>
+<li>When shortages are allowed, 28,540 speakers are to be produced every 3.6 months, with 22,424 speakers stored and a shortage of 6,116 speakers permitted.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="economic-production-quantity-epq-model" class="slide level2">
+<h2>3. Economic Production Quantity (EPQ) Model</h2>
+<p>The EPQ model extends EOQ to cases where <strong>replenishment is not instantaneous</strong> but occurs gradually over time, such as in manufacturing.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="figs/EPQ.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+
+<aside><div>
+<p>Replenishment = restoration of stock or supply to the former level.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<div style="font-size:95%;">
+<p>For production environments with production rate <span class="math inline">\(r\)</span>,</p>
+<div class="columns">
+<div class="column center fragment" style="width:35%;">
+<p><strong>Cycle time</strong></p>
+<p><span class="math display">\[
+\boxed{T = \frac{Q^*}{D} = T_r + T_d}
+\]</span></p>
+</div><div class="column center fragment" style="width:30%;">
+<p><strong>Replenishment time</strong></p>
+<p><span class="math display">\[
+\boxed{T_r = \frac{Q^*}{r}}
+\]</span></p>
+</div><div class="column center fragment" style="width:30%;">
+<p><strong>Depletion time</strong></p>
+<p><span class="math display">\[
+\boxed{T_d = \frac{Q^*}{D}\left(1 - \frac{D}{r}\right)}
+\]</span></p>
+</div></div>
+<div class="columns">
+<div class="column fragment">
+<p><strong>Maximum Inventory Level</strong></p>
+<p><span class="math display">\[
+\boxed{I_{max} = Q^*\left(1 - \frac{D}{r}\right)}
+\]</span></p>
+</div><div class="column fragment">
+<p><strong>Inventory Holding Cost</strong></p>
+<p><span class="math display">\[
+\boxed{IHC = \left(1 - \frac{D}{r}\right)\frac{Q^*}{2}h}
+\]</span></p>
+</div></div>
+<div class="fragment">
+<p><strong>Total Inventory Cost <span class="math inline">\(\;TC = OC + IHC\)</span></strong></p>
+<p><span class="math display">\[
+\boxed{TC = \frac{DA}{Q^*} + \left(1 - \frac{D}{r}\right)\frac{Q^*}{2}h},
+\]</span></p>
+<p>where <span class="math inline">\(A\)</span> can also be interpreted as the setup cost per production run.</p>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>The cycle time is divided into replenishment time and depletion time.</li>
+<li>The replenishment time is the time taken to produce the order quantity <span class="math inline">\(Q^*\)</span> at the production rate <span class="math inline">\(r\)</span>.</li>
+<li>The depletion time is the time taken to consume the inventory after production, which is adjusted by the factor <span class="math inline">\(\left(1 - \frac{D}{r}\right)\)</span> to account for the fact that inventory is being replenished while it is being depleted.</li>
+<li>The maximum inventory level is also adjusted by the factor <span class="math inline">\(\left(1 - \frac{D}{r}\right)\)</span> for the same reason.</li>
+<li>The inventory holding cost is adjusted by the factor <span class="math inline">\(\left(1 - \frac{D}{r}\right)\)</span> to account for the fact that inventory is being replenished while it is being depleted.</li>
+<li>The total cost includes the ordering cost and the adjusted inventory holding cost.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<p>Setting the first derivative of <span class="math inline">\(TC\)</span> with respect to <span class="math inline">\(Q^*\)</span> to zero and solving for <span class="math inline">\(Q^*\)</span>:</p>
+<div class="fragment">
+<p><strong>Optimal lot size</strong> <span class="math display">\[
+\boxed{Q^* = \sqrt{\frac{2DA}{h}\frac{r}{r-D}}
+= \sqrt{\frac{2DA}{h(1-D/r)}}}
+\]</span></p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>The term <span class="math inline">\(\frac{r}{r-D}\)</span> accounts for the fact that production is not instantaneous but occurs gradually over time, which affects the average inventory level.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>The <strong>minimum total cost</strong> is obtained by substituting <span class="math inline">\(Q^*\)</span> back into <span class="math inline">\(TC\)</span>:</p>
+<p><span class="math display">\[
+\boxed{TC^* = \sqrt{2DAh\left(1 - \frac{D}{r}\right)}}
+\]</span></p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>What if production rate <span class="math inline">\(r\)</span> is very high, i.e.&nbsp;<span class="math inline">\(r \to \infty\)</span>?</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="sensitivity-of-the-epq-model">3.1 Sensitivity of the EPQ Model</h3>
+<p><span class="math display">\[
+\boxed{TC^* = \sqrt{2DAh\left(1 - \frac{D}{r}\right)}}
+\]</span></p>
+<ul>
+<li class="fragment">If <span class="math inline">\(r \to \infty\)</span>, then <span class="math inline">\(\displaystyle 1 - \frac{D}{r} \to 1 \implies Q^* = \sqrt{\frac{2DK}{h}}\)</span> (reduces to EOQ).</li>
+</ul>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-note callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Higher production rate <span class="math inline">\(r\)</span> → faster replenishment → lower inventory buildup → lower holding cost</p>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column center fragment">
+<p><strong>As <span class="math inline">\(r\)</span> increases</strong></p>
+<p>EPQ approaches EOQ</p>
+</div><div class="column center fragment">
+<p><strong>If <span class="math inline">\(r\)</span> is just above <span class="math inline">\(D\)</span></strong></p>
+<p>EPQ is much larger than EOQ due to high inventory buildup</p>
+</div></div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 7.</strong> A product is to be manufactured on a machine. The cost, production, demand, etc. are as follows:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li>Ordering cost/order = $30</li>
+<li>Purchase cost/unit = $0.10</li>
+<li>Inventory holding cost/unit/year = $0.05</li>
+<li>Production rate = 100,000 units/year</li>
+<li>Demand rate = 10,000 units/year</li>
+</ul>
+<p>Determine the economic manufacturing quantity.</p>
+</div><div class="column" style="width:40%;">
+<ul>
+<li class="fragment"><span class="math inline">\(A\)</span> = $30/order</li>
+<li class="fragment"><span class="math inline">\(C\)</span> = $0.10/unit</li>
+<li class="fragment"><span class="math inline">\(h\)</span> = 0.05/unit/year</li>
+<li class="fragment"><span class="math inline">\(r\)</span> = 100,000 units/year</li>
+<li class="fragment"><span class="math inline">\(d\)</span> = 10,000 units/year</li>
+</ul>
+</div></div>
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2DA}{h}\frac{r}{r-D}}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+= \sqrt{\frac{2(10,000)(30)}{0.05}\frac{100,000}{90,000}}
+= 3651 \text{ units}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<p><strong>Example 8.</strong> Golden Food distributes tinned foodstuff in Great Britain. In a warehouse located in Birmingham:</p>
+<ul>
+<li>The demand rate (<span class="math inline">\(D\)</span>) for tomato purée is 400 pallets a month.</li>
+<li>The value of a pallet is <span class="math inline">\(C = 2500\)</span> pounds and the annual interest rate <span class="math inline">\(I\)</span> is 14.5%, including warehousing costs.</li>
+<li>Issuing an order costs <span class="math inline">\(A = 30\)</span> pounds.</li>
+<li>Number of working days in a month equals 20.</li>
+<li>The replenishment rate (<span class="math inline">\(r\)</span>) is 40 pallets per day.</li>
+<li>Shortages are not allowed.</li>
+</ul>
+<div class="fragment">
+<p>Holding cost is calculated from the value of the pallet and the annual interest:</p>
+<p><span class="math display">\[
+h = 0.145 \times 2500 = 362.5 \text{ pounds per year per pallet}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+h = 30.2 \text{ pounds per month per pallet}
+\]</span></p>
+</div>
+<div class="fragment" style="font-size:1.4em;">
+<div class="callout callout-caution callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Unit must always be CONSISTENT.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<p>We also need to convert the production rate <span class="math inline">\(r\)</span> to pallets/month:</p>
+<div class="fragment">
+<p><span class="math display">\[
+r = 40 \text{ pallets/day} \times 20 \text{ days/month} = 800 \text{ pallets/month}
+\]</span></p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+Q^* = \sqrt{\frac{2 \times 30 \times 400}{30.2\left(1 - \frac{400}{800}\right)}}
+= 39.9 \approx 40 \text{ pallets}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>The cycle time is:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T^* = \frac{Q^*}{D} = \frac{40}{400} = \frac{1}{10}\text{ month} = 2 \text{ workdays}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>The replenishment time is:</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T_r^* = \frac{Q^*}{r} = \frac{40}{40} = 1 \text{ workday}
+\]</span></p>
+</div>
+</section>
+<section class="slide level2 scrollable">
+
+<p><strong>Example 9.</strong> A beverage company produces its own cardboard packaging boxes for shipping bottled drinks to retailers. The boxes are consumed continuously by the filling and packing line.</p>
+<p>The following data are given:</p>
+<ul>
+<li>Annual demand: <span class="math inline">\(D = 24{,}000\)</span> boxes/year</li>
+<li>Production rate: <span class="math inline">\(r = 80{,}000\)</span> boxes/year</li>
+<li>Demand rate: <span class="math inline">\(d = 24{,}000\)</span> boxes/year</li>
+<li>Setup cost per production run: <span class="math inline">\(A = \$120\)</span></li>
+<li>Holding cost: <span class="math inline">\(h = \$0.50\)</span> per box per year</li>
+</ul>
+<p>Determine:</p>
+<ol type="1">
+<li>The optimal production lot size <span class="math inline">\(Q^*\)</span></li>
+<li>The maximum inventory level</li>
+<li>The total annual relevant cost</li>
+</ol>
+</section>
+<section class="slide level2">
+
+<ul>
+<li class="fragment">The optimal production lot size <span class="math inline">\(Q^*\)</span> is calculated using the EPQ formula:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+Q^*=\sqrt{\frac{2DA}{h\left(1-\frac{D}{r}\right)}}=\sqrt{
+\frac{2(24{,}000)(120)}
+{0.50\left(1-\frac{24{,}000}{80{,}000}\right)}}\approx 4057 \text{ boxes}
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">The maximum inventory level is the optimal lot size adjusted for the production and demand rates:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+I_{\max}=Q^*\left(1-\frac{D}{r}\right)=4056.74(0.7)\approx 2840
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">The total annual relevant cost is:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+TC(Q^*) =\frac{D}{Q^*}A+h\frac{Q^*}{2}\left(1-\frac{D}{r}\right) =1419.86
+\]</span></p>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="epq-simulation">3.2 EPQ Simulation</h3>
+<div id="f50688c0" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href=""></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-5"><a href=""></a><span class="co"># EPQ parameters</span></span>
+<span id="cb2-6"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-7"><a href=""></a>D <span class="op">=</span> <span class="dv">24000</span>          <span class="co"># annual demand</span></span>
+<span id="cb2-8"><a href=""></a>p <span class="op">=</span> <span class="dv">80000</span>          <span class="co"># production rate per year</span></span>
+<span id="cb2-9"><a href=""></a>d <span class="op">=</span> <span class="dv">24000</span>          <span class="co"># demand rate per year</span></span>
+<span id="cb2-10"><a href=""></a>K <span class="op">=</span> <span class="dv">120</span>            <span class="co"># setup cost</span></span>
+<span id="cb2-11"><a href=""></a>h <span class="op">=</span> <span class="fl">0.50</span>           <span class="co"># holding cost</span></span>
+<span id="cb2-12"><a href=""></a></span>
+<span id="cb2-13"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-14"><a href=""></a><span class="co"># EPQ calculations</span></span>
+<span id="cb2-15"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-16"><a href=""></a>Q <span class="op">=</span> np.sqrt((<span class="dv">2</span> <span class="op">*</span> D <span class="op">*</span> K) <span class="op">/</span> (h <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> d <span class="op">/</span> p)))   <span class="co"># optimal production lot size</span></span>
+<span id="cb2-17"><a href=""></a>tp <span class="op">=</span> Q <span class="op">/</span> p                                     <span class="co"># production time</span></span>
+<span id="cb2-18"><a href=""></a>T <span class="op">=</span> Q <span class="op">/</span> d                                      <span class="co"># cycle length</span></span>
+<span id="cb2-19"><a href=""></a>Imax <span class="op">=</span> Q <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> d <span class="op">/</span> p)                         <span class="co"># maximum inventory</span></span>
+<span id="cb2-20"><a href=""></a></span>
+<span id="cb2-21"><a href=""></a><span class="bu">print</span>(<span class="ss">f"EPQ lot size Q* = </span><span class="sc">{</span>Q<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb2-22"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Production time tp = </span><span class="sc">{</span>tp<span class="sc">:.4f}</span><span class="ss"> years"</span>)</span>
+<span id="cb2-23"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Cycle length T = </span><span class="sc">{</span>T<span class="sc">:.4f}</span><span class="ss"> years"</span>)</span>
+<span id="cb2-24"><a href=""></a><span class="bu">print</span>(<span class="ss">f"Maximum inventory Imax = </span><span class="sc">{</span>Imax<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb2-25"><a href=""></a></span>
+<span id="cb2-26"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-27"><a href=""></a><span class="co"># Build 2-cycle inventory curve</span></span>
+<span id="cb2-28"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-29"><a href=""></a>cycles <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-30"><a href=""></a>points_per_segment <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb2-31"><a href=""></a></span>
+<span id="cb2-32"><a href=""></a>time_vals <span class="op">=</span> []</span>
+<span id="cb2-33"><a href=""></a>inventory_vals <span class="op">=</span> []</span>
+<span id="cb2-34"><a href=""></a></span>
+<span id="cb2-35"><a href=""></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(cycles):</span>
+<span id="cb2-36"><a href=""></a>    cycle_start <span class="op">=</span> k <span class="op">*</span> T</span>
+<span id="cb2-37"><a href=""></a>    </span>
+<span id="cb2-38"><a href=""></a>    <span class="co"># Segment 1: production period (inventory rises at rate p-d)</span></span>
+<span id="cb2-39"><a href=""></a>    t_up <span class="op">=</span> np.linspace(<span class="dv">0</span>, tp, points_per_segment)</span>
+<span id="cb2-40"><a href=""></a>    i_up <span class="op">=</span> (p <span class="op">-</span> d) <span class="op">*</span> t_up</span>
+<span id="cb2-41"><a href=""></a>    </span>
+<span id="cb2-42"><a href=""></a>    <span class="co"># Segment 2: no-production period (inventory falls at rate d)</span></span>
+<span id="cb2-43"><a href=""></a>    t_down <span class="op">=</span> np.linspace(tp, T, points_per_segment)</span>
+<span id="cb2-44"><a href=""></a>    i_down <span class="op">=</span> Imax <span class="op">-</span> d <span class="op">*</span> (t_down <span class="op">-</span> tp)</span>
+<span id="cb2-45"><a href=""></a>    </span>
+<span id="cb2-46"><a href=""></a>    time_vals.extend(cycle_start <span class="op">+</span> t_up)</span>
+<span id="cb2-47"><a href=""></a>    inventory_vals.extend(i_up)</span>
+<span id="cb2-48"><a href=""></a>    </span>
+<span id="cb2-49"><a href=""></a>    time_vals.extend(cycle_start <span class="op">+</span> t_down)</span>
+<span id="cb2-50"><a href=""></a>    inventory_vals.extend(i_down)</span>
+<span id="cb2-51"><a href=""></a></span>
+<span id="cb2-52"><a href=""></a>time_vals <span class="op">=</span> np.array(time_vals)</span>
+<span id="cb2-53"><a href=""></a>inventory_vals <span class="op">=</span> np.array(inventory_vals)</span>
+<span id="cb2-54"><a href=""></a></span>
+<span id="cb2-55"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-56"><a href=""></a><span class="co"># Plot</span></span>
+<span id="cb2-57"><a href=""></a><span class="co"># -----------------------------</span></span>
+<span id="cb2-58"><a href=""></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">4</span>))</span>
+<span id="cb2-59"><a href=""></a>plt.plot(time_vals, inventory_vals, linewidth<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">"EPQ Inventory Level"</span>)</span>
+<span id="cb2-60"><a href=""></a>plt.axhline(Imax, linestyle<span class="op">=</span><span class="st">"--"</span>, label<span class="op">=</span><span class="vs">r"Maximum inventory </span><span class="dv">$</span><span class="vs">I_{</span><span class="dv">\m</span><span class="vs">ax}</span><span class="dv">$</span><span class="vs">"</span>)</span>
+<span id="cb2-61"><a href=""></a></span>
+<span id="cb2-62"><a href=""></a><span class="co"># Mark cycle boundaries</span></span>
+<span id="cb2-63"><a href=""></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(cycles <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb2-64"><a href=""></a>    plt.axvline(k <span class="op">*</span> T, linestyle<span class="op">=</span><span class="st">":"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb2-65"><a href=""></a></span>
+<span id="cb2-66"><a href=""></a><span class="co"># Mark production stop times</span></span>
+<span id="cb2-67"><a href=""></a><span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(cycles):</span>
+<span id="cb2-68"><a href=""></a>    plt.axvline(k <span class="op">*</span> T <span class="op">+</span> tp, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>)</span>
+<span id="cb2-69"><a href=""></a></span>
+<span id="cb2-70"><a href=""></a>plt.xlabel(<span class="st">"Time (years)"</span>)</span>
+<span id="cb2-71"><a href=""></a>plt.ylabel(<span class="st">"Inventory level"</span>)</span>
+<span id="cb2-72"><a href=""></a>plt.title(<span class="st">"EPQ Inventory Profile for 2 Cycles"</span>)</span>
+<span id="cb2-73"><a href=""></a>plt.grid(<span class="va">True</span>)</span>
+<span id="cb2-74"><a href=""></a>plt.legend(loc<span class="op">=</span><span class="st">"center right"</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.15</span>, <span class="fl">0.5</span>))</span>
+<span id="cb2-75"><a href=""></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>EPQ lot size Q* = 4056.74
+Production time tp = 0.0507 years
+Cycle length T = 0.1690 years
+Maximum inventory Imax = 2839.72</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="06lecture_files/figure-revealjs/cell-5-output-2.png" class="quarto-figure quarto-figure-center" width="690" height="392"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="reorder-point-policy" class="slide level2">
+<h2>4. Reorder Point &amp; Policy</h2>
+<div style="font-size:1.4em;">
+<div class="callout callout-note no-icon callout-titled callout-style-simple">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>When should we place an order to replenish inventory?</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li class="fragment">Order <span class="math inline">\(Q\)</span> units when stock drops to reorder point <span class="math inline">\(R\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column center fragment">
+<p><strong>Basic reorder level</strong></p>
+<p><span class="math display">\[
+\boxed{R = D \times L}
+\]</span></p>
+<p>represents the amount of stock needed to cover demand during the lead time.</p>
+<p>This is used when:</p>
+<ul>
+<li class="fragment">Lead time (<span class="math inline">\(L\)</span>) is shorter than or equal to the cycle time <span class="math inline">\(T\)</span>.</li>
+<li class="fragment">There is only one order in progress at any time.</li>
+</ul>
+</div><div class="column center fragment">
+<p><strong>Adjusted Reorder Point</strong></p>
+<p><span class="math display">\[
+\boxed{R = D \times L - n \times Q^*}
+\]</span></p>
+<p><span class="math inline">\(n \times Q^*\)</span> is demand that will be covered by previous orders already placed.</p>
+<p>This is used when:</p>
+<ul>
+<li class="fragment"><span class="math inline">\(L &gt; T\)</span>, i.e.&nbsp;multiple orders may be in flight during the lead time.</li>
+<li class="fragment"><span class="math inline">\(n\)</span> is the number of orders that will arrive during the lead time, <span class="math inline">\(\lfloor L/T \rfloor\)</span>.</li>
+</ul>
+</div></div>
+
+<aside><div>
+<p>The adjusted reorder point is the actual remaining demand for which a new order is needed.</p>
+</div></aside></section>
+<section class="slide level2">
+
+<div style="font-size:95%;">
+<p><strong>Example 9.</strong> Suppose we have a demand of 100 units/week and a lead time of 2 weeks. When should we place an order to replenish inventory assuming that the lead time is shorter than the cycle time?</p>
+<div class="fragment">
+<p><span class="math display">\[
+R = 100 \times 2 = 200 \text{ units}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Place an order when stock falls to 200 units.</p>
+</div>
+<div class="fragment">
+<p><strong>Example 10.</strong> Suppose we have a demand of 100 units/week, a lead time of 3 weeks, and an EOQ of 250 units. When should we place an order to replenish inventory?</p>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+T = \frac{Q^*}{D} = \frac{250}{100} = 2.5 \text{ weeks}
+\]</span></p>
+</div>
+<ul>
+<li class="fragment">Lead time, 3 weeks, is between <span class="math inline">\(1T\)</span> and <span class="math inline">\(2T\)</span>, so <span class="math inline">\(n = 1\)</span>.</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+R = D \times L - n \times Q^* = 100 \times 3 - 1 \times 250  = 50 \text{ units}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Wait until stock falls to 50 units, because 250 units are already on the way, and then place another order for 250 units.</p>
+</div>
+</div>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figs/curtin-logo2.png" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="06lecture_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="06lecture_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="06lecture_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="06lecture_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"8\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true,"titleSelector":"h1, h2, h3","hideMissingTitles":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

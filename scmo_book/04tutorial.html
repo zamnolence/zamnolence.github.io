@@ -76,6 +76,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script type="module">
+import elkLayouts from 'https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0/dist/mermaid-layout-elk.esm.min.mjs';
+mermaid.registerLayoutLoaders(elkLayouts);
+</script>
 
 
 </head>
@@ -421,8 +425,21 @@ ul.task-list li input[type="checkbox"] {
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text"><strong>6 Inventory Model: Single-Commodity</strong></span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text"><strong>6 Inventory Model: Single-Commodity</strong></span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial 6 Exercises</span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <span class="sidebar-item-text sidebar-link text-start">
@@ -479,7 +496,7 @@ ul.task-list li input[type="checkbox"] {
 <p>A food distribution company must decide how to procure cold storage space for the next 2 years. It has three options:</p>
 <ul>
 <li>Option 1: Purchase all cold storage space as needed from the spot market.</li>
-<li>Option 2: Sign a 2-year fixed contract to lease a predetermined amount of storage, and fulfill any extra need through the spot market.</li>
+<li>Option 2: Sign a 2-year fixed contract to lease a predetermined amount of storage, and fulfil any extra need through the spot market.</li>
 <li>Option 3: Sign a flexible-use lease, which includes a minimum committed space and allows expansion up to a cap, with excess paid at spot prices.</li>
 </ul>
 <p><strong>Information:</strong></p>
@@ -490,10 +507,12 @@ ul.task-list li input[type="checkbox"] {
 <li>Spot market price: $2.00/sq.ft/year, may rise or fall by 15%, also with equal probability.</li>
 <li>Fixed lease price: $1.75/sq.ft/year</li>
 <li>Revenue: $2.50 per frozen item</li>
-<li>Flexible lease of $20,000 upfront:</li>
+<li>Flexible lease of $20,000 upfront:
+<ul>
 <li>Covers up to 250,000 items (i.e., 500 sq.ft).</li>
 <li>Charged at $1.75/sq.ft.</li>
 <li>Additional needs paid at spot price.</li>
+</ul></li>
 <li>Spot price and demand are independent.</li>
 <li>Discount rate k = 8%</li>
 </ul>
