@@ -11,7 +11,7 @@
 
   <meta name="author" content="Lecturer: Sam Wiwatanapataphee">
   <meta name="dcterms.date" content="2026-06-12">
-  <title>Topic 7: Inventory Model: Inventory Control Policies and Stochastic Inventory Models</title>
+  <title>Topic 8: Inventory Model: Inventory Control Policies and Stochastic Inventory Models</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -140,7 +140,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Topic 7: Inventory Model: Inventory Control Policies and Stochastic Inventory Models</h1>
+  <h1 class="title">Topic 8: Inventory Model: Inventory Control Policies and Stochastic Inventory Models</h1>
   <p class="subtitle">05115130 Supply Chain Modelling and Optimisation</p>
 
 <div class="quarto-title-authors">
@@ -230,7 +230,7 @@ Lecturer: Sam Wiwatanapataphee
 <p>where <span class="math inline">\(d\)</span> is demand rate and <span class="math inline">\(L\)</span> is lead time.</p>
 </div>
 <div class="fragment">
-<div id="82c29ea3" class="cell" data-execution_count="1">
+<div id="cefd2651" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -392,7 +392,7 @@ d = \frac{10000}{311} \approx 32.15, \quad ROP = dL \approx 32.15(10) \approx 32
 <li class="fragment">Higher service level means more safety stock and higher holding cost.</li>
 </ul>
 <div class="fragment">
-<div id="1cac77cf" class="cell" data-execution_count="2">
+<div id="0a547d93" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -540,7 +540,7 @@ R = 100(2) = 200\ \text{units}
 </section>
 <section class="slide level2">
 
-<div id="fba0d9e3" class="cell" data-execution_count="3">
+<div id="b80aff34" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -559,7 +559,7 @@ R = 100(2) = 200\ \text{units}
 </section>
 <section class="slide level2">
 
-<div id="e3561233" class="cell" data-execution_count="4">
+<div id="2afad162" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
@@ -813,8 +813,8 @@ ROP = 150(5) + 253 \approx 1003\ \text{units}
 <li class="fragment">Given:
 <ul>
 <li class="fragment"><span class="math inline">\(D=275 \times 365\)</span>, <span class="math inline">\(K=10\)</span>, <span class="math inline">\(h=0.30\)</span>,</li>
-<li class="fragment"><span class="math inline">\(\bar{d}=275\)</span>, <span class="math inline">\(\sigma_d=30\)</span>, <span class="math inline">\(\bar{L}=5\)</span>,</li>
-<li class="fragment"><span class="math inline">\(\sigma_L=1\)</span>, service level = 99% so <span class="math inline">\(z=2.33\)</span>.</li>
+<li class="fragment"><span class="math inline">\(\bar{d}=275\)</span>, <span class="math inline">\(\sigma_d=30\)</span>, <span class="math inline">\(\bar{L}=5\)</span>, <span class="math inline">\(\sigma_L=1\)</span>,</li>
+<li class="fragment">service level = 99% so <span class="math inline">\(z=2.33\)</span>.</li>
 </ul></li>
 </ul>
 </section>
@@ -909,11 +909,12 @@ TC &amp;= \frac{D}{Q^*}K + \left(\frac{Q^*}{2} + SS\right)h \\
 </section>
 <section class="slide level2">
 
-<div id="b78f7940" class="cell" data-execution_count="5">
+<div id="ca6bc24d" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure>
-<p><img data-src="08lecture_files/figure-revealjs/cell-6-output-1.png" class="quarto-figure quarto-figure-center" width="993" height="588"></p>
+<p><img data-src="08lecture_files/figure-revealjs/cell-6-output-1.png" width="1113" height="529"></p>
+<figcaption>Simulating a Periodic Review (P) System with Uncertain Demand and Lead Time with d = 10 units/week, σ_d = 0.8 units/week, P = 4 weeks, L = 2 weeks, and a 99.9% service level (z ≈ 3.09). The plot shows inventory levels over time, with safety stock shaded and markers for reviews, orders, and arrivals.</figcaption>
 </figure>
 </div>
 </div>
@@ -922,54 +923,101 @@ TC &amp;= \frac{D}{Q^*}K + \left(\frac{Q^*}{2} + SS\right)h \\
 <section class="slide level2">
 
 <h3 id="basic-mechanics-and-order-up-to-level">3.1 Basic Mechanics and Order-Up-To Level</h3>
-<h5 id="no-uncertainty">No Uncertainty</h5>
-<div class="fragment">
-<p><span class="math display">\[
-\boxed{TIL = d(P + L)}
-\]</span></p>
+<p>For a <strong>Periodic Review System</strong> with review period <span class="math inline">\((P)\)</span>, average demand <span class="math inline">\((\bar d)\)</span>, average lead time <span class="math inline">\((\bar L)\)</span>, demand standard deviation per unit time <span class="math inline">\((\sigma_d)\)</span>, lead-time standard deviation <span class="math inline">\((\sigma_L)\)</span>, and service factor <span class="math inline">\((z)\)</span>:</p>
+<div class="fragment" style="font-size: 84%;">
+<table class="caption-top">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 34%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Safety Stock (SS)</th>
+<th>Order-Up-To Level (TIL)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No uncertainty</td>
+<td><span class="math inline">\(0\)</span></td>
+<td><span class="math inline">\(\boxed{TIL=d(P+L)}\)</span></td>
+</tr>
+<tr class="even">
+<td>Demand uncertainty</td>
+<td><span class="math inline">\(\boxed{SS=z\sigma_d\sqrt{P+L}}\)</span></td>
+<td><span class="math inline">\(\boxed{TIL=\bar d(P+L)+z\sigma_d\sqrt{P+L}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Lead time uncertainty</td>
+<td><span class="math inline">\(\boxed{SS=zd\sigma_L}\)</span></td>
+<td><span class="math inline">\(\boxed{TIL=d(P+\bar L)+zd\sigma_L}\)</span></td>
+</tr>
+<tr class="even">
+<td>Demand + lead time uncertainty</td>
+<td><span class="math inline">\(\boxed{SS=z\sqrt{\sigma_d^2(P+\bar L)+\bar d^2\sigma_L^2}}\)</span></td>
+<td><span class="math inline">\(\boxed{TIL=\bar d(P+\bar L)+z\sqrt{\sigma_d^2(P+\bar L)+\bar d^2\sigma_L^2}}\)</span></td>
+</tr>
+</tbody>
+</table>
 </div>
-<ul>
-<li class="fragment">Covers demand during review period <span class="math inline">\(P\)</span> and lead time <span class="math inline">\(L\)</span></li>
-</ul>
-<p><br></p>
-<h6 class="fragment" id="with-demand-uncertainty">With Demand Uncertainty</h6>
 <div class="fragment">
-<p><span class="math display">\[
-\boxed{TIL = \bar{d}(P + L) + SS}
-\]</span> <span class="math display">\[
-\boxed{SS = z \sigma_{P+L}}
-\]</span></p>
+<p>If using the EOQ-based optimal review period <span class="math inline">\(\boxed{T=\frac{Q^*}{\bar d}=\sqrt{\frac{2K}{\bar d h}}}\)</span></p>
 </div>
-<ul>
-<li class="fragment"><span class="math inline">\(z\)</span> = service level factor,<br>
-</li>
-<li class="fragment"><span class="math inline">\(\sigma_{P+L}= \sigma_d \times \sqrt{P + L}\;\)</span>, the stdev of demand over <span class="math inline">\(P+L\)</span>,</li>
-<li class="fragment"><span class="math inline">\(\sigma_d\)</span> is the stdev of demand/unit time.</li>
-</ul>
+<div class="fragment">
+<p>then simply replace <span class="math inline">\(P\)</span> with <span class="math inline">\(T\)</span>: <span class="math inline">\(\boxed{I_{\max}=TIL}\)</span></p>
+</div>
 </section>
 <section class="slide level2">
 
-<p>Recall the EOQ formula</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 49%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Case</th>
+<th>Maximum Inventory Level <span class="math inline">\(I_{\max}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No uncertainty</td>
+<td><span class="math inline">\(\boxed{\bar d(T+\bar L)}\)</span></td>
+</tr>
+<tr class="even">
+<td>Demand uncertainty only</td>
+<td><span class="math inline">\(\boxed{\bar d(T+\bar L)+z\sigma_d\sqrt{T+\bar L}}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Lead time uncertainty only</td>
+<td><span class="math inline">\(\boxed{\bar d(T+\bar L)+z\bar d\sigma_L}\)</span></td>
+</tr>
+<tr class="even">
+<td>Demand + lead time uncertainty</td>
+<td><span class="math inline">\(\boxed{\bar d(T+\bar L)+z\sqrt{\sigma_d^2(T+\bar L)+\bar d^2\sigma_L^2}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="fragment" style="font-size: 1.4em;">
+<div class="callout callout-tip callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
 <p><span class="math display">\[
-Q^* = \sqrt{\frac{2KD}{h}}
-\]</span></p>
-<div class="fragment">
-<p>The optimal review period is given by</p>
-<p><span class="math display">\[
-\boxed{T = \frac{Q^*}{\bar{d}} = \frac{1}{\bar{d}}\sqrt{\frac{2KD}{h}} = \sqrt{\frac{2K}{\bar{d}h}}}
+\text{TIL}=\text{Expected demand during protection period}+\text{Safety stock}
 \]</span></p>
 </div>
-<ul>
-<li class="fragment">This is the time it takes to consume one EOQ batch at the average demand rate.</li>
-</ul>
-<div class="fragment">
-<p>The maximum inventory level:</p>
-<p><span class="math display">\[
-\boxed{I_\text{max}= \bar{d}(T+\bar{L}) + SS}
-\]</span></p>
+</div>
+</div>
 </div>
 <div class="fragment">
-<p>where <span class="math inline">\(SS = z \times \sqrt{\sigma_d^2(T+\bar{L})+ \sigma_{LT}^2\bar{d}^2}\)</span></p>
+<p>where the <strong>protection period</strong> is <span class="math inline">\(\boxed{P+\bar L}\)</span>.</p>
+<p>(or <span class="math inline">\(T+\bar L\)</span> when using the EOQ-derived review period).</p>
 </div>
 </section>
 <section class="slide level2">
@@ -1083,20 +1131,45 @@ Q^* = \sqrt{\frac{2KD}{h}}
 <h3 id="critical-ratio-and-optimal-order-quantity">5.1 Critical Ratio and Optimal Order Quantity</h3>
 <p>Define costs:</p>
 <p><span class="math display">\[
-C_o = c-u, \quad C_u = r-c
+\boxed{C_o = c-u} \quad \boxed{C_u = r-c}
 \]</span></p>
-<p>Critical ratio:</p>
+<p>where</p>
+<ul>
+<li class="fragment"><span class="math inline">\(C_o\)</span> is the overage cost per unit (cost minus salvage value).</li>
+<li class="fragment"><span class="math inline">\(C_u\)</span> is the underage cost per unit (selling price minus cost).</li>
+</ul>
+<h5 class="fragment" id="critical-ratio">Critical ratio</h5>
+<div class="fragment">
 <p><span class="math display">\[
-CR = \frac{C_u}{C_u + C_o} = \frac{r-c}{r-u}
+\boxed{CR = \frac{C_u}{C_u + C_o} = \frac{r-c}{r-u}}
 \]</span></p>
-<p>Optimal order rule:</p>
+</div>
+<ul>
+<li class="fragment"><p>This represents the relative cost of understocking versus overstocking.</p></li>
+<li class="fragment"><p>Higher <span class="math inline">\(CR\)</span> means understocking is more costly, so you want to order more.</p></li>
+<li class="fragment"><p>Lower <span class="math inline">\(CR\)</span> means overstocking is more costly, so you want to order less</p></li>
+</ul>
+</section>
+<section class="slide level2">
+
+<h5 class="fragment" id="optimal-order-rule">Optimal order rule</h5>
+<div class="fragment">
 <p><span class="math display">\[
-P(D \le Q^*) = CR
+\boxed{P(D \le Q^*) = CR}
 \]</span></p>
-<p>For normal demand <span class="math inline">\(D \sim N(\mu,\sigma)\)</span>:</p>
+</div>
+<ul>
+<li class="fragment">This means you should choose the order quantity <span class="math inline">\(Q^*\)</span> such that the probability of demand being less than or equal to <span class="math inline">\(Q^*\)</span> equals the critical ratio.</li>
+<li class="fragment">For normal demand <span class="math inline">\(D \sim N(\mu,\sigma)\)</span>:</li>
+</ul>
+<div class="fragment">
 <p><span class="math display">\[
 Q^* = \mu + z\sigma \quad \text{where } \Phi(z)=CR
 \]</span></p>
+</div>
+<ul>
+<li class="fragment"><span class="math inline">\(\Phi(z)\)</span> is the cumulative distribution function of the standard normal distribution, so you can find <span class="math inline">\(z\)</span> from standard normal tables based on the critical ratio.</li>
+</ul>
 <aside class="notes">
 <p>Emphasize the logic: choose Q where marginal underage and overage effects balance. Students should map CR to z first, then to Q star. Clarify notation: Phi is cumulative normal probability. Mention this model is especially useful for one-shot ordering windows. Transition to expected-cost expressions used for policy evaluation.</p>
 <style type="text/css">
@@ -1114,23 +1187,29 @@ Q^* = \mu + z\sigma \quad \text{where } \Phi(z)=CR
 <section class="slide level2">
 
 <h3 id="expected-cost-under-normal-demand">5.2 Expected Cost Under Normal Demand</h3>
-<p>Expected total cost for order quantity <span class="math inline">\(Q\)</span>:</p>
+<p>For policy evaluation, we can compute the <strong>expected total cost</strong> for any order quantity <span class="math inline">\(Q\)</span>.</p>
+<h5 class="fragment" id="expected-total-cost-for-order-quantity-q">Expected total cost for order quantity <span class="math inline">\(Q\)</span></h5>
+<div class="fragment">
 <p><span class="math display">\[
-E[TC(Q)] = C_oE[(Q-D)^+] + C_uE[(D-Q)^+]
+\boxed{E[TC(Q)] = C_oE[(Q-D)^+] + C_uE[(D-Q)^+]}
 \]</span></p>
+</div>
+<div class="fragment">
 <p>With <span class="math inline">\(z = \frac{Q-\mu}{\sigma}\)</span> and <span class="math inline">\(D\sim N(\mu,\sigma)\)</span>:</p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
-E[(Q-D)^+] = \sigma[\phi(z)+z\Phi(z)]
+E[(Q-D)^+] = \sigma[\phi(z)+z\Phi(z)] \qquad \text{(Expected leftover inventory cost)}
 \]</span></p>
+</div>
+<div class="fragment">
 <p><span class="math display">\[
-E[(D-Q)^+] = \sigma[\phi(z)-z(1-\Phi(z))]
+E[(D-Q)^+] = \sigma[\phi(z)-z(1-\Phi(z))] \qquad \text{(Expected shortage cost)}
 \]</span></p>
-<p>where</p>
+</div>
 <ul>
-<li class="fragment"><p><span class="math inline">\(\phi(z)\)</span> is the standard normal density</p></li>
-<li class="fragment"><p><span class="math inline">\(\Phi(z)\)</span> is the standard normal cumulative distribution function</p></li>
-<li class="fragment"><p>The first term, <span class="math inline">\(\sigma[\phi(z)+z\Phi(z)]\)</span>, captures expected leftover inventory cost,</p></li>
-<li class="fragment"><p>the second term, <span class="math inline">\(\sigma[\phi(z)-z(1-\Phi(z))]\)</span>, captures expected shortage cost.</p></li>
+<li class="fragment"><span class="math inline">\(\phi(z)\)</span> is the standard normal density</li>
+<li class="fragment"><span class="math inline">\(\Phi(z)\)</span> is the standard normal cumulative distribution function</li>
 </ul>
 <aside class="notes">
 <p>Do not over-derive this slide; focus on practical interpretation. Highlight that this evaluates a chosen Q and supports sensitivity checks. Students often confuse phi and Phi; remind them density versus cumulative. Keep this as an optional computation step after finding Q star. Transition to one compact worked example.</p>
