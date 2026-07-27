@@ -30,16 +30,6 @@
     ]
   },
   {
-    "objectID": "index.html#materials",
-    "href": "index.html#materials",
-    "title": "Supply Chain Modelling and Optimisation",
-    "section": "2025 Materials",
-    "text": "2025 Materials\n\nLecture Slides\n\nLecture 1: Introduction to Supply Chain and Optimisation\nLecture 2: Network Design - SESC\nLecture 3: Network Design - TEMC\nLecture 4: Network Design under Uncertainty\nLecture 5: Demand Forecasting Techniques\nLecture 6: Inventory Model - Single-Commodity\nLecture 7: Inventory Model - Discount\nLecture 8: Stochastic Inventory Model\n\nExam Materials\n\nExam Paper and Solutions",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
     "objectID": "00_python_setup.html",
     "href": "00_python_setup.html",
     "title": "Python on VS Code",
